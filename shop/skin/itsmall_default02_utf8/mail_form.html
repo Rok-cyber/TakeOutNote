@@ -1,0 +1,48 @@
+<html>
+<head>
+<link rel="StyleSheet" HREF="{{SKIN}}/style.css" type="text/css" title="style">
+</head>
+
+<body>
+
+<div style="width:760px;">
+	<div>{{MAIL_IMG}}</div>
+	<!-- DYNAMIC @is_regist@ -->
+	<div style="padding:20px 8px 10px 8px;text-align:left"><font style="font-size:14px">{{name}}</font><img src="{{SKIN}}/img/mail/mail_regist_title.gif" border="0" align="absmiddle" alt='회원가입' /></div>	
+	<!-- DYNAMIC @is_regist@ -->
+	<!-- DYNAMIC @is_pwsearch@ -->
+	<div style="padding:20px 8px 10px 8px;text-align:left"><font style="font-size:14px">{{name}}</font><img src="{{SKIN}}/img/mail/mail_pwsearch_title.gif" border="0" align="absmiddle" alt='비번찾기' /></div>	
+	<!-- DYNAMIC @is_pwsearch@ -->	
+	<!-- DYNAMIC @is_order@ -->
+	<div style="padding:20px 8px 10px 8px;text-align:left"><font style="font-size:14px">{{name}}</font><img src="{{SKIN}}/img/mail/mail_order_title.gif" border="0" align="absmiddle" alt='주문완료' /></div>	
+	<!-- DYNAMIC @is_order@ -->	
+	<!-- DYNAMIC @is_carr@ -->
+	<div style="padding:20px 8px 10px 8px;text-align:left"><font style="font-size:14px">{{name}}</font><img src="{{SKIN}}/img/mail/mail_carr_title.gif" border="0" align="absmiddle" alt='배송중' /></div>	
+	<!-- DYNAMIC @is_carr@ -->	
+	<!-- DYNAMIC @is_counsel@ -->
+	<div style="padding:20px 8px 10px 8px;text-align:left"><font style="font-size:14px">{{name}}</font><img src="{{SKIN}}/img/mail/mail_counsel_title.gif" border="0" align="absmiddle" alt='고객문의' /></div>	
+	<!-- DYNAMIC @is_counsel@ -->	
+	
+	<div style="padding:10px 8px 20px 8px;text-align:left">{{MAIL_COMMENT}}</div>	
+</div>
+
+<div style="width:760px; border:1px solid #CCC; height:60px; padding:10px;">
+	<div style="text-align:left;font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">
+		<!-- DYNAMIC @is_mailling@ -->	
+		본 메일은 정보통신망이용촉진 및 정보보호 등에 관한 법률에 의거하여 메일수신에 동의하신 분에게만 발송되는 메일입니다. <br />
+		메일을 더 이상 받고 싶지 않으시면 [<a href="{{URL}}?channel=modify" target="_blank">수신거부</a>]를 클릭 하시어 로그인 하신 후 [마이페이지 > 회원정보수정]에서 메일수신여부를 수정하시기 바랍니다. <br />
+
+		If you don't want to receive this e-mail anymore, click <a href="{{URL}}/index.php?channel=modify" target="_blank">here</a><br />
+		<!-- DYNAMIC @is_mailling@ -->		
+
+		본 메일은 발송 전용 메일이므로 문의 사항이 있으시면 [고객센터]로 연락 주시기 바랍니다.<br />
+		
+	</div>
+	<div style="text-align:left;margin-top:10px;font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">
+		주소 : {{CO_ADDR}}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;고객센터 : {{CO_TEL}}&nbsp;&nbsp;|<!-- DYNAMIC @is_fax@ -->&nbsp;&nbsp;팩스 : {{CO_FAX}}&nbsp;&nbsp;|<!-- DYNAMIC @is_fax@ -->&nbsp;&nbsp;E-mail : <a href="mailto:{{CO_EMAIL}}" style="font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{CO_EMAIL}}</a><br />
+		Copyright {{SYEAR}} <font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">{{CO_NAME2}}</font> All Right Reserved.
+	</div>
+</div>
+
+</body>
+</html>

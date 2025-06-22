@@ -1,0 +1,466 @@
+<script type="text/javascript" src="{{skin}}/listDesign.js"></script>
+<script type="text/javascript" src="lib/lib.moneyBar.js"></script>
+
+<div id="subMain">
+	
+	<!-- DYNAMIC @is_cate_up@ -->
+	<div id="s_code01">{{CATE_UP_CODE}}</div>
+	<!-- DYNAMIC @is_cate_up@ -->
+
+	<!-- DYNAMIC @is_scate@ -->
+	<div id="cate_box">
+		<!-- DYNAMIC @loop_cate@ -->
+		<div class="cate_box_1">
+			<div style="margin-left:16px;">
+				<a href='{{CLINK}}' onfocus='this.blur();' class="small"><font class="{{COLOR1}}">{{CNAME}}</font></a>
+			</div>
+				
+			<!-- DYNAMIC @loop_scate@ -->
+			<div style="margin:4px 0px 0px 16px;">
+				<a href='{{CLINK2}}' onfocus='this.blur();' class="small"><font class="{{COLOR2}}">{{CNAME2}}</font></a>
+			</div>
+			<!-- DYNAMIC @loop_scate@ -->
+		</div>
+		<!-- DYNAMIC @loop_cate@ -->
+		<div style="clear:both;height:16px"></div>
+	</div>
+	<!-- DYNAMIC @is_scate@ -->
+
+	<!-- DYNAMIC @is_hit_up@ -->
+	<div id="s_code01">{{HIT_UP_CODE}}</div>
+	<!-- DYNAMIC @is_hit_up@ -->
+
+	<!-- DYNAMIC @is_main_goods1@ -->
+	<!--    HIT GOODS START -->		
+	<div style='height:8px;overflow:hidden;clear:both'></div>
+	<div id="hitGoods">			
+		<div class="scrollBox2">
+			<div class="top"></div>
+			<div class="content1" style="width:724px;">
+				<div style="float:left;padding-left:16px"><img src="img/main/ttl_hit.gif" alt="인기상품" /></div>
+				<div style="float:right;padding-right:30px;">
+					<!-- DYNAMIC @loop_sicon1@ -->
+					<img src='img/main/icon_scroll_dot{{ON}}.gif' border='0' id='hitBoxImg{{i}}' onmouseover="hitBoxDiv.imover('{{i}}')"  onmouseout="hitBoxDiv.imout()" style="cursor:pointer"  alt='인기상품{{i}}' />
+					<!-- DYNAMIC @loop_sicon1@ -->
+				</div>
+				<div class="{{BCLASS}}" style="margin-left:15px;clear:both;">
+					<!-- DYNAMIC @is_scoll11@ -->
+					<div id="hitBox" style="position:relative;left:0px;top:0px;width:{{SWIDTH}}px" onmouseover="hitBoxDiv.mover()"  onmouseout="hitBoxDiv.mout()">
+					<!-- DYNAMIC @is_scoll11@ -->							
+						<!-- DYNAMIC @loop_goods1@ -->			
+						<div class="scroll_img_box" id="hitBoxGoods{{i}}" {{DSTYLE}}>						
+							<ul>				
+								<li style="cursor:move;border:2px solid #FFF; height:120px;width:120px;background:url({{IMAGE}}) no-repeat;" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></li>
+								<li style="height:30px; overflow:hidden;padding-top:4px;"><a href="{{LINK}}" onfocus="this.blur()">{{NAME}}</a></li>					
+								<li style="padding-top:4px;">
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+									<!-- DYNAMIC @is_coupon@ -->
+									<div style="float:left" class="num green">{{PRICE}}</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:left" class="small orange">[품절]</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:right;padding-right:8px;"><img src="img/common/icon_qview.gif" border="0" alt="퀵뷰" title="퀵뷰" class="hand" onclick="openQview({{QLINK}});" />&nbsp;<img src="img/common/icon_nwin.gif" border="0"  alt="새창" title="새창" class="hand" onclick="openView('{{LINK}}');" /></div>
+								</li>		
+							</ul>
+						</div>
+						<!-- DYNAMIC @loop_goods1@ -->		
+						
+						<!-- DYNAMIC @no_goods1@ -->	
+						<div style="height:180px; width:724px; text-align:center;">
+							<div style='height:80px'></div>
+							<div class="small">! 상품 준비 중 입니다.</div>
+						</div>
+						<!-- DYNAMIC @no_goods1@ -->
+
+					<!-- DYNAMIC @is_scoll12@ -->
+					</div>	
+					<!-- DYNAMIC @is_scoll12@ -->
+				</div>
+			</div>
+			<div class="content2" style="width:180px;">
+				<div style="float:left;padding-left:10px">
+					<div id="weekRank">
+						<div style="width:83px;float:left;margin-top:4px;text-align:center" class="small hand" onmouseover="viewWeek(1);" id="weekRank1">클릭 베스트</div>
+						<div style="width:83px;float:left;margin-top:4px;text-align:center" class="small hand" onmouseover="viewWeek(2);" id="weekRank2">판매 베스트</div>
+					</div>
+				</div>
+				<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+				<div style="width:180px;" id="weekGoods1">						
+					<!-- DYNAMIC @loop_goods4@ -->	
+					<div style="width:30px;float:left;">
+						<img src="img/main/ttl_crank_0{{i}}.gif" alt="rnak {{i}}" />					
+					</div>
+					<div style="float:left;cursor:move;border:2px solid #FFF; height:55px;width:55px;background:url({{IMAGE}}) -12px -12px;" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></div>
+					<div style="float:left;width:80px;">
+						<div style="height:45px;overflow:hidden;text-align:left;padding-left:4px;line-height:120%">
+							<a href="{{LINK}}" onfocus="this.blur()" class="small">{{NAME}}</a>
+						</div>
+						<div style="overflow:hidden;text-align:left;padding-left:4px">
+							<!-- DYNAMIC @is_coupon@ -->	
+							<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+							<!-- DYNAMIC @is_coupon@ -->
+							<div style="float:left;" class="num green">{{PRICE}}</div>
+						</div>
+					</div>
+					<!-- DYNAMIC @loop_goods4@ -->	
+				</div>
+
+				<div style="width:180px; margin-top:8px;display:none" id="weekGoods2">
+					<!-- DYNAMIC @loop_goods5@ -->	
+					<div style="width:30px;float:left;">
+						<img src="img/main/ttl_crank_0{{i}}.gif" alt="rank {{i}}" />					
+					</div>
+					<div style="float:left;cursor:move;border:2px solid #FFF; height:55px;width:55px;background:url({{IMAGE}}) -12px -12px;" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></div>
+					<div style="float:left;width:80px;">
+						<div style="height:45px;overflow:hidden;text-align:left;padding-left:4px;line-height:120%">
+							<a href="{{LINK}}" onfocus="this.blur()" class="small">{{NAME}}</a>
+						</div>
+						<div style="overflow:hidden;text-align:left;padding-left:4px">
+							<!-- DYNAMIC @is_coupon@ -->	
+							<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+							<!-- DYNAMIC @is_coupon@ -->
+							<div style="float:left;" class="num green">{{PRICE}}</div>
+						</div>
+					</div>
+					<!-- DYNAMIC @loop_goods5@ -->	
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_scoll13@ -->
+	<script type="text/javascript">hitBoxDiv = new itemScroll('hitBox',{{mcnt}},{{vcnt}},136);hitBoxDiv.scroll();</script>
+	<!-- DYNAMIC @is_scoll13@ -->
+	<!-- DYNAMIC @is_move1@ -->
+	<script type="text/javascript">hitBoxDiv = new itemMove('hitBox',{{i}},{{vcnt}});hitBoxDiv.Move();</script>
+	<!-- DYNAMIC @is_move1@ -->
+
+	<!--    @HIT GOODS END -->
+	<!-- DYNAMIC @is_main_goods1@ -->
+
+	<!-- DYNAMIC @is_main_goods2@ -->
+	<!--    RECO GOODS START -->	
+	<div style='height:8px;overflow:hidden;clear:both'></div>
+	<div id="recoGoods">			
+		<div class="scrollBox2">
+			<div class="top"></div>
+			<div class="content1" style="width:724px;">
+				<div style="float:left;padding-left:16px;"><img src="img/main/ttl_reco.gif" alt="추천상품" /></div>
+				<div style="float:right;padding-right:30px;">
+					<!-- DYNAMIC @loop_sicon2@ -->
+					<img src='img/main/icon_scroll_dot{{ON}}.gif' border='0' id='recoBoxImg{{i}}' onmouseover="recoBoxDiv.imover('{{i}}')"  onmouseout="recoBoxDiv.imout()" style="cursor:pointer" alt='추천상품{{i}}' />
+					<!-- DYNAMIC @loop_sicon2@ -->
+				</div>
+				<div class="{{BCLASS}}" style="margin-left:15px;clear:both;">
+					<!-- DYNAMIC @is_scoll21@ -->
+					<div id="recoBox" style="position:relative;left:0px;top:0px;width:{{SWIDTH}}px" onmouseover="recoBoxDiv.mover()"  onmouseout="recoBoxDiv.mout()">
+					<!-- DYNAMIC @is_scoll21@ -->							
+						<!-- DYNAMIC @loop_goods2@ -->			
+						<div class="scroll_img_box" id="recoBoxGoods{{i}}" {{DSTYLE}}>						
+							<ul>				
+								<li style="cursor:move;border:2px solid #FFF; height:120px;width:120px;background:url({{IMAGE}}) no-repeat;" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></li>
+								<li style="height:30px; overflow:hidden;padding-top:4px;"><a href="{{LINK}}" onfocus="this.blur()">{{NAME}}</a></li>					
+								<li style="padding-top:4px;">
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+									<!-- DYNAMIC @is_coupon@ -->
+									<div style="float:left" class="num green">{{PRICE}}</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:left" class="small orange">[품절]</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:right;padding-right:8px;"><img src="img/common/icon_qview.gif" border="0" alt="퀵뷰" title="퀵뷰" class="hand" onclick="openQview({{QLINK}});" />&nbsp;<img src="img/common/icon_nwin.gif" border="0"  alt="새창" title="새창" class="hand" onclick="openView('{{LINK}}');" /></div>
+								</li>	
+							</ul>
+						</div>
+						<!-- DYNAMIC @loop_goods2@ -->		
+						
+						<!-- DYNAMIC @no_goods2@ -->	
+						<div style="height:180px; width:724px; text-align:center;">
+							<div style='height:80px'></div>
+							<div class="small">! 상품 준비 중 입니다.</div>
+						</div>
+						<!-- DYNAMIC @no_goods2@ -->
+
+					<!-- DYNAMIC @is_scoll22@ -->
+					</div>	
+					<!-- DYNAMIC @is_scoll22@ -->
+				</div>
+			</div>
+			<div class="content2" style="width:180px;height:200px">
+				<div style="float:left;padding-left:10px">
+					<div style="background:url(img/main/box_tab_bg.gif) repeat-x;width:165px;height:25px;" class="small bold">
+						<div style="width:100px;float:left;margin-top:4px;text-align:center" class="small">베스트 이용후기</div>
+					</div>
+				</div>
+				<div style='clear:both;height:8px;overflow:hidden;'></div>
+				<div style="width:180px;">						
+					<!-- DYNAMIC @loop_goods6@ -->		
+					<div style="width:10px;float:left;overflow:hidden;">&nbsp;</div>
+					<div style="float:left;cursor:move;border:2px solid #FFF; height:80px;width:80px;background:url({{IMAGE}}) no-repeat;" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></div>
+					<div style="float:left;width:80px;">
+						<div style="height:50px;overflow:hidden;text-align:left;padding-left:4px">
+							<a href="{{LINK}}" onfocus="this.blur()" class="small">{{NAME}}</a>
+						</div>
+						<div style="overflow:hidden;text-align:left;padding-left:4px">
+							<!-- DYNAMIC @is_coupon@ -->	
+							<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+							<!-- DYNAMIC @is_coupon@ -->
+							<div style="float:left;" class="num green">{{PRICE}}</div>
+						</div>
+						<div style="padding:2px 0 0 4px;text-align:left">
+							<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:1px;">
+								<div style="width:{{SUM_AFTER}}%;overflow:hidden"><img src="img/shop/icon_star.gif" alt='icon star' /></div>
+							</div>
+						</div>
+					</div>
+					<div style='clear:both;height:5px;overflow:hidden;'></div>
+					<div style="margin-left:11px;border:1px solid #E1E1E1;width:160px;background-color:#F0F0F0;height:94px;overflow:hidden">
+						<div style="text-align:left;padding:4px;" class="small">{{CONTENT}}</div>
+					</div>
+					<!-- DYNAMIC @loop_goods6@ -->	
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_scoll23@ -->
+	<script type="text/javascript">recoBoxDiv = new itemScroll('recoBox',{{mcnt}},{{vcnt}},136);recoBoxDiv.scroll();</script>
+	<!-- DYNAMIC @is_scoll23@ -->
+	<!-- DYNAMIC @is_move2@ -->
+	<script type="text/javascript">recoBoxDiv = new itemMove('recoBox',{{i}},{{vcnt}});recoBoxDiv.Move();</script>
+	<!-- DYNAMIC @is_move2@ -->
+
+	<!--    @RECO GOODS END -->
+	<!-- DYNAMIC @is_main_goods2@ -->
+
+	<!-- DYNAMIC @is_main_goods3@ -->
+	<!--    NEW GOODS START -->
+	<div style='height:8px;overflow:hidden;clear:both'></div>	
+	<div id="newGoods">			
+		<div class="scrollBox3">
+			<div class="top"></div>
+			<div class="content" style="width:909px;">
+				<div style="float:left;padding-left:0px;"><img src="img/main/ttl_new.gif" alt="신상품" /></div>
+				<div style="float:right;padding-right:40px;">
+					<!-- DYNAMIC @loop_sicon3@ -->
+					<img src='img/main/icon_scroll_dot{{ON}}.gif' border='0' id='newBoxImg{{i}}' onmouseover="newBoxDiv.imover('{{i}}')"  onmouseout="newBoxDiv.imout()" style="cursor:pointer" alt="신상품{{i}}" />
+					<!-- DYNAMIC @loop_sicon3@ -->
+				</div>
+				<div class="{{BCLASS}}" style="padding-left:0px; width:876px">
+					<!-- DYNAMIC @is_scoll31@ -->
+					<div id="newBox" style="position:relative;left:0px;top:0px;width:{{SWIDTH}}px" onmouseover="newBoxDiv.mover()"  onmouseout="newBoxDiv.mout()">
+					<!-- DYNAMIC @is_scoll31@ -->
+						<!-- DYNAMIC @loop_goods3@ -->			
+						<div class="scroll_img_box" id="newBoxGoods{{i}}" {{DSTYLE}}>						
+							<ul>				
+								<li style="cursor:move;border:2px solid #FFF; height:120px;width:120px;background:url({{IMAGE}}) no-repeat;" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></li>
+								<li style="height:30px; overflow:hidden;padding-top:4px;"><a href="{{LINK}}" onfocus="this.blur()">{{NAME}}</a></li>					
+								<li style="padding-top:4px;">
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+									<!-- DYNAMIC @is_coupon@ -->
+									<div style="float:left" class="num green">{{PRICE}}</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:left" class="small orange">[품절]</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:right;padding-right:8px;"><img src="img/common/icon_qview.gif" border="0" alt="퀵뷰" title="퀵뷰" class="hand" onclick="openQview({{QLINK}});" />&nbsp;<img src="img/common/icon_nwin.gif" border="0"  alt="새창" title="새창" class="hand" onclick="openView('{{QLINK}}');" /></div>
+								</li>												
+							</ul>
+						</div>
+						<!-- DYNAMIC @loop_goods3@ -->		
+
+						<!-- DYNAMIC @no_goods3@ -->	
+						<div style="height:180px; width:100%; text-align:center;">
+							<div style='height:80px'></div>
+							<div class="small">! 상품 준비 중 입니다.</div>
+						</div>
+						<!-- DYNAMIC @no_goods3@ -->
+
+					<!-- DYNAMIC @is_scoll32@ -->
+					</div>	
+					<!-- DYNAMIC @is_scoll32@ -->
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_scoll33@ -->
+	<script type="text/javascript">newBoxDiv = new itemScroll('newBox',{{mcnt}},{{vcnt}},146);newBoxDiv.scroll();</script>
+	<!-- DYNAMIC @is_scoll33@ -->
+	<!-- DYNAMIC @is_move3@ -->
+	<script type="text/javascript">newBoxDiv = new itemMove('newBox',{{i}},{{vcnt}});newBoxDiv.Move();</script>
+	<!-- DYNAMIC @is_move3@ -->
+	<!--    @NEW GOODS END -->
+
+	<div style="clear:both;height:20px">&nbsp;</div>	
+	<!-- DYNAMIC @is_main_goods3@ -->
+
+	<!-- DYNAMIC @is_cate_goods@ -->
+	<div style='height:8px;overflow:hidden;clear:both'></div>
+	<div class="scrollBox3">
+		<div class="top"></div>
+		<div class="content" style="width:909px;padding-top:10px;">		
+			<div style="padding-left:30px;">				
+				<form name="searchForm2" method="get" onsubmit='return ckSearch2();' action='{{Main}}'>				
+				<input type="hidden" name="channel" value="main2" />
+				<input type="hidden" name="cate" value="{{cate}}" />
+				<input type="hidden" name="field" value="name" />
+				
+				<div id='reBox' style="position:relative;z-index:998;background-color:#FFF; border: 1px solid #bbb;width:80px; height:18px;" class='left'></div>
+				<script type="text/javascript">
+					<!--
+					reBoxs = new selectBox('reBox',document.searchForm2.field);
+					reBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333";
+					reBoxs.addItem('상품명','name');
+					reBoxs.addItem('태그','tag');
+					reBoxs.addItem('브랜드','brand');
+					reBoxs.show();
+					//-->
+				</script>
+				<div style="float:left;padding-left:2px;"><input type="text" name="search" size="40" class="whites default" style='border-color:#bbb;vertical-align:top' /></div>
+				<div style="float:left;padding-left:2px;"><input type="image" src="img/shop/btn_search.gif" border="0" alt="검색" title="검색" /></div>	
+				<div style="float:left;padding-left:2px;"><a href="{{Main}}?channel=main2{{cstring}}"><img src="img/shop/btn_cancel.gif" border="0" alt="검색취소" title="검색취소" /></a></div>	
+				</form>
+				<!-- DYNAMIC @is_search@ -->
+				&nbsp;&nbsp;&nbsp;&nbsp;<font class="small">검색어 : <font class="orange">[{{fields}}] {{search}}</font></font>
+				<!-- DYNAMIC @is_search@ -->
+			</div>
+			<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+			<div style="float:left;width:250px;padding-left:30px;">
+				<div class="small bold orange">{{SCATENAME}}</div>
+				<div style="padding-top:6px;" class="small">
+					총 상품수 <font class="num orange">{{TOTAL}}</font>건					
+				</div>
+			</div>			
+			<div style="float:left;height:44px;width:600px;">
+				<div style="position:relative;float:left;width:370px;">
+					<div id="pmoneyBarDiv"></div>
+				</div>
+				<!-- DYNAMIC @is_sec_mon@ -->
+				<div class="left small green">선택한조건 : <font class="num">{{SEC_MON}}</font> <a href="{{Main}}?channel=main2{{cstring}}{{sstring}}" onfocus="this.blur();"><img src="img/common/icon_x.gif" border="0" alt="선택해제" title="선택해제" /></a></div>
+				<!-- DYNAMIC @is_sec_mon@ -->					
+			</div>				
+		</div>
+		<div class="bottom"></div>
+	</div>	
+
+	<form name="moneySeatch" method="get" action="{{Main}}">
+	<input type="hidden" name="channel" value="main2" />
+	<input type="hidden" name="cate" value="{{cate}}" />
+	<input type="hidden" name="mo1" />
+	<input type="hidden" name="mo2" />
+	<input type="hidden" name="order" value="{{order}}" />
+	<input type="hidden" name="limit" value="{{limit}}" />
+	<input type="hidden" name="search" value="{{search}}" />
+	<input type="hidden" name="field" value="{{field}}" />
+	</form>
+
+	<script type="text/javascript">
+	<!--
+	pmoneyBar.show("pmoneyBarDiv","rtnValue","{{skin}}/","216","{{MaxMoney}}");
+	// -->
+	</script>
+
+
+	<div id="list" style="margin-top:20px;">	
+		<div id="list_top">
+			<div id='order_uid' class="tab_on small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('uid',1);">신상품순</a></div>
+			<div id='order_best' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('best',1);">인기상품순</a></div>
+			<div id='order_price' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('price',1);">낮은 가격순</a></div>
+			<div id='order_price2' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('price2',1);">높은 가격순</a></div>
+			
+			<div class="right">
+				<form name="limitForm">								
+				<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+				<div id='limitBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px; text-align:left;" class='left'></div>
+				<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+				<script type="text/javascript">
+				<!--
+					limitBoxs = new selectBox('limitBox','','{{Main}}','4');
+					limitBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+					limitBoxs.img1.src = 'img/common/icon_select_down2.gif';
+					limitBoxs.img2.src = 'img/common/icon_select_up2.gif';
+					{{LIMIT_OPTION2}}
+					limitBoxs.show('cate');
+					limitBoxs.secNum = {{SEC_LIMIT}};
+					limitBoxs.mout();
+				// -->
+				</script>									
+				</form>
+			</div>			
+			
+			<div class="right">
+				<a href="#" onfocus="this.blur();" onclick="return getLists.cgType('img',1)"><img src="img/common/icon_img_off.gif" align="absmiddle" alt='이미지형' title='이미지형' id="imgof_img" /></a>
+			</div>
+			<div class="right">
+				<a href="#" onfocus="this.blur();" onclick="return getLists.cgType('list',1)"><img src="img/common/icon_list_on.gif" align="absmiddle" alt='리스트형' title='리스트형' id="imgof_list" /></a>
+			</div>	
+		</div>
+		
+		<form name="listForm">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col />
+			<col width="120" /> 
+			<col width="120" />        			
+            <thead>
+            <tr height="28">
+                <th scope="col" class="small black">상품명</th>
+				<th align="right" scope="col" class="small black">가격/적립금</th>
+				<th scope="col" class="small black">상품평</th>
+            </tr>
+			</thead>
+			
+			<tbody id="list_table"></tbody>
+			<!-- id:listTable 에 리스트가 나옵니다. -->
+			</table>
+		</div>
+
+		<div id="list_img" style="display:none">						
+			<!-- id:lis_img 에 이미지가 나옵니다. -->
+		</div>	
+		</form>
+		
+		<!-- DYNAMIC @no_loop@ -->
+		<div style="clear:both;text-align:center">
+			<img src="img/shop/no_goods.gif" alt="상품이 없습니다" />
+		</div>
+		<!-- DYNAMIC @no_loop@ -->
+
+	</div>
+
+	<div style='clear:both;'>
+	    <div style="height:10px;">&nbsp;</div>
+		<div style='clear:both;text-align:left;'>
+			<img src="img/shop/btn_compare.gif" class="hand" onclick="secCompare();return false;" alt="선택상품 비교하기" />
+			<img src="img/shop/btn_cart_all.gif" class="hand" onclick="cartPost();return false;" alt="선택상품 장바구니담기" />
+		</div>
+		<div id="paging" class="small" style=""></div>
+	</div>
+	
+	<div style="clear:both;height:20px">&nbsp;</div>		
+
+	<script type="text/javascript">
+	<!--
+
+	getLists = new getList('{{limit}}','list','uid','{{TOTAL}}','{{Pstart}}','{{ajaxstring}}');
+	getLists.display();
+	aPage = new ajaxPaging('aPage','paging',getLists,'{{TOTAL}}','{{limit}}','10');
+	aPage.makePage();
+	aPage.printPage();
+
+	getLists.cgOrder('{{order}}');
+	getLists.cgType('{{cgType}}');
+
+	// -->
+	</script>
+
+	<!-- DYNAMIC @is_cate_goods@ -->
+
+	<!-- DYNAMIC @is_page@ -->
+	<script type="text/javascript">aPage.page={{page}};aPage.makePage();aPage.printPage();</script>
+	<!-- DYNAMIC @is_page@ -->
+	
+	<script type="text/javascript">checkCookieVar();</script>
+</div>

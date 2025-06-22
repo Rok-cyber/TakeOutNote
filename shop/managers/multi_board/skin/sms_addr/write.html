@@ -1,0 +1,98 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+  form=document.signForm;
+  
+  if(form.ckGroup[0].checked==true) {
+	form.groups.value=form.sgroup.value;
+  }
+  else {
+	form.groups.value=form.igroup.value;
+  }
+
+  if(!form.name.value) {
+	alert('이름을 입력 하세요!');
+	form.name.focus();
+	return false;
+  }
+
+  if(!form.cell1.value || !form.cell2.value || !form.cell3.value) {
+	alert('핸드폰 번호를 입력 하세요!');
+	return false;
+  }
+
+  form.cell.value = form.cell1.value+'-'+form.cell2.value+'-'+form.cell3.value;
+  
+  form.submit();
+  
+  return false;
+}
+
+//-->
+</script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<input type="hidden" name="groups" value="{{FORM1}}">
+		<input type="hidden" name="cell" value="{{FORM3}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;그룹</font></td>
+							<td bgcolor="#EFEFEF">
+								&nbsp;<input type="radio" name="ckGroup" value="1" checked>기존그룹 : 
+								<select name="sgroup" onchange="document.signForm.ckGroup[0].checked=true;">
+									<option value="">선택</option>{{SECGROUP}}
+								</select>
+								&nbsp;<input type="radio" name="ckGroup" value="1">신규그룹 : 
+								<input type=text class=ta name="igroup" value='' size=24 onclick="document.signForm.ckGroup[1].checked=true;">
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이름</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=name value='{{FORM2}}' size=24></td>
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;핸드폰번호</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=cell1 value='{{FORM31}}' size=5 maxlength=3> - <input type=text class=ta name=cell2 value='{{FORM32}}' size=5 maxlength=4> - <input type=text class=ta name=cell3 value='{{FORM33}}' size=5 maxlength=4></td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;성별</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type="radio" name="sex" value="M" {{CKDM}}> 남성&nbsp;<input type="radio" name="sex" value="F" {{CKDF}}> 여성 </td>
+						</tr>						
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비고</font></td>
+							<td bgcolor="#EFEFEF" style='word-break:break-all'>&nbsp;<input type=text class=ta name="memo" value='{{FORM5}}' size=95></td>
+						</tr>						
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>		
+							</td>							 
+						</tr>										
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

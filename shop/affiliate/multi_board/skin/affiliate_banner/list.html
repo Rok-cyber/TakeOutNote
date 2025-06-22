@@ -1,0 +1,128 @@
+<table border=0 cellpadding="0" cellspacing="0" width="100%" align=center bgcolor='#FFFFFF'>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="post" action="{{ACTION}}" onsubmit='return false;'>
+		<tr><td height='6'></td></tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">배너타입</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='status'>
+						<option value=''>전체</option>
+						<option value='I'>이미지</option>
+						<option value='T'>텍스트</option>
+					</select>
+				</div>					
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=50%><font class="small">&nbsp;전체 : <font class="eng">{{TOTAL}}</font> 건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지</font></td>
+    <td align=right></td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">배너타입</font></td>			
+							<td align=center class=gr_bg><font class="bTitle small">텍스트/이미지</font></td>
+							<td width=14% align=center class=gr_bg><font class="bTitle small">사이즈</font></td>							
+							<td width=10% align=center class=gr_bg><font class="bTitle small">퍼가기</font></td>
+						</tr>
+						<form METHOD=POST name='delForm'>
+						<!-- DYNAMIC @loop@ -->
+						<tr height=22 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<td align=center>{{LIST2}}</td>
+							<td align=center style="padding:4px;">
+								{{BANNER}}
+								<div style="height:6px;overflow:hidden">&nbsp;</div>
+								<div style="padding:4px;width:450px;border:1px solid #ccc;background-color:#fff" id="links_{{num}}">{{LINKS}}</div>
+							</td>
+							<td align=center>{{SIZES}}</td>							
+							<td align=center>
+								<div><span id='nextIcon' class="hand small" onclick="copyBanner('{{num}}');">배너 퍼가기</span></div> 								
+							</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=60>
+							<td align=center colspan=5 bgcolor="#ffffff">등록(검색)된 배너가 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+    </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+	<!-- 페이징,검색... start -->
+		<table border = 0 cellspacing=0 cellpadding=0 width=100%>
+		<tr>
+			<td width=40%></td>
+			<td align=right id=paging>{{PAGING}}</td>
+		</tr>
+		</table>
+		<!-- 페이징,검색... end -->
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+<script>
+document.searchForm.status.value = '{{status}}';
+document.searchForm.limit.value = '{{limit}}';
+
+function copyBanner(num){
+	try{
+		if (window.clipboardData) { 
+			link_s = str_replace("&lt;","<",document.getElementById('links_'+num).innerHTML);
+			link_s = str_replace("&gt;",">",link_s);
+			window.clipboardData.setData('Text', link_s); 			
+			ck = 1;
+		}
+		if(ck==1) alert("배너링크가 클립보드에 복사 되었습니다.");
+		else alert("해당 브라우저가 클립보드 복사 기능을 허용하지 않습니다. 직접 왼쪽 주소를 복사해서 사용하시기 바랍니다.");
+	}  catch (ex) {
+		alert("해당 브라우저가 클립보드 복사 기능을 허용하지 않습니다. 직접 왼쪽 주소를 복사해서 사용하시기 바랍니다.");
+	}
+}
+
+</script>

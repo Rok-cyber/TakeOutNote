@@ -1,0 +1,391 @@
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+	<div id="subTitle">
+		<div class="left"><img src="img/shop/ttl_order_result.gif" alt="주문완료" title="주문완료" /></div>
+		<div class="right" style="padding-top:30px;"><img src="img/shop/ttl_order_step03.gif" alt="주문완료" title="주문완료" /></div>
+	</div>		
+	
+	<div class="clear" style="height:28px;">&nbsp;</div>
+
+	<div id="printArea">
+		
+		<div class="small" style="margin:0 0 10px 0; text-align:left;">
+			<div class="noticeDiv"><b>주문시간 : <font class="num">{{TIME}}</font>, 주문번호 : <font class="num">{{NUMBER}}</font></b></div>
+			<div class="noticeDiv" style="margin-top:6px">비회원주문일 경우 배송조회시 주문번호가 필요하오니 주문번호를 다른곳에 적어 두시기 바랍니다.</div>
+			<div class="noticeDiv" style="margin-top:6px">주문내역은 아래와 같습니다. 확인해 보시고 이상이 있으시면 고객센터 <font class="mColor">1:1고객상담</font>이나 <font class="mColor">고객콜센터</font>로 연락 주시면 바로 처리해 드리겠습니다.</div>
+		</div>
+
+		<div id="list_list" style="margin-top:30px;">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">						
+				<col width="90" />
+				<col />
+				<col width="80" /> 
+				<col width="40" /> 				
+				<col width="70" />
+				<col width="80" />
+				<thead>
+				<tr height="28" align="center">				
+					<th scope="col"><img src="img/shop/ttl_list_img.gif" alt="이미지" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_name.gif" alt="상품명/옵션" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_price.gif" alt="가격" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_qty.gif" alt="수량" /></th>					
+					<th scope="col"><img src="img/shop/ttl_list_point.gif" alt="적립금" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_sum.gif" alt="합계" /></th>
+				</tr>
+				</thead>				
+				<tbody>
+				<!-- DYNAMIC @loop_cart@ -->
+				<tr align="center" height="98">
+					<td><a href="{{LINK}}"><img src="{{OIMAGE}}" width="80" style="border:1px solid #efefef" alt="{{NAME}}" /></a></td>
+					<td align="left">
+						<div class="clear tleft">						
+							<div><a href="{{LINK}}">{{NAME}}</a>&nbsp;{{ICON}}</div>
+							<div>
+								<!-- DYNAMIC @loop_op@ -->
+								<div style='float:left;padding-right:10px;' class='small left blue'>{{OP_SEC_VLS}}&nbsp;</div>
+								<!-- DYNAMIC @loop_op@ -->
+							</div>
+							<div class="clear">
+								<!-- DYNAMIC @is_my_sale@ -->
+								<font class="small">({{TTL}}할인 <font class="num blue">{{MY_SALE}}%</font> 적용)&nbsp;&nbsp;</font>
+								<!-- DYNAMIC @is_my_sale@ -->
+								<!-- DYNAMIC @is_my_point@ -->
+								<font class="small">({{TTL}}추가적립 <font class="num blue">{{MY_POINT}}%</font> 적용)</font>
+								<!-- DYNAMIC @is_my_point@ -->
+								<!-- DYNAMIC @is_my_carr@ -->
+								<font class="small">(배송비 <font class="num blue">{{CARR}}원</font> 별도상품)</font>
+								<!-- DYNAMIC @is_my_carr@ -->
+								<!-- DYNAMIC @is_my_free@ -->
+								<font class="small">(배송비 무료상품)</font>
+								<!-- DYNAMIC @is_my_free@ -->				
+							</div>
+						</div>					
+					</td>								
+					<td class="num">{{PRICE}}<font class="small">원</font> {{OP_PRICE}}</td>
+					<td class="num">{{QTY}}<font class="small">{{UNIT}}</font></td>
+					<td class="num">{{RESE}}P</td>
+					<td class="num bold">{{SUM}}<font class="small">원</font></td>
+				</tr>
+				<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>			
+				<!-- DYNAMIC @loop_cart@ -->
+				<tr><td colspan="7" height="1" bgcolor="#dddddd"></td></tr>
+				</tbody>			
+			</table>
+		</div>		
+		
+		<div class="blank" style="height:20px">&nbsp;</div>	
+
+		<div>
+			<div class="left small tleft" style="width:450px;line-height:220%;">
+				주문상품 : <font class="num mColor">{{TCNT}}</font>개,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->총할인금액 : <font class="num blue">{{TSALE}}</font>원,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->상품총금액 : <font class="num mColor">{{TOTAL}}</font>원,&nbsp;&nbsp;총배송비 : <font class="num mColor">{{TCARR}}</font>원<br>
+				총적립금 : <font class="num mColor">{{TRESE}}</font><font class='num'>P</font>&nbsp;&nbsp;(적립금은 주문완료후 적립처리 됩니다.)
+			</div>
+			<div class="right" style="font-size:20px;padding:4px 6px;">
+				<img src="img/shop/ttl_total_pay.gif" alt="총주문금액" />{{IMG_TOTAL}}<img src="img/shop/ttl_total_won.gif" alt="원" />
+			</div>		
+		</div>	
+
+		<div class="blank" style="height:20px">&nbsp;</div>	
+
+		<div id="orderInfo">
+			<div style="padding:8px 0;"><img src="img/shop/ttl_order_result1.gif" alt="결제정보" title="결제정보" /></div>
+			<div class="orderBox clearfix">		
+				<ul>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_total.gif" alt="상품 총금액" /></div>
+						<div class="left num" style="width:80px;text-align:right;font-size:10pt">{{TOTAL}}<font class="default">원</font></div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_tcarr.gif" alt="총배송비" /></div>
+						<div id="carr_total" class="left num" style="width:80px;text-align:right;font-size:10pt">{{TCARR}}<font class="default">원</font></div>
+					</li>					
+					<!-- DYNAMIC @is_reserve@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_upoint.gif" alt="적립금사용" /></div>
+						<div class="left num" style="width:80px;text-align:right;font-size:10pt">{{RESERVE}}P</div>
+					</li>
+					<!-- DYNAMIC @is_reserve@ -->
+
+					<!-- DYNAMIC @is_cupon@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_cpsale.gif" alt="쿠폰할인" /></div>
+						<div class="left num blue" style="width:80px;text-align:right;font-size:10pt">{{CUPON}}<font class="default">원</font></div>
+						<div class="left small" style="text-align:right;padding:2px 0 0 6px;">(
+							<!-- DYNAMIC @loop_cupon@ -->
+							{{C_NAME}} - <font class="num">{{C_SALE}}</font>{{C_STYPE}}할인
+							<!-- DYNAMIC @loop_cupon@ -->
+						)&nbsp;</div>
+					</li>
+					<!-- DYNAMIC @is_cupon@ -->
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_csale.gif" alt="현금결제할인" /></div>
+						<div id="cash_dc" class="left num bold blue" style="width:80px;text-align:right;font-size:10pt">{{CASHDC}}<font class="default">원</font></div>
+						<div class="left num" style="padding:2px 0 0 6px;">({{CASHDC2}}% <font class='small'>할인</font>)</div>
+					</li>	
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_tpay.gif" alt="총결제금액" /></div>
+						<div id="cash_money" class="left num bold mColor" style="width:80px;text-align:right;font-size:10pt">{{TOTAL3}}<font class="default">원</font></div>
+					</li>	
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_ctype.gif" alt="결제 방법" /></div>
+						<div class="left">{{CASH_TYPE}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_bank.gif" alt="입금은행" /></div>
+						<div class="left">{{BANK_NAME}} </div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_bank_info.gif" alt="입금자/예정일" /></div>
+						<div class="left">{{PAY_NAME}} / {{PAY_DATE}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank_cash@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_cash_taxs.gif" alt="현금영수증" /></div>
+						<div class="left">								
+							{{CASH_INFO}} 						
+						</div>
+					</li>
+					<!-- DYNAMIC @is_bank_cash@ -->
+					<!-- DYNAMIC @is_bank@ -->
+					<!-- DYNAMIC @is_card@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_card_info.gif" alt="카드결제정보" /></div>
+						<div class="left">{{CARD_INFO}}</div>
+					</li>
+					<!-- DYNAMIC @is_card@ -->
+				</ul>
+			</div>
+
+			<div class="clear" style="height:28px;">&nbsp;</div>	
+			<div style="padding:8px 0;"><img src="img/shop/ttl_order_result2.gif" alt="배송정보" title="배송정보" /></div>
+			<div class="orderBox clearfix">	
+				<ul>				
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_name.gif" alt="수취인 이름" /></div>
+						<div class="left">{{NAME}}</div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_tel.gif" alt="수취인 연락처" /></div>
+						<div class="left num">{{TEL}}</div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_cell.gif" alt="수취인 핸드폰" /></div>
+						<div class="left num">{{PHONE}}</div>
+					</li>	
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_addr.gif" alt="배송지 주소" /></div>
+						<div class="left">({{ZIPCODE}}) {{ADDRESS}}</div>
+					</li>
+					<li style="height:56px;">
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_memo.gif" alt="요청 사항" /></div>
+						<div class="left">{{MESSAGE}}</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<!-- DYNAMIC @mail_send@ -->	
+	<div style="width:720px;padding-top:20px;">
+		<div style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;margin:0 0 10px 0; text-align:left;">
+			<div style="background:url(img/common/icon_notice.gif) no-repeat 0 -1px;padding:1px 0 0 16px;"><b>주문시간 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{TIME}}</font>, 주문번호 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{NUMBER}}</font></b></div>
+			<div style="background:url(img/common/icon_notice.gif) no-repeat 0 -1px;padding:1px 0 0 16px;;margin-top:6px">비회원주문일 경우 배송조회시 주문번호가 필요하오니 주문번호를 다른곳에 적어 두시기 바랍니다.</div>
+			<div style="background:url(img/common/icon_notice.gif) no-repeat 0 -1px;padding:1px 0 0 16px;;margin-top:6px">주문내역은 아래와 같습니다. 확인해 보시고 이상이 있으시면 고객센터 <font class="mColor">1:1고객상담</font>이나 <font class="mColor">고객콜센터</font>로 연락 주시면 바로 처리해 드리겠습니다.</div>
+		</div>
+
+		<div style="margin-top:20px;">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">						
+				<col width="90" />
+				<col />
+				<col width="80" /> 
+				<col width="40" /> 				
+				<col width="70" />
+				<col width="80" />
+				<thead>
+				<tr><td colspan="7" height="1" bgcolor="#dddddd"></td></tr>
+				<tr height="28" align="center">				
+					<th scope="col"><img src="img/shop/ttl_list_img.gif" alt="이미지" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_name.gif" alt="상품명/옵션" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_price.gif" alt="가격" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_qty.gif" alt="수량" /></th>					
+					<th scope="col"><img src="img/shop/ttl_list_point.gif" alt="적립금" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_sum.gif" alt="합계" /></th>
+				</tr>
+				<tr><td colspan="7" height="1" bgcolor="#dddddd"></td></tr>
+				</thead>				
+				<tbody>
+				<!-- DYNAMIC @loop_cart2@ -->
+				<tr align="center" height="98">
+					<td><a href="{{LINK}}" target="_blank"><img src="{{OIMAGE}}" width="80" style="border:1px solid #efefef" alt="{{NAME}}" /></a></td>
+					<td align="left">
+						<div class="clear tleft">						
+							<div><a href="{{LINK}}" onfocus="blur()" target="_blank">{{NAME}}</a>&nbsp;{{ICON}}</div>
+							<div>
+								<!-- DYNAMIC @loop_op2@ -->
+								<div style='float:left;padding-right:10px;' class='small left blue'>{{OP_SEC_VLS}}&nbsp;</div>
+								<!-- DYNAMIC @loop_op2@ -->
+							</div>
+							<div class="clear">
+								<!-- DYNAMIC @is_my_sale2@ -->
+								<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">({{TTL}}할인 <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#39f">{{MY_SALE}}%</font> 적용)&nbsp;&nbsp;</font>
+								<!-- DYNAMIC @is_my_sale2@ -->
+								<!-- DYNAMIC @is_my_point2@ -->
+								<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">({{TTL}}추가적립 <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#39f">{{MY_POINT}}%</font> 적용)</font>
+								<!-- DYNAMIC @is_my_point2@ -->
+								<!-- DYNAMIC @is_my_carr2@ -->
+								<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">(배송비 <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#39f">{{CARR}}원</font> 별도상품)</font>
+								<!-- DYNAMIC @is_my_carr2@ -->
+								<!-- DYNAMIC @is_my_free2@ -->
+								<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">(배송비 무료상품)</font>
+								<!-- DYNAMIC @is_my_free2@ -->				
+							</div>
+						</div>					
+					</td>								
+					<td style="font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{PRICE}}<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">원</font> {{OP_PRICE}}</td>
+					<td style="font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{QTY}}<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">{{UNIT}}</font></td>
+					<td style="font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{RESE}}P</td>
+					<td style="font-family:Tahoma; font-size:11px;letter-spacing:0px;font-weight:bold">{{SUM}}<font style="font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;">원</font></td>
+				</tr>
+				<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>			
+				<!-- DYNAMIC @loop_cart2@ -->
+				<tr><td colspan="7" height="1" bgcolor="#dddddd"></td></tr>
+				</tbody>			
+			</table>
+		</div>		
+		
+		<div class="blank" style="clear:both; height:8px; overflow:hidden;height:20px">&nbsp;</div>	
+
+		<div>
+			<div class="small tleft" style="float:left;width:450px;line-height:220%;">
+				주문상품 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#38c1c9">{{TCNT}}</font>개,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale2@ -->총할인금액 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#39f">{{TSALE}}</font>원,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale2@ -->상품총금액 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#38c1c9">{{TOTAL}}</font>원,&nbsp;&nbsp;총배송비 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#38c1c9">{{TCARR}}</font>원<br>
+				총적립금 : <font style="font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#38c1c9">{{TRESE}}</font><font class='num'>P</font>&nbsp;&nbsp;(적립금은 주문완료후 적립처리 됩니다.)
+			</div>
+			<div style="float:right;font-size:20px;padding:4px 6px;">
+				<img src="img/shop/ttl_total_pay.gif" alt="총주문금액" />{{IMG_TOTAL}}<img src="img/shop/ttl_total_won.gif" alt="원" />
+			</div>		
+		</div>	
+
+		<div class="blank" style="clear:both; height:8px; overflow:hidden; height:20px">&nbsp;</div>	
+
+		<div style="text-align:left; width:720px;">
+			<div style="padding:8px 0;"><img src="img/shop/ttl_order_result1.gif" alt="결제정보" title="결제정보" /></div>
+			<div class="clearfix" style="border:2px solid #f8f8f8;">		
+				<ul style="margin:0px; padding:20px 0 10px 16px; border:1px solid #ccc;">
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_total.gif" alt="상품 총금액" /></div>
+						<div class="num" style="float:left;width:80px;text-align:right;font-size:10pt">{{TOTAL}}<font class="default">원</font></div>
+					</li>
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_tcarr.gif" alt="총배송비" /></div>
+						<div id="carr_total" class="num" style="float:left;width:80px;text-align:right;font-size:10pt">{{TCARR}}<font class="default">원</font></div>
+					</li>					
+					<!-- DYNAMIC @is_reserve2@ -->
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_upoint.gif" alt="적립금사용" /></div>
+						<div class="num" style="float:left;width:80px;text-align:right;font-size:10pt">{{RESERVE}}P</div>
+					</li>
+					<!-- DYNAMIC @is_reserve2@ -->
+
+					<!-- DYNAMIC @is_cupon2@ -->
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_cpsale.gif" alt="쿠폰할인" /></div>
+						<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;color:#38c1c9" style="width:80px;text-align:right;font-size:10pt">{{CUPON}}<font class="default">원</font></div>
+						<div style="float:left;font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;" style="text-align:right;padding:2px 0 0 6px;">(
+							<!-- DYNAMIC @loop_cupon2@ -->
+							{{C_NAME}} - <font class="num">{{C_SALE}}</font>{{C_STYPE}}할인
+							<!-- DYNAMIC @loop_cupon2@ -->
+						)&nbsp;</div>	
+					</li>
+					<!-- DYNAMIC @is_cupon2@ -->
+					<!-- DYNAMIC @is_cash_dc2@ -->
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_csale.gif" alt="현금결제할인" /></div>
+						<div id="cash_dc" class="num bold blue" style="float:left;width:80px;text-align:right;font-size:10pt">{{CASHDC}}<font class="default">원</font></div>
+						<div class="num" style="float:left;padding:2px 0 0 6px;">({{CASHDC2}}% <font class='small'>할인</font>)</div>
+					</li>	
+					<!-- DYNAMIC @is_cash_dc2@ -->
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_tpay.gif" alt="총결제금액" /></div>
+						<div id="cash_money" class="num bold mColor" style="float:left;width:80px;text-align:right;font-size:10pt">{{TOTAL3}}<font class="default">원</font></div>
+					</li>	
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_ctype.gif" alt="결제 방법" /></div>
+						<div style="float:left;">{{CASH_TYPE}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank2@ -->
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_bank.gif" alt="입금은행" /></div>
+						<div style="float:left;">{{BANK_NAME}} </div>
+					</li>
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_bank_info.gif" alt="입금자/예정일" /></div>
+						<div style="float:left;">{{PAY_NAME}} / {{PAY_DATE}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank_cash2@ -->
+					<li>
+						<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_cash_taxs.gif" alt="현금영수증" /></div>
+						<div class="left">{{CASH_INFO}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank_cash2@ -->
+					<!-- DYNAMIC @is_bank2@ -->
+					<!-- DYNAMIC @is_card2@ -->
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div class="nextIcon2"><img src="img/shop/ttl_card_info.gif" alt="카드결제정보" /></div>
+						<div style="float:left;">{{CARD_INFO}}</div>
+					</li>
+					<!-- DYNAMIC @is_card2@ -->
+				</ul>
+			</div>
+
+			<div class="clear" style="clear:both; height:8px; overflow:hidden; height:28px;">&nbsp;</div>	
+			<div style="padding:8px 0;"><img src="img/shop/ttl_order_result2.gif" alt="배송정보" title="배송정보" /></div>
+			<div class="clearfix" style="border:2px solid #f8f8f8;">	
+				<ul style="margin:0px; padding:20px 0 10px 16px; border:1px solid #ccc;">			
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_carr_name.gif" alt="수취인 이름" /></div>
+						<div style="float:left;">{{NAME}}</div>
+					</li>
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_carr_tel.gif" alt="수취인 연락처" /></div>
+						<div style="font-family:Tahoma; font-size:11px;letter-spacing:0px;" style="float:left;">{{TEL}}</div>
+					</li>
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_carr_cell.gif" alt="수취인 핸드폰" /></div>
+						<div style="font-family:Tahoma; font-size:11px;letter-spacing:0px;" style="float:left;">{{PHONE}}</div>
+					</li>	
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_carr_addr.gif" alt="배송지 주소" /></div>
+						<div style="float:left;">({{ZIPCODE}}) {{ADDRESS}}</div>
+					</li>
+					<li style="clear:both;list-style:none;vertical-align:middle;line-height:120%; margin:0px; padding:0px; height:32px; width:95%;height:56px;">
+						<div style="float:left;padding-left:8px; width:120px;"><img src="img/shop/ttl_carr_memo.gif" alt="요청 사항" /></div>
+						<div style="float:left;">{{MESSAGE}}</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<!-- DYNAMIC @mail_send@ -->
+	<div class="blank" style="height:30px;">&nbsp;</div>
+
+	<center>			
+		<div style="width:208px;">
+			<div class="left"><a href="{{Main}}"><img src="img/shop/btn_shopping.gif" alt="계속쇼핑하기" title="계속쇼핑하기" border="0" /></a></div>
+			<div class="left" style="padding-left:6px;"><img src="img/shop/btn_print.gif" class="hand" onclick="printClick();" alt="프린트하기" title="프린트하기" /></div>		
+		</div>	
+	</center>
+		
+	<div class="blank" style="height:20px;">&nbsp;</div>
+</div>

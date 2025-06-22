@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>교환상품 발송처리</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+<script LANGUAGE="JavaScript" src="../../lib/lib.lightBox.js"></script> 
+<script LANGUAGE="JavaScript" src="../../lib/lib.Function.js"></script> 
+
+<script language="JavaScript"> 
+function ckForm(){
+	var f = document.changeForm;
+	if(!f.carr_num.value) {
+		alert("송장번호를 입력 하시기 바랍니다");
+		f.carr_num.focus();
+		return false;
+	}
+}
+</script>
+</HEAD>
+
+<BODY style="padding:0px;margin:0px;">
+
+<TABLE width=96% align=center cellpadding=0 cellspacing=0 border=0>
+<FORM name='changeForm' method='post' action='order_change_ok.php?mode=send' onsubmit="return ckForm();">
+<input type=hidden name=order_num value='{{order_num}}'>
+<input type=hidden name=uid value='{{uid}}'>
+
+<tr><td height=10></td></tr>
+<TR><TD><img src='./img/ttl_change_01.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<TR>
+		<TD>
+			<TABLE  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<TR>
+				<TD>
+					<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+							<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>
+							<td align="center" class=gr_bg><font class="bTitle small">상품명 / 옵션</font></td>
+							<td width=8% align="center" class=gr_bg><font class="bTitle small">수량</font></td>
+							<td width=12% align="center" class=gr_bg><font class="bTitle small">개별배송비</font></td>
+							<td width=12% align="center" class=gr_bg><font class="bTitle small">합계</font></td>
+							<td width=15% align="center" class=gr_bg><font class="bTitle small">진행상황</font></td>
+						</tr>
+						<!-- DYNAMIC @loop_change@ -->
+						<tr height=24 bgcolor='#ffffff'>
+							<td align=center class='eng'>{{ii}}</td>
+							<td align="left" style='padding-left:6px;'>{{NAME}} <font class='small'>{{OP_SEC_VLS}}</font></td>
+							<td align=center class='eng'>{{QTY}}</td>
+							<td align=right class='eng' style='padding-right:6px;'>{{CARR}}원</td>
+							<td align=right class='eng' style='padding-right:6px;'>{{SUM}}</td>
+							<td align=center class="small">{{STATUS}}</td>
+						</tr>
+						<!-- DYNAMIC @loop_change@ -->						
+					</table>	
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=10></TD></TR>
+<TR><TD><img src='./img/ttl_change_02.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<TR>
+		<TD>
+			<TABLE  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=1 cellspacing=1>					
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;처리 담당자</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' class=ta name='name' size='20' value="{{my_name}}"></TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배송 정보</font></TD>
+						<TD bgcolor=#EFEFEF style="padding-left:6px;">
+							<select name="delivery">{{DELIVERY}}</select>										
+							<input type=text name="carr_num" size="30" value='' class="ta">&nbsp;&nbsp;<font class="small">'-'를 제외하고 입력하세요</font>
+						</TD>
+					</TR>					
+					<TR height=30 align=left>
+						<TD class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메모</font></TD>
+						<TD bgcolor=#EFEFEF style="padding:3px 0 3px 6px;">
+							<textarea name=message rows=5 class=ta style='width:99%'>{{memo}}</textarea>
+						</TD>
+					</TR>					
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<TR><TD align=center><input type='image' src='./img/btn_change.gif' border=0 onfocus='blur();' align=absmiddle>&nbsp;<img src='../shopping/img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"></TD></TR>
+<TR><TD height=30></TD></TR>
+</FORM>
+</TABLE>
+
+<div class="small" style="padding:0 0 20px 10px;">
+	! 배송정보를 입력하시면 고객이 주문/배송조회 페이지에서 교환상품 위치추적을 이용 할 수 있습니다.<br />
+	! 교환시 발생되는 택배비나 기타사항들은 메모란에 적어 두시면 됩니다.
+</div>
+
+</BODY>
+</HTML>

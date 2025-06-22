@@ -1,0 +1,52 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>.text{mso-number-format:"\@";}</style>
+</head>
+<body>
+
+<table border="1">
+<tr>
+	<th>번호</th>
+	<th>주문번호</th>
+	<th>주문일</th>	
+	<th>아이디</th>
+	<th>주문고객 성명</th>
+	<th>주문상품</th>
+	<th>수량</th>	
+	<th>개별배송비</th>
+	<th>판매금액</th>
+	<th>진행상황</th>
+	<th>결제상태</th>		
+</tr>
+<!-- DYNAMIC @loop@ -->
+<!-- DYNAMIC @type1@ -->
+<tr>
+	<td {{ROWSPAN}}>{{NUM}}</td>
+	<td {{ROWSPAN}}>{{LIST1}}</td>
+	<td {{ROWSPAN}}>{{LIST2}}</td>
+	<td {{ROWSPAN}}>{{LIST3}}</td>
+	<td {{ROWSPAN}}>{{LIST4}}</td>
+	<td>{{LIST5}}</td>
+	<td>{{LIST6}}</td>
+	<td>{{LIST10}}</td>
+	<td>{{LIST7}}</td>
+	<td>{{LIST8}}</td>
+	<td {{ROWSPAN}}>{{LIST9}}</td>	
+</tr>
+<!-- DYNAMIC @type1@ -->
+<!-- DYNAMIC @type2@ -->
+<tr>
+	<td>{{LIST5}}</td>
+	<td>{{LIST6}}</td>
+	<td>{{LIST10}}</td>
+	<td>{{LIST7}}</td>
+	<td>{{LIST8}}</td>	
+</tr>
+<!-- DYNAMIC @type2@ -->
+<!-- DYNAMIC @loop@ -->
+
+</table>
+
+</body>
+</html>

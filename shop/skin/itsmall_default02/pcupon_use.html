@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y:auto;">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<title>할인쿠폰 사용선택</title>
+<script type="text/javascript"  src="../lib/lib.Function.js"></script>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" title="style" />
+
+<body style="padding:0;margin:0">
+
+<div style="width:600px;padding:20px 0 0 14px;">	
+	
+	<div style="width:560px;">
+		<div style="text-align:left;padding-bottom:8px;"><img src="img/shop/ttl_cupon_sec.gif" alt="쿠폰선택" title="쿠폰선택" /></div>
+        <div id="list_list" style="width:560px;">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">
+				<col width="50" /> 			
+				<col />			
+				<col width="70" /> 
+				<col width="110" />
+				<col width="130" />      					
+				<col width="80" />      					
+				<thead>
+				<tr height="28" align="center">
+					<th scope="col" class="hand"><img src="img/shop/ttl_list_sec.gif" alt="선택" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_cname.gif" alt="쿠폰명" /></th>
+					<th scope="col" align="center"><img src="img/shop/ttl_list_sale.gif" alt="할인액(율)" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_limit.gif" alt="사용제한사항" /></th>				
+					<th scope="col"><img src="img/shop/ttl_list_udate.gif" alt="사용기간" /></th>				
+					<th scope="col"><img src="img/shop/ttl_list_cdate.gif" alt="발급일" /></th>					
+				</tr>
+				</thead>
+				
+				<tbody>
+
+				<form name="secForm">
+				
+				<!-- DYNAMIC @loop@ -->					
+				<tr align="center" height="26" style="position:relative">					
+					<td>
+						<!-- DYNAMIC @sec1@ -->
+						<input type="radio" name="secs" value="{{UID}}" {{DISA}} onclick="return ckCupons({{C_PRICE}},{{ckFloatCnt}})" />
+						<!-- DYNAMIC @sec1@ -->
+						<!-- DYNAMIC @sec2@ -->
+						<input type="checkbox" name="secsg[]" value="{{UID}}" {{DISA}} onclick="return ckCupons2({{C_PRICE}},{{ckFloatCnt}},this)" />
+						<!-- DYNAMIC @sec2@ -->					
+					</td>
+					<td align="left">{{NAME}}</td>
+					<td align="center" class="num">{{SALE}}{{STYPE}}</font><!-- DYNAMIC @is_sprice@ --><br />({{SPRICE}}<font class='small'>원</font>)<!-- DYNAMIC @is_sprice@ --></td>							
+					<td class="small green" style="padding:1px 0 1px 0">
+						<!-- DYNAMIC @lmt1@ -->
+						개별상품({{G_NAME}})
+						<!-- DYNAMIC @lmt1@ -->
+
+						<!-- DYNAMIC @lmt2@ -->
+						<span onmouseOver="document.getElementById('cateDiv{{UID}}').style.display='block';" onmouseOut="document.getElementById('cateDiv{{UID}}').style.display='none';" class="hand">특정 카테고리</span> <br /><font class='num'>{{LMT}}</font>원 이상구매시
+						<!-- DYNAMIC @lmt2@ -->
+
+						<!-- DYNAMIC @lmt3@ -->
+						<span onmouseOver="document.getElementById('cateDiv{{UID}}').style.display='block';" onmouseOut="document.getElementById('cateDiv{{UID}}').style.display='none';" class="hand">특정 카테고리</span>
+						<!-- DYNAMIC @lmt3@ -->
+
+						<!-- DYNAMIC @lmt4@ -->
+						<font class='num'>{{LMT}}</font>원 이상구매시
+						<!-- DYNAMIC @lmt4@ -->
+
+						<!-- DYNAMIC @lmt5@ -->
+						제한없음
+						<!-- DYNAMIC @lmt5@ -->
+
+						<!-- DYNAMIC @lmt_cate@ -->
+						<div style="position:absolute;top:1px;background-color:#EFEFEF;border:1px solid #dadada;padding:2px 8px 2px 8px;text-align:left;display:none;" class="black small" id="cateDiv{{UID}}">{{LMT_CATE}}</div>
+						<!-- DYNAMIC @lmt_cate@ -->
+					</td>				
+					<td class="num orange" style="line-height:130%">{{DATES}}</td>				
+					<td class="num">{{DATE}}</td>									
+				</tr>			
+				<tr><td colspan="6" height="1" bgcolor="#F1F1F1"></td></tr>
+				<!-- DYNAMIC @loop@ -->		
+
+				<!-- DYNAMIC @no_loop@ -->					
+				<tr align="center" height="50">
+					<td align="center" colspan="6" class="small">사용가능한 쿠폰이 없습니다.</td>									
+				</tr>			
+				<tr><td colspan="6" height="1" bgcolor="#F1F1F1"></td></tr>
+				<!-- DYNAMIC @no_loop@ -->					
+
+				</form>
+				</tbody>			
+			</table>
+		</div>
+	</div>
+
+	<div style="width:560px;margin-top:30px;">
+		<div style="text-align:left;padding-bottom:8px;"><img src="img/shop/ttl_cupon_total.gif" alt="쿠폰적용총주문금액" title="쿠폰적용총주문금액" /></div>
+        <div id="list_list" style="width:560px;">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">
+				<col width="33%" />
+				<col width="33%" />
+				<col width="34%" />
+				<thead>
+				<tr height="28" align="center">
+					<th scope="col"><img src="img/shop/ttl_list_total.gif" alt="상품 총 금액" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_coupon.gif" alt="쿠폰 할인 금액" /></th>	
+					<th scope="col"><img src="img/shop/ttl_list_stotal.gif" alt="할인 적용 상품 총 금액" /></th>
+				</tr>
+				</thead>
+				
+				<tbody>
+				<form name="dispForm">
+				<input type="hidden" name="total" value="{{TOTAL}}" />
+				<input type="hidden" name="c_total" value="0" />
+				<input type="hidden" name="g_total" value="0" />
+
+				<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+					<td align="center" class="num" style="font-size:10pt">{{TOTAL2}}<font class="default">원</font></td>				
+					<td align="center"><font class="num green" id="use_money" style="font-size:10pt">0</font><font class="default">원</font></td>				
+					<td align="center"><font class="num" id="cash_money" style="font-size:10pt">{{TOTAL2}}</font><font class="default">원</font></td>									
+				</tr>			
+				<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>		
+
+				</form>
+				</tbody>			
+			</table>
+		</div>
+	</div>
+
+	<div style="margin-top:30px;text-align:center">
+		<img src="img/shop/btn_cupon_use.gif" class="hand" onclick="cuponOk();" alt="선택쿠폰사용하기" title="선택쿠폰사용하기" />
+		<a href="#" onclick="parent.pLightBox.hide();"><img src="img/common/btn_close.gif" border="0" alt="창닫기" title="창닫기" /></a>
+	</div>
+	
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<div id="contents">
+	<section id="headline">
+		<h1>보유 적립금</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>
+	</section>
+	
+	<section id="myReserve">
+		<h2>적립금 정보</h2> 
+		<div class="reserveInfoBox">
+			<p>총 적립금 <span>{{TOTAL_MONEY}} P</span></p>
+			<p>사용가능 적립금 <span>{{TOTAL_USE}} P</span></p>
+			<p>대기중 적립금 <span>{{MONEY1}} P</span></p>
+		</div>
+
+		<table summary="적립내역" id="reserveTable">
+		<col width="60%" /> 
+		<col width="20%" />
+		<col width="20%" />
+		<thead>
+        <tr>
+			<th scope="col">일자 / 적립내역</th>
+			<th scope="col">적립금액</th>
+			<th scope="col">상태</th>
+        </tr>
+		</thead>
+		<tbody id="reserveList"></tbody>	
+		</table>
+
+		<!-- DYNAMIC @no_content@ -->	
+		<div id="noContent">
+			<p>! 등록된 내역이 없습니다.</p>
+		</div>
+		<script type="text/javascript">
+		<!--
+			$("#reserveTable").hide();
+		-->
+		</script>
+		<!-- DYNAMIC @no_content@ -->
+	</section>
+    
+	<section id="contentMore" style="margin:20px 12px;">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getMultis.listMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<div id="listLoading">
+	상품 데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	function rtnReserve(obj,name,reserve,status,date) {				
+		newRow = document.createElement('TR');	
+		
+		newCell = document.createElement('TD');	
+		newCell.innerHTML = '<p>'+date+'</p>'+name;
+		newRow.appendChild(newCell);	
+
+		newCell = document.createElement('TD');	
+		newCell.innerHTML = reserve+' P';
+		newRow.appendChild(newCell);	
+
+		newCell = document.createElement('TD');	
+		newCell.innerHTML = status;
+		newRow.appendChild(newCell);	
+
+		obj.appendChild(newRow);
+	}
+
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>4) $("#contentMore").show();	
+	if(ck_str>0) {	
+		getMultis = new getMulti('reserveList','{{limit}}','{{TOTAL}}','0','{{ajaxstr}}','php/getReserve.php','rtnReserve');
+		getMultis.display();
+		reviewViewNum = '';	
+
+		if({{TOTAL_PAGE}}<={{PAGE}}) {
+			$("#listGoodsMore")[0].innerHTML = "&nbsp;";
+		}
+
+		$("#contentMore").show();
+	}
+ -->
+</script>

@@ -1,0 +1,154 @@
+<center id="wrapBody">
+
+<div id="header">
+	<div id="topUtil">
+		<div id="topBanner">
+			<!-- DYNAMIC @loop_banner@ -->
+			<div><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+			<!-- DYNAMIC @loop_banner@ -->			
+		</div>
+		<div id="logo">{{T_LOGO}}</div>
+		<div id="topMenu">
+			<div style="height:8px;overflow:hidden;">&nbsp;</div>
+			<div id="homeMenu">
+				<ul>
+					<!-- DYNAMIC @is_login@ -->
+					<li style="background:url();padding-left:0px;"><a href='{{Main}}?channel=login'><img src="img/top/btn_login.gif" alt="로그인" title="로그인" /></a></li>
+					<li><a href='{{Main}}?channel=regist'><img src="img/top/btn_regist.gif" alt="회원가입" title="회원가입" /></a></li>
+					<li><a href='{{Main}}?channel=login&amp;type=osearch'><img src="img/top/btn_order.gif" alt="주문/배송조회" title="주문/배송조회" /></a></li>
+					<!-- DYNAMIC @is_login@ -->
+					<!-- DYNAMIC @is_logout@ -->
+					<li style="background:url();padding-left:0px;"><a href='php/logout.php'><img src="img/top/btn_logout.gif" alt="로그아웃" title="로그아웃" /></a></li>
+					<li><a href='{{Main}}?channel=mypage'><img src="img/top/btn_mypage.gif" alt="마이페이지" title="마이페이지" /></a></li>
+					<li><a href='{{Main}}?channel=order'><img src="img/top/btn_order.gif" alt="주문/배송조회" title="주문/배송조회" /></a></li>
+					<!-- DYNAMIC @is_logout@ -->
+					<li><a href='{{Main}}?channel=cart'><img src="img/top/btn_cart.gif" alt="장바구니" title="장바구니" /></a></li>
+					<li><a href='{{Main}}?channel=customer'><img src="img/top/btn_customer.gif" alt="고객센터" title="고객센터" /></a></li>
+				</ul>
+
+				<div id="utilMenu">				
+					<ul>
+						<li style="background:url();padding-left:0px;"><a href='{{Main}}?channel=cooperate'><img src="img/top/btn_top_cooper.gif" alt="공동구매" title="공동구매" /></a></li>
+						<li><a href='{{Main}}?channel=qna2'><img src="img/top/btn_top_qna.gif" alt="상품문의" title="상품문의" /></a></li>						
+						<li><a href='{{Main}}?channel=rss'><img src="img/top/btn_top_rss.gif" alt="RSS" title="RSS" /></a></li>
+						<li><a href='{{Main}}?channel=tag'><img src="img/top/btn_top_tag.gif" alt="HOT TAG" title="HOT TAG" /></a></li>
+					</ul>
+				</div>
+			</div>		
+		</div>	
+	</div>
+	<!-- TOP MENU START -->
+	<div id="navi">
+		<ul>
+			<li>{{T_MENU}}</li>
+		</ul>
+	</div>
+	<!-- @TOP MENU END -->
+
+	<!--   LOCATION & SEARCH START -->
+	<div id="topSearch" style='background: url({{SEARCHBG}}) repeat-x top left;'>	
+		<div id="searchKeyword">
+			<div id="topSch" class="small gray">
+				<form name="TsearchForm" method="get" onsubmit="return ckSearch();" action="{{Main}}">
+				<input type="hidden" name="channel" value='search' />
+				<input type="hidden" name="field" value='' />
+				
+				<div id='sBox' style="position:relative;z-index:998;background-color:#FFF; border: 1px solid #ceeaec;width:80px; height:20px;" class='left'></div>
+				<script type="text/javascript">
+					<!--
+					sBoxs = new selectBox('sBox',document.TsearchForm.field);
+					sBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333;padding-top:2px;";
+					sBoxs.bColor = "#ceeaec";
+					sBoxs.addItem('통합검색','');
+					sBoxs.addItem('상품명','name');
+					sBoxs.addItem('태그','tag');
+					sBoxs.addItem('브랜드','brand');
+					sBoxs.show();
+					//-->
+				</script>	
+
+				<div id='sText' style="position:relative;z-index:998;background-color:#FFF; border: 1px solid #ceeaec;width:230px; height:20px;margin-left:1px" class='left'></div>			
+				<script type="text/javascript">
+					<!--
+					document.write("<style>.autoTextBox { font-family:굴림,verdana;font-size:12px; }</style>");
+					sTexts = new autoTextBox('sText','search','TsearchForm');
+					sTexts.bColor = "#ceeaec";
+					sTexts.bgColor = "#f8f8f8";
+					sTexts.fColor = "#38c1c9";
+					sTexts.show();
+					//-->
+				</script>
+
+				<div class="left" style="margin-left:2px;"><input type="image" src="img/top/btn_search.gif" onfocus="blur();"  alt="검색" title="검색" /></div>
+
+				</form>
+			</div>	
+
+			<div id="topRank">
+				<img src="img/top/ttl_keyword.gif" alt="실시간검색어" title="실시간검색어" />
+			</div>
+			 
+			<div class="left">  
+				<div id="top_rankLine">
+					<script type="text/javascript">
+					<!--
+					wscroll = new MsgScroll(); 
+					wscroll.name = "wscroll"; 
+					wscroll.height = 18; //레이어에 맞게 객체 속성 재 정의(없으면 기본값)
+					wscroll.width = 160; 
+					wscroll.speed = 100;  
+					wscroll.pauseDelay =2000; 
+					wscroll.pauseMouseover = true; 
+					
+					function scroll_div(rank,keyword,img,num,snum){
+						divs =	"<div onmouseover='ViewRankBox(1,"+snum+")'>";
+							divs +=	"<div class='rank_num'><img src='img/top/rank_"+rank+".gif' width='14' height='14' alt='"+snum+"' /></div>";
+							divs +=	"<div class='rank_name small' style='color:666;'>"+keyword+"</div>";
+							divs +=	"<div class='rank_img num white'><img src='img/top/rank_"+img+".gif' alt='"+img+"' />&nbsp;&nbsp;"+num+"</div>";
+						divs +=	"</div>";
+						return divs;
+					}
+
+					<!-- DYNAMIC @loop_rank1@ -->
+					wscroll.add(scroll_div("{{i}}","{{NAME}}","{{CHANGE}}","{{NUM}}","{{i}}")); 		
+					<!-- DYNAMIC @loop_rank1@ -->
+					wscroll.start();
+					//-->
+					</script>
+				</div>
+
+				<div id="top_rankBox"  onmouseover="ViewRankBox('1');" onmouseout="ViewRankBox('');">				
+					<!-- DYNAMIC @loop_rank2@ -->
+					<div class="clear" style="height:20px;{{DISP}}" id="rankBox_{{i}}">				    
+						<div class="rank_num"><img src='img/top/rank_{{i}}.gif' width='14' height='14' alt='{{i}}' /></div>
+						<div class="rank_name small"><a href="{{Main}}?channel=search&amp;search={{NAME}}">{{NAME}}</a></div>
+						<div  class="rank_img num blue"><img src='img/top/rank_{{CHANGE}}.gif' alt='{{CHANGE}}' />&nbsp;&nbsp;{{NUM}}</div>
+					</div>						
+					<!-- DYNAMIC @loop_rank2@ -->
+					<div style="margin:4px 0 4px 0; height:1px;width:94%; overflow:hidden; background-color:#DADADA"></div>
+					<div style="margin:4px 0 4px 0; height:20px; overflow:hidden;" class="small hand" onclick="rankView();"><img src="img/common/icon_select_down.gif" id="rankImg" alt="icon" />&nbsp;&nbsp;<font class="num" id="rankNum">6~10</font>위 까지 보기</div>				
+				</div>
+			</div>
+		</div>		
+	</div>
+	<!--   @LOCATION & SEARCH END -->
+</div>
+
+<!--   LOADING BAR -->
+<div id="list_loading">
+	<div class="top">&nbsp;</div>
+	<div class="center small">				
+		<center>
+		<div style='height:20px'>&nbsp;</div>
+		상품 데이타를 가져오는 중입니다.
+		<div style='height:10px'>&nbsp;</div>
+		<img src='img/common/bigWaiting.gif' border='0' alt="waiting..." />
+		<div style='height:10px'>&nbsp;</div>
+		</center>
+	</div>
+	<div class="bottom">&nbsp;</div>
+</div>
+<!--   @LOADING BAR -->
+
+<div id="content" style="clear:both;">
+	<div style='width:920px;float:left;'>

@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>스킨정의파일(skin_define.php)</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> 스킨정의파일(skin_define.php)
+</div>
+<div style="padding-left:10px;">
+	<pre><font class="blue">* 관리자 페이지에서 사용되는 정보 입니다.</font>
+$SKIN_DEFINE['skin_name']	= "기본스킨";&nbsp;&nbsp;<font class="blue">// 스킨명</font>
+$SKIN_DEFINE['skin_desc']	= "종합쇼핑몰형태의 기본스킨";&nbsp;&nbsp;<font class="blue">// 스킨 간략 설명</font>
+$SKIN_DEFINE['cate_type'] = "1";&nbsp;&nbsp;<font class="blue">// 하위 카테고리 레이어이용시 1 , 하위카테고리 바로 출력시 2</font>
+$SKIN_DEFINE['cate_all_type'] = "2";&nbsp;&nbsp;<font class="blue">// location 영역의 쇼핑카테고리 전체보기, 분류이미지 있을 경우 이미지 이용 1, 무조건 텍스트 출력시 2</font>
+$SKIN_DEFINE['location_type'] = "1";&nbsp;&nbsp;<font class="blue">// location 영역의 상품 분류 출력 형태, 레이어 셀렉트 박스 이용시 1, 텍스트 출력시 2</font>
+
+$SKIN_DEFINE['logo']		= "최대 가로 : 180, 세로 : 65";&nbsp;&nbsp;<font class="blue">// 로고 사이즈 안내</font>
+$SKIN_DEFINE['main_menu']	= "전체 가로 사이즈 724";&nbsp;&nbsp;<font class="blue">// 상단 메뉴 사이즈 안내</font>
+$SKIN_DEFINE['copyright']	= "가로 : 909, 세로 : 76 고정";&nbsp;&nbsp;<font class="blue">// 하단 카피라이트 사이즈 안내</font>
+$SKIN_DEFINE['main_img']	= "가로 : 724 고정";&nbsp;&nbsp;<font class="blue">// 메인 이미지 사이즈 안내</font>
+$SKIN_DEFINE['docu_code']	= "가로사이즈 720";&nbsp;&nbsp;<font class="blue">// 문서(회사소개,이용안내,개인정보보호정책,이용약관)페이지 사이즈 안내</font>
+$SKIN_DEFINE['ctitle_img']	= "가로 : 170 이하, 세로 : 28 고정";&nbsp;&nbsp;<font class="blue">// 분류 타이틀 사이즈 안내</font>
+
+<font class="blue">* 관리자페이지 메인디자인관리 인기/추천/산상품/공동구매 출력 갯수 선택창에 사용되는 정보 입니다.</font>
+$SKIN_DEFINE['main_hit_cnt'] = "5,10,15,20";
+$SKIN_DEFINE['main_reco_cnt'] = "5,10,15,20";
+$SKIN_DEFINE['main_new_cnt'] = "5,10,15,20";
+$SKIN_DEFINE['main_cooper_cnt'] = "5,10,15,20";
+
+<font class="blue">* 관리자페이지 메인디자인관리 MBOX 사용시 상품 출력 갯수 정의</font>
+$SKIN_DEFINE['main_click_cnt'] = "3";        
+$SKIN_DEFINE['main_order_cnt'] = "3";
+$SKIN_DEFINE['main_review_cnt'] = "4";
+$SKIN_DEFINE['main_notice_cnt'] = "5";
+
+<font class="blue">* 관리자페이지 분류디자인관리 인기/추천/신상품 출력 갯수 선택창에 사용되는 정보 입니다.</font>
+$SKIN_DEFINE['sub_hit_cnt'] = "5,10,15,20";
+$SKIN_DEFINE['sub_reco_cnt'] = "5,10,15,20";
+$SKIN_DEFINE['sub_new_cnt'] = "6,12,18,24";
+
+$SKIN_DEFINE['cus_faq']	= 5;&nbsp;&nbsp;<font class="blue">// 고객센터 FAQ 리스트 갯수</font>
+$SKIN_DEFINE['cus_notice']	= 4;&nbsp;&nbsp;<font class="blue">// 고객센터 공지사항 리스트 갯수</font>
+$SKIN_DEFINE['cus_customer']	= 4;&nbsp;&nbsp;<font class="blue">// 고객센터 고객게시판 리스트 갯수</font>
+
+$SKIN_DEFINE['main_mcode1'] = "가로 사이즈 724픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 인기상품위 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_mcode2'] = "가로 사이즈 724픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 추천상품위 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_mcode3'] = "가로 사이즈 724픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 신상품위 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_mcode4'] = "가로 사이즈 724픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 신상품아래 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_mcode5'] = "가로 사이즈 724픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 공동구매 아래 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_mcode6'] = "가로 사이즈 909픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 MBOX위 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_lcode1'] = "가로 사이즈 178픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 카테고리박스아래 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main_lcode2'] = "가로 사이즈 178픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 메인디자인관리 배너아래 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['main2_code']	= "가로 사이즈 909픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 분류디자인관리 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['brand_code']	= "가로 사이즈 909픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 브랜드관리 삽입코드 사이즈안내</font>
+$SKIN_DEFINE['coop_code']	= "가로 사이즈 909픽셀에 맞춰 주세요.";&nbsp;&nbsp;<font class="blue">// 관리자페이지 공동구매 삽입코드 사이즈안내</font>
+
+<font class="blue">* 관리자페이지 상품등록/수정에 사용되는 정보 입니다.</font>
+$SKIN_DEFINE['img1']		= "Size : 500px * 500px";&nbsp;&nbsp;<font class="blue">// 큰이미지 사이즈 안내</font>
+$SKIN_DEFINE['img2']		= "Size : 250px * 250px";&nbsp;&nbsp;<font class="blue">// 중간이미지 사이즈 안내</font>
+$SKIN_DEFINE['img3']		= "Size : 150px * 150px";&nbsp;&nbsp;<font class="blue">// 리스트이미지 사이즈 안내</font>
+$SKIN_DEFINE['img4']		= "Size : 80px * 80px";&nbsp;&nbsp;<font class="blue">// 작은이미지 사이즈 안내</font>
+$SKIN_DEFINE['img5']		= "Size : 120px * 120px";&nbsp;&nbsp;<font class="blue">// 디스플레이이미지 사이즈 안내</font>
+$SKIN_DEFINE['other']		= "Size : 500px * 500px";&nbsp;&nbsp;<font class="blue">// 다른이미지 사이즈 안내</font>
+$SKIN_DEFINE['other_vcnt']	= 4;&nbsp;&nbsp;<font class="blue">// 다른이미지 출력갯수 안내</font>
+
+<font class="blue">* 이미지 사이즈 정의</font>
+$IMG_DEFINE['img1']		= 500;&nbsp;&nbsp;<font class="blue">// 큰이미지 사이즈</font>
+$IMG_DEFINE['img2']		= 250;&nbsp;&nbsp;<font class="blue">// 중간이미지 사이즈</font> 
+$IMG_DEFINE['img3']		= 150;&nbsp;&nbsp;<font class="blue">// 리스트이미지 사이즈</font>
+$IMG_DEFINE['img4']		= 80;&nbsp;&nbsp;<font class="blue">// 작은이미지 사이즈</font>
+$IMG_DEFINE['img5']		= 120;&nbsp;&nbsp;<font class="blue">// 디스플레이이미지 사이즈</font>
+$IMG_DEFINE['other_s']	= 55;&nbsp;&nbsp;<font class="blue">// 다른 작은이미지 사이즈</font>  
+$IMG_DEFINE['other_ms']           = 110;&nbsp;&nbsp;<font class="blue">// 다른 중간이미지 사이즈</font>   
+$SKIN_DEFINE['other_vcnt']	= 4;&nbsp;&nbsp;<font class="blue">// 다른이미지 리스트 갯수</font>
+
+$SKIN_DEFINE['menu_top']		= 29;&nbsp;&nbsp;<font class="blue">// 분류박스 top 위치</font>
+$SKIN_DEFINE['menu_height']		= 24;&nbsp;&nbsp;<font class="blue">// 분류박스 텍스트일 경우 height</font>
+$SKIN_DEFINE['menu_arrow']		= 12;&nbsp;&nbsp;<font class="blue">// 분류박스 arrow top 위치</font>
+$SKIN_DEFINE['ctitle_height']	= 28;&nbsp;&nbsp;<font class="blue">// 분류페이지 타이틀 이미지 height</font>
+
+$IMG_DEFINE['banner1'] = 180;&nbsp;&nbsp;<font class="blue">// 메인1 배너 가로 사이즈</font>
+$IMG_DEFINE['banner2'] = 180;&nbsp;&nbsp;<font class="blue">// 메인2 배너 가로 사이즈</font>
+$IMG_DEFINE['banner3'] = 160;&nbsp;&nbsp;<font class="blue">// 고객센터 배너 가로 사이즈</font>
+$IMG_DEFINE['banner4'] = 160;&nbsp;&nbsp;<font class="blue">// 로그인 배너 가로 사이즈</font>
+$IMG_DEFINE['banner5'] = 160;&nbsp;&nbsp;<font class="blue">// 분류박스 배너 가로 사이즈</font>
+$IMG_DEFINE['banner6'] = 160;&nbsp;&nbsp;<font class="blue">// 퀵메뉴 배너 가로 사이즈</font>
+$IMG_DEFINE['banner7'] = 160;&nbsp;&nbsp;<font class="blue">// 마이페이지 배너 가로 사이즈</font>
+$IMG_DEFINE['banner8'] = 160;&nbsp;&nbsp;<font class="blue">// 상단 배너 가로 사이즈</font>
+$IMG_DEFINE['addpage'] = 909;&nbsp;&nbsp;<font class="blue">// 추가 페이지 가로 사이즈</font>
+
+$LIST_DEFINE['limit_arr'] = "10,20,30,40,50,100" ; &nbsp;&nbsp;<font class="blue">//리스트 출력갯수 선택(','로 구분)</font>
+$LIST_DEFINE['limit'] = "10"; &nbsp;&nbsp;<font class="blue">// 상품 리스트 기본 갯수</font>
+	
+	</pre>
+</div>
+
+
+
+</BODY>
+</html>

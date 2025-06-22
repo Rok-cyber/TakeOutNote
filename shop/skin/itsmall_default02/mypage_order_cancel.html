@@ -1,0 +1,177 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle">
+		<img src="img/member/ttl_order_cancel.gif" alt="취소/교환/반품내역" title="취소/교환/반품내역" />
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div style="margin-top:20px;text-align:left" class="small">
+		<div class="noticeDiv">주문번호를 누르시면 상세주문내역을 보실 수 있습니다.</div>	
+		<div class="noticeDiv" style="margin-top:6px">주문 취소/반품/교환 신청은 주문상세 내역에서 하시면 됩니다.</div>	
+		<div class="noticeDiv" style="margin-top:6px">취소절차/반품절차/교환절차를 참조 하시고 신청 하시기 바랍니다.</div>	
+	</div>
+	
+	<div class="clear" style="height:20px;">&nbsp;</div>
+	
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">							
+			<div id="CalendarLayer" style="position:absolute;display:none;top:272px;;width:172px; height:175px">
+				<iframe name="CalendarFrame" src="{{skin}}/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+			</div>
+			<div class="blank" style="height:10px;">&nbsp;</div>
+			<form name="orderForm" method="post" action="{{Main}}?channel=order" onsubmit="ckOsearch();">
+			<input type="hidden" name="status" value='{{status}}' />
+			<div class="left" style="width:20px;">&nbsp;</div>
+			<div class="boxText small mColor" style="margin-right:6px;">주문상태</div> 
+			<div id='PsBox' class='left searchField' style="z-index:99999;width:80px; height:18px;"></div>
+			<script>
+				PsBoxs = new selectBox('PsBox',document.orderForm.status);							
+				PsBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333";
+				PsBoxs.addItem('전체','');
+				PsBoxs.addItem('주문취소','Z');
+				PsBoxs.addItem('상품반품','X');
+				PsBoxs.addItem('상품교환','Y');
+				PsBoxs.show();
+
+				if(document.orderForm.status.value) {
+					PsBoxs.initSelect(document.orderForm.status.value);								
+				}
+			</script>
+			<div class="boxText small mColor" style="margin-left:10px;">주문일</div> 
+			<div style='float:left;padding-left:6px;'>
+				<input type="text" onfocus="new CalendarFrame.Calendar(this,447)" class="inputs_bg num" size="10" name="sdate1" value="{{sdate1}}" /> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this,530)"  class="inputs_bg num"  size="10" name="sdate2" value="{{sdate2}}" style="vertical-align:top;" />&nbsp;
+				<img src="img/member/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" alt="오늘" style="vertical-align:middle;" />
+				<img src="img/member/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" alt="1주일" style="vertical-align:middle;" />
+				<img src="img/member/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" alt="1개월" style="vertical-align:middle;" />
+				<img src="img/member/btn_day6.gif" class="hand" onclick="putDay('{{DAY5}}','{{DAY1}}')" alt="6개월" style="vertical-align:middle;" />
+				<img src="img/member/btn_day7.gif" class="hand" onclick="putDay('','')" alt="전체" style="vertical-align:middle;" />				
+			</div>	
+			<div style="float:left;padding:0 0 0 4px;">
+				<input type="image" src="img/shop/btn_search.gif" style="border:0px;" />
+			</div>			
+			</form>
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div id="list_list" style="margin:0px;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="120" /> 
+			<col />
+			<col width="50"/>			
+			<col width="60" /> 
+			<col width="70" />
+			<col width="80" />
+			<col width="80" />
+			<col width="90" />      					
+			<thead>
+            <tr height="28" align="center">
+				<th scope="col"><img src="img/member/ttl_list_onum.gif" alt="주문번호" /></th>
+				<th scope="col"><img src="img/member/ttl_list_gname.gif" alt="주문상품명" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_ocnt.gif" alt="주문수량" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_carr.gif" alt="개별배송비" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_oprice.gif" alt="판매금액" /></th>				
+				<th scope="col"><img src="img/shop/ttl_list_status.gif" alt="진행상황" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_pstate.gif" alt="결제상태" /></th>
+				<th scope="col"><img src="img/member/ttl_list_date.gif" alt="주문일" /></th>		
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<!-- DYNAMIC @type1@ -->
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td style="border-bottom:1px solid #f1f1f1" class="num orange" {{ROWSPAN}}><a href="{{Main}}?channel=order_detail&amp;order_num={{NUM}}{{addstring}}" title="주문내역상세보기">{{NUM}}</a></td>
+				<td style="border-bottom:1px solid #f1f1f1" align="left" class="small">{{NAME}}</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="num">{{CNT}}개</td>				
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num">{{CARRIAGE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num blue">{{PRICE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="small">{{STATUS1}}</td>				
+				<td style="border-bottom:1px solid #f1f1f1" class="small" {{ROWSPAN}}>{{STATUS2}}</td>				
+				<td style="border-bottom:1px solid #f1f1f1" class="num" {{ROWSPAN}}>{{DATE}}</td>								
+			</tr>						
+			<!-- DYNAMIC @type1@ -->
+			<!-- DYNAMIC @type2@ -->
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td style="border-bottom:1px solid #f1f1f1" align="left" class="small">{{NAME}}</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="num">{{CNT}}개</td>				
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num">{{CARRIAGE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num blue">{{PRICE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="small">{{STATUS1}}</td>								
+			</tr>
+			<!-- DYNAMIC @type2@ -->
+			<!-- DYNAMIC @loop@ -->								
+			
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div class="clear" style="height:20px;">&nbsp;</div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/member/no_order.gif" alt="주문된상품없음이미지" title="주문된상품없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+	<div class="clear" style="height:30px;">&nbsp;</div>
+	<div>
+		<img src="img/member/ttl_cancel_01.gif" alt="취소절차" title="취소절차" />
+	</div>
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:6px;">
+				<img src="img/member/help_cancel_01.gif" alt="취소절차" title="취소절차" />
+			</div>			
+		</div>
+	</div>
+
+	<div style="padding-top:18px;">
+		<img src="img/member/ttl_cancel_02.gif" alt="반품절차" title="반품절차" />
+	</div>
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:6px;">
+				<img src="img/member/help_cancel_02.gif" alt="반품절차" title="반품절차" />
+			</div>			
+		</div>
+	</div>
+
+	<div style="padding-top:18px;">
+		<img src="img/member/ttl_cancel_03.gif" alt="교환절차" title="교환절차" />
+	</div>
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:6px;">
+				<img src="img/member/help_cancel_03.gif" alt="교환절차" title="교환절차" />
+			</div>			
+		</div>
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+</div>

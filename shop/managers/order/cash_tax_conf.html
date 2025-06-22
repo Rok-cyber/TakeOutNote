@@ -1,0 +1,156 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+$sql = "SELECT code FROM mall_design WHERE mode='A'";
+$tmp1 = $mysql->get_one($sql);
+$basic=explode("|*|",stripslashes($tmp1));
+
+$ERROR = "! <a href='../conf/conf.html#t1'>쇼핑몰 환경설정 > 사업자정보&기본정보</a>에서 설정한 정보를 이용해 현금영수증이 발급됩니다.";
+if(!$basic[2] || !$basic[3] || !$basic[4] || !$basic[6] || !$basic[7]) {
+	$ERROR = "<font class='orange small'>! 현금영수증 발급자 정보가 없습니다. '<a href='../conf/conf.html#t1'><font class='orange small'>쇼핑몰 환경설정 > 사업자정보&기본정보</font></a>' 에서 설정 하시기 바랍니다.</font>";
+	$cks = 1;
+}
+
+$sql = "SELECT code FROM mall_design WHERE mode='B'";
+$tmp_cash = $mysql->get_one($sql);
+$cash = explode("|*|",stripslashes($tmp_cash));
+
+if($cash[2] && $cash[3]) {
+	if($cash[2]!='KCP') {
+		$SHOP_INFO = "현재 KCP일때만 현금 영수증이 지원 됩니다.";
+	}
+	else {
+		$SHOP_INFO = "{$cash[2]} ({$cash[3]})";
+		$ckCP = 'Y';
+	}
+}
+else $SHOP_INFO = "<a href='../conf/conf.html#t2'>쇼핑몰 환경설정 > 결제정보</a>에서 전자결제대행사를 설정 하시기 바랍니다.";
+
+$sql = "SELECT code FROM mall_design WHERE mode='O'";
+$code = $mysql->get_one($sql);
+if($code) {
+	$code = explode("|",stripslashes($code));
+	$CKD1[$code[0]] = "checked";
+	$CKD2[$code[1]] = "checked";
+	$CKD3[$code[3]] = "checked";
+	$days = $code[2];
+}
+else {
+	$CKD2[2] = "checked";
+	$CKD3[1] = "checked";
+	$days = "2";
+}
+?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function ckForm(){
+	f = document.basicForm;
+<? if($cks==1) { ?>	
+	alert("현금영수증 발급자 정보가 없습니다. 쇼핑몰 환경설정 > 사업자정보&기본정보에서 설정 하시기 바랍니다.");
+	return false;	
+<? } ?>
+	
+	if(f.ckCP.value!='Y') {
+		alert("전자결제대행사를 설정 하지 않았거나 KCP가 아닙니다");
+		return false;
+	}
+
+	if(!f.use[0].checked && !f.use[1].checked) {
+		alert("발급 사용여부를 선택 하세요!");
+		f.use[0].focus();
+		return false;
+	}
+
+	if(!f.days.value) {
+		alert("신청기간제한일을 입력 하세요!");
+		f.days.focus();
+		return false;
+	}	
+	f.submit();
+}
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_cash_conf.gif" alt="현금영수증설정" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>현금영수증 기본정보를 설정할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td>&nbsp;<img src='./img/c_conf.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='basicForm' method='post' action='cash_tax_post.php?mode=conf'>
+					<input type="hidden" name="ckCP" value="<?=$ckCP?>">
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전자결제대행사</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<?=$SHOP_INFO?></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;발급 사용여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='use' id='use1' value='1' <?=$CKD1[1]?>>&nbsp;<label for='use1'>사용함</label>&nbsp;<input type='radio' name='use' id='use2' value='2' <?=$CKD1[2]?>>&nbsp;<label for='use2'>사용안함</label>&nbsp;&nbsp;<font class=small>(계좌이체/가상계좌 이용시 자동 신청/발급)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;발급 방법</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='type' id='type1' value='1' <?=$CKD2[1]?>>&nbsp;<label for='type1'>자동발급</label>&nbsp;<input type='radio' name='type' id='type2' value='2' <?=$CKD2[2]?>>&nbsp;<label for='type2'>수동발급</label></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;신청기간제한</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;고객 주문일로부터  <input type="text" class="bt2 eng" name="days" size="3" maxlength="3" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$days?>">이내 신청 가능 &nbsp;&nbsp;<font class=small>(마이페이지 주문상세내역에 설정일 까지 현금영수증 신청 버튼이 표시됩니다)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사업자형태</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='ctype' id='ctype1' value='1' <?=$CKD3[1]?>>&nbsp;<label for='ctype1'>일반 과세사업자</label>&nbsp;<input type='radio' name='ctype' id='ctype2' value='2' <?=$CKD3[2]?>>&nbsp;<label for='ctype2'>면세/간이사업자</label></td>
+					</tr>
+					
+					<tr height=110 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								<?=$ERROR?><br />
+								! 설정된 전자결제대행사의 현금영수증을 사용하며 별도 계약이 필요없습니다.<br/>
+								! 구매자가 주문서/마이페이지에서 영수증 발급을 신청하면 관리자가 발급합니다.</br>
+								! 자동발급은 구매자가 현금영수증을 신청하면 입금확인/취소완료 단계에서 자동으로 발급/취소됩니다.</br>
+								! 수동발급은 구매자가 신청한 현금 영수증을 관리자가 건별로 발급버튼을 눌러서 발급합니다.<br/>
+								! 일반 과세사업자는 판매물품에 부가세가 있고 현금영수증에 공급가액,부가세가 분리되어 국세청통보 됩니다.<br/>
+								! 면세/간이사업자는 판매물품에 부가세가 없고 현금영수증에 공급가액 = 합계금액 (부가세없음)으로 국세청통보 됩니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();return false;"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+</table>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

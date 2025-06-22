@@ -1,0 +1,142 @@
+<div id="contents">
+	<!-- DYNAMIC @is_banner1@ -->
+	<section id="mainBanner">
+		<h1>MAIN BANNER</h1>
+		<div class="slidings">
+			<div id="mainBannerContent" class="wrap">
+				<!-- DYNAMIC @loop_banner1@ -->
+				<figure >
+					<a href="{{BLINK}}" {{BTARGET}}><img src="{{BANNER}}" /></a>
+					<figcaption>{{BTITLE}}</figcaption>
+				</figure>
+				<!-- DYNAMIC @loop_banner1@ -->
+			</div>		
+		</div>
+		<p id="mainBannerPagination" class="pagination" title="배너 순서">
+			<!-- DYNAMIC @loop_sbanner1@ -->
+			<span>{{j}}</span>
+			<!-- DYNAMIC @loop_sbanner1@ -->
+		</p>
+	</section>
+
+	<script type="text/javascript">
+		var mainBanners = BaramangSwipe.template.mainBanner("#mainBannerContent", "p#mainBannerPagination");
+		mainBanners.load().refreshPagination();
+	</script>
+	<!-- DYNAMIC @is_banner1@ -->
+	
+	<!-- DYNAMIC @is_main_goods1@ -->
+	<section id="mainHitGoods">
+		<h1>인기상품</h1>
+		<p id="mainHitGoodsListPagination" class="pagination" title="인기상품 순서">
+			<!-- DYNAMIC @loop_sicon1@ -->
+			<span>{{i}}</span>
+			<!-- DYNAMIC @loop_sicon1@ -->
+		</p>
+		
+		<ul id="mainHitGoodsList" class="main_goods">
+			<!-- DYNAMIC @loop_goods1@ -->		
+			<li>			
+				<div class="item_box">
+					<a href="{{LINK}}" title="상품상세보기">
+						<div class="thumbnail"><img src="{{IMAGE}}" alt="{{NAME}} 사진" /></div>
+						<div class="item_info">
+							<p class="goods" title="상품명">{{NAME}}</p>
+							<p class="price" title="가격"><strong>{{PRICE2}}</strong>원</p>		
+						</div>
+					</a>
+				</div>
+			</li>
+			<!-- DYNAMIC @loop_goods1@ -->					
+		</ul>		
+	</section>	
+
+	<script type="text/javascript">
+		var mainHitGoodsList = BaramangSwipe.template.mainGoodsList("#mainHitGoodsList", "p#mainHitGoodsListPagination");
+		mainHitGoodsList.load().refreshPagination();
+	</script>	
+	<!-- DYNAMIC @is_main_goods1@ -->
+
+	<!-- DYNAMIC @is_main_goods2@ -->
+	<section id="mainRecoGoods">
+		<h1>추천상품</h1>
+		<p id="mainRecoGoodsListPagination" class="pagination" title="추천상품 순서">
+			<!-- DYNAMIC @loop_sicon2@ -->
+			<span>{{i}}</span>
+			<!-- DYNAMIC @loop_sicon2@ -->
+		</p>
+		<ul id="mainRecoGoodsList" class="main_goods">
+			<!-- DYNAMIC @loop_goods2@ -->		
+			<li>			
+				<div class="item_box">
+					<a href="{{LINK}}" title="상품상세보기">
+						<div class="thumbnail"><img src="{{IMAGE}}" alt="{{NAME}} 사진" /></div>
+						<div class="item_info">
+							<p class="goods" title="상품명">{{NAME}}</p>
+							<p class="price" title="가격"><strong>{{PRICE2}}</strong>원</p>		
+						</div>
+					</a>
+				</div>
+			</li>
+			<!-- DYNAMIC @loop_goods2@ -->	
+		</ul>
+	</section>		
+
+	<script type="text/javascript">
+		var mainRecoGoodsList = BaramangSwipe.template.mainGoodsList("#mainRecoGoodsList", "p#mainRecoGoodsListPagination");
+		mainRecoGoodsList.load().refreshPagination();
+	</script>
+	<!-- DYNAMIC @is_main_goods2@ -->
+
+	<!-- DYNAMIC @is_main_goods3@ -->	
+	<section id="mainNewGoods">
+		<h1>신상품</h1>
+		<p id="mainNewGoodsListPagination" class="pagination" title="신상품 순서">
+			<!-- DYNAMIC @loop_sicon3@ -->
+			<span>{{i}}</span>
+			<!-- DYNAMIC @loop_sicon3@ -->	
+		</p>
+		<ul id="mainNewGoodsList" class="main_goods">
+			<!-- DYNAMIC @loop_goods3@ -->		
+			<li>			
+				<div class="item_box">
+					<a href="{{LINK}}" title="상품상세보기">
+						<div class="thumbnail"><img src="{{IMAGE}}" alt="{{NAME}} 사진" /></div>
+						<div class="item_info">
+							<p class="goods" title="상품명">{{NAME}}</p>
+							<p class="price" title="가격"><strong>{{PRICE2}}</strong>원</p>		
+						</div>
+					</a>
+				</div>
+			</li>
+			<!-- DYNAMIC @loop_goods3@ -->	
+		</ul>
+	</section>	
+
+	<script type="text/javascript">
+		var mainNewGoodsList = BaramangSwipe.template.mainGoodsList("#mainNewGoodsList", "p#mainNewGoodsListPagination");
+		mainNewGoodsList.load().refreshPagination();
+	</script>
+	<!-- DYNAMIC @is_main_goods3@ -->	
+
+	<!-- DYNAMIC @is_banner2@ -->	
+	<section id="bannerList">
+		<h1>BANNER LIST</h1>
+		<ul>
+			<!-- DYNAMIC @loop_banner2@ -->
+			<li><a href="{{BLINK}}" {{BTARGET}}><img src="{{BANNER}}" alt="{{BTITLE}}" /></a></li>
+			<!-- DYNAMIC @loop_banner2@ -->
+		</ul>
+	</section>
+	<!-- DYNAMIC @is_banner2@ -->	
+
+	<section id="mainNotice">
+		<h1><a href="{{Main}}?channel=board&code=notice" title="공지사항보기">공지사항</a></h1>
+		<p class="noticeArticle">
+			<!-- DYNAMIC @loop_notice@ -->	
+			<a href='{{LINK}}'>{{BOARD}}</a>
+			<!-- DYNAMIC @loop_notice@ -->	
+		</p>
+	</section>	
+
+</div>

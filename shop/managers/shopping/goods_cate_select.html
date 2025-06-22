@@ -1,0 +1,293 @@
+<?
+ob_start();
+$img_path = "../../image/cate/";
+include "../ad_init.php";
+
+$uid	= $_GET['uid'];
+$mode	= $_GET['mode'];
+
+function palert($msg) {
+    echo "<script>
+    alert('\\n $msg \\n');";
+    echo "parent.pLightBox.hide();";
+    echo "</script>";
+	exit;
+}
+
+if((!$uid && ($mode!='scopy' && $mode!='scate')) || !$mode) palert('정보가 제대로 넘어오지 못했습니다. 다시 시도하세요!');
+
+######################## 분류 생성 ##############################
+$tmps1	= "CATEname = [";
+$tmps2	= "CATEnum	= [";
+$tmps3	= "CATE1	= [";
+$cnts	= 0;
+$cnts2	= 0;
+$sql = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = 1 && cate!='999000000000' ORDER BY number ASC";
+$mysql->query($sql);
+while($row=$mysql->fetch_array()){    
+	$row['cate_name'] = addslashes($row['cate_name']);
+	if($row['cate_sub']==1) {
+	    if($cnts==1) { 
+			$tmps1.= ",['{$row[cate_name]}→'";		
+			$tmps2.= ",['{$row[cate]}:O'";		
+		}
+		else { 
+			$tmps1.= "['{$row[cate_name]}→'";		
+			$tmps2.= "['{$row[cate]}:O'";		
+        }
+		$sql2 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '2' AND cate_parent = '{$row[cate]}' ORDER BY number ASC";
+		$mysql->query2($sql2);
+		while($row2=$mysql->fetch_array(2)){
+			$row2['cate_name'] = addslashes($row2['cate_name']);
+			if($row2['cate_sub']==1) {
+				$tmps1.= ",['{$row2[cate_name]}→'";	
+				$tmps2.= ",['{$row2[cate]}:O'";	
+				$sql3 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '3' AND cate_parent = '{$row2[cate]}' ORDER BY number ASC";
+				$mysql->query3($sql3);
+				while($row3=$mysql->fetch_array(3)){
+					$row3['cate_name'] = addslashes($row3['cate_name']);
+					if($row3['cate_sub']==1) {
+						$tmps1.= ",['{$row3[cate_name]}→'";	
+						$tmps2.= ",['{$row3[cate]}:O'";	
+						$sql4 = "SELECT cate,cate_name FROM mall_cate WHERE cate_dep = '4' AND cate_parent = '{$row3[cate]}' ORDER BY number ASC";
+						$mysql->query4($sql4);						
+						while($row4=$mysql->fetch_array(4)){							
+							$row4['cate_name'] = addslashes($row4['cate_name']);
+							$tmps1.= ",'{$row4[cate_name]}'";
+							$tmps2.= ",'{$row4[cate]}'";
+						}
+						$tmps1.= "]";
+						$tmps2.= "]";
+					} 
+					else {
+						$tmps1.= ",['{$row3[cate_name]}']";		
+						$tmps2.= ",['{$row3[cate]}:X']";		
+					}					
+				}
+				$tmps1.= "]";
+				$tmps2.= "]";
+			} 
+			else {
+				$tmps1.= ",['{$row2[cate_name]}']";		
+				$tmps2.= ",['{$row2[cate]}:X']";		
+            }
+		}
+
+		if($cnts2==1) $tmps3.= ",['{$row[cate_name]}','{$row[cate]}']";
+		else $tmps3.= "['{$row[cate_name]}','{$row[cate]}']";
+		$cnts2 = 1;
+
+    } 
+	else {
+		if($cnts==1) {
+			$tmps1.= ",['{$row[cate_name]}'";		
+			$tmps2.= ",['{$row[cate]}:X'";		
+		} 
+		else {
+			$tmps1.= "['{$row[cate_name]}'";		
+			$tmps2.= "['{$row[cate]}:X'";		
+		}
+	
+	}
+	$tmps1.= "]";
+	$tmps2.= "]";	
+	$cnts = 1;
+	
+}
+$tmps1.= "]";
+$tmps2.= "]";
+$tmps3.= "]";
+######################## 분류 생성 ##############################
+
+if($mode=='cmodify') $TITLE = "수정";
+else $TITLE = "복사";
+?>
+
+<HTML>
+<HEAD>
+<TITLE>상품분류 선택</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+<? echo $tmps1."\n".$tmps2."\n".$tmps3;?>
+
+
+/*************************  등록 체크 ***************************/
+function checkForm() {
+	
+	var form = document.myForm;
+
+	if(!form.cate_num.value || form.cate_num.value == 0) {
+		window.alert('선택된 분류가 없습니다! 다시한번확인해주세요.');
+		form.cate1.focus();
+		return false;
+	}
+	
+	var ck_last = form.cate_num.value;
+	var split_cate = ck_last.split(":");
+	
+	if(split_cate[1] == "O") { // 하위분류가 있을경우 상위분류에 상품을 등록시키지 못함.
+		window.alert('하위분류가 존재하는 분류입니다!\n하위분류를 지정해주시고,\n\n하위분류가 생성되지 않았으면\n하위분류를 생성후 상품을 등록해주세요!');
+		form.cate1.focus();
+		return false;
+	}
+    
+<? if($mode=='scopy' || $mode=='scate') { ?>
+	parent.document.selectForm.cate_num.value = form.cate_num.value;
+	parent.secSend('<?=$mode?>');
+	parent.pLightBox.hide();	
+	return false;
+<? } ?>
+	
+}
+/*************************  등록 체크 ***************************/
+
+//-->
+</SCRIPT>
+
+
+<BODY style="padding:15px 8px 8px 8px;">
+
+<TABLE width="98%" align="center" cellpadding="0" cellspacing="0" style="margin:5px;">
+<!---------------------------- 분류 선택폼  시작 ----------------------------------->
+<FORM name="myForm" method="post" action="goods_post.php" onsubmit="return checkForm()">
+<input type="hidden" name="path_cate1">
+<input type="hidden" name="path_cate2">
+<input type="hidden" name="path_cate3">
+<input type="hidden" name="cate_num">
+<input type="hidden" name="item" value="<?=$_POST[item]?>">
+<TR><TD><img src='./img/g_1th.gif'></TD></TR>
+<tr><td height="10"></td></tr>
+<TR><TD align=center>
+	<TABLE width="800" border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE">
+	  <TR>
+	    	<TD>
+				<TABLE width="800" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
+				<TR> 
+					<TD> 
+					<!--@ 상품분류 테이블 -->
+					<TABLE width=100% align=center border=0 cellpadding=0 cellspacing=1>
+					<TR height=30>
+						<TD class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;1차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;2차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;3차분류</font></TD>
+						<td class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;4차분류</font></td>
+					</TR>
+					<TR bgcolor='#FFFFFF' height="146">
+						<TD><SELECT NAME="cate1" size=10 style='width:100%;height:100%;background:#FFFFFF;'></SELECT></TD>
+						<TD><SELECT name="cate2" size=10 style='width:100%;height:100%;background:#FFFFFF;'></SELECT></TD>
+                        <TD><SELECT name="cate3" size=10 style='width:100%;height:100%;background:#FFFFFF;'></SELECT></TD>	
+						<td><SELECT name="cate4" size=10 style='width:100%;height:100%;background:#FFFFFF;'></SELECT></td>	
+					</TR>
+					</TABLE>
+					</TD>
+				</TR>
+				</TABLE>			
+         </TD>
+     </TR>
+     </TABLE>
+   </TD>
+</TR>
+<TR><TD height=6></TD></TR>
+<TR><TD align=center>
+	<TABLE width="800" border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE">
+	  <TR>
+	    	<TD>
+				<TABLE width="800" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
+				<TR> 
+					<TD> 
+					<TABLE width=100% border=0 cellpadding=5 cellspacing=1>
+					<TR  height=30>
+						<TD class=gr_bg width=115><font class="bTitle small">*&nbsp;<?=$TITLE?>될 분류 위치</font></TD>
+						<TD colspan=2 bgcolor=efefef>&nbsp;<font class="eng">HOME</font>&nbsp;<input type='text' name='this_path' value='' size=70 style='background-color:#efefef;border-width:0;border-style:solid;color:#0083c7;' readonly>
+					    <input type='hidden' name='list_len' value=''>						
+						</TD>
+					</TR>					
+					
+					</TABLE>
+                	<!--@ 상품분류 테이블 -->
+			        </TD>
+		        </TR>
+		        </TABLE>
+         </TD>
+     </TR>
+     </TABLE>
+   </TD>
+</TR>
+<TR><TD height=20></TD></TR>
+<TR><TD align=center><input type=image src='./img/btn_cate_select.gif' border=0 onfocus='blur();'>&nbsp;&nbsp;<img src='./img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"></TD></TR>
+<input type=hidden name=uid value='<?=$uid?>'>
+<input type=hidden name=mode value='<?=$mode?>'>
+</FORM>
+
+<!---------------------------- 분류 선택폼  끝 ----------------------------------->
+</TABLE>
+
+</BODY>
+</HTML>
+
+<script>
+
+var myForm = document.myForm;
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+	myForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+myForm.cate1.onchange=function(e){
+	for(i=myForm.cate2.length;i>=0;i--){
+		myForm.cate2.options[i]=null;
+	}
+	for(i=myForm.cate3.length;i>=0;i--){
+		myForm.cate3.options[i]=null;
+	}
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+		if(CATEname[sIndex][i][0]) myForm.cate2.options[i-1]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+		else myForm.cate2.options[i-1]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+	}
+	myForm.this_path.value	= "> " + myForm.cate1.options[sIndex].text.split('→')[0];
+	myForm.path_cate1.value = "> " + myForm.cate1.options[sIndex].text.split('→')[0];
+	myForm.cate_num.value = myForm.cate1.value;	
+}
+
+myForm.cate2.onchange=function(e){
+	for(i=myForm.cate3.length;i>=0;i--){
+		myForm.cate3.options[i]=null;
+	}
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,sIndex2=myForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2+1].slice(1).length;i<=cnt;i++){
+		if(typeof(CATEname[sIndex][sIndex2+1][i][0])!='undefined') myForm.cate3.options[i-1]=new Option(CATEname[sIndex][sIndex2+1][i][0],CATEnum[sIndex][sIndex2+1][i][0]);
+	}
+   
+	myForm.this_path.value	= myForm.path_cate1.value + " > " + myForm.cate2.options[sIndex2].text.split('→')[0];
+	myForm.path_cate2.value = myForm.path_cate1.value + " > " + myForm.cate2.options[sIndex2].text.split('→')[0];
+	myForm.cate_num.value =  myForm.cate2.value;
+}
+
+myForm.cate3.onchange=function(e){
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,sIndex2=myForm.cate2.selectedIndex,sIndex3=myForm.cate3.selectedIndex,cnt=CATEname[sIndex][sIndex2+1][sIndex3+1].slice(1).length;i<=cnt;i++){
+		if(typeof(CATEname[sIndex][sIndex2+1][sIndex3+1][i])!='undefined') myForm.cate4.options[i-1]=new Option(CATEname[sIndex][sIndex2+1][sIndex3+1][i],CATEnum[sIndex][sIndex2+1][sIndex3+1][i]);
+	}
+   
+	myForm.this_path.value	= myForm.path_cate2.value + " > " + myForm.cate3.options[sIndex3].text.split('→')[0];
+	myForm.path_cate3.value = myForm.path_cate2.value + " > " + myForm.cate3.options[sIndex3].text.split('→')[0];
+	myForm.cate_num.value =  myForm.cate3.value;
+}
+
+myForm.cate4.onchange=function(e){
+	sIndex=myForm.cate4.selectedIndex;   
+	myForm.this_path.value	= myForm.path_cate3.value + " > " + myForm.cate4.options[sIndex].text.split('→')[0];	
+	myForm.cate_num.value = myForm.cate4.value;	
+}
+</script>

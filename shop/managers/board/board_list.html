@@ -1,0 +1,145 @@
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_board.gif" alt="게시판관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>생성된 게시판 리스트를 확인 하거나 설정을 변경 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+	<td width="50%"></td>
+    <td align="right"><font class="eng">Total {{TOTAL}} &nbsp;&nbsp;{{PAGE}} page</font>&nbsp;</td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+		<tr>
+			<td>
+				<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+				<tr>
+					<td align="center">
+						<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height="24">
+							<td width="5%" align="center" class="gr_bg"><font class="bTitle small">No</font></td>
+							<td width="5%" align="center" class="gr_bg"><font class="bTitle small"><a href='#' onclick="ch_check(document.del)" onfocus='this.blur();' title="반전">√</a></font></td>
+							<td width="14%" align="center" class="gr_bg"><font class="bTitle small">게시판 아이디</font></td>
+							<td align="center" class="gr_bg"><font class="bTitle small">게시판 이름</font></td>
+							<td width="12%" align="center" class="gr_bg"><font class="bTitle small">글 갯수</font></td>
+							<td width="10%" align="center" class="gr_bg"><font class="bTitle small">게시판 속성</font></td>
+							<td width="10%" align="center" class="gr_bg"><font class="bTitle small">접속 레벨</font></td>
+							<td width="10%" align="center" class="gr_bg"><font class="bTitle small">카테고리</font></td>
+							<td width="7%" align="center" class="gr_bg"><font class="bTitle small">백업</font></td>
+							<td width="10%" align="center" class="gr_bg"><font class="bTitle small">Date</font></td>			
+						</tr>
+						<form METHOD="POST" name="del">
+						<!-- DYNAMIC @loop@ -->
+						<tr height="22" bgcolor="{{BGCOLOR}}" onMouseOver="this.style.backgroundColor='#F4F4F4'" onMouseOut="this.style.backgroundColor=''">
+							<td align="center"><font class="eng">{{NUM}}</font></td>
+							<td align="center">{{DEL}}</td>
+							<td align="left" style="padding-left:6px;">{{LIST1}}</td>
+							<td align="left" style="padding-left:6px;">{{LIST2}}</td>			
+							<td align="center"><font class="eng">{{LIST3}}</font></td>
+							<td align="center"><font class="eng">{{LIST4}}</font></td>			
+							<td align="center"><font class="eng">{{LIST5}}</font></td>
+							<td align="center"><font class="eng">{{LIST6}}</font></td>
+							<td align="center"><font class="eng">{{LIST7}}</font></td>
+							<td align="center"><font class="eng">{{LIST8}}</font></td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @noloop@ -->
+						<tr height="100">
+							<td align="center" colspan="10" bgcolor="#ffffff">생성된 게시판이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @noloop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+     </td>
+</tr>
+<tr><td height="8" colspan="2"></td></tr>
+<tr>
+    <td colspan=2>
+		<!-- 페이징 start -->
+		<table border="0" cellspacing="0" cellpadding="0" width="100%">
+		<tr>
+			<td width="40%">
+				<div id="sBtn1" style="padding-left:2px;">
+					<a href="{{LINK}}"><span class="blue">게시판 생성하기</span></a>
+					<a href="#" onclick="delSend(document.del);return false;"><span class="blue">선택 삭제하기</span></a>
+				</div>
+			</td>
+			<td align="right" id="paging">{{PAGING}}&nbsp;</td>
+		</tr>
+		<tr><td height="8"></td></tr>
+		</table>
+		<!-- 페이징 end -->
+	</td>
+</tr>
+<tr><td height="20"></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function delSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) cnt++;
+	}
+
+	if(cnt<=0) {
+		alert("삭제할 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		if (window.confirm("정말로 삭제 할까요?")) {
+			frm.action = "./board_ok.php?mode=del";
+			frm.submit();
+			return;
+		} 
+		else return;		
+	}
+
+}
+
+function ch_check(frm){
+	for (j=0,cnt=frm.elements.length;j<cnt;j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			if(frm.elements[j].disabled==false) frm.elements[j].checked = true;
+		}
+	}
+}
+
+
+function openAccess(num){
+	pLightBox.show('access_manager.html?uid='+num,'iframe','700','400','■ 게시판 접속권한 설정',10);
+}
+
+function openCate(num){
+	pLightBox.show('cate_manager.html?uid='+num,'iframe','700','400','■ 게시판 카테고리 설정',10);
+}
+
+//-->
+</SCRIPT>

@@ -1,0 +1,49 @@
+<header id="header">
+	<section>
+		<h1><a href="{{Main}}">{{LOGO}}</a></h1>
+		<div id="util">
+			<h2>회원서비스</h2>
+			<ul>
+				<!-- DYNAMIC @is_login@ -->	
+				<li><a href="{{Main}}?channel=login" title="로그인">LOGIN</a></li>
+				<!-- DYNAMIC @is_login@ -->	
+				<!-- DYNAMIC @is_logout@ -->	
+				<li><a href="php/logout.php" title="로그아웃">LOGOUT</a></li>
+				<!-- DYNAMIC @is_logout@ -->	
+				<li><a href="{{Main}}?channel=mypage">MY PAGE</a></li> 
+				<li><a class="sBtn" href="#" onclick="searchLayer(this); return false;">검색</a></li>
+			</ul>					
+		</div>					
+				
+		<form name="TsearchForm" method="get" action="{{Main}}">
+		<input type="hidden" name="channel" value='search' />
+		<input type="hidden" name="detail" value='' />
+		<fieldset id="searchForm">
+			<legend>검색어 입력</legend>
+			<div>
+				<input type="text" name="search" id="searchI" placeholder="검색어 입력" onkeyup="ckSearchInput(this.form)" value="" />
+			</div>
+			<input type="reset" id="reset" onclick="this.form.search.focus();$(this).hide();" value="지우기" />
+			<input type="submit" onclick="return ckSearch()" value="검색" />
+		</fieldset>
+		</form>
+	</section>
+
+	<!-- DYNAMIC @is_main@ -->	
+	<nav id="naviMain">
+	<!-- DYNAMIC @is_main@ -->
+	<!-- DYNAMIC @is_sub@ -->	
+	<script type="text/javascript">
+		$(".sBtn").click();	
+	</script>
+	<nav id="navi">
+	<!-- DYNAMIC @is_sub@ -->
+		<h2>네비게이션</h2>
+		<ul>
+			<li><a href="{{Main}}?channel=cate">카테고리</a></li>
+			<li><a href="{{Main}}?channel=cart">장바구니</a></li>
+			<li><a href="{{Main}}?channel=today">최근본상품</a></li>
+			<li><a href="{{Main}}?channel=login&amp;type=osearch">주문배송</a></li>
+		</ul>
+	</nav>
+</header>

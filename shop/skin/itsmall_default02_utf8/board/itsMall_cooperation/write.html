@@ -1,0 +1,173 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<!-- DYNAMIC @is_editer1@ -->
+<link href="/{{ShopPath}}pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="/{{ShopPath}}pEdit/pEditor.js"></script>
+<!-- DYNAMIC @is_editer1@ -->
+
+<div id="pb_sub">
+	
+	<form name="signForm" enctype="multipart/form-data" method="post" action="{{ACTION}}" onsubmit="return checkIt()" >
+    <input type="hidden" name="Main" value="{{Main}}" />	
+	<input type="hidden" name="remail" value="1" />
+	<input type="hidden" name="passwd" value="guest" />
+	<input type="hidden" name="ck_w"><input type="hidden" name="ck_w2" />
+	<input type="hidden" name="ck_bt" />
+	<!-- DYNAMIC @is_editer2@ -->
+	<input type="hidden" name="tmp_dir" value="{{tmp_dir2}}" />	
+	<input  type="hidden" name="html_type" value="1" />
+	<!-- DYNAMIC @is_editer2@ -->
+	<div style="height:20px"></div>
+
+	<div class="pb_small" style="text-align:left;padding:4px 4px 14px 4px;">
+		<div class="noticeDiv">아래 내용을 적으시고 신청해 주시면 검토 후 연락 드리겠습니다.</div>
+		<div class="noticeDiv" style="margin-top:6px"><img src="img/icon_nextrq.gif" alt='required' /> 아이콘 항목은 필수 입력 사항 입니다.</div>
+	</div>
+
+	<div id="writeInfo">
+		<!-- DYNAMIC @is_modify@ -->
+		<div style="padding:8px 0;"><img src="img/ttl_modifys.gif" alt="등록된 글 수정" /></div>
+		<!-- DYNAMIC @is_modify@ -->
+		<!-- DYNAMIC @is_reply@ -->
+		<div style="padding:8px 0;"><img src="img/ttl_replys.gif" alt="답변 글 등록" /></div>
+		<!-- DYNAMIC @is_reply@ -->
+		<div class="writeBox clearfix">			
+			<ul class="clearfix">	
+				<!-- DYNAMIC @is_cate@ -->   
+				<li>
+					<div class="left nextIcon2rq"><img src="img/ttl_cate.gif" alt="분류" /></div>
+					<div class="left">
+						<select name="cate" class="pb_default inputs_bg pb_default">{{OPTION}}</select>
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_cate@ -->  
+				<!-- DYNAMIC @is_info1@ -->
+				<li>
+					<div class="left nextIcon2rq"><img src="img/ttl_name.gif" alt="이름" /></div>
+					<div class="left">
+						<input class="inputs_bg pb_default" type="text" name="name" size="20" value="{{NAME}}" maxlength="30" />
+					</div>
+				</li>	
+				<li>
+					<div class="left nextIcon2rq"><img src="img/ttl_email.gif" alt="이메일" /></div>
+					<div class="left">
+						<input class="inputs_bg pb_default" type="text" name="email" size="40" value="{{EMAIL}}" maxlength="50" />
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_info1@ -->
+				<li>
+					<div class="left nextIcon2rq"><img src="img/ttl_title.gif" alt="제목" /></div>
+					<div class="left">
+						<input class="inputs_bg pb_default" type="text" name="subject" style="width:500px" value="{{SUBJECT}}" maxlength="80" />
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_pds@ -->
+				<li>
+					<div class="left nextIcon2"><img src="img/ttl_file_up.gif" alt="파일업로드" /></div>
+					<div class="left">
+						<div style="float:left;padding-right:4px;"><input type="text" name="filetext{{FNUM}}" size="40" class="inputs_bg pb_default" /></div>
+						<div style="float:left">
+							<img src="img/btn_file.gif" alt="File Search" class="hand">
+						</div>
+						<div style="float:left;position:relative;left:-90px"><input type="file" name="userfile{{FNUM}}" style="width:100px;height:24px; filter:alpha(opacity=0);opacity:0; -moz-opacity:0;cursor:pointer" onchange="this.form.filetext{{FNUM}}.value=this.value;this.blur();" /></div>
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_pds@ -->
+				<!-- DYNAMIC @is_file@ -->
+				<li>
+					<div class="left nextIcon2"><img src="img/ttl_file_del.gif" alt="파일삭제" /></div>
+					<div class="left">
+						{{SAVEDFILE}}
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_file@ -->
+				<li id="other">
+					<div class="left nextIcon2"><img src="img/ttl_tel.gif" alt="연락처" /></div>
+					<div class="left">
+						<input class="inputs_bg pb_default" type="text" name="homepage" size="40" value="{{HOMEPAGE}}" maxlength="50" />  
+					</div>
+				</li>	
+
+				<!-- DYNAMIC @is_slink@ -->
+				<li>
+					<div class="left nextIcon2"><img src="img/ttl_rlink.gif" alt="관련링크" /></div>
+					<div class="left">
+						<input class="inputs_bg pb_default" type="text" name="slink[]" style="width:500px" value="{{SLINK}}" maxlength="80" />  
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_slink@ -->
+				
+				<!-- DYNAMIC @is_default@ -->
+				<li style="height:240px;">
+					<div class="left nextIcon2rq"><img src="img/ttl_comment.gif" alt="문의내용" /></div>
+					<div class="left">
+						<textarea name="comment" style="width:500px;height:240px" class="inputs_bg pb_default">{{COMMENT}}</textarea>
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_default@ -->
+				<!-- DYNAMIC @is_editer3@ -->
+				<li style="margin-top:10px;height:380px;">
+					<center>
+						<textarea name="comment" id="comment">{{COMMENT}}</textarea>
+						<script>var comment = new pEditor("comment","/{{ShopPath}}pEdit","620","300","{{up_dir}}","basic2"); //에디터 생성</script>
+					</center>
+				</li>
+				<!-- DYNAMIC @is_editer3@ -->				
+			</ul>
+			<!-- DYNAMIC @is_hcate@ --><input type="hidden" name="cate" value="{{CATE}}" /><!-- DYNAMIC @is_hcate@ -->
+		</div>
+	</div>
+	
+	<div style="margin:20px 0 20px;text-align:center;width:100%;">
+		<!-- DYNAMIC @is_write2@ -->			
+		<a href="#" onclick="return checkIt();return false;"><img src="img/btn_write2.gif" alt="입력완료" /></a>
+		<a href="#" onclick="document.signForm.reset();return false;"><img src="img/btn_reset.gif" alt="다시작성" /></a>
+		<!-- DYNAMIC @is_write2@ -->			
+		<!-- DYNAMIC @is_modify2@ -->			
+		<a href="#" onclick="return checkIt();return false;"><img src="img/btn_modify.gif" alt="수정하기" /></a>
+		<a href="{{Main}}{{addstring}}"><img src="img/btn_list.gif" alt="목록보기" /></a>
+		<!-- DYNAMIC @is_modify2@ -->
+		<!-- DYNAMIC @is_reply2@ -->			
+		<a href="#" onclick="return checkIt();return false;"><img src="img/btn_reply.gif" alt="답글달기" /></a>
+		<a href="{{Main}}{{addstring}}"><img src="img/btn_list.gif" alt="목록보기" /></a>
+		<script>document.getElementById("other").style.display='none';</script>
+		<!-- DYNAMIC @is_reply2@ -->	
+		</div>
+	</div>
+
+	</form>	
+
+</div>
+
+<p style="clear:both;height:20px;"></p>
+
+<!-- 업로드중 플래시 필수 -->
+<div id="uploading" style="display:none;margin:50px;">
+	<EMBED src="img/data_up.swf" border="0" width="459" height="167"></EMBED>
+</div>
+
+<script type="text/javascript">
+<!--
+
+function checkIt2() {
+	form = document.signForm;
+
+	if(document.getElementById("ordernum")) {
+		if(document.getElementById("ordernum").value && !document.getElementById("gname").value){
+			alert("상품명을 입력 하시기 바랍니다.");
+			document.getElementById("gname").focus();
+			return false;
+		}		
+	}
+
+	/* 사용자 체크 추가 부분  */
+	form.ck_bt.value='1';
+	document.getElementById('pb_sub').style.display = "none";
+	document.getElementById('uploading').style.display = "block";
+	form.submit();
+	return false;
+}
+-->
+</script>

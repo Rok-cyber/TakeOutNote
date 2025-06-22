@@ -1,0 +1,47 @@
+<table border="0" width="99%" align="center" cellpadding="0" cellspacing=0>
+<tr><td height=10 align=left></td></tr>
+<tr>
+	<td align=center>
+	    <table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+		<tr>
+		    <td>
+			    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+						    <td width=8% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<td width=75% align=center class=gr_bg><font class="bTitle small">접속경로</font></td>
+							<td width=17% align=center class=gr_bg><font class="bTitle small">방문자수</font></td>
+						  </tr>
+						  <!-- DYNAMIC @loop@ -->
+						  <tr height=24 bgcolor='#FFFFFF'>
+						    <td align=center><font class=eng>{{NUM}}</font></td>
+							<td align=left style='padding-left:8px;' class='word_break'>{{REFER}}</td>
+							<td align=center><font class='eng mcolor'>{{CNT}} : {{PER}}%</font></td>
+						  </tr>
+						  <!-- DYNAMIC @loop@ -->
+						  <tr>
+							<td colspan=3 height=30 bgcolor=#FFFFFF align=center>
+							  <table border=0 width=96% cellpadding="0" cellspacing="0">
+							    <tr>
+								  <td id='paging'>{{PAGING}}</td>
+								  <td align=right><font class='small bold'>총 방문자수 : <font class=eng>{{TOTAL}}</font>회</td>
+								</tr>
+                              </table>
+                            </td>
+						  </tr>   
+						</table>
+				      </td>
+					</tr>
+				  </table>
+			    </td>
+			  </tr>
+			</table>
+		  </td>
+		</tr>
+		<tr><td height=20 colspan=2></td></tr>
+ 	  </table>
+    </td>
+  </tr>
+</table>

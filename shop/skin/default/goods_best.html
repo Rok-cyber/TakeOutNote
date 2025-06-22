@@ -1,0 +1,91 @@
+<script type="text/javascript" src="{{skin}}/listDesign.js"></script>
+
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">	
+	<div id="subTitle">
+		<img src="img/shop/ttl_best_goods.gif" alt="베스트상품" title="베스트상품" />
+	</div>
+	
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<div id="list">	
+		<div id="list_top">
+			<ul>
+				<li><a href="#" onclick="return getLists.cgBest('wc',1);"><img src="img/shop/tab_best_wc_on.gif" alt="주간클릭베스트" id='best_wc' /></a></li>
+				<li><a href="#" onclick="return getLists.cgBest('wo',1);"><img src="img/shop/tab_best_wo_off.gif" alt="주간판매베스트" id='best_wo' /></a></li>
+				<li><a href="#" onclick="return getLists.cgBest('mc',1);"><img src="img/shop/tab_best_mc_off.gif" alt="월간클릭베스트" id='best_mc' /></a></li>
+				<li><a href="#" onclick="return getLists.cgBest('mo',1);"><img src="img/shop/tab_best_mo_off.gif" alt="월간판매베스트" id='best_mo' /></a></li>
+			</ul>				
+			<div class="right">
+				<a href="#" onclick="return getLists.cgType('img',1)"><img src="img/common/icon_img_off.gif" align="absmiddle" alt='이미지형' title='이미지형' id="imgof_img" /></a>
+			</div>
+			<div class="right">
+				<a href="#" onclick="return getLists.cgType('list',1)"><img src="img/common/icon_list_on.gif" align="absmiddle" alt='리스트형' title='리스트형' id="imgof_list" /></a>
+			</div>	
+		</div>
+		
+		<form name="listForm" method="post" action="">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col />
+			<col width="120" /> 
+			<col width="120" />        			
+			<thead>
+			<tr height="28">
+				<th scope="col"><img src="img/common/ttl_list_name.gif" alt="상품명" /></th>
+				<th align="right" scope="col"><img src="img/common/ttl_list_price.gif" alt="가격/적립금" /></th>
+				<th scope="col"><img src="img/common/ttl_list_point.gif" alt="상품평" /></th>
+			</tr>
+			</thead>
+			
+			<tbody id="list_table"></tbody>
+			<!-- id:listTable 에 리스트가 나옵니다. -->
+			</table>
+		</div>
+
+		<div id="list_img" style="display:none">						
+			<!-- id:lis_img 에 이미지가 나옵니다. -->
+		</div>	
+		</form>
+		
+		<!-- DYNAMIC @no_loop@ -->
+		<div style="clear:both;text-align:center">
+			<img src="img/shop/no_goods3.gif" alt="상품이 없습니다" />
+		</div>
+		<!-- DYNAMIC @no_loop@ -->
+
+		<div id="noGoods" style="display:none;">
+			<img src="img/shop/no_goods3.gif" alt="상품이 없습니다" />
+		</div>
+
+	</div>
+
+	<div style='clear:both;'>
+		<div style="height:10px;">&nbsp;</div>
+		<div style='clear:both;text-align:left;'>
+			<img src="img/shop/btn_compare.gif" class="hand" onclick="secCompare();return false;" alt="선택상품 비교하기" />
+			<img src="img/shop/btn_cart_all.gif" class="hand" onclick="cartPost();return false;" alt="선택상품 장바구니담기" />
+		</div>
+		<div id="paging" class="small" style=""></div>
+	</div>	
+	<div class="clear" style="height:20px">&nbsp;</div>	
+</div>
+<!-- @MAIN CENTER END -->
+
+<script type="text/javascript">
+<!--
+
+getLists = new getList('{{TOTAL}}','list','wc','{{TOTAL}}','','','php/getBest.php');
+getLists.display();
+
+checkCookieVar();
+// -->
+</script>

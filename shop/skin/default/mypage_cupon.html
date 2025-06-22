@@ -1,0 +1,78 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle">  
+		<img src="img/member/ttl_coupon.gif" alt="발급쿠폰내역" title="발급쿠폰내역" />
+	</div>	
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div id="list_list" style="margin:0px;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="50" /> 			
+			<col />			
+			<col width="70" /> 
+			<col width="120" />
+			<col width="150" />      					
+			<col width="80" />      					
+			<col width="80" />      					
+			<thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/member/ttl_list_num.gif" alt="번호" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_cname.gif" alt="쿠폰명" /></th>
+				<th scope="col" align="center"><img src="img/shop/ttl_list_sale.gif" alt="할인액(율)" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_limit.gif" alt="사용제한사항" /></th>				
+				<th scope="col"><img src="img/shop/ttl_list_udate.gif" alt="사용기간" /></th>	
+				<th scope="col"><img src="img/member/ttl_list_cstatus.gif" alt="쿠폰상태" /></th>	
+				<th scope="col"><img src="img/shop/ttl_list_cdate.gif" alt="발급일" /></th>		
+            </tr>
+			</thead>
+			
+			<tbody>			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td class="num">{{NUM}}</td>
+				<td align="left">{{NAME}}</td>
+				<td align="center" class="num">{{SALE}}{{STYPE}}</font></td>				
+				<td class="small mColor">{{LMT}}</td>				
+				<td class="num">{{DATES}}</td>				
+				<td class="small status2{{TYPE}}">{{STATUS}}</td>				
+				<td class="num">{{DATE}}</td>				
+			</tr>			
+			<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->											
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div class="clear" style="height:16px;">&nbsp;</div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(box,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/member/no_cupon.gif" alt="발급쿠폰내역없음" title="발급쿠폰내역없음" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+</div>

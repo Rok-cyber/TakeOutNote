@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>write.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> write.html (글 등록 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ACTION}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글등록 처리 페이지 주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{Main}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">게시판 메인 페이지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_CK1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">HTML 사용 체크시 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_CK2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">공지사항 사용 체크시 checked</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_CK3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">비밀글 사용 체크시 checked</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_CK4}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">답변메일받기 사용 체크시 checked</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이름</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{EMAIL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이메일</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{HOMEPAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">홈페이지</td>
+					</tr>
+					
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUBJECT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">제목</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{IMPASS}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">임시</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OPTION}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류 리스트 (select box 형태)</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CATE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 분류</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{FNUM}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">업로드 번호</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SAVEDFILE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록된 파일</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SLINK}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">관련 링크</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MLINK}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">동영상 링크</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{WIDTH}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">동영상 링크 가로 사이즈</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{HEIGHT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">동영상 링크 세로 사이즈</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{COMMENT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">내용</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{addstring}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 파라미터</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_write@ --></font><br/>
+			. . . (글등록일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_write@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_modify@ --></font><br/>
+			. . . (글 수정일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_modify@ --></font>
+		</div>
+	</div>	
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_reply@ --></font><br/>
+			. . . (답변글 등록일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_reply@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_html@ --></font><br/>
+			. . . (HTML사용일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_html@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_notice@ --></font><br/>
+			. . . (공지글 사용일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_notice@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_serect@ --></font><br/>
+			. . . (비밀글 사용일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_serect@ --></font>
+		</div>
+	</div>
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_remail@ --></font><br/>
+			. . . (답변메일받기 사용일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_remail@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_info1@ --></font><br/>
+			. . . (로그인 되지 않았을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_info1@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_info2@ --></font><br/>
+			. . . (로그인 되지 않았을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_info2@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_info3@ --></font><br/>
+			. . . (로그인 되었을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_info3@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_cate@ --></font><br/>
+			. . . (분류를 사용일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_cate@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_hcate@ --></font><br/>
+			. . . (분류가 나타나지 않을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_hcate@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_pds@ --></font><br/>
+			. . . (파일업로드를 사용할 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_pds@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_file@ --></font><br/>
+			. . . (등록된 파일이 있는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_file@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_slink@ --></font><br/>
+			. . . (관련링크를 사용 할 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_slink@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_mlink@ --></font><br/>
+			. . . (동영상링크 사용 할 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_mlink@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_write2@ --></font><br/>
+			. . . (글등록 권한이 있는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_write2@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_modify2@ --></font><br/>
+			. . . (글수정 권한이 있는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_modify2@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_reply2@ --></font><br/>
+			. . . (답글달기 권한이 있는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_reply2@ --></font>
+		</div>
+	</div>
+
+	
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

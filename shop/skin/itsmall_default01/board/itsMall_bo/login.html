@@ -1,0 +1,43 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<div id="pb_sub2">	
+	<form name="signForm" method="post" action="{{ACTION}}" onsubmit="return checkIt()" >
+    <input type="hidden" name="url" value="{{Main}}">
+	<input type="hidden" name="ck_bt">
+
+	<div class="pb_bar"></div>	
+
+	<div id="pb_top_title" class="pb_default">				
+		<b>로그인</b>
+	</div>
+	
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">아이디</div>		
+		<div class="pb_write_input2">
+			<input class="pb_ip" type="text" name="id" size="20" maxlength="20">	
+		</div>        		
+	</div>
+
+	<div class="pb_write_area" style="border:0px">
+		<div class="pb_write_title pb_small pb_bold">비밀번호</div>		
+		<div class="pb_write_input2">
+			<input class="pb_ip" type="password" name="passwd" size="20" maxlength="20">
+		</div>        		
+	</div>	
+	
+
+	<div style="margin:20px 0 20px;text-align:center;width:100%;">
+		<div style="width:150px;">
+			<div id="sBtn3">
+				<a href="#" onfocus="this.blur();" onclick="return checkIt(2);return false;"><span>확인</span></a>
+			</div>		
+			<div id="sBtn2">
+				<a href="{{Main}}{{addstring}}" onfocus="this.blur();"><span>취소</span></a>
+			</div>		
+		</div>
+	</div>
+
+	</form>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>쿠폰관리</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> 쿠폰관리
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>01.</font> <font class="blue">쿠폰 리스트</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		등록된 쿠폰 리스트를 확인 하거나 검색할 수 있습니다.<br />
+		쿠폰명을 클릭하면 등록된 쿠폰 내용을 수정할 수 있습니다. <br />	
+		발급된수를 클릭 하시면 해당 쿠폰의 발급리스트를 확인 할 수 있습니다.
+	</div>
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>02.</font> <font class="blue">쿠폰 등록</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		<font class='eng green'>A.</font> <font class="green">쿠폰명</font> : 쿠폰명을 입력 하시면 됩니다.<br />
+		<font class='eng green'>B.</font> <font class="green">쿠폰발급방식</font> : 관리자발급, 회원가입자동발급, 상품페이지 다운로드, 링크 다운로드 중 선택 하시면 됩니다. <br />
+		<font class='eng green'>C.</font> <font class="green">쿠폰할인내역</font> : 쿠폰 할인률(%)을 입력 하시면 됩니다. 상품페이지 다운로드일경우는 상품금액에서 할인됩니다. <br />
+		<font class='eng green'>D.</font> <font class="green">쿠폰발급상품</font> : 쿠폰을 사용할 수 있는 분류나 상품을 선택 하시면 됩니다. 전체상품일경우는 전체 상품에 쿠폰을 사용할 수 있습니다. 특정분류일 경우 분류를 선택 하시고 '추가 하기'로 계속해서 추가 할 수 있습니다. 특정 상품일 경우 '상품검색하기'로 상품을 검색 하셔서 추가 하시면 됩니다. 추가된 분류나 상품은 'x'를 누르시면 삭제 됩니다. 특정분류 및 특정상품에 발급된 쿠폰은 해당조건에 만족하는 상품을 구매 했을경우에만 사용 가능 합니다.<br />
+		<font class='eng green'>E.</font> <font class="green">쿠폰사용기간</font> : 쿠폰사용가능기간을 입력 하시거나 발급 후 사용가능한 일수를 입력 하시면 됩니다.<br />
+		<font class='eng green'>G.</font> <font class="green">쿠폰수량</font> : 발급될 쿠폰수량을 입력 하시면 됩니다.<br />
+		<font class='eng green'>H.</font> <font class="green">쿠폰사용가능금액</font> : 쿠폰을 사용할 수 있는 구매 금액을 입력 하시면 됩니다. 0원일 경우 구매금액에 상관없이 사용이 가능 합니다. <br />
+		<font class='eng green'>I.</font> <font class="green">쿠폰발급확률</font> : 쿠폰발급확률과 발급요청수를 입력 하시면 됩니다. 쿠폰발급할률은 상품페이지 다운로드나 링크 다운로드에 이용됩니다. <br /><br />
+		
+		<font class="small">		
+		! 관리자발급은 쿠폰등록 후 쿠폰리스트에서 관리자가 특정등급이나 특정회원에게 직접 발급합니다. <br />
+		! 관리자발급은 쿠폰리스트에서 발급된수를 클릭하셔서 특정등급이나 특정회원에게 쿠폰을 발급 할 수 있습니다.<br />
+		! 회원가입자동발급은 회원가입시 자동으로 발급됩니다.<br />
+		! 상품페이지 다운로드는 쇼핑몰 상품상세 페이지에서 직접 쿠폰을 다운로드받습니다. 쿠폰발급상품에서 특정상품이 추가 되어야 됩니다.<br />
+		! 링크 다운로드는 쇼핑몰에서 배너나 삽입코드를 이용하여 링크시켜서 회원이 직접 쿠폰을 다운로드받습니다.<br />
+		! 링크 다운로드 주소는 "php/pcupon_down.php?num=" 이며 자바스크립트 함수 cuponDown()을 사용하시면 됩니다. 			
+		</font>
+	</div>
+
+	<img src="../img/sample_5_71.gif" vspace="8" /><br />
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>03.</font> <font class="blue">쿠폰발급리스트</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		회원에게 발급된 쿠폰 리스트를 확인 하거나 회원에게 쿠폰을 발급 할 수 있습니다.<br />
+		쿠폰명을 클릭하면 등록된 쿠폰 내용을 수정할 수 있습니다. <br />			
+	</div>
+</div>
+
+</BODY>
+</html>

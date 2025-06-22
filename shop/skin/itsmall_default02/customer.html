@@ -1,0 +1,137 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 고객센터 메뉴 START -->
+	{{CUS_MENU}}
+	<!-- @고객센터 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div class="clear" style="height:22px;">&nbsp;</div>	
+	
+	<div>
+		<img src="img/customer/customer_help.gif" alt="고객센터 이용안내" title="고객센터 이용안내" />
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>	
+	
+	<div style="height:22px;text-align:left">
+		<img src='img/customer/ttl_faq.gif' alt="자주하는질문과답변" title="자주하는질문과답변" />
+	</div>
+
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:6px;">
+				<form name="faqsForm" method="post" action="{{Main}}?channel=board&amp;code=faq" onsubmit="return ckFsearch();">
+				<input type="hidden" name="field" value="subject" />
+				<input type="text" name="word" size="110" class="whites default" style="vertical-align:top;background-color:#fafafa" />
+				<input type="image" src="img/search/btn_search.gif" border="0" align="absmiddle" />
+				</form>
+			</div>			
+		</div>
+	</div>
+	
+	<div id="cusFaq">		
+		<ul>
+			<!-- DYNAMIC @loop_faq@ -->
+			<li onclick="faqDisplay({{NO}});" style="cursor:pointer;height:24px;">
+				<div class="faqLeft"><img src="img/customer/faq_num_{{NO}}.gif" alt="{{NO}}" /></div>
+				<div class="faqBody small" style="padding-top:2px;">{{SUBJECT}}</div>
+				<div class="faqRight small gray" style="padding-top:2px;">{{FCATE}}</div>				
+			</li>
+			<li id="faq_an_{{NO}}" style="display:none;" class="small clearfix">				
+				<div class="faqLeft">&nbsp;</div>
+				<div class="faqBody2 small">{{ANSWER}}</div>
+			</li>
+			<!-- DYNAMIC @loop_faq@ -->
+		</ul>			
+	</div>
+	
+	<div id="board_box">
+		<div class="left" style="width:230px;">
+			<div style="height:22px;margin-bottom:8px;border-bottom:1px solid #ccc">
+				<a href="{{Main}}?channel=board&amp;code=notice"><img src='img/customer/ttl_notice.gif' alt="NEWS&amp;EVENT" /></a>
+			</div>
+			
+			<ul>
+				<!-- DYNAMIC @loop_notice@ -->	
+				<li class='small'>
+					<div style="width:228px; height:13px; overflow:hidden;">
+						<a href="{{Main}}?channel=board&amp;code=notice&amp;pmode=view&amp;no={{NO}}">{{SUBJECT}}</a>
+					</div>
+				</li>
+				<!-- DYNAMIC @loop_notice@ -->	
+			</ul>
+		</div>
+		
+		<div style="width:15px; float:left;">&nbsp;</div>
+
+		<div class="left" style="width:230px;">
+			<div style="height:22px;margin-bottom:8px;border-bottom:1px solid #ccc">
+				<a href="{{Main}}?channel=board&amp;code=customer"><img src='img/customer/ttl_customer_board.gif' alt="고객게시판" /></a>
+			</div>
+			
+			<ul>
+				<!-- DYNAMIC @loop_customer@ -->
+				<li class='small'>
+					<div style="width:228px; height:13px; overflow:hidden;">
+						<a href="{{Main}}?channel=board&amp;code=customer&amp;pmode=view&amp;no={{NO}}">{{SUBJECT}}</a>
+					</div>
+				</li>
+				<!-- DYNAMIC @loop_customer@ -->
+			</ul>
+		</div>
+
+		<div style="width:15px; float:left;">&nbsp;</div>
+
+		<div class="left" style="width:230px;">
+			<div style="height:22px;">
+				<img src='img/customer/ttl_guide.gif' alt="GUIDE" />
+			</div>
+
+			<div class="contentBox" style="width:226px;"">
+				<div class="contentBoxIn clearfix" style="width:224px;">				
+					<div style="padding:20px 0 0 13px;text-align:left;">
+						<div class="left" style="width:55%;">
+							<a href="{{Main}}?channel=idpwsearch"><img src="img/customer/customer_quick1.gif" border="0" alt="아이디비번찾기" title="아이디비번찾기" /></a>
+						</div>
+						<div class="left" style="width:45%;">
+							<a href="{{Main}}?channel=mypage"><img src="img/customer/customer_quick2.gif" border="0" alt="내쇼핑정보확인" title="내쇼핑정보확인" /></a>
+						</div>
+						<div class="left" style="width:55%;padding:20px 0;">
+							<a href="{{Main}}?channel=board&amp;code=sales"><img src="img/customer/customer_quick3.gif" border="0" alt="대량구매문의하기" title="대량구매문의하기" /></a>
+						</div>
+						<div class="left" style="width:45%;padding:20px 0;">
+							<!-- DYNAMIC @is_logins@ -->
+							<a href="{{Main}}?channel=order"><img src="img/customer/customer_quick4.gif" border="0" alt="주문/배송조회" title="주문/배송조회" /></a>
+							<!-- DYNAMIC @is_logins@ -->
+							<!-- DYNAMIC @is_logouts@ -->
+							<a href="{{Main}}?channel=login&amp;type=osearch"><img src="img/customer/customer_quick4.gif" border="0" alt="주문/배송조회" title="주문/배송조회" /></a>
+							<!-- DYNAMIC @is_logouts@ -->							
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- @MAIN CENTER END -->
+
+<script language="JavaScript">
+<!--
+
+faqSec = 0;
+function faqDisplay(num) {
+	if(!num) return;
+	obj = $('faq_an_'+num);
+	if(obj.style.display=='none') {
+		obj.style.display = 'block';		
+	}
+	else obj.style.display = 'none';
+
+	if(faqSec>0 && faqSec!=num) $('faq_an_'+faqSec).style.display = 'none';
+	faqSec = num;
+}
+// -->
+</script>

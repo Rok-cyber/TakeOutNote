@@ -1,0 +1,374 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function putDay(date1,date2) {
+	f = document.searchForm;
+	if(!date1) {
+		f.sdate1.value = '';
+		f.sdate2.value = '';
+	} 
+	else {
+		f.sdate1.value = date1;
+		f.sdate2.value = date2;
+	}
+}
+
+function ckSearch(){
+	f = document.searchForm;
+	
+	if(f.sdate1.value && !f.sdate2.value) {
+		alert('등록일 조건을 입력 하세요!');
+		f.sdate2.focus();
+		return false;
+	}
+
+	if(!f.sdate1.value && f.sdate2.value) {
+		alert('등록일 조건을 입력 하세요!');
+		f.sdate1.focus();
+		return false;
+	}
+	
+	f.submit();
+	return false;
+}
+
+
+function secSend(mode){
+	frm = document.selectForm;
+
+	if(mode=='sdel') var Title = '삭제';
+	else var Title = '복사';
+
+	for (i=ck=0,cnt=frm.elements.length;i<cnt;i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			ck = 1;
+			break;
+		}
+	}
+	if (ck == 0) {
+		alert(Title + "할 목록을 선택하세요!");
+		return false;
+	} 
+	else {		
+		if((mode=='scopy' || mode=='scate') && frm.cate_num.value) {
+			frm.action = "./goods_post.php?mode="+mode+"{{addstring}}";			
+			frm.submit();
+			return;
+		}
+		
+		if(mode=='sdel') ck = window.confirm("정말로 삭제 할까요?");
+		if (mode=='sdel' && ck) {
+			frm.action = "./goods_post.php?coop=1&mode=sdel{{addstring}}";			
+			frm.submit();
+		}
+		else if(mode=='scopy') { 
+			pLightBox.show('goods_cate_select.html?mode=scopy','iframe','840','380','■ 선택 상품 복사하기',10)
+		}
+		else if(mode=='scate') { 
+			pLightBox.show('goods_cate_select.html?mode=scate','iframe','840','380','■ 선택 상품 분류 변경하기',10)
+		}
+    }  
+}
+
+function chCheck(){
+	frm = document.selectForm;
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			frm.elements[j].checked = true;
+		}
+
+	}
+	return false;
+}
+
+function goodsDel(num) {
+	if(confirm("정말로 삭제 하시겠습니까?")) {
+		window.location.href = 'goods_post.php?coop=1&mode=del{{addstring}}&uid='+num;
+	}
+}
+
+function goodsCopy(num) {
+	window.location.href = 'goods_post.php?coop=1&mode=copy&cate_num=999000000000&{{addstring}}&uid='+num;	
+}
+
+function ckEnter(){
+	if(event.keyCode==13) {
+		return ckSearch();
+	}
+}
+
+function cgValues(num) {
+	if(!num) return;
+	
+	tmp_qty = eval("document.selectForm.qty_"+num);
+
+	if(typeof(tmp_qty)!='undefined') {
+		qty = tmp_qty.value;
+		if(!qty) {
+			alert('수량을 입력 하시기 바랍니다.');
+			tmp_qty.focus();
+			return;
+		}
+	}
+	sequence = eval("document.selectForm.sequence_"+num+".value");
+
+	window.location.href='goods_post.php?mode=cgVls{{addstring}}&qty='+qty+'&sequence='+sequence+'&uid='+num;
+}
+
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2" id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_coop_goods.gif" alt="공동구매 상품리스트" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>등록된 공동구매 상품 리스트 확인 및 검색을 할 수 있습니다.</div>			
+		</div>					
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>		
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="get" action="{{ACTION}}" onsubmit='return false;'>
+		<tr><td height='6'></td></tr>		
+		<tr>
+			<td height="28" style="padding-left:10px;">											
+				<div class="boxText small orange">기간검색</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'>
+					<select name="brands">
+						<option value="coop_sdate">공구시작일</option>
+						<option value="coop_edate">공구종료일</option>
+						<option value="signdate">상품등록일</option>
+						<option value="moddate">상품수정일</option>
+					</select>
+					<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="bt2 eng" size="10" name="sdate1" value="{{sdate1}}">~ <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="bt2 eng"  size="10" name="sdate2" value="{{sdate2}}">
+					<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day2.gif" class="hand" onclick="putDay('{{DAY2}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" align="absmiddle">					
+					<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">				
+				</div>
+				<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+					<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+				</div>				
+			</td>
+		</tr>		
+		<tr>
+			<td height="28" style="padding-left:10px;">	
+				<div class="boxText small orange">진행상황</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="s_qty">
+					   <option value=''>전체</option>
+					   <option value='1'>공구준비중</option>
+					   <option value='2'>공구진행중</option>
+					   <option value='3'>공구마감</option>					   
+					</select>
+				</div>
+				<div class="boxText small orange">공구성립</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="seccate">
+					   <option value=''>전체</option>
+					   <option value='1'>공구성립</option>
+					   <option value='2'>공구미성립</option>				   
+					</select>
+				</div>
+				<div class="boxText small orange">주문시점</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="coop_p">
+					   <option value=''>전체</option>
+					   <option value='N'>성립후주문</option>
+					   <option value='Y'>선주문(소셜커머스)</option>				   
+					</select>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td height="28" style="padding-left:10px;">				
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+					   <option value='name'>상품명</option>
+					   <option value='model'>모델명</option>
+					   <option value='tag'>태그명</option>
+					   <option value='multi'>통합</option>
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2" onkeydown="ckEnter();">
+				</div>
+				<div class="boxText small orange">정렬</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="order">
+						<option value="coop_sdate DESC">공구시작일↓</option>
+						<option value="coop_sdate ASC">공구시작일↑</option>
+						<option value="coop_edate DESC">공구종료일↓</option>
+						<option value="coop_edate ASC">공구종료일↑</option>
+						<option value="uid DESC">등록일↓</option>
+						<option value="uid ASC">등록일↑</option>
+						<option value="moddate DESC">수정일↓</option>
+						<option value="moddate ASC">수정일↑</option>
+						<option value="name DESC">상품명↓</option>
+						<option value="name ASC">상품명↑</option>						
+					</select>
+					
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="return ckSearch();"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=30% class="small"> &nbsp;검색된 상품수 : <font class="eng">{{TOTAL}}</font>건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지.</FONT></td>
+	<td></td>
+</tr>
+<tr>
+	<td colspan=2>
+	<!-- 게시판 리스트 start -->
+		<TABLE border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<TR>
+			<TD>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24>
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=3% align=center class=gr_bg><a href='#' onclick="return chCheck();" onfocus='this.blur();'><font class="bTitle small">√</font></a></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=8% align=center class=gr_bg><font class="bTitle small">이미지</font></td>
+							<td align=center class=gr_bg><font class="bTitle small">상품명/공구기간</font></td>
+							<td width=10% align=center class=gr_bg><font class="bTitle small">시작/현재가</font></td>
+							<td width=7% align=center class=gr_bg><font class="bTitle small">판매수량</font></td>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">신청/주문수</font></td>
+							<td width=10% align=center class=gr_bg><font class="bTitle small">등록/수정일</font></td>
+							<td width=6% align=center class=gr_bg><font class="bTitle small">관리</font></td>
+						</tr>
+						<form method="post" name='selectForm'>
+						<input type="hidden" name="cate_num">
+						<!-- DYNAMIC @loop@ -->
+						<tr  align="center" height="66" bgcolor="{{BGCOLOR}}" onMouseOver="this.style.backgroundColor='#efefef'" onMouseOut="this.style.backgroundColor=''">
+							<td class="eng">{{NUM}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td>{{DEL}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td><a href='{{SMain}}?channel=view&uid={{UID}}' target='_blank' title='쇼핑몰 상세설명 보기'>{{LIST2}}</a></td>
+							<td align="left" style="padding-left:6px;">
+								<div>
+									<div style="float:left;width:0px;height:54px"></div>
+									<div style="float:left">
+										<div style='padding-top:4px;line-height:120%;overflow:hidden'>{{LIST3}}</div>
+										<div style='padding-top:4px;height:16px;overflow:hidden' class="eng bold">
+											{{LIST10}} ~ {{LIST11}}
+										</div>
+										<div style='float:left;margin-top:4px;height:18px;border:1px solid #ccc;background-color:#fff' class='small'>
+											<div style='padding:4px 8px 0 8px;'>{{STATUS}}</div>
+										</div>
+										<div style='float:left;margin:4px 0 0 4px;height:18px;border:1px solid #ccc;background-color:#fff;' class='small'>
+											<div style='padding:4px 8px 0 8px;'>{{STATUS2}}</div>
+										</div>
+										<div style='float:left;margin:4px 0 0 4px;height:18px;border:1px solid #ccc;background-color:#fff;' class='small'>
+											<div style='padding:4px 8px 0 8px;'>{{STATUS3}}</div>
+										</div>
+										<div style="float:right;margin-top:6px;padding-left:4px;">
+											{{LIST13}}&nbsp;<font class="eng blue">UID</font>:<font class='eng'>{{UID}}</font>
+										</div>
+									</div>
+								</div>								
+							</td>
+							<td align=right style="padding-right:6px;line-height:200%">
+								<font class="eng ">{{LIST4}}</font><br />
+								<font class="eng bold">{{LIST21}}</font><br>
+								<img src='img/icon_point.gif' align='absmiddle'><font class="eng">{{LIST5}}</font>
+							</td>
+							<td class="small">{{LIST7}}</td>
+							<td class="eng"><a href="coop_participation_list.php?gid={{UID}}" title="신청리스트 보기">{{LIST22}}<font class='small'>건</font></a><br />/<br /><a href="../order/order_list.php?field=p_number&word={{UID}}" target="_blank" title="주문내역보기">{{LIST20}}<font class='small'>건</font></a></td>
+							<td class="eng" style="line-height:140%">{{DATE}}<br>{{MDATE}}</td>
+							<td style="line-height:140%">
+								<div><span id='nextIcon' class="hand small" onclick="location.href='{{MLINK}}';">수정</span></div> 
+								<div><span id='nextIcon' class="hand small" onclick="goodsCopy('{{UID}}')">복사</span></div> 
+								<div><span id='nextIcon' class="hand small" onclick="goodsDel('{{UID}}')">삭제</span></div> 
+							</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=100>
+							<td align=center colspan=9 bgcolor=#ffffff>등록(검색)된 상품이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+	</td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+     <td colspan=2>
+	 <!-- 페이징,검색... start -->
+	 <table border = 0 cellspacing=0 cellpadding=0 width=100%>
+	 <tr>
+		<td width=39%>	       
+		   <div id="sBtn1" style="padding-left:6px;">
+				<a href="{{LINK}}"><span class="blue">등록하기</span></a>
+				<a href="#" onclick="secSend('sdel');return false;"><span class="blue">선택 삭제하기</span></a>				
+			</div>
+		</td>
+	    <td align=right id="paging">{{PAGING}}</td>
+	 </tr>
+	 </table>
+	 <!-- 페이징,검색... end -->
+	 </td>
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<script>
+
+searchForm.field.value = "{{field}}";
+searchForm.s_qty.value = "{{s_qty}}";
+searchForm.seccate.value = "{{seccate}}";
+searchForm.brands.value = "{{brands}}";
+searchForm.coop_p.value = "{{coop_p}}";
+searchForm.order.value = "{{order}}";
+searchForm.limit.value = "{{limit}}";
+
+</script>

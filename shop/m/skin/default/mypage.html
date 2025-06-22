@@ -1,0 +1,24 @@
+<div id="contents">
+	<section id="headline">
+		<h1>마이페이지</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section id="myPage">
+		<ul>
+			<li onclick="window.location.href='{{Main}}?channel=order';">주문 / 배송조회 ({{TOTAL_ORDER}}건)</li>
+			<li onclick="window.location.href='{{Main}}?channel=wish';">관심 상품 ({{TOTAL_WISH}}개)</li>
+			<li onclick="window.location.href='{{Main}}?channel=reserve';">보유 적립금 ({{TOTAL_MONEY}}P, 사용가능 {{TOTAL_USE}}P)</li>
+			<li onclick="window.location.href='{{Main}}?channel=coupon';">발급쿠폰내역 (사용가능 {{ABLE_COUPON}}개)</li>
+			<li onclick="window.location.href='{{Main}}?channel=my_review';">나의 상품후기 ({{TOTAL_REVIEW}}개)</li>
+			<li onclick="window.location.href='{{Main}}?channel=my_qna';">나의 상품문의 ({{TOTAL_QNA}}개)</li>
+		</ul>
+	</section>
+    
+</div>
+
+<script type="text/javascript">
+<!--
+//	$("#contentMore").show();	
+ -->
+</script>

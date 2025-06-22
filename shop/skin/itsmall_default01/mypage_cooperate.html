@@ -1,0 +1,164 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" title="style">
+<!-- DYNAMIC @is_style@ -->
+
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_cooperate.gif" alt="공동구매신청내역" title="공동구매신청내역" />
+	</div>
+
+	<div style="margin-top:20px;text-align:left" class="small">
+		! 결제(주문)은 공동구매 성립시 공동구매가 마감되었거나 공구가가 확정 되었을 경우 '결제하기' 버튼을 클릭 하시고 진행 하시면 됩니다  (선결제방식 제외) .<br />
+		! 결제(주문) 이후 교환/반품은 일반상품의 진행 방식과 동일 합니다.<br />
+		! 결제(주문)기한이 지난 이후에는 결제(주문)하실 수 없으니 기간내에 결제(주문)하시기 바랍니다.<br />
+	</div>
+	
+	<div id="box720" style="margin-top:20px;">
+		<div class="top"></div>
+		<div class="content" style="width:720px;height:20px;">		
+			<form name="orderForm" method="post" action="{{Main}}?channel=cooperate_list">
+			<div class="left" style="width:20px;">&nbsp;</div>			
+			<div class="boxText small orange">신청일</div> 
+			<div style='float:left;padding-left:6px;'>
+				<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="inputs num" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="inputs num"  size="10" name="sdate2" value="{{sdate2}}">
+				<img src="img/customer/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day5.gif" class="hand" onclick="putDay('{{DAY5}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day6.gif" class="hand" onclick="putDay('{{DAY6}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">				
+			</div>	
+			<div style="float:left;padding:1px 0 0 6px;">
+				<input type="image" src="img/customer/btn_search2.gif" style="border:0px;" />
+			</div>
+			<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+				<iframe name="CalendarFrame" src="{{skin}}/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+			</div>
+			</form>
+		</div>		
+		<div class="bottom"></div>
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="130" /> 
+			<col />
+			<col width="50"/>			
+			<col width="80" /> 
+			<col width="70" />
+			<col width="110" />      					
+			<col width="75" />      					
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>                
+				<th scope="col" class="small black">신청일</th>
+				<th scope="col" class="small black">상품명</th>							
+				<th scope="col" class="small black">신청수량</th>				
+				<th scope="col" align="right" style="padding-right:10px;" class="small black">공구가</th>	
+				<th scope="col" class="small black">공구상태</th>
+				<th scope="col" class="small black">결제기한</th>
+				<th scope="col" class="small black">비고</th>
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td></td>
+				<td class="num">{{NUM}}</td>
+				<td align="left" class="small"><a href="{{Main}}?channel=view&amp;uid={{GID}}" title="상품상세보기">{{NAME}}</a></td>
+				<td class="num">{{CNT}}건</td>				
+				<td align="right" style="padding-right:10px;" class="num blue">{{PRICE}}원</td>
+				<td class="small">{{STATUS}}</td>				
+				<td class="small">
+					<!-- DYNAMIC @is_type@ -->
+					공구마감후 <font class="num orange">{{CLOSEDATE}}</font>일까지
+					<!-- DYNAMIC @is_type@ -->
+					<!-- DYNAMIC @is_type2@ -->
+					<font class="num orange">{{CLOSEDATE}}</font>일까지
+					<!-- DYNAMIC @is_type2@ -->
+					<!-- DYNAMIC @is_type5@ -->
+					<font class="small">결제마감</font>
+					<!-- DYNAMIC @is_type5@ -->
+					<!-- DYNAMIC @is_type7@ -->
+					<font class="small">선결제방식</font>
+					<!-- DYNAMIC @is_type7@ -->
+				</td>				
+				<td align="center">
+					<!-- DYNAMIC @is_process@ -->
+					<img src="img/customer/btn_co_cancel.gif" alt="취소하기" class="hand" onclick="cooperCancel({{UID}});" /></a>
+					<!-- DYNAMIC @is_process@ -->
+					<!-- DYNAMIC @is_process2@ -->
+					<a href='php/cooperate_ok.php?mode=order&uid={{UID}}'><img src="img/customer/btn_co_order.gif" alt="결제하기" /></a>
+					<!-- DYNAMIC @is_process2@ -->
+					<!-- DYNAMIC @is_process3@ -->
+					<font class="small orange">구매완료</font>
+					<!-- DYNAMIC @is_process3@ -->
+					<!-- DYNAMIC @is_process4@ -->
+					<font class="small">신청취소</font>
+					<!-- DYNAMIC @is_process4@ -->
+					<!-- DYNAMIC @is_process5@ -->
+					<font class="small">판매완료</font>
+					<!-- DYNAMIC @is_process5@ -->		
+					<!-- DYNAMIC @is_process6@ -->
+					<font class="small">공구 미성립</font>
+					<!-- DYNAMIC @is_process6@ -->		
+					<!-- DYNAMIC @is_process8@ -->
+					<font class="small orange">구매취소</font>
+					<!-- DYNAMIC @is_process8@ -->
+				</td>
+				<td></td>
+			</tr>			
+			<tr><td colspan="10" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->								
+			
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/customer/no_cooper.gif" alt="공구신청내역없음" title="공구신청내역없음" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+
+	<div style="clear:both;height:20px"></div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function cooperCancel(uid) {
+	if(confirm('정말로 취소 하시겠습니까?')){
+		window.location.href= 'php/cooperate_ok.php?mode=cancel&uid='+uid+'{{addstring}}';
+	}
+}
+// -->
+</script>

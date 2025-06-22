@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>큰 이미지 보기</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript"  src="../lib/lib.Function.js"></script>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+
+<script type="text/javascript" >
+<!--
+shop_skin = '{{skin}}/';
+// -->
+</script>
+
+
+<script type="text/javascript"  src="../lib/lib.ckForm.js"></script>
+<div style='width:680px;padding:10px 0 0 10px;;text-align:left;'>
+	<div id="nextIcon2" style="width:70px;" class="small left bold">상품명</div>
+	<div style="width:300px;" class="left num orange">{{GOODS_NAME}}</div>
+	<div id="nextIcon2" style="width:70px;" class="small left bold">판매가격</div>
+	<div class="left num orange">{{GOODS_PRICE}}</div>
+</div>	
+
+<div id="pageView" style="width:690px">	
+	<div style="float:left;width:500px;height:500px;margin-left:10px;"><img src='{{GOODS_IMG}}' border='0' id='viewImage' width="{{GOODS_IMG_WIDTH}}" alt='상품이미지' /></div>			
+	<div style='float:left;width:160px; margin-left:10px;'>
+		<!-- DYNAMIC @is_ot_img@ -->
+		<center>
+		<div style='height:20px;overflow:hidden;'><img src="img/common/icon_arrow_prev_off.gif" class="hand" onclick="oViewBoxDiv.scroll('up');" id="oViewBoxDivImgPrev" /></div>
+
+		<div style="position:relative;width:160px;height:460px;overflow:hidden;">
+			<div id='oViewBox' style="position:relative;left:0px;top:0px;">
+									
+				<!-- DYNAMIC @loop_ot_img@ -->
+				<div style="margin-top:2px;">
+					<img src="{{OT_IMG1}}" width="110" height="110" style="border:1px solid #DADADA" onmouseover="chImage('{{OT_IMG2}}');" onmouseout="chImage('{{GOODS_OIMG}}');" class="hand" alt="상품다른이미지" title="상품다른이미지" /> 
+				</div>								
+				<!-- DYNAMIC @loop_ot_img@ -->
+						
+				<!-- DYNAMIC @no_ot_img@ -->
+				<div  style="margin-top:2px;">
+					<img src="img/shop/no_ot_img.gif" width="110" height="110" style="border:1px solid #DADADA" alt="상품이미지없음" title="상품이미지없음" />
+				</div>			
+				<!-- DYNAMIC @no_ot_img@ -->
+
+			</div>
+		</div>
+				
+		<div style='height:10px;'></div>
+		<div><img src="img/common/icon_arrow_next_off.gif" class="hand" onclick="oViewBoxDiv.scroll('down');" id="oViewBoxDivImgNext" /></div>
+	
+		<script>
+		oViewBoxDiv = new itemScroll2('oViewBox','{{OCNT}}','4','114');
+		</script>
+		</center>
+		<!-- DYNAMIC @is_ot_img@ -->
+	</div>			
+</div>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>나의 상품후기</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section>
+		<div id="reviewInfo" class="mypage">
+			<h2>상품후기정보</h2> 
+			<div class="reviewInfoBox">
+				<ul id="reviewList"></ul>						
+			</div>
+		</div>
+
+		<!-- DYNAMIC @no_content@ -->	
+		<div id="noContent">
+			<p>! 등록된 상품후기가 없습니다.</p>
+		</div>
+		<script type="text/javascript">
+		<!--
+			$("#reviewInfo").hide();
+		-->
+		</script>
+		<!-- DYNAMIC @no_content@ -->		
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getMultis.listMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>	
+</div>
+
+<div id="listLoading">
+	데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	var limitWidth =  $(document).width()-50;
+
+	cntNum = 0;
+	function rtnReview(obj,num,point,title,name,buy,date,content,mod,uid,name2,link,image) {				
+		newLi = document.createElement('LI');	
+		newLi.id = "review_"+uid;
+		
+		div = ' <p class="mypage"><a href='+link+' title="상품상세보기">['+name2+']</a></p>\
+				<a href="javascript:viewReview('+num+');" title="내용보기">\
+					<p>\
+						<span class="review_bg2"><em style="width:'+point+'%"></em></span>\
+						<span> '+date+'</span>\
+					</p>\
+					<p>'+title+'</p>\
+					<div id="reviewContent_'+num+'">'+content+'</div>\
+				</a>\
+				';
+		
+		newLi.innerHTML = div;
+		obj.appendChild(newLi);		
+		imgSizeConv($("#reviewContent_"+num),limitWidth);
+		$("#reviewContent_"+num).hide();
+		cntNum++;
+	}
+	
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>4) $("#contentMore").show();	
+	if(ck_str>0) {	
+		getMultis = new getMulti('reviewList','{{limit}}','{{TOTAL}}','0','{{ajaxstr}}','php/getReview.php','rtnReview');
+		getMultis.display();
+		reviewViewNum = '';	
+
+		if({{TOTAL_PAGE}}<={{PAGE}}) {
+			$("#listGoodsMore")[0].innerHTML = "&nbsp;";
+		}
+
+		$(window).resize(function(){ 
+			limitWidth2 =  $(document).width()-50;
+			for(i=1;i<=cntNum;i++) {
+				imgSizeConv($("#reviewContent_"+i),limitWidth2);
+			}
+		});
+	}
+ -->
+</script>

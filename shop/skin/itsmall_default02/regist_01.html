@@ -1,0 +1,109 @@
+<!-- DYNAMIC @is_confirm1@ -->
+<script type="text/javascript">
+<!--
+	function lengthCheck( checkTag )
+	{
+		if ( checkTag.name == "userNo1" )
+		{
+			if ( checkTag.value.length >= 6 )
+			{
+				checkTag.blur();
+				document.all.userNo2.focus();
+			}
+		}
+	}
+// -->
+</script>
+
+<form name="inputForm" method="POST" action="{{sMain}}card/nice_check/RNCheckRequest.php">
+	<input type="hidden" name="name"></input>
+	<input type="hidden" name="jumin1"></input>
+	<input type="hidden" name="jumin2"></input>
+</form>
+<!-- DYNAMIC @is_confirm1@ -->
+
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+	<div id="subTitle">
+		<div class="left"><img src="img/member/ttl_registration.gif" alt="회원가입" title="회원가입" /></div>
+		<div class="right" style="padding-top:30px;"><img src="img/member/ttl_registration_step01.gif" alt="약관동의" title="약관동의" /></div>
+	</div>		
+		
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<div class="tleft">		
+		<!-- DYNAMIC @is_default1@ -->
+		<form method="post" name="joinForm" action="{{Main}}?channel=regist" onsubmit="return ckForm();">
+		<input type="hidden" name="jmode" value='new'>
+		<!-- DYNAMIC @is_default1@ -->
+		
+		<!-- DYNAMIC @is_confirm2@ -->
+		<form name="pageForm" method="post" onsubmit="return ckForm2();">
+		<!-- DYNAMIC @is_confirm2@ -->
+		
+		<div style="padding:8px 0;"><img src="img/member/ttl_agree1.gif" alt='이용약관동의' /></div>
+		<div class="memberBox" style="height:202px;">
+			<div class="agreeBox">
+				<div class="agreeBoxIn">{{USED}}</div>
+			</div>							
+		</div>
+		<div style="padding:8px 0 0 2px;" class="small bold">
+			<div class="left"><input type="checkbox" class="input_check" name="agree1" id='agree1y' value="Y" /></div>
+			<div class="left" style='padding:1px 0 0 8px;'> <label for='agree1y'>이용약관에 동의 합니다.</label></div>				
+		</div>
+		<div class="blank" style="height:30px;">&nbsp;</div>
+
+		<div style="padding:8px 0;"><img src="img/member/ttl_agree2.gif" alt='개인정보취급방침 동의' /></div>
+		<div class="memberBox" style="height:202px;">
+			<div class="agreeBox">
+				<div class="agreeBoxIn">{{PRIV}}</div>
+			</div>							
+		</div>
+		<div style="padding:8px 0 0 2px;" class="small bold">
+			<div class="left"><input type="checkbox" class="input_check" name="agree2" id='agree1y2' value="Y" /></div>
+			<div class="left" style='padding:1px 0 0 8px;'> <label for='agree1y2'>개인정보취급방침에 동의 합니다.</label></div>
+		</div>
+		<div class="blank" style="height:30px;">&nbsp;</div>
+
+		<!-- DYNAMIC @is_confirm3@ -->
+		<div style="padding:8px 0;"><img src="img/member/ttl_check_{{CIMG}}.gif" alt='{{CTITLE}}' /></div>
+		<div class="contentBox">
+			<div class="contentBoxIn clearfix">			
+				<div style="padding:6px;height:22px;">
+					<div class="left" style="padding:3px 0 0 40px;"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left" style="padding-left:10px;"><input type="text" id="userNm" name="userNm" style="ime-mode:active;width:100px;"  class="inputs black" size="10" /></div>
+					<div class="left" style="padding:3px 0 0 40px;"><img src="img/member/ttl_resno.gif" alt="주민등록번호" /></div>
+					<div class="left" style="padding-left:10px;">
+						<input type="text" id="userNo1" name="userNo1" class="inputs black" size="8" maxlength="6" onKeyUp="javascript:lengthCheck( this );" /> - <input type="password" id="userNo2" name="userNo2" class="inputs black" size="9" maxlength="7" onKeyUp="javascript:lengthCheck( this );" style="vertical-align:top"/>
+					</div>		
+				</div>
+			</div>
+		</div>
+		<div class="blank" style="height:10px;">&nbsp;</div>
+
+		<div class="small">
+			! 입력하신 주민등록번호는 별도 저장되지 않으며, 신용평가기관을 통한 실명확인용으로만 이용됩니다.<br />
+			! 타인의 주민등록번호를 도용하여 가입하는 행위는 3년 이하의 징역 또는 1천 만원 이하의 벌금에 부과될 수 있습니다.<br />
+			[관련 법률: 주민등록법 제37조(벌칙) 제9호(시행일 2006.09.24)] 
+		</div>
+		<div class="blank" style="height:30px;">&nbsp;</div>
+		<!-- DYNAMIC @is_confirm3@ -->
+		<center>			
+			<div style="width:206px;">
+				<div class="left"><input type="image" src="img/member/btn_confirm.gif" alt="다음단계" title="다음단계" /></div>
+				<div class="left" style="padding-left:6px;"><img src="img/member/btn_cancel.gif" alt="취소" title="취소" class="hand" onclick="history.back();" /></div>
+			</div>	
+		</center>
+		</form>	
+	</div>
+	<div class="blank" style="height:20px">&nbsp;</div>	
+</div>
+<!-- @MAIN CENTER END -->

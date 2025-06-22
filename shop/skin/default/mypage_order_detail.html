@@ -1,0 +1,416 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle">
+		<img src="img/member/ttl_order.gif" alt="주문/배송조회" title="주문/배송조회" />
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div style="margin-top:20px;text-align:left" class="small">
+		<div class="noticeDiv">주문된 상품을 취소/반품/교환 신청 하실 수 있습니다.</div>
+		<div class="noticeDiv" style="margin-top:6px">상품배송중 상태일 경우 관리자가 택배회사 송장 정보를 입력 하면 '배송조회하기'로 해당 상품의 배송 상태를 확인 하실 수 있습니다.</div>
+		<div class="noticeDiv" style="margin-top:6px">적립금은 주문시 적립대기 상태가 되고 배송완료(수령확인)시 적립완료가 되며 사용하실 수 있습니다.</div>
+		<div class="noticeDiv" style="margin-top:6px">주문상품 배송완료 후 고객님이 수령확인을 하지 않았거나 거부의사(반품/교환)를 밝히지 않았을 경우 상품배송 후 {{EDATE}}일후 자동으로 배송완료 처리 됩니다.</div>
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+	
+	<div id="printArea">	
+		
+		<div id="list_list">
+			<form name="cartForm" method="post" onsubmit="return false;">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">
+				<col width="40" /> 
+				<col width="90" />
+				<col />
+				<col width="70" /> 
+				<col width="40" /> 				
+				<col width="65" />
+				<col width="70" />
+				<col width="75" />
+				<thead>
+				<tr  height="28" align="center"> 				
+					<th scope="col" class="hand" onclick="ckAll();"><img src="img/shop/ttl_list_sec.gif" alt="선택" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_img.gif" alt="이미지" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_name.gif" alt="상품명/옵션" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_price.gif" alt="가격" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_qty.gif" alt="수량" /></th>					
+					<th scope="col"><img src="img/shop/ttl_list_point.gif" alt="적립금" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_sum.gif" alt="합계" /></th>
+					<th scope="col"><img src="img/shop/ttl_list_status.gif" alt="진행상황" /></th>
+				</tr>
+				</thead>				
+				<tbody>
+				<!-- DYNAMIC @loop_cart@ -->
+				<tr align="center" height="98">
+					<td><input type="checkbox" name="item[]" value="{{UID}}" {{DISA}} /></td>
+					<td><a href="{{LINK}}"><img src="{{OIMAGE}}" width="80" style="border:1px solid #efefef" alt="{{NAME}}" /></a></td>
+					<td align="left">
+						<div class="clear tleft">						
+							<div><a href="{{LINK}}">{{NAME}}</a>&nbsp;{{ICON}}</div>
+							<div>
+								<!-- DYNAMIC @loop_op@ -->
+								<div style='float:left;padding-right:10px;' class='small left blue'>{{OP_SEC_VLS}}&nbsp;</div>
+								<!-- DYNAMIC @loop_op@ -->
+							</div>
+							<div class="clear">
+								<!-- DYNAMIC @is_my_sale@ -->
+								<font class="small">({{TTL}}할인 <font class="num blue">{{MY_SALE}}%</font> 적용)&nbsp;&nbsp;</font>
+								<!-- DYNAMIC @is_my_sale@ -->
+								<!-- DYNAMIC @is_my_point@ -->
+								<font class="small">({{TTL}}추가적립 <font class="num blue">{{MY_POINT}}%</font> 적용)</font>
+								<!-- DYNAMIC @is_my_point@ -->
+								<!-- DYNAMIC @is_my_carr@ -->
+								<font class="small">(배송비 <font class="num blue">{{CARR}}원</font> 별도상품)</font>
+								<!-- DYNAMIC @is_my_carr@ -->
+								<!-- DYNAMIC @is_my_free@ -->
+								<font class="small">(배송비 무료상품)</font>
+								<!-- DYNAMIC @is_my_free@ -->				
+							</div>
+						</div>					
+					</td>	
+					<td class="num orange">{{PRICE}}<font class="small">원</font> {{OP_PRICE}}</td>
+					<td class="num">{{QTY}}<font class="small">{{UNIT}}</font></td>
+					<td class="num">{{RESE}}P</td>
+					<td class="num orange">{{SUM}}<font class="small">원</font></td>
+					<td class="small">
+						{{STEP}}
+						<!-- DYNAMIC @is_carrY@ -->	
+						<br /><img src='img/customer/btn_carr.gif' class='hand' onclick="searchCarr('{{CLINKY}}','{{CNUMY}}');" align="absmiddle" />
+						<!-- DYNAMIC @is_carrY@ -->
+						<br /><font class="num">{{LTIME}}</font>
+					</td>
+				</tr>
+				<tr><td colspan="8" height="1" bgcolor="#F1F1F1"></td></tr>			
+				<!-- DYNAMIC @loop_cart@ -->
+				<tr><td colspan="8" height="1" bgcolor="#dddddd"></td></tr>
+				</tbody>			
+			</table>
+			</form>
+		</div>		
+		
+		<!-- DYNAMIC @is_statusZ@ -->
+		<div id="sBtn2" style="margin-top:5px;">
+			<a href="#" onclick="orderChange('Z'); return false;"><span>선택상품 취소신청하기</span></a>
+		</div>					
+		<!-- DYNAMIC @is_statusZ@ -->
+		<!-- DYNAMIC @is_statusX@ -->
+		<div id="sBtn2" style="margin-top:5px;">
+			<a href="#" onclick="orderChange('X'); return false;"><span>선택상품 반품신청하기</span></a>
+		</div>					
+		<!-- DYNAMIC @is_statusX@ -->
+		<!-- DYNAMIC @is_statusY@ -->
+		<div id="sBtn2" style="margin-top:5px;">
+			<a href="#" onclick="orderChange('Y'); return false;"><span>선택상품 교환신청하기</span></a>
+		</div>					
+		<!-- DYNAMIC @is_statusY@ -->
+
+		<div class="blank" style="height:20px">&nbsp;</div>	
+
+		<div>
+			<div class="left small tleft" style="width:480px;line-height:220%;">
+				주문상품 : <font class="num mColor">{{TCNT}}</font>개,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->총할인금액 : <font class="num blue">{{TSALE}}</font>원,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->상품총금액 : <font class="num mColor">{{TOTAL}}</font>원,&nbsp;&nbsp;총배송비 : <font class="num mColor">{{TCARR}}</font>원<br>
+				총적립금 : <font class="num mColor">{{TRESE}}</font><font class='num'>P</font>&nbsp;&nbsp;(적립금은 주문완료후 적립처리 됩니다.)
+				&nbsp;&nbsp;주문상태 : {{STATUS}} 
+				<!-- DYNAMIC @is_carr@ -->	
+				&nbsp;&nbsp;<img src='img/customer/btn_carr.gif' class='hand' onclick="searchCarr('{{CLINK}}','{{CNUM}}');" align="absmiddle" />
+				&nbsp;<img src='img/customer/btn_carrok.gif' align="absmiddle" class="hand" onclick="carrOk('{{order_num}}','{{addstring}}');"/>
+				<!-- DYNAMIC @is_carr@ -->
+			</div>
+			<div class="right" style="font-size:20px;padding:4px 6px;">
+				<img src="img/shop/ttl_total_pay.gif" alt="총주문금액" />{{IMG_TOTAL}}<img src="img/shop/ttl_total_won.gif" alt="원" />
+			</div>		
+		</div>	
+
+		<div class="blank" style="height:20px">&nbsp;</div>	
+
+
+		<div id="orderInfo">
+			<div style="padding:8px 0;"><img src="img/shop/ttl_order_result1.gif" alt="결제정보" title="결제정보" /></div>
+			<div class="orderBox clearfix">		
+				<ul>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_total.gif" alt="상품 총금액" /></div>
+						<div class="left num" style="width:80px;text-align:right;font-size:10pt">{{TOTAL}}<font class="default">원</font></div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_tcarr.gif" alt="총배송비" /></div>
+						<div id="carr_total" class="left num" style="width:80px;text-align:right;font-size:10pt">{{TCARR}}<font class="default">원</font></div>
+					</li>					
+					<!-- DYNAMIC @is_reserve@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_upoint.gif" alt="적립금사용" /></div>
+						<div class="left num" style="width:80px;text-align:right;font-size:10pt">{{RESERVE}}P</div>
+					</li>
+					<!-- DYNAMIC @is_reserve@ -->
+
+					<!-- DYNAMIC @is_cupon@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_cpsale.gif" alt="쿠폰할인" /></div>
+						<div class="left num mColor" style="width:80px;text-align:right;font-size:10pt">{{CUPON}}<font class="default">원</font></div>
+						<div class="left small" style="text-align:right;padding:2px 0 0 6px;">
+							<!-- DYNAMIC @loop_cupon@ -->
+							<div style="padding:2px;text-alig:left;">{{C_NAME}} - <font class="num">{{C_SALE}}</font>{{C_STYPE}}할인</div>
+							<!-- DYNAMIC @loop_cupon@ -->
+						</div>
+					</li>
+					<!-- DYNAMIC @is_cupon@ -->
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_csale.gif" alt="현금결제할인" /></div>
+						<div id="cash_dc" class="left num bold blue" style="width:80px;text-align:right;font-size:10pt">{{CASHDC}}<font class="default">원</font></div>
+						<div class="left num" style="padding:2px 0 0 6px;">({{CASHDC2}}% <font class='small'>할인</font>)</div>
+					</li>	
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_tpay.gif" alt="총결제금액" /></div>
+						<div id="cash_money" class="left num bold mColor" style="width:80px;text-align:right;font-size:10pt">{{TOTAL3}}<font class="default">원</font></div>
+					</li>	
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_ctype.gif" alt="결제 방법" /></div>
+						<div class="left">{{CASH_TYPE}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_bank.gif" alt="입금은행" /></div>
+						<div class="left">{{BANK_NAME}} </div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_bank_info.gif" alt="입금자/예정일" /></div>
+						<div class="left">{{PAY_NAME}} / {{PAY_DATE}}</div>
+					</li>
+					<!-- DYNAMIC @is_bank_cash@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_cash_taxs.gif" alt="현금영수증" /></div>
+						<div class="left">								
+							{{CASH_INFO}} 
+							<!-- DYNAMIC @is_cash_print@ -->
+							&nbsp;&nbsp;<span class="nextmIcon1 small green hand" onclick="window.open('https://admin.kcp.co.kr/Modules/Service/Cash/Cash_Bill_Common_View.jsp?term_id=PGNW{{SHOP_ID}}&orderid={{order_num}}&bill_yn=N&authno={{receipt_no}}','cash','width=420, height=670');return false;">현금영수증 전표출력</span>
+							<!-- DYNAMIC @is_cash_print@ -->							
+						</div>
+					</li>
+					<!-- DYNAMIC @is_bank_cash@ -->
+					<!-- DYNAMIC @is_bank_cash2@ -->
+					<form name="cashForm" method="post" action="php/order_multi_ok.php?mode=cash">
+					<input type="hidden" name="order_num" value='{{order_num}}' />
+					<li style="height:55px;background:url(img/shop/dot_line.gif) repeat-x 0px 51px;">
+						<div class="left nextIcon2"><img src="img/shop/ttl_cash_tax.gif" alt="현금영수증 신청" /></div>
+						<div class="left">
+							<div style="padding-bottom:4px;">
+								<input type='radio' name='cash_ctype' id='use1' value='A' checked onclick="cashCgType('1');">&nbsp;<label for='use1'>소득공제용</label>&nbsp;<input type='radio' name='cash_ctype' id='use2' value='B' onclick="cashCgType('2');">&nbsp;<label for='use2'>지출증빙용</label>
+							</div>
+							<div id="pay1">
+								<input type='radio' name='pay_type' id='use3' value='A' checked>&nbsp;<label for='use3'>핸드폰번호</label>
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell1 size="3" maxlength=3> - 
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell2 size="4" maxlength=4> - 
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell3 size="4" maxlength=4>
+								&nbsp;<input type='radio' name='pay_type' id='use4' value='B'>&nbsp;<label for='use4'>주민등록번호</label>
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=jumin1 size="6" maxlength=6> - 
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=jumin2 size="7" maxlength=7>					
+							</div>
+							<div id="pay2" style="display:none">
+								<input type='radio' name='pay_type' id='use5' value='C'>&nbsp;<label for='use5'>사업자번호</label>
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum1 size="3" maxlength=3> - 
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum2 size="2" maxlength=2> - 
+								<input type=text  class="inputs_bg black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum3 size="5" maxlength=5>
+							</div>								
+						</div>							
+					</li>
+					</form>						
+					<!-- DYNAMIC @is_bank_cash2@ -->
+
+					<!-- DYNAMIC @is_bank@ -->
+					<!-- DYNAMIC @is_card@ -->
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_card_info.gif" alt="카드결제정보" /></div>
+						<div class="left" style="width:520px">
+							{{CARD_INFO}}
+							<!-- DYNAMIC @is_card_print@ -->
+							&nbsp;&nbsp;
+							<span class="nextmIcon1 small green hand" onclick="window.open('https://admin.kcp.co.kr/Modules/Sale/Card/ADSA_CARD_BILL_Receipt.jsp?c_trade_no={{tno}}','cash','width=370, height=730');return false;">신용카드 매출전표출력</span>
+							<!-- DYNAMIC @is_card_print@ -->
+							<!-- DYNAMIC @is_rbank_print@ -->
+							&nbsp;&nbsp;
+							<span class="nextmIcon1 small green hand" onclick="window.open('https://admin8.kcp.co.kr/assist/bill.BillAction.do?cmd=acnt_bill&a_trade_no={{tno}}','cash','width=450, height=730');return false;">계좌이체 거래명세표출력</span>
+							<!-- DYNAMIC @is_rbank_print@ -->							
+						</div>
+					</li>
+					<!-- DYNAMIC @is_card@ -->
+					<!-- DYNAMIC @is_pay_change1@ -->
+					<form name="changForm" method="post" action="php/order_multi_ok.php?mode=paycg" onsubmit="return false">
+					<input type="hidden" name="order_num" value="{{order_num}}" />
+					<input type="hidden" name="cash_total" value="{{O_TOTAL}}" />
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_ptype_change.gif" alt="결제방법 변경" /></div>
+						<div class="left">
+							<!-- DYNAMIC @is_card1@ -->
+							<input type="radio" name="cash_type" class="input_check" value='C' onfocus="blur();" id="payC" /> <label for="payC">신용카드 <span id="cards" class="small"></span></label>
+							<!-- DYNAMIC @is_card1@ -->
+							<!-- DYNAMIC @is_card2@ -->
+							<input type="radio" name="cash_type" class="input_check" value='R' onfocus="blur();" id="payR" /> <label for="payR">실시간 계좌이체&nbsp;&nbsp;<span id="cards" class="small"></span></label>
+							<!-- DYNAMIC @is_card2@ -->
+							<!-- DYNAMIC @is_card3@ -->
+							<input type="radio" name="cash_type" class="input_check" value='V' onfocus="blur();" id="payV" /> <label for="payV">가상계좌<span id="cards" class="small"></span></label>
+							<!-- DYNAMIC @is_card3@ -->
+							<!-- DYNAMIC @is_card4@ -->
+							<input type="radio" name="cash_type" class="input_check" value='H' onfocus="blur();" id="payH" /> <label for="payH">핸드폰 <span id="cards" class="small"></span></label>
+							<!-- DYNAMIC @is_card4@ -->
+							<!-- DYNAMIC @is_test@ -->
+							&nbsp;&nbsp;<font class="small blue">결제 테스트 중 입니다. 선택하지 마시기 바랍니다!</font>
+							<!-- DYNAMIC @is_test@ -->
+						</div>	
+					</li>
+					</form>
+					<!-- DYNAMIC @is_pay_change1@ -->
+				</ul>
+			</div>
+			
+			<!-- DYNAMIC @is_pay_change2@ -->
+			<div id="sBtn3" style="float:right;margin-top:5px;">
+				<a href="#" onclick="return ckChange();"><span>선택한 결제방법으로 결제하기</span></a>
+			</div>
+			<!-- DYNAMIC @is_pay_change2@ -->
+			
+			<!-- DYNAMIC @is_bank_cash3@ -->
+			<div id="sBtn2" style="float:right;margin-top:4px;">
+				<a href="#" onclick="return ckCashOk();"><span>현금영수증신청하기</span></a>
+			</div>
+			<!-- DYNAMIC @is_bank_cash3@ -->
+
+			<!-- DYNAMIC @is_pay_change3@ -->
+			<div id="sBtn3" style="float:right;margin-top:5px;">
+				<a href="{{RELINK}}"><span>다시 결제하기</span></a>
+			</div>
+			<!-- DYNAMIC @is_pay_change3@ -->
+
+			<div class="clear" style="height:28px;">&nbsp;</div>	
+			<div style="padding:8px 0;"><img src="img/shop/ttl_order_result2.gif" alt="배송정보" title="배송정보" /></div>
+			<div class="orderBox clearfix">	
+				<ul>				
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_name.gif" alt="수취인 이름" /></div>
+						<div class="left">{{NAME}}</div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_tel.gif" alt="수취인 연락처" /></div>
+						<div class="left num">{{TEL}}</div>
+					</li>
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_cell.gif" alt="수취인 핸드폰" /></div>
+						<div class="left num">{{PHONE}}</div>
+					</li>	
+					<li>
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_addr.gif" alt="배송지 주소" /></div>
+						<div class="left">({{ZIPCODE}}) {{ADDRESS}}</div>
+					</li>
+					<li style="height:56px;">
+						<div class="left nextIcon2"><img src="img/shop/ttl_carr_memo.gif" alt="요청 사항" /></div>
+						<div class="left">{{MESSAGE}}</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<div class="blank" style="height:20px;">&nbsp;</div>
+	
+	<center>
+	<div style="width:333px;">	
+		<div class="left"><a href="{{Main}}?channel=order{{addstring}}"><img src="img/common/btn_pagePrev.gif" alt="이전페이지" title="이전페이지" /></a></div>
+		<div class="left" style="padding-left:6px;"><img src="img/shop/btn_print.gif" class="hand" onclick="printClick();" alt="프린트하기" title="프린트하기" /></div>
+		<!-- DYNAMIC @is_cancel@ -->
+		<div class="left" style="padding-left:6px;"><img src="img/member/btn_ocancel.gif" alt="주문취소" title="주문취소" class="hand" onclick="if(confirm('정말로 취소하시겠 습니까?')) { window.location.href='/php/order_multi_ok.php?mode=cancel&amp;order_num={{order_num}}{{addstring}}'; }return false;" /></div>
+		<!-- DYNAMIC @is_cancel@ -->
+	</div>
+	</center>
+	<div style="clear:both;height:20px;">&nbsp;</div>		
+</div>
+
+<script type="text/javascript">
+<!--
+
+<!-- DYNAMIC @is_pay_change4@ -->
+function ckChange() {
+	f = document.changForm;
+	
+	if(typeof(f.cash_type[0])=='undefined') { 
+		cktype = f.cash_type;
+		cks2 = 1;
+	}
+	else {
+		cktype = f.cash_type[0];
+		cks2 =0;
+	}
+
+	if(cktype.checked==true) { 
+		if(f.cash_total.value < {{CARDUSE1}}) {
+			document.getElementById('cards').innerHTML = "* 카드결재는 {{CARDUSE2}}원 이상 일떄 사용가능합니다.";
+            cktype.checked=false;
+			return false;
+		}
+	}
+
+	if(cks2==0) {
+		for(i=cks=0,cnt=f.cash_type.length;i<cnt;i++) {
+			if(f.cash_type[i].checked==true) {
+				cks =1 ;
+				break;
+			}
+		}
+	}
+	else {
+		if(f.cash_type.checked==true) cks =1 ;
+		else cks = 0;
+	}
+
+	if(cks!=1) {
+		alert("결제 방법을 선택 하시기 바랍니다");
+		return false;
+	}
+	f.submit();
+	return false;
+}
+<!-- DYNAMIC @is_pay_change4@ -->
+
+function orderChange(status) {	
+	frm = document.cartForm;
+	var sgoods = '';
+
+	if(status=='Z') title = '취소';
+	else if(status=='X') title = '반품';
+	else if(status=='Y') title = '교환';
+
+	
+	for (i=cnt=0;i<frm.elements.length;i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			if(sgoods) sgoods +=','+frm.elements[i].value;
+			else sgoods = frm.elements[i].value;
+			cnt++;
+		}
+	}
+	
+	if (cnt <= 0) {
+		alert(title+"할 상품을 선택하세요!");
+		return false;
+	} 
+	
+
+	pLightBox.show('php/porder_change.php?status='+status+'&order_num={{order_num}}&sgoods='+sgoods,'iframe','750','550','■ 주문상품 '+title+' 신청하기','20');	
+}
+
+function carrOk(num,str){
+	if(confirm('주문상품 수령확인을 하시겠습니까?')) {
+		window.location.href = 'php/order_multi_ok.php?mode=carrok&order_num='+num+str;
+	}
+}
+
+// -->
+</script>

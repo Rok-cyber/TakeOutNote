@@ -1,0 +1,103 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>{{CNAME}}</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>
+	</section>
+
+	<section id="searchIndicator">
+		<form name="reSearchForm">
+		<!-- DYNAMIC @is_search@ -->
+		<p>
+			<strong>"{{search}}"</strong> 검색어로 <em>{{TOTAL}}</em>개 상품검색
+			<span class="btn"><a href="{{Main}}?channel={{channel}}&amp;cate={{cate}}" title="검색취소">검색취소</a></p>
+		</p>		
+		<!-- DYNAMIC @is_search@ -->
+		<!-- DYNAMIC @is_total@ -->
+		<p>전체 <em>{{TOTAL}}</em>개</p>
+		<!-- DYNAMIC @is_total@ -->
+		<p class="checkboxStyle"><input type="checkbox" name="detail" value="{{uid}}" id="detail" ><label for="detail" onclick="reSearch('event','이벤트내 검색')"><span></span> 이벤트내 검색</label></p>
+		</form>
+	</section>
+	
+	<section>
+		<div id="goodsListHead">
+			<h2>상품목록</h2> 
+			<label>
+				<select title="정렬순서" onchange="getLists.cgOrder(this.value,1);">
+					<option value="uid">최근등록</option>
+					<option value="best">인기상품</option>
+					<option value="price2">최고가격</option>
+					<option value="price">최저가격</option>
+				</select>
+			</label>
+			<span title="정렬방법"> 
+				<button onclick="return getLists.cgType('list',1);" id="btnList" class="button listList">리스트형</button>
+				<button onclick="return getLists.cgType('img',1)" id="btnImg" class="button listImg">이미지형</button>
+			</span>
+		</div>	
+		
+		<ul id="goodsList" class="listList"></ul>
+
+		<!-- DYNAMIC @no_content@ -->	
+		<div id="noContent">
+			<p>! 등록된 상품이 없습니다.</p>
+		</div>
+		<script type="text/javascript">
+		<!--
+			$("#goodsList").hide();
+		-->
+		</script>
+		<!-- DYNAMIC @no_content@ -->
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getLists.goodsMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<div id="listLoading">
+	상품 데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentHeight = $(document).height();
+	
+	if(scrollHeight<documentHeight) {
+		$("#contentMore").show();	
+	}
+
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>0) {
+		getLists = new getList('goodsList','{{limit}}','img','uid','{{TOTAL}}','{{Pstart}}','{{ajaxstring}}');
+		getLists.display();
+		getLists.cgOrder('{{order}}');	
+
+		checkCookieVar();
+
+		total_page = "{{TOTAL_PAGE}}";
+		page = "{{PAGE}}";
+		
+		if(total_page<=page) {
+			$("#listGoodsMore")[0].innerHTML = "&nbsp;";
+		}
+
+		$(window).resize(function(){ listResize(getLists); });
+	}
+
+ -->
+</script>

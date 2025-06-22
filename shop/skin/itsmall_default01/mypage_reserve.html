@@ -1,0 +1,87 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_reserve.gif" alt="적립금내역" title="적립금내역" />
+	</div>	
+
+	<div id="box720" style="margin-top:20px;">
+		<div class="top"></div>
+		<div class="content" style="width:720px;height:20px;">		
+			<div class="left" style="width:80px;">&nbsp;</div>
+			<div class="left small bold" style="width:200px;margin:2px 0 0 0px;">- 총누적 적립금 : <font class="num orange">{{TOTAL_MONEY}}</font><font class="orange num">P</font></div>
+			<div class="left small bold" style="width:200px;margin-top:2px;">- 사용가능 적립금 : <font class="num blue">{{TOTAL_USE}}</font><font class="blue num">P</font></div>
+			<div class="left small bold" style="width:200px;margin-top:2px;">- 대기중 적립금 : <font class="num">{{MONEY1}}</font><font class="small num">P</font></div>
+		</div>		
+		<div class="bottom"></div>
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="50" /> 			
+			<col />			
+			<col width="100" /> 
+			<col width="100" />
+			<col width="100" />      					
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>
+				<th scope="col" class="small black">번호</th>
+				<th scope="col" class="small black">적립내역</th>
+				<th scope="col" align="right" style="padding-right:10px;"  class="small black">적립금액</th>
+				<th scope="col" class="small black">적립상태</th>				
+				<th scope="col" class="small black">적립일자</th>				
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td></td>
+				<td class="num">{{NUM}}</td>
+				<td align="left">{{NAME}}</td>
+				<td align="right" style="padding-right:10px;" class="num">{{MONEY}}<font class="num">P</font></td>	
+				<td class="small status{{TYPE}}">{{STATUS}}</td>				
+				<td class="num">{{DATE}}</td>				
+				<td></td>
+			</tr>			
+			<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->											
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/customer/no_reserve.gif" alt="적립내역없음" title="적립내역없음" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+
+	<div style="clear:both;height:20px"></div>
+</div>

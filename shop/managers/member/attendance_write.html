@@ -1,0 +1,224 @@
+<script language="javascript">
+<!--
+
+var tmp_scate = new Array();
+var tmp_sgoods = new Array();
+
+function ckIt() {      
+	form=document.signForm;
+
+	if(!form.title.value) {
+		alert('출석체크을 입력하세요.');
+		form.title.focus();
+		return false;
+	}
+
+	if(!form.s_date.value) {
+		alert('시작일을 입력히세요.');
+		form.s_date.focus();
+		return false;
+	} 
+	if(!form.e_date.value) {
+		alert('종료일을 입력히세요.');
+		form.e_date.focus();
+		return false;
+	} 
+
+	if(form.type[0].checked) {
+		if(!form.condi1.value) {
+			alert('출석일을 입력히세요.');
+			form.condi1.focus();
+			return false;
+		} 
+	}
+	else if(form.type[1].checked) {
+		if(!form.condi2.value) {
+			alert('출석일을 입력히세요.');
+			form.condi2.focus();
+			return false;
+		} 
+	}
+
+	if(form.stype[1].checked) {
+		if(!form.point.value) {
+			alert('지급될 포인트를 입력히세요.');
+			form.point.focus();
+			return false;
+		} 
+	}
+
+	form.code.value = code.getHtml();	
+	
+	form.submit();
+	return false;
+}
+
+//-->
+</script>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_attendance.gif" alt="출석체크등록" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>출석체크를 등록하거나 수정 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td><img src="img/ttl_attendance_{{mode}}.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign="top" height="650">
+		<form name="signForm" enctype='multipart/form-data' method="post" action="attendance_post.php">
+		<input type="hidden" name="mode" value="{{mode}}" />
+		<input type="hidden" name="uid" value="{{uid}}" />
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle"><div style='width:120px;'>&nbsp;&nbsp;*&nbsp;출석체크명</div></font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=title value='{{TITLE}}' size=80></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;진행기간</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								<input type=text class="ta eng" name=s_date value='{{SDATE}}' size=10 onfocus="new CalendarFrame.Calendar(this)" />일 부터 <input type=text class="ta eng" name=e_date value='{{EDATE}}' size=10 onfocus="new CalendarFrame.Calendar(this)" />일 까지 사용가능
+								<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+								<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+								</div>
+								&nbsp;<font class="small">(기간은 시작일 00:00분 부터 종료일 23:59분 까지 적용 받습니다.)</font>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;출석체크형태</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<input type="radio" name="type" id='type1' value="A" {{CKD1A}} /> <label for='type1'>연속 출석형 </label> - 출석체크기간동안 연속 <input type=text class="ta2 eng" name="condi1" value='{{CONDI1}}' size=4 maxlength=4 />일 이상 출석하면 혜택을 제공
+								<br />
+								<input type="radio" name="type" id='type2' value="T" {{CKD1T}} /> <label for='type2'>횟수 출석형</label> - 출석체크기간동안 <input type=text class="ta2 eng" name="condi2" value='{{CONDI2}}' size=4 maxlength=4 />일 이상 출석하면 혜택을 제공
+								<br />
+								<input type="radio" name="type" id='type3' value="D" {{CKD1D}} /> <label for='type3'>매일 출석형</label> - 출석체크기간동안 출석시 혜택을 제공
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;적립금 지급방식</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<input type="radio" name="stype" id='stype1' value="P" {{CKD2P}} /> <label for='stype1'>수동지급</label> - 이벤트에 참석한 고객을 확인하여 직접 적립금을 지급
+								<br />
+								<input type="radio" name="stype" id='stype2' value="A" {{CKD2A}} /> <label for='stype2'>자동지급</label>  - 이벤트 조건을 만족한 경우 자동으로 적립금이 지급
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;출석혜택</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px" class="eng" >
+								<input type=text class="ta eng" name='point' value='{{POINT}}' size=10  onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" /> Point <font class="small">적립</font>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;출석체크 방법</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<input type="radio" name="method" id='method1' value="S" {{CKD3S}} /> <label for='method1'>출첵 스템프(도장) 찍기 <font class="small">(1일 1회 인정)</font></label>
+								<br />
+								<input type="radio" name="method" id='method2' value="R" {{CKD3R}} /> <label for='method2'>출첵 댓글 달기 <font class="small">(1일 1회 인정)</font></label>
+								<br />
+								<input type="radio" name="method" id='method3' value="L" {{CKD3L}} /> <label for='method3'>회원로그인시 자동 <font class="small">(1일 1회 인정)</font></label>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메세지</font></td>
+							<td bgcolor="#EFEFEF" style="padding:6px;">
+								<div style="height:20px;">
+									<div style="width:120px;padding-top:3px;" class="left small bold">참여시</div>
+									<div class="left"><input type=text class=ta name=msg1 value='{{MSG1}}' size=70 maxlength=100 /></div>
+								</div>
+								<div style="clear:both;height:20px;padding-top:2px;">
+									<div style="width:120px;padding-top:3px;" class="left small bold">중복 참여시</div>
+									<div class="left"><input type=text class=ta name=msg2 value='{{MSG2}}' size=70 maxlength=100 /></div>
+								</div>
+								<div style="clear:both;height:20px;padding-top:2px;">
+									<div style="width:120px;padding-top:3px;" class="left small bold">조건 만족시(자동지급)</div>
+									<div class="left"><input type=text class=ta name=msg3 value='{{MSG3}}' size=70 maxlength=100 /></div>
+								</div>
+								<div style="clear:both;height:20px;padding-top:2px;">
+									<div style="width:120px;padding-top:3px;" class="left small bold">조건 만족시(수동지급)</div>
+									<div class="left"><input type=text class=ta name=msg4 value='{{MSG4}}' size=70 maxlength=100 /></div>
+								</div>								
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타이틀 이미지</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=file class=ta name=img value='' size=50>&nbsp;&nbsp;<font class=small>{{IMGSIZE}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      
+						<tr>
+							<td colspan=2 align=middle height=30 class=gr_bg>등록된 타이틀 이미지 <font class='eng'>({{IMG}})</font></td>
+						</tr>
+						<tr>
+							<td colspan=2 align=middle bgcolor='ffffff'>{{IMG2}}</td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->
+						<tr height=28>
+							<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;삽입 코드</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type='radio' name='code_use' value='Y' {{CKDY}} id="vaild1" /><label for="vaild1">사용</label> <input type='radio' name='code_use' value='N' {{CKDN}} id="vaild2"><label for="vaild2" />사용안함<label></TD>
+						</tr>
+						<tr height=120> 							
+							<td bgcolor="#FFFFFF" colspan='2'>
+								<div>
+									<textarea name="code" id="code">{{CODE}}</textarea>
+									<script>
+										var code = new pEditor("code","../../pEdit","758","250","{{up_dir}}","basic","hide"); //에디터 생성
+									</script>
+								<div>
+							</td>
+						</tr>
+						
+						
+						<tr height=60>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;line-height:140%;" class='small'>
+									! 출석체크 기간은 중복되게 설정 할 수 없습니다. <br />									
+									! 출석체크 삭제 시 회원에게 지급된 적립금은 반환되지 않으며, 회원의 적립금 내역에 남아 있습니다. <br />
+									! 삽입 코드부분에 페이지 상단에 나타날 디자인을 꾸미시면 됩니다. {{HELP_SIZE}}	
+								</div>
+								<div id="sBtn1" style="float:right;margin-top:4px;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>							 
+						</tr>					
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=30></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script LANGUAGE="JavaScript">
+<!--
+pE[0] = code;
+//-->
+</script>

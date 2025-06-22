@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=euc-kr' />
+<TITLE>Affiliate 정보</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<BODY style="padding:0px;margin:0px;">
+<table width=98% border=0  cellpadding=0 cellspacing=0 align=center>
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_crm_basic.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;등록일</font></td>
+							<td bgcolor="#EFEFEF" colspan="3">&nbsp;&nbsp;<font class=eng>{{FORM11}}</font></td>
+						</tr>
+						<tr height=30> 
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;업체명</font></td>
+							<td bgcolor="#efefef" width=30%>&nbsp;&nbsp;<font>{{FORM1}}</font></td>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;아이디</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;<font class=eng>{{FORM2}}</font></td>
+						</tr>						
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;연락처</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM3}}</font></td>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이메일</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM4}}</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;수수료</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;{{FORM5}}%</td>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;정산일</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM6}}일</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;계좌정보</font></td>
+							<td bgcolor="#EFEFEF" colspan="3">&nbsp;&nbsp;<font class=eng>{{FORM7}} {{FORM8}} (예금주 : {{FORM9}})</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메모사항</font></td>
+							<td bgcolor="#EFEFEF" colspan="3">&nbsp;&nbsp;<font class=eng>{{FORM10}}</font></td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+<tr><td><img src="img/ttl_crm_order.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;총주문건수</font></td>
+							<td bgcolor="#EFEFEF">
+								<div style="padding-top:4px;float:left;padding-left:16px;"><font class="eng blue bold">{{ORDER1}}</font>건</div>
+								<div style='padding-top:6px;padding-left:10px;float:left'><span id='nextIcon' class="hand small" onclick="window.open('affiliate_order_list.php?affiliates={{affiliate}}','pops');">주문내역보기</span></div> 
+							</td>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;마직막 주문일</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;<font class=eng>{{ORDER2}}</font></td>
+						</tr>		
+						<tr height=30> 
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;총주문액</font></td>
+							<td bgcolor="#efefef" width=30%>&nbsp;&nbsp;<font class="eng blue">{{ORDER3}}</font>원</td>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;총수수료</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;<font class="eng blue">{{ORDER4}}</font>원</td>
+						</tr>		
+						<tr height=30> 
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;총접속수</font></td>
+							<td bgcolor="#efefef" width=30%>&nbsp;&nbsp;<font class="eng">{{ORDER5}}</font>명</td>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;오늘접속수</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;<font class="eng">{{ORDER6}}</font>명</td>
+						</tr>		
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=30></td></tr>
+</table>
+<iframe name="HFrm" style="display:none"></iframe>
+
+</BODY>
+</HTML>

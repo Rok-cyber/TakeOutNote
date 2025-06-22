@@ -1,0 +1,200 @@
+.likeParent {
+	font: inherit;
+	color: inherit;
+	text-decoration: inherit;
+}
+
+a.likeParent,
+a.likeParent:link,
+a.likeParent:active,
+a.likeParent:visited,
+a.likeParent:hover 
+{
+	font: inherit;
+	color: #000000;
+	text-decoration: none;
+}
+
+div.title 
+{
+	width: auto;
+	/*background-color: #B5C4FF;*/
+	background-color: #99BBE8;
+	border-bottom: solid 1px #000000;
+	padding: 2px;
+	margin-bottom: 15px;
+
+	font-family: Verdana;
+	font-size: 14pt;
+	color: #000000;
+	text-decoration: none;
+
+}
+
+fieldset {
+	margin: 5px;
+}
+
+legend 
+{
+	font-family: Arial;
+	font-size: 11pt;
+	font-weight: bold;
+	color: Black;
+}
+
+fieldset.flash
+{
+	width: 375px;
+	margin: 10px 0px 10px 0px;
+	border-color: #D9E4FF;
+}
+
+.progressWrapper {
+	width: 580px;
+	overflow: hidden;
+}
+.progressContainer {
+	margin-left: 4px;
+	margin-right: 4px;
+	padding: 0px;
+	
+	border: solid 1px #E8E8E8;
+	background-color: #F7F7F7;
+	
+	overflow: hidden;
+	float:left;
+}
+.reds /* Error */
+{
+	border: solid 1px #B50000;
+	background-color: #FFEBEB;
+}
+.greens /* Current */ 
+{
+	border: solid 1px #DDF0DD;
+	background-color: #EBFFEB;
+}
+.grays /* Complete */
+{
+	border: solid 1px #CCCCCC;
+	background-color: #EFEFEF;
+}
+
+.progressName {
+    font-family: verdana;
+	font-size: 8pt;
+	font-weight: bold;
+	color: #555555;
+	
+	margin-top: 2px;
+	margin-left: 6px;
+	height: 14px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	float:left;
+}
+
+.listName {
+	font-family: verdana;
+	font-size: 8pt;
+	color: #555555;
+   
+	margin-top: 4px;
+	padding-left:4px;
+	height: 20px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;	
+}
+
+.listName2 {
+    font-family: verdana;
+	font-size: 8pt;
+	color: #555555;
+    background-color:#EFEFEF; 
+	
+	margin-top: 4px;
+	padding-left:4px;
+	height: 20px;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;	
+}
+
+.listSize {
+    font-family: verdana;
+	font-size: 8pt;
+	color: #555555;
+	
+	margin-top: 4px;
+	padding-right:4px;
+	height: 20px;
+	text-align: right;
+	white-space: nowrap;
+	overflow: hidden;
+	float:right;
+}
+
+.progressBarInProgress,
+.progressBarComplete,
+.progressBarError {
+	font-size: 0px;
+	width: 0%;
+	height: 2px;
+	background-color: blue;
+	margin-top: 2px;	
+	float: left;
+}
+.progressBarComplete {
+	width: 100%;
+	background-color: green;
+	visibility: hidden;
+	float: left;
+}
+.progressBarError {
+	width: 100%;
+	background-color: red;
+	visibility: hidden;	
+	float: left;
+}
+.progressBarStatus {
+    
+	margin-top: 3px;
+	margin-left: 6px;
+	width: 300px;
+	font-size: 7pt;
+	font-family: verdana;
+	text-align: left;
+	white-space: nowrap;
+	float: left;
+}
+a.progressCancel,
+a.progressCancel:link,
+a.progressCancel:active,
+a.progressCancel:visited,
+a.progressCancel:hover
+{
+	font-size: 0px;
+	display: block;
+	height: 14px;
+	width: 14px;
+	
+	margin-top: 3px;
+	margin-right: 3px;
+	background-image: url(/blog/swfupload/cancelbutton.gif);
+	background-repeat: no-repeat;
+	background-position: -14px 0px;
+	float: right;
+}
+a.progressCancel:hover 
+{
+	background-position: 0px 0px;
+}
+
+
+.thumList { width:90px; height:114px; float:left; }
+.thumImg { width: 80px; height:80px; }
+.thumName { margin-top:6px; width: 80px; height:45px; overflow:hidden; font-family:돋움,돋움체;font-size:8pt;letter-spacing:0;}
+.thumName2 { font-family:verdana; font-size:11px; }

@@ -1,0 +1,178 @@
+<?
+$skin_inc = "Y";
+include "../html/top_inc.html"; // 상단 HTML 
+
+$img_path = "../../image/cate/";
+$up_dir   = previlEncode("../../image/up_img/cate/");
+
+$sql = "SELECT * FROM mall_cate WHERE cate = '999000000000'";
+$row = $mysql->one_row($sql);
+
+$valid[$row['valid']] = "checked";
+$img1 = $row['img1'];
+$number = $row['number'];
+$code = explode("|*|",stripslashes($row['code']));
+${"CKD".$code[0]} = "checked";
+
+for($i=1;$i<2;$i++){
+    if(${"img".$i}) {
+		$size=@GetImageSize($img_path.${"img".$i});
+		${"image".$i} = imgSizeCh($img_path,${"img".$i},420)."<div style='height:4px;overflow:hidden'>&nbsp;</div><font class='eng'>".$size['0']."px*".$size['1']."px</font>(삭제<input type=checkbox name=del_img".$i." value=1 onfocus='blur();' align=absmiddle>)"; 
+	} else {
+	    ${"image".$i} = "미등록";
+    }
+}
+
+$links = "http://{$_SERVER["SERVER_NAME"]}/index.php?channel=cooperate";
+?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function ckForm(){
+	f = document.signForm;	
+	
+	f.code.value = code.getHtml();
+	f.submit();
+}
+//-->
+</SCRIPT>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_coop_conf.gif" alt="공동구매설정" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>공동구매를 설정 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td><img src='./img/ttl_coop_conf.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<form name='signForm' method='post' action='cate_post.php?cate_mode=coop_conf' enctype="multipart/form-data">
+					<tr height=30 align=left> 
+						<td class="gr_bg" width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사용상태 설정</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='valid' id='valid1' value='1' onfocus="blur();" <?=$valid[1]?>><label for='valid1'>사용</label> <input type='radio' name='valid' id='valid2' value='0' onfocus="blur();" <?=$valid[0]?>><label for='valid2'>미사용</label>	
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class="gr_bg"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;페이지 링크주소</font></td>
+						<td bgcolor="#EFEFEF" class="eng">&nbsp;<a href="<?=$links?>" target="_blank"><?=$links?></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class="gr_bg"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;접급권한 설정</font></td>
+						<td bgcolor="#EFEFEF">&nbsp;
+							<select name='access_level' style='background:#FFFFFF;'>
+								<option value=''>전체</option>
+							<? 
+								$access_level = explode("|",$row['access_level']);
+								if(!$access_level[1]) $access_level[1] = "<";
+								
+								$sql = "SELECT name, code FROM mall_design WHERE mode='L' && name!='10' ORDER BY name ASC";
+								$mysql->query($sql);
+
+								for($i=2;$i<9;$i++) {
+									$row2 = $mysql->fetch_array();
+									
+									if($i==$access_level[0]) $sed = "selected";
+									else $sed = "";
+
+									while($row2['name']!=$i) {
+										echo  "<option value='{$i}' {$sed}>LV{$i}</option>";
+										if($i==8) break;
+										$i++;
+									}
+									if($row2['name']==$i) {
+										$tmps = explode("|",$row2['code']);
+										echo "<option value='{$i}' {$sed}>".stripslashes($tmps[0])."</option>";							
+									}
+								}									
+							?>
+								<option value='9'>부관리자</option>
+								<option value='10'>관리자</option>
+							</select>
+							<select name='access_type'>
+								<option value="<">이상부터</option>
+								<option value="!=">만</option>
+							</select>	&nbsp;<font class=small>(상품에도 같이 적용됨)</font>	
+							<script>document.signForm.access_type.value='<?=$access_level[1];?>';</script>	
+						
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class="gr_bg"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공동구매 종료일</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;공동구매 마감 후 <input type='text' name='number' size=4 value='<?=$number?>' class="ta2 eng"  onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" maxlength=5 onfocus="this.select();">일 까지 구매가능&nbsp;&nbsp;<font class="small">상품등록시 Default 값으로 등록</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class="gr_bg"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타이틀 이미지</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='file' class=ta name='img1' size='30'>&nbsp;&nbsp;<font class="small"><?=$SKIN_DEFINE['ctitle_img']?></font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class="gr_bg"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;등록된 타이틀 이미지</font></td>
+						<td bgcolor="#EEEEEE" style="padding:6px;"><?=$image1?></td>
+					</tr>		
+					<tr height=28 align=left>
+						<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;삽입 코드</font></td>
+						<td bgcolor="#EFEFEF">&nbsp;<input type='radio' name='code_use' value='Y' <?=$CKDY?> id="use1" /><label for="use1">사용</label> <input type='radio' name='code_use' value='N' <?=$CKDN?> id="use2"><label for="use2" />사용안함<label></TD>
+					</tr>
+					<tr height=120> 							
+						<td bgcolor="#FFFFFF" colspan='2'>
+							<div>
+								<textarea name="code" id="code"><?=$code[1];?></textarea>
+								<script>
+									var code = new pEditor("code","../../pEdit","758","250","<?=$up_dir?>","basic","hide"); //에디터 생성
+								</script>
+							<div>
+						</td>
+					</tr>
+					
+					<tr height=50 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								! 공동구매 미사용일 경우 사용자 마이페이지에 공동구매 관련 메뉴가 나타나지 않습니다.<br />
+								! 스킨에 따라 공동구매 타이틀이미지는 사용하지 않을 수 있습니다. <br />
+								! 페이지 상단에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['coop_code']?><br />					
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();return false;"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</form>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+</table>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	pE[0] = code;
+//-->
+</SCRIPT>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

@@ -1,0 +1,48 @@
+body {
+	color: #000000;
+	font-family: 굴림, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	scrollbar-3dlight-color:595959;
+	scrollbar-arrow-color:ffffff;
+	scrollbar-base-color:CFCFCF;
+	scrollbar-darkshadow-color:FFFFFF;
+	scrollbar-face-color:CFCFCF;
+	scrollbar-highlight-color:FFFFF;
+	scrollbar-shadow-color:595959
+}
+
+tr,td, table,input , button, select, textarea {
+	color: #000000;
+	font-family: 굴림, Verdana, Arial, Helvetica, sans-serif;
+	font-size: 9pt;
+	margin : 2 2 2 2;
+}
+
+.curHand	{cursor:pointer}
+form{ border:0;margin:0;}
+font.eng {font-family:verdana; font-size:10px;}
+
+BODY,TD,BR,LEGEND	{font-size:9pt}
+LEGEND	{color:#1C4FAC}
+
+.WebEditorDiv a {border:1px solid #f5f5f5;padding:0 6px;height:9px;font:8px verdana;text-decoration:none}
+.small  {font-family:돋움,돋움체,Tahoma; font-size:8pt;letter-spacing:-1;text-decoration:none} 
+.tah11px {font-family:Tahoma;font-size:11px}
+.imgAlign	{cursor:hand;border:3px solid buttonface}
+.imgAlignOn	{cursor:hand;border:3px solid #4C84BE}
+
+A.AutoLinkType_red:link		{text-decoration:none;color:#D8442C;border-bottom:2px solid #E78B29}
+A.AutoLinkType_red:visited	{text-decoration:none;color:#D8442C;border-bottom:2px solid #E78B29}
+A.AutoLinkType_red:active	{text-decoration:none;color:#D8442C;border-bottom:2px solid #E78B29}
+A.AutoLinkType_red:hover	{text-decoration:none;color:#A9250F;border-bottom:2px solid #DD7611}
+
+A.AutoLinkType_blue:link	{text-decoration:none;color:#2A61A4;border-bottom:2px solid #37AFCD}
+A.AutoLinkType_blue:visited	{text-decoration:none;color:#2A61A4;border-bottom:2px solid #37AFCD}
+A.AutoLinkType_blue:active	{text-decoration:none;color:#2A61A4;border-bottom:2px solid #37AFCD}
+A.AutoLinkType_blue:hover	{text-decoration:none;color:#144684;border-bottom:2px solid #3796CD}
+
+
+A.AutoLinkType_green:link		{text-decoration:none;color:#368E36;border-bottom:2px solid #76BD31}
+A.AutoLinkType_green:visited	{text-decoration:none;color:#368E36;border-bottom:2px solid #76BD31}
+A.AutoLinkType_green:active		{text-decoration:none;color:#368E36;border-bottom:2px solid #76BD31}
+A.AutoLinkType_green:hover		{text-decoration:none;color:#136F13;border-bottom:2px solid #5FA90F}

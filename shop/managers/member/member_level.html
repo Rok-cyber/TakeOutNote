@@ -1,0 +1,217 @@
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_level.gif" alt="회원등급관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>레벨별 회원등급을 설정할 수 있으며 할인률, 적립금, 배송비유무 및 관리자페이지 권한을 설정 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_level.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<form name='levelForm' method='post' action='member_ok.php?mode=level' onsubmit="return false;">
+						<input type="hidden" name="num" /> 
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=8% align=center class=gr_bg><font class="bTitle small">레벨</font></td>
+							<td align=center class=gr_bg><font class="bTitle small">등급명</font></td>
+							<td width=13% align=center class=gr_bg><font class="bTitle small">관리자페이지권한</font></td>
+							<td width=16% align=center class=gr_bg><font class="bTitle small">제공할인률</font></td>
+							<td width=16% align=center class=gr_bg><font class="bTitle small">추가적립금</font></td>
+							<td width=13% align=center class=gr_bg><font class="bTitle small">기본배송비유무</font></td>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">회원수</font></td>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">수정</font></td>
+						</tr>						
+						<tr height=28 bgcolor=#ffffff onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>1</td>
+							<td align=center>회원일시중지</td>			
+							<td align=center></td>
+							<td align=center></td>
+							<td align=center></td>
+							<td align=center></td>
+							<td align=center class=eng>{{MEMBER1}}명</td>
+							<td align=center></td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<tr height=28 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{i}}</td>
+							<td align=center><input type="text" name="name{{i}}" class="bt" value="{{NAME}}" /></td>			
+							<td align=center>
+								<select name="permi{{i}}">
+									<option value="0" {{SEC0}}>권한없음</option>
+									<option value="1" {{SEC1}}>권한제한</option>
+									<option value="2" {{SEC2}}>상품등록</option>									
+								</select>
+							</td>
+							<td align=center>제품가격의 <input type="text" name="sale{{i}}" class="ta2 eng" value="{{SALE}}" size=3 maxlength=3 onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" />%</td>
+							<td align=center>제품가격의 <input type="text" name="point{{i}}" class="ta2 eng" value="{{POINT}}" size=3 maxlength=3 onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" />%</td>
+							<td align=center class=eng><input type="checkbox" name="carr{{i}}" value='Y' {{CARR}} /> 배송료 무료</td>
+							<td align=center class=eng>{{MEMBER}}명</td>
+							<td align=center >
+								<div><span id='nextIcon' class="hand small" onclick="return ckIt({{i}});">수정</span></div> 
+							</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<tr height=28 bgcolor=#ffffff onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>9</td>
+							<td align=center><input type="text" name="name9" class="bt" value="부관리자" readonly /></td>		
+							<td align=center>
+								<select name="permi9">
+									<option value="3">부관리자</option>									
+								</select>
+							</td>
+							<td align=center>제품가격의 <input type="text" name="sale9" class="ta2 eng" value="{{SALE9}}" size=3 maxlength=3 />%</td>
+							<td align=center>제품가격의 <input type="text" name="point9" class="ta2 eng" value="{{POINT9}}" size=3 maxlength=3 />%</td>
+							<td align=center class=eng><input type="checkbox" name="carr9" value="Y" {{CARR9}} /> 배송료 무료</td>
+							<td align=center class=eng>{{MEMBER9}}명</td>
+							<td align=center >
+								<div><span id='nextIcon' class="hand small" onclick="return ckIt(9);">수정</span></div> 
+							</td>
+						</tr>
+						<tr height=28 bgcolor=#efefef onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>10</td>
+							<td align=center><input type="text" name="name10" class="bt" value="관리자" readonly /></td>		
+							<td align=center>
+								<select name="permi10">
+									<option value="4">관리자&nbsp;&nbsp;&nbsp;</option>									
+								</select>
+							</td>
+							<td align=center>제품가격의 <input type="text" name="sale10" class="ta2 eng" value="{{SALE10}}" size=3 maxlength=3 />%</td>
+							<td align=center>제품가격의 <input type="text" name="point10" class="ta2 eng" value="{{POINT10}}" size=3 maxlength=3 />%</td>
+							<td align=center class=eng><input type="checkbox" name="carr10" value="Y" {{CARR10}} /> 배송료 무료</td>
+							<td align=center class=eng>{{MEMBER10}}명</td>
+							<td align=center >
+								<div><span id='nextIcon' class="hand small" onclick="return ckIt(10);">수정</span></div> 
+							</td>
+						</tr>
+						<tr height=50 align=left>
+							<td colspan=8 bgcolor='#FFFFFF' style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 회원 레벨은 1~10 까지 있으며 1은 일시중지상태, 9는 부관리자, 10은 관리자 고정 입니다.<br />
+									! 이벤트 상품구매시 이벤트 할인률과 회원등급별 할인룰 중 큰 할인률을 상품구매시 적용 합니다.<br />
+									! 베송비 무료는 배송비 별도 상품 및 추가배송비 지역(도서산간)에는 적용 되지 않습니다.
+								</div>		
+							</td>
+						</tr>
+						</table>
+						</form>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+    </td>
+</tr>
+<tr><td height=20></td></tr>
+<tr><td><img src="img/ttl_permi.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<form name='permiForm' method='post' action='member_ok.php?mode=permi' onsubmit="return false;">
+						<tr height=28>
+							<td align=left class=gr_bg width="120"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;권한제한</font></td>
+							<td bgcolor="#FFFFFF">
+								&nbsp;<input type="checkbox" name="per11" id='per11' value=1 {{PER11}} /> <label for='per11'>상품관리</label> 
+								&nbsp;<input type="checkbox" name="per12" id='per12' value=1 {{PER12}} /> <label for='per12'>주문관리</label> 
+								&nbsp;<input type="checkbox" name="per13" id='per13' value=1 {{PER13}} /> <label for='per13'>디자인&문서관리</label> 
+								&nbsp;<input type="checkbox" name="per14" id='per14' value=1 {{PER14}} /> <label for='per14'>회원관리</label>
+								&nbsp;<input type="checkbox" name="per15" id='per15' value=1 {{PER15}} /> <label for='per15'>기타&서비스관리</label>
+								&nbsp;<input type="checkbox" name="per16" id='per16' value=1 {{PER16}} /> <label for='per16'>쇼핑몰 환경설정</label>
+							</td>
+						</tr>						
+						<tr height=28>
+							<td align=left class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;상품등록</font></td>
+							<td bgcolor="#FFFFFF">
+								&nbsp;<input type="checkbox" name="per21" id='per21' value=1 {{PER21}} /> <label for='per21'>상품관리</label> 
+								&nbsp;<input type="checkbox" name="per22" id='per22' value=1 {{PER22}} /> <label for='per22'>주문관리</label> 
+								&nbsp;<input type="checkbox" name="per23" id='per23' value=1 {{PER23}} /> <label for='per23'>디자인&문서관리</label> 
+								&nbsp;<input type="checkbox" name="per24" id='per24' value=1 {{PER24}} /> <label for='per24'>회원관리</label>
+								&nbsp;<input type="checkbox" name="per25" id='per25' value=1 {{PER25}} /> <label for='per25'>기타&서비스관리</label>
+								&nbsp;<input type="checkbox" name="per26" id='per26' value=1 {{PER26}} /> <label for='per26'>쇼핑몰 환경설정</label>
+							</td>
+						</tr>						
+						<tr height=28>
+							<td align=left class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;부관리자</font></td>
+							<td bgcolor="#FFFFFF">
+								&nbsp;<input type="checkbox" name="per31" id='per31' value=1 {{PER31}} /> <label for='per31'>상품관리</label> 
+								&nbsp;<input type="checkbox" name="per32" id='per32' value=1 {{PER32}} /> <label for='per32'>주문관리</label> 
+								&nbsp;<input type="checkbox" name="per33" id='per33' value=1 {{PER33}} /> <label for='per33'>디자인&문서관리</label> 
+								&nbsp;<input type="checkbox" name="per34" id='per34' value=1 {{PER34}} /> <label for='per34'>회원관리</label>
+								&nbsp;<input type="checkbox" name="per35" id='per35' value=1 {{PER35}} /> <label for='per35'>기타&서비스관리</label>
+								&nbsp;<input type="checkbox" name="per36" id='per36' value=1 {{PER36}} /> <label for='per36'>쇼핑몰 환경설정</label>
+							</td>
+						</tr>						
+						<tr height=28>
+							<td align=left class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;관리자</font></td>
+							<td bgcolor="#FFFFFF">
+								&nbsp;<input type="checkbox" name="per41" id='per41' checked disabled /> <label for='per41'>상품관리</label> 
+								&nbsp;<input type="checkbox" name="per42" id='per42' checked disabled /> <label for='per42'>주문관리</label> 
+								&nbsp;<input type="checkbox" name="per43" id='per43' checked disabled /> <label for='per43'>디자인&문서관리</label> 
+								&nbsp;<input type="checkbox" name="per44" id='per44' checked disabled /> <label for='per44'>회원관리</label>
+								&nbsp;<input type="checkbox" name="per45" id='per45' checked disabled /> <label for='per45'>기타&서비스관리</label>
+								&nbsp;<input type="checkbox" name="per46" id='per46' checked disabled /> <label for='per46'>쇼핑몰 환경설정</label>
+							</td>
+						</tr>			
+						<tr height=30>
+							<td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 관리자페이지 접속 권한을 설정 하실 수 있습니다. 일반회원은 권한이 없고 관리자는 모든 권한을 가집니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="document.permiForm.submit();return false;"><span class="blue">설정저장</span></a>
+								</div>		
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+    </td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<script>
+function ckIt(num){
+	f = document.levelForm;
+	f.num.value = num;
+	f.submit();
+	return false;	
+}
+</script>

@@ -1,0 +1,248 @@
+<html>
+<title>이미지 수정</title>
+<link rel=StyleSheet HREF='dialog.css' type='text/css' title='CSS'>
+
+<script src="dialogComm.js"></script>
+
+<style>
+BODY	{border-style:none;margin:0px;padding:10px;background-color:#EBEAE7}
+</style>
+
+<script>
+var Args	= window.opener.dialogArguments;
+var iProps	= Args.arguments;
+
+function Init() {    
+    if (iProps) {		        
+		var maxwidth = 250;
+        var maxheight = 120;
+		iProps.width = parseInt(iProps.width);
+		iProps.height = parseInt(iProps.height);
+        var w = iProps.width;
+        var h = iProps.height;
+        var ratio = 1;
+        if (w > maxwidth) ratio = w / maxwidth;
+        if (h > maxheight && h/maxheight > ratio) ratio = h/maxheight;
+        var imgelm = document.getElementById('imgPreview');
+        imgelm.src = iProps.src;
+        imgelm.width = Math.round(w / ratio);
+        imgelm.height = Math.round(h / ratio);
+        
+		if (iProps.src) imgProp.csrc.value = iProps.src;
+		if (iProps.alt) imgProp.calt.value = iProps.alt;
+		if (iProps.width) imgProp.cwidth.value = iProps.width;
+        if (iProps.height) imgProp.cheight.value = iProps.height;                
+		if (iProps.style.border) {		    
+			tmps = iProps.style.border.split(' ');
+			if(document.selection) {		
+				imgProp.cborder.value = tmps[1].split('px')[0];
+				document.getElementById('ccolor').style.backgroundColor = tmps[0];
+            } else {
+				imgProp.cborder.value = tmps[0].split('px')[0];				
+				document.getElementById('ccolor').style.backgroundColor = tmps[2]+tmps[3]+tmps[4];			
+			}
+        } else imgProp.cborder.value=0;
+        if (iProps.hspace) imgProp.chspace.value = iProps.hspace;
+		if (iProps.vspace) imgProp.cvspace.value = iProps.vspace;    
+
+		if(iProps.align=='left') document.all.imgAlign2.className = "imgAlignOn";
+		else if(iProps.align=='right') document.all.imgAlign3.className = "imgAlignOn";
+		else document.all.imgAlign1.className = "imgAlignOn";
+		imgProp.calign.value=iProps.align;
+    }
+	setColorPicker();
+}
+
+function setImgAlignType(sAlign,obj) {
+		
+	document.all.imgAlign1.className = "imgAlign";
+	document.all.imgAlign2.className = "imgAlign";
+	document.all.imgAlign3.className = "imgAlign";
+    
+	obj.className = "imgAlignOn";
+	imgProp.calign.value = sAlign;
+}
+
+function validateParams() {
+    if (isNaN(parseInt(imgProp.cwidth.value)) && imgProp.cwidth.value != '') {
+        alert('가로크기는 숫자만 입력하세요!');
+        imgProp.cwidth.focus();
+        return false;
+    }
+    if (isNaN(parseInt(imgProp.cheight.value)) && imgProp.cheight.value != '') {
+        alert('세로크기는 숫자만 입력하세요!');
+        imgProp.cheight.focus();
+        return false;
+    }
+    if (isNaN(parseInt(imgProp.cborder.value)) && imgProp.cborder.value != '') {
+        alert('Border는 숫자만 입력하세요!');
+        imgProp.cborder.focus();
+        return false;
+    }
+    if (isNaN(parseInt(imgProp.chspace.value)) && imgProp.chspace.value != '') {
+        alert('Hspace는 숫자만 입력하세요!');
+        imgProp.chspace.focus();
+        return false;
+    }
+    if (isNaN(parseInt(imgProp.cvspace.value)) && imgProp.cvspace.value != '') {
+        alert('Vspace는 숫자만 입력하세요!');
+        imgProp.cvspace.focus();
+        return false;
+    }    
+    return true;
+  }
+
+function checkModifyImage() {    
+    if (validateParams()) {
+      var iProps = {};
+      iProps.align = (imgProp.calign.value)?(imgProp.calign.value):'';
+      iProps.width = (imgProp.cwidth.value)?(imgProp.cwidth.value):'';
+      iProps.height = (imgProp.cheight.value)?(imgProp.cheight.value):'';
+      iProps.src = (imgProp.csrc.value)?(imgProp.csrc.value):'';
+      iProps.alt = (imgProp.calt.value)?(imgProp.calt.value):'';
+      iProps.hspace = (imgProp.chspace.value)?(imgProp.chspace.value):'';
+      iProps.vspace = (imgProp.cvspace.value)?(imgProp.cvspace.value):'';
+      if(document.getElementById('ccolor').style.backgroundColor) iProps.sborder = document.getElementById('ccolor').style.backgroundColor+" "+imgProp.cborder.value+"px solid";      
+
+	  if(Args.callback) eval('window.opener.'+Args.callback + '(Args.Editor, iProps,Args.obj)');
+      self.close();
+    }
+}
+
+function ckSize(type){
+	if(imgProp.eqSize.checked==false) return;
+    
+	if(type=='width') {
+
+		if (isNaN(parseInt(imgProp.cwidth.value)) && imgProp.cwidth.value != '') {
+		    alert('가로크기는 숫자만 입력하세요!');
+			imgProp.cwidth.focus();
+			return false;
+		}
+		
+		imgProp.cheight.value = parseInt((iProps.height * imgProp.cwidth.value) / iProps.width);		
+	} 
+	else {
+		if (isNaN(parseInt(imgProp.cheight.value)) && imgProp.cheight.value != '') {
+			alert('세로크기는 숫자만 입력하세요!');
+			imgProp.cheight.focus();
+			return false;
+		}
+		imgProp.cwidth.value = parseInt((iProps.width * imgProp.cheight.value) / iProps.height);
+	}
+}
+
+function ckEq(){
+	if(imgProp.eqSize.checked==false) return;
+	imgProp.cwidth.value	= iProps.width;
+	imgProp.cheight.value	= iProps.height;
+}
+
+</script>
+
+
+<body scroll=no onLoad="Init()">
+
+<form name="imgProp" onsubmit="return false">
+
+<fieldset style="width:100%;padding:8px">
+<legend> 이미지 </legend>	
+    <center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+		<td width=30%><img id="imgPreview" src="" width="250" height="120" alt=""></td>
+		<td width=70% valign=top>이미지경로 <br><input type="text" name="csrc" class="input" size="58"><br><br>대체문구<br><input type="text" name="calt" class="input" size="58"></td>
+	</tr>
+	</table>
+	</center>
+       
+</fieldset>
+
+
+<fieldset style="width:100%;padding:8px">
+<legend> 이미지크기 </legend>
+	<center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+	    <td width=20%></td>
+		<td width=40>가로</td>
+		<td width=100><input type="text" name="cwidth" size="5" maxlength="3" onblur="ckSize('width');"></td>
+		<td width=40>세로</td>
+		<td width=100><input type="text" name="cheight" size="5" maxlength="3" onblur="ckSize('height');"></td>
+		<td width=20% align="right">비율유지 <input type="checkbox" name="eqSize" value="1" onclick="ckEq();">&nbsp;&nbsp;</td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<fieldset style="width:100%;padding:8px">
+<legend> 레이아웃 </legend>
+	<center>
+	<input type=hidden name=calign>
+	<table border=0 cellpadding=5 cellspacing=0 width=100% class=fixed>
+	<tr align=center>
+		<td width=20%></td>
+		<td><img id=imgAlign1 class='imgAlign' onclick="setImgAlignType('newline',this)" src=../img/imgInsertImageAlignType_newline.png border=0></td>
+		<td><img id=imgAlign2 class='imgAlign' onclick="setImgAlignType('left',this)" src=../img/imgInsertImageAlignType_left.png border=0></td>
+		<td><img id=imgAlign3 class='imgAlign' onclick="setImgAlignType('right',this)" src=../img/imgInsertImageAlignType_right.png border=0></td>
+		<td width=20%></td>
+	</tr>
+	<tr align=center>
+	    <td></td>
+		<td>줄바꿈</td>
+		<td>왼쪽</td>
+		<td>오른쪽</td>
+		<td></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<fieldset style="width:100%;padding:8px">
+<legend> 테두리 </legend>
+	<center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+	    <td width=20%></td> 
+		<td width=40>두께</td>
+		<td width=100><input type="text" name="cborder" size="5" maxlength="3"></td>
+		<td width=40>색상</td>
+		<td width=100><button onclick="cpShow(this)" style="border:0px;width:50px;background-color:#8c8c8c" onfocus="this.blur();" id=ccolor>&nbsp;&nbsp;&nbsp;</button></td>
+		<td width=20%></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<fieldset style="width:100%;padding:8px">
+<legend> 이미지여백 </legend>
+	<center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+	    <td width=20%></td>
+		<td width=40>좌우</td>
+		<td width=100><input type="text" name="chspace" size="5" maxlength="3"></td>
+		<td width=40>상하</td>
+		<td width=100><input type="text" name="cvspace" size="5" maxlength="3"></td>
+		<td width=20%></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+
+<center>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+	<td height=40 align=right style="padding-right:5px"><button onclick="checkModifyImage()" class='tah11px bold' style="width:80px">OK</button></td>
+	<td style="padding-left:5px"><button style="width:80px" onclick="self.close()" class='tah11px'>CANCEL</button></td>
+</tr>
+</table>
+
+</form>
+</center>
+
+
+</div>
+</body>
+</html>

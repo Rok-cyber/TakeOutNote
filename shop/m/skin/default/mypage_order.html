@@ -1,0 +1,129 @@
+<div id="contents">
+	<section id="headline">
+		<h1>주문 / 배송 조회</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>
+	</section>
+	
+	<section id="myOrder">
+		<h2>주문 내역</h2> 
+		<div id="orderListHead">		
+			<p>전체 <em id="totalCnt">{{TOTAL}}</em>개</p>
+			<span>
+				<label>
+					<select name="dates" title="검색기간" onchange="getMultis.cgStr1(this.name,this.value);">
+						<option value="">전체</option>
+						<option value="1">오늘</option>
+						<option value="2">1주일</option>
+						<option value="3">1개월</option>
+						<option value="4">3개월</option>
+						<option value="5">6개월</option>
+						<option value="6">1년</option>						
+					</select>
+				</label>
+				<label>
+					<select name="status" title="주문상태" onchange="getMultis.cgStr2(this.name,this.value);">
+						<option value="">전체</option>
+						<option value="A">입금대기중</option>
+						<option value="B">결제완료</option>
+						<option value="C">배송준비중</option>
+						<option value="D">배송중</option>
+						<option value="E">배송완료</option>
+						<option value="F">취소완료</option>
+					</select>
+				</label>
+			</span>
+		</div>	
+
+		<ul id="orderList"></ul>
+		
+		<div id="noContent">
+			<p>! 주문/배송조회 내역이 없습니다.</p>
+		</div>
+		<!-- DYNAMIC @no_content@ -->	
+		<script type="text/javascript">
+		<!--
+			$("#noContent").show();
+			$("#orderList").hide();
+		-->
+		</script>
+		<!-- DYNAMIC @no_content@ -->
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getMultis.listMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<div id="listLoading">
+	상품 데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	$("#noContent").hide();
+	
+	function rtnOrder(obj,orderNum,name,price,type,status,date,clink,cnum) {				
+		
+		newLi = document.createElement('LI');
+		newLi.className = 'title';
+		newLi.innerHTML = '<em>'+date+'</em>(주문번호 '+orderNum+')';
+		newLi.onclick = function() { window.location.href='{{Main}}?channel=order_detail&order_num='+orderNum; }
+		obj.appendChild(newLi);		
+		
+		newLi = document.createElement('LI');
+		newLi.className = 'detail';
+		div	= ' <p>'+name+'</p>\
+				<table summary="주문정보">\
+				<col width="40%" />\
+				<col width="60%" />\
+				<tbody>\
+				<tr>\
+					<th>결제금액</th>\
+					<td><em>'+price+'<em>원</td>\
+				</tr>\
+				<tr>\
+					<th>결제수단</th>\
+					<td>'+type+'</td>\
+				</tr>\
+				<tr>\
+					<th>주문상태</th>\
+					<td>'+status+'</td>\
+				</tr>\
+				<tbody>\
+				</table>\
+			 ';
+		if(clink && cnum) {
+			div += '<div>\
+						<p onclick="searchCarr(\''+clink+'\',\''+cnum+'\')" title="배송조회">배송조회</p>\
+					</div>\
+					';
+		}
+		newLi.innerHTML = div;
+		obj.appendChild(newLi);				
+	}
+
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>4) $("#contentMore").show();	
+	if(ck_str>0) {	
+		getMultis = new getMulti('orderList','{{limit}}','{{TOTAL}}','0','{{ajaxstr}}','php/getOrder.php','rtnOrder');
+		getMultis.display();
+
+		if({{TOTAL_PAGE}}<={{PAGE}}) {
+			$("#listGoodsMore")[0].innerHTML = "&nbsp;";
+		}
+
+		$("#contentMore").show();
+	}
+ -->
+</script>

@@ -1,0 +1,251 @@
+<script type="text/javascript" src="{{skin}}/listDesign.js"></script>
+<script type="text/javascript" src="lib/lib.moneyBar.js"></script>
+
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+	
+	<div class="blank">&nbsp;</div>
+	
+	<div style="height:22px;text-align:left">
+		<img src='img/search/ttl_hot_keyword.gif' alt="HOT KEYWORD" title="HOT KEYWORD" />
+	</div>
+
+	<div id="brand_top"><img src="img/main/cate_menu_top.gif" alt="" /></div>
+	<div id="brand_center">			
+		<div class="blank">&nbsp;</div>
+		<!-- DYNAMIC @loop_rank_best@ -->
+		<div class="rank_best">				
+			<div style="width:160px;height:16px;overflow:hidden;">
+				<img src='img/top/rank_{{i}}.gif' width='14' height='14' align="absmiddle" alt="{{i}}" title="{{i}}" />
+				&nbsp;<a href="{{Main}}?channel=search&search={{WORD}}" class="black small bold">{{WORD}}</a>
+			</div>
+		</div>			
+		<!-- DYNAMIC @loop_rank_best@ -->
+	</div>
+	<div id="brand_bottom"><img src="img/main/cate_menu_bottom.gif" alt="" /></div>
+
+	<!-- 배너 START -->
+	<div>
+		<!-- DYNAMIC @loop_banner@ -->
+		<div class="banner"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+		<!-- DYNAMIC @loop_banner@ -->			
+	</div>
+	<!-- @배너 END -->
+	
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">	
+	<div id="subTitle">
+		<img src="img/search/ttl_search_result.gif" alt="상품검색결과" title="상품검색결과" />
+	</div>		
+	
+	<div class="clear" style="height:28px;">&nbsp;</div>
+	
+	<div id="search_content"> 
+		<div>			
+			<div><img src="img/search/box_search_top.gif" /></div>
+			<div id="search_cbody">
+			    <form name="searchForm2" method="get" onsubmit='return ckSearch2();' action='{{Main}}'>
+				<input type="hidden" name="channel" value="search" />
+				<input type="hidden" name="cate" value="{{cate}}" />
+				<input type="hidden" name="brand" value="{{brand}}" />
+				<div style="padding-left:8px;">
+					<div class="left" style="padding:1px 6px 0 0;">
+						<input type="checkbox" name="detail" value="{{search}}" class="input_check" />
+					</div>
+					<div class="left small" style="padding:3px 8px 10px 0px;">결과내 재검색</div>
+					<div class="left">
+						<input type="text" name="search" size="35" class="whites default" style="vertical-align:top;" />						
+					</div>
+					<div class="left" style="padding-left:3px;">
+						<input type="image" src="img/search/btn_search.gif" border="0" alt="검색" title="검색" />
+					</div>
+				</div>
+				</form>				
+				<div><img src="img/search/box_dsearch_top.gif" /></div>
+				<div id="dsearch_cbody">
+					<form name="dsearchForm" method="get" onsubmit='return ckdSearch();' action='{{Main}}'>
+					<input type="hidden" name="channel" value="search" />
+					<ul>
+						<li><img src="img/search/ttl_dsearch.gif" alt="상세검색" title="상세검색" /></li>
+						<li>
+							<div class="small bold mt4 tleft">
+								쇼핑분류&nbsp;&nbsp;&nbsp;&nbsp;
+								<SELECT name="cate" class="small"><option value=''>전체상품</option>{{SELECT}}</SELECT>
+							</div>
+							<div class="small bold mt4 tleft">
+								브랜드&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<SELECT name="brand" class="small"><option value=''>전체상품</option>{{BRAND}}</SELECT>
+							</div>
+							<div class="small bold mt4 tleft">
+								검색어&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="text" name="search" size="35" class="whites default" />
+								<input type="image" src="img/search/btn_search.gif" border="0" align="absmiddle" alt="검색" title="검색" />
+							</div>
+						</li>
+					</ul>
+					</form>
+				</div>
+			</div>
+			<div><img src="img/search/box_search_bottom.gif" /></div>
+		</div>
+		
+		<div class="blank" style="height:16px;">&nbsp;</div>
+
+		<div class="contentBox">
+			<div class="contentBoxIn clearfix">							
+				<div class="blank" style="height:16px;">&nbsp;</div>
+				<div class="left" style="text-align:left;width:170px;">
+					<div style="padding-left:20px;">
+						<div class="small bold">'{{search}}'</div>
+						<div style="padding-top:6px;" class="small">
+							총 상품수 <font class="num mColor">{{TOTAL}}</font>건					
+						</div>
+					</div>
+				</div>			
+				<div class="left" style="height:44px;width:540px;">
+					<div class="left" style="position:relative;width:345px;">
+						<div id="pmoneyBarDiv"></div>
+					</div>
+					<!-- DYNAMIC @is_sec_mon@ -->
+					<div class="right small mColor tleft" style="width:195px;">선택한조건 : <font class="num">{{SEC_MON}}</font> <a href="{{Main}}{{addstring}}{{lstring}}{{ostring}}"><img src="img/common/icon_x.gif" border="0" alt="선택해제" title="선택해제" /></a></div>
+					<!-- DYNAMIC @is_sec_mon@ -->					
+				</div>				
+				<div class="blank">&nbsp;</div>
+			</div>	
+		</div>	
+	</div>	
+
+	<form name="moneySeatch" method="get" action="{{Main}}">
+	<input type="hidden" name="channel" value="search" />
+	<input type="hidden" name="search" value="{{search}}" />
+	<input type="hidden" name="cate" value="{{cate}}" />
+	<input type="hidden" name="comp" value="{{comp}}" />
+	<input type="hidden" name="mo1" />
+	<input type="hidden" name="mo2" />
+	</form>
+
+	<script type="text/javascript">
+	<!--
+	pmoneyBar.show("pmoneyBarDiv","rtnValue","{{skin}}/","216","{{MaxMoney}}");
+
+	// -->
+	</script>
+		
+	<div class="blank" style="height:16px;">&nbsp;</div>
+
+	<!-- DYNAMIC @is_scate@ -->
+	<div id="cate_box" style="margin-top:15px;">
+		<!-- DYNAMIC @loop_cate@ -->
+		<div class="cate_list">
+			<div style="margin-left:20px;">
+				<a href='{{CLINK}}' onfocus='this.blur();' class="small"><b class="{{COLOR1}}">{{CNAME}}({{CCNT}}건)</b></a>
+			</div>
+		</div>
+		<!-- DYNAMIC @loop_cate@ -->
+		<div class="blank">&nbsp;</div>
+	</div>
+	<div class="blank" style="height:16px;">&nbsp;</div>
+	<!-- DYNAMIC @is_scate@ -->
+
+	<div id="list" style="margin-top:20px;">	
+		<div id="list_top">
+			<ul>
+				<li><a href="#" onclick="return getLists.cgOrder('uid',1);"><img src="img/common/tab_order_uid_on.gif" alt="신상품순" id='order_uid' /></a></li>
+				<li><a href="#" onclick="return getLists.cgOrder('best',1);"><img src="img/common/tab_order_best_off.gif" alt="인기상품순" id='order_best' /></a></li>
+				<li><a href="#" onclick="return getLists.cgOrder('price',1);"><img src="img/common/tab_order_price_off.gif" alt="낮은가격순" id='order_price' /></a></li>
+				<li><a href="#" onclick="return getLists.cgOrder('price2',1);"><img src="img/common/tab_order_price2_off.gif" alt="높은가격순" id='order_price2' /></a></li>
+			</ul>				
+			<div class="right">
+				<form name="limitForm" method="get" action="">								
+				<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+				<div id='limitBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px; text-align:left;" class='left'></div>
+				<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+				<script type="text/javascript">
+				<!--
+					limitBoxs = new selectBox('limitBox','','{{Main}}','4');
+					limitBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+					limitBoxs.img1.src = 'img/common/icon_select_down2.gif';
+					limitBoxs.img2.src = 'img/common/icon_select_up2.gif';
+					{{LIMIT_OPTION2}}
+					limitBoxs.show('cate');
+					limitBoxs.secNum = {{SEC_LIMIT}};
+					limitBoxs.mout();
+				// -->
+				</script>									
+				</form>
+			</div>			
+			
+			<div class="right">
+				<a href="#" onclick="return getLists.cgType('img',1)"><img src="img/common/icon_img_off.gif" align="absmiddle" alt='이미지형' title='이미지형' id="imgof_img" /></a>
+			</div>
+			<div class="right">
+				<a href="#" onclick="return getLists.cgType('list',1)"><img src="img/common/icon_list_on.gif" align="absmiddle" alt='리스트형' title='리스트형' id="imgof_list" /></a>
+			</div>	
+		</div>
+		
+		<form name="listForm" method="post" action="">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col />
+			<col width="120" /> 
+			<col width="120" />        			
+			<thead>
+			<tr height="28">
+				<th scope="col"><img src="img/common/ttl_list_name.gif" alt="상품명" /></th>
+				<th align="right" scope="col"><img src="img/common/ttl_list_price.gif" alt="가격/적립금" /></th>
+				<th scope="col"><img src="img/common/ttl_list_point.gif" alt="상품평" /></th>
+			</tr>
+			</thead>
+			
+			<tbody id="list_table"></tbody>
+			<!-- id:listTable 에 리스트가 나옵니다. -->
+			</table>
+		</div>
+
+		<div id="list_img" style="display:none">						
+			<!-- id:lis_img 에 이미지가 나옵니다. -->
+		</div>	
+		</form>
+		
+		<!-- DYNAMIC @no_loop@ -->
+		<div style="clear:both;text-align:center">
+			<img src="img/search/no_search.gif" alt="검색된 상품이 없습니다" />
+		</div>
+		<!-- DYNAMIC @no_loop@ -->
+
+	</div>
+
+	<div style='clear:both;'>
+		<div style="height:10px;">&nbsp;</div>
+		<div style='clear:both;text-align:left;'>
+			<img src="img/shop/btn_compare.gif" class="hand" onclick="secCompare();return false;" alt="선택상품 비교하기" />
+			<img src="img/shop/btn_cart_all.gif" class="hand" onclick="cartPost();return false;" alt="선택상품 장바구니담기" />
+		</div>
+		<div id="paging" class="small" style=""></div>
+	</div>
+	
+	<div class="clear" style="height:20px">&nbsp;</div>	
+
+</div>
+
+
+<script type="text/javascript">
+<!--
+
+getLists = new getList('{{limit}}','list','uid','{{TOTAL}}','{{Pstart}}','{{ajaxstring}}');
+getLists.display();
+aPage = new ajaxPaging('aPage','paging',getLists,'{{TOTAL}}','{{limit}}','10');
+aPage.makePage();
+aPage.printPage("box");
+
+getLists.cgOrder('{{order}}');
+
+checkCookieVar();
+// -->
+</script>

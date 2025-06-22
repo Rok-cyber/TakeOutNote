@@ -1,0 +1,522 @@
+<?
+$skin_inc = "Y";
+include "../html/top_inc.html"; // 상단 HTML 
+
+$up_dir   = previlEncode("../../image/up_img/cate/");
+
+######################## 분류 생성 ##############################
+$tmps1	= "CATEname = [";
+$tmps2	= "CATEnum	= [";
+$tmps3	= "CATE1	= [";
+$cnts	= 0;
+$cnts2	= 0;
+$sql = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = 1 && cate!='999000000000' ORDER BY number ASC";
+$mysql->query($sql);
+while($row=$mysql->fetch_array()){    
+	$row['cate_name'] = addslashes($row['cate_name']);
+	if($row['cate_sub']==1) {
+	    if($cnts==1) { 
+			$tmps1.= ",['{$row[cate_name]}→'";		
+			$tmps2.= ",['{$row[cate]}:O'";		
+		}
+		else { 
+			$tmps1.= "['{$row[cate_name]}→'";		
+			$tmps2.= "['{$row[cate]}:O'";		
+        }
+		$sql2 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '2' AND cate_parent = '{$row[cate]}' ORDER BY number ASC";
+		$mysql->query2($sql2);
+		while($row2=$mysql->fetch_array(2)){
+			$row2['cate_name'] = addslashes($row2['cate_name']);
+			if($row2['cate_sub']==1) {
+				$tmps1.= ",['{$row2[cate_name]}→'";	
+				$tmps2.= ",['{$row2[cate]}:O'";	
+				$sql3 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '3' AND cate_parent = '{$row2[cate]}' ORDER BY number ASC";
+				$mysql->query3($sql3);
+				while($row3=$mysql->fetch_array(3)){
+					$row3['cate_name'] = addslashes($row3['cate_name']);
+					if($row3['cate_sub']==1) {
+						$tmps1.= ",['{$row3[cate_name]}→'";	
+						$tmps2.= ",['{$row3[cate]}:O'";	
+						$sql4 = "SELECT cate,cate_name FROM mall_cate WHERE cate_dep = '4' AND cate_parent = '{$row3[cate]}' ORDER BY number ASC";
+						$mysql->query4($sql4);						
+						while($row4=$mysql->fetch_array(4)){							
+							$row4['cate_name'] = addslashes($row4['cate_name']);
+							$tmps1.= ",'{$row4[cate_name]}'";
+							$tmps2.= ",'{$row4[cate]}'";
+						}
+						$tmps1.= "]";
+						$tmps2.= "]";
+					} 
+					else {
+						$tmps1.= ",['{$row3[cate_name]}']";		
+						$tmps2.= ",['{$row3[cate]}:X']";		
+					}					
+				}
+				$tmps1.= "]";
+				$tmps2.= "]";
+			} 
+			else {
+				$tmps1.= ",['{$row2[cate_name]}']";		
+				$tmps2.= ",['{$row2[cate]}:X']";		
+            }
+		}
+
+		if($cnts2==1) $tmps3.= ",['{$row[cate_name]}','{$row[cate]}']";
+		else $tmps3.= "['{$row[cate_name]}','{$row[cate]}']";
+		$cnts2 = 1;
+
+    } 
+	else {
+		if($cnts==1) {
+			$tmps1.= ",['{$row[cate_name]}'";		
+			$tmps2.= ",['{$row[cate]}:X'";		
+		} 
+		else {
+			$tmps1.= "['{$row[cate_name]}'";		
+			$tmps2.= "['{$row[cate]}:X'";		
+		}
+	
+	}
+	$tmps1.= "]";
+	$tmps2.= "]";	
+	$cnts = 1;
+	
+}
+$tmps1.= "]";
+$tmps2.= "]";
+$tmps3.= "]";
+######################## 분류 생성 ##############################
+
+
+$skin_hit = explode(",",$SKIN_DEFINE['sub_hit_cnt']);
+$skin_reco = explode(",",$SKIN_DEFINE['sub_reco_cnt']);
+$skin_new = explode(",",$SKIN_DEFINE['sub_new_cnt']);
+
+?>
+
+<SCRIPT language="JavaScript">
+<!--
+
+var cate_def;
+var keep1 = "<?=$_GET['keep1'];?>";
+
+<? echo $tmps1."\n".$tmps2."\n".$tmps3;?>
+
+function ckCode(){
+	form = document.codeForm;
+	form.cate_insert.value = cate_insert.getHtml();
+	form.hit_insert.value = hit_insert.getHtml();	
+	form.submit();
+}
+
+//-->
+</SCRIPT>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_cate.gif" alt="분류디자인관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>쇼핑몰 분류 페이지의 디자인을 설정 하실 수 있는 곳 입니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<form name=myForm>
+<input type=hidden name=path_cate1>
+<input type=hidden name=path_cate2>							
+<input type=hidden name=path_cate3>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+	<td>&nbsp;<img src='img/ttl_cate_sec.gif' align=absmiddle>&nbsp;&nbsp;<font class=small>디자인을 설정할 분류를 선택 하시면 됩니다.</font>
+	</td>
+</tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">							
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table width="100%" align=center border=0 cellpadding=0 cellspacing=1>
+					<tr height=30 align=left>
+						<TD class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;1차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;2차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;3차분류</font></TD>
+						<td class=gr_bg align=center width=25%><font class="bTitle small">*&nbsp;4차분류</font></td>
+					</tr>
+
+					<tr bgcolor=FFFFFF>
+						<TD><select name="cate1" size=10 style='width:100%;background:#FFFFFF;'></select></TD>
+						<TD><select name="cate2" size=10 style='width:100%;background:#FFFFFF;'></select></TD>
+                        <TD><select name="cate3" size=10 style='width:100%;background:#FFFFFF;'></select></TD>	
+						<td><select name="cate4" size=10 style='width:100%;background:#FFFFFF;'></select></td>	
+					</tr>					
+					</table>
+				</td>
+			</tr>
+			</table>
+     </td></tr>
+	 </table>		
+</td></tr>
+<!---------------------------- @3차분류 추가 및 분류 관리폼 끝 ----------------------------------->
+</table>
+
+<table width=99% align=center cellpadding=0 cellspacing=0>
+<TR><TD height=6></TD></TR>
+<TR><TD align=center>
+	<TABLE width="100%" border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE">
+	  <TR>
+	    	<TD>
+				<TABLE width="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
+				<TR> 
+					<TD> 
+					<TABLE width=100% border=0 cellpadding=0 cellspacing=1>
+					<TR  height=30>
+						<TD class=gr_bg width=120><font class="bTitle small">*&nbsp;선택된 분류 위치</font></TD>
+						<TD align="left" bgcolor=efefef>&nbsp;<font class="eng">HOME</font>&nbsp;<input type='text' name='this_path' value='' size=90 style='background-color:#efefef;border-width:0;border-style:solid;color:#0083c7;' readonly>			
+						</TD>
+					</TR>					
+					
+					</TABLE>
+                	<!--@ 상품분류 테이블 -->
+			        </TD>
+		        </TR>
+		        </TABLE>
+         </TD>
+     </TR>
+     </TABLE>
+   </TD>
+</TR>
+<tr><td height=20></td></tr>
+<table>
+</FORM>
+
+<table width=99% align=center cellpadding=0 cellspacing=0 id="codeArea1" >
+<!---------------------------- 메인 상품 관리 ----------------------------------->
+<tr><td>&nbsp;<img src='./img/ttl_cate_goods.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='goodsForm' method='post' action='design_post.php?mode=mgoods2'>
+					<input type="hidden" name="cate">
+					<tr height=30 align=left> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;인기 상품</font></td>
+							<td bgcolor="#EEEEEE">
+								<input type='radio' name='hit_use' id='hit_use1' value='0' onfocus='blur();'>&nbsp;<label for='hit_use1'>사용안함</label>
+								<input type='radio' name='hit_use' id='hit_use2' value='2' onfocus='blur();'>&nbsp;<label for='hit_use2'>상품이동형</label>
+								<input type='radio' name='hit_use' id='hit_use3' value='3' onfocus='blur();'>&nbsp;<label for='hit_use3'>상품그룹이동형</label>
+							</td>
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+							<td bgcolor="#EEEEEE" width="120">&nbsp;
+								<select name=hit_num>
+								<?
+								for($i=0,$cnt=count($skin_hit);$i<$cnt;$i++) {
+									echo "<option value='{$skin_hit[$i]}'>{$skin_hit[$i]}</option>";
+								}
+								?>
+								</select>개						
+							</td>
+					</tr>
+					<tr height=30 align=left> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추천 상품</font></td>
+							<td bgcolor="#EEEEEE">
+								<input type='radio' name='reco_use' id='reco_use1' value='0' onfocus='blur();'>&nbsp;<label for='reco_use1'>사용안함</label>
+								<input type='radio' name='reco_use' id='reco_use2' value='2' onfocus='blur();'>&nbsp;<label for='reco_use2'>상품이동형</label>
+								<input type='radio' name='reco_use' id='reco_use3' value='3' onfocus='blur();'>&nbsp;<label for='reco_use3'>상품그룹이동형</label>
+							</td> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+							<td bgcolor="#EEEEEE">&nbsp;
+								<select name=reco_num>
+								<?
+								for($i=0,$cnt=count($skin_reco);$i<$cnt;$i++) {
+									echo "<option value='{$skin_reco[$i]}'>{$skin_reco[$i]}</option>";
+								}
+								?>
+								</select>개							
+							</td>
+					</tr>
+					<tr height=30 align=left> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;새로운 상품</font></td>
+							<td bgcolor="#EEEEEE">
+								<input type='radio' name='new_use' id='new_use1' value='0' onfocus='blur();'>&nbsp;<label for='new_use1'>사용안함</label>
+								<input type='radio' name='new_use' id='new_use2' value='1' onfocus='blur();'>&nbsp;<label for='new_use2'>리스트형</label>
+								<input type='radio' name='new_use' id='new_use3' value='2' onfocus='blur();'>&nbsp;<label for='new_use3'>상품이동형</label>
+								<input type='radio' name='new_use' id='new_use4' value='3' onfocus='blur();'>&nbsp;<label for='new_use4'>상품그룹이동형</label>								
+							</td> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+							<td bgcolor="#EEEEEE">&nbsp;
+								<select name=new_num>
+								<?
+								for($i=0,$cnt=count($skin_new);$i<$cnt;$i++) {
+									echo "<option value='{$skin_new[$i]}'>{$skin_new[$i]}</option>";
+								}
+								?>
+								</select>개								
+							</td>
+					</tr>					
+					<tr height=30 align=left>
+                             <td  bgcolor="#ffffff" align='right' colspan='4' style="padding-left:6px">
+								<div style="float:left;padding-top:6px;" class='small'>
+								! 분류 페이지에 나타나는 상품들의 사용유무와 갯수를 수정 하실 수 있습니다.
+								&nbsp;XML파일로 제공이 되어 플래시 파일과 연동이 가능 합니다.
+								</div>
+								
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="document.goodsForm.submit();return false;"><span class="blue">설정저장</span></a>
+								</div>	
+
+							 </td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<!---------------------------- @메인 상품 관리 끝 ----------------------------------->
+<tr><td height=20></td></tr>
+</table>
+
+<table width=99% align=center cellpadding=0 cellspacing=0 id="codeArea2" >
+<!---------------------------- 메인 디스플래이 관리 ----------------------------------->
+<tr><td>&nbsp;<img src='./img/ttl_cate_display.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='codeForm' method='post' action='design_post.php?mode=code2'>
+					<input type="hidden" name="cate">
+					<tr height=30 align=left> 
+						<td class=gr_bg width="20%"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;분류박스 위 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;"><input type='radio' name='cate_up_use' id='cup_use1' value='1' onfocus='blur();'>&nbsp;<label for='cup_use1'>사용함</label>
+						<input type='radio' name='cate_up_use' id='cup_use2' value='2' onfocus='blur();'>&nbsp;<label for='cup_use2'>사용안함</label><input type="text" style="border:0;background-color:#EEE" size="40"></td>
+					</tr>
+					<tr align=left>
+						<td bgcolor=#FFFFFF colspan=2>
+							<textarea name="cate_insert" id="cate_insert"></textarea>
+							<script>var cate_insert = new pEditor("cate_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;분류박스 아래 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;"><input type='radio' name='hit_up_use' id='hup_use1' value='1' onfocus='blur();'>&nbsp;<label for='hup_use1'>사용함</label>
+						<input type='radio' name='hit_up_use' id='hup_use2' value='2' onfocus='blur();'>&nbsp;<label for='hup_use2'>사용안함</label> </td>
+					</tr>
+					<tr align=left>
+						<td bgcolor=#FFFFFF colspan=2>
+							<textarea name="hit_insert" id="hit_insert"></textarea>
+							<script>var hit_insert = new pEditor("hit_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 분류박스 위, 아래에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main2_code']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode();"><span class="blue">설정저장</span></a>
+							</div>								
+						</td>
+					</tr>            
+						
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<!---------------------------- @메인디스플래이 관리 끝 ----------------------------------->
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<iframe name="HFrm" style="display:none"></iframe>
+
+
+<script>
+
+var myForm = document.myForm;
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+	myForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+myForm.cate1.onchange=function(e){
+	for(i=myForm.cate2.length;i>=0;i--){
+		myForm.cate2.options[i]=null;
+	}
+	for(i=myForm.cate3.length;i>=0;i--){
+		myForm.cate3.options[i]=null;
+	}
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+		if(CATEname[sIndex][i][0]) myForm.cate2.options[i-1]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+		else myForm.cate2.options[i-1]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+	}
+	myForm.this_path.value	= "> " + myForm.cate1.options[sIndex].text.split('→')[0];
+	myForm.path_cate1.value = "> " + myForm.cate1.options[sIndex].text.split('→')[0];
+
+	tmps = myForm.cate1.options[sIndex].value.split('→')[0].split(':');
+	if(tmps[1]=='O') document.getElementById("codeArea1").style.display = 'block';
+	document.getElementById("codeArea2").style.display = 'block';	
+	
+	document.codeForm.cate.value = tmps[0];
+	HFrm.location.href = "secCate.php?cate="+tmps[0];
+}
+
+myForm.cate2.onchange=function(e){
+	for(i=myForm.cate3.length;i>=0;i--){
+		myForm.cate3.options[i]=null;
+	}
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,sIndex2=myForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2+1].slice(1).length;i<=cnt;i++){
+		if(typeof(CATEname[sIndex][sIndex2+1][i][0])!='undefined') myForm.cate3.options[i-1]=new Option(CATEname[sIndex][sIndex2+1][i][0],CATEnum[sIndex][sIndex2+1][i][0]);
+	}
+   
+	myForm.this_path.value	= myForm.path_cate1.value + " > " + myForm.cate2.options[sIndex2].text.split('→')[0];
+	myForm.path_cate2.value = myForm.path_cate1.value + " > " + myForm.cate2.options[sIndex2].text.split('→')[0];
+	
+	tmps = myForm.cate2.options[sIndex2].value.split('→')[0].split(':');
+	if(tmps[1]=='O') document.getElementById("codeArea1").style.display = 'block';
+	else document.getElementById("codeArea1").style.display = 'none'; 
+	document.getElementById("codeArea2").style.display = 'block';	
+	
+	document.codeForm.cate.value = tmps[0];
+	HFrm.location.href = "secCate.php?cate="+tmps[0];
+}
+
+myForm.cate3.onchange=function(e){
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,sIndex2=myForm.cate2.selectedIndex,sIndex3=myForm.cate3.selectedIndex,cnt=CATEname[sIndex][sIndex2+1][sIndex3+1].slice(1).length;i<=cnt;i++){
+		if(typeof(CATEname[sIndex][sIndex2+1][sIndex3+1][i])!='undefined') myForm.cate4.options[i-1]=new Option(CATEname[sIndex][sIndex2+1][sIndex3+1][i],CATEnum[sIndex][sIndex2+1][sIndex3+1][i]);
+	}
+   
+	myForm.this_path.value	= myForm.path_cate2.value + " > " + myForm.cate3.options[sIndex3].text.split('→')[0];
+	myForm.path_cate3.value = myForm.path_cate2.value + " > " + myForm.cate3.options[sIndex3].text.split('→')[0];
+	
+	tmps = myForm.cate3.options[sIndex3].value.split('→')[0].split(':');
+	document.getElementById("codeArea1").style.display = 'none'; 
+	document.getElementById("codeArea2").style.display = 'block';	
+	
+	document.codeForm.cate.value = tmps[0];
+	HFrm.location.href = "secCate.php?cate="+tmps[0];
+}
+
+myForm.cate4.onchange=function(e){
+	sIndex=myForm.cate4.selectedIndex;   
+	myForm.this_path.value	= myForm.path_cate3.value + " > " + myForm.cate4.options[sIndex].text.split('→')[0];	
+	
+	tmps = myForm.cate4.options[sIndex].value.split('→')[0].split(':');
+	document.getElementById("codeArea1").style.display = 'none'; 
+	document.getElementById("codeArea2").style.display = 'block';	
+	
+	document.codeForm.cate.value = tmps[0];
+	HFrm.location.href = "secCate.php?cate="+tmps[0];
+}
+
+<?
+if($_GET['cate']) { 
+	$cate = $_GET['cate'];
+	
+	if(substr($cate,3,9)=="000000000") {		
+		$sql = "SELECT cate_sub FROM mall_cate WHERE cate='{$cate}'";
+
+		if($mysql->get_one($sql)) $cate1 = $cate.":O";
+		else $cate1 = $cate.":X";
+
+		echo "
+			myForm.cate1.value = '{$cate1}';
+			myForm.cate1.onchange();
+			";
+	}
+	else if(substr($cate,6,6)=="000000") {
+		$cate1 = substr($cate,0,3)."000000000:O";		
+		$sql = "SELECT cate_sub FROM mall_cate WHERE cate='{$cate}'";
+
+		if($mysql->get_one($sql)) $cate2 = $cate.":O";
+		else $cate2 = $cate.":X";
+
+		echo "
+			myForm.cate1.value = '{$cate1}';
+			myForm.cate1.onchange();
+			myForm.cate2.value = '{$cate2}';
+			myForm.cate2.onchange();			";
+	}
+	else {
+		$cate1 = substr($cate,0,3)."000000000:O";
+		$cate2 = substr($cate,0,6)."000000:O";
+		
+		if(substr($cate,9,3)=="000") {
+			$sql = "SELECT cate_sub FROM mall_cate WHERE cate='{$cate}'";
+
+			if($mysql->get_one($sql)) $cate3 = $cate.":O";
+			else $cate3 = $cate.":X";
+
+			echo "
+				myForm.cate1.value = '{$cate1}';
+				myForm.cate1.onchange();
+				myForm.cate2.value = '{$cate2}';
+				myForm.cate2.onchange();
+				myForm.cate3.value = '{$cate3}';
+				myForm.cate3.onchange();
+				";
+		}
+		else {
+			$cate3 = substr($cate,0,9)."000:O";
+			$cate4 = $cate;
+
+			echo "
+				myForm.cate1.value = '{$cate1}';
+				myForm.cate1.onchange();
+				myForm.cate2.value = '{$cate2}';
+				myForm.cate2.onchange();
+				myForm.cate3.value = '{$cate3}';
+				myForm.cate3.onchange();
+				myForm.cate4.value = '{$cate4}';
+				myForm.cate4.onchange();
+				";
+		}
+	}
+}
+
+?>
+pE[0] = cate_insert;
+pE[1] = hit_insert;
+</script>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

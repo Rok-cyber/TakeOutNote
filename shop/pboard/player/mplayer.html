@@ -1,0 +1,486 @@
+<html>
+<head>
+    <title>Mplayer</title>
+
+<!--아래 소스는 네이버 동영상 플레이어를 부분 발췌한 소스입니다. 저작권은 네이버에 있음을 밝힙니다.-->
+<style>
+.vdn{font-family:verdana}
+.box01{border:0px solid #000000;background-color:#000000;line-height:1.4}
+.p10, a.p10:link, a.p10:visited, a.p10:hover, a.p10:active{font-size:10px}
+.ls{letter-spacing:-1px}
+.imgborder {border:1px #C0C0C0 solid;}
+.sel_on {border:2px #B0B0B0 solid;}
+.sel_off {border:2px #F3F3F3 solid;}
+.scr_tag {width:65px; height:22px; border:1px #C0C0C0 solid; padding:3px 0 0 0;}
+</style>
+
+<SCRIPT language="javascript">
+<!--
+var oldPos = 0;            //클릭시 마우스좌표
+var oldPixel = 0;        //클릭시 슬라이더 좌표
+var bDrag = false;            //움직임
+var bPlay = false;                //플레이중
+
+/********************************************************************
+재생 관련
+********************************************************************/
+var progressBar_StartPixel =0;        //플레이바 시작위치
+var progressBar_Size = 280;        //플레이바 크기
+function progressBar_onmousedown() {
+    if (!bPlay)
+        return ;
+        
+    if (MediaPlayer.CurrentPosition == -1 )        //Player.FileName이 설정되어 있지 않으면 걍 리턴해 버린다.
+        return false;
+
+    oldPos = event.clientX;
+    bDrag  = true;
+    TrackBar = event.srcElement.parentElement;
+    oldPixel = progressBar.style.pixelLeft; 
+    document.onmousemove = PlayMoveSlider;
+    if(document.all)
+    {
+        document.onmouseup = PlayStopSlider;
+    }
+}
+
+function PlayMoveSlider() {
+    if (bDrag) {
+        var XPos = oldPixel + (event.clientX - oldPos);    //최초 마우스다운일때 좌표에서 mousemove한 좌표값
+        if((progressBar_StartPixel <= XPos  )
+            && (XPos <= progressBar_StartPixel + (progressBar_Size  ) ) )    
+        {
+        
+            //프로그래스바 이동
+            document.all.progressBar.style.pixelLeft = XPos;
+                
+        }//if((XPos >= startVolPos) &&....
+        return false;
+    }
+    
+}
+
+
+function PlayStopSlider() {
+
+    bDrag = false;
+        
+    MediaPlayer.currentPosition  = Pixel2Pos(progressBar.style.pixelLeft - progressBar_StartPixel)
+    if (MediaPlayer.PlayState == 1)    //일시 중지 일때, 즉 스라이더 움직임에 의해 중단되었을 때만, 다시 실행
+        MediaPlayer.Play();        
+        
+    document.onmousemove = null;
+    if(document.all);
+        document.onmouseup = null;
+}    
+
+function Pixel2Pos(nPixel)
+{
+        return parseInt((nPixel) * MediaPlayer.Duration / progressBar_Size);
+}
+
+
+/*********************************************************************
+volume관련
+**********************************************************************/
+var imgpath = "img/naver_movie";
+var volumeMin = -3000;        
+var volumeMax = 0;
+var volumeValue = 0;
+var oldVolume = 0;
+var VolumeBar_StartPixel = 0;
+var VolumeBar_Size = 34;    //볼륨바 크기
+
+function VolumeBar_onmousedown() {
+    if (!bPlay)
+        return ;
+        
+    oldPos = event.clientX;                            //최초 마우스다운일때 좌표
+    oldPixel = VolumeBar.style.pixelLeft;                //최초 마우스다운 일때 슬라이더좌표
+    oldVolume = MediaPlayer.Volume
+    bDrag = true;
+    document.onmousemove = VolumeMoveSlider;            //onmousemove캡쳐
+    if (document.all)
+        document.onmouseup=VolumeStopSlider;        //onmousemove 해제
+}
+
+function VolumeMoveSlider() {
+    if (bDrag) {
+        var XPos = oldPixel + event.clientX - oldPos;    //최초 마우스다운일때 좌표에서 mousemove한 좌표값
+        
+        if((VolumeBar_StartPixel <= XPos  )
+            && (XPos <= VolumeBar_StartPixel + VolumeBar_Size ) )    
+        {
+            
+            VolumeBar.style.pixelLeft = XPos;    //마우스 이동한 만큼 슬라이더 이동
+            vol_position_bg.style.width = VolumeBar.style.pixelLeft - VolumeBar_StartPixel;
+            var mouseMove = XPos - oldPixel;    //마우스이동값
+            var currentVolumeValue = oldVolume - parseInt(mouseMove * volumeMin / VolumeBar_Size );
+            
+            if( currentVolumeValue <= -4929) 
+                MediaPlayer.Volume = volumeMin;
+            else if (currentVolumeValue >= volumeMax)
+                MediaPlayer.Volume = volumeMax;
+            else 
+                MediaPlayer.Volume = currentVolumeValue;    
+    
+
+        }
+        return false;
+    }//if (bDrag)
+}
+
+function VolumeStopSlider() {
+    bDrag = false;
+}
+
+function VolumeInit() {
+
+    //볼륨초기화
+    VolumeBar.style.pixelLeft = VolumeBar_StartPixel + VolumeBar_Size /2  ;
+    vol_position_bg.style.width = VolumeBar.style.pixelLeft - VolumeBar_StartPixel;
+    MediaPlayer.Volume =  volumeMin / 2;
+}
+
+//음소거  ---------------------------------------------------------------------------------------
+function setMute() {
+
+    if (!bPlay)
+        return ;
+        
+    if(MediaPlayer.mute==false)
+    {
+        player_mute.src = imgpath+"btn_ctl_soundoff.gif";
+        MediaPlayer.mute = true;
+    }
+    else
+    {
+        player_mute.src = imgpath+"btn_ctl_soundon.gif";
+        MediaPlayer.mute = false;
+    }
+}
+
+
+function playerControl(action)
+{
+    try {
+        if (action == "play")
+        {    
+            MediaPlayer.Play();
+			imgView.style.display = "none";
+            play_botton.style.visibility = "hidden";
+            pause_botton.style.visibility = "visible";
+            stop_botton.style.visibility = "visible";        
+            
+        }
+        else if (action == "pause")
+        {        
+            if (MediaPlayer.PlayState ==2)
+                MediaPlayer.Pause();
+            play_botton.style.visibility = "visible";
+            pause_botton.style.visibility = "hidden";
+            stop_botton.style.visibility = "visible";        
+            
+        }
+        else if (action == "open")
+        {
+            try{
+                MediaPlayer.open("<?=$_GET['url']?>");  //동영상 경로 설정
+                imgView.style.display = "none";                 
+                play_botton.style.visibility = "hidden";
+                pause_botton.style.visibility = "visible";
+                stop_botton.style.visibility = "visible";        
+                ScreenPlay.src = "img/title_replay.gif";
+                
+            }catch(e){}
+            
+            //볼륨셋팅    
+            VolumeInit();
+        }
+        
+        else if (action == "stop")
+        {  
+		    imgView.style.display = "block";
+            play_botton.style.visibility = "hidden";
+            pause_botton.style.visibility = "hidden";
+            stop_botton.style.visibility = "hidden";        
+            MediaPlayer.Stop();
+            //볼륨셋팅    
+            VolumeInit();
+        }
+    }catch(e){
+        alert("재생되지 않는 동영상 파일이거나\nMicrosoft Widows Media Player6.4 이상이 설치되어 있지않습니다.");
+    }
+}
+
+
+
+//플레이 트랙바 자동이동-----------------------------------------------------------------------------------
+function ScrollBarState() {
+
+    CurrentPosition.innerHTML = TimeFormat(MediaPlayer.CurrentPosition);
+    Duration.innerHTML = TimeFormat(MediaPlayer.duration);
+    
+    if(bDrag == false)
+    {
+        progressBar.style.pixelLeft = progressBar_StartPixel + parseInt(MediaPlayer.CurrentPosition*progressBar_Size/MediaPlayer.duration);
+    }
+        position_bg.width =parseInt(MediaPlayer.CurrentPosition*progressBar_Size/MediaPlayer.duration);
+    
+}
+
+
+function TimeFormat(totalsecond)
+{
+    
+    var second = parseInt(totalsecond) % 60;
+    var minute = parseInt(totalsecond / 60);    
+    return ((minute < 10)?"0":"")+minute+":" + ((second < 10)?"0":"")+second;
+}
+
+function progressBuffering(bPlay)
+{
+    if(bPlay)
+    {
+        var BufferingProgress = MediaPlayer.BufferingProgress;
+        var disBuffer="";
+        
+        //for(var i=0; i < BufferingProgress; i=i+20)
+        disBuffer +="<img src=img/img_bufferings.gif width=30 height=5>";
+        
+        PlayStateTable.style.visibility = "visible";        
+        PlayState.style.visibility = "visible";    
+        PlayState.innerHTML = disBuffer;
+    }
+    else
+    {
+        PlayStateTable.style.visibility = "hidden";    
+        PlayState.style.visibility = "hidden";    
+    }
+        
+}
+function onFullScreen()
+{
+    MediaPlayer.DisplaySize = 3;
+}
+function onView(width,height)
+{
+    document.all["MediaPlayer"].style.width = width;
+    document.all["MediaPlayer"].style.height = height;
+
+}
+//-->
+</SCRIPT>
+<SCRIPT language="javascript" event="PlayStateChange(OldState,NewState)" for="MediaPlayer">
+    switch (NewState){
+    
+        case 0:        
+		    imgView.style.display = "block";
+            play_botton.style.visibility = "visible";
+            pause_botton.style.visibility = "hidden";
+            try{clearTimeout(MediaTimer);    }catch(e){return;}
+            bPlay = true;
+            progressBuffering(false);
+            break;
+        case 1: 
+		    imgView.style.display = "block";
+            play_botton.style.visibility = "visible";
+            pause_botton.style.visibility = "hidden";
+            try{clearTimeout(MediaTimer);    }catch(e){return;}
+            bPlay = true;
+            break;
+        case 2:        //플레이중            
+            play_botton.style.visibility = "hidden";
+            pause_botton.style.visibility = "visible";
+            stop_botton.style.visibility = "visible";
+            MediaTimer=window.setInterval("ScrollBarState()",500);            
+            bPlay = true;
+            progressBuffering(false);
+            break;
+        case 3:        //버퍼링중..
+            progressBuffering(true);
+            break;
+        case 6:        //버퍼링중..        
+            progressBuffering(true);
+            break;
+        default:
+    
+    }
+</SCRIPT>
+<SCRIPT language="javascript" event="Buffering(bStart)" for="MediaPlayer">
+    if (bStart) 
+    {    
+        idI = window.setInterval("progressBuffering()",100);
+    }else{
+        clearTimeout(idI);    
+    }
+</script>
+<script language="javascript">
+
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+//-->
+</SCRIPT>
+
+</head>
+
+<body>
+
+<center>
+
+<table width=422 height=360 cellspacing=1 cellpadding=0 border=0 bgcolor=#DEDEDE>
+<tr valign="top">
+
+
+
+
+<td bgcolor=#FFFFFF background="img/img_conbg.gif" style='padding:8px 8px 0 8px'>
+
+
+    <!-- 화면 -->
+    <table width=404 cellspacing=0 cellpadding=0>
+    <tr>
+    <td bgcolor="#000000" width="400" height="304" align="center" valign="middle" style="border-top:2px solid #C0C0C0;border-right:2px solid #FFFFFF;border-left:2px solid #C0C0C0;border-bottom:2px solid #FFFFFF;">
+		<div style="height:304px;width:400px;overflow:hidden;white-space:nowrap;">
+		<img src="<?=$_GET['img']?>" border="0" width="400" height="300" id="imgView">
+        
+		<script>
+            document.write(""
+            + "<OBJECT ID='MediaPlayer' Name='MediaPlayer' classid='clsid:22D6F312-B0F6-11D0-94AB-0080C74C7E95' codebase='http://activex.microsoft.com/activex/controls/mplayer/en/nsmp2inf.cab#Version=5,1,52,701' standby='Loading Microsoft Windows Media Player components...' type='application/x-oleobject ' bgcolor='DarkBlue' width='400' Height='300' VIEWASTEXT>"
+            + "<PARAM NAME='AutoStart' VALUE='1'>"
+            + "<PARAM NAME='AutoSize' VALUE='1'>"
+            + "<PARAM NAME='AnimationAtStart' VALUE='0'>"
+            + "<PARAM NAME='DisplayMode' VALUE='4'>"
+            + "<PARAM NAME='Enabled' VALUE='1'>"
+            + "<PARAM NAME='ShowControls' VALUE='0'>"
+            + "<PARAM NAME='ShowAudioControls' VALUE='0'>"
+            + "<PARAM NAME='ShowDisplay' VALUE='0'>"
+            + "<PARAM NAME='ShowGotoBar' VALUE='0'>"
+            + "<PARAM NAME='ShowPositionControls' VALUE='0'>"
+            + "<PARAM NAME='ShowStatusBar' VALUE='0'>"
+            + "<PARAM NAME='Volume' VALUE='50'>"
+            + "<PARAM NAME='ShowCaptioning' VALUE='0'>"
+            + "<PARAM NAME='TransparentAtStart' value='1'>"
+            + "<EMBED invokeURLs='false' type='application/x-mplayer2' pluginspage='http://www.microsoft.com/Windows/Downloads/Contents/Products/MediaPlayer/' id='MediaPlayer' Name='MediaPlayer' DisplaySize='4' AutoSize='1' ShowControls='0' ShowDisplay='0' ShowStatusBar='1' autostart='1'>"
+            + "</EMBED>"
+            + "</OBJECT></td>");
+        </script>		
+		</div>
+    </td>
+    </tr>
+    </table>
+    <!-- //화면 -->
+    
+    <!-- 컨트롤 -->
+    <table width="404" cellspacing=0 cellpadding=0>
+    <tr>
+    <td width=329 nowrap>
+        <!-- 상태바 -->
+        <table width=320 cellspacing=0 cellpadding=0>
+        <tr><td colspan=4 height=3></td></tr>
+        <tr>
+        <td><img src=img/rnd01_l.gif width=4 height=8></td>
+        <td width=100% background=img/rnd01_c.gif style="position:relative ">
+			<DIV id="progressBar" style="Z-INDEX: 6; POSITION: absolute; top:0px; left: 0px;" LANGUAGE="javascript" onmousedown="return progressBar_onmousedown()" onmouseover="this.style.cursor='hand'"><img src=img/img_nvr_sts.gif width=39 height=8></DIV>
+			<DIV style="Z-INDEX: 5; POSITION: absolute; left: 0px; top: -2px;"><img src=img/img_nvr_bar2.gif width=1 height=12 name="position_bg"></DIV></td>
+        <td><img src=img/rnd01_r.gif width=4 height=8></td>
+        </tr>
+        <tr><td colspan=4 height=2></td></tr>
+        </table>
+        <!-- //상태바 -->    
+	</td>
+    <td width=75 align=right nowrap>
+        <!-- 소리 -->
+        <table width=75 cellspacing=0 cellpadding=0 border=0>
+        <tr><td colspan=4 height=1></td></tr>
+        <tr>
+        <td><img src=img/btn_ctl_soundon.gif width=17 height=12 id="player_mute" style="cursor:hand " onClick="setMute()"></td>
+        <td><img src=img/rnd02_l.gif width=4 height=12></td>
+        <td width=100% background=img/rnd02_c.gif style="position:relative "><div style="Z-INDEX: 1; POSITION: absolute;left: 0px; top: 3px;"><img src=img/img_nvr_bar2.gif width=1 height=6 name="vol_position_bg"></div>
+        <div id="VolumeBar" style="Z-INDEX: 2; POSITION: absolute; height: 1px; left: 0px; top: 3px;" language="javascript" onMouseDown="VolumeBar_onmousedown()" onMouseOver="this.style.cursor='hand'"><img src=img/img_nvr_sts2.gif width=15 height=6></div></td>
+        <td><img src=img/rnd02_r.gif width=4 height=12></td>
+        </tr>
+        </table>
+        <!-- //소리 -->
+    </td>
+    </tr>
+    </table>
+    <!-- //컨트롤 -->
+    
+    <!-- 버튼 -->
+    <table width=403 cellspacing=0 cellpadding=0>
+    <tr>
+    <td nowrap>
+        <!-- 버튼 -->
+        <table cellspacing=0 cellpadding=0 border=0>
+        <tr>
+        <td style='padding-left:1px'><SPAN id="pause_botton" style="VISIBILITY: hidden; POSITION: absolute"><img src="img/btn_ctr_stop1.gif" name="Image22" width="21" height="21" border="0" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image22','','img/btn_ctr_stop1_nvr0.gif',1)" style="CURSOR: pointer" onmousedown="MM_swapImage('Image22','','img/btn_ctr_stop1_nvr1.gif',1);" onClick="playerControl('pause')"></SPAN>
+		<SPAN id="play_botton" style="VISIBILITY: hidden; POSITION: absolute"><img src="img/btn_ctr_play.gif" name="Image23" width="21" height="21" border="0" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image23','','img/btn_ctr_play_nvr0.gif',1)" style="CURSOR: pointer" onmousedown="MM_swapImage('Image23','','img/btn_ctr_play_nvr1.gif',1);" onClick="playerControl('play')"></SPAN>
+		<img src="img/btn_ctr_play.gif" name="Image20" width="21" height="21" border="0" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image20','','img/btn_ctr_play_nvr0.gif',1)" style="CURSOR: pointer" onmousedown="MM_swapImage('Image20','','img/btn_ctr_play_nvr1.gif',1);" onClick="playerControl('open')"></td>
+        <td style='padding-left:2px'><SPAN id="stop_botton" style=" POSITION: absolute;VISIBILITY: hidden;"><img src="img/btn_ctr_stop.gif" name="Image21" width="21" height="21" border="0" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('Image21','','img/btn_ctr_stop_nvr0.gif',1)" style="CURSOR: pointer" onmousedown="MM_swapImage('Image21','','img/btn_ctr_stop_nvr1.gif',1);" onClick="playerControl('stop')"></SPAN><img src="img/btn_ctr_stop.gif"  width="21" height="21" border="0" style="CURSOR: hand" onclick="playerControl('stop')"></td>
+        <td width=15 align="right" nowrap><img src=img/img_line.gif width=2 height=21></td>
+        </tr>
+        </table>
+        <!-- //버튼 -->
+    </td>
+    <td width="84"></td>
+    <td width="44" nowrap valign=bottom style="padding-bottom:2 ">
+        <table id="PlayStateTable" style="VISIBILITY: hidden;" width=42 height=18 cellspacing=0 cellpadding=0 border=0 background=img/bg_buffering.gif>
+        <tr><td class='p10 black vdn ls' style='padding-left:7px'><span id="PlayState" style="VISIBILITY: hidden;"><img src=img/img_buffering.gif width=6 height=5><img src=img/img_buffering.gif width=6 height=5><img src=img/img_buffering.gif width=6 height=5><img src=img/img_buffering.gif width=6 height=5><img src=img/img_buffering.gif width=6 height=5></span></td></tr>
+        </table>
+        
+        <!-- 버퍼링 -->
+    </td>
+    <td align="right" nowrap>
+        <table cellspacing=0 cellpadding=0 >
+        <tr valign="top">
+        <td style="padding:3px 0 0 0;">
+            <!-- 타임 -->
+            <table width=83 height=18 cellspacing=0 cellpadding=0 border=0 background=img/bg_time.gif>
+            <tr><td class='p10 black vdn ls' style='padding-bottom:1px;padding-left:7px'><span id="CurrentPosition">00:00</span>　<span id="Duration" class='gray02'>00:00</span></td></tr>
+            </table>
+            <!-- 타임 -->
+            <!-- 버퍼링 시
+            <img src="img/white_buffering_ani.gif" width="83" height="18"><br>
+            -->
+        </td>
+        <td style="padding:0 10px 0 10px;"><img src=img/img_line.gif width=2 height=21 style="margin-top:2px;"></td>
+        <td style="padding:3px 0 0 0;"><img src=img/btn_320.gif width=33 height=17 onmouseout=this.src='img/btn_320.gif' onmouseover=this.src='img/btn_320_on.gif' onmousedown=this.src='img/btn_320_dn.gif' style="cursor:hand" onClick="onView(320,240)"></td>
+        <td style="padding:3px 0 0 1px;"><img src=img/btn_400.gif width=33 height=17 onmouseout=this.src='img/btn_400.gif' onmouseover=this.src='img/btn_400_on.gif' onmousedown=this.src='img/btn_400_dn.gif' style="cursor:hand" onClick="onView(400,300)"></td>
+        <td style="padding:3px 0 0 1px;"><img src=img/btn_full.gif width=33 height=17 onmouseout=this.src='img/btn_full.gif' onmouseover=this.src='img/btn_full_on.gif' onmousedown=this.src='img/btn_full_dn.gif' style="cursor:hand" onClick="onFullScreen()"></td>
+          </tr>
+        </table>
+    </td>
+    </tr>
+    </table>
+    <!-- //버튼 -->
+
+
+
+</td>
+</tr>
+</table>
+</body>
+
+</HTML> 

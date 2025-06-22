@@ -1,0 +1,996 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+$sql = "SELECT code FROM mall_design WHERE mode='A'";
+$tmp1 = $mysql->get_one($sql);
+$basic=explode("|*|",stripslashes($tmp1));
+if(!$basic[0]) $basic[0] = "http://";
+
+$sql = "SELECT code FROM mall_design WHERE mode='B'";
+$tmp2 = $mysql->get_one($sql);
+$cash=explode("|*|",stripslashes($tmp2));
+$CKD1[$cash[0]] = "checked";
+$CKD2[$cash[1]] = "checked";
+${"SED".$cash[2]} = "selected";
+$CKD3[$cash[6]] = "checked";
+$CKD4[$cash[10]] = "checked";
+$CKD9[$cash[16]] = "checked";
+$CKD10[$cash[17]] = "checked";
+$CKD11[$cash[18]] = "checked";
+$CKD12[$cash[19]] = "checked";
+$CKD13[$cash[21]] = "checked";
+$CKD14[$cash[23]] = "checked";
+
+if(!$cash[4]) $cash[4]="1000";
+
+if($cash[5]) $bank_info = explode("|",$cash[5]);
+$bank_info2 = explode(",",$bank_info[0]);
+
+$c_money3 = explode("|",$cash[13]);
+$addCarr = explode("|",$cash[14]);
+
+$sql	= "SELECT code FROM mall_design WHERE mode='D'";
+$tmp	= $mysql->get_one($sql);
+$info	= stripslashes($tmp);
+
+$sql	= "SELECT code FROM mall_design WHERE mode='W'";
+$tmp	= $mysql->get_one($sql);
+$ssl	= explode("|*|",$tmp);
+
+$CKD20[$ssl[0]] = "checked";
+if($ssl[1]) $pssl = ":{$ssl[1]}";
+else $pssl = ":443";
+if($ssl[2]) {
+	$tmp    = explode("|",$ssl[2]);
+	for($i=0,$cnt=count($tmp);$i<$cnt;$i++){
+		${"CKD2".$tmp[$i]} = "checked";
+	}
+}
+
+$sql	= "SELECT code FROM mall_design WHERE mode='T'";
+$tmp	= $mysql->get_one($sql);
+$etc_info = explode("|",$tmp);
+
+$CKD5[$etc_info[0]] = "checked";
+$CKD6[$etc_info[1]] = "checked";
+$CKD7[$etc_info[2]] = "checked";
+
+$up_dir   = previlEncode("../../image/up_img/etc/");
+
+$ssl_use = socketPost("https://".$_SERVER["HTTP_HOST"].$pssl."/".$ShopPath."managers/conf/ssl_test.php");
+$ssl_use = @join("",$ssl_use);
+
+if($ssl_use=="1") {
+	$ssl_use = '';	
+}
+else $ssl_use = 'disabled';
+
+$sql	= "SELECT code FROM mall_design WHERE mode='Y'";
+$tmp	= $mysql->get_one($sql);
+$confirm	= explode("|*|",$tmp);
+
+$CKD30[$confirm[0]] = "checked";
+$CKD31[$confirm[2]] = "checked";
+
+?>
+
+<SCRIPT language="JavaScript">
+<!--
+var bank_ck = 0;
+function bank_manager(mode) {
+    var form = document.cashForm; 
+	
+	if(!form.bank_select.value && (mode=='mod' || mode=='del')){
+       alert('먼저 은행을 선택하시기 바랍니다!');
+       form.bank_select.focus()
+	   return false;
+    }
+
+	if(!form.bank.value && mode !='del') { 
+       alert('은행명을 입력하시기 바랍니다!');
+       form.bank.focus()
+	   return false;
+    }
+	if(!form.bank_num.value && mode !='del') { 
+       alert('계좌번호를 입력하시기 바랍니다!');
+       form.bank_num.focus()
+	   return false;
+    }
+	if(!form.bank_name.value && mode !='del') { 
+       alert('예금주를 입력하시기 바랍니다!');
+       form.bank_name.focus()
+	   return false;
+    }
+	switch (mode) {
+	    case "ins" :
+                 bank_info = form.bank.value+","+form.bank_num.value+","+form.bank_name.value;
+		         eval("form.bank_select.options["+bank_ck+"]=new Option('"+bank_info+"','"+bank_info+"')")
+                 eval("form.bank_select.options["+bank_ck+"].selected=true")
+                 bank_ck ++;
+				 form.bank.value = '';
+				 form.bank_num.value = '';
+				 form.bank_name.value = '';
+        break;
+		case "mod" :
+		         bank_info = form.bank.value+","+form.bank_num.value+","+form.bank_name.value;
+		         for(i=0;i<bank_ck;i++) {
+				 	if(eval("form.bank_select.options["+i+"].selected") ==true) break;
+				 } 
+				 eval("form.bank_select.options["+i+"].value ='"+bank_info+"'")
+				 eval("form.bank_select.options["+i+"].text ='"+bank_info+"'")
+                 eval("form.bank_select.options["+i+"].selected=true")
+         break;
+		 case "del" :
+			     for(i=0;i<bank_ck;i++) {
+					if(eval("form.bank_select.options["+i+"].selected") ==true) break;
+				 }
+				 bank_ck --;
+				 for(j=i;j<bank_ck;j++) {
+				 	j2 = j+1;
+				 	eval("form.bank_select.options["+j+"].value =form.bank_select.options["+j2+"].value")
+				 	eval("form.bank_select.options["+j+"].text =form.bank_select.options["+j2+"].text")
+				 }
+				 eval("form.bank_select.options["+bank_ck+"]= null")    
+				 form.bank.value = '';
+				 form.bank_num.value = '';
+				 form.bank_name.value = '';
+
+				 if(bank_ck=='0') { 
+				 	form.bank_select.options[0]=new Option('입금은행 계좌번호를 입력하세요!','');
+				 } else {
+				    bank_info = form.bank_select.options[0].value;
+					form.bank.value = bank_info.split(",")[0]
+					form.bank_num.value = bank_info.split(",")[1]
+					form.bank_name.value = bank_info.split(",")[2]                    
+                 }
+				 form.bank_select.options[0].selected=true;
+				 bank_cancel();
+          break;		          
+   }
+   return false;
+}
+
+function bank_change() {
+    var form = document.cashForm; 
+	for(i=0;i<bank_ck;i++) {
+	    if(eval("form.bank_select.options["+i+"].selected") ==true) break;
+	}
+    bank_info = form.bank_select.options[i].value;
+	if(!bank_info) return;
+    form.bank.value = bank_info.split(",")[0]
+	form.bank_num.value = bank_info.split(",")[1]
+	form.bank_name.value = bank_info.split(",")[2]
+
+	document.getElementById("bk1").style.display = 'none';
+	document.getElementById("bk2").style.display = 'block';
+	document.getElementById("bk3").style.display = 'block';
+	return false;
+}
+
+function bank_cancel() {
+	var form = document.cashForm; 
+	form.bank.value = '';
+	form.bank_num.value = '';
+	form.bank_name.value = '';
+
+	document.getElementById("bk1").style.display = 'block';
+	document.getElementById("bk2").style.display = 'none';
+	document.getElementById("bk3").style.display = 'none';
+	return false;
+}
+
+
+function cash_submit(){
+    var form = document.cashForm;
+    if(bank_ck>0) {
+	    form.b_info.value = "";
+		for(i=0;i<bank_ck;i++) {
+		 	eval("form.b_info.value += form.bank_select.options["+i+"].value+'|'")
+		}
+	}
+	
+	if(form.c_cash2.checked==true || form.c_cash3.checked==true || form.c_cash5.checked==true){
+	   if(!form.c_card.value){
+	        alert('결제 대행사를 선택하시기 바랍니다.');
+			form.c_card.focus();
+			return false;
+       }
+	   
+	   if(!form.c_id.value && form.c_test.checked==false){
+	        alert('결제 대행사 상점아이디를 입력하시기 바랍니다.');
+			form.c_id.focus();
+			return false;
+       }
+	   if(!form.c_key.value && form.c_test.checked==false){
+	        alert('결제 대행사 상점KEY를 입력하시기 바랍니다.');
+			form.c_key.focus();
+			return false;
+       }
+	   if(!form.c_money.value){
+	        alert('카드결제 최소금액을 입력하시기 바랍니다.');
+			form.c_money.focus();
+			return false;
+       }
+    }
+	form.submit();
+	return false;
+}
+
+function cl_1(num){
+    var form = document.cashForm;
+	if(num=='1') {
+       form.r_join.readOnly=false;
+	   form.r_join.style.background="#FFFFFF";
+	   form.r_order.readOnly=false;
+	   form.r_order.style.background="#FFFFFF";
+	   form.r_money.readOnly=false;
+	   form.r_money.style.background="#FFFFFF";
+	  
+	} else {
+       form.r_join.readOnly=true;
+	   form.r_join.style.background="#F3F3F3";
+	   form.r_order.readOnly=true;
+	   form.r_order.style.background="#F3F3F3";
+	   form.r_money.readOnly=true;
+	   form.r_money.style.background="#F3F3F3";	 
+	}
+   
+}
+
+function cl_2(num){
+    var form = document.cashForm;
+	if(num=='1') {
+		form.c_money1.readOnly=false;
+		form.c_money1.style.background="#FFFFFF";
+		form.c_money2.readOnly=false;
+		form.c_money2.style.background="#FFFFFF";
+	} else {
+		form.c_money1.readOnly=true;
+		form.c_money1.style.background="#F3F3F3";
+		form.c_money2.readOnly=true;
+		form.c_money2.style.background="#F3F3F3";
+	}   
+}
+
+function cl_3(num){
+    var form = document.confirmForm;
+	if(num=='1') {
+		form.c_id.readOnly=false;
+		form.c_id.style.background="#FFFFFF";		
+		form.c_pw.readOnly=false;
+		form.c_pw.style.background="#FFFFFF";		
+		form.c_use21.disabled = false;
+		form.c_use22.disabled = false;
+	} else {
+		form.c_id.readOnly=true;
+		form.c_id.style.background="#F3F3F3";
+		form.c_pw.readOnly=true;
+		form.c_pw.style.background="#F3F3F3";
+		form.c_use21.disabled = true;
+		form.c_use22.disabled = true;
+	}   
+}
+
+function sl_1(num){
+    var form = document.sslForm;
+	if(num=='1') {
+		for (j = 0;  j< form.elements.length; j++) {
+			if(form.elements[j].name == 's_apply[]') form.elements[j].disabled = false;
+		} 
+	} else {
+		for (j = 0;  j< form.elements.length; j++) {
+			if(form.elements[j].name == 's_apply[]') form.elements[j].disabled = true;
+		} 
+	}   
+}
+
+function ckInfo(num){	
+	form = document.carrForm;
+	form.info.value = info.getHtml(); //대체한 textarea에 작성한HTML값 전달	
+	if(num) form.submit();
+	return false;
+}
+
+
+function ckDeli(mode){
+   var form = document.deliForm;
+   
+   form.b_mode.value=mode;
+   switch(mode) {
+	   case "ins" :
+		   if(!form.name.value) {
+				window.alert('택배회사명을 입력해주세요!');
+				form.name.focus();
+				return false;
+		   }
+		   if(!form.code.value) {
+				window.alert('택배조회주소를 입력해주세요!');
+				form.code.focus();
+				return false;
+		   }
+	   break;
+	   case "mod" :
+		   if(!form.b_num.value) {
+				window.alert('먼저 변경할 '+b_name+'를 선택하세요!');
+				form.s_cate.focus();
+				return false;
+		   }
+		   if(!form.re_name.value) {
+				window.alert('변경할 '+b_name+'명을 입력해주세요!');
+				form.re_name.focus();
+				return false;
+		   }	   
+	   break;
+	   case "del" :
+		   if(!form.b_num.value) {
+				window.alert('먼저 삭제할 '+b_name+'를 선택하세요!');
+				form.s_cate.focus();
+				return false;
+		   }	  
+	   break;
+
+   }
+   form.submit();
+   return false;
+   
+}
+
+function clickEvent(frm){
+	var form = eval("document."+frm+"Form")
+	sIndex=form.s_cate.selectedIndex;  
+	if(sIndex==-1) return;
+	form.re_name.value = form.s_cate.options[sIndex].text;
+	tmps = form.s_cate.options[sIndex].value.split('|');
+	form.re_code.value = tmps[1];
+	form.b_num.value = tmps[0];
+}
+
+function codeView(){
+	switch (document.cashForm.c_card.value)	{
+		case 'KCP' :
+			pLightBox.show('kcp_code.html','iframe','500','430','■ KCP 무이자 기간 생성',10);
+		break;
+		case 'LGDACOM' :
+			pLightBox.show('lgdacom_code.html','iframe','500','430','■ LGU+ 무이자 기간 생성',10);
+		break;
+	}
+}
+
+
+//-->
+</SCRIPT>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_conf.gif" alt="쇼핑몰환경설정" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>쇼핑몰 정보 등록 및 각종 정책을 설정하는 곳 입니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+
+<!--  BASIC START -->
+<tr><td><a name="#t1"></a><img src='./img/t_basic.gif'></td></tr>
+<tr><td align=center>
+	<form name='basicForm' method='post' action='conf_post.php?mode=basic' target='HFrm'>					
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쇼핑몰 주소</font></td>
+						<td bgcolor="#EEEEEE" >&nbsp;<input type='text' class=ta name='s_url' size='36' value='<?=$basic[0]?>'></td>
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쇼핑몰명</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_title' size='36' value='<?=$basic[1]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_name' size='36' value='<?=$basic[2]?>'></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;대표자명</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_boss' size='36' value='<?=$basic[3]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사업자등록번호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_num1' size='36' value='<?=$basic[4]?>'></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;통신판매 신고번호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_num2' size='36' value='<?=$basic[5]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;정보확인 링크주소</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='text' class=ta name='c_info' size='96' value='<?=$basic[14]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사업장 주소</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='text' class=ta name='s_addr' size='96' value='<?=$basic[6]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;연락처</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_tel' size='36' value='<?=$basic[7]?>'></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팩스번호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_fax' size='36' value='<?=$basic[8]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;관리자명</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_admin' size='36' value='<?=$basic[9]?>'></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;관리자 이메일</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='s_email' size='36' value='<?=$basic[10]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상단 타이틀</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='title' size='36' value='<?=$basic[11]?>'></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;검색엔진 키워드</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='keyword' size='36' value='<?=$basic[12]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;실시간 검색어</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='text' class=ta name='r_word' size='80' value='<?=$basic[13]?>'> <font class="small">( ","구분 10개까지 입력)</font></td> 
+					</tr>
+					<tr height=70 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;line-height:140%;" class='small'>
+								! 쇼핑몰 화면하단의 카피라이트 부분에 표시됩니다 <br>
+								! 사업자정보확인 링크 주소는 <a href="http://www.ftc.go.kr/info/bizinfo/communicationList.jsp" target="_blank">http://www.ftc.go.kr/info/bizinfo/communicationList.jsp</a>접속 후 해당 사업자번호로 검색후 링크주소를 적으시면 됩니다.<br />
+								! 상단 타이틀은 브라우저 상단틀에 나오는 타이틀입니다.&nbsp; 검색엔지 키워드는 검색사이트에서 유용한 키워드를 입력 하시면 됩니다. <br />
+								! 실시간 검색어는 24시간 이내의 검색어로 집계가 되며 검색이 없을 시 입력된 검색어가 나타 납니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.basicForm.submit();return false;"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</form>
+</td></tr>
+<!--  @BASIC END -->
+<tr><td height=20></td></tr>
+<!--  ORDER START -->
+<tr><td><a name="#t2"></a><img src='./img/t_cash.gif'></td></tr>
+<tr><td align=center>
+	<form name='cashForm' method='post' action='conf_post.php?mode=cash' target='HFrm'>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>					
+					<input type=hidden name=b_info>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;결제 방법</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							&nbsp;<input type='checkbox' name='c_cash1' id='c_cash1' value='1' onfocus=blur(); <?=$CKD1[1]?>>&nbsp;<label for='c_cash1'>무통장입금</label>&nbsp;
+							<input type='checkbox' name='c_cash2' id='c_cash2' value='1' onfocus=blur(); <?=$CKD2[1]?>>&nbsp;<label for='c_cash2'>신용카드</label>
+							<input type='checkbox' name='c_cash3' id='c_cash3' value='1' onfocus=blur(); <?=$CKD10[1]?>>&nbsp;<label for='c_cash3'>실시간 계좌이체</label>
+							<input type='checkbox' name='c_cash4' id='c_cash4' value='1' onfocus=blur(); <?=$CKD11[1]?>>&nbsp;<label for='c_cash4'>가상계좌</label>
+							<input type='checkbox' name='c_cash5' id='c_cash5' value='1' onfocus=blur(); <?=$CKD12[1]?>>&nbsp;<label for='c_cash5'>핸드폰</label>
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전자결제대행사</font></td>
+						<td bgcolor="#EEEEEE">
+							&nbsp;<select name=c_card>
+								<option value=''>대행사를 선택 하세요!</option>
+								<option value="KCP" <?=$SEDKCP?>>KCP</option>
+								<!-- <option value="LGDACOM" <?=$SEDLGDACOM?>>LGU+</option>-->
+							</select>								
+						</td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Test 모드</font></td>
+						<td class=gr_bg><input type="checkbox" name="c_test" value="1" <?=$CKD9[1]?>>&nbsp;<font class="small">(승인완료되면 체크를 해제 하시기 바랍니다.)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상점ID</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='c_id' size='15' value='<?=$cash[3]?>'></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상점KEY</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='c_key' size='28' value='<?=$cash[15]?>'></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;카드결제 최소금액</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='text' class='ta2 eng' name='c_money' size='20' value='<?=$cash[4]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>원 이상일때 사용 가능</td>							
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;할부 기간</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<select name="c_halbu">
+							<option value="0" >일시불만 가능</option>
+							<option value="3">3개월까지만 가능</option>
+							<option value="6">6개월까지만 가능</option>
+							<option value="9">9개월까지만 가능</option>
+							<option value="10">10개월까지만 가능</option>
+							<option value="12">12개월까지만 가능</option>
+							</select>
+							<script>document.cashForm.c_halbu.value="<?=$cash[20];?>";</script>
+						</td>							
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;무이자 할부 여부</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='radio' name='c_interest' id='c_int1' value='0' onfocus=blur(); <?=$CKD13[0]?> >&nbsp;<label for='c_int1'>일반결제</label>&nbsp;<input type='radio' name='c_interest' id='c_int2' value='1' onfocus=blur(); <?=$CKD13[1]?>>&nbsp;<label for='c_int2'>무이자결제</label>&nbsp;&nbsp;<font class=small>(무이자결제는 반드시 PG사와 계약체결 후에 사용해야 합니다!)</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;무이자 할부 기간</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							<div style="float:left;padding-left:6px;">
+							    <input type='text' class='ta eng' name='c_interest2' size='80' value='<?=$cash[22]?>'>&nbsp;
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="codeView();return false;" ><span class="green">무이자기간코드생성</span></a>
+							</div>
+						</td>							
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg rowspan=2><font class="small bTitle">&nbsp;&nbsp;*&nbsp;은행계좌번호</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							<div style="float:left;padding-left:6px;">
+								<font class="small bold">은행명 : </font><input type='text' size='14' name=bank class=ta value=''>&nbsp;,&nbsp;
+								<font class="small bold">계좌번호 : </font><input type='text' size='18' name=bank_num class=ta value=''>&nbsp;,&nbsp;
+								<font class="small bold">예금주 : </font><input type='text' size='10' name=bank_name class=ta  value=''>&nbsp;
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return bank_manager('ins');" id="bk1"><span class="blue">은행추가</span></a>
+								<a href="#" onclick="return bank_manager('mod');" id="bk2" style="display:none"><span class="blue">은행수정</span></a>
+								<a href="#" onclick="return bank_cancel();" id="bk3" style="display:none" style="display:none"><span class="green">선택해제</span></a>
+							</div>
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3>
+							<div style="float:left;padding-left:6px">
+								<select name=bank_select onclick='bank_change();'>
+									<? if($cash[5]) {
+										 for($i=0;$i<count($bank_info)-1;$i++) {
+											 echo "<option value='{$bank_info[$i]}'>{$bank_info[$i]}</option>";
+										 }
+										 echo "<script>bank_ck = ".($i).";</script>";
+										} else {                                  
+											 echo "<option value=''>입금은행 계좌번호를 입력하세요!</option>";
+										 }
+									?>													  
+								</select>
+							</div>
+							<div id="sBtn1" style="float:left;padding-left:4px;">
+								<a href="#" onclick="return bank_manager('del');"><span class="blue">은행삭제</span></a>
+							</div>
+						</td>			
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;에스크로 사용 여부</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='radio' name='e_use' id='e_use1' value='1' onfocus=blur(); <?=$CKD14[1]?> >&nbsp;<label for='e_use1'>사용함</label>&nbsp;<input type='radio' name='e_use' id='e_use2' value='0' onfocus=blur();  <?=$CKD14[0]?>>&nbsp;<label for='e_use2'>사용안함</label>&nbsp;&nbsp;<font class="small">(에스크로를 신청하셨다면 사용함으로 체크하시기 바랍니다!) </font></td>
+					</tr>
+					<tr height=120 align=left>
+					    <td colspan=4 bgcolor="#ffffff" style="padding-left:6px">
+							<div style="float:left;line-height:140%;" class='small'>
+								! 신용카드, 계좌이체, 핸드폰 결제를 사용하시려면 먼저 결제대행사에 신청을 하시고 발급받은 상점아이디와 상점KEY를 넣으시면 됩니다.<br />
+								!  PG사를 통해 카드승인된 값을 받지못하여 주문관리페이지에서 입금확인완료로 자동변경되지 않을수 있습니다. <br />&nbsp;&nbsp;반드시 주문관리페이지의 주문상태와 PG사에서 제공하는 관리자화면내의 카드승인내역도 동시에 확인해 주십시요 .<br />
+								! 은행계좌번호를 추가 하려면 은행명, 계좌번호, 예금주 (예. 농협 1234-5678-90 홍길동)를 입력 하시고 '은행추가'를 누르시면 은행이 추가 됩니다. <br />&nbsp;&nbsp;셀렉트 박스에 등록된 은행을 선택 하시면 은행 정보를 수정 하거나 삭제 하실 수 있습니다. 추가, 수정, 삭제 후 '설정저장'을 누르셔야 적용됩니다. <br />
+								! 구매안전서비스(에스크로)는 전자상거래소비자보호법 및 시행령 개정에 따라 2006년 4월1일부터 10만원 이상 현금성 결제시 의무 시행됩니다.<br />
+								! 에스크로를 신청 하셨을 경우 신청된 결제수단(실시간 계좌이체, 신용카드결제, 핸드폰 결제 등)에만 에스크로가 적용 됩니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding:6px 6px;">
+								<a href="#" onclick="return cash_submit();"><span class="blue">설정저장</span></a>
+							</div>	
+						</td>
+					</tr>
+                    </table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<!--  @ORDER END -->
+<tr><td height=20></td></tr>
+<!--  ORDER START -->
+<tr><td><a name="#t3"></a><img src='./img/t_cash2.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;적립금 사용 여부</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='radio' name='r_use' id='r_use1' value='1' onfocus=blur();  onclick="cl_1('1')" <?=$CKD3[1]?>>&nbsp;<label for='r_use1'>사용함</label>&nbsp;<input type='radio' name='r_use' id='r_use2' value='0' onfocus=blur();  onclick="cl_1('2')" <?=$CKD3[0]?>>&nbsp;<label for='r_use2'>사용안함</label></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;회원 가입시</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta2 eng' name='r_join' size='10'  value='<?=$cash[7]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'><font class='eng'>Point</font></td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 구매시</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta2 eng' name='r_order' size='3'  value='<?=$cash[8]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'><font class='eng'>%</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;최소사용 가능금액</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='text' class='ta2 eng' name='r_money' size='10'  value='<?=$cash[9]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'><font class='eng'>Point</font> 이상일때 사용 가능</td>							
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배송비 사용 여부</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='radio' name='c_use' id='c_use1' value='1' onfocus=blur(); onclick="cl_2('1')" <?=$CKD4[1]?> >&nbsp;<label for='c_use1'>사용함</label>&nbsp;<input type='radio' name='c_use' id='c_use2' value='0' onfocus=blur(); onclick="cl_2('2')"  <?=$CKD4[0]?>>&nbsp;<label for='c_use2'>사용안함</label></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배송비 적용금액</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta2 eng' name='c_money1' size='20'  value='<?=$cash[11]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>원 미만일때</td>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배송비</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta2 eng' name='c_money2' size='10'  value='<?=$cash[12]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>원</td>
+					</tr>
+					<tr height=80 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가배송비 지역설정 </font></td>
+						<td bgcolor="#EEEEEE" colspan=3 style="padding-left:6px">
+							<div style='float:left;padding:14px 0 0 0;'>
+								아래지역의 배송비 <input type='text' class='ta2 eng' name='c_money31' size='10'  value='<?=$c_money3[0]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>원 추가
+							</div>									
+							<div id="sBtn1" style="float:left;padding:14px 0 0 8px;">
+								<a href="#" onclick="pLightBox.show('zipcode.php?num=1','iframe','420','220','■ 지역검색하기','20');return false;"><span class="green">지역검색하기</span></a>	
+							</div>
+							<div style="clear:both;height:8px;overflow:hidden">&nbsp;</div>
+							<div style='width:600px;border:1px solid #dadada; background-color:#FFF;padding:2px;'>
+								<textarea name="addCarr1" style="border:0px;width:99%;" class="small"><?=$addCarr[0]?></textarea>
+							</div>		
+							<div style='float:left;padding:14px 0 0 0;'>
+								아래지역의 배송비 <input type='text' class='ta2 eng' name='c_money32' size='10'  value='<?=$c_money3[1]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>원 추가
+							</div>									
+							<div id="sBtn1" style="float:left;padding:14px 0 0 8px;">
+								<a href="#" onclick="pLightBox.show('zipcode.php?num=2','iframe','420','220','■ 지역검색하기','20');return false;"><span class="green">지역검색하기</span></a>	
+							</div>
+							<div style="clear:both;height:8px;overflow:hidden">&nbsp;</div>
+							<div style='width:600px;border:1px solid #dadada; background-color:#FFF;padding:2px;'>
+								<textarea name="addCarr2" style="border:0px;width:99%;" class="small"><?=$addCarr[1]?></textarea>
+							</div>		
+							<div style='float:left;padding:14px 0 0 0;'>
+								아래지역의 배송비 <input type='text' class='ta2 eng' name='c_money33' size='10'  value='<?=$c_money3[2]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>원 추가
+							</div>									
+							<div id="sBtn1" style="float:left;padding:14px 0 0 8px;">
+								<a href="#" onclick="pLightBox.show('zipcode.php?num=3','iframe','420','220','■ 지역검색하기','20');return false;"><span class="green">지역검색하기</span></a>	
+							</div>
+							<div style="clear:both;height:8px;overflow:hidden">&nbsp;</div>
+							<div style='width:600px;border:1px solid #dadada; background-color:#FFF;padding:2px;'>
+								<textarea name="addCarr3" style="border:0px;width:99%;" class="small"><?=$addCarr[2]?></textarea>
+							</div>		
+							<div style="clear:both;height:8px;overflow:hidden">&nbsp;</div>
+						</td>
+					</tr>
+					<tr height=38 align=left>
+					    <td colspan=4 bgcolor="#ffffff" style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+								! 추가배송비 지역설정으로 도서산간 등 지역별로 배송금액을 지정할 수 있습니다. 입력 형태는 '시/구/군,시/구/군' 로 입력 하시면 됩니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding:6px 6px;">
+								<a href="#" onclick="return cash_submit();"><span class="blue">설정저장</span></a>
+							</div>	
+						</td>
+					</tr>                    
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</form>
+</td></tr>
+<!--  @ORDER END -->
+<tr><td height=20></td></tr>
+<!--  SSL START -->
+<tr><td><a name="#t4"></a><img src='./img/t_ssl.gif'></td></tr>
+<tr><td align=center>
+	<form name='sslForm' method='post' action='conf_post.php?mode=ssl' target='HFrm'>					
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SSL 사용 여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='s_use' id='s_use1' value='1' onfocus=blur();  onclick="sl_1('1')" <?=$CKD20[1]?> <?=$ssl_use?>>&nbsp;<label for='s_use1'>사용함</label>&nbsp;<input type='radio' name='s_use' id='s_use2' value='0' onfocus=blur();  onclick="sl_1('2')" <?=$CKD20[0]?>>&nbsp;<label for='s_use2'>사용안함</label></td>
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SSL 포트번호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta2 eng' name='s_port' size='5'  value='<?=$ssl[1]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>&nbsp;&nbsp;<font class="small">(미등록시 기본포트 443으로 접속)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SSL 적용 페이지</font></td>
+						<td bgcolor="#EEEEEE" style='padding:4px 0 4px 8px'>
+						    <input type='checkbox' name='s_apply[]' id='a_apply1' value='1' onfocus='blur();' <?=$CKD21?>>&nbsp; <label for='a_apply1'>관리자 로그인 페이지에 보안접속(SSL) 적용하여 전송</label> <br/>
+							<input type='checkbox' name='s_apply[]' id='a_apply2' value='2' onfocus='blur();' <?=$CKD22?>>&nbsp; <label for='a_apply2'>회원 로그인 페이지에 SSL 적용하여 전송</label> 
+							<input type='checkbox' name='s_apply[]' id='a_apply3' value='3' onfocus='blur();' <?=$CKD23?>>&nbsp; <label for='a_apply3'>ID/비밀번호 찾기 페이지에 SSL적용하여 전송</label> </br>
+							<input type='checkbox' name='s_apply[]' id='a_apply4' value='4' onfocus='blur();' <?=$CKD24?>>&nbsp; <label for='a_apply4'>회원가입 페이지에 SSL적용하여 전송</label> &nbsp;&nbsp;&nbsp;
+							<input type='checkbox' name='s_apply[]' id='a_apply5' value='5' onfocus='blur();' <?=$CKD25?>>&nbsp; <label for='a_apply5'>회원정보수정 페이지에 SSL적용하여 전송</label> <br/>							
+							<input type='checkbox' name='s_apply[]' id='a_apply6' value='6' onfocus='blur();' <?=$CKD26?>>&nbsp; <label for='a_apply6'>주문서 작성 페이지에 SSL적용하여 전송</label>
+						</td>
+					</tr>
+					<tr height=56 align=left>
+					    <td colspan=2 bgcolor="#ffffff" style="padding-left:6px">
+							<div style="float:left;line-height:140%;" class='small'>
+								! SSL(보안서버) 사용시 중요 데이터 암호화를 통해 속도는 떨어지지만 데이타를 안전하게 전송시킬 수 있습니다.</br>
+								! SSL(보안서버)은 별도 유료서비스이며 호스팅 서버 관리자에게 쇼핑몰 도메인에 SSL 보안서버 셋팅을 요청 하시면 됩니다.</br>
+								! SSL(보안서버)은 서버에서 도메인에 SSL 보안 셋팅을 해야만 '사용함'을 선택 할 수 있으며 세팅되어있지 않으면 '사용함'을 선택 할 수 없습니다. 
+							</div>
+							<div id="sBtn1" style="float:right;padding:6px 6px;">
+								<a href="#" onclick="document.sslForm.submit();return false;"><span class="blue">설정저장</span></a>
+							</div>	
+						</td>
+					</tr>
+                    </table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</form>
+</td></tr>
+<!--  @SSL END -->
+<tr><td height=20></td></tr>
+<!--  실명확인 START -->
+<tr><td><a name="#t5"></a><img src='./img/t_confirm.gif'></td></tr>
+<tr><td align=center>
+	<form name='confirmForm' method='post' action='conf_post.php?mode=confirm' target='HFrm'>					
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;실명확인 사용 여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='c_use' id='c_use1' value='1' onfocus=blur();  onclick="cl_3('1')" <?=$CKD30[1]?>>&nbsp;<label for='c_use1'>사용함</label>&nbsp;<input type='radio' name='c_use' id='c_use2' value='0' onfocus=blur();  onclick="cl_3('2')" <?=$CKD30[0]?>>&nbsp;<label for='c_use2'>사용안함</label><input type="text" size="70" style="border:0;background-color:#eee" readonly /></td>
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사이트 코드</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta eng' name='c_id' size='20'  value='<?=$confirm[1]?>' />&nbsp;&nbsp;<font class="small">(한국신용정보와 계약후 발급 받은 사이트 코드를 입력하세요)</font></td>
+					</tr>		
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사이트 패스워드</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class='ta eng' name='c_pw' size='20'  value='<?=$confirm[3]?>' />&nbsp;&nbsp;<font class="small">(한국신용정보와 계약후 발급 받은 사이트 패스워드를 입력하세요)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;성인인증 사용 여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='c_use2' id='c_use21' value='1' onfocus=blur();  <?=$CKD31[1]?>>&nbsp;<label for='c_use21'>사용함</label>&nbsp;<input type='radio' name='c_use2' id='c_use22' value='0' onfocus=blur(); <?=$CKD31[0]?>>&nbsp;<label for='c_use22'>사용안함</label>
+							&nbsp;&nbsp;<font class="small">(성인인증 사용시 19세 이상만 회원가입이 가능 합니다)</font>
+						</td>
+					</tr>
+					<tr height=105 align=left>
+					    <td colspan=2 bgcolor="#ffffff" style="padding-left:6px">
+							<div style="float:left;line-height:140%;" class='small'>
+								! 실명확인서비스를 하기 위해서는 한국신용정보와 계약만 진행하시면 됩니다.  실명확인서비스 제공업체: 한국신용정보 (<a href='http://www.idcheck.co.kr' target=_blank>http://www.idcheck.co.kr</a>)&nbsp;</br>	
+								! 실명확인서비스 절차 : 
+								<br /> 
+								&nbsp;&nbsp;&nbsp;&nbsp;1)계약 약정서를 작성 및 서류(업자등록증사본, 인감증명서) 발송 > 
+								&nbsp;&nbsp;&nbsp;&nbsp;2) 회원사 사이트 코드/사이트 패스워드 발급  > 
+								<br /> 
+								&nbsp;&nbsp;&nbsp;&nbsp;3) 실명확인 사용함으로 체크 및 발급받은 회원사 사이트 코드/사이트 패스워드 입력 > 
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4) 실명확인 서비스 정상동작 확인<br />
+								! 개인실명확인 서비스는 설치하시는 서버에서 한국신용정보 서버로 80포트를 이용한 통신이 이루어 집니다.<br />
+								  방화벽에 secure.nuguya.com(반드시 DNS서비스여야 합니다.) 80 outer 포트가 열려 있는지 확인해 주시기 바랍니다. 
+							</div>
+							<div id="sBtn1" style="float:right;padding:6px 6px;">
+								<a href="#" onclick="document.confirmForm.submit();return false;"><span class="blue">설정저장</span></a>
+							</div>	
+						</td>
+					</tr>
+                    </table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</form>
+</td></tr>
+<!--  @실명확인 END -->
+<tr><td height=20></td></tr>
+<!--  ORDER START -->
+<tr><td><a name="#t6"></a><img src='./img/t_etc.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='etcForm' method='post' action='conf_post.php?mode=etc' target='HFrm'>					
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;회원인증 정책</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							&nbsp;<input type='radio' name='auth' id='auth1' value='1' onfocus=blur(); <?=$CKD6[1]?>>&nbsp;<label for='auth1'>가입시 자동승인</label>&nbsp;
+							<input type='radio' name='auth' id='auth2' value='2' onfocus=blur(); <?=$CKD6[2]?>>&nbsp;<label for='auth2'>관리자 승인시 가입</label>&nbsp;
+						</td>
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;태그 정책</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							&nbsp;<input type='radio' name='tag' id='tag1' value='1' onfocus=blur(); <?=$CKD5[1]?>>&nbsp;<label for='tag1'>모든 사용자 등록</label>&nbsp;
+							<input type='radio' name='tag' id='tag2' value='2' onfocus=blur(); <?=$CKD5[2]?>>&nbsp;<label for='tag2'>회원만 등록</label>&nbsp;
+							<input type='radio' name='tag' id='tag3' value='0' onfocus=blur(); <?=$CKD5[0]?>>&nbsp;<label for='tag3'>등록불가</label>
+						</td>
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비회원 정보이용동의</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							&nbsp;<input type='radio' name='agree' id='agree1' value='1' onfocus=blur(); <?=$CKD7[1]?>>&nbsp;<label for='agree1'>비회원 주문시 개인정보 수집동의 표시함</label>
+							<input type='radio' name='agree' id='agree2' value='2' onfocus=blur(); <?=$CKD7[2]?>>&nbsp;<label for='agree2'>표시안함</label>
+							&nbsp;&nbsp;<font class="small">(비회원이 주문 할 경우 정보이용동의 출력 여부 선택)</font>
+						</td>
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;자동배송완료</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;상품발송 후 <input type='text' class='ta2 eng' name='e_date' style='width:20px;'  value='<?=$etc_info[3]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>일후 자동으로 배송완료 처리 됩니다. &nbsp;&nbsp;<font class="small">(기본설정 7일)</font></td>	
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;현금결제 추가DC</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;주문된 상품을 현금으로 결제시 <input type='text' class='ta2 eng' name='cash_dc' style='width:20px;'  value='<?=$etc_info[4]?>' OnKeyPress='onlyNum(this);' OnKeyUp='onlyNum(this);'>% 를 추가로 DC 합니다. &nbsp;&nbsp;<font class="small">(배송비제외, 1단위는 반올림 처리)</font></td>	
+					</tr>
+					<tr height=30 align=left>
+					    <td colspan=4 bgcolor="#FFFFFF" style="padding-left:6px">							
+                            <div style="float:left;padding-top:6px;" class='small'>
+							! 태그 정책은 상품상세정보 페이지에서 사용자 태그 등록 가능 여부를 설정 합니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.etcForm.submit();return false;"><span class="blue">설정저장</span></a>
+							</div>	
+						</td>
+					</tr>
+                    </FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<!--  @ORDER END -->
+<tr><td height=20></td></tr>
+<tr><td><a name="#t7"></a><img src='./img/t_delivery.gif'></td></tr>
+<tr>
+	<td align=center>
+		<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+				<tr>
+					<td>
+						<table border=0 width='100%' cellpadding=0 cellspacing=1>
+						<FORM name='deliForm' method='post' action='conf_post.php?mode=deli' onsubmit="return false;">
+						<input type=hidden name=b_mode>
+						<input type=hidden name=b_num>
+						<tr height=30 align=left>
+							<td width=30% class=gr_bg align=center><font class="small bTitle">&nbsp;&nbsp;*&nbsp;택배회사 선택</font></td>
+							<td width=70% class=gr_bg align=center><font class="small bTitle">&nbsp;&nbsp;*&nbsp;택배회사 등록</font></td>						
+						</tr>
+						<tr>
+							<td bgcolor=#EFEFEF align=center rowspan=3>
+							<SELECT name=s_cate size=6 style='width:100%;background:#FFFFFF;' onclick="clickEvent('deli')" >
+								<?
+								$sql = "SELECT uid,name,code FROM mall_design WHERE mode='Z'  ORDER BY uid ASC";
+								$mysql->query($sql);
+								for($i=0; $row = $mysql->fetch_array(); $i++) {
+									echo "<option value='{$row['uid']}|{$row['code']}'>".stripslashes($row['name'])."</option>\n";
+								}
+								?>
+							</SELECT>
+							</td>
+							<td height=30 bgcolor=#EFEFEF>
+								<div style="float:left;padding-left:6px;">
+									<font class="small bold">택배회사명 : </font><input type=text name=name class=ta size="12"> ,
+									<font class="small bold">택배조회주소 : </font><input type=text name=code class=ta size="24">
+								</div>
+								<div id="sBtn1" style="float:left;padding-left:6px;">
+									<a href="#" onclick="return ckDeli('ins');;"><span class="blue">등록하기</span></a>
+								</div>
+							</td>					
+						</tr>
+						<tr height=30 align=left>
+							<td class=gr_bg align=center><font class="small bTitle">&nbsp;&nbsp;*&nbsp;택배회사 수정/삭제</font></td>						
+						</tr>
+						<tr>
+							<td height=30 bgcolor=#EFEFEF>
+								<div style="float:left;padding-left:6px;">
+									<font class="small bold">택배회사명 : </font><input type=text name=re_name class=ta size="12"> ,
+									<font class="small bold">택배조회주소 : </font><input type=text name=re_code class=ta size="24">
+								</div>
+								<div id="sBtn1" style="float:left;padding-left:6px;">
+									<a href="#" onclick="return ckDeli('mod');;"><span class="blue">수정하기</span></a>
+									<a href="#" onclick="return ckDeli('del');;"><span class="blue">삭제하기</span></a>
+								</div>
+							</td>					
+						</tr>							
+						<tr height=30 align=left>
+							<td colspan=2 bgcolor="#ffffff" style="padding-left:6px">
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 사용하시는 택배회사, 택배조회주소를 등록 하시면 배송조회시 자동으로 해당 배송조회 페이지로 넘어갑니다.
+								</div>
+							</td>
+						</tr>
+						</FORM>
+						</table>		
+					</td>
+				</tr>				
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>	
+</tr>
+<tr><td height=20></td></tr>
+<!--  배송정보 START -->
+<tr><td><a name="#t8"></a><img src='./img/t_carr.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<tr>
+				<td>
+					<table border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='carrForm' method='post' action='conf_post.php?mode=info' target='HFrm' onsubmit="ckInfo();">										
+					<tr bgcolor="#FFFFFF"> 
+						<td style="padding:2px;" align="left">
+							<textarea name="info" id="info"><?=$info?></textarea>
+							<script>var info = new pEditor("info","../../pEdit","756","200","<?=$up_dir?>","basic","hide");</script>
+						</td>
+					</tr>					
+					<tr height=30 align=left>
+					    <td bgcolor="#FFFFFF" style="padding-left:6px">
+                            <div style="float:left;padding-top:6px;" class='small'>
+							! 상품상세정보 페이지 나타나는 정보입니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckInfo(1);"><span class="blue">설정저장</span></a>
+							</div>
+                        </td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<!--  @배송정보 END -->
+
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<iframe name="HFrm" style="display:none;"></iframe>
+
+<script>
+<? 
+if($cash[6]==0) echo "cl_1('2');";
+if($cash[10]==0) echo "cl_2('2');";
+if($ssl[0]==0) echo "sl_1('2');";
+if($confirm[0]==0) echo "cl_3('2');";
+?>
+pE[0] = info;
+</script>
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

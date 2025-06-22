@@ -1,0 +1,218 @@
+<?
+ob_start();
+
+include "../ad_init.php";
+require "{$lib_path}/lib.Shop.php";
+$order_num = $_GET['order_num'];
+$sgoods = $_GET['sgoods'];
+$status = $_GET['status'];
+$uid = $_GET['uid'];
+
+if($uid) {
+	$sql = "SELECT * FROM mall_order_change WHERE uid='{$uid}' && order_num='{$order_num}'";
+	$row = $mysql->one_row($sql);
+	if(!$row) alert("내역이 존재 하지 않습니다","close5");
+	$sgoods	= $row['sgoods'];
+	$bank_info = explode(" ",$row['bank_info']);
+	$bank = $bank_info[0];
+	$bank_num = $bank_info[1];
+	$bank_name = $bank_info[2];
+	$memo = $row['message'];
+	$reason = $row['reason_code'];
+}
+
+if(!$order_num || !$sgoods || !$status) alert("정보가 넘어오지 못했습니다.","close5");
+
+$sql = "SELECT pay_type, order_status FROM mall_order_info WHERE order_num = '{$order_num}'";
+$row = $mysql->one_row($sql);
+$def_status = $row['order_status'];
+$pay_type = $row['pay_type'];
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=euc-kr' />
+<TITLE>주문상품 취소/반품/교환 처리하기</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+
+<script language="JavaScript"> 
+function ckForm(){
+	var f = document.changeForm;
+	if(!f.reason_code.value) {
+		alert("사유를 선택 하시기 바랍니다");
+		f.reason_code.focus();
+		return false;
+	}
+<? if($status!='Y' && $def_status!='A' && $pay_type=='B') { ?>
+	if(!f.bank.value || !f.bank_num.value || !f.bank_name.value) {
+		alert("환불계좌정보를 입력 하시기 바랍니다");
+		return false;
+	}
+<? } ?>
+}
+</script>
+</HEAD>
+
+<BODY style="padding:0px;margin:0px;">
+
+<TABLE width=96% align=center cellpadding=0 cellspacing=0 border=0>
+<FORM name='changeForm' method='post' action='order_change_ok.php' onsubmit="return ckForm();">
+<input type=hidden name=order_num value='<?=$order_num?>'>
+<input type=hidden name=status value='<?=$status?>'>
+<input type=hidden name=sgoods value='<?=$sgoods?>'>
+<input type=hidden name=uid value='<?=$uid?>'>
+<TR><TD><img src='./img/ttl_change_01.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<TR>
+		<TD>
+			<TABLE  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<TR>
+				<TD>
+					<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+							<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>
+							<td align="center" class=gr_bg><font class="bTitle small">상품명 / 옵션</font></td>
+							<td width=8% align="center" class=gr_bg><font class="bTitle small">수량</font></td>
+							<td width=12% align="center" class=gr_bg><font class="bTitle small">개별배송비</font></td>
+							<td width=12% align="center" class=gr_bg><font class="bTitle small">합계</font></td>
+							<td width=15% align="center" class=gr_bg><font class="bTitle small">진행상황</font></td>
+						</tr>
+<?
+$sql = "SELECT * FROM mall_order_goods WHERE order_num='{$order_num}' && uid IN({$sgoods})";
+$mysql->query($sql);
+
+$ii = 1;
+while($data = $mysql->fetch_array()){
+
+	if($data['sale_vls']){
+		$tmps = explode("|",$data['sale_vls']);
+		$MY_SALE = $tmps[0];
+		$MY_POINT = $tmps[1];
+		$MY_CARR = $tmps[2];
+		$my_type1 = $tmps[3];
+		$my_type2 = $tmps[4];
+	}
+	else {
+		$MY_SALE = $MY_POINT = 0;
+		$MY_CARR = 'N';
+	}
+	
+	$gData	= getDisplayOrder2($data);	
+	$NAME	= $gData['name'];		
+	$QTY	= $data['p_qty'];
+	if($gData['carr']=='F') $gData['carr'] = 0;
+	$CARR	= number_format(($gData['carr']*$data['p_qty']));
+	$SUM	= $gData['p_sum'];
+	
+	$OP_SEC_VLS = '';
+	for($i=0,$cnt=count($gData['op_sec_vls']);$i<$cnt;$i++){
+		if($gData['op_sec_vls'][$i]) {	
+			$OP_SEC_VLS .= $gData['op_sec_vls'][$i];
+		}		
+	}
+
+	if($uid) $STATUS = $status_arr2[$data['order_status'].$data['order_status2']];
+	else $STATUS = $status_arr[$data['order_status']];
+	
+	echo "
+						<tr height=24 bgcolor='#ffffff'>
+							<td align=center class='eng'>{$ii}</td>
+							<td align='left' style='padding-left:6px;'>{$NAME} <font class='small'>{$OP_SEC_VLS}</font></td>
+							<td align=center class='eng'>{$QTY}</td>
+							<td align=right class='eng' style='padding-right:6px;'>{$CARR}원</td>
+							<td align=right class='eng' style='padding-right:6px;'>{$SUM}</td>
+							<td align=center class='small'>{$STATUS}</td>
+						</tr>
+		";
+	$ii++;
+}
+?>
+
+
+					</table>	
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=10></TD></TR>
+<TR><TD><img src='./img/ttl_change_02.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<TR>
+		<TD>
+			<TABLE  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=1 cellspacing=1>					
+					<TR height=30 align=left>
+						<TD width=140 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;처리 담당자</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' class=ta name='name' size='20' value="<?=$my_name?>"></TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=140 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사유</font></TD>
+						<TD bgcolor=#EFEFEF style="padding-left:6px;">
+							<select name=reason_code>
+								<option value="">선택
+<?
+	foreach ($reason_code_arr as $key => $value) {
+		if($key==0) continue;
+		if($reason==$key) $sec = "selected";
+		else $sec = "";
+		echo "<option value='{$key}' {$sec}>{$value}</option>\n";
+	}
+?>
+					
+							</select>						
+						</TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=140 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메모</font></TD>
+						<TD bgcolor=#EFEFEF style="padding:3px 0 3px 6px;">
+							<textarea name=message rows=5 class=ta style='width:99%'><?=$memo?></textarea>
+						</TD>
+					</TR>
+					<? if($status!='Y' && $def_status!='A') { ?>
+					<TR height=30 align=left>
+						<TD width=140 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;환불계좌정보</font></TD>
+						<TD bgcolor=#EFEFEF style="padding-left:6px;">
+							<font class="small bold">은행명 : </font><input type='text' size='14' name=bank class=ta value='<?=$bank?>'>&nbsp;,&nbsp;
+							<font class="small bold">계좌번호 : </font><input type='text' size='18' name=bank_num class=ta value='<?=$bank_num?>'>&nbsp;,&nbsp;
+							<font class="small bold">예금주 : </font><input type='text' size='10' name=bank_name class=ta  value='<?=$bank_name?>'>&nbsp;				
+						</TD>
+					</TR>
+					<? } ?>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<TR><TD align=center><input type='image' src='./img/btn_change.gif' border=0 onfocus='blur();' align=absmiddle>&nbsp;<img src='../shopping/img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"></TD></TR>
+<TR><TD height=30></TD></TR>
+</FORM>
+</TABLE>
+
+<div class="small" style="padding-left:10px;">
+<? if($status=='Y') { ?>
+	! 입금대기중, 결제완료, 배송준비중 상태에서는 배송되지 않은 상태이기 때문에 교환처리가 아닌 바로 주문취소가 됩니다.<br />
+	! 배송중, 배송완료 상태에서 교환요청을 한 경우, 교환접수 후 반품/교환접수리스트에서 회수완료 및 교환발송완료 처리하셔야 합니다.<br />
+	! 상품교환일경우 동일 상품의 동일 옵션으로만 가능합니다<br />
+<? } else { ?>
+	! 주문상태가 입금대기중일 경우 바로 주문취소 처리가 됩니다.<br />
+	! 주문상태가 결제완료 또는 배송준비중일 경우 바로 환불접수리스트에 접수되어 환불완료를 처리하셔야 합니다.<br />
+	! 주문상태가 배송중 또는 배송완료인 경우 반품으로 진행되며 반품회수완료처리 및 환불접수리스트에서 최종 환불완료를 처리하셔야 합니다.<br />
+	! 무통장, 계좌이체, 가상계좌로 결제한 주문을 취소/반품하는 경우 고객으로부터 받은 환불계좌정보를 입력하셔야 합니다.<br />
+	! 카드로 결제한 주문을 취소/반품하는 경우 '메모'란에는 '카드승인취소할것'등의 고객님께서 관리할 수 있는 메모는 남겨두시고 해당 PG사(전자지불 카드결제사)의 회원사 관리자페이지에 접속하여 카드승인취소나 카드숭인부분취소를 하시고 환불접수리스트에서 최종 환불완료를 처리하셔야 합니다.<br />
+<? } ?>
+</div>
+
+</BODY>
+</HTML>

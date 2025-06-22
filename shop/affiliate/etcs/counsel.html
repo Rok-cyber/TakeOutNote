@@ -1,0 +1,59 @@
+<?
+ob_start();
+include "../html/top_inc.html";     /*** TOP INCLUDE ***/ 
+
+$_GET['code'] = "affil_counsel";
+$code = $_GET['code'];
+?>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_counsel.gif" alt="1:1문의" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>궁금한점이 있으시면 관리자에게 문의 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>		
+
+<table border=0 cellpadding="0" cellspacing="0" width="98%" align=center>
+<tr><td height="20" colspan="2"></td></tr>
+</TABLE>
+
+<!--내용들어가는 부분-->
+<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center">
+  <tr>
+    <td align="center" height="400" valign="top">
+		<!-- BOARD INCLUDE START -->
+		  <?	
+				$includes = 'Y';
+				$admin_board = 'Y';				
+				$code = $_GET['code'];
+				$bo_path="../../pboard";
+				$main_url = "../../affiliate/etcs/counsel.html";
+				include "{$bo_path}/pboard.php";
+		  ?>
+		<!-- @BOARD INCLUDE END -->
+	</td>
+  </tr>
+<tr><td height="20"></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+<!--//내용들어가는 부분-->
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	boardType = 'Y';
+//-->
+</SCRIPT>
+<?
+include "../html/bottom_inc.html";     /*** BOTTOM INCLUDE ***/  
+?>

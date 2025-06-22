@@ -1,0 +1,45 @@
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">		
+	<div id="subTitle">
+		<img src="img/shop/ttl_tag100.gif" alt="TagTop100" title="TagTop100" />
+	</div>	
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<div id="boxTag">
+		<div class="top">
+			<div style="text-align:right;padding:30px 24px 0 0;" class="small gray">
+				집계기간 : <font class="num">{{s_date}} ~ {{e_date}}</font>
+			</div>
+		
+		</div>
+		<div class="content" style="width:720px;">	
+			<div style="padding:15px;line-height:260%;">
+				<!-- DYNAMIC @loop_tag@ -->
+				&nbsp;&nbsp;<!-- DYNAMIC @is_line@ --><font class="gray small">|</font>&nbsp;&nbsp;<!-- DYNAMIC @is_line@ -->
+				<a href="{{TLINK}}" class="tag2{{RND}}">{{TAG}}</a>
+				<!-- DYNAMIC @loop_tag@ -->
+			</div>
+		</div>		
+		<div class="bottom">
+			<form name="searchForm2" method="post" onsubmit='return ckSearch2();' action='{{Main}}?channel=search'>
+			<input type="hidden" name="field" value="tag" />
+			<div style="padding:18px 0 0 365px;">
+				<input type="text" name="search" size="24" class="whites default" style="border:0px;" />
+				<input type='image' src='img/search/btn_tag_search.gif' border='0' align='absmiddle' />
+			</div>
+			</form>		
+		</div>
+	</div>	
+	<div class="blank" style="height:30px;">&nbsp;</div>
+	
+</div>
+<!-- @MAIN CENTER END -->

@@ -1,0 +1,106 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+	if(form.type[1].checked) {
+		if(!form.title.value) {
+			alert('텍스트를 입력 하세요.');
+			form.title.focus();
+			return false;
+		}
+	}
+	else if(form.type[0].checked) {
+		if(!form.banner.value && form.ckd.value !='modify') {
+			alert('이미지를 등록하세요.');
+			form.banner.focus();
+			return false;
+		}   
+	}
+	else {
+		alert('배너 타입을 선택 하세요.');
+		return false;		
+	}
+	form.submit();
+	return false;
+}
+
+function ckType() {
+	f = document.signForm;
+	if(f.type[0].checked) {
+		f.title.disabled = true;
+		f.banner.disabled = false;
+	}
+	else {
+		f.title.disabled = false;
+		f.banner.disabled = true;
+	}	
+}
+
+//-->
+</script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+    <form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+	<input type=hidden name=ckd value={{mode}}>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배너타입</font></td>
+							<td bgcolor="#EFEFEF">
+								 <input type=radio name=type {{CKDI}} id='type1' value=I onfocus=blur(); onclick="ckType();"><label for='type1'>이미지</label>
+								 <input type=radio name=type {{CKDT}} id='type2' value=T onfocus=blur(); onclick="ckType();"><label for='type2'>텍스트</label>
+							</td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;텍스트</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=title value='{{FORM2}}' size=80></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이미지</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=file class=ta name=banner size=50></td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      
+						<tr>
+							<td colspan=2 align=middle height=30 class=gr_bg>등록된 배너 이미지 <font class='eng'>{{IMG}}</font></td>
+						</tr>
+						<tr>
+							<td colspan=2 align=middle bgcolor='ffffff'>{{IMG2}}</td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      			   	
+
+						<tr height=38>
+							<td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;padding-top:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>
+						</tr>							
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+<script>
+ckType();
+</script>

@@ -1,0 +1,94 @@
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_mlog.gif" alt="메일링로그" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>전체 메일링이나 개별메일 내역및 전송 상황을 확인 할 수 있습니다</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td><img src="img/write_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signform" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td height=30 class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전송일</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font class=eng>{{DATE}}</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;받는이</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font class=eng>{{FORM1}}</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제목</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font>{{FORM2}}</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg style="word-break:break-all"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;내용</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font class=3>{{FORM3}}</font></td>
+						</tr>
+						<tr >
+							<td height=30 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전송 결과</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font class=eng>{{FORM4}}</font></td>
+						</tr>
+						<tr >
+							<td height=30 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;처리 상황</font></td>
+							<td bgcolor="efefef">
+								<div style="float:left;padding:0 8px 0 8px;">{{FORM7}}</div>
+								<!-- DYNAMIC @is_send@ -->
+								<div id="sBtn1" style="float:left;">
+									<a href="{{SEND}}"><span class="blue">중단회원 메일 보내기</span></a>
+								</div>	
+								<!-- DYNAMIC @is_send@ -->								
+							</td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;보낸 시간</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font class=eng>{{FORM5}}</font></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg style="word-break:break-all"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;에러 메세지</font></td>
+							<td bgcolor="efefef">&nbsp;&nbsp;<font class=3>{{FORM6}}</font></td>
+						</tr>
+						<tr height=30>
+							<td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 전송실패시 에러 메세지를 확인 해 보시기 바랍니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="{{LIST}}"><span class="blue">목록보기</span></a>
+								</div>	
+							</td>		
+						</tr>			
+					</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=30></td></tr>
+</table>
+
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>

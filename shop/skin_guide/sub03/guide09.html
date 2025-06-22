@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>mypage_cupon.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> mypage_cupon.html (마이페이지 발급쿠폰 내역)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MY_MENU}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">마이페이지 레프트 분류 메뉴 (mypage_menu.html 이용)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 등록글 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">현재 페이지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL_PAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 페이지 수</td>
+					</tr>					
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop@ --></font></div>
+			<div style="margin:10px 0 0 28px;">이용후기 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NUM}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">출력번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">쿠폰명</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SALE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">할인액(률)</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{STYPE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">할인 방식(%,원)</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{LMT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">사용제한사항</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{DATES}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">사용기간</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{STATUS}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">쿠폰상태</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{DATE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">발급일</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_loop@ --></font></div>
+			<div style="margin:10px 0 0 28px;">... (발급된 쿠폰이 있을 경우 나타남)</div>
+			<div style="margin:10px 0 10px 0">	
+				
+				<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+					<div style="padding:10px;">
+						<font class="blue">&lt!-- DYNAMIC @define_pg@ --></font><br/>
+						. . . (2페이지 이상일 경우 나타남)<br/>
+						PAGING(타입(텍스트,이미지),구분자(|),이미지경로)  페이징 정의<br/>
+						<font class="blue">&lt!-- DYNAMIC @define_pg@ --></font>
+					</div>
+				</div>
+				
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_loop@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_loop@ --></font><br/>
+			. . . (발급된 쿠폰이 없을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_loop@ --></font>
+		</div>
+	</div>
+
+	
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

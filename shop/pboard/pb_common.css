@@ -1,0 +1,32 @@
+/******************************************************************
+* =======================================================
+* Pboard Common CSS
+*
+* 제 작: gubok kim (email : previl@previl.net,  homepage : http://previl.net)
+*
+* 마지막 수정일: 2007.11.01
+*        
+* =======================================================
+******************************************************************/
+
+/*********************************************************************
+*	GLOBAL
+*********************************************************************/
+html {
+	
+	scrollbar-face-color: #EFEFEF;
+	scrollbar-shadow-color: gray;
+	scrollbar-highlight-color: white;
+	scrollbar-3dlight-color: gray;
+	scrollbar-darkshadow-color:white;
+	scrollbar-track-color: #F5F5F5;
+	scrollbar-arrow-color: gray;
+}
+
+form, p		{ border:0px; margin:0px; }
+.word_break { word-break:break-all; }
+.hand		{ cursor:pointer; border:0px; }
+.hidden		{ display:none; }
+.input_check, .input_radio{ width:13px;height:13px;vertical-align:middle; }
+.blank  { clear:both; height:8px; overflow:hidden; }
+.left	{ float:left; }

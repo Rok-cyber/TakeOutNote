@@ -1,0 +1,169 @@
+<?
+ob_start();
+include "../ad_init.php";
+
+$uid = isset($_GET['uid'])? $_GET['uid']:'';
+if(!$uid) alert('정보가 제대로 넘어오지 못했습니다.\\n다시 시도해 주세요!','back');
+
+############ 게시판 정보 불러오기 ####################
+$sql = "SELECT name,category FROM pboard_manager WHERE uid={$uid}";
+$row = $mysql->one_row($sql);
+$catelist = $row['category'];
+$data=explode("|",$catelist);  
+?>
+
+<script language="JavaScript">
+<!--				
+function checkIt() {
+	form = document.form1;
+	if(!form.cate_name.value) {
+		window.alert('추가할 카테고리명을 입력하세요!');
+		form.cate_name.focus();
+		return false;
+	}
+	
+   if(form.cate_name.value.search("\'") != -1 || form.cate_name.value.search("\"") != -1 ) {
+		window.alert('특수문자가 들어갔습니다. 다시 입력하세요!');
+		form.cate_name.focus();
+		return false;
+	}
+	form.submit();
+}
+
+function checkIt2(form) {
+	form = document.form2;
+	if(!form.cate_num.value) {
+		window.alert('카테고리를 선택하세요!');
+		return false;
+	}
+	if(!form.cate_md.value) {
+		window.alert('카테고리명을 입력하세요!');
+		return false;
+	}
+	if(form.cate_md.value.search("\'") != -1 || form.cate_md.value.search("\"") != -1 ) {
+		window.alert('특수문자가 들어갔습니다. 다시 입력하세요!');
+		form.cate_md.focus();
+		return false;
+	}
+	document.form2.cmode.value= "modify"	
+	form.submit();
+}
+
+function checkIt3(form) {
+	form = document.form2;
+	if(!form.cate_num.value) {
+		window.alert('카테고리를 선택하세요!');
+		return false;
+	}
+	if(!window.confirm('정말로 삭제 하겠습니까?')) return;
+		document.form2.cmode.value= "delete"	
+		form.submit();
+	}
+
+function post_list(list) {
+	var jn = new Array();
+
+<? for($j=1;$j<=$data[0];$j++){ ?>
+    jn[<? echo $j;?>] = "<? echo $data[$j];?>";
+<? } ?>
+
+	document.form2.cate_md.value=jn[list];
+}
+
+// -->
+</script>
+
+<HTML>
+<HEAD>
+<TITLE>카테고리 설정</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type='text/css' title=style>
+</HEAD>
+
+<BODY style="padding:15px 8px 8px 8px;">
+
+<TABLE width="98%" border="0" align="center" cellpadding="0" cellspacing="0" >
+<TR><TD><img src="img/t_category.gif" border="0"></TD></TR>
+<TR><TD height="10"></TD></TR>
+<TR>
+	<TD style="padding:4px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">
+        <form name='form1' method='post' action='board_ok.php'>
+		<input type="hidden" name="uid" value='<?=$uid?>'><input type="hidden" name="mode" value="cate">
+		<tr><td height="20" colspan="3"></td></tr>
+		<tr>
+			<td width="20"></td>
+			<td colspan="2" align=right class="eng">[Selected  Pboard Name : <b><?=$row[name]?></b>]&nbsp;&nbsp;</font></td>
+		</tr>
+		<tr><td height="10" colspan="3"></td></tr>
+		<tr>
+			<td></td>
+			<td align="left" height="20" width="20%"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Category name</font></td>
+			<td>
+				<div style="float:left; margin-right:4px;">
+					<input class="ta" type='text' name='cate_name' style='width:200px'>
+				</div>
+				<div id="sBtn1">
+					<a href="#" onclick="return checkIt();"><span class="blue">분류생성</span></a>
+				</div>
+			</td>
+		</tr>
+		</form>	
+		
+		<tr><td height="20" colspan="3"></td></tr>
+		<tr>
+  			<td></td>
+			<td colspan="2">
+				<TABLE border="0" width="96%" cellpadding="1" cellspacing="1">
+				<form name='form2' method='post' action='board_ok.php'>
+				<input type="hidden" name="uid" value='<?=$uid?>'><input type="hidden" name="mode" value='cate'>
+				<TR height="25">
+					<td width="45%" align="left"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Select category</font></td>
+					<td align="left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="small bTitle">&nbsp;&nbsp;*&nbsp;Category modify or delete</font></td>
+				</TR>
+				<TR height="30">
+					<td>
+						<select name='cate_num' size="8" style='width:100%;background:#FFFFFF;' onchange="post_list(this.value);">
+					<? 
+						for($j=1;$j<=$data[0];$j++){
+							echo "<option value='{$j}'>{$data[$j]}</option>";
+						}   
+					?>
+						</select>
+					 </td>
+					 <td width="65%">
+						<div style="float:left; margin-right:4px;margin-left:10px;">
+							<input class="ta"  type="text" name="cate_md" size="25">
+							<input type="hidden" name="cmode">
+						</div>
+						<div id="sBtn1">
+							<a href="#" onclick="return checkIt2();"><span class="blue">분류수정</span></a>
+							<a href="#" onclick="return checkIt3();"><span class="blue">분류삭제</span></a>
+						</div>
+					 </td>
+				</TR>
+				</form>
+				</TABLE>
+            </td>
+		</tr> 
+		<tr><td colspan="3" height="10"></td></tr>
+		</table>
+	 </TD>		   
+</TR>			   
+<TR><td colspan="2" height="20"></td></tr>
+<tr>
+	<td colspan="2" align="center">      
+		<img src='./img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle">
+	</td>
+</tr>
+<tr><td colspan=2 height="10"></td></tr>
+</form>
+</table>
+
+</BODY>
+</HTML>
+
+<script language="JavaScript">
+<!--				
+	document.form1.cate_name.focus();
+// -->
+</script>

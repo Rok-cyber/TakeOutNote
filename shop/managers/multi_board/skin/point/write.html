@@ -1,0 +1,105 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+  form=document.signForm;
+  form.submit();
+  return false;
+}
+
+function imgSizeConv(objName,Limit,path){ 
+	try {
+		if(!Limit) return;
+		Obj=document.getElementById(objName);	
+		if(!Obj) return;
+		var img = Obj.getElementsByTagName('IMG');
+		for(k=0; k<img.length; k++) {	
+			if (parseInt(img[k].style.width) > Limit) {
+				height = (parseInt(img[k].style.height)*Limit)/parseInt(img[k].style.width);
+				img[k].style.width  = Limit+'px';
+				img[k].style.height = height+'px';
+				img[k].style.cursor = "pointer";
+				img[k].onclick = function() { pLightBox.show(path+"php/photo_view.php?img="+this.src,"iframe","800","600","■ 이미지 보기");};
+			}
+		}	
+		return;
+	} catch(e) { return }
+
+}
+
+//-->
+</script>
+
+<table width=100% border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/modify_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품명</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;{{FORM1}}</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제목</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;{{FORM2}}</td>
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;별점평가</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;{{POINT}} <input type="text" style="border:0px;background-color:#efefef" size="80"></td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이름/아이디</font></td>
+							<td bgcolor="#EFEFEF">
+								<div style="float:left; padding:1px 6px 0 6px;">{{FORM4}}</div>								
+								<div style="float:left; padding:1px 10px 0 1px;" class="eng">/ {{FORM5}}</div>
+								<!-- DYNAMIC @is_crm@ -->
+								<div id="sBtn1" style="padding-left:6px;">
+									<a href="#" onclick="pLightBox.show('../member/member_crm.php?mid={{FORM5}}','iframe','700','450','■ {{FORM4}}({{FORM5}}) 회원 CRM',10);return false;"><span class="green">CRM 보기</span></a>	
+								</div>
+								<!-- DYNAMIC @is_crm@ -->
+							</td>
+						</tr>						
+						<tr height=80> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;내용</font></td>
+							<td bgcolor="#EFEFEF" style='word-break:break-all;padding:6px;' id='afterContent'>{{FORM6}}</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;우수상품평</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=checkbox name=best value='Y' {{CKD1}} onfocus=blur();>채택 , <input type=text class="ta2 eng" name=reserve value='{{FORM8}}' size=8 onkeydown="onlyNum(this)" onkeyup="onlyNum(this)"> point 적립
+							</td>
+						</tr>
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 적립금 취소시 적립금 관리에서 적립취소를 하시기 바랍니다.
+									우수상품평으로 채택되면 메인페이지에 나타 납니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>		
+							</td>							 
+						</tr>										
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+<script>
+imgSizeConv("afterContent",600,"../../");
+</script>

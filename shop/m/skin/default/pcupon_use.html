@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>할인쿠폰 사용선택</title>
+
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" title="style" />
+<script type="text/javascript">
+<!--
+var pops = 1;
+ -->
+</script>
+<script type="text/javascript" src="{{skin2}}js/jquery.min.js"></script>
+<script type="text/javascript"  src="{{skin2}}js/skin.lib.Shop.js"></script>
+
+<body>
+<section id="couponUse">	
+	<h1>할인쿠폰선택</h1>	
+	<form name="secForm">	
+	<table summary="할인쿠폰정보">
+		<col width="30" /> 
+		<col />
+		<tbody>
+		<!-- DYNAMIC @loop1@ -->	
+		<tr>
+			<td>
+				<p class="checkboxStyle"><input type="checkbox" name="secsg[]" value="{{UID}}" id="ckbox{{UID}}" onchange="ckCupons2({{C_PRICE}},{{ckFloatCnt}},this)" /><label for="ckbox{{UID}}" onclick="return"><span></span></label></p>				
+			</td>
+			<td>
+				<div>
+					{{NAME}} - {{SALE}}{{STYPE}}<!-- DYNAMIC @is_sprice@ -->({{SPRICE}}원)<!-- DYNAMIC @is_sprice@ -->			
+					<p>{{G_NAME}}</p>
+					<p>{{DATES}}</p>
+				</div>
+			</td>
+		</tr>
+		<!-- DYNAMIC @loop1@ -->	
+		<!-- DYNAMIC @loop2@ -->	
+		<tr>
+			<td>
+				<p class="radioStyle"><input type="radio" name="secs" value="{{UID}}" id="ckbox{{UID}}" onchange="ckCupons({{C_PRICE}},{{ckFloatCnt}})" /><label for="ckbox{{UID}}" onclick="return"><span></span></label></p>
+			</td>
+			<td>
+				<div>
+					{{NAME}} - {{SALE}}{{STYPE}}
+					<p>
+						<!-- DYNAMIC @lmt2@ -->
+						특정 카테고리 {{LMT}}원 이상구매시
+						<!-- DYNAMIC @lmt2@ -->
+
+						<!-- DYNAMIC @lmt3@ -->
+						특정 카테고리
+						<!-- DYNAMIC @lmt3@ -->
+
+						<!-- DYNAMIC @lmt4@ -->
+						{{LMT}}원 이상구매시
+						<!-- DYNAMIC @lmt4@ -->
+
+						<!-- DYNAMIC @lmt5@ -->
+						제한없음
+						<!-- DYNAMIC @lmt5@ -->
+					</p>
+					<p>{{DATES}}</p>
+				</div>
+			</td>
+		</tr>
+		<!-- DYNAMIC @loop2@ -->			
+		</tbody>
+	</table>
+	</form>
+
+	<h1>쿠폰적용총주문금액</h1>	
+	<form name="dispForm">
+	<input type="hidden" name="total" value="{{TOTAL}}" />
+	<input type="hidden" name="c_total" value="0" />
+	<input type="hidden" name="g_total" value="0" />
+	<table summary="쿠폰적용총주문금액">
+		<col width="60%" /> 
+		<col width="40%" />
+		<tbody>
+		<tr>
+			<th>상품 총 금액</th>
+			<td class="right">{{TOTAL2}}원</td>
+		</tr>
+		<tr>
+			<th>쿠폰 할인 금액</th>
+			<td class="right"><span id="use_money">0</span>원</td>
+		</tr>
+		<tr>
+			<th>할인 적용 상품 총 금액</th>
+			<td class="right"><span id="cash_money">{{TOTAL2}}</span>원</td>
+		</tr>		
+		</tbody>
+	</table>
+	</form>
+	
+	<ul>
+		<li><p class="active" onclick="cuponOk()" title="선택쿠폰사용하기">선택쿠폰사용하기</p></li>
+		<li>&nbsp;</li>
+		<li><p class="active" onclick="parent.cancelCupon();closeWin()" title="사용취소">사용취소</p></li>
+	</ul>	
+	
+	<br />
+	
+</section>
+
+<script language="javascript">
+<!--
+	var h = ($("#couponUse")[0].offsetHeight)
+	parent.pLightBox.cgSize(h);
+// -->
+</script>
+
+</body>
+</html>

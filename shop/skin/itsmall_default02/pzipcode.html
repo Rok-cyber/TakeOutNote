@@ -1,0 +1,278 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<head>
+<title>우편번호 검색</title>
+
+<script LANGUAGE="Javascript" src="{{skin2}}skin.lib.Shop.js"></script>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" title="style" />
+
+<style>
+#list_top { width:360px;margin-top:10px;background:url(img/common/tab_bg2.gif); height:22px; }
+		#list_top .tab_on { float:left; width:100px; height:22px; margin-right:2px; background:url(img/common/tab_bg_on.gif) no-repeat; color:#000000; padding-top:4px;text-align:center; }
+		#list_top .tab_off { float:left; width:100px; height:22px; margin-right:2px; background:url(img/common/tab_bg_off.gif) no-repeat; color:#000000; padding-top:4px;text-align:center; }
+</style>
+
+<script LANGUAGE="Javascript">
+<!--
+
+function put_post(post_no1, post_no2, address) {
+    var f =document.postForm;
+	f.zip1.value=post_no1;
+    f.zip2.value=post_no2;
+    f.addr.value=address;	
+	document.getElementById("focus").focus();
+	f.addr2.focus();
+}
+
+function ckIt(){ 
+    var f =document.postForm;	
+    if(typeof(f.addr)!="undefined" && f.addr.value) {
+        var f2 =parent.document.{{fname}}Form;
+		f2.zip{{ocnt}}1.value=f.zip1.value;
+		f2.zip{{ocnt}}2.value=f.zip2.value;
+		f2.addr{{ocnt}}.value=f.addr.value + " " + f.addr2.value;
+
+		<!-- DYNAMIC @is_order@ -->
+		parent.ckCarrArea();
+		<!-- DYNAMIC @is_order@ -->
+
+		f2.addr{{ocnt}}.focus();
+		parent.pLightBox.hide();
+		return false;
+    }	
+    
+	if(!f.keyword.value){
+        if(f.type.value==1) alert('동/면/읍 명을 입력하세요!');
+		else alert('도로/건물 명을 입력하세요!');
+        f.keyword.focus();
+	    return false;
+    }
+
+	if(f.keyword.value.length<2) {
+		alert('최소 이름을 2자리이상 입력하세요!');
+		f.keyword.focus();
+		return false;
+	}
+	
+	document.getElementById('list_loading').style.display='block';
+	f.submit();
+	return false;
+}
+
+
+function cgType(num,ck){
+	 var f =document.postForm;	
+	 if(num==f.type.value && ck!=1) return;
+	  if(num==1) {
+		if(document.getElementById('zips1')) {
+			document.getElementById('zips1').style.display = 'block';
+			document.getElementById('zips2').style.display = 'none';
+			document.getElementById('sname').innerHTML = '동/면/읍 명';
+		}
+		else {
+			f.type.value = 1;
+			f.keyword.value = '';
+			f.submit();
+		}
+		document.getElementById('zips21').className = "tab_on";
+		document.getElementById('zips22').className = "tab_off";
+	 }
+	 else {
+		if(document.getElementById('zips1')) {
+			document.getElementById('zips1').style.display = 'none';
+			document.getElementById('zips2').style.display = 'block';
+			document.getElementById('sname').innerHTML = '도로/건물 명';
+		}
+		else {
+			f.type.value = 2;
+			f.keyword.value = '';
+			f.submit();
+		}
+		document.getElementById('zips21').className = "tab_off";
+		document.getElementById('zips22').className = "tab_on";
+	}
+	f.type.value = num;
+}
+
+function cgType2(){
+	document.getElementById('zips21').className = "tab_off";
+	document.getElementById('zips22').className = "tab_on";
+}
+
+function ckEnter(){
+	if(event.keyCode==13) {
+		return ckIt();
+	}
+}
+// -->
+</script>
+
+
+<body>
+
+<form name="postForm" method="post" onsubmit='return ckIt();'>
+<input type="hidden" name="fname" value="{{fname}}" />
+<input type="hidden" name="ocnt" value="{{ocnt}}" />
+<input type="hidden" name="type" value="{{type}}" />
+
+<div id="list_top">
+	<div id="zips21" class="tab_on" onclick="cgType(1);"><font class="small hand">지번주소</font></div>
+	<div id="zips22" class="tab_off" onclick="cgType(2);"><font class="small hand">도로명주소</font></div>
+</div>
+
+<div style="width:360px;padding:15px;">
+
+	<!-- DYNAMIC @is_default@ -->
+	<div id="zips1">
+		<div class="small">
+			! 찾고자 하시는 지역의 동이나 읍/면의 이름을 공백없이 입력 하신 후 '검색하기' 버튼을 누르시거나 'Enter'키를 누르시면 됩니다.
+		</div>
+		<div class="small" style="margin-top:20px;">
+			(예) 주소가 '서울시 송파구 잠실동'인 경우 '<font class="green">잠실동</font>'을 입력합니다.
+		</div>
+	</div>
+	<div id="zips2" style="display:none">
+		<div class="small">
+			! 찾고자 하시는 지역의 도로명 과 건물번호나 빌딩 또는 아파트명을 입력 하신 후 '검색하기' 버튼을 누르시거나 'Enter'키를 누르시면 됩니다.
+		</div>
+		<div class="small" style="margin-top:20px;">
+			(예) <font class="green">경대로 144 , 신천동 자이&nbsp;&nbsp;</font>등 두단어 이상 조합
+		</div>
+	</div>
+	<div style="margin-top:15px;">
+		<font class="small bold" id="sname">{{TITLE}}</font>&nbsp;&nbsp;<input name="keyword" size="25" class="inputs default black" onkeydown="ckEnter();" />
+	</div>
+
+	<div style="margin-top:25px;float:right;width:130px;">
+		<div id="sBtn3">
+			<a href="#" onclick="return ckIt('1');"><span>검색하기</span></a>
+		</div>
+		<div id="sBtn2">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>창닫기</span></a>
+		</div>
+	</div>	
+	<!-- DYNAMIC @is_default@ -->
+
+	<!-- DYNAMIC @is_search@ -->
+	<div style="margin-top:20px;">
+		<div class="left" style="margin:3px 10px 0 5px;">
+			<font class="small bold">{{TITLE}}</font>&nbsp;&nbsp;<input name="keyword" size="25" class="inputs default black" onkeydown="ckEnter();" value="{{keyword}}" />
+		</div>
+		<div id="sBtn3">
+			<a href="#" onclick="return ckIt('1');"><span>검색하기</span></a>
+		</div>
+	</div>
+
+	<div style="clear:both;height:16px;overflow:hidden">&nbsp;</div>
+	
+	<div id="list_small">
+		<table cellspacing="0" cellpadding="0" border="0" width="360">			
+			<col width="70" /> 
+			<col />			
+			<thead>
+			<tr height="28" align="center">
+				<th scope="col" class="small black">우편번호</th>
+				<th scope="col" class="small black">주소</th>				
+			</tr>
+			</thead>				
+			<tbody>
+			<!-- DYNAMIC @loop@ -->
+			<tr align="center" height="26" class="hand" onclick="put_post('{{post_no1}}','{{post_no2}}','{{addr}}');">
+				<td class="num">{{post_no1}} - {{post_no2}}</td>
+				<td align="left" class="small">{{addr2}}</td>
+			</tr>
+			<tr><td colspan="9" height="1" bgcolor="#efefef"></td></tr>			
+			<!-- DYNAMIC @loop@ -->
+			<!-- DYNAMIC @no_loop@ -->
+			<tr align="center" height="26">
+				<td colspan="2" align="center" class="small">검색결과가 없습니다.</td>
+			</tr>
+			<tr><td colspan="9" height="1" bgcolor="#efefef"></td></tr>			
+			<!-- DYNAMIC @no_loop@ -->
+			</tbody>			
+		</table>
+	</div>		
+
+	<div id="zipSearch" style="clear:both;margin-top:30px;">		
+		<ul>
+			<li>
+				<div id="nextIcon2" class="small left bold"  style="width:80px;">우편번호</div>
+				<div class="left small"><input type="text" name="zip1" size="4" class="inputs num" /> - <input type="text" name="zip2" size="4" class="inputs num" /></div>
+			</li>
+			<li>
+				<div id="nextIcon2" class="small left bold"  style="width:80px;">주소</div>
+				<div class="left small"><input type="text" name="addr" size="30" class="inputs small" /></div>
+			</li>
+			<li>
+				<div id="nextIcon2" class="small left bold"  style="width:80px;">상세주소</div>
+				<div class="left small"><input type="text" name="addr2" size="30" class="inputs small" /></div>
+			</li>
+		</ul>
+	</div>	
+	
+	<div style="clear:both;height:16px;overflow:hidden">&nbsp;</div>
+
+	<div style="float:right;width:130px;" id="focus">
+		<div id="sBtn3">
+			<a href="#" onclick="return ckIt('1');"><span>입력하기</span></a>
+		</div>
+		<div id="sBtn2">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>창닫기</span></a>
+		</div>
+	</div>
+	<div style="clear:both;height:26px;overflow:hidden">&nbsp;</div>
+	<!-- DYNAMIC @is_search@ -->
+
+	<!-- DYNAMIC @is_search2@ -->
+	<div style="margin-top:20px;">
+		<div class="left" style="margin:3px 10px 0 5px;">
+			<font class="small bold">도로/건물 명</font>&nbsp;&nbsp;<input name="keyword" size="25" class="inputs default black" value="{{keyword}}" />
+		</div>
+		<div id="sBtn3">
+			<a href="#" onclick="return ckIt('1');"><span>검색하기</span></a>
+		</div>
+	</div>
+
+	<div style="clear:both;height:16px;overflow:hidden">&nbsp;</div>
+	
+	<div>
+		검색결과가 너무 많습니다. 다시 검색 해 주시기 바랍니다.<br />
+		검색시 건물번호도 같이 입력 해 주시기 바랍니다.<br />
+		예) <font class="green">경대로 144</font>
+	</div>		
+
+	
+	<div style="clear:both;height:16px;overflow:hidden">&nbsp;</div>
+
+	<div style="float:right;width:130px;" id="focus">
+		<div id="sBtn2">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>창닫기</span></a>
+		</div>
+	</div>
+	<div style="clear:both;height:16px;overflow:hidden">&nbsp;</div>
+	<!-- DYNAMIC @is_search2@ -->	
+</div>
+
+<div id="list_loading" style="width:220px; left:100px; top:60px;">
+	<div style="border:1px solid #ccc; background-color:#fff">
+		<div style='height:15px'>&nbsp;</div>
+		주소 데이타를 가져오는 중입니다.
+		<div style='height:10px'>&nbsp;</div>
+		<img src='img/common/bigWaiting.gif' border='0' alt="waitong..." />
+		<div style='height:15px'>&nbsp;</div>
+	</div>	
+</div>
+</form>
+
+
+<script>
+<!-- DYNAMIC @is_type21@ -->
+cgType(2,1);
+<!-- DYNAMIC @is_type21@ -->
+<!-- DYNAMIC @is_type22@ -->
+cgType2();
+<!-- DYNAMIC @is_type22@ -->
+</script>
+</body>
+</html>

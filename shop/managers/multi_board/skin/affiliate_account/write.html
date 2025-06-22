@@ -1,0 +1,100 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+	if(!form.affiliate.value) {
+		alert('Affiliate를 선택하세요.');
+		form.affiliate.focus();
+		return false;
+	}
+	if(!form.a_price.value) {
+		alert('입금액을 입력히세요.');
+		form.a_price.focus();
+		return false;
+	} 
+   
+	form.submit();
+	return false;
+}
+
+function secBank(vls) {
+	if(!vls) return;
+	form=document.signForm;
+	form.bank_info.value = bank_info[vls];
+}
+
+bank_info = new Array();
+{{BANK_INFO}}
+
+//-->
+</script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width='120'><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Affiliate</font></div></td>
+							<td bgcolor="#EFEFEF" colspan=3 style="padding-left:6px;">
+								<select name='affiliate' onchange="secBank(this.value);">
+									<option value=''>선택</option>
+									{{AFFILIATE}}						
+								</select>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width='120'><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;정산달</font></div></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;{{SELECT}}</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width='120'><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;송금액</font></div></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=a_price value='{{FORM3}}' size=10 onkeydown="onlyNum(this)" onkeyup="onlyNum(this)">원</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width='120'><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;송금계좌</font></div></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=bank_info value='{{FORM4}}' size=80></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width='120'><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;송금일</font></div></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=dates value='{{FORM5}}' size=10 onfocus="new CalendarFrame.Calendar(this)">
+								<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+									<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+								</div>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;입금메모</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<textarea name="memo" cols="95" rows="8" class="ta">{{FORM6}}</textarea></td>
+						</tr>
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=4  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									 
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>							 
+						</tr>					
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

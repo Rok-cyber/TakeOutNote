@@ -1,0 +1,114 @@
+<table border=0 cellpadding="0" cellspacing="0" width="100%" align=center bgcolor='#FFFFFF'>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="post" action="{{ACTION}}" onsubmit='return false;'>
+		<tr><td height='6'></td></tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+						<option value='subject'>제목</option>					   
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2">
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=50%><font class="small">&nbsp;전체 : <font class="eng">{{TOTAL}}</font> 건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지</font></td>
+    <td align=right></td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=5% align=center class=gr_bg><font class="bTitle small"><a href="#" onclick="return chCheck(document.delForm)" onfocus="this.blur();">√</font></a></font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=30% align=center class=gr_bg><font class="bTitle small">페이지 제목</font></td>
+							<td align=center class=gr_bg><font class="bTitle small">페이지 주소</font></td>			
+							<td width=15% align=center class=gr_bg><font class="bTitle small">등록일</font></td>
+						</tr>
+						<form METHOD=POST name='delForm'>
+						<!-- DYNAMIC @loop@ -->
+						<tr height=22 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=center>{{DEL}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=left style="padding-left:6px;">{{LIST2}}</td>
+							<td align=left style="padding-left:6px" class=eng>{{LIST3}}</td>
+							<td align=center class=eng>{{DATE}}</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=60>
+							<td align=center colspan=5 bgcolor=#ffffff>등록(검색)된 추가 페이지가 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+     </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+	<!-- 페이징,검색... start -->
+		<table border = 0 cellspacing=0 cellpadding=0 width=100%>
+		<tr>
+			<td width=40%>
+				<div id="sBtn1" style="padding-left:2px;">
+					<a href="{{LINK2}}"><span class="blue">등록하기</span></a>
+					<!-- DYNAMIC @is_man3@ -->
+					<a href="#" onclick="delSend(document.delForm);return false;"><span class="blue">선택 삭제하기</span></a>
+					<!-- DYNAMIC @is_man3@ -->
+				</div>          
+			</td>
+			<td align=right id=paging>{{PAGING}}</td>
+		</tr>
+		</table>
+		<!-- 페이징,검색... end -->
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+<script>
+document.searchForm.limit.value = '{{limit}}';
+</script>

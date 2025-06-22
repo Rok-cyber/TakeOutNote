@@ -1,0 +1,319 @@
+<?
+include "../html/top_inc.html";     /*** TOP INCLUDE ***/
+
+############ 회원가입 양식 정보 불러오기 ####################
+$sql = "SELECT address,info from pboard_member WHERE uid=1";
+$data = $mysql->one_row($sql);
+
+$opt = explode("|",$data['address']);
+for($i=1;$i<27;$i++){
+	${"opt".$i}[$opt[$i]] = "checked";
+}
+
+$optw = explode("|",stripslashes($data['info']));
+?>
+
+<script language="JavaScript">
+<!--
+
+function ck_option(num,st) {
+	var form = document.member_form; 
+	for (i=cnt=0;i< form.elements.length; i++) {
+		eval("if(form.elements[i].name == 'opt"+num+"[]' && form.elements[i].value!=st )  form.elements[i].checked = false; ")
+		eval("if(form.elements[i].name == 'opt"+num+"[]' && form.elements[i].value==st )  form.elements[i].checked = true; ")
+	}
+}
+
+ -->
+</script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_mconf.gif" alt="가입양식설정" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>회원가입시 입력하는 양식을 설정 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<form name=member_form method=post action='./mem_form_ok.php'>
+<!-- 입력 양식설정 시작 -->
+
+<TR><TD height="40"><img src="img/mem_t31.gif" border="0" align="absmiddle"></TD></TR>
+<TR>
+	<TD style="padding:4px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">
+        <tr><td height="10"></td></tr>
+		<tr>
+			<td valign="top"> 
+				<table border="0" cellpadding="0" cellspacing="0" width="96%" align="center">
+				<tr><td height="24" colspan="2">&nbsp;<b class="small">! 아이디, 이름, 비밀번호, 이메일 주소는 필수입력 사항입니다.</b></td></tr>
+				<tr><td height="1" colspan="2" bgcolor="#999999""></td></tr> 
+				<tr><td height="8" colspan="2"></td></tr> 
+				<tr>
+					<td height="24" width="20%"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주민번호</font></td>
+					<td>
+						<input type="checkbox" name=opt1[] value="0" onfocus='blur();' onclick="ck_option('1','0');" <?=$opt1[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt1[] value="1" onfocus='blur();' onclick="ck_option('1','1');" <?=$opt1[1]?>> 사용함
+						&nbsp;&nbsp;<input type="checkbox" name=opt1[] value="2" onfocus='blur();' onclick="ck_option('1','2');" <?=$opt1[2]?>> 필수항목</font>
+					</td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전화번호</font></td>
+				  <td>
+				      <input type="checkbox" name=opt2[] value="0" onfocus='blur();' onclick="ck_option('2','0');" <?=$opt2[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt2[] value="1" onfocus='blur();' onclick="ck_option('2','1');" <?=$opt2[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt2[] value="2" onfocus='blur();' onclick="ck_option('2','2');" <?=$opt2[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;핸드폰번호</font></td>
+				  <td>
+				      <input type="checkbox" name=opt3[] value="0" onfocus='blur();' onclick="ck_option('3','0');" <?=$opt3[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt3[] value="1" onfocus='blur();' onclick="ck_option('3','1');" <?=$opt3[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt3[] value="2" onfocus='blur();' onclick="ck_option('3','2');" <?=$opt3[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주소</font></td>
+				  <td>
+				      <input type="checkbox" name=opt4[] value="0" onfocus='blur();' onclick="ck_option('4','0');" <?=$opt4[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt4[] value="1" onfocus='blur();' onclick="ck_option('4','1');" <?=$opt4[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt4[] value="2" onfocus='blur();' onclick="ck_option('4','2');" <?=$opt4[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>				
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;홈페이지</font></td>
+				  <td>
+				      <input type="checkbox" name=opt6[] value="0" onfocus='blur();' onclick="ck_option('6','0');" <?=$opt6[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt6[] value="1" onfocus='blur();' onclick="ck_option('6','1');" <?=$opt6[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt6[] value="2" onfocus='blur();' onclick="ck_option('6','2');" <?=$opt6[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메신저(MSN)</td>
+				  <td>
+				      <input type="checkbox" name=opt7[] value="0" onfocus='blur();' onclick="ck_option('7','0');" <?=$opt7[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt7[] value="1" onfocus='blur();' onclick="ck_option('7','1');" <?=$opt7[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt7[] value="2" onfocus='blur();' onclick="ck_option('7','2');" <?=$opt7[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr><tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;생년월일</font></td>
+				  <td>
+				      <input type="checkbox" name=opt8[] value="0" onfocus='blur();' onclick="ck_option('8','0');" <?=$opt8[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt8[] value="1" onfocus='blur();' onclick="ck_option('8','1');" <?=$opt8[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt8[] value="2" onfocus='blur();' onclick="ck_option('8','2');" <?=$opt8[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;성별</font></td>
+				  <td>
+				      <input type="checkbox" name=opt9[] value="0" onfocus='blur();' onclick="ck_option('9','0');" <?=$opt9[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt9[] value="1" onfocus='blur();' onclick="ck_option('9','1');" <?=$opt9[1]?>> 사용함</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;결혼유무</font></td>
+				  <td>
+				      <input type="checkbox" name=opt10[] value="0" onfocus='blur();' onclick="ck_option('10','0');" <?=$opt10[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt10[] value="1" onfocus='blur();' onclick="ck_option('10','1');" <?=$opt10[1]?>> 사용함</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;최종학력</font></td>
+				  <td>
+				      <input type="checkbox" name=opt11[] value="0" onfocus='blur();' onclick="ck_option('11','0');" <?=$opt11[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt11[] value="1" onfocus='blur();' onclick="ck_option('11','1');" <?=$opt11[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt11[] value="2" onfocus='blur();' onclick="ck_option('11','2');" <?=$opt11[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr><td height="4" colspan="2"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;최종학력입력</font></td>
+				  <td>
+				      <textarea name="edu_in" style="width:96%" rows="3" class="ta"><?=$optw[0]?></textarea>
+				  </td>
+			    </tr>
+                <tr><td height="4" colspan="2"></td></tr>
+				<tr><td height="24"></td><td><font class="small">"," 를 구분으로 입력하세요.</font></td></tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;취미</font></td>
+				  <td>
+				      <input type="checkbox" name=opt12[] value="0" onfocus='blur();' onclick="ck_option('12','0');" <?=$opt12[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt12[] value="1" onfocus='blur();' onclick="ck_option('12','1');" <?=$opt12[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt12[] value="2" onfocus='blur();' onclick="ck_option('12','2');" <?=$opt12[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr><td height="4" colspan="2"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;취미입력</font></td>
+				  <td>
+				      <textarea name="hobby_in" style="width:96%" rows="2" class="ta"><?=$optw[1]?></textarea>
+				  </td>
+			    </tr>
+                <tr><td height="4" colspan="2"></td></tr>
+				<tr><td height="24"></td><td><font class="small">"," 를 구분으로 입력하세요.</font></td></tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;직업</font></td>
+				  <td>
+				      <input type="checkbox" name=opt13[] value="0" onfocus='blur();' onclick="ck_option('13','0');" <?=$opt13[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt13[] value="1" onfocus='blur();' onclick="ck_option('13','1');" <?=$opt13[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt13[] value="2" onfocus='blur();' onclick="ck_option('13','2');" <?=$opt13[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;직장명</font></td>
+				  <td>
+				      <input type="checkbox" name=opt14[] value="0" onfocus='blur();' onclick="ck_option('14','0');" <?=$opt14[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt14[] value="1" onfocus='blur();' onclick="ck_option('14','1');" <?=$opt14[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt14[] value="2" onfocus='blur();' onclick="ck_option('14','2');" <?=$opt14[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				
+				<tr><td height="4" colspan="2"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;직업입력</font></td>
+				  <td>
+				      <textarea name=job_in style="width:96%" rows=4 class="ta"><?=$optw[2]?></textarea>
+				  </td>
+			    </tr>
+                <tr><td height="4" colspan="2"></td></tr>
+				<tr><td height="24"></td><td><font class="small">"," 를 구분으로 입력하세요.</font></td></tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;남기는말씀</font></td>
+				  <td>
+				      <input type="checkbox" name=opt15[] value="0" onfocus='blur();' onclick="ck_option('15','0');" <?=$opt15[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt15[] value="1" onfocus='blur();' onclick="ck_option('15','1');" <?=$opt15[1]?>> 사용함
+					  &nbsp;&nbsp;<input type="checkbox" name=opt15[] value="2" onfocus='blur();' onclick="ck_option('15','2');" <?=$opt15[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메일링 수신</font></td>
+				  <td>
+				      <input type="checkbox" name=opt16[] value="0" onfocus='blur();' onclick="ck_option('16','0');" <?=$opt16[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt16[] value="1" onfocus='blur();' onclick="ck_option('16','1');" <?=$opt16[1]?>> 사용함</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SMS 수신</font></td>
+				  <td>
+				      <input type="checkbox" name=opt26[] value="0" onfocus='blur();' onclick="ck_option('26','0');" <?=$opt26[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt26[] value="1" onfocus='blur();' onclick="ck_option('26','1');" <?=$opt26[1]?>> 사용함</font>
+					  &nbsp;&nbsp;<font class="small">SMS기능은 SMS관리에서 별도록 설정 하셔야 됩니다.</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가필드 1</font></td>
+				  <td>
+				      <input type="text" name="add1" value="<?=$optw[5]?>" class="ta">&nbsp;&nbsp;
+					  <input type="checkbox" name=opt21[] value="0" onfocus='blur();' onclick="ck_option('21','0');" <?=$opt21[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt21[] value="1" onfocus='blur();' onclick="ck_option('21','1');" <?=$opt21[1]?>> 사용함&nbsp;&nbsp;<input type="checkbox" name=opt21[] value="2" onfocus='blur();' onclick="ck_option('21','2');" <?=$opt21[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가필드 2</font></td>
+				  <td>
+				      <input type="text" name="add2" value="<?=$optw[6]?>" class="ta">&nbsp;&nbsp;
+					  <input type="checkbox" name=opt22[] value="0" onfocus='blur();' onclick="ck_option('22','0');" <?=$opt22[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt22[] value="1" onfocus='blur();' onclick="ck_option('22','1');" <?=$opt22[1]?>> 사용함&nbsp;&nbsp;<input type="checkbox" name=opt22[] value="2" onfocus='blur();' onclick="ck_option('22','2');" <?=$opt22[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가필드 3</font></td>
+				  <td>
+				      <input type="text" name="add3" value="<?=$optw[7]?>" class="ta">&nbsp;&nbsp;
+					  <input type="checkbox" name=opt23[] value="0" onfocus='blur();' onclick="ck_option('23','0');" <?=$opt23[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt23[] value="1" onfocus='blur();' onclick="ck_option('23','1');" <?=$opt23[1]?>> 사용함&nbsp;&nbsp;<input type="checkbox" name=opt23[] value="2" onfocus='blur();' onclick="ck_option('23','2');" <?=$opt23[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가필드 4</font></td>
+				  <td>
+				      <input type="text" name="add4" value="<?=$optw[8]?>" class="ta">&nbsp;&nbsp;
+					  <input type="checkbox" name=opt24[] value="0" onfocus='blur();' onclick="ck_option('24','0');" <?=$opt24[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt24[] value="1" onfocus='blur();' onclick="ck_option('24','1');" <?=$opt24[1]?>> 사용함&nbsp;&nbsp;<input type="checkbox" name=opt24[] value="2" onfocus='blur();' onclick="ck_option('24','2');" <?=$opt24[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+				  <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가필드 5</font></td>
+				  <td>
+				      <input type="text" name="add5" value="<?=$optw[9]?>" class="ta">&nbsp;&nbsp;
+					  <input type="checkbox" name=opt25[] value="0" onfocus='blur();' onclick="ck_option('25','0');" <?=$opt25[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt25[] value="1" onfocus='blur();' onclick="ck_option('25','1');" <?=$opt25[1]?>> 사용함&nbsp;&nbsp;<input type="checkbox" name=opt25[] value="2" onfocus='blur();' onclick="ck_option('25','2');" <?=$opt25[2]?>> 필수항목</font>
+				  </td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+
+	   		    </table>
+			</td></tr>
+			<tr><td height="10"></td></tr>
+			</table>
+	 </TD>		   
+ </TR>
+
+ <!-- 입력 양식설정 끝 -->
+<TR><TD height="24"></TD></TR>
+
+<!-- 아이디 제한 설정 시작 -->
+
+<TR><TD height="40"><img src="img/mem_t33.gif" border="0" align="absmiddle"></TD></TR>
+<TR>
+	<TD style="padding:4px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">
+        <tr><td height="10"></td></tr>
+		<tr>
+			<td valign="top"> 
+				<table border="0" cellpadding="0" cellspacing="0" width="96%" align="center">
+	            <tr>
+					<td height="24" width="20%"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사용금지 아이디</font></td>
+					<td>
+						<input type="checkbox" name=opt19[] value="0" onfocus='blur();' onclick="ck_option('19','0');" <?=$opt19[0]?>> <font>사용안함&nbsp;&nbsp;<input type="checkbox" name=opt19[] value="1" onfocus='blur();' onclick="ck_option('19','1');" <?=$opt19[1]?>> 사용함</font>
+					</td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr><td height="4" colspan="2"></td></tr>
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사용금지 아이디 입력</font></td>
+					<td>
+						<textarea name="useid_in" style="width:96%" rows="2" class="ta"><?=$optw[4]?></textarea>
+					</td>
+			    </tr>
+                <tr><td height="4" colspan="2"></td></tr>
+				<tr><td height="24"></td><td><font class="small">"," 를 구분으로 입력하세요.</font></td></tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				</table>
+			</td>
+		</tr>
+		<tr><td height="10"></td></tr>
+		</table>
+	</TD>		   
+</TR>
+
+<!-- 아이디 제한 설정 끝 -->
+<TR><TD height="24"></TD></TR> 
+<TR>
+	<TD align="center">
+		<input type="image" src="img/btn_save.gif" onfocus='blur();'>
+		<img src="img/btn_prepage.gif" onClick="history.back()" onfocus='this.blur();' class="hand" align="absmiddle">
+	</TD>
+</TR>
+<TR><TD height="20"></TD></TR> 
+</form>
+</TABLE>  
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<? include "../html/bottom_inc.html";     /*** BOTTOM INCLUDE ***/ ?>

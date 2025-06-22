@@ -1,0 +1,65 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>.text{mso-number-format:"\@";}</style>
+</head>
+<body>
+
+<table border="1">
+<tr>
+	<!-- DYNAMIC @is_torder_status@ --><th>주문상태</th><!-- DYNAMIC @is_torder_status@ -->
+	<!-- DYNAMIC @is_torder_num@ --><th>주문번호</th><!-- DYNAMIC @is_torder_num@ -->
+	<!-- DYNAMIC @is_tsigndate@ --><th>주문시간</th><!-- DYNAMIC @is_tsigndate@ -->
+	<!-- DYNAMIC @is_tid@ --><th>아이디</th><!-- DYNAMIC @is_tid@ -->
+	<!-- DYNAMIC @is_tname1@ --><th>주문고객성명</th><!-- DYNAMIC @is_tname1@ -->
+	<!-- DYNAMIC @is_tgoods_name@ --><th>주문상품</th><!-- DYNAMIC @is_tgoods_name@ -->
+	<!-- DYNAMIC @is_tpay_total@ --><th>총결제금액</th><!-- DYNAMIC @is_tpay_total@ -->
+	<!-- DYNAMIC @is_tgooods_total@ --><th>주문상품금액</th><!-- DYNAMIC @is_tgooods_total@ -->
+	<!-- DYNAMIC @is_tcarriage@ --><th>배송비</th><!-- DYNAMIC @is_tcarriage@ -->
+	<!-- DYNAMIC @is_tuse_reserve@ --><th>적립금사용금액</th><!-- DYNAMIC @is_tuse_reserve@ -->
+	<!-- DYNAMIC @is_tuse_cupon@ --><th>쿠폰사용금액</th><!-- DYNAMIC @is_tuse_cupon@ -->
+	<!-- DYNAMIC @is_tpay_type@ --><th>결제방법</th><!-- DYNAMIC @is_tpay_type@ -->
+	<!-- DYNAMIC @is_tcarriage1@ --><th>택배회사</th><!-- DYNAMIC @is_tcarriage1@ -->
+	<!-- DYNAMIC @is_tcarriage2@ --><th>송장번호</th><!-- DYNAMIC @is_tcarriage2@ -->
+	<!-- DYNAMIC @is_ttel1@ --><th>주문고객연락처1</th><!-- DYNAMIC @is_ttel1@ -->
+	<!-- DYNAMIC @is_thphone1@ --><th>주문고객연락처2</th><!-- DYNAMIC @is_thphone1@ -->
+	<!-- DYNAMIC @is_temail@ --><th>주문고객E-mail</th><!-- DYNAMIC @is_temail@ -->
+	<!-- DYNAMIC @is_tname2@ --><th>수취인성명</th><!-- DYNAMIC @is_tname2@ -->
+	<!-- DYNAMIC @is_ttel2@ --><th>수취인연락처1</th><!-- DYNAMIC @is_ttel2@ -->
+	<!-- DYNAMIC @is_thphone2@ --><th>수취인연락처2</th><!-- DYNAMIC @is_thphone2@ -->
+	<!-- DYNAMIC @is_tzipcode@ --><th>수취인 우편번호</th><!-- DYNAMIC @is_tzipcode@ -->
+	<!-- DYNAMIC @is_taddress@ --><th>수취인주소</th><!-- DYNAMIC @is_taddress@ -->
+	<!-- DYNAMIC @is_tmessage@ --><th>주문고객메모</th><!-- DYNAMIC @is_tmessage@ -->
+</tr>
+<!-- DYNAMIC @loop@ -->
+<tr>
+	<!-- DYNAMIC @is_order_status@ --><td>{{LISTorder_status}}</td><!-- DYNAMIC @is_order_status@ -->
+	<!-- DYNAMIC @is_order_num@ --><td>{{LISTorder_num}}</td><!-- DYNAMIC @is_order_num@ -->
+	<!-- DYNAMIC @is_signdate@ --><td>{{LISTsigndate}}</td><!-- DYNAMIC @is_signdate@ -->
+	<!-- DYNAMIC @is_id@ --><td>{{LISTid}}</td><!-- DYNAMIC @is_id@ -->
+	<!-- DYNAMIC @is_name1@ --><td>{{LISTname1}}</td><!-- DYNAMIC @is_name1@ -->
+	<!-- DYNAMIC @is_goods_name@ --><td>{{LISTgoods_name}}</td><!-- DYNAMIC @is_goods_name@ -->
+	<!-- DYNAMIC @is_pay_total@ --><td>{{LISTpay_total}}</td><!-- DYNAMIC @is_pay_total@ -->
+	<!-- DYNAMIC @is_gooods_total@ --><td>{{LISTgooods_total}}</td><!-- DYNAMIC @is_gooods_total@ -->
+	<!-- DYNAMIC @is_carriage@ --><td>{{LISTcarriage}}</td><!-- DYNAMIC @is_carriage@ -->
+	<!-- DYNAMIC @is_use_reserve@ --><td>{{LISTuse_reserve}}</td><!-- DYNAMIC @is_use_reserve@ -->
+	<!-- DYNAMIC @is_use_cupon@ --><td>{{LISTuse_cupon}}</td><!-- DYNAMIC @is_use_cupon@ -->
+	<!-- DYNAMIC @is_pay_type@ --><td>{{LISTpay_type}}</td><!-- DYNAMIC @is_pay_type@ -->
+	<!-- DYNAMIC @is_carriage1@ --><td>{{LISTcarriage1}}</td><!-- DYNAMIC @is_carriage1@ -->
+	<!-- DYNAMIC @is_carriage2@ --><td>{{LISTcarriage2}}</td><!-- DYNAMIC @is_carriage2@ -->
+	<!-- DYNAMIC @is_tel1@ --><td>{{LISTtel1}}</td><!-- DYNAMIC @is_tel1@ -->
+	<!-- DYNAMIC @is_hphone1@ --><td>{{LISThphone1}}</td><!-- DYNAMIC @is_hphone1@ -->
+	<!-- DYNAMIC @is_email@ --><td>{{LISTemail}}</td><!-- DYNAMIC @is_email@ -->
+	<!-- DYNAMIC @is_name2@ --><td>{{LISTname2}}</td><!-- DYNAMIC @is_name2@ -->
+	<!-- DYNAMIC @is_tel2@ --><td>{{LISTtel2}}</td><!-- DYNAMIC @is_tel2@ -->
+	<!-- DYNAMIC @is_hphone2@ --><td>{{LISThphone2}}</td><!-- DYNAMIC @is_hphone2@ -->
+	<!-- DYNAMIC @is_zipcode@ --><td>{{LISTzipcode}}</td><!-- DYNAMIC @is_zipcode@ -->
+	<!-- DYNAMIC @is_address@ --><td>{{LISTaddress}}</td><!-- DYNAMIC @is_address@ -->
+	<!-- DYNAMIC @is_message@ --><td>{{LISTmessage}}</td><!-- DYNAMIC @is_message@ -->
+</tr>
+<!-- DYNAMIC @loop@ -->
+
+</table>
+
+</body>
+</html>

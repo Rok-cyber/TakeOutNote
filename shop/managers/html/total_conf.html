@@ -1,0 +1,66 @@
+<?
+include "../ad_init.php";
+
+$sql = "SELECT code FROM mall_aconf WHERE mode='T'";
+$code = $mysql->get_one($sql);
+$code = explode("|",stripslashes($code));
+
+for($i=1;$i<14;$i++) {
+	if($code[$i-1]==1) ${"ckd".$i} = "checked";
+}
+
+$infos = explode(",",$code[13]);
+for($i=1;$i<5;$i++) {
+	if($infos[$i-1]==1) ${"ckd2".$i} = "checked";
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<TITLE>쇼핑몰 정보 설정</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<BODY style="padding:0;margin:0;">
+
+<div>
+	<form name='menuForm' method='post' action='menu_conf_ok.php'>
+	<input type='hidden' name='mode' value='total' />
+	<div style="padding:20px 0 0 20px; width:400px">
+		<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+		<tr>
+			<td>	
+				<div class='small' style='line-height:220%'>					
+					<input type='checkbox' name='info1' id='info1' value='1' <?=$ckd1?> /> <label for="info1">매출액</label> <br/>
+					<input type='checkbox' name='info2' id='info2' value='1' <?=$ckd2?> /> <label for="info2">주문건수</label> <br/>					
+					<input type='checkbox' name='info3' id='info3' value='1' <?=$ckd3?> /> <label for="info3">결제방법별</label> (<input type='checkbox' name='info21' id='info21' value='1' <?=$ckd21?> /><label for="info21">무통장</label> / <input type='checkbox' name='info22' id='info22' value='1' <?=$ckd22?> /><label for="info22">카드</label> / <input type='checkbox' name='info23' id='info23' value='1' <?=$ckd23?> /><label for="info23">계좌이체</label> / <input type='checkbox' name='info24' id='info24' value='1' <?=$ckd24?> /><label for="info24">핸드폰</label>)<br/>
+					<input type='checkbox' name='info4' id='info4' value='1' <?=$ckd4?> /> <label for="info4">결제완료</label> <br/>
+					<input type='checkbox' name='info5' id='info5' value='1' <?=$ckd5?> /> <label for="info5">취소완료</label> <br/>
+					<input type='checkbox' name='info6' id='info6' value='1' <?=$ckd6?> /> <label for="info6">배송완료</label> <br/>
+					<input type='checkbox' name='info7' id='info7' value='1' <?=$ckd7?> /> <label for="info7">상품평</label> <br/>
+					<input type='checkbox' name='info8' id='info8' value='1' <?=$ckd8?> /> <label for="info8">상품Q&A</label> <br/>
+					<input type='checkbox' name='info9' id='info9' value='1' <?=$ckd9?> /> <label for="info9">1:1고객문의</label> <br/>
+					<input type='checkbox' name='info10' id='info10' value='1' <?=$ckd10?> /> <label for="info10">회원가입</label> <br/>
+					<input type='checkbox' name='info11' id='info11' value='1' <?=$ckd11?> /> <label for="info11">방문자</label> <br/>
+					<input type='checkbox' name='info12' id='info12' value='1' <?=$ckd12?> /> <label for="info12">상품등록</label> <br/>	
+					<input type='checkbox' name='info13' id='info13' value='1' <?=$ckd13?> /> <label for="info13">전체통계 보이기</label> <br/>	
+				</div>							
+				<div style="clear:both;height:12px;">&nbsp;</div>
+				<center>
+				<div style="text-align:-moz-center;#text-align:center;:">
+					<img src="../html/img/btn_menu_save.gif" class="hand" alt="선택완료" onclick="document.menuForm.submit();" />
+					<img src="../html/img/btn_menu_cancel.gif" class="hand" onclick="parent.pLightBox.hide();" alt="취소" />
+				</div>
+				</center>
+			</td>
+		</tr>
+		</table>	
+	</div>
+	</form>
+</div>
+</body>
+</html>
+
+

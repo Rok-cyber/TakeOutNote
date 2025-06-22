@@ -1,0 +1,72 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>최근본상품</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>
+	</section>
+	
+	<section>
+		<div id="goodsListHead">
+			<h2>상품목록</h2> 
+			<p>전체 <em>{{TOTAL}}</em>개</p>
+			<span title="정렬방법"> 
+				<button onclick="return getLists.cgType('list',1);" id="btnList" class="button listList">리스트형</button>
+				<button onclick="return getLists.cgType('img',1)" id="btnImg" class="button listImg">이미지형</button>
+			</span>
+		</div>	
+		
+		<ul id="goodsList" class="listList"></ul>
+		
+		<!-- DYNAMIC @no_content@ -->	
+		<div id="noContent">
+			<p>! 최근본 상품이 없습니다.</p>
+		</div>
+		<script type="text/javascript">
+		<!--
+			$("#goodsList").hide();
+		-->
+		</script>
+		<!-- DYNAMIC @no_content@ -->
+
+	</section>
+    
+	<section id="contentMore" style="margin:20px 12px;">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getLists.goodsMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<div id="listLoading">
+	상품 데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentHeight = $(document).height();
+	
+	if(scrollHeight<documentHeight) {
+		$("#contentMore").show();	
+	}
+
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>0) {	
+		getLists = new getList('goodsList','{{limit}}','{{cgType}}','uid','{{TOTAL}}','{{Pstart}}','{{ajaxstring}}',"php/getToday.php");
+		getLists.display();
+	
+		$(window).resize(function(){ listResize(getLists); });
+	}
+
+ -->
+</script>

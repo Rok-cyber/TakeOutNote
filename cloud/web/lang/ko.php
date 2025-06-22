@@ -1,0 +1,33 @@
+<?php
+$lng = array(
+	'login' => '로그인', 
+	'betaservice' => '베타서비스', 
+	'group' => '그룹', 
+	'list' => '목록', 
+	'regdate' => '생성일', 
+	'lastupdate' => '마지막 수정일', 
+	'search' => '검색', 
+	'usage' => '사용량', 
+	'mypage' => '회원정보', 
+	'logout' => '로그아웃', 
+	'filename' => '파일명', 
+	'moddate' => '수정일', 
+	'note' => '노트', 
+	'urlcopy' => '주소복사', 
+	'storetime' => '저장시간', 
+	'location' => '위치', 
+	'alarm' => '알람등록', 
+	'save' => '저장', 
+	'result' => '결과', 
+	'capacity' => '용량', 
+	'notesetpublic' => '노트가 [공개]로 설정 되었습니다.\n노트URL을 통해 비회원도 접근 가능 합니다.', 
+	'notesetprivate' => '노트가 [비공개]로 설정 되었습니다.\n노트URL 접근이 차단 됩니다.',
+	'extrasetpublic' => '정보가 [공개]로 설정 되었습니다.\n노트URL에서 공개 됩니다.', 
+	'extrasetprivate' => '정보가 [비공개]로 설정 되었습니다.\n노트URL에서 표시되지 않습니다.', 	
+	'replydeleteconfirm' => '삭제하면 복구 하실수 없습니다!\r\n삭제 하시겠습니까?', 
+	'alert_private' => '없는 노트이거나 비공개된 노트 입니다!', 
+	'fail' => '실패', 
+	'user' => '사용자', 
+	'password' => '비밀번호'
+);
+?>

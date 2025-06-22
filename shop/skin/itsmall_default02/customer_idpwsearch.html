@@ -1,0 +1,150 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 고객센터 메뉴 START -->
+	{{CUS_MENU}}
+	<!-- @고객센터 메뉴 END -->  
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">	
+	<div id="subTitle">
+		<div class="left"><img src="img/member/ttl_idpwsearch.gif" alt="아이디/비밀번호찾기" title="아이디/비밀번호찾기" /></div>			
+	</div>
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<div>
+		<img src="img/member/help_idpwsearch.gif" alt="아이디/비번찾기 안내" />		
+	</div>
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+	
+	<form method="post" name="idsearchForm" action="{{sMain}}php/idsearch_ok.php" target="HFrm">
+	<div id="memberInfo">
+		<div style="padding:8px 0;"><img src="img/member/ttl_idsearch.gif" alt="아이디찾기" title="아이디찾기" /></div>
+		<form method="post" name="idsearchForm" action="{{sMain}}php/idsearch_ok.php" target="HFrm">
+		<div class="memberBox" class="clearfix">						
+			<ul>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left">
+						<input type="text" class="inputs black default" name="name" maxlength="12" style="width:80px" />
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_email.gif" alt="이메일주소" /></div>
+					<div class="left">
+						<input type="hidden" name="email"  value="" />
+						<input type="text" class="inputs black num" name="email1" size="13" style="ime-mode:inactive;" /> @ <input type="text" class="inputs black num" name="email2" size="13" style="ime-mode:inactive;" />
+						<select name="email_select" class="num select_check" onchange="document.idsearchForm.email2.value=this.value;">
+							<option value=''>직접입력</option>
+							<option value=hanmail.net>hanmail.net</option> 
+							<option value=chol.com>chol.com</option>
+							<option value=dreamwiz.com>dreamwiz.com</option> 
+							<option value=empal.com>empal.com</option> 
+							<option value=freechal.com>freechal.com</option> 
+							<option value=gmail.com>gmail.com</option> 
+							<option value=hanafos.com>hanafos.com</option> 
+							<option value=hanmir.com>hanmir.com</option> 
+							<option value=hitel.net>hitel.net</option> 
+							<option value=hotmail.com>hotmail.com</option> 
+							<option value=korea.com>korea.com</option> 
+							<option value=lycos.co.kr>lycos.co.kr</option> 
+							<option value=nate.com>nate.com</option> 
+							<option value=naver.com>naver.com</option> 
+							<option value=netian.com>netian.com</option> 
+							<option value=paran.com>paran.com</option> 
+							<option value=yahoo.com>yahoo.com</option> 
+							<option value=yahoo.co.kr>yahoo.co.kr</option> 							  
+						</select>
+						&nbsp;&nbsp;<span id="emails" class="small"></span>
+					</div>
+				</li>
+				<li style="display:none;padding-top:20px;" id="viewId1">
+					<div class="small">
+						! 아이디를 찾을 수 없습니다. 이름과 이메일 주소를 다시 확인해 보시기 바랍니다.
+					</div>
+				</li>	
+				<li style="display:none;padding-top:20px;" id="viewId2">
+					<div class="small">
+						! 회원님의 아이디는 <span id="memId" class="small bold orange"></span> 입니다.
+					</div>
+				</li>	
+			</ul>
+		</div>
+		</form>
+		<div class="blank" style="height:20px;">&nbsp;</div>	
+		<div style="float:right">						
+			<img src="img/member/btn_idsearch.gif" class="hand" onclick="return ckIdsearch();" alt="아이디찾기" title="아이디찾기" />			
+		</div>					
+		
+		<div class="blank" style="height:30px;">&nbsp;</div>	
+
+		<div style="padding:8px 0;"><img src="img/member/ttl_pwsearch.gif" alt="비밀번호찾기" title="비밀번호찾기" /></div>
+		<form method="post" name="pwsearchForm" action="{{sMain}}php/pwsearch_ok.php" target="HFrm">				
+		<div class="memberBox" class="clearfix">						
+			<ul>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left">
+						<input type="text" class="inputs black default" name="name" maxlength="12" style="width:80px" />
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_id.gif" alt="아이디" /></div>
+					<div class="left">
+						<input type="text" class="inputs black num" name="id" maxlength="12" size="26"  style="ime-mode:inactive;" />
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_email.gif" alt="이메일주소" /></div>
+					<div class="left">
+						<input type="hidden" name="email"  value="" />
+						<input type="text" class="inputs black num" name="email1" size="13" style="ime-mode:inactive;" /> @ <input type="text" class="inputs black num" name="email2" size="13" style="ime-mode:inactive;" />
+						<select name="email_select" class="num select_check" onchange="document.pwsearchForm.email2.value=this.value;">
+							<option value=''>직접입력</option>
+							<option value=hanmail.net>hanmail.net</option> 
+							<option value=chol.com>chol.com</option>
+							<option value=dreamwiz.com>dreamwiz.com</option> 
+							<option value=empal.com>empal.com</option> 
+							<option value=freechal.com>freechal.com</option> 
+							<option value=gmail.com>gmail.com</option> 
+							<option value=hanafos.com>hanafos.com</option> 
+							<option value=hanmir.com>hanmir.com</option> 
+							<option value=hitel.net>hitel.net</option> 
+							<option value=hotmail.com>hotmail.com</option> 
+							<option value=korea.com>korea.com</option> 
+							<option value=lycos.co.kr>lycos.co.kr</option> 
+							<option value=nate.com>nate.com</option> 
+							<option value=naver.com>naver.com</option> 
+							<option value=netian.com>netian.com</option> 
+							<option value=paran.com>paran.com</option> 
+							<option value=yahoo.com>yahoo.com</option> 
+							<option value=yahoo.co.kr>yahoo.co.kr</option> 							  
+						</select>
+						&nbsp;&nbsp;<span id="emails" class="small"></span>
+					</div>
+				</li>
+				<li style="padding-top:20px;display:none;" id="viewPw1">
+					<div class="small">
+						! 회원정보를 찾을 수 없습니다. 이름, 아이디, 이메일 주소를 다시 확인해 보시기 바랍니다.
+					</div>
+				</li>	
+				<li style="padding-top:20px;display:none;" id="viewPw2">
+					<div class="small">
+						! 비밀번호를 회원님의 메일로 전송했습니다!<br /> 메일을 확인해주십시요. 해당메일서버의 상태에따라 다소 몇분씩 지연될 수도 있습니다.
+					</div>
+				</li>	
+			</ul>
+		</div>
+		</form>
+
+		<div class="blank" style="height:20px;">&nbsp;</div>	
+		<div style="float:right">						
+			<img src="img/member/btn_pwsearch.gif" class="hand" onclick="return ckPwsearch();" alt="비밀번호찾기" title="비밀번호찾기" />
+		</div>							
+	</div>
+	<div style="clear:both;height:40px;"></div>
+</div>
+<!-- @MAIN CENTER END -->

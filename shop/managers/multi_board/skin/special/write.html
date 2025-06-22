@@ -1,0 +1,105 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+  
+	if(!form.name.value) {
+		alert('기획전명을 입력 하세요!');
+		form.name.focus();
+		return false;
+	}
+
+	form.code.value = code.getHtml();
+
+	form.submit();
+  
+	return false;
+}
+
+//-->
+</script>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<!-- DYNAMIC @is_modify@ -->     
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle"><div style='width:120px;'>&nbsp;&nbsp;*&nbsp;링크주소</font></div></td>
+							<td bgcolor="#EFEFEF">&nbsp;{{LINK_URL}}</td>
+						</tr>	
+						<!-- DYNAMIC @is_modify@ -->     
+
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle"><div style='width:120px;'>&nbsp;&nbsp;*&nbsp;기획전명</font></div></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=name value="{{FORM1}}" size=50></td>
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타이틀 이미지</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=file class=ta name=img1 value='' size=50>&nbsp;&nbsp;<font class=small>{{IMGSIZE}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      
+						<tr>
+							<td colspan=2 align=middle height=30 class=gr_bg>등록된 타이틀 이미지 <font class='eng'>({{IMG}})</font></td>
+						</tr>
+						<tr>
+							<td colspan=2 align=middle bgcolor='ffffff'>{{IMG2}}</td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->
+						<tr height=28>
+							<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;삽입 코드</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type='radio' name='code_use' value='Y' {{CKDY}} id="vaild1" /><label for="vaild1">사용</label> <input type='radio' name='code_use' value='N' {{CKDN}} id="vaild2"><label for="vaild2" />사용안함<label></TD>
+						</tr>
+						<tr height=120> 							
+							<td bgcolor="#FFFFFF" colspan='2'>
+								<div>
+									<textarea name="code" id="code">{{FORM4}}</textarea>
+									<script>
+										var code = new pEditor("code","../../pEdit","758","250","{{up_dir}}","basic","hide"); //에디터 생성
+									</script>
+								<div>
+							</td>
+						</tr>
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 페이지 상단에 나타날 디자인을 꾸미시면 됩니다. {{HELP_SIZE}}<br />
+									! 기획전에 전시될 상품은 상품등록/수정 폼이나 기획전 상품 관리에서 추가, 삭제 하시면 됩니다.
+
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;padding-top:4px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>		
+							</td>							 
+						</tr>										
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+<script LANGUAGE="JavaScript">
+<!--
+pE[0] = code;
+//-->
+</script>

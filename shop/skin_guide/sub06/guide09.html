@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>tag.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> tag.html (TAG 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{URL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">쇼핑몰 주소</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{s_date}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">집계 시작일</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{e_date}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">집계 마감일</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop_tag@ --></font></div>
+			<div style="margin:10px 0 0 28px;">분류 리스트</div>
+				
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TLINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">태그 검색결과 링크 주소</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RND}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">랜덤값(1~8)</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TAG}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">태그</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;margin-top:10px;"><font class="blue">&lt!-- DYNAMIC @loop_tag@ --></font></div>
+		</div>
+	</div>
+	
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop_rank_best@ --></font></div>
+			<div style="margin:10px 0 0 28px;">검색어 순의 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{i2}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">순위</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{WORD}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">검색어</td>
+								</tr>									
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_rank_best@ --></font></div>
+		</div>
+	</div>
+		    
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

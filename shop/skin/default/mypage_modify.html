@@ -1,0 +1,471 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle"> 
+		<img src="img/member/ttl_modify.gif" alt="회원정보수정" title="회원정보수정" />
+	</div>
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<form method="post" name="joinForm" action="{{ACTION}}" enctype="multipart/form-data">
+	<input type="hidden" name="jmode" value="modify">
+	<input type="hidden" name="ckBtn">
+	
+	<div id="memberInfo">
+		<div style="padding:8px 0;"><img src="img/member/ttl_member_input1.gif" alt="기본정보입력" title="기본정보입력" /></div>
+		<div class="memberBox clearfix">
+			<ul>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left default">
+						{{my_name}}
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_id.gif" alt="아이디" /></div>
+					<div class="left num">
+						{{my_id}}
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_repasswd.gif" alt="비밀번호확인" /></div>
+					<div class="left">
+						<input type="password" class="inputs_bg black" name="passwd" maxlength="12" size="20" />
+						&nbsp;&nbsp;<span id="passwd1s" class="small noticeDiv">비빌번호를 입력하셔야 수정이 됩니다.</font></span>
+					</div>
+				</li>				
+				<!-- DYNAMIC @is_mjumin@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_resno.gif" alt="주민번호" /></div>
+					<div class="left">
+						{{JUMIN1}} - *******
+					</div>
+				</li>
+				<!-- DYNAMIC @is_mjumin@ -->
+				<!-- DYNAMIC @is_tel@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_tel.gif" alt="전화번호" /></div>
+					<div class="left">
+						<select name="tel11" class="inputs_bg black num">
+							<option value="02">02</option>
+							<option value='031'>031</option>
+							<option value='032'>032</option>
+							<option value='033'>033</option>
+							<option value='041'>041</option>
+							<option value='042'>042</option>
+							<option value='043'>043</option>
+							<option value='051'>051</option>
+							<option value='052'>052</option>
+							<option value='053'>053</option>
+							<option value='054'>054</option>
+							<option value='055'>055</option>
+							<option value='061'>061</option>
+							<option value='062'>062</option>
+							<option value='063'>063</option>
+							<option value='064'>064</option>
+							<option value='070'>070</option>
+							<option value='0502'>0502</option>
+							<option value='0505'>0505</option>
+							<option value='0303'>0303</option>
+						</select>
+						 - <input type="text"  class="inputs_bg black num" name="tel12" size="5" maxlength="4" onBlur="return ck_tel('1','2');" value="{{TEL12}}" /> - <input type="text"  class="inputs_bg black num" name="tel13" size="5" maxlength="4" onBlur="return ck_tel('1','3');" value="{{TEL13}}" />&nbsp;&nbsp;<span id="tels1" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<script>document.joinForm.tel11.value = '{{TEL11}}';</script>
+				<!-- DYNAMIC @is_tel@ -->
+				<!-- DYNAMIC @is_phone@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_cell.gif" alt="휴대폰번호" /></div>
+					<div class="left">
+						<select name="phone11" class="inputs_bg black num">
+							<option value="010">010&nbsp;&nbsp;</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+							<option value="019">019</option>							
+						</select>
+						 - <input type="text"  class="inputs_bg black num" name="phone12" size="5" maxlength="4" onBlur="return ck_phone('1','2');" value="{{PHONE12}}" /> - <input type="text"  class="inputs_bg black num" name="phone13" size="5" maxlength="4" onBlur="return ck_phone('1','3');" value="{{PHONE13}}" />&nbsp;&nbsp;<span id="phones1" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<script>document.joinForm.phone11.value = '{{PHONE11}}';</script>
+				<!-- DYNAMIC @is_phone@ -->
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_email.gif" alt="이메일주소" /></div>
+					<div class="left">
+						<input type="hidden" name="email" value="{{EMAIL}}" />
+						<input type="text" class="inputs_bg black num" name="email1" size="13" value="{{EMAIL1}}" onBlur="ck_email();" /> @ <input type="text" class="inputs_bg black num" name="email2" size="15" value="{{EMAIL2}}" onBlur="ck_email();" />
+						<select name="email_select" class="num" onchange="document.joinForm.email2.value=this.value;ck_email();">
+							<option value=''>직접입력</option>
+							<option value=hanmail.net>hanmail.net</option> 
+							<option value=chol.com>chol.com</option>
+							<option value=dreamwiz.com>dreamwiz.com</option> 
+							<option value=empal.com>empal.com</option> 
+							<option value=freechal.com>freechal.com</option> 
+							<option value=gmail.com>gmail.com</option> 
+							<option value=hanafos.com>hanafos.com</option> 
+							<option value=hanmir.com>hanmir.com</option> 
+							<option value=hitel.net>hitel.net</option> 
+							<option value=hotmail.com>hotmail.com</option> 
+							<option value=korea.com>korea.com</option> 
+							<option value=lycos.co.kr>lycos.co.kr</option> 
+							<option value=nate.com>nate.com</option> 
+							<option value=naver.com>naver.com</option> 
+							<option value=netian.com>netian.com</option> 
+							<option value=paran.com>paran.com</option> 
+							<option value=yahoo.com>yahoo.com</option> 
+							<option value=yahoo.co.kr>yahoo.co.kr</option> 							  
+						</select>
+						&nbsp;&nbsp;<span id="emails" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_addr@ -->
+				<li style="height:68px;">
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_addr.gif" alt="주소" /></div>
+					<div class="left">
+						<div class="left">
+							<input type="text" class="inputs_bg black num" name="zip11" size="4" maxlength="4" onBlur="return ck_zip(1,1,this);" value="{{ZIP11}}" /> - <input type="text" class="inputs_bg black num" name="zip12" size="4" maxlength="4" onBlur="return ck_zip(2,1,this);" value="{{ZIP12}}" />
+						</div>
+						<div class="left" style="padding:0 0 0 6px">
+							<img src="img/shop/btn_zipcode.gif" onclick="zipcode(1);" class="hand" alt="우편번호찾기" title="우편번호찾기" />
+						</div>
+						<div class="left" style="padding:4px 0 0 4px"><span id="zips1" class="small noticeDiv"></span></div>
+						<div style="clear:both;height:4px;overflow:hidden">&nbsp;</div>
+						<div>
+							<input type="text" class="inputs_bg black default" name="addr1" size="80" value="{{ADDR1}}" readonly />
+						</div>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_addr@ -->
+				<!-- DYNAMIC @is_homepage@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_homepage.gif" alt="홈페이지" /></div>
+					<div class="left"><input type="text" class="inputs_bg black num" name="homepage" size="35" onBlur="return ck_home();" value="{{HOMEPAGE}}" />&nbsp;&nbsp;<span id="homes" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_homepage@ -->
+				<!-- DYNAMIC @is_mess@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_mess.gif" alt="메신저" /></div>
+					<div class="left"><input type="text" class="inputs_bg black num" name="mess" size="35" value="{{MESS}}" />&nbsp;&nbsp;<span id="homes" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_mess@ -->
+				<!-- DYNAMIC @is_bir@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_birth.gif" alt="생년월일" /></div>
+					<div class="left"><input type="text" class="inputs_bg black num" name="bir1" size="5" maxlength="4" onBlur="return ck_bir(1);" value="{{BIR1}}" />년 <input type="text" class="inputs_bg black num" name="bir2" size="3" maxlength="2" onBlur="return ck_bir(2);" value="{{BIR2}}" />월 <input type="text" class="inputs_bg black num" name="bir3" size="3" maxlength="2" onBlur="return ck_bir(3);" value="{{BIR3}}" />일 <input type='radio' name='uy' id='uyu' value='음력' onfocus="blur();" {{CHECK1}} /><label for="uyu">음력</label> <input type='radio' name='uy' id='uyy' value='양력' onfocus="blur();" {{CHECK2}} /><label for="uyy">양력</label>&nbsp;&nbsp;<span id="birs" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_bir@ -->
+				<!-- DYNAMIC @is_sex@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_sex.gif" alt="성별" /></div>
+					<div class="left"><input type="radio"  name="sex" id='sexm' value="M" {{CHECK3}} /><label for="sexm">남</label> &nbsp;&nbsp;<input type="radio"  name="sex" id='sexf' value="F" {{CHECK4}} /><label for="sexf">여</label>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_sex@ -->
+				<!-- DYNAMIC @is_marr@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_marr.gif" alt="결혼유무" /></div>
+					<div class="left"><input type="radio" name="marr" id='marrn' value="N" {{CHECK5}} /><label for="marrn">미혼</label>&nbsp;&nbsp;<input type="radio"  name="marr" id='marry' value="Y" {{CHECK6}} /><label for="marry">기혼</label>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_marr@ -->
+				<!-- DYNAMIC @is_edu@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_edu.gif" alt="최종학력" /></div>
+					<div class="left"><select name="edu"  class="default black"><option value=''>선택하세요</option>{{EDU}}</select>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_edu@ -->
+				<!-- DYNAMIC @is_hobby@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_hobby.gif" alt="취미" /></div>
+					<div class="left"><select name="hobby"  class="default black"><option value=''>선택하세요</option>{{HOBBY}}</select>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_hobby@ -->
+				<!-- DYNAMIC @is_job@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_job.gif" alt="직업" /></div>
+					<div class="left"><select name="job"  class="default black"><option value=''>선택하세요</option>{{JOB}}</select>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_job@ -->
+				<!-- DYNAMIC @is_jobname@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_jobname.gif" alt="직장명" /></div>
+					<div class="left">
+						<input type="text" class="inputs_bg black" name="jobname" maxlength="12" size="20"  value="{{JOBNAME}}" />
+					</div>
+				</li>
+				<!-- DYNAMIC @is_jobname@ -->
+				<!-- DYNAMIC @is_add1@ -->
+				<li>
+					<div class="small left bold nextIcon2{{REQUIRE}}">{{TADD1}}</div>
+					<div class="left">
+						<input type="text" class="inputs_bg black" name="add1" size="30"  value="{{ADD1}}" />
+					</div>
+				</li>
+				<!-- DYNAMIC @is_add1@ -->
+				<!-- DYNAMIC @is_add2@ -->
+				<li>
+					<div class="small left bold nextIcon2{{REQUIRE}}">{{TADD2}}</div>
+					<div class="left">
+						<input type="text" class="inputs_bg black" name="add2" size="30"  value="{{ADD2}}" />
+					</div>
+				</li>
+				<!-- DYNAMIC @is_add2@ -->
+				<!-- DYNAMIC @is_add3@ -->
+				<li>
+					<div class="small left bold nextIcon2{{REQUIRE}}">{{TADD3}}</div>
+					<div class="left">
+						<input type="text" class="inputs_bg black" name="add3" size="30"  value="{{ADD3}}" />
+					</div>
+				</li>
+				<!-- DYNAMIC @is_add3@ -->
+				<!-- DYNAMIC @is_add4@ -->
+				<li>
+					<div class="small left bold nextIcon2{{REQUIRE}}">{{TADD4}}</div>
+					<div class="left">
+						<input type="text" class="inputs_bg black" name="add4" size="30"  value="{{ADD4}}" />
+					</div>
+				</li>
+				<!-- DYNAMIC @is_add4@ -->
+				<!-- DYNAMIC @is_add5@ -->
+				<li>
+					<div class="small left bold nextIcon2{{REQUIRE}}">{{TADD5}}</div>
+					<div class="left">
+						<input type="text" class="inputs_bg black" name="add5" size="30"  value="{{ADD5}}" />
+					</div>
+				</li>
+				<!-- DYNAMIC @is_add5@ -->		
+				<!-- DYNAMIC @is_info@ -->
+				<li style="height:56px;">
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_info.gif" alt="남기는말씀" /></div>
+					<div class="left">
+						<textarea class="inputs_bg default  black" name="info" style="height:40px" cols="80">{{MINFO}}</textarea>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_info@ -->
+				<!-- DYNAMIC @is_mailling@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_mailling.gif" alt="메일수신허용" /></div>
+					<div class="left"><input type="radio"  name="mailling" id='maillingy' value="Y" {{CHECK7}} /><label for='maillingy'>수신허용</label> &nbsp;&nbsp;<input type="radio"  name="mailling" id='maillingn' value="N" {{CHECK8}} /><label for='maillingn'>수신허용안함</label>
+					&nbsp;&nbsp;<font class="small">( 행사안내 및 상품정보에 관한 안내메일을 보내드립니다. )&nbsp;</font>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_mailling@ -->
+				<!-- DYNAMIC @is_sms@ -->
+				<li>
+					<div class="left nextIcon2{{REQUIRE}}"><img src="img/member/ttl_sms.gif" alt="SMS수신허용" /></div>
+					<div class="left"><input type="radio"  name="sms" id='smsy' value="Y" {{CHECK9}} /><label for='smsy'>수신허용</label> &nbsp;&nbsp;<input type="radio"  name="sms" id='smsn' value="N" {{CHECK10}} /><label for='smsn'>수신허용안함</label>
+					&nbsp;&nbsp;<font class="small">( 행사안내 및 상품정보에 관한 안내메일을 보내드립니다. )&nbsp;</font>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_sms@ -->
+						
+			</ul>			
+		</div>
+
+		<div class="clear" style="height:28px;">&nbsp;</div>	
+		<div style="padding:8px 0;"><img src="img/member/ttl_member_input2.gif" alt="추가배송지입력" title="추가배송지입력" /></div>
+		<div class="memberBox clearfix">	
+			<ul>				
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left">
+						<input type="text" class="inputs_bg black default" name="name2" maxlength="12" size="20"  value="{{NAME2}}" />
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_tel.gif" alt="전화번호" /></div>
+					<div class="left">
+						<select name="tel21" class="inputs_bg black num">
+							<option value="02">02</option>
+							<option value='031'>031</option>
+							<option value='032'>032</option>
+							<option value='033'>033</option>
+							<option value='041'>041</option>
+							<option value='042'>042</option>
+							<option value='043'>043</option>
+							<option value='051'>051</option>
+							<option value='052'>052</option>
+							<option value='053'>053</option>
+							<option value='054'>054</option>
+							<option value='055'>055</option>
+							<option value='061'>061</option>
+							<option value='062'>062</option>
+							<option value='063'>063</option>
+							<option value='064'>064</option>
+							<option value='070'>070</option>
+							<option value='0502'>0502</option>
+							<option value='0505'>0505</option>
+							<option value='0303'>0303</option>
+						</select>
+						 - <input type="text"  class="inputs_bg black num" name="tel22" size="5" maxlength="4" onBlur="return ck_tel('2','2');" value="{{TEL22}}" /> - <input type="text"  class="inputs_bg black num" name="tel23" size="5" maxlength="4" onBlur="return ck_tel('2','3');" value="{{TEL23}}" />&nbsp;&nbsp;<span id="tels2" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_cell.gif" alt="휴대폰번호" /></div>
+					<div class="left">
+						<select name="phone21" class="inputs_bg black num">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+							<option value="019">019&nbsp;&nbsp;</option>							
+						</select>
+						 - <input type="text"  class="inputs_bg black num" name="phone22" size="5" maxlength="4" onBlur="return ck_phone('2','2');" value="{{PHONE22}}" /> - <input type="text"  class="inputs_bg black num" name="phone23" size="5" maxlength="4" onBlur="return ck_phone('2','3');" value="{{PHONE23}}" />&nbsp;&nbsp;<span id="phones2" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<li style="height:68px;">
+					<div class="left nextIcon2"><img src="img/member/ttl_addr.gif" alt="주소" /></div>
+					<div class="left">
+						<div class="left">
+							<input type="text" class="inputs_bg black num" name="zip21" size="4" maxlength="4" onBlur="return ck_zip(1,2,this);" value="{{ZIP21}}" /> - <input type="text" class="inputs_bg black num" name="zip22" size="4" maxlength="4" onBlur="return ck_zip(2,2,this);" value="{{ZIP22}}" />
+						</div>
+						<div class="left" style="padding:0 0 0 6px">
+							<img src="img/shop/btn_zipcode.gif" onclick="zipcode(2);" class="hand" alt="우편번호찾기" title="우편번호찾기" />
+						</div>
+						<div class="left" style="padding:4px 0 0 4px"><span id="zips2" class="small noticeDiv"></span></div>
+						<div style="clear:both;height:4px;overflow:hidden">&nbsp;</div>
+						<div>
+							<input type="text" class="inputs_bg black default" name="addr2" size="80" value="{{ADDR2}}" readonly  />
+						</div>
+					</div>
+				</li>
+				<li style="height:50px;">
+					<div class="blank" style="height:20px;">&nbsp;</div>
+					<div class="blank" style="border-top:1px solid #eee">&nbsp;</div>
+				</li>
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left">
+						<input type="text" class="inputs_bg black default" name="name3" maxlength="12" size="20"  value="{{NAME3}}" />
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_tel.gif" alt="전화번호" /></div>
+					<div class="left">
+						<select name="tel31" class="inputs_bg black num">
+							<option value="02">02</option>
+							<option value='031'>031</option>
+							<option value='032'>032</option>
+							<option value='033'>033</option>
+							<option value='041'>041</option>
+							<option value='042'>042</option>
+							<option value='043'>043</option>
+							<option value='051'>051</option>
+							<option value='052'>052</option>
+							<option value='053'>053</option>
+							<option value='054'>054</option>
+							<option value='055'>055</option>
+							<option value='061'>061</option>
+							<option value='062'>062</option>
+							<option value='063'>063</option>
+							<option value='064'>064</option>
+							<option value='070'>070</option>
+							<option value='0502'>0502</option>
+							<option value='0505'>0505</option>
+							<option value='0303'>0303</option>
+						</select>
+						 - <input type="text"  class="inputs_bg black num" name="tel32" size="5" maxlength="4" onBlur="return ck_tel('3','2');" value="{{TEL32}}" /> - <input type="text"  class="inputs_bg black num" name="tel33" size="5" maxlength="4" onBlur="return ck_tel('3','3');" value="{{TEL33}}" />&nbsp;&nbsp;<span id="tels3" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_cell.gif" alt="휴대폰번호" /></div>
+					<div class="left">
+						<select name="phone31" class="inputs_bg black num">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+							<option value="019">019&nbsp;&nbsp;</option>							
+						</select>
+						 - <input type="text"  class="inputs_bg black num" name="phone32" size="5" maxlength="4" onBlur="return ck_phone('3','2');" value="{{PHONE32}}" /> - <input type="text"  class="inputs_bg black num" name="phone33" size="5" maxlength="4" onBlur="return ck_phone('3','3');" value="{{PHONE33}}" />&nbsp;&nbsp;<span id="phones3" class="small noticeDiv"></span>
+					</div>
+				</li>
+				<li style="height:68px;">
+					<div class="left nextIcon2"><img src="img/member/ttl_addr.gif" alt="주소" /></div>
+					<div class="left">
+						<div class="left">
+							<input type="text" class="inputs_bg black num" name="zip31" size="4" maxlength="4" onBlur="return ck_zip(1,3,this);" value="{{ZIP31}}" /> - <input type="text" class="inputs_bg black num" name="zip32" size="4" maxlength="4" onBlur="return ck_zip(2,3,this);" value="{{ZIP32}}" />
+						</div>
+						<div class="left" style="padding:0 0 0 6px">
+							<img src="img/shop/btn_zipcode.gif" onclick="zipcode(3);" class="hand" alt="우편번호찾기" title="우편번호찾기" />
+						</div>
+						<div class="left" style="padding:4px 0 0 4px"><span id="zips3" class="small noticeDiv"></span></div>
+						<div style="clear:both;height:4px;overflow:hidden">&nbsp;</div>
+						<div>
+							<input type="text" class="inputs_bg black default" name="addr3" size="80" value="{{ADDR3}}" readonly  />
+						</div>
+					</div>
+				</li>				
+			</ul>
+			<script>
+				document.joinForm.tel21.value = '{{TEL21}}';
+				document.joinForm.tel31.value = '{{TEL31}}';
+				document.joinForm.phone21.value = '{{PHONE21}}';
+				document.joinForm.phone31.value = '{{PHONE31}}';
+			</script>			
+		</div>
+
+		<div class="clear" style="height:28px;">&nbsp;</div>	
+		<div style="padding:8px 0;"><img src="img/member/ttl_member_input3.gif" alt="주문시요청사항입력" title="주문시요청사항입력" /></div>
+		<div class="memberBox clearfix">
+			<ul>
+				<li style="height:56px;">
+					<div class="left nextIcon2"><img src="img/member/ttl_add_mess1.gif" alt="요청사항1" /></div>
+					<div class="left"><textarea class="inputs_bg black default" style="width:500px;height:40px;" name="message1">{{MESSAGE1}}</textarea></div>
+				</li>
+				<li style="height:30px;">
+					<div class="blank" style="height:10px;">&nbsp;</div>
+					<div class="blank" style="border-top:1px solid #eee">&nbsp;</div>
+				</li>
+				<li style="height:56px;">
+					<div class="left nextIcon2"><img src="img/member/ttl_add_mess2.gif" alt="요청사항2" /></div>
+					<div class="left"><textarea class="inputs_bg black default" style="width:500px;height:40px;" name="message2">{{MESSAGE2}}</textarea></div>
+				</li>
+				<li style="height:30px;">
+					<div class="blank" style="height:10px;">&nbsp;</div>
+					<div class="blank" style="border-top:1px solid #eee">&nbsp;</div>
+				</li>
+				<li style="height:56px;">
+					<div class="left nextIcon2"><img src="img/member/ttl_add_mess3.gif" alt="요청사항3" /></div>
+					<div class="left"><textarea class="inputs_bg black default" style="width:500px;height:40px;" name="message3">{{MESSAGE3}}</textarea></div>
+				</li>					
+			</ul>			
+		</div>
+	</div>
+
+	<div class="blank" style="height:30px;">&nbsp;</div>
+
+	<center>			
+		<div style="width:252px;">
+			<div class="left"><img src="img/common/btn_pagePrev.gif" class="hand" onclick="history.back();return false;" alt="이전페이지" title="이전페이지" /></div>
+			<div class="left" style="padding-left:6px;"><img src="img/member/btn_modify.gif" class="hand" onclick="return checkIt();return false;" alt="회원정보수정하기" title="회원정보수정하기" /></div>
+		</div>	
+	</center>	
+
+	<div class="blank" style="height:20px;">&nbsp;</div>	
+
+	</form>	
+
+</div>
+
+<script type="text/javascript">
+<!--
+var f = document.joinForm;
+// -->
+</SCRIPT>

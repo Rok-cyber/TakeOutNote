@@ -1,0 +1,623 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+require ("{$lib_path}/lib.Shop.php");
+
+$sms_cnt = pmallSmsCnt();
+if($sms_cnt==-1) $sms_cnt = 0;
+
+$sql = "SELECT message1 FROM mall_sms_auto WHERE code='info'";
+$row = $mysql->get_one($sql);
+
+if($row) {
+	$row = explode("|",stripslashes($row));
+	$tel1 = explode("-",$row[2]);
+}
+
+
+echo "<script>\n var sms_cnt = '{$sms_cnt}';\n var level_arr = groups_arr = new Array();\n";
+
+$level_cnt = "";
+$total = 0;
+for($i=1;$i<11;$i++) {
+	$sql = "SELECT count(*) FROM pboard_member WHERE level='{$i}' && hphone!='' && sms='Y'";
+	$leve_cnt[$i] = $mysql->get_one($sql);
+	echo "level_arr[{$i}] = $leve_cnt[$i];\n";
+	$total += $leve_cnt[$i];
+
+}
+
+$sql = "SELECT name, code FROM mall_design WHERE mode='L' && name!='10' ORDER BY name ASC";
+$mysql->query($sql);
+
+for($i=2;$i<9;$i++) {
+	$row = $mysql->fetch_array();
+	while($row['name']!=$i) {
+		$LEVEL .= "<option value='{$i}'>LV{$i}({$leve_cnt[$i]}명)</option>";
+		$LV[$i] = "LV{$i}";
+		if($i==8) break;
+		$i++;
+	}
+	if($row['name']==$i) {
+		$tmps = explode("|",$row['code']);
+		$LEVEL .= "<option value='{$i}'>".stripslashes($tmps[0])."({$leve_cnt[$i]}명)</option>";
+		$LV[$i] = stripslashes($tmps[0]);
+	}
+}
+
+$total2 = 0;
+$sql = "SELECT groups FROM mall_sms_addr GROUP BY groups ORDER BY groups DESC";
+$mysql->query($sql);
+$GROUPS = "";
+$i = 1;
+while($row = $mysql->fetch_array()){
+	$sql = "SELECT count(*) FROM mall_sms_addr WHERE groups='{$row['groups']}'";
+	$cnts = $mysql->get_one($sql);
+	$GROUPS .= "<option value='{$row['groups']}'>{$row['groups']}({$cnts}명)</option>";
+	echo "groups_arr[{$i}] = $cnts;\n";
+	$total2 += $cnts;
+	$i++;
+}
+
+echo "</script>";
+
+$thisyear  = date('Y');
+$thismonth = date('n');
+$today     = date('j');
+$tohour		=date('H');
+$tomin		=date('i');
+
+
+$SELECT = "<select name=year disabled>\n";
+for($i=$thisyear;$i<=($thisyear+1);$i++){
+	if($i==$year) $SELECT .="<option value=$i selected>{$i}년</option>\n";
+	else $SELECT .="<option value=$i>{$i}년</option>\n";
+}
+$SELECT .= "</select>\n";
+    
+			
+$SELECT .= "<select name=month disabled>\n";
+for($i=1;$i<13;$i++){
+	if($i==$thismonth) $SELECT .="<option value=$i selected>{$i}월</option>\n";
+	else $SELECT .="<option value=$i>{$i}월</option>\n";
+}
+$SELECT .= "</select>\n";
+
+$SELECT .= "<select name=day disabled>\n";
+for($i=1;$i<=31;$i++){
+	if($i==$today) $SELECT .="<option value=$i selected>{$i}일</option>\n";
+	else $SELECT .="<option value=$i>{$i}일</option>\n";
+}
+$SELECT .= "</select>\n";
+
+$SELECT .= "<select name=hour disabled>\n";
+for($i=1;$i<=24;$i++){
+	if($i==$tohour) $SELECT .="<option value=$i selected>{$i}시</option>\n";
+	else $SELECT .="<option value=$i>{$i}시</option>\n";
+}
+$SELECT .= "</select>\n";
+
+$SELECT .= "<select name=min disabled>\n";
+for($i=1;$i<=60;$i++){
+	if($i==$tomin) $SELECT .="<option value=$i selected>{$i}분</option>\n";
+	else $SELECT .="<option value=$i>{$i}분</option>\n";
+}
+$SELECT .= "</select>\n";
+
+
+?>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_sms_send.gif" alt="SMS발송" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>전체회원 및 특정회원에게 SMS를 발송 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td height=30 colspan=2></td></tr>
+<form name="smsForm" method="post" action="sms_post.php" onsubmit="return ckIt();">
+<input type="hidden" name="mode" value="send" />
+<input type="hidden" name="sms_lists" />
+<input type="hidden" name="sms_cnt" />
+
+<tr>
+	<td  valign=top width=28% align=center>
+		<table border="0" cellpadding="0" cellspacing="0" width="179" background="img/sms_send_bg.gif" height=154>
+		<tr>
+			<td colspan=2 align="center">
+				<textarea name="message" cols="16" rows="6" style="font:9pt 굴림체;color:#000;margin-top:15px;overflow:hidden;border:0;background-color:transparent;" onkeyUP="UpdateChar2(80,400,'message','smsForm');"></textarea>
+			</td>
+		</tr>	
+		<tr>
+			<td class="eng" width=35% style="padding-left:16px;"><span id="b_message" class="eng blue">0</span>Bytes </td>
+			<td class="eng"> SMS <span id="c_message" class="eng blue">0</span><font class="small">건</font></td>
+		</tr>
+		</table>
+
+		<div style="height:10px"></div>
+
+		<table border=0 cellpadding=0 cellspacing=4 width=179 bgcolor=#fafafa>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#cccccc>
+				<tr>
+					
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+							<tr align=middle bgColor="#ffffff">
+								<td class="small bold"><a href="#" onclick="pLightBox.show('search_sms_sample.php','iframe','760','580','■ SMS 샘플',10);return false;">SMS 샘플 선택</a></td>
+							</tr>							
+							</table>
+					</td>
+					
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>		
+		
+		<div style="height:6px"></div>
+
+		<table border=0 cellpadding=0 cellspacing=4 width=179 bgcolor=#fafafa>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#cccccc>
+				<tr>
+					
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('☆');">☆</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('★');">★</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('○');">○</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('●');">●</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◎');">◎</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◇');">◇</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◆');">◆</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('□');">□</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('■');">■</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('△');">△</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▲');">▲</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◁');">◁</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◀');">◀</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♤');">♤</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♠');">♠</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♡');">♡</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♥');">♥</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♧');">♧</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♣');">♣</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⊙');">⊙</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◈');">◈</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▣');">▣</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('◐');">◐</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▩');">▩</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▨');">▨</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▒');">▒</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♨');">♨</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('☏');">☏</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('☎');">☎</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('℡');">℡</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('☜');">☜</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('☞');">☞</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♩');">♩</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♪');">♪</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♬');">♬</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▽');">▽</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('▼');">▼</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∞');">∞</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∴');">∴</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∽');">∽</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('※');">※</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('㉿');">㉿</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('㈜');">㈜</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('™');">™</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('￣');">￣</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('…');">…</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('?');">?</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('》');">》</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♂');">♂</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('♀');">♀</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∬');">∬</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('‡');">‡</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('￠');">￠</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('￥');">￥</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⊃');">⊃</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∪');">∪</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∧');">∧</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⇒');">⇒</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∀');">∀</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('∃');">∃</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('→');">→</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('←');">←</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('↑');">↑</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('↓');">↓</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('↔');">↔</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('『');">『</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('』');">』</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('【');">【</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('】');">】</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('(');">(</td>
+							</tr>
+							<tr align=middle bgColor="#ffffff">
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar(')');">)</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('①');">①</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('②');">②</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('③');">③</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('④');">④</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⑤');">⑤</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⑥');">⑥</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⑦');">⑦</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⑧');">⑧</td>
+								<td width=10% class="hand"   onmouseover="this.style.background='#fafafa'" onmouseout="this.style.background='#FFFFFF'" onclick="addChar('⑨');">⑨</td>
+							</tr>							
+							</table>
+					</td>
+					
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>		
+
+		<div style="height:6px"></div>
+
+		<table border=0 cellpadding=0 cellspacing=4 width=179 bgcolor=#fafafa>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#cccccc>
+				<tr>
+					
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+							<tr align=middle bgColor="#ffffff">
+								<td class="small bold">발송가능 SMS : <font class="eng bold" style="font-size:12px;"><?=$sms_cnt?></font>건
+							</tr>							
+							</table>
+					</td>
+					
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>		
+	</td>	
+	<td valign="top">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr class=gr_bg height="30">
+						  <td colspan=2 align=center class="small bold" height="24">휴대폰 문자메세지(SMS) 발송정보 입력</td>
+						</tr>
+						<tr bgcolor="#FFFFFF" height="24">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;보내는 사람</td>
+							<td bgcolor='#EFEFEF'>&nbsp;<input type="text" class="bt2 eng" name="cell11" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel1[0]?>"> - <input type="text" class="bt2 eng" name="cell12" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel1[1]?>"> - <input type="text" class="bt2 eng" name="cell13" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel1[2]?>"></td>
+						</tr>
+						<tr bgcolor="#FFFFFF" height="24">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;발송 방법</td>
+							<td bgcolor='#EFEFEF'>
+								&nbsp;<input type="radio" name="send_type" value="1" checked onclick="cgType(1);" id="stype1" /><label for='stype1'>개별</label>
+								<input type="radio" name="send_type" value="2" onclick="cgType(2);" id="stype2" /><label for='stype2'>회원등급별</label>
+								<input type="radio" name="send_type" value="3" onclick="cgType(3);" id="stype3" /><label for='stype3'>전체회원</label>
+								<input type="radio" name="send_type" value="4" onclick="cgType(4);" id="stype4" /><label for='stype4'>주소록그룹별</label>	
+								<input type="radio" name="send_type" value="5" onclick="cgType(5);" id="stype5" /><label for='stype5'>주소록전체</label>
+							</td>
+						</tr>	
+						<tr bgcolor="#FFFFFF" height="24" id="type1">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;받는 사람</td>
+							<td bgcolor='#EFEFEF' style="padding:4px;">
+								<div style="float:left">
+									&nbsp;<input type="text" class="bt2 eng" name="cell21" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);"> - <input type="text" class="bt2 eng" name="cell22" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);"> - <input type="text" class="bt2 eng" name="cell23" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);">
+								</div>
+								<div id="sBtn1" style="float:left;padding-left:6px;">
+									<a href="#" onclick="return addSms();return false;"><span class="blue">번호추가</span></a>
+									<a href="#" onclick="return delSms();return false;"><span class="blue">번호삭제</span></a>
+									<a href="#" onclick="pLightBox.show('search_sms_addr.php','iframe','760','500','■ SMS 주소록',10);return false;"><span class="green">주소록</span></a>	
+									<a href="#" onclick="pLightBox.show('search_sms_member.php','iframe','760','500','■ 회원 검색',10);return false;"><span class="green">회원검색</span></a>	
+								</div>		
+								<div style="clear:both;padding:6px 0 0 4px;">
+									<select name='sms_list' size="11" style='width:98%;background:#FFFFFF;' class="eng" ></select>
+								</div>
+							</td>
+						</tr>
+						<tr bgcolor="#FFFFFF" height="24" id="type2" style="display:none">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;회원 등급</td>
+							<td bgcolor='#EFEFEF'>
+								&nbsp;<select name='level' onchange="secLevel(this.value);">
+									<option value="">선택</option>
+									<option value='1'>일시정지(<?=$leve_cnt[1]?>명)</option>
+									<?=$LEVEL?>
+									<option value='9'>부관리자(<?=$leve_cnt[9]?>명)</option>
+									<option value='10'>관리자(<?=$leve_cnt[10]?>명)</option>
+								</select>
+								&nbsp;&nbsp;<font class=small>(핸드폰번호 등록 회원만 발송됩니다)</font>
+							</td>
+						</tr>
+						<tr bgcolor="#FFFFFF" height="24" id="type4" style="display:none">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;주소록 그룹</td>
+							<td bgcolor='#EFEFEF'>
+								&nbsp;<select name='groups' onchange="secGroups();">
+									<option value="">선택</option>
+									<?=$GROUPS?>
+								</select>								
+							</td>
+						</tr>
+						<tr bgcolor="#FFFFFF" height="24">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;발송 리스트</td>
+							<td bgcolor='#EFEFEF'>&nbsp;<span id="c_sms" class="eng blue bold">0</span><font class="small">건</font></td>
+						</tr>	
+						<tr bgcolor="#FFFFFF" height="24">						   
+							<td class=gr_bg width="20%"><font class="bold small">&nbsp;&nbsp;*&nbsp;예약발송</td>
+							<td bgcolor='#EFEFEF'>&nbsp;<input type="checkbox" name="reserv" value="1" onclick="cgRev();">사용함 <?=$SELECT?></td>
+						</tr>
+						<tr height=38 align=left>
+							<td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+								<div style="float:left;" class='small'>
+									! 회원등급별 및 전체회원 발송시 SMS 수신 허용 회원에게만 발송됩니다. <br />
+									! 문자수가 80Byte 이상일 경우 장문(LMS)발송으로 되며 발송건수는 2.5건으로 집계 됩니다. 
+								</div>									
+							</td>
+						</tr>
+						</table>
+					</td>
+					
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	
+	</td>
+</tr>
+
+<TR><TD height="24" colspan=2></TD></TR> 
+<TR>
+	<TD align="center" colspan=2>		
+		<img src="../../lib/img/bigWaiting.gif" border="0" align="absmiddle" id="waiting" style="display:none;"><br/>
+		<input type="image" src="img/btn_sms_send.gif" onfocus='blur();' id="sendBtn">
+		<img src="img/btn_prepage.gif" onClick="history.back()" onfocus='this.blur();' class="hand" align="absmiddle" id="prev">
+	</TD>
+</TR>
+
+<TR><TD height="30" colspan=2></TD></TR> 
+</form>
+</table>
+
+</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function cgRev(ckd){
+	f = document.smsForm;
+	if(f.reserv.checked==false) {
+		f.year.disabled = true;
+		f.month.disabled = true;
+		f.day.disabled = true;
+		f.hour.disabled = true;
+		f.min.disabled = true;
+	}
+	else {
+		f.year.disabled = false;
+		f.month.disabled = false;
+		f.day.disabled = false;
+		f.hour.disabled = false;
+		f.min.disabled = false;
+	}
+}
+
+function secLevel(vls) {
+	document.getElementById("c_sms").innerHTML = level_arr[vls];
+}
+
+function secGroups() {
+	document.getElementById("c_sms").innerHTML = groups_arr[document.smsForm.groups.selectedIndex];
+}
+
+function cgType(num) {
+	document.getElementById("type1").style.display = 'none';
+	document.getElementById("type2").style.display = 'none';
+	document.getElementById("type4").style.display = 'none';
+
+	switch(num) {
+		case 1 : 
+			document.getElementById("type1").style.display = 'table-row';
+			document.getElementById("c_sms").innerHTML = document.smsForm.sms_list.options.length;
+		break;
+		case 2 :
+			document.getElementById("type2").style.display = 'table-row';
+			document.getElementById("c_sms").innerHTML = 0;
+		break;
+		case 3 :
+			document.getElementById("c_sms").innerHTML = <?=$total?>;
+		break;
+		case 4 :
+			document.getElementById("type4").style.display = 'table-row';
+			document.getElementById("c_sms").innerHTML = 0;
+		break;
+		case 5 :
+			document.getElementById("c_sms").innerHTML = <?=$total2?>;
+		break;
+	}
+
+}
+
+function addChar(str) {
+	document.smsForm.message.value += str;
+	UpdateChar2(80,160,'message','smsForm');	
+}
+
+function addSms(){
+	f = document.smsForm;
+	
+	if(!f.cell21.value || !f.cell22.value || !f.cell23.value) {
+		alert('받는 사람 번호 입력되지 않았거나 잘못 입력 되었습니다.');
+		f.cell21.focus();
+		return false;
+	}
+
+	if(f.cell21.value.length<3 || f.cell21.value.length>4) {
+		alert('받는 사람 번호 앞자리를 다시 입력해 주세요.');		
+		f.cell21.focus();
+		return false;
+	} 
+
+	if(f.cell22.value.length<3 || f.cell22.value.length>4) {
+		alert('받는 사람 번호 가운데자리를 다시 입력해 주세요.');		
+		f.cell22.focus();
+		return false;
+	} 
+
+	if(f.cell23.value.length!=4) {
+		alert('받는 사람 번호 뒷자리를 다시 입력해 주세요.');		
+		f.cell22.focus();
+		return false;
+	} 
+
+	for(i=0,cnt=f.sms_list.options.length;i<cnt;i++) {
+		if(f.sms_list.options[i].value == f.cell21.value+f.cell22.value+f.cell23.value) {
+			alert('이미 등록되어 있는 번호 입니다');
+			return false;
+		}
+	}
+	f.sms_list.options[cnt] = new Option(f.cell21.value+'-'+f.cell22.value+'-'+f.cell23.value,f.cell21.value+f.cell22.value+f.cell23.value); 
+	f.cell21.value = f.cell22.value = f.cell23.value = '';
+	document.getElementById("c_sms").innerHTML = f.sms_list.options.length;
+	return false;
+}
+
+function delSms() {
+	f = document.smsForm;
+	if(f.sms_list.selectedIndex<0) {
+		alert('먼저 목록에서 삭제할 번호를 선택 하시기 바랍니다');
+		return false;
+	}
+
+	f.sms_list.options[f.sms_list.selectedIndex]=null;
+	document.getElementById("c_sms").innerHTML = f.sms_list.options.length;
+	return false;
+}
+
+function secAdds(str,ck) {
+	if(!str) return;
+
+	f = document.smsForm;
+
+	tmps = str.split(',');
+	tmps2 = ''; 
+	for(k=0;k<tmps.length;k++){
+		cks = 0;
+		tmps[k] = str_replace(' ','',tmps[k]);
+		tmps2 = str_replace('-','',tmps[k]);
+		
+		for(j=0,cnt=f.sms_list.options.length;j<cnt;j++) {					
+			if(f.sms_list.options[j].value == tmps2) {
+				if(tmps.length==1) {
+					alert('이미 등록되어 있는 번호 입니다.');
+					return false;
+				}
+				cks = 1;    
+				break;				
+			}					
+		}
+		if(cks==0) f.sms_list.options[cnt] = new Option(tmps[k],tmps2); 			
+	}	
+	document.getElementById("c_sms").innerHTML = f.sms_list.options.length;
+	if(!ck) pLightBox.hide();	
+}
+
+function ckIt(){
+	f = document.smsForm;
+
+	send_cnt = document.getElementById("c_sms").innerHTML;
+	send_cnt2 = document.getElementById("c_message").innerHTML; 
+	send_cnt3 = parseInt(send_cnt) * parseInt(send_cnt2);
+
+	if(send_cnt<1) {
+		alert('발송 건수가 0건입니다. SMS 신청을 하시거나 충전을 하시기 바랍니다.');
+		return false;
+	}
+
+	if(!f.message.value.trim()) {
+		alert('발송될 메세지를 입력 하세요.');
+		f.message.focus();
+		return false;
+	}
+
+	if(send_cnt3>sms_cnt) {
+		alert('발송가능한 SMS건수 보다 발송할 SMS건수가 많습니다.');
+		return false;
+	}
+
+	if(f.send_type[0].checked) {
+		for(j=0,cnt=f.sms_list.options.length;j<cnt;j++) {					
+			if(f.sms_lists.value) f.sms_lists.value += ","+f.sms_list.options[j].value;
+			else f.sms_lists.value = f.sms_list.options[j].value;
+		}
+	}
+	
+	f.sms_cnt.value = send_cnt2;
+	document.getElementById("sendBtn").src = "img/btn_sending.gif";
+	document.getElementById("waiting").style.display = 'block';
+	document.getElementById("prev").style.display = 'none';	
+}
+
+function secSample(str) {
+	if(!str) return;
+
+	f = document.smsForm;	
+	f.message.value = str;
+	UpdateChar2(80,400,'message','smsForm');
+	pLightBox.hide();
+}
+
+
+<?
+$list = $_POST['item'];
+if($list) {
+	$type = $_GET['type'];
+	$send_list = "";
+	for($i = 0, $ct_num = count($list); $i < $ct_num; $i++) {
+		if($type=='mem') $sql = "SELECT hphone FROM pboard_member WHERE uid='{$list[$i]}'";
+		else $sql = "SELECT cell FROM mall_sms_addr WHERE uid='{$list[$i]}'";
+		if($row = $mysql->get_one($sql)) {	
+			if(!$send_list) $send_list = $row;
+			else $send_list .= ",{$row}";
+		}
+	}
+
+	echo "secAdds('{$send_list}',1);";
+}
+if($_GET['cell']) echo "secAdds('{$_GET['cell']}',1);";
+?>
+
+//-->
+</SCRIPT>
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

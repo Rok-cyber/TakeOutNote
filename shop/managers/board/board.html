@@ -1,0 +1,95 @@
+<?
+ob_start();
+include "../html/top_inc.html";     /*** TOP INCLUDE ***/ 
+
+$code = $_GET['code'];
+
+if(!$code) alert("정보가 제대로 넘어오지 못했습니다.","back");
+
+$sql = "SELECT title FROM pboard_manager WHERE name='{$code}'";
+$BTITLE = $mysql->get_one($sql);
+
+if(!$BTITLE) alert("게시판이 삭제 되었거나 존재하지 않습니다","back");
+?>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function imgSizeConv(objName,Limit,path){ 
+	try {
+		if(!Limit) return;
+		Obj=document.getElementById(objName);	
+		if(!Obj) return;
+		var img = Obj.getElementsByTagName('IMG');
+		for(k=0; k<img.length; k++) {	
+			if (parseInt(img[k].style.width) > Limit) {
+				height = (parseInt(img[k].style.height)*Limit)/parseInt(img[k].style.width);
+				img[k].style.width  = Limit+'px';
+				img[k].style.height = height+'px';
+				img[k].style.cursor = "pointer";
+				img[k].onclick = function() { pLightBox.show(path+"php/photo_view.php?img="+this.src,"iframe","800","600","■ 이미지 보기");};
+			}
+		}	
+		return;
+	} catch(e) { return }
+
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_board.gif" alt="게시판관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>생성된 게시판 리스트를 확인 하거나 설정을 변경 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>		
+
+<table border=0 cellpadding="0" cellspacing="0" width="98%" align=center>
+<tr><td colspan=2 class="small bold" height=28>■ <?=$BTITLE?></td></tr>
+<tr><td colspan=2 bgcolor="#EFEFEF" height=1></td></tr>
+<tr><td colspan=2 bgcolor="#FAFAFA" height=3></td></tr>
+<tr><td height="20" colspan="2"></td></tr>
+</TABLE>
+
+<!--내용들어가는 부분-->
+<table cellpadding="0" cellspacing="0" border="0" width="98%" align="center">
+  <tr>
+    <td align="center" height="400" valign="top">
+		<!-- BOARD INCLUDE START -->
+		  <?	
+				$includes = 'Y';
+				$admin_board = 'Y';
+				$admin_board2 = 'Y';
+				$code = $_GET['code'];
+				$bo_path="../../pboard";
+				$main_url = "../../managers/board/board.html";
+				include "{$bo_path}/pboard.php";
+		  ?>
+		<!-- @BOARD INCLUDE END -->
+	</td>
+  </tr>
+<tr><td height="20"></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+<!--//내용들어가는 부분-->
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	boardType = 'Y';
+//-->
+</SCRIPT>
+<?
+include "../html/bottom_inc.html";     /*** BOTTOM INCLUDE ***/  
+?>

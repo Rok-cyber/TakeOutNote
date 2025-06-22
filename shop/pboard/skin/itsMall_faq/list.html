@@ -1,0 +1,356 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<script>
+function PselectBox(id,fName) {	
+	this.id			= id;
+	this.iskin		= "";
+	this.itemName	= new Array();
+	this.itemValue	= new Array();
+	this.itemCnt	= 0;
+	this.fName		= fName;
+	this.secNum		= 0;
+	this.tCnt		= 0;
+	this.hide		= false;
+	this.fStyle		= "font-family:굴림,verdana;font-size:12px;";
+	this._tArea		= document.createElement("DIV");
+	this._sArea		= document.createElement("DIV");				
+	this._hArea		= document.createElement("DIV");					
+
+	this.img1 = new Image;
+	this.img2 = new Image;
+	this.img1.src = this.iskin+'img/icon_select_down.gif';
+	this.img2.src = this.iskin+'img/icon_select_up.gif';
+	   
+	this.addItem = function(name, value){ 
+		this.itemName[this.itemCnt]		= name;
+		this.itemValue[this.itemCnt]	= value;
+		this.itemCnt++;
+	}
+
+	this.show = function(mode){
+		var self = (this)?this:'';
+		var pBody = document.getElementById(this.id);			
+		if(document.all) {
+			this._tArea.style.styleFloat = 'left';
+			this._sArea.style.styleFloat = 'left';
+		}
+		else {
+			this._tArea.style.cssFloat = 'left';
+			this._sArea.style.cssFloat = 'left';
+		}
+
+		this._tArea.style.width		= (parseInt(pBody.style.width) - 22) + 'px';	
+		this._tArea.style.padding	= '2px 0 0 4px';	
+		this._tArea.style.height	= '16px';
+		this._tArea.style.overflow	= 'hidden';
+
+		this._tArea.innerHTML		= "<div style='"+this.fStyle+"'>"+this.itemName[0]+"</div>";
+		this._sArea.style.width		= '18px';	
+		this._sArea.style.height	= '16px';	
+		this._sArea.style.overflow	= 'hidden';
+		this._sArea.style.background	= "url("+this.iskin+"img/select_line.gif) repeat-y";
+
+		tag	= document.createElement("img");
+		tag.id				= "sImg"+this.id;
+		tag.src				= this.img1.src;
+		tag.style.cursor	= 'pointer';
+		tag.style.padding	= "7px 0 0 3px";
+		tag.onclick	= function() { self.open(this); }
+		this._sArea.appendChild(tag);
+		
+		this._hArea.style.position	= 'absolute';
+		this._hArea.style.clear		= 'both';		
+		this._hArea.style.top		= parseInt(pBody.style.height) + 1 + 'px';			
+
+		if(mode=='cate') {
+			this._hArea.style.left		= '-2px';
+			this._hArea.style.border	= '1px solid #CCC';
+			this._hArea.style.width		= parseInt(pBody.style.width) + 2 + 'px';
+		}
+		else {
+			this._hArea.style.left		= '-1px';
+			this._hArea.style.border	= '1px solid #999';
+			this._hArea.style.width		= parseInt(pBody.style.width) +'px';
+		}
+
+		this._hArea.style.borderTop	= '0px';
+		this._hArea.style.backgroundColor = '#FFF';
+		this._hArea.style.display	= 'none';		
+
+		for(i=1;i<=this.itemCnt;i++) {
+			tag	= document.createElement("div");			
+			tag.style.height	= '18px';			
+
+			if(i==1) tag.style.padding	= '2px 0 0 4px';			
+			else tag.style.padding	= '0px 0 0 4px';		
+			tag.cnt				= i;
+			tag.style.cursor	= 'pointer';
+			tag.onmouseover		= function() { this.style.backgroundColor = '#efefef'; }
+			tag.onmouseout		= function() { this.style.backgroundColor = ''; }
+
+			tag.innerHTML		= "<div style='"+this.fStyle+"'>"+this.itemName[i-1]+"</div>";
+			if(mode=='cate') tag.onclick = function() { self.secNum = this.cnt; self.movePage(); self.hide = true; self.mout(); }
+			else tag.onclick = function() { self.secNum = this.cnt; self.hide = true; self.mout(); }
+			this._hArea.appendChild(tag);
+		}
+		
+		pBody.appendChild(this._tArea);
+		pBody.appendChild(this._sArea);
+		pBody.appendChild(this._hArea);
+	}
+
+	this.initSelect = function(vls) {
+		this.hide = true;
+
+		for(i=1;i<=this.itemCnt;i++) {
+			if(this.itemValue[i-1]==vls) this.secNum = i;
+		}	
+		this.mout();
+	}
+
+	this.open = function(obj) {			
+		var self = (this)?this:'';
+		var obj2 = this._hArea;
+
+		obj.src = this.img2.src;
+		obj.style.padding	= '5px 0 0 4px';
+		obj.onclick = function() { self.hide = true; self.mout(); }
+		
+		obj2.style.display = 'block';		
+		obj2.onmouseout = function() { self.mout(); }
+	}
+
+	this.mout = function() {
+		var self = (this)?this:'';
+		var obj	 = this._hArea;				
+		var obj2 = document.getElementById("sImg"+this.id);
+
+		if(!this.hide) {			
+			obj.onmouseover = function() { self.secNumse = ''; self.hide = false; clearTimeout(tHide) } 
+			this.hide = true;
+			tHide = setTimeout(this.id+"s.mout()",500);
+			return;			
+		}			
+		obj.style.display	= 'none';
+		obj2.style.padding	= "7px 0 0 3px";
+		obj2.src			= this.img1.src;
+		obj2.onclick		= function() { self.open(this); }
+
+		this.hide			= false;
+		if(this.secNum!='') {			
+			this.fName.value = this.itemValue[this.secNum-1];
+			this._tArea.innerHTML = "<div style='"+this.fStyle+"'>"+this.itemName[this.secNum-1]+"</div>";
+			this.secNum = '';
+		} 		
+
+	}	
+}
+
+function comDisplay(num) {
+	<!-- DYNAMIC @is_admin@ -->
+	return;
+	<!-- DYNAMIC @is_admin@ -->
+	if(!num) return;
+	obj = document.getElementById('com_'+num);
+	if(obj.style.display=='none') {
+		obj.style.display = 'block';
+		HFrm.location.href = '{{bo_path}}/viewCount.php?code={{code}}&no={{no}}';
+	}
+	else obj.style.display = 'none';
+
+	if(conSec>0 && conSec!=num) document.getElementById('com_'+conSec).style.display = 'none';
+
+	conSec = num;
+}
+conSec = 0;
+</script>
+
+<div id="pb_sub">
+
+	<div id="cate_tab">
+		<!-- DYNAMIC @is_cate@ -->						
+		<!-- DYNAMIC @loop_cate@ -->
+		<div class="tab_{{CSEC}} pb_small pb_blue"><a href="{{Main}}{{catestring}}&seccate={{i}}" class="atab_{{CSEC}}">{{C_NAME}}</a></div>
+		<!-- DYNAMIC @loop_cate@ -->		
+		<!-- DYNAMIC @is_cate@ -->						
+	</div>
+
+
+    <div id="pb_list_top">
+		<div style="clear:both;height:4px;">&nbsp;</div>
+		<div  class="pb_left_text">
+			<font class="pb_eng"><font class="pb_small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOPAGE}} <font class="pb_small">페이지</font>.</font>
+		</div>
+		<div class="pb_right_text">			
+			<!-- DYNAMIC @is_login_v@ -->
+			<!-- DYNAMIC @is_login@ -->
+			<a href="{{Main}}&pmode=login" class="pb_link pb_small">로그인</a>
+			<a href="#" onclick="join('');return false;" class="pb_link pb_small">회원가입</a>
+			<a href="#" onclick="window.open('{{bo_path}}/lostid.php','','width=425,height=245,top=100,left=100');return false;" class="pb_link pb_small">아이디/비번찾기</a>
+			<!-- DYNAMIC @is_login@ -->
+			<!-- DYNAMIC @is_logout@ -->
+			<a href="{{bo_path}}/logout.php" class="pb_link pb_small">로그아웃</a>
+			<a href="#" onclick="join('modify');return false;" class="pb_link pb_small">정보수정</a>
+			<!-- DYNAMIC @is_logout@ -->
+			<!-- DYNAMIC @is_login_v@ -->			
+		</div>
+		<div style="clear:both;height:4px;">&nbsp;</div>
+	</div>
+
+	<div id="pb_list">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="1%" />
+			<col width="5%" />	
+			<!-- DYNAMIC @is_man1@ -->
+			<col width="8%"/>
+			<!-- DYNAMIC @is_man1@ -->
+			<col width="12%" /> 						
+			<col />			
+			<col width="1%" />
+            <thead>
+            <tr height="28"align="center">
+				<th scope="col" align="right"><img src="img/bar_list_left.gif" alt='' /></th>
+                <th scope="col" class="pb_small pb_black"  style="background:url(img/bar_list_bg.gif)">번호</th>
+				<!-- DYNAMIC @is_man2@ -->
+				<th scope="col"  style="background:url(img/bar_list_bg.gif)"><a href='#' onclick="ch_check(document.del)" class="pb_link"><b class="pb_default">√</b></a></th>
+				<!-- DYNAMIC @is_man2@ -->
+                <th scope="col" class="pb_small pb_black"  style="background:url(img/bar_list_bg.gif)">분류</th>
+				<th scope="col" class="pb_small pb_black"  style="background:url(img/bar_list_bg.gif)">제목</th>
+				<th scope="col" align="left"><img src="img/bar_list_right.gif" alt='' /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			<form method="post" name="del"><input type="hidden" name="Main" value="{{Main}}" />
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" class="hand" onclick="comDisplay({{NO}});">
+				<td></td>
+				<td>
+					<!-- DYNAMIC @is_notice@ --><font class="pb_small">공지</font><!-- DYNAMIC @is_notice@ -->
+					<!-- DYNAMIC @is_num@ --><font class="pb_eng"><b>{{NUM}}</b></font><!-- DYNAMIC @is_num@ -->
+				</td>
+				<!-- DYNAMIC @is_man3@ -->
+				<td>{{DEL}}</td>
+				<!-- DYNAMIC @is_man3@ -->
+				<td style="overflow:hidden;">
+					<font class="pb_default">{{CATENAME}}</font>
+				</td>
+				<td align=left style='padding-left:8px;'>				    
+					<!-- DYNAMIC @is_man5@ --><a href="{{VLINK}}" class="pb_link pb_default"><!-- DYNAMIC @is_man5@ -->{{SUBJECT}}</a> {{NEWS}}
+				</td>				
+				<td></td>
+			</tr>
+			<tr bgcolor="#FAFAFA" id="com_{{NO}}" style="display:none">
+				<td></td>
+				<td colspan="4" align="left" style="padding:8px;">
+					<div style="padding-bottom:6px;"><img src="img/ttl_answer.gif" /></div>
+					<div class="pb_default">{{COMMENT2}}</div>
+				</td>
+				<td></td>
+			</tr>
+			<tr><td height="1" class="pb_bg" colspan="7"></td></tr>
+			<!-- DYNAMIC @loop@ -->		
+			
+			<!-- DYNAMIC @no_loop@ -->			
+			<tr height="100">
+				<td colspan="8" align="center" class="pb_default">등록(검색)된글이 없습니다.</td>
+			</tr>			
+			<tr><td height="1" class="pb_bg" colspan="7"></td></tr>
+			<!-- DYNAMIC @no_loop@ -->				
+			
+			<tr><td height="10" colspan="7"></td></tr>
+			</form>
+			</tbody>			
+		</table>
+	</div>
+	
+	<div id="pb_list_page">
+		<div class="pb_left_text">			
+			<!-- DYNAMIC @is_write@ -->
+			<div id="sBtn3">
+				<a href="{{WLINK}}"><span>등록하기</span></a>
+			</div>
+			<!-- DYNAMIC @is_write@ -->
+			<!-- DYNAMIC @is_man4@ -->
+			<div id="sBtn2">
+				<a href="#" onclick="delSend(document.del);return false;"><span>삭제하기</span></a>
+			</div>
+			<!-- DYNAMIC @is_man4@ -->            
+	    </div>
+		<div id="paging" class="pb_right_text pb_small">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->	
+		</div>
+	    
+		<!-- DYNAMIC @is_paging@ -->
+		<div style="clear:both; text-align:right">
+			<font class="pb_default">( 분할검색 : {{SEPALIMIT}}만건 )</font>&nbsp;&nbsp;
+			<!-- DYNAMIC @define_pg2@ -->
+			PAGING2(,,)
+			<!-- DYNAMIC @define_pg2@ -->
+		</div>
+        <!-- DYNAMIC @is_paging@ -->
+	</div>
+
+	<div style="clear:both;height:20px;">&nbsp;</div>
+	<div id="pb_search_box" style="height:36px;">
+		<form name="searchForm" method="post" action="{{Main}}{{searchstring}}">
+		<input type="hidden" name="field" value='{{field}}' />
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="5" />
+			<col />
+			<col width="5" />
+			<tbody>
+			<tr>
+				<td><img src="img/box_search_left.gif" alt="box left" /></td>
+				<td align="center" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4">					
+					<table cellspacing="0" cellpadding="0" border="0" width="408">
+					<col width="78" />
+					<col width="64" />
+					<col width="164" />
+					<col width="102" />
+					<tbody>
+					<tr>
+						<td>
+							<img src="img/ttl_search.gif" alt="search" title="search" />
+						</td>						
+						<td align="left">
+						    <div  style='position:absolute'>
+								<div id='PsBox' style="position:relative;top:-11px;left:-0px;background-color:#FFF; border: 1px solid #BBB;width:60px; height:20px; float:left;text-align:left;" ></div>
+
+								<script>
+									PsBoxs = new PselectBox('PsBox',document.searchForm.field);
+									PsBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;color:#333;padding-top:2px;";
+									PsBoxs.addItem('제목','subject');
+									PsBoxs.addItem('내용','comment');
+									PsBoxs.addItem('이름','name');
+									PsBoxs.show();
+
+									if(document.searchForm.field.value) {
+										PsBoxs.initSelect(document.searchForm.field.value);								
+									}
+								</script>
+							</div>
+						</td>
+						<td>
+							<input type="text" class="pb_ip2" name="word" size="30" value="{{word}}" style="height:16px;line-height:180%" />
+						</td>
+						<td>
+							<a href='#' onclick="document.searchForm.submit();return false;" /><img src="img/btn_search.gif" border="0" height="22" alt="검색" title="검색" /></a><img src='img/blank.gif' width="1" alt='' /><a href="{{Main}}"><img src="img/btn_cancel.gif" border="0" height="22" alt="취소" title="취소" /></a>
+						</td>			
+					</tr>
+					<tbody>
+					</table>
+				</td>
+				<td><img src="img/box_search_right.gif" alt="box right" /></td>
+			</tr>
+			</tbody>
+		</table>		
+		</form>		
+	</div>	
+	<div style="clear:both;height:20px;">&nbsp;</div>
+</div>	

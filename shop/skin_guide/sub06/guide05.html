@@ -1,0 +1,390 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>location.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> location.html (상단파일 밑 location 파일)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SHOP_CATE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">해당 분류 이미지 or 분류명</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{LOCATION}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">해당페이지 명</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_tcate@ --></font></div>
+			<div style="margin:10px 0 0 28px;">... (분류페이지, 리스트 페이지가 아닐 경우 나타남)</div>
+			
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					
+					<div><font class="blue">&lt!-- DYNAMIC @loop_tcate@ --></font></div>
+					<div style="margin:10px 0 0 28px;">분류 리스트</div>
+					<div style="margin:10px 0 10px 0">			    
+						<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+						<tr>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+								<tr>
+									<td>
+										<table border="0" cellpadding="2" cellspacing="1" width="100%">
+										<tr height="26"> 
+											<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+											<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+										</tr>	
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{tcate}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류번호</td>
+										</tr>
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CATE_NAME}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류명</td>
+										</tr>	
+										</table>
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</div>
+
+					<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+						<div style="padding:10px;">
+							<font class="blue">&lt!-- DYNAMIC @is_text@ --></font><br/>
+							. . . (텍스트 일 경우 나타남)<br/>
+							<font class="blue">&lt!-- DYNAMIC @is_text@ --></font>
+						</div>
+					</div>
+
+					<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_tcate@ --></font></div>
+				</div>
+			</div>
+
+			<div style="clear:both;margin-top:10px;"><font class="blue">&lt!-- DYNAMIC @is_tcate@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_seccate1@ --></font></div>
+			<div style="margin:10px 0 0 28px;">분류페이지, 리스트 페이지일 경우 1차분류 나타남</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류명</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CCATE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CSEC1}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 분류번호</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate1@ --></font><br/>
+					. . . (1차분류 반복 출력)<br/>
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate1@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_seccate1@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_seccate2@ --></font></div>
+			<div style="margin:10px 0 0 28px;">분류페이지, 리스트 페이지일 경우 2차분류 나타남</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류명</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CCATE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CSEC2}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 분류번호</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate2@ --></font><br/>
+					. . . (2차분류 반복 출력)<br/>
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate2@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_seccate2@ --></font></div>
+		</div>
+	</div>
+
+	<div style="height:20px;"></div>
+
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_seccate3@ --></font></div>
+			<div style="margin:10px 0 0 28px;">분류페이지, 리스트 페이지일 경우 3차분류 나타남</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류명</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CCATE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CSEC3}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 분류번호</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate3@ --></font><br/>
+					. . . (3차분류 반복 출력)<br/>
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate3@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_seccate3@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_seccate4@ --></font></div>
+			<div style="margin:10px 0 0 28px;">분류페이지, 리스트 페이지일 경우 4차분류 나타남</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류명</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CCATE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CSEC3}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 분류번호</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate4@ --></font><br/>
+					. . . (4차분류 반복 출력)<br/>
+					<font class="blue">&lt!-- DYNAMIC @loop_seccate4@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_seccate4@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @define_location@ --></font></div>
+			<div style="margin:10px 0 0 28px;">location 경로가 텍스트 출력시 구분자 및 스타일 정의(스킨설정의 location_type이 2일 경우, 상품의 분류 경로도 텍스트로 나타남) </div>
+		
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">LOCATION(구분자,A태그 스타일)</font><br />
+					<font>ex) LOCATION(>,orange) // 1차분류명 <font class=blue>></font> 2차분류명 으로 구분되고 분류링크에 &lta ... class='orange'> 로 됨  
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @define_location@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_sbe_page@ --></font></div>
+			<div style="margin:10px 0 0 28px;">스페셜 페이지나 이벤트 페이지 일 경우 나타남</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NUMS}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">스페셜->2, 이벤트->3</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">페이지 명</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CUID}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">페이지 번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CSEC1}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 페이지번호</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @loop_sbe_list@ --></font><br/>
+					. . . (리스트 반복 출력)<br/>
+					<font class="blue">&lt!-- DYNAMIC @loop_sbe_list@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_sbe_page@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @define_location@ --></font></div>
+			<div style="margin:10px 0 0 28px;">			
+				현재위치에 표시되는 형태 정의<br/>
+				LOCATION(구분자(>),CSS class)<br/>
+			</div>
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @define_location@ --></font></div>
+		</div>
+	</div>
+
+
+<div style="height:20px;"></div>
+</div>
+
+
+</BODY>
+</html>

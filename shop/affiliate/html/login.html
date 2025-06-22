@@ -1,0 +1,90 @@
+<?
+$bo_path = "../../pboard";      
+$lib_path="../../lib";
+$inc_path="../../include";
+$ShopPath	= "";
+
+require "{$lib_path}/lib.Function.php";
+include "{$inc_path}/dbconn.php";
+require "{$lib_path}/class.Mysql.php";
+
+$mysql = new  mysqlClass(); //디비 클래스
+
+$sql	= "SELECT code FROM mall_design WHERE mode='W'";
+$tmp	= $mysql->get_one($sql);
+$ssl	= explode("|*|",$tmp);
+$sMain = "../../";
+if($ssl[0]==1) {
+	$tmp    = explode("|",$ssl[2]);	
+	if(in_array(1,$tmp)) {
+		if($ssl[1]) $sport = ":{$ssl[1]}";
+		$sMain = "https://".$_SERVER["SERVER_NAME"]."{$sport}/{$ShopPath}";	
+		unset($sport);
+	}
+}
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HEAD>
+<TITLE>Affiliate Log In</TITLE>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<link rel=StyleSheet HREF='style.css' type=text/css title=style>
+
+<script LANGUAGE="JavaScript">
+<!--
+function login_check() {
+	var f=document.login;
+	if(!f.id.value) {
+		alert('아이디를 입력해주세요!');
+		f.id.focus();
+		return false; 
+    }
+	if(!f.passwd.value) {
+		alert('비밀번호를 입력해주세요!');
+		f.passwd.focus();
+		return false; 
+    }
+	f.submit();  
+ }
+
+//-->
+</script>
+
+</HEAD>
+
+<BODY  onload="document.login.id.focus();">
+<form method="post" name="login" ACTION="<?=$sMain?>affiliate/html/login_ok.php" >
+<input type="hidden" name="url" value="admin">
+	
+<div style="height:200px;">&nbsp;</div>
+
+<center>
+	<div style="width:590px">
+		<div style="padding-top:95px; padding-left:180px;background:url(img/login_bg.gif) no-repeat;text-align:center">
+			<div style="width:343">
+				<div style="float:left;width:236px">
+					<div style="float:left;width:76px;text-align:right;padding-top:6px;" class="small bold">아이디</div>
+					<div style="float:left;width:160px">
+						<input type="text" name="id" style="border:#d4d4d4 1px solid; height: 16px;width:145px;" tabindex="1" value="" />
+					</div>
+					<div style="clear:both;height:4px;overflow:hidden">&nbsp;</div>
+					<div style="float:left;width:76px;text-align:right;padding-top:6px;" class="small bold">비밀번호</div>
+					<div style="float:left;width:160px">
+						<input name="passwd" type="password" style="border: #d4d4d4 1px solid; height:16px;width:145px;" tabindex="2" value="" />
+					</div>
+				</div>
+				<div style="float:left;width:107px;"><input type="image" src="img/login_btn.gif" tabindex="3" /></div>
+				<div style="clear:both;padding:30px 0 0 10px;line-height:160%;text-align:left;" class="small">
+					! 아이디와 비밀번호를 입력 하신 후 'Affiliate 로그인'버튼을 누르시면 됩니다.<br />
+					! 아이디와 비밀번호을 잊으셨을 경우 쇼핑몰 고객센터로 연락 주시면 됩니다.
+				</div>
+			</div>
+			<div style="height:50px;">&nbsp;</div>
+		</div>
+	</div>
+</center>
+</form>
+
+</BODY>
+</HTML>

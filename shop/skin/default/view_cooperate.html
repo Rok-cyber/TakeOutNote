@@ -1,0 +1,702 @@
+<SCRIPT LANGUAGE="JavaScript" src="lib/lib.ckForm.js"></SCRIPT>
+
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+	
+	<div class="blank">&nbsp;</div>	
+
+	<div style="height:25px;text-align:left">
+		<img src='img/shop/ttl_tag_cloude.gif' alt="TAG CLOUDE" title="TAG CLOUDE" />
+	</div>
+
+	<div id="brand_top"><img src="img/main/cate_menu_top.gif" alt="" /></div>
+	<div id="brand_center">										
+		<div id="tagList">
+			<!-- DYNAMIC @loop_tag@ -->
+			<a href="{{TLINK}}" class="tag{{RND}}">{{TAG}}</a>
+			<!-- DYNAMIC @loop_tag@ -->
+		</div>
+	</div>
+	<div id="brand_bottom"><img src="img/main/cate_menu_bottom.gif" alt="" /></div>
+	<!-- DYNAMIC @is_tag@ -->
+	<form name="tagForm">
+	<input type="hidden" name="uid" value="{{uid}}">
+	<div style="padding:4px 0 0 2px;height:20px;">
+		<div class="left"><input type="text" name="tag" size="19" class="inputs black default" onBlur="ckTagInput(this);" style="vertical-align:top" /></div>
+		<div class="left" style="padding:0 0 0 1px;">						
+			<img src="img/shop/btn_tag.gif" class="hand" alt="태그등록" title="태그등록" {{oclick}} />
+		</div>
+	</div>
+	</form>
+	<!-- DYNAMIC @is_tag@ -->
+
+	<div class="blank" style="height:20px">&nbsp;</div>	
+
+	<div style="height:20px;text-align:left">
+		<img src='img/shop/ttl_related_goods.gif' alt="related goods" title="related goods" />
+	</div>
+	
+	<div style="width:190px;overflow:hidden;">
+		<!-- DYNAMIC @loop_relate@ -->
+		<div style="float:left;width:82px;padding:10px 6px 0 6px;">
+			<div style="width:82px;height:82px;text-align:center;overflow:hidden;">
+				<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" width='80' height='80' class="imgBoder" /></a></div>
+			</div>
+			<div style="padding-top:10px; height:28px;overflow:hidden;line-height:120%;text-align:left;">
+				<a href="{{LINK}}" class="small">{{NAME}}</a>
+			</div>
+			<div style="overflow:hidden;padding-top:4px">
+				<!-- DYNAMIC @is_coupon@ -->	
+				<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+				<!-- DYNAMIC @is_coupon@ -->
+				<div style="float:left;" class="num orange bold">{{PRICE2}}</div>
+			</div>	
+		</div>
+		<!-- DYNAMIC @loop_relate@ -->
+	</div>
+
+	<!-- 배너 START -->
+	<div>
+		<!-- DYNAMIC @loop_banner@ -->
+		<div class="banner"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+		<!-- DYNAMIC @loop_banner@ -->			
+	</div>
+	<!-- @배너 END -->	
+</div>
+<!-- @MAIN LEFT END -->
+
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+	<div id="pageView">
+		<div class="left" style="width:280px;">
+			<div style="width:280px;height:260px"><img src='{{GOODS_IMG}}' border='0' id='viewImage' width="{{GOODS_IMG_WIDTH}}" alt='상품이미지' /></div>	
+			<div style="padding-top:8px;" class="bold small hand" onclick="openBimg({{uid}});">
+				<img src="img/shop/icon_magnifier.gif" align="absmiddle" alt="큰이미지보기" title="큰이미지보기" />
+			</div>
+
+			<!-- DYNAMIC @is_ot_img@ -->
+			<div style="height:74px">
+				<div class="left" style="margin:40px 0 0 0"><img src="img/shop/icon_arrow_prev2_off.gif" class="hand" onclick="oViewBoxDiv.scroll('left');" id="oViewBoxDivImgPrev" /></div>
+				<div style="position:relative;width:260px;height:74px;overflow:hidden;" class="left">
+					<div id='oViewBox' style="position:relative;left:0px;top:0px;width:{{OWIDTH}}px">
+						<div style="margin-top:16px;">
+							<!-- DYNAMIC @loop_ot_img@ -->
+							<div class="left" style="margin:0 4px 0 4px">
+								<img src="{{OT_IMG1}}" width="55" height="55" style="border:1px solid #DADADA" onmouseover="chImage('{{OT_IMG2}}');" onmouseout="chImage('{{GOODS_OIMG}}');" class="hand" alt="상품다른이미지" title="상품다른이미지" /> 
+							</div>			
+							<!-- DYNAMIC @loop_ot_img@ -->
+							<!-- DYNAMIC @no_ot_img@ -->
+							<div class="left" style="margin:0 4px 0 4px"><img src="img/shop/no_ot_img.gif" width="55" height="55" style="border:1px solid #DADADA" alt="상품이미지없음" title="상품이미지없음" /></div>	
+							<!-- DYNAMIC @no_ot_img@ -->
+						</div>
+					</div>
+				</div>
+				<div class="left" style="margin:40px 0 0 0;"><img src="img/shop/icon_arrow_next2_off.gif" class="hand" onclick="oViewBoxDiv.scroll('right');" id="oViewBoxDivImgNext" /></div>
+			</div>
+
+			<script>
+			oViewBoxDiv = new itemScroll3('oViewBox','{{OCNT}}','4','65');
+			</script>
+			<!-- DYNAMIC @is_ot_img@ -->
+
+			<div style="padding:20px 0 0 10px">
+				<div>
+					<div class="left"><img src="img/shop/ttl_goods_point.gif" alt="상품고객평가" /></div>
+					<div class="num left tleft" style="padding:1px 10px 0 0;">
+						<img src="img/shop/star_num{{SUM1}}.gif" alt="" title="" /><img src="img/shop/star_num{{SUM2}}.gif" alt="" title="" /><img src="img/shop/star_jum.gif" alt="" title="" /><img src="img/shop/star_num{{SUM3}}.gif" alt="" title="" />
+					</div>
+					<div class="left" style="padding:1px 0 0 0;">
+						<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:1px;">
+							<div style="width:{{SUM4}}%;overflow:hidden"><img src="img/shop/icon_star.gif" /></div>
+						</div>
+					</div>
+				</div>
+				<div class="goodsShare">
+					<div class="left" style="padding-right:10px;"><img src="img/shop/ttl_goods_share.gif" alt="상품공유" /></div>
+					<ul>
+						<li>
+							<img src="img/shop/share_facebook.gif" class="hand" onclick="sendSNS('fa','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="페이스북 공유하기" title="페이스북 공유하기" />
+						</li>
+						<li>
+							<img src="img/shop/share_twitter.gif" class="hand" onclick="sendSNS('tw','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="트위터 공유하기" title="트위터 공유하기" />
+						</li>
+						<li>
+							<img src="img/shop/share_metoday.gif" class="hand" onclick="sendSNS('me','{{SHARE_GOODS}}','{{SHARE_URL}}','{{SHARE_TAG}}');" alt="미투데이 공유하기" title="미투데이 공유하기" />
+						</li>
+						<li>
+							<img src="img/shop/share_yozm.gif" class="hand" onclick="sendSNS('yz','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="요즘 공유하기" title="요즘 공유하기" />
+						</li>
+						<li>
+							<img src="img/shop/share_mail.gif" class="hand" onclick="sendSNS('ml','','','','{{uid}}',530,540);" alt="메일 보내기" title="메일 보내기" />
+						</li>
+						<li>
+							<img src="img/shop/share_copy.gif" class="hand" onclick="sendSNS('cp','','','','{{uid}}',550,420);" alt="상품 퍼가기" title="상품 퍼가기" />
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>		
+
+		<form name="goodsForm" method="post" onsubmit="return false;" action="php/cart_ok.php">
+		<input type='hidden' name='p_price' value='{{P_PRICE}}' />
+		<input type='hidden' name='p_price2' value='{{P_PRICE2}}' />
+		<input type='hidden' name='p_price3' value='{{P_PRICE3}}' />
+		<input type='hidden' name='p_total' value='{{P_TOTAL}}' />
+		<input type='hidden' name='p_total2' value='{{P_TOTAL2}}' />
+		<input type='hidden' name='p_reserve' value='{{P_RESERVE}}' />
+		<input type='hidden' name='p_sale' value='{{MY_SALE}}' />
+		<input type='hidden' name='p_cate' value='{{cate}}' />
+		<input type='hidden' name='p_number' value='{{uid}}' />
+		<input type='hidden' name='p_carr' value='{{P_CARR}}' />
+		<input type='hidden' name='type' />
+		<input type='hidden' name='defQty' value='{{DEF_QTY}}' />
+		<input type='hidden' name='sQty' value='{{S_QTY}}' />
+		<input type='hidden' name='goodsUnit' value='{{GOODS_UNIT}}' />
+		<input type='hidden' name='ckLogin' value='{{CKLOGIN}}' />
+		<input type='hidden' name='page' value='{{page}}' />
+		<input type='hidden' name='direct' value='N' />
+		<input type='hidden' name='ckCart' value='{{ckCart}}' />
+		<input type='hidden' name='p_option' />
+		<input type='hidden' name='p_op' value='0' />
+		<input type='hidden' name='p_op_cnt' value='{{op_cnt}}' />
+		<input type='hidden' name='cp_type' value='{{CP_TYPE}}' />
+		<input type='hidden' name='cp_sale' value='{{CP_SALE}}' />
+		<input type='hidden' name='cp_sale_type' value='{{CP_SALE_TYPE}}' />
+		<input type='hidden' name='coop_pay' value='{{COOP_PAY}}' />
+
+
+		<div class="goodsInfo">
+			<div style="width:1px; height:1px;float:left;overflow:hidden;">&nbsp;</div>
+			<div style="padding:0 0 10px 0;text-align:left">
+				<font class="title bold">{{GOODS_NAME}} {{GOODS_ICON}}</font>
+			</div>						
+			<div style="margin:8px 0;height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+			<div style="width:417px;">
+				<div id="countTop" class="num white bold">
+					<div style="height:10px;overflow:hidden;">&nbsp;</div>
+					<!-- DYNAMIC @is_cooper_ok@ -->	
+					<div class="left" style="padding-left:10px;">
+						<img src="img/shop/coop_type2.gif" alt="공구가확정" align="absmiddle" />
+					</div>
+					<!-- DYNAMIC @is_cooper_ok@ -->	
+					<div class="right">
+						<span id="countDay">{{TM1}}</span>
+						<span id="countHour">{{TM2}}</span>
+						<span id="countMin">{{TM3}}</span>
+						<span id="countSec">{{TM4}}</span>
+					</div>
+				</div>
+				<div>
+					<div style="height:6px;overflow:hidden;">&nbsp;</div>
+					<ul>
+						<li>
+							<div class="left"><img src="img/shop/ttl_goods_coop_cnt.gif" alt="신청수량" /></div>
+							<div class="goodsText mColor bold num" style="font-size:12px;">{{COOP_CNT}}<font class="default">{{GOODS_UNIT}}</font></div>
+						</li>
+						<li>
+							<div class="left"><img src="img/shop/ttl_goods_coop_date.gif" alt="공구기간" /></div>
+							<div class="goodsText bold num">
+								{{S_YY}}-{{S_MM}}-{{S_DD}} {{S_HH}}:{{S_II}}&nbsp; ~ &nbsp;{{E_YY}}-{{E_MM}}-{{E_DD}} {{E_HH}}:{{E_II}}
+							</div>
+						</li>				
+					</ul>
+					<div style="padding-left:15px;width:332px;">
+						<div style="width:332px;">						
+							<div class="{{COOP_ALIGN}}" style="width:{{COOP_PER}}%;">&nbsp;</div>						
+							<div class="{{COOP_ALIGN}}">
+								<div style="height:22px;text-align:{{COOP_ALIGN}};">
+									<div class="num mColor"><b>{{participation}}</b><font class="small gray">{{GOODS_UNIT}} 신청</font></div>
+									<div class="coop_arrow {{COOP_ALIGN}}">&nbsp;</div>
+								</div>
+							</div>
+						</div>					
+						<div style="clear:both;padding-left:6px;">
+							<div style="width:320px;height:18px;background:url(img/shop/coop_bar_bg2.gif) no-repeat;text-align:left;">
+								<div style="width:{{COOP_PER2}}%;overflow:hidden;height:10px;"><img src="img/shop/coop_bar2.gif" style="verticla-align:top;" alt="bar" /></div>
+							</div>
+						</div>
+						<div>
+							<div class="num gray left">0<font class="small">{{GOODS_UNIT}}</font></div>
+							<div class="num left orange" style="padding-left:50px;">{{START_CNT}}<font class="small gray">{{GOODS_UNIT}}이상 신청시 공구성립</font></div>						
+							<div class="num gray right">{{END_CNT}}<font class="small">{{GOODS_UNIT}}</font></div>
+						</div>
+						<!-- DYNAMIC @is_come@ -->	
+						<div class="coop_come2"></div>
+						<!-- DYNAMIC @is_come@ -->					
+					</div>
+					<div style="clear:both;text-align:left;padding:10px 16px 0 16px;">
+						<!-- DYNAMIC @loop_coop@ -->
+						<span class="small gray" style="text-align:left"><font class="num black">{{COOP_LOOP_QTY}}</font>{{GOODS_UNIT}} 신청시 : <font class="num black">{{COOP_LOOP_PRICE}}</font>원</span>&nbsp;&nbsp;&nbsp;
+						<!-- DYNAMIC @loop_coop@ -->
+					</div>
+				</div>
+				<div class="clear" style="height:10px;">&nbsp;</div>
+			</div>
+			<div class="blank">&nbsp;</div>
+			<div style="height:1px;background-color:#ccc;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+			<div>
+				<div class="clear" style="height:10px;">&nbsp;</div>				
+				<ul>
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_oprice.gif" alt="기존가격" /></div>
+						<div class="goodsText num"><s>{{GOODS_PRICE}}</s></div>
+					</li>
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_coop_price.gif" alt="공구가격" /></div>
+						<div class="goodsText mColor bold num">{{COOP_PRICE}}</div>					
+					</li>
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_coop_sale.gif" alt="할인률" /></div>
+						<div class="goodsText"><font class="num mColor bold" style="font-size:12px;">{{COOP_SALE}}%</font></div>					
+					</li>
+					<!-- DYNAMIC @is_reserve@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_reserve.gif" alt="적립금" /></div>
+						<!-- DYNAMIC @is_my_point@ -->
+						<div class="right small gray" style='padding:4px 0 0 8px;background-color:#fff;'>({{TTL}}추가적립 <font class="num orange">{{MY_POINT}}%</font>)&nbsp;</div>
+						<!-- DYNAMIC @is_my_point@ -->
+						<div class="goodsText num gray" id="reserves">{{GOODS_RESERVE}}원</div>					
+					</li>
+					<!-- DYNAMIC @is_reserve@ -->		
+					<!-- DYNAMIC @is_model@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_model.gif" alt="모델명" /></div>
+						<div class="goodsText small gray">{{GOODS_MODEL}}</div>
+					</li>
+					<!-- DYNAMIC @is_model@ -->
+					<!-- DYNAMIC @is_comp@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_comp.gif" alt="제조사" /></div>
+						<div class="goodsText small gray">{{GOODS_COMP}}</div>
+					</li>
+					<!-- DYNAMIC @is_comp@ -->
+					<!-- DYNAMIC @is_made@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_made.gif" alt="원산지" /></div>
+						<div class="goodsText small gray">{{GOODS_MADE}}</div>
+					</li>
+					<!-- DYNAMIC @is_made@ -->
+					<!-- DYNAMIC @is_carr@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_carr.gif" alt="개별배송비" /></div>
+						<div class="goodsText small gray">{{GOODS_CARR}}</div>
+					</li>
+					<!-- DYNAMIC @is_carr@ -->
+					<!-- DYNAMIC @is_carr_free@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_carr2.gif" alt="배송비" /></div>
+						<div class="goodsText small gray">배송비 무료 상품입니다.</div>
+					</li>
+					<!-- DYNAMIC @is_carr_free@ -->
+					<!-- DYNAMIC @is_option@ -->
+					<li>
+						<div class="small left bold" style="background-color:#fff">
+							<!-- DYNAMIC @is_op_img@ -->
+							<img src="img/shop/ttl_goods_option{{o}}.gif" alt="{{OP_TITLE}}" />
+							<!-- DYNAMIC @is_op_img@ -->
+							<!-- DYNAMIC @is_op_text@ -->
+							<div style="padding:4px 8px 0 8px;">{{OP_TITLE}}</div>
+							<!-- DYNAMIC @is_op_text@ -->						
+						</div>
+						<div class="goodsText small gray" style="padding-top:1px;">
+							<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+							<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+						</div>
+					</li>			
+					<!-- DYNAMIC @is_option@ -->	
+					<!-- DYNAMIC @is_qty@ -->
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_total_cooper.gif" alt="총공구 수량" /></div>
+						<div class="goodsText num gray">{{S_QTY}}{{GOODS_UNIT}}</div>
+					</li>
+					<!-- DYNAMIC @is_qty@ -->				
+					<li>
+						<div class="left"><img src="img/shop/ttl_goods_qty.gif" alt="구매수량" /></div>											
+						<!-- DYNAMIC @is_limit_qty@ -->
+						<div class="right" style="background-color:#fff;padding:4px 0 0 8px;">							
+							<font class="small">(1인당 최대 {{DEF_QTY}}{{GOODS_UNIT}}까지 신청가능)&nbsp;</font>							
+						</div>
+						<!-- DYNAMIC @is_limit_qty@ -->
+						<div class="right" style="padding:2px 0 0 1px;background-color:#fff">
+							<div style="width:13px;height:10px;overflow:hidden;"><img src="img/shop/btn_qty_up.gif" alt="plus" class="hand" onclick="cgQty('p');" style="vertical-align:top" /></div>
+							<div style="width:13px;height:10px;overflow:hidden;padding-top:1px;"><img src="img/shop/btn_qty_down.gif" alt="minus" class="hand" onclick="cgQty('m');" style="vertical-align:top" /></div>														
+						</div>
+						<div class="goodsText small gray">
+							<input type="text" name="p_qty" size="4" value="1" class="inputs black num" onKeydown="onlyNum(this);" onKeyup="onlyNum(this);" onchange="ckTotal()" style="text-align:right;padding-right:3px;" /> 
+						</div>
+					</li>				
+				</ul>
+				<div class="blank" style="height:20px;">&nbsp;</div>
+				<div style="height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+				<div class="blank" style="height:20px;">&nbsp;</div>
+				<div>
+					<!-- DYNAMIC @is_limit_1@ -->
+					<img src="img/shop/btn_cooperate.gif" class="hand" onclick="return ckGoods('cooper');" alt="공동구매신청하기" title="공동구매신청하기" />				
+					<!-- DYNAMIC @is_limit_1@ -->
+					<!-- DYNAMIC @is_limit_2@ -->
+					<img src="img/shop/btn_cooperate_close.gif" alt="공동구매마감" title="공동구매마감" />				
+					<!-- DYNAMIC @is_limit_2@ -->				
+					<!-- DYNAMIC @is_limit_3@ -->
+					<img src="img/shop/btn_cooperate_ready.gif" alt="공동구매준비중" title="공동구매준비중" />				
+					<!-- DYNAMIC @is_limit_3@ -->				
+				</div>	
+			</div>
+		</div>
+	</div>	
+	</form>
+
+	
+	<div id="detail">
+		<a name="content_01">&nbsp;</a>
+		<div class="detail_top">
+			<ul>
+				<li><img src="img/shop/ttl_view01.gif" border="0" alt="상품상세정보" title="상품상세정보" /></li>
+				<li><a href="#content_02"><img src="img/shop/ttl_view02_off.gif" border="0" alt="상품후기" title="상품후기" /></a></li>
+				<li><a href="#content_03"><img src="img/shop/ttl_view03_off.gif" border="0" alt="상품문의" title="상품문의" /></a></li>					
+				<li><a href="#content_04"><img src="img/shop/ttl_view05_off.gif" border="0" alt="배송/반품/환불" title="배송/반품/환불" /></a></li>
+			</ul>
+		</div>
+		<div id="content01">
+			<!-- DYNAMIC @is_goods_info@ -->
+			<div>
+				<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+				<col width="15%" /> 
+				<col width="35%" />
+				<col width="15%" />
+				<col width="35%" /> 
+				<tbody>
+				<!-- DYNAMIC @loop_info@ -->
+				<!-- DYNAMIC @is_info1@ -->
+				<tr>
+					<td class="tdType1">{{opName1}}</td>
+					<td class="tdType2" colspan="3">{{opContent1}}</td>
+				</tr>
+				<!-- DYNAMIC @is_info1@ -->
+				<!-- DYNAMIC @is_info2@ -->
+				<tr>
+					<td class="tdType1">{{opName1}}</td>
+					<td class="tdType2">{{opContent1}}</td>
+					<td class="tdType3">{{opName2}}</td>
+					<td class="tdType2">{{opContent2}}</td>
+				</tr>
+				<!-- DYNAMIC @is_info2@ -->
+				<!-- DYNAMIC @loop_info@ -->
+				<tr>
+					<td colspan="4" style="border-top:1px solid #ccc" height="30">&nbsp;</td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+			<!-- DYNAMIC @is_goods_info@ -->
+			<div style="float:left; width:1px; height:200px;"></div>
+			<div style="float:left; padding:8px; width:700px; overflow:hidden;" id="detailViews">{{GOODS_EXPL}}</div>
+		</div>
+		<div style="height:1px;overflow:hidden;clear:both;">&nbsp;</div>
+			
+		<a name="content_02">&nbsp;</a>			
+		<div class="detail_top">
+			<ul>
+				<li><a href="#content_01"><img src="img/shop/ttl_view01_off.gif" border="0" alt="상품상세정보" title="상품상세정보" /></a></li>
+				<li><img src="img/shop/ttl_view02.gif" border="0" alt="상품후기" title="상품후기" /></li>
+				<li><a href="#content_03"><img src="img/shop/ttl_view03_off.gif" border="0" alt="상품문의" title="상품문의" /></a></li>					
+				<li><a href="#content_04"><img src="img/shop/ttl_view05_off.gif" border="0" alt="배송/반품/환불" title="배송/반품/환불" /></a></li>
+			</ul>
+		</div>
+		<div id="content02">
+			<div style="margin-top:16px; height:18px; overflow:hidden;">				
+				<div class="left small">■ 작성된 이용후기 : <font class="num orange">{{CNT_AFTER}}</font>건</div>
+				<div class="left small" style="margin-left:8px;">고객평점 : <font class="num orange">{{SUM_AFTER}}</font></div> 
+				<div class="left" style="margin-left:8px;">
+					<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:2px;">
+						<div style="width:{{SUM4}}%;overflow:hidden"><img src="img/shop/icon_star.gif" /></div>
+					</div>					
+				</div>				
+			</div>
+
+			<div id="list_list">
+				<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+				<col width="60" /> 
+				<col width="80" />
+				<col width="509" />
+				<col width="100" /> 
+				<col width="40" /> 				
+				<col width="120" />
+				<thead>
+				<tr height="28" align="center">
+					<th scope="col"><img src="img/shop/ttl_board_num.gif" alt="번호" /></th>
+					<th scope="col"><img src="img/shop/ttl_board_point.gif" alt="평점" /></th>
+					<th scope="col"><img src="img/shop/ttl_board_subject.gif" alt="제목" /></th>
+					<th scope="col"><img src="img/shop/ttl_board_name.gif" alt="작성자" /></th>
+					<th scope="col"></th>					
+					<th scope="col"><img src="img/shop/ttl_board_date.gif" alt="작성일" /></th>
+				</tr>
+				</thead>
+				
+				<tbody id="list_after"></tbody>			
+				</table>
+			</div>		
+			
+			<!-- DYNAMIC @no_after@ -->
+			<div style="text-align:center;margin-top:30px">
+				<img src="img/shop/no_after.gif" alt="상품후기 없음" title="상품후기 없음" />
+			</div>
+			<!-- DYNAMIC @no_after@ -->
+
+			<div id="paging" class="small"></div>
+			
+			<div style="height:20px">&nbsp;</div>					
+			<div class="right" style="margin-bottom:20px;">
+				<img src="img/shop/btn_after2.gif" class="hand" onclick="pLightBox.show('php/after_write.php?cate={{cate}}&amp;number={{uid}}','iframe','610','420','■ 상품후기 작성','20');" alt="상품후기쓰기" title="상품후기쓰기"  />
+			</div>
+		</div>
+
+		<a name="content_03">&nbsp;</a>		
+		<div class="detail_top">
+			<ul>
+				<li><a href="#content_01"><img src="img/shop/ttl_view01_off.gif" border="0" alt="상품상세정보" title="상품상세정보" /></a></li>
+				<li><a href="#content_02"><img src="img/shop/ttl_view02_off.gif" border="0" alt="상품후기" title="상품후기" /></a></li>
+				<li><img src="img/shop/ttl_view03.gif" border="0" alt="상품문의" title="상품문의" /></li>					
+				<li><a href="#content_04"><img src="img/shop/ttl_view05_off.gif" border="0" alt="배송/반품/환불" title="배송/반품/환불" /></a></li>
+			</ul>
+		</div>
+		<div id="content03">
+			<div style="margin-top:16px; height:18px; overflow:hidden;">				
+				<div class="left small">■ 작성된 상품Q&A : <font class="num orange">{{CNT_QNA}}</font>건</div>
+			</div>
+
+			<div id="list_list">
+				<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+				<col width="60" /> 				
+				<col width="50" /> 				
+				<col width="579" />
+				<col width="100" /> 				
+				<col width="120" />
+				<thead>
+				<tr height="28" align="center">
+					<th scope="col"><img src="img/shop/ttl_board_num.gif" alt="번호" /></th>
+					<th scope="col"></th>					
+					<th scope="col"><img src="img/shop/ttl_board_subject.gif" alt="제목" /></th>
+					<th scope="col"><img src="img/shop/ttl_board_name.gif" alt="작성자" /></th>				
+					<th scope="col"><img src="img/shop/ttl_board_date.gif" alt="작성일" /></th>
+				</tr>
+				</thead>
+				
+				<tbody id="list_qna"></tbody>			
+				</table>
+			</div>		
+			
+			<!-- DYNAMIC @no_qna@ -->
+			<div style="text-align:center;margin-top:30px">
+				<img src="img/shop/no_qna.gif" alt="상품문의 없음" title="상품문의 없음" />
+			</div>
+			<!-- DYNAMIC @no_qna@ -->
+
+			<div id="paging2" class="small"></div>
+			
+			<div style="height:20px">&nbsp;</div>					
+			<div class="right" style="margin-bottom:20px;">
+				<img src="img/shop/btn_qna.gif" class="hand" onclick="pLightBox.show('php/qna_write.php?cate={{cate}}&amp;number={{uid}}','iframe','610','420','■ 상품문의 작성','20');" alt="상품문의쓰기" title="상품문의쓰기" />
+			</div>
+		</div>
+
+		<a name="content_04">&nbsp;</a>	
+		<div class="detail_top">
+			<ul>
+				<li><a href="#content_01"><img src="img/shop/ttl_view01_off.gif" border="0" alt="상품상세정보" title="상품상세정보" /></a></li>
+				<li><a href="#content_02"><img src="img/shop/ttl_view02_off.gif" border="0" alt="상품후기" title="상품후기" /></a></li>
+				<li><a href="#content_03"><img src="img/shop/ttl_view03_off.gif" border="0" alt="상품문의" title="상품문의" /></a></li>					
+				<li><img src="img/shop/ttl_view05.gif" border="0" alt="배송/반품/환불" title="배송/반품/환불" /></li>
+			</ul>
+		</div>	
+		<div id="content04">
+			{{INFO}}	
+		</div>
+	</div>	
+
+</div>
+
+<script type="text/javascript">
+<!--
+var serTime = {{SER_TIME}};
+var cooperateTime = {{COOP_TIME}};
+setTimeout(cooperateCount, 1000);
+
+function rtnRowAfter(obj,num,point,title,name,buy,date,content,mod,uid) {		
+	newRow = document.createElement('TR');			
+	newRow.style.height = "26px";
+	newRow.align = "center";
+	
+	newCell = document.createElement('TD');	
+	newCell.innerHTML = '<font class="num">'+num+'</font>';
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	newCell.innerHTML = '<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:2px;"><div style="width:'+point+'%;overflow:hidden"><img src="img/shop/icon_star.gif" /></div></div>';
+	newRow.appendChild(newCell);
+
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	newCell.onclick = function() { viewAfter(num) }
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = title;
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.innerHTML = name;
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	if(buy==1) newCell.innerHTML = "<img src='img/shop/icon_buyer.gif' alt='구매자' title='구매자' />";
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.innerHTML = '<font class="num">'+date+'</font>';
+	newRow.appendChild(newCell);		
+
+	obj.appendChild(newRow);	
+
+	newRow = document.createElement('TR');				
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 6;	
+	newCell.style.height = 1;
+		
+	if(mod==1) {
+		tmps = '<div style="margin:20px 0 4px 0">';
+		tmps += '<img src="img/shop/btn_modify.gif"  class="hand" onclick="pLightBox.show(\'php/after_write.php?pmode=confirm&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 비밀번호 확인\',\'20\');" alt="상품후기수정" title="상품후기수정" />&nbsp;';
+		tmps += '<img src="img/shop/btn_delete.gif"   class="hand" onclick="pLightBox.show(\'php/after_write.php?pmode=delete&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 상품후기 삭제\',\'20\');" alt="상품후기삭제" title="상품후기삭제" />';
+		tmps += '</div>';
+	} 
+	else tmps = '';
+
+	newCell.innerHTML = '<div style="border:1px solid #EFEFEF; border-bottom:0px; display:none;background-color:#FAFAFA;" id="after_'+num+'"><div style="padding:10px 20px 6px 20px;word-break:break-all" id="afterContent'+num+'">'+content+tmps+'</div></div>';
+	
+	newRow.appendChild(newCell);
+	obj.appendChild(newRow);
+
+	newRow = document.createElement('TR');			
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 6;
+	newCell.style.height = 1;
+	newCell.style.backgroundColor = "#F1F1F1";
+	newCell.innerHTML = "<img src='" + shop_skin + "/img/common/blank.gif' width=1 height=1 alt='blank' />";;
+	newRow.appendChild(newCell);
+
+	obj.appendChild(newRow);
+	imgSizeConv("afterContent"+num,700);
+}
+
+function rtnRowQna(obj,num,title,name,ans,date,content,answer,mod,uid,name2,link,image,dragd,secret) {		
+	var tmps = '', tmps2 = '', tmps3 = '';
+
+	newRow = document.createElement('TR');			
+	newRow.style.height = "26px";
+	newRow.align = "center";
+	
+	newCell = document.createElement('TD');	
+	newCell.innerHTML = '<font class="num">'+num+'</font>';
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	if(ans==1) newCell.innerHTML = "<img src='img/shop/icon_answer.gif' alt='icon' />";
+	else newCell.innerHTML = "<img src='img/shop/icon_noans.gif' alt='icon' />";
+	newRow.appendChild(newCell);	
+	
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	
+	if(secret=='Y') newCell.onclick = function() { viewQnaLock(uid, num) }
+	else newCell.onclick = function() { viewQna(num) }
+	
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = title;
+	if(secret=='Y' || secret=='F') newCell.innerHTML = "<img src='img/shop/icon_lock.gif' alt='icon' style='vertical-align:middle' /> " + newCell.innerHTML
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.innerHTML = name;
+	newRow.appendChild(newCell);	
+	
+	newCell = document.createElement('TD');	
+	newCell.innerHTML = '<font class="num">'+date+'</font>';
+	newRow.appendChild(newCell);		
+
+	obj.appendChild(newRow);	
+
+	newRow = document.createElement('TR');			
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 5;	
+	newCell.style.height = 1;
+
+	content = '<span id="qna_content_'+uid+'">'+content+'</span>';
+	answer = '<span id="qna_answer_'+uid+'">'+answer+'</span>';
+		
+	if(mod==1) {
+		tmps = '<div style="padding:20px 0 4px 0">';
+		tmps += '<img src="img/shop/btn_modify.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=confirm&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 비밀번호 확인\',\'20\');" alt="상품문의수정" title="상품문의수정" />&nbsp;';
+		tmps += '<img src="img/shop/btn_delete.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=delete&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 상품문의 삭제\',\'20\');" alt="상품문의삭제" title="상품문의삭제" />&nbsp;';
+
+		<!-- DYNAMIC @is_admin@ -->
+		if(ans!=1) {
+			tmps += '<img src="img/shop/btn_answer.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=answer&amp;uid='+uid+'\',\'iframe\',\'700\',\'480\',\'■ 상품문의 답변달기 \',\'20\');" alt="상품문의답변달기" title="상품문의답변달기" />';
+		}
+
+		tmps3 = '<div style="padding:20px 0 4px 0">';
+		tmps3 += '<img src="img/shop/btn_modify.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=modify2&amp;uid='+uid+'\',\'iframe\',\'700\',\'480\',\'■ 상품문의 답변수정\',\'20\');" alt="상품문의답변수정" title="상품문의답변수정" />&nbsp;';
+		tmps3 += '<img src="img/shop/btn_delete.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=delete2&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 상품문의 답변삭제\',\'20\');" alt="상품문의답변삭제" title="상품문의답변삭제" />&nbsp;';
+		tmps3 += '</div>';
+		<!-- DYNAMIC @is_admin@ -->	
+
+		tmps += '</div>';
+	} 
+	
+
+	if(ans==1) {
+		tmps2 = '<div style="clear:both;height:1px;background-color:#ddd;width:100%;overflow:hidden;margin-bottom:10px;">&nbsp;</div><div style="float:left;width:80px;text-align:center"><img src="img/shop/ttl_answer.gif" alt="answer" /></div><div style="float:left;" id="qnaContent2'+num+'">'+answer+tmps3+'</div>';
+	} 
+	
+
+	newCell.innerHTML = '<div style="border:1px solid #EFEFEF; border-bottom:0px; display:none;background-color:#FAFAFA;" id="qna_'+num+'"><div style="padding:10px 20px 6px 20px;word-break:break-all;" class="clearfix" ><div style="float:left;width:80px;text-align:center"><img src="img/shop/ttl_question.gif" alt="question" /></div><div style="float:left;" id="qnaContent1'+num+'">'+content+tmps+'</div>'+tmps2+'</div></div>';
+
+	newRow.appendChild(newCell);
+	obj.appendChild(newRow);
+
+	newRow = document.createElement('TR');			
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 5;
+	newCell.style.height = 1;
+	newCell.style.backgroundColor = "#efefef";
+	newCell.innerHTML = "<img src='" + shop_skin + "/img/common/blank.gif' width=1 height=1 alt='blank' />";;
+	newRow.appendChild(newCell);
+
+	obj.appendChild(newRow);
+	imgSizeConv("qnaContent1"+num,600);
+	if(ans==1) imgSizeConv("qnaContent2"+num,600);
+
+}
+
+getAfters = new getAfter('10','{{CNT_AFTER}}','0','{{afterstr}}');
+getAfters.display();
+aPage = new ajaxPaging('aPage','paging',getAfters,'{{CNT_AFTER}}','10','10','content02');
+aPage.makePage();
+aPage.printPage();
+afterViewNum = '';
+
+getQna = new getQna('10','{{CNT_QNA}}','0','{{qnastr}}');
+getQna.display();
+qPage = new ajaxPaging('qPage','paging2',getQna,'{{CNT_QNA}}','10','10','content03');
+qPage.makePage();
+qPage.printPage();
+qnaViewNum = '';
+
+imgSizeConv("detailViews",700);
+
+{{FOCUS}}
+
+var f = document.goodsForm;
+// -->
+</script>

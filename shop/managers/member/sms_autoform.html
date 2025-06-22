@@ -1,0 +1,146 @@
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_sms_auto.gif" alt="SMS자동발송관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>SMS 자동발송 유무를 선택 하시거나 문구를 수정 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td height=10 colspan=2></td></tr>
+<tr><td colspan=2><img src="img/ttl_sms_auto1.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8 colspan=2></td></tr>
+<form name="smsForm" method="post" action="sms_post.php">
+<input type="hidden" name="mode" value="auto" />
+<tr>
+	<!-- DYNAMIC @loop_sms@ -->
+	<!-- DYNAMIC @is_tr@ -->
+	</tr><tr><td colspan=2 height=10></td></tr><tr>
+	<!-- DYNAMIC @is_tr@ -->
+	<td  valign=middle width=50%>
+		<table border=0 cellpadding=0 cellspacing=4 width=99% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr class=gr_bg>
+						  <td colspan=2 align=center class="small bold" height="24">{{TITLE}}</td>
+						</tr>
+						<tr bgcolor="#FFFFFF">
+						    <td width=50% height="190" align="center">
+								<table border="0" cellpadding="0" cellspacing="0" width="140" background="img/sms_bg{{ONLY1}}.gif" height=141>
+								<tr>
+									<td align="center">
+										<textarea name="message1_{{UID}}" cols="16" rows="6" style="font:9pt 굴림체;color:#000;margin-top:15px;overflow:hidden;border:0;background-color:transparent;" {{DISA1}}>{{MSG1}}</textarea>
+									</td>
+								</tr>								
+								</table>
+								<table>
+								<tr>
+								    <td style="padding-top:10px;">
+										<input type="checkbox" name="chk_message1_{{UID}}" id='cmeeeage1_{{UID}}' value="1" {{CKD1_1}} {{DISA1}} /> <label for='cmeeeage1_{{UID}}'>고객에게 자동발송</label>
+									</td>
+								</tr>
+								</table>
+						    </td>
+							<td width=50% height="190" align=center>
+								<table border="0" cellpadding="0" cellspacing="0" width="140" background="img/sms_bg{{ONLY2}}.gif" height=141>
+								<tr>
+									<td align="center">
+										<textarea name="message2_{{UID}}" cols="16" rows="6" style="font:9pt 굴림체;color:#000;margin-top:15px;overflow:hidden;border:0;background-color:transparent;" {{DISA2}}>{{MSG2}}</textarea>
+									</td>
+								</tr>								
+								</table>
+								<table>
+								<tr>
+								    <td style="padding-top:10px;">
+										<input type="checkbox" name="chk_message2_{{UID}}" id='cmeeeage2_{{UID}}' value="1" {{CKD2_1}} {{DISA2}} /> <label for='cmeeeage2_{{UID}}'>관리자에게 자동발송</label>
+									</td>
+								</tr>
+								</table>
+						    </td>
+						</tr>
+						</table>
+					</td>
+					
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<!-- DYNAMIC @loop_sms@ -->
+</tr>
+
+<TR><TD height="24" colspan=2></TD></TR> 
+<TR>
+	<TD align="center" colspan=2>
+		<input type="image" src="img/btn_save.gif" onfocus='blur();'>
+		<img src="img/btn_prepage.gif" onClick="history.back()" onfocus='this.blur();' class="hand" align="absmiddle">
+	</TD>
+</TR>
+<TR><TD height="20" colspan=2></TD></TR> 
+<tr><td colspan=2>
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="20%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="30%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+						<td class="gr_bg" width="20%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="30%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{shopName}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">쇼핑몰명</td>
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{name}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">회원명 or 주문자명</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{goodsName}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">상품명 <font class="small">(상품품절시 발송에만 가능)</font> </td>						
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{number}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">주문번호 <font class="small">(주문관련 발송에만 가능)</font></td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{price}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">결제금액 <font class="small">(주문관련 발송에만 가능)</font></td>
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{account}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">은행명 계좌번호 입금자명 <font class="small">(무통장 입금요청 발송에만 가능)</font></td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{deli_comp}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">택배사 <font class="small">(상품배송시 발송에만 가능)</font></td>
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{deli_no}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">송장번호 <font class="small">(상품배송시 발송에만 가능)</font></td>
+					</tr>	
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<TR><TD height="20" colspan=2></TD></TR> 
+</form>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+

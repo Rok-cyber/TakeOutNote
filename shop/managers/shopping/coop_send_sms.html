@@ -1,0 +1,127 @@
+<?
+include "../ad_init.php";
+$uid = $_GET['uid'];
+if(!$uid) alert("정보가 제대로 넘어오지 못했습니다","close5");
+
+require "{$lib_path}/lib.Shop.php";
+
+$sql = "SELECT code FROM mall_design WHERE mode='A'";
+$tmp_basic = $mysql->get_one($sql);
+$basic = explode("|*|",stripslashes($tmp_basic));
+//0:주소,1:쇼핑몰명,2:상호,3:대표자명,4:사번호,5:부가번호,6:주소,7:연락처,8:팩스,9:관리자명,10:이메일
+
+
+$sql = "SELECT * FROM mall_goods WHERE uid = '{$uid}'";
+$row = $mysql->one_row($sql);
+$name = stripslashes($row['name']);
+$cnt = number_format($row['coop_cnt']);
+
+if($row['coop_pay']=='Y'){
+	$sql = "SELECT price FROM mall_goods_cooper WHERE guid='{$row['uid']}' ORDER BY qty ASC LIMIT 1";
+	$price = number_format($mysql->get_one($sql),$ckFloatCnt);
+}
+else $price = number_format($row['coop_price'],$ckFloatCnt);
+
+$sdate = date("y-m-d",time()+(86400*($row['coop_close']+1)));
+
+$message = "[{$basic[1]}] {$name} {$price}원 공구마감 {$sdate}일 까지 결제바람";
+
+$sms_cnt = pmallSmsCnt();
+if($sms_cnt==-1) $sms_cnt = 0;
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>공구 신청자 SMS발송</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+<script LANGUAGE="JavaScript" src="../../lib/lib.Function.js"></script> 
+</head>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function ckForm() {
+	f = document.sendForm;
+	
+	send_cnt = <?=$sms_cnt?>;
+	send_cnt2 = document.getElementById("c_message").innerHTML; 
+	send_cnt3 = parseInt(send_cnt) * parseInt(send_cnt2);
+
+	if(!f.message.value.trim()) {
+		alert('발송될 메세지를 입력 하세요.');
+		f.message.focus();
+		return false;
+	}
+	if(send_cnt<1) {
+		alert('발송 건수가 0건입니다. SMS 신청을 하시거나 충전을 하시기 바랍니다.');
+		return false;
+	}
+	if(send_cnt3>sms_cnt) {
+		alert('발송가능한 SMS건수 보다 발송할 SMS건수가 많습니다.');
+		return false;
+	}
+	f.sms_cnt.value = send_cnt2;
+}
+//-->
+</SCRIPT>
+
+<body style="padding:15px 0 8px 0;">
+
+<table border=0 cellpadding="0" cellspacing="0" width="580" align=center bgcolor='FFFFFF'>
+<form name='sendForm' method='post' enctype="multipart/form-data" action='coop_post.php?mode=sms' onsubmit="return ckForm();">
+<input type="hidden" name="gid" value="<?=$uid?>" />
+<input type="hidden" name="sms_cnt" />
+<tr><td><img src="img/ttl_coop_sms.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+  <td>
+	<table  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<tr>
+		<td>
+			<table  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<tr height=30 align=left>
+						<td width=120 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공구 상품명</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<?=$name?></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공구 신청자수</font></td>
+						<td bgcolor=#EFEFEF class="eng">&nbsp;<?=$cnt?><font class='small'>명</font>&nbsp;&nbsp;<font class="small">(발송가능&nbsp;&nbsp;<font class="eng">SMS : <b><?=$sms_cnt?></b></font>건) </font></td>
+					</tr>					
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공구가</font></td>
+						<td bgcolor=#EFEFEF class="eng">&nbsp;<?=$price?><font class='small'>원</font></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;발송 메세지</font></td>
+						<td bgcolor=#EFEFEF style="padding:6px;">
+							<textarea name="message" style="width:99%" rows="9" class="bt2" onkeyUP="UpdateChar2(80,400,'message','sendForm');"><?=$message?></textarea>
+							<div style="text-align:right; padding-top:4px;" class="eng">
+								SMS <span id="c_message" class="eng blue">0</span><font class="small">건</font>
+								<span id="b_message" class="eng blue">0</span>Bytes
+							</div>
+						</td>
+					</tr>					
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+  </td>
+ </tr>
+<tr><td height=10></td></tr>
+<tr><td align=center><input type='image' src='img/btn_send_sms.gif' border=0 onfocus='blur();' align=absmiddle>&nbsp;&nbsp;<img  src='img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"></td></tr>
+<tr><td height=20></td></tr>
+</table>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+	UpdateChar2(80,400,'message','sendForm');
+//-->
+</SCRIPT>
+</body>
+</HTML>

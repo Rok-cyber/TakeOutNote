@@ -1,0 +1,59 @@
+<?
+ob_start();
+include "../ad_init.php";
+
+$sql = "SELECT code FROM mall_aconf WHERE mode='I'";
+$code = $mysql->get_one($sql);
+$code = explode("|",stripslashes($code));
+
+for($i=1;$i<8;$i++) {
+	if($code[$i-1]==1) ${"ckd".$i} = "checked";
+}
+$host_hd = $code[7];
+$tf_url = $code[8];
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<TITLE>쇼핑몰 정보 설정</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<BODY style="padding:0;margin:0;">
+
+<div>
+	<form name='menuForm' method='post' action='menu_conf_ok.php'>
+	<input type='hidden' name='mode' value='info' />
+	<div style="padding:20px 0 0 20px; width:400px">
+		<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+		<tr>
+			<td>	
+				<div class='small' style='line-height:220%'>					
+					<input type='checkbox' name='info1' id='info1' value='1' <?=$ckd1?> /> <label for="info1">도메인</label> <br/>
+					<input type='checkbox' name='info2' id='info2' value='1' <?=$ckd2?> /> <label for="info2">최초 설치일</label> <br/>
+					<input type='checkbox' name='info3' id='info3' value='1' <?=$ckd3?> /> <label for="info2">우편번호 업데이트</label> <br/>
+					<input type='checkbox' name='info4' id='info4' value='1' <?=$ckd4?> /> <label for="info3">등록된 상품건수</label> <br/>
+					<input type='checkbox' name='info5' id='info5' value='1' <?=$ckd5?> /> <label for="info4">발송가능 SMS건수</label> <br/>
+					<input type='checkbox' name='info6' id='info6' value='1' <?=$ckd6?> /> <label for="info5">계정 사용 용량</label>&nbsp;&nbsp;(전체 용량 : <input type="text" class="ta eng" name="host_hd" value="<?=$host_hd?>" size="10" />M)<br/>
+					<input type='checkbox' name='info7' id='info7' value='1' <?=$ckd7?> / > <label for="info6">계정 일트래픽 용량</label>&nbsp;&nbsp;(트래픽 확인 주소 : <input type="text" class="ta eng" name="tf_url" value="<?=$tf_url?>" size="30" />)<br/>
+					트래픽 확인은 <font class="eng">Throttle Status</font>만 가능
+				</div>							
+				<div style="clear:both;height:12px;">&nbsp;</div>
+				<center>
+				<div style="text-align:-moz-center;#text-align:center;:">
+					<img src="../html/img/btn_menu_save.gif" class="hand" alt="선택완료" onclick="document.menuForm.submit();" />
+					<img src="../html/img/btn_menu_cancel.gif" class="hand" onclick="parent.pLightBox.hide();" alt="취소" />
+				</div>
+				</center>
+			</td>
+		</tr>
+		</table>	
+	</div>
+	</form>
+</div>
+</body>
+</html>
+
+

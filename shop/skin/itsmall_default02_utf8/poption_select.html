@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y:auto;">
+
+<!-- HEAD START -->
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>상품 옵션 선택</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript"  src="../lib/lib.Function.js"></script>
+<script type="text/javascript"  src="../lib/lib.ckForm.js"></script>
+<script type="text/javascript"  src="../lib/lib.ajax.js"></script>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+
+<body style="padding:0px;margin:0px;">
+<form name="goodsForm" method="post" onsubmit="return false;" action="../php/cart_ok.php">
+<input type='hidden' name='uid' value='{{uid}}' />
+<input type='hidden' name='p_option' value='' />
+<input type='hidden' name='p_op' value='0' />
+<input type='hidden' name='p_op_cnt' value='{{op_cnt}}' />
+
+<div id="pageView" style="width:700px;padding-left:8px;">		
+	<div id="goodsHtml">
+		<div style="text-align:left;border:4px solid #efefef;width:670px;padding:5px;">
+			
+			<div style="width:150px;float:left;padding:0">
+				<img src='{{GOODS_IMG}}' border='0' id='viewImage' width="{{GOODS_IMG_WIDTH}}" alt='{{GOODS_NAME}}' />
+			</div>		
+			
+			<div style="float:left;width:500px;padding:20px 10px 0 10px;">			
+				<ul>
+					<li style="margin:0px;">
+						<div class="orange bold">{{GOODS_NAME}}</div>
+					</li>				
+					<li>
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div class="left bold small" style="width:100px;">판매가격</div>
+						<div class="left num">{{GOODS_PRICE}}</div>
+					</li>
+					<li>
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div class="left bold small" style="width:100px;">적립금</div>
+						<div class="left num">{{GOODS_RESERVE}}원</div>
+					</li>
+					<li>
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div class="left bold small" style="width:100px;">구매수량</div>
+						<div class="left num">{{GOODS_QTY}}{{GOODS_UNIT}}</div>
+					</li>
+					<!-- DYNAMIC @is_option@ -->
+					<li>
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div class="left bold small" style="width:100px;">{{OP_TITLE}}</div>
+						<div class="left num">
+							<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+							<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+						</div>
+					</li>
+					<!-- DYNAMIC @is_option@ -->
+				</ul>			
+			</div>	
+			<div style="clear:both;height:1px;overflow:hidden;">&nbsp;</div>		
+		</div>
+	</div>
+
+	<center>
+		<div style="width:150px;padding-top:30px;">
+			<div id="sBtn3">
+				<a href="#" onclick="quickBarChangeOption();return false;"><span>옵션 적용하기</span></a>
+			</div>
+			<div id="sBtn2">
+				<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>창 닫기</span></a>
+			</div>
+		</div>
+	</center>
+
+</div>
+</form>
+</body>
+</html>

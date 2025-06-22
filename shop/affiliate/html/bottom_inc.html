@@ -1,0 +1,129 @@
+		</div>
+	</div>
+</div>
+
+<div style='clear:both;height:4px;overflow:hidden'>&nbsp;</div>
+
+<div style="width:100%;height:38px;background:url('../html/img/bottom_bg.gif');">
+	<div style='width:994px;overflow:hidden;'>
+		<div style='float:left; padding:12px 0 0 30px;' class='eng'>
+			Copyright 2010 <a href="http://itsmall.kr" target="_blank" class="eng">itsMall</a> All Rights Reserved.
+		</div>
+		<div style='float:right; padding:12px 4px;' class='eng'>
+			<span><a href='../html/index.html' style='color:#888'>Main Page</a> <font style='color:#aaa;font-size:10px;'>|</font> </span>
+			<span><a href='../../index.php' target='_blank' style='color:#888'>Shopping Mall</a> <font style='color:#aaa;font-size:10px;'>|</font> </span>
+			<span><a href='#' onclick="goTop();return false;" style='color:#888;'>Top</a> <font style='color:#aaa;font-size:10px;'>|</font> </span>
+			<span><a href='#' onclick='history.back();return false;' style='color:#888'>Prev Page</a></span>
+		</div>
+	</div>
+</div>
+
+<? if($ckMains!='Y') { ?>
+<div style='position:absolute;top:95px; left:970px;' id="scaleBtDiv">
+	<img src="../html/img/icon_scale_up.gif" alt="확대" title="확대" border="0" id='scaleBt' style='cursor:pointer' />
+</div>
+
+<script LANGUAGE="JavaScript">
+<!--
+window.onload = function() {
+	if(document.getElementById('leftHeight')) {
+		tHeight1 = document.getElementById('leftHeight');
+		tHeight2 = document.getElementById('mainHeight');
+		
+		if(tHeight2.clientHeight ==0) tHeight4 = document.getElementById('mainContent').clientHeight - 64;
+		else tHeight4 = tHeight2.clientHeight;
+
+		if(tHeight1.clientHeight==0) tHeight3 = document.getElementById('leftBox').clientHeight - 64;
+		else  tHeight3 = tHeight1.clientHeight;
+		
+		if(tHeight3<550 && tHeight4<550) {
+			tHeight1.style.height = '546px';
+			tHeight2.style.height = '550px';
+			tHeight4 = 550;			
+		}
+		else {
+			if(tHeight3 > tHeight4) {
+				tHeight2.style.height = tHeight3+'px';
+				tHeight4 = tHeight3;
+			}
+			else tHeight1.style.height = (tHeight4 -4) + 'px';
+		}
+		totalHeight = tHeight4;
+	}
+	if(document.getElementById("codeArea1")) {
+		if(!myForm.cate1.value) {
+			document.getElementById("codeArea1").style.display = 'none';	
+			document.getElementById("codeArea2").style.display = 'none';	
+			tHeight2.style.height = tHeight1.clientHeight+'px';
+		}
+	}
+	
+	document.getElementById("scaleBt").onmouseover = function () { this.src = this.src.substr(0, this.src.length-4) + "_over.gif";  }
+	document.getElementById("scaleBt").onmouseout = function () { this.src = this.src.substr(0, this.src.length-9) + ".gif";  }
+	document.getElementById("scaleBt").onclick = function () { 
+		if(this.src.indexOf("scale_up")!=-1){
+			this.src = "../html/img/icon_scale_down_over.gif";  
+			this.title = "축소";
+			document.getElementById('left').style.display = 'none';
+			document.getElementById('body_gab').style.display = 'none';
+			document.getElementById('mainContent').className = 'mainBox2_up';		
+			if(document.getElementById('goodsList')) document.getElementById('goodsList').style.width = (parseInt(document.getElementById('goodsList').style.width)+198)+'px';
+			if(document.getElementById('cateList')) document.getElementById('cateList').style.width = (parseInt(document.getElementById('cateList').style.width)+198)+'px';
+			if(pE.length > 0) {
+				for(l=0;l<pE.length;l++) {
+					pE[l].scaleMode('up');			
+				}
+			}
+		}
+		else {
+			this.src = "../html/img/icon_scale_up_over.gif";  
+			this.title = "확대";
+			document.getElementById('left').style.display = 'block';
+			document.getElementById('body_gab').style.display = 'block';
+			document.getElementById('mainContent').className = 'mainBox2';					
+			if(document.getElementById('goodsList')) document.getElementById('goodsList').style.width = (parseInt(document.getElementById('goodsList').style.width)-198)+'px';
+			if(document.getElementById('cateList')) document.getElementById('cateList').style.width = (parseInt(document.getElementById('cateList').style.width)-198)+'px';
+			if(pE.length > 0) {
+				for(l=0;l<pE.length;l++) {
+					pE[l].scaleMode('down');			
+				}
+			}
+		}
+	}
+
+	document.getElementById("scaleBt2").onmouseover = function () { this.src = this.src.substr(0, this.src.length-4) + "_over.gif";  }
+	document.getElementById("scaleBt2").onmouseout = function () { this.src = this.src.substr(0, this.src.length-9) + ".gif";  }
+	document.getElementById("scaleBt2").onclick = function () { 
+		document.getElementById("scaleBt").src = "../html/img/icon_scale_down.gif";  
+		document.getElementById("scaleBt").title = "축소";
+		document.getElementById('left').style.display = 'none';
+		document.getElementById('body_gab').style.display = 'none';
+		document.getElementById('mainContent').className = 'mainBox2_up';	
+		if(document.getElementById('goodsList')) document.getElementById('goodsList').style.width = (parseInt(document.getElementById('goodsList').style.width)+198)+'px';
+		if(document.getElementById('cateList')) document.getElementById('cateList').style.width = (parseInt(document.getElementById('cateList').style.width)+198)+'px';
+		if(pE.length > 0) {
+			for(l=0;l<pE.length;l++) {
+				pE[l].scaleMode('up');			
+			}
+		}
+	}
+
+	if(swfUpload=='Y') swfUploadInit();
+	if(boardType=='Y') {
+		document.getElementById('mainContent').className = 'mainBox2_up';
+		document.getElementById('mainContent').className = 'mainBox2';
+	}
+}
+//-->
+</script>
+<? 
+} else {
+?>
+<script LANGUAGE="JavaScript">
+<!--
+document.getElementById('leftHeight').style.height = document.getElementById('body').clientHeight + 148 + "px";
+//-->
+</script>
+<? } ?>
+</BODY>
+</HTML>

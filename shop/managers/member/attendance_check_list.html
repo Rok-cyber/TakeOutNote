@@ -1,0 +1,282 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function delSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	
+	if ( cnt <= 0) {
+		alert("삭제할 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		if (window.confirm("삭제시 출석체크 내역이 다 삭제 됩니다. 정말로 삭제 하시겠습니까?")) {
+			frm.action = "./attendance_post.php?{{addstring}}";
+			frm.submit();
+			return;
+		} 
+		else return;
+	}
+}
+
+function chCheck(frm){
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			frm.elements[j].checked = true;
+		}
+	}
+	return false;
+}
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_attendance_check.gif" alt="출석체크참여리스트" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>출석체크에 참여한 회원 리스트를 확인 하거나 검색 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!-- DYNAMIC @is_infos@ -->
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td align=center class=gr_bg><font class="bTitle small">출석체크명</font></td>
+							<td width=20% align=center class=gr_bg><font class="bTitle small">기간</font></td>		
+							<td width=30% align=center class=gr_bg><font class="bTitle small">형태/지급방식/방법</font></td>		
+							<td width=10% align=center class=gr_bg><font class="bTitle small">상태</font></td>
+						</tr>
+						<tr height=22 bgcolor="#FFFFFF">
+							<td align="left" style="padding-left:6px;">{{NAME}}</td>
+							<td align=center class="eng">{{SDATE}}~{{EDATE}}</td>
+							<td align=center class="small">{{TYPE}}{{CONDI}}{{POINT}} / {{STYPE}} / {{METHOD}} </td>
+							<td align=center class="small">{{STATUS}}</td>
+						</tr>						
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+     </td>
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<!-- DYNAMIC @is_infos@ -->
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="post" action="{{ACTION}}" onsubmit='return false;'>
+		<tr><td height='6'></td></tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">조건</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field2">
+						<option value=''>전체</option>					   						
+						<option value='total'>출석수</option>					   						
+						<option value='continuity'>연속출석수</option>					   						
+					</select>
+					<input type=text name='word2' size="5" value="{{word2}}" class="bt2">건 이상
+				</div>
+				<div class="boxText small orange">선택</div> 
+				<div class="small" style='float:left;padding-left:6px;padding-right:10px;'> 
+					<input type="checkbox" name='status1' value="1" {{status11}} /> 혜택대상자
+					<input type="checkbox" name='status2' value="1" {{status21}} /> 적립금지급완료
+				</div>	
+			</td>
+		</tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+						<option value='id'>아이디</option>					   						
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2">
+				</div>
+				<div class="boxText small orange">정렬</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="order">
+						<option value="total DESC">출석수↓</option>
+						<option value="total ASC">출석수↑</option>
+						<option value="continuity DESC">연속출석수↓</option>
+						<option value="continuity ASC">연속출석수↑</option>
+						<option value="id DESC">아이디↓</option>
+						<option value="id ASC">아이디↑</option>
+					</select>
+					
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=50%><font class="small">&nbsp;전체 : <font class="eng">{{TOTAL}}</font> 건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지</font></td>
+    <td align=right></td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=8% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=5% align=center class=gr_bg><font class="bTitle small"><a href="#" onclick="return chCheck(document.delForm)" onfocus="this.blur();">√</font></a></font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td align=center class=gr_bg><font class="bTitle small">아이디</font></td>
+							<td width=12% align=center class=gr_bg><font class="bTitle small">이름</font></td>	
+							<td width=12% align=center class=gr_bg><font class="bTitle small">CRM</font></td>	
+							<td width=12% align=center class=gr_bg><font class="bTitle small">출석수</font></td>		
+							<td width=12% align=center class=gr_bg><font class="bTitle small">연속출석수</font></td>		
+							<td width=12% align=center class=gr_bg><font class="bTitle small">혜택대상</font></td>
+							<td width=12% align=center class=gr_bg><font class="bTitle small">적립금지급</font></td>
+						</tr>
+						<form name='delForm' method="post">
+						<input type="hidden" name="title" value="" />
+						<input type="hidden" name="reserve" value="0" />
+						<!-- DYNAMIC @loop@ -->
+						<tr height=22 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=center>{{DEL}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=center class="eng">{{C_ID}}</td>
+							<td align=center>{{C_NAME}}</td>
+							<td align=center>
+								<div style='padding-top:4px;'><span id='nextIcon' class="hand small" onclick="pLightBox.show('../member/member_crm.php?mid={{C_ID}}','iframe','700','450','■ {{C_NAME}}({{C_ID}}) 회원 CRM',10);return false;">CRM보기</span></div>
+							</td>
+							<td align=center class="small">{{C_CNTS}}<font class='small'>회</font></td>
+							<td align=center class="eng">{{C_MCNTS}}<font class='small'>회</font></td>
+							<td align=center class="small">{{C_STATUS1}}</td>
+							<td align=center class="small">{{C_STATUS2}}</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=60>
+							<td align=center colspan=9 bgcolor=#ffffff>등록(검색)된 출석체크 참여내역이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+     </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+	<!-- 페이징,검색... start -->
+		<table border = 0 cellspacing=0 cellpadding=0 width=100%>
+		<tr>
+			<td width=40%>
+				<div id="sBtn1" style="padding-left:2px;">					
+					<a href="#" onclick="reserveSend();return false;"><span class="blue">선택 적립금지급</span></a>					
+				</div>      
+			</td>
+			<td align=right id=paging>{{PAGING}}</td>
+		</tr>
+		</table>
+		<!-- 페이징,검색... end -->
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+document.searchForm.limit.value = '{{limit}}';
+document.searchForm.field2.value = '{{field2}}';
+
+
+function chCheck(frm){
+	for (j=0,cnt=frm.elements.length;j<cnt;j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			if(frm.elements[j].disabled==false) frm.elements[j].checked = true;
+		}
+	}
+	return false;
+}
+
+function reserveSend(){
+	frm = document.delForm;
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	if ( cnt <= 0) {
+		alert("적립금을 지급할 회원을 선택하세요!");
+		return false;
+	} 
+	else {
+		if(frm.reserve.value>0) {
+			frm.action = "./attendance_post.php?mode=reserve{{addstring}}";			
+			frm.submit();
+			return;
+		}
+
+		pLightBox.show('attendance_reserve.html','iframe','600','280','■ 출석체크 적립금 지급하기',10)
+		return;
+	}
+}
+</script>

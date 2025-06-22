@@ -1,0 +1,242 @@
+<? 
+header("Pragma: no-cache"); // 페이지 항상 새로 불러오기
+include "../ad_init.php";
+
+$sql	= "SELECT code FROM mall_design WHERE mode='W'";
+$tmp	= $mysql->get_one($sql);
+$ssl	= explode("|*|",$tmp);
+
+$aMain = "http://".$_SERVER["SERVER_NAME"]."/";
+if($ssl[0]==1) {
+	$tmp    = explode("|",$ssl[2]);	
+	if(in_array(1,$tmp)) {
+		if($ssl[1]) $sport = ":{$ssl[1]}";
+		$aMain = "https://".$_SERVER["SERVER_NAME"]."{$sport}/{$ShopPath}";	
+		unset($sport);
+	}
+}
+
+$affil_link = $aMain."index.php?a_id=".$a_my_id;
+
+
+$MENU_ARR = Array();
+$MENU_ARR[0] = Array();
+$MENU_ARR[0][] = Array("제휴마케팅관리","shopping/goods_list.php","m_affiliate.gif","N");
+$MENU_ARR[0][] = Array("업체정보관리","etcs/affiliate.php","Y","N");
+$MENU_ARR[0][] = Array("배너가져가기","multi_board/board.php?code=affiliate_banner","Y","N");
+$MENU_ARR[0][] = Array("주문관리","order/order_list.php","Y","0");
+$MENU_ARR[0][] = Array("정산관리","order/sale.php","Y","1");
+$MENU_ARR[0][] = Array("접속통계","etcs/count.php?channel=day","Y","2");
+$MENU_ARR[0][] = Array("1:1문의","etcs/counsel.html","Y","N");
+
+$SMENU_ARR[0]  = Array('전체주문'=>'order/order_list.php','입금대기중'=>'order/order_list.php?gs=A','결제완료'=>'order/order_list.php?gs=B','배송준비중'=>'order/order_list.php?gs=C','배송중'=>'order/order_list.php?gs=D','배송완료'=>'order/order_list.php?gs=E','취소완료'=>'order/order_list.php?gs=Z');
+$SMENU_ARR[1]  = Array('정산내역'=>'order/sale.php','입금내역'=>'multi_board/board.php?code=affiliate_account');
+$SMENU_ARR[2]  = Array('년별통계'=>'etcs/count.php?channel=year','월별통계'=>'etcs/count.php?channel=month','일별통계'=>'etcs/count.php?channel=day','시간별통계'=>'etcs/count.php?channel=hour','사이트별통계'=>'etcs/count.php?channel=site');
+$sub_pages ="sale.php|count.php\?channel=year|count.php\?channel=month|count.php\?channel=day|count.php\?channel=hour";
+
+if(!eregi( 'Firefox', getenv("HTTP_USER_AGENT"))) { 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<? } ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>Affiliate 관리 페이지</TITLE>
+<script LANGUAGE="JavaScript" src="../../lib/lib.Function.js"></script> 
+<script LANGUAGE="JavaScript" src="../../lib/lib.lightBox.js"></script> 
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+
+<script LANGUAGE="JavaScript">
+<!--
+var swfUpload = '';
+var boardType = '';
+var ckMains = '';
+
+//-->
+</script>
+</HEAD>
+
+<BODY style="margin:0; padding:0;background:url('../html/img/background.gif');">
+<div style="width:100%;height:<?=$height?>px; overflow:hidden;background:url(../html/img/top_bg1.gif)" id="topHeight">
+	<div style="float:left;width:994px;overflow:hiden">		
+		<div style="float:left; width:200px;overflow:hidden">
+			<div style="height:60px;">
+				<center style='padding:12px 0 0 2px;'>
+					<a href="../order/order_list.php" onfocus='this.blur();'><img src="../html/img/logo.gif"  border="0" alt='logo' /></a>
+				</center>
+			</div>			
+		</div>
+		
+		<div style="height:4px;overflow:hidden"></div>
+
+		<div style="float:left; width:794px;overflow:hidden;">					
+			
+			<div style='float:left;text-align:right;height:24px;width:786px;padding-right:4px;' class="small">				
+				<div style="height:6px;overflow:hidden;">&nbsp;</div>
+				<a href="#" onclick="location.href='../html/logout.php'" style="color:#fff;">로그아웃</a>
+				<img src="../html/img/menu_bar.gif" border="0" alt="menu bar" hspace="4" />				
+				<a href="#" onclick="window.open('../../','');" style="color:#fff;">쇼핑몰보기</a>
+			</div>				
+			
+			<div style="float:left;width:446px;padding-top:6px" class="small white">
+				&nbsp;링크주소 : <a href="<?=$affil_link?>" target="_blank" class="eng" style="color:#fff"><?=$affil_link?></a><br />
+				&nbsp;<?=$a_my_id?>&nbsp;&nbsp;( 커미션 : <font class="eng" style="color:#fff"><?=$a_my_commi?>%</font> )
+			</div>
+			<div style="float:left;height:31px;width:340px;padding-left:4px;" class="small gray">
+			
+			</div>	
+
+		</div>
+		<div style="clear:both;height:8px;overflow:hidden;"></div>
+	</div>		
+</div>
+
+<div style="width:994px;" class="clearfix">
+	<div style="height:3px;overflow:hidden">&nbsp;</div>
+	<div id="left_gab">&nbsp;</div>
+	<div id="left">
+<?
+if("{$menu_name[2]}/{$menu_name[3]}"=="html/index.html") {
+	$ckMains = 'Y';
+	include "{$lib_path}/lib.Shop.php";
+}
+
+$MENU_NUM = 0;
+
+if(eregi("order_list.php|order_view.php",$menu_name[3])) { 
+	if(eregi("gs=&",$menu_name[3])) $menu_name[3] = "order_list.php";
+	else if(eregi("gs=",$menu_name[3])) {
+		$tmps = explode("&",$menu_name[3]);
+		$menu_name[3] = $tmps[0]; 
+		$menu_name[3] = str_replace("view","list",$menu_name[3]);
+	}
+	else $menu_name[3] = "order_list.php";
+}
+else if(eregi("sale.php",$menu_name[3])) { 
+	$menu_name[3] = "sale.php?mode=day";
+}
+else if(eregi("account.php",$menu_name[3])) { 
+	$menu_name[3] = "account.php?mode=month";
+}
+
+echo "
+	<div class='leftBox2' id='leftBox'>	
+		<div class='top'>					
+			<div style='padding:9px 0 0 12px;'>
+				<div class='left'><img src='../html/img/{$MENU_ARR[$MENU_NUM][0][2]}' border='0' alt='{$MENU_ARR[$MENU_NUM][0][0]}' /></div>
+				</div>
+			<div style='float:right;padding:2px 8px;'>
+				<img src='../html/img/icon_exit.gif' alt='닫기' title='닫기' border='0' id='scaleBt2' style='cursor:pointer' />
+			</div>
+		</div>
+		<div class='content'>
+			<div class='content_top'></div>
+			<div style='padding:4px 0 0 10px;' id='leftHeight'>	
+			
+			<center>
+			<div id='leftMenu'>				
+				<ul>
+	";
+
+for($i=1,$cnt=count($MENU_ARR[$MENU_NUM]);$i<$cnt;$i++){
+
+	if(eregi("counsel",$menu_name[3])) $menu_name[3]="counsel.html";
+	else if(eregi("code=",$menu_name[3])) $menu_name[3]="board.php?code={$code}";
+
+	$class1 = $style1 = '';
+	if(($MENU_ARR[$MENU_NUM][$i][1] == "{$menu_name[2]}/{$menu_name[3]}" && $MENU_ARR[$MENU_NUM][$i][4]!='Y') || (eregi($MENU_ARR[$MENU_NUM][$i][1],"{$menu_name[2]}/{$menu_name[3]}") && $MENU_ARR[$MENU_NUM][$i][4]=='Y')) {
+		$class1='orange';
+		$style1 = "style='background:url(../html/img/left_menu_bg_sec.gif) no-repeat;'";
+	}
+	else if($MENU_ARR[$MENU_NUM][$i][3]!='N') {
+		$SNUM = $MENU_ARR[$MENU_NUM][$i][3];					
+		foreach($SMENU_ARR[$SNUM] as $key => $value) {
+			if($value == "{$menu_name[2]}/{$menu_name[3]}") {								
+				$class1 = 'orange';			
+				$style1 = "style='background:url(../html/img/left_menu_bg_sec.gif) no-repeat;'";
+				break;
+			}
+			if(eregi($sub_pages,$value)) {											
+				$value = str_replace("?","\?",$value);					
+				if(eregi($value,"{$menu_name[2]}/{$menu_name[3]}")) {						
+					$class1='orange';								
+					$style1 = "style='background:url(../html/img/left_menu_bg_sec.gif) no-repeat;'";
+					break;
+				}
+			}
+		}	
+	}		
+
+	echo "			
+						<li {$style1}>
+							<div style='height:6px;overflow:hidden'>&nbsp;</div>
+							<a href='../{$MENU_ARR[$MENU_NUM][$i][1]}' onfocus='this.blur()'><font class='{$class1} small bold'>{$MENU_ARR[$MENU_NUM][$i][0]}</font></a>
+						</li>\n
+		";
+	
+	if($MENU_ARR[$MENU_NUM][$i][3]!='N') {	
+		$SNUM = $MENU_ARR[$MENU_NUM][$i][3];
+			
+		$cnt2 = count($SMENU_ARR[$SNUM]);
+		$height = ($cnt2 * 20) + 6;
+			
+		echo "
+						<li style='background:url();padding-left:20px;height:{$height}px;overflow:hidden;'>
+							<div id='leftMenu2' style='width:142px;background-color:#fafafa'>
+								<ul>
+		";
+
+		foreach($SMENU_ARR[$SNUM] as $key => $value) {			
+			$class2 = "";	
+			if($value == "{$menu_name[2]}/{$menu_name[3]}") $class2='orange';
+			else if(eregi($sub_pages,$value)) {
+				if(eregi($value,"{$menu_name[2]}/{$menu_name[3]}")) $class2='orange';
+			}						
+
+			echo "
+									<li>
+										<div style='height:4px;overflow:hidden'>&nbsp;</div>
+										<a href='../{$value}' onfocus='this.blur();'><font class='{$class2} small'>{$key}</font></a>
+									</li>\n
+				";	
+		}			
+		echo "					
+								</ul>							
+							</div>						
+						</li>
+						<li style='background:url();padding-left:9px;height:5px;overflow:hidden;'>
+							<div style='height:1px;background-color:#dddddd;width:152px;overflow:hidden;'>&nbsp;</div>
+						</li>
+			";
+	}
+}
+?>					
+						<li style="background:url();height:16px;overflow:hidden;"></li>
+					</ul>			
+				</div>			
+				</center>
+			</div>
+<?
+if($ckMains=="Y") {
+?>			<div class="bottom"></div>
+				</span>
+			</div>	
+		</div>	
+<? 
+} 
+else {
+?>	
+			<div class="bottom"></div>			
+		</div>		
+	</div>
+
+<script LANGUAGE="JavaScript">
+<!--
+	var pE = new Array();
+//-->
+</script>
+<? } ?>
+	</div>
+	<div id="body_gab">&nbsp;</div>
+	<div id='body'>

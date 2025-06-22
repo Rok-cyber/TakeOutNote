@@ -1,0 +1,111 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>상품문의</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section>
+		<div id="goodsListHead">
+			<h2>상품문의</h2> 			
+			<!--
+			<span class="btn">
+				<a href="qna_write.php" title="상품문의등록">상품문의등록</a>
+			</span>
+			-->
+		</div>
+		
+		<div id="goodsInfoSub">
+			<h3>상품정보</h3> 
+			<div class="goodsInfoBox">
+				<a href="{{GOODS_LINK}}" title="상품상세보기">
+					<div class="thumbnail"><img src="{{GOODS_IMAGE}}" alt="상품이미지" /></div>
+					<div class="item_info">
+						<p class="goods" title="상품명">{{GOODS_NAME}}</p>
+						<p class="price" title="판매가"><strong>{{GOODS_PRICE2}}</strong>원</p>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div id="qnaInfo">
+			<h3>상품문의정보</h3> 
+			<div class="qnaInfoBox">
+				<div class="qnaHead">
+					<span>전체</span> <em>({{TOTAL}}개)</em>					
+				</div>
+
+				<ul id="qnaList"></ul>						
+			</div>
+		</div>
+		
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getMultis.listMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>	
+</div>
+
+<div id="listLoading">
+	데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	cntNum = 0;
+	function rtnQna(obj,num,title,name,ans,date,content,answer,mod,uid,secret) {		
+		newLi = document.createElement('LI');	
+		newLi.id = "qna_"+uid;
+
+		if(secret=='Y' || secret=='F') icon = " <img src='img/common/icon_lock.gif' alt='icon lock' />";
+		else icon = '';
+		if(ans==1) {
+			ans_icon = "<img src='img/common/icon_answer.gif' alt='답변완료' /> "
+			answer = '<div class="answer">'+answer+'</div>';	
+		}
+		else {
+			ans_icon = "<img src='img/common/icon_noans.gif' alt='미답변' /> "
+			answer = '';
+		}
+		if(secret=='Y') uid2 = 0;
+		else uid2 = uid;
+		div = '<a href="javascript:viewQna('+num+','+uid2+');" title="내용보기">\
+					<p>\
+						<span>'+date+'</span> <span>|</span> <span>'+name+'</span>'+icon+'\
+					</p>\
+					<p>'+ans_icon+title+'</p>\
+					<div id="qnaContent_'+num+'">'+content+answer+'</div>\
+				</a>\
+				';
+		
+		newLi.innerHTML = div;
+		obj.appendChild(newLi);		
+		$("#qnaContent_"+num).hide();
+		cntNum++;
+	}
+	
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>4) $("#contentMore").show();	
+	if(ck_str>0) {	
+		getMultis = new getMulti('qnaList','{{limit}}','{{TOTAL}}','0','{{ajaxstr}}','php/getQna.php','rtnQna');
+		getMultis.display();
+		qnaViewNum = '';	
+
+		if({{TOTAL_PAGE}}<={{PAGE}}) {
+			$("#listGoodsMore")[0].innerHTML = "&nbsp;";
+		}		
+	}
+ -->
+</script>

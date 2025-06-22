@@ -1,0 +1,86 @@
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+	<td align=center>
+		<table border=0 cellpadding="0" cellspacing="0" align=center bgcolor='#FFFFFF' width="100%">
+		<form name=searchForm method=get action={{ACTION}}>
+		<input type=hidden name=mode value={{mode}}>
+		<tr>
+			<td  colspan=2 align=right>
+				<div class="boxText small orange">기간선택</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					{{SELECT}}
+				</div>	
+				
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="printClick();return false;"><span class="green">프린트하기</span></a>
+				</div>
+			</td>
+		</tr>
+		</form>
+		<tr><td colspan=2 height=10></td></tr>
+		<tr>
+
+		<td colspan=2>
+			<div id="printArea">
+			
+			<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+			 <tr><td>
+			   <table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+			   <tr><td align=center>
+					<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+					<tr><td align=right colspan=9 height=30 bgcolor=#FFFFFF class="small bold"><font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 총 매출 : <font class=eng>{{TOTAL}}</font>원 &nbsp;(주문금액 + 배송비 - 적립금사용 - 쿠폰사용)&nbsp;&nbsp;</td></tr>
+					<tr height=24>
+						<td width=6% align=center class=gr_bg><font class="bTitle small">일별</font></td>
+						<td width=11% align=center class=gr_bg><font class="bTitle small">주문건수</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">주문금액</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">배송비</font></td>
+						<td width=11% align=center class=gr_bg><font class="bTitle small">결제건수</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">결제금액</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">적립금사용</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">쿠폰사용</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">미결제금액</font></td>					
+					</tr>
+					<!-- DYNAMIC @loop@ -->
+					<tr height=24 bgcolor='#F4F4F4'>
+						<td align=center class=eng>{{DAYS}}</td>
+						<td align=right>{{SALE1}}건&nbsp;</td>
+						<td align=right class=eng>{{SALE2}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE3}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE4}}건&nbsp;</td>
+						<td align=right class=eng>{{SALE5}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE6}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE8}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE7}}원&nbsp;</td>
+					</tr>
+					<!-- DYNAMIC @loop@ -->
+					<tr height=24 bgcolor='#F4F4F4'>
+						<td align=center class=bold>합계</b></td>
+						<td align=right class='eng bold'>{{TSALE1}}건</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE2}}원</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE3}}원</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE4}}건</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE5}}원</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE6}}원</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE8}}원</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE7}}원</font>&nbsp;</td>
+					</tr>
+					<tr><td align=right colspan=9 height=30 bgcolor=#FFFFFF class="small bold"><font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 총 매출 : <font class=eng>{{TOTAL}}</font>원 &nbsp;(주문금액 + 배송비 - 적립금사용 - 쿠폰사용)&nbsp;&nbsp;</td></tr>
+					</table>
+				    </td></tr>
+				</table>
+			    </td>
+			</tr>
+			</table>
+			
+			</div>
+			</td>
+		</tr>
+		<tr><td height=20 colspan=2></td></tr>
+		</table>
+      </td>
+</tr>
+</table>

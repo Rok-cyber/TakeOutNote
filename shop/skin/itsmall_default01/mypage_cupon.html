@@ -1,0 +1,82 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_cupon.gif" alt="발급쿠폰내역" title="발급쿠폰내역" />
+	</div>	
+
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="50" /> 			
+			<col />			
+			<col width="70" /> 
+			<col width="120" />
+			<col width="150" />      					
+			<col width="80" />      					
+			<col width="80" />      					
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>
+				<th scope="col" class="small black">번호</th>
+				<th scope="col" class="small black">쿠폰명</th>
+				<th scope="col" align="center" class="small black">할인액(율)</th>
+				<th scope="col" class="small black">사용제한사항</th>				
+				<th scope="col" class="small black">사용기간</th>
+				<th scope="col" class="small black">쿠폰상태</th>
+				<th scope="col" class="small black">발급일</th>
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td></td>
+				<td class="num">{{NUM}}</td>
+				<td align="left">{{NAME}}</td>
+				<td align="center" class="num">{{SALE}}{{STYPE}}</font></td>				
+				<td class="small green">{{LMT}}</td>				
+				<td class="num">{{DATES}}</td>				
+				<td class="small status2{{TYPE}}">{{STATUS}}</td>				
+				<td class="num">{{DATE}}</td>				
+				<td></td>
+			</tr>			
+			<tr><td colspan="8" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->											
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/customer/no_cupon.gif" alt="발급쿠폰내역없음" title="발급쿠폰내역없음" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+
+	<div style="clear:both;height:20px"></div>
+</div>

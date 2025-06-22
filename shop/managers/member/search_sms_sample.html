@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>SMS 샘플</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function ckSearch(){
+	f = document.searchForm;
+		
+	f.submit();
+	return false;
+}
+
+
+function secSend(uid){
+	str = eval("document.selectForm.message_"+uid+".value");
+	parent.secSample(str);
+	return false;
+}
+
+//-->
+</SCRIPT>
+
+<body style="padding:15px 8px 8px 8px;">
+
+<table border=0 cellpadding="0" cellspacing="0" width="704" align=center bgcolor='FFFFFF'>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="700" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="get" action="{{ACTION}}" onsubmit='return false;'>
+		<tr><td height='6'></td></tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">그룹</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='groups'>
+						<option value="">전체</option>
+						{{SECGROUP}}
+					</select>
+				</div>	
+				
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+						<option value='title'>제목</option>					   
+					</select>
+					<input type=text name='word' size="20" value="{{word}}" class="bt2">
+				</div>
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="return ckSearch();"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=30% class="small"> &nbsp;검색된 샘플 : <font class="eng">{{TOTAL}}</font>건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지.</FONT></td>
+	<td></td>
+</tr>
+<tr>
+	<td colspan=2>
+	<!-- 게시판 리스트 start -->
+		<TABLE border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<TR>
+			<TD>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="700" align=center>
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+						<col width="25%" />
+						<form method="post" name='selectForm'>						
+						<tr bgcolor="#FFFFFF">
+							<!-- DYNAMIC @loop@ -->
+							<!-- DYNAMIC @is_tr@ -->
+							</tr><tr bgcolor="#FFFFFF">
+							<!-- DYNAMIC @is_tr@ -->
+						    <td height="190" align="center">
+								<table border="0" cellpadding="0" cellspacing="0" width="140" background="img/sms_bg.gif" height=141>
+								<tr>
+									<td align="center">
+										<textarea name="message_{{UID}}" cols="16" rows="6" style="font:9pt 굴림체;color:#000;margin-top:15px;overflow:hidden;border:0;background-color:transparent;" readonly>{{LIST4}}</textarea>
+									</td>
+								</tr>								
+								</table>
+								<table>
+								<tr><td height="10"></td></tr>
+								<tr>
+								    <td width="80%" class="small">{{LIST3}}</td>
+									<td align="right"><span id='nextIcon' class="hand small" onclick="secSend('{{UID}}');">선택</span></td>
+								</tr>
+								</table>
+						    </td>
+							<!-- DYNAMIC @loop@ -->
+							<!-- DYNAMIC @loop_empty@ -->
+							<td height="190"></td>
+							<!-- DYNAMIC @loop_empty@ -->
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=100>
+							<td align=center colspan=4 bgcolor=ffffff>등록(검색)된 샘플이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+	</td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+     <td colspan=2>
+	 <!-- 페이징,검색... start -->
+	 <table border = 0 cellspacing=0 cellpadding=0 width=100%>
+	 <tr>
+		<td width=40%></td>
+	    <td align=right id="paging">{{PAGING}}</td>
+	 </tr>
+	 </table>
+	 <!-- 페이징,검색... end -->
+	 </td>
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+</table>
+
+<script>
+document.searchForm.groups.value = '{{groups}}';
+document.searchForm.field.value = "{{field}}";
+</script>
+
+</body>
+</HTML>

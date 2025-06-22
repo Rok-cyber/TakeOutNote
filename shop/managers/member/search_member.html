@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>회원 검색</TITLE>
+
+<LINK rel="StyleSheet" HREF="../html/style.css" type="text/css" title="style" />
+
+<script LANGUAGE="JavaScript">
+<!--
+
+function put_post(str) {	    
+	if(document.postForm.type.value==1) {
+		secSend(str);
+		return;
+	}
+
+	var f = parent.document.signForm;
+	f.id.value = str;	
+	parent.pLightBox.hide();
+}
+
+function ckIt(){ 
+    var f =document.postForm;	
+      
+    if(!f.keyword.value){        
+		alert('회원명을 입력하세요!');
+        f.keyword.focus();
+	    return false;
+    }
+	
+	f.submit();
+	return false;
+}
+
+function secSend(str){
+	var frm = document.selectForm;
+	
+	if(!str) {		
+		for (i=ck=0,cnt=frm.elements.length;i<cnt;i++) {
+			if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {			
+				if(!str) str = frm.elements[i].value;
+				else str += '|*|' + frm.elements[i].value;
+			}
+		}
+		if(!str) {
+			alert('회원을 선택 하시기 바랍니다.');
+			return false;
+		}
+	}
+	parent.secMem(str);	
+	parent.pLightBox.hide();
+}
+
+function chCheck(){
+	frm = document.selectForm;
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			frm.elements[j].checked = true;
+		}
+
+	}
+	return false;
+}
+
+// -->
+</script>
+
+
+<BODY>
+
+<form name="postForm" method="post" onsubmit='return ckIt();'>
+<input type="hidden" name="type" value="{{type}}">
+
+<div style="width:360px;padding:15px;text-align:center">
+	<!-- DYNAMIC @is_default@ -->
+	<div class="small" style="line-height:240%">
+		! 찾고자 하시는 회원명을 공백없이 입력 하신 후 '검색하기' 버튼을 누르시거나 'Enter'키를 누르시면 됩니다.
+	</div>
+	<div style="margin-top:20px;">
+		<font class="small bold">회원명</font>&nbsp;&nbsp;<input name="keyword" size="25" class="ta" />
+	</div>
+
+	<div style="margin-top:25px;float:right">
+		<div id="sBtn1">
+			<a href="#" onclick="return ckIt('1');"><span>검색하기</span></a>
+		</div>
+		<div id="sBtn1">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>창닫기</span></a>
+		</div>
+	</div>
+	</form>
+	<!-- DYNAMIC @is_default@ -->
+
+	<!-- DYNAMIC @is_search@ -->
+	<div style="margin-top:20px;">
+		<div style="float:left;margin:3px 10px 0 5px;">
+			<font class="small bold">회원명</font>&nbsp;&nbsp;<input name="keyword" size="25" class="ta" />
+		</div>
+		<div id="sBtn1" style="padding-top:2px;">
+			<a href="#" onclick="return ckIt('1');"><span>검색하기</span></a>
+		</div>
+	</div>
+
+	</form>
+	
+	<div style="clear:both;height:20px;">&nbsp;</div>
+	<div style=" width:340px;background:url(img/bar_slist.gif) no-repeat; text-align:left">
+		<table cellspacing="0" cellpadding="0" border="0" width="340">			
+			<col width="35" />
+			<col width="95" /> 
+			<col width="95" /> 
+			<col  /> 			
+			<thead>
+			<tr height="28" align="center">
+				<th scope="col" class="small black"><a href='#' onclick="return chCheck(document.selectForm)" onfocus='this.blur();'>√</a></th>
+				<th scope="col" class="small black">회원명</th>
+				<th scope="col" class="small black">아이디</th>				
+				<th scope="col" class="small black">연락처</th>				
+			</tr>
+			</thead>				
+			<tbody>
+			<form method="post" name='selectForm'>
+			<!-- DYNAMIC @loop@ -->
+			<tr align=center height="26">
+				<td class="small hand">{{DEL}}</td>
+				<td class="small hand" onclick="put_post('{{MID2}}');">{{MNAME}}</td>
+				<td class="eng hand" onclick="put_post('{{MID2}}');">{{MID}}</td>
+				<td class="eng hand" onclick="put_post('{{MID2}}');">{{MTEL}}</td>
+			</tr>
+			<tr><td colspan="4" height="1" bgcolor="#efefef"></td></tr>			
+			<!-- DYNAMIC @loop@ -->
+			<!-- DYNAMIC @no_loop@ -->
+			<tr align=center height="26">
+				<td class="small" colspan=4>검색된 회원이 없습니다.</td>				
+			</tr>
+			<tr><td colspan="4" height="1" bgcolor="#efefef"></td></tr>			
+			<!-- DYNAMIC @no_loop@ -->
+			<!-- DYNAMIC @is_man3@ -->
+			<tr>
+				<td colspan="4">
+					<div id="sBtn1" style="padding:10px 0 0 130px;">				
+						<a href="#" onclick="secSend('');return false;"><span class="blue">체크회원 선택</span></a>
+					</div>
+				</td>
+			</tr>
+			<!-- DYNAMIC @is_man3@ -->
+				
+			</tbody>
+			</form>
+		</table>
+	</div>			
+	<!-- DYNAMIC @is_search@ -->
+
+
+	
+</div>
+
+</BODY>
+</HTML>

@@ -1,0 +1,62 @@
+	<div style="background:url(img/customer/box_customer_bg.gif);width:180px;">
+		<div style="height:51px;">
+			<a href="{{Main}}?channel=customer" onfocus="this.blur();"><img src="img/customer/ttl_customer.gif" border="0" alt="고객센터" title="고객센터" /></a>
+		</div>
+		<div id="menuSub">
+			<div style="margin-bottom:4px;height:22px;">
+				<a href="{{Main}}?channel=board&code=faq" onfocus="this.blur();"><img src="img/customer/ttl_menu_faq.gif" border="0" alt="FAQ" title="FAQ" /></a>
+			</div>
+			<ul>
+				<!-- DYNAMIC @loop_faq_cate@ -->
+				<li><a href="{{Main}}?channel=board&amp;code=faq&amp;seccate={{i}}" onfocus="this.blur();" class="small">{{CNAME}}</a></li>				
+				<!-- DYNAMIC @loop_faq_cate@ -->
+			</ul>
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=board&amp;code=counsel" onfocus="this.blur();"><img src="img/customer/ttl_menu_counsel.gif" border="0" alt="1:1고객문의" title="1:1고객문의" /></a>
+			</div>
+			<ul>
+				<!-- DYNAMIC @loop_counsel_cate@ -->
+				<li><a href="{{Main}}?channel=board&amp;code=counsel&amp;seccate={{i}}" class="small">{{CNAME}}</a></li>
+				<!-- DYNAMIC @loop_counsel_cate@ -->
+			</ul>
+
+			<div style="margin:4px 0 4px;">
+				<!-- DYNAMIC @is_logins@ -->
+				<a href="{{Main}}?channel=order"><img src="img/customer/ttl_menu_osearch.gif" border="0" alt="주문/배송조회" title="주문/배송조회" /></a>
+				<!-- DYNAMIC @is_logins@ -->
+				<!-- DYNAMIC @is_logouts@ -->
+				<a href="{{Main}}?channel=login&amp;type=osearch"><img src="img/customer/ttl_menu_osearch.gif" border="0" alt="주문/배송조회" title="주문/배송조회" /></a>
+				<!-- DYNAMIC @is_logouts@ -->
+			</div>
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{MAIN}}?channel=after2"><img src="img/customer/ttl_menu_after.gif" border="0" alt="이용후기" title="이용후기" /></a>
+			</div>
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{MAIN}}?channel=qna2"><img src="img/customer/ttl_menu_qna.gif" border="0" alt="상품Q&A" title="상품Q&A" /></a>
+			</div>
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{MAIN}}?channel=board&amp;code=notice"><img src="img/customer/ttl_menu_notice.gif" border="0" alt="공지사항" title="공지사항" /></a>
+			</div>
+
+			<div style="margin:4px 0 4px;height:20px;">
+				<a href="{{MAIN}}?channel=board&amp;code=customer"><img src="img/customer/ttl_menu_board.gif" border="0" alt="고객게시판" title="고객게시판" /></a>
+			</div>
+		</div>		
+
+		<div style="height:14px; overflow:hidden"><img src="img/customer/box_customer_bottom.gif" border="0" alt='box bottom' style="vertical-align:top" /></div>
+	</div> 
+	
+
+	<!-- 배너 START -->
+	<div id="banner">
+		<ul>
+			<!-- DYNAMIC @loop_banner@ -->
+			<li style="background:url()"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></li>
+			<!-- DYNAMIC @loop_banner@ -->			
+		</ul>
+	</div>
+	<!-- @배너 END -->

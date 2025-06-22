@@ -1,0 +1,167 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function ckSearch(){
+	f = document.searchForm;
+	f.submit();
+	return false;
+}
+
+
+function ckEnter(){
+	if(event.keyCode==13) {
+		return ckSearch();
+	}
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_refund.gif" alt="횐불접수리스트 " /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>환불접수된 주문건을 조회하고 환불처리를 할 수 있습니다. </div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border="0" width='99%' align="center" cellpadding="0" cellspacing=0>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="get" action="{{ACTION}}" onsubmit='return false;'>
+		<input type="hidden" name="gs" value="{{gs}}" />
+		<tr><td height='6'></td></tr>				
+		<tr>
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+					   <option value='order_num'>주문번호</option>
+					   
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2" onkeydown="ckEnter();">
+				</div>				
+				<div class="boxText small orange">처리상태</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="status">
+						<option value="">전체</option>						
+						<option value="Z">취소승인</option>
+						<option value="X">반품회수완료</option>
+					</select>
+					
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="return ckSearch();"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=30% class="small"> &nbsp;검색된 환불요청수 : <font class="eng">{{TOTAL}}</font>건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지.</FONT></td>
+	<td align=right class=small style='padding-right:4px;'></td>
+</tr>
+<tr>
+	<td colspan="2">
+		<!-- 게시판 리스트 start -->
+		<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+		<tr>
+			<td>
+				<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			    <tr>
+					<td align="center">
+						<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+							<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>
+							<td width=13% align="center" class=gr_bg><font class="bTitle small">주문번호</font></td>							
+							<td align="center" class=gr_bg><font class="bTitle small">상품명</font></td>
+							<td width=19% align="center" class=gr_bg><font class="bTitle small">메모</font></td>							
+							<td width=8% align="center" class=gr_bg><font class="bTitle small">담당자</font></td>
+							<td width=9% align="center" class=gr_bg><font class="bTitle small">처리상태</font></td>
+							<td width=10% align="center" class=gr_bg><font class="bTitle small">처리일</font></td>
+							<td width=7% align="center" class=gr_bg><font class="bTitle small">환불</font></td>
+						</tr>
+						<form method="post" name='selectForm'>
+						<!-- DYNAMIC @loop@ -->
+						<tr height=36 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor='#F4F4F4' onMouseOut=this.style.backgroundColor=''>
+							<td align="center" class="eng">{{NUM}}</td>
+							<td align="center" class="eng">							    
+								<a href='#' onclick="pLightBox.show('order_view.php?pop=1&order_num={{ORDER_NUM}}','iframe','840','580','■ 주문내역 상세보기',10);return false;">{{LIST2}}</a>				
+							</td>
+							<td align="left" style="padding-left:6px;">{{LIST3}}</td>
+							<td align="left" style="padding-left:6px;" class="small">{{LIST4}}</td>							
+							<td align="center" class="small">{{LIST7}}</td>
+							<td align="center" class="small">{{LIST5}}</td>
+							<td align="center" class="eng">{{LIST6}}</td>
+							<td align="center"><span id='nextIcon' class='hand small' onclick="pLightBox.show('order_change_refund.php?order_num={{ORDER_NUM}}&uid={{UID}}','iframe','750','550','■ 취소/반품상품 환불처리','20');">환불처리</span></td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=100>
+							<td align="center" colspan=8 bgcolor="#ffffff">접수(검색)된 환불요청내역 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+	</td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+     <td colspan=2>
+	 <!-- 페이징,검색... start -->
+	 <table border = 0 cellspacing=0 cellpadding=0 width=100%>
+	 <form name="secForm">
+	 <tr>
+		<td width=60%>	       
+			
+		</td>
+	    <td align=right id="paging">{{PAGING}}</td>
+	 </tr>
+	 </form>
+	 </table>
+	 <!-- 페이징,검색... end -->
+	 </td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+searchForm.status.value	= "{{status}}";
+searchForm.limit.value	= "{{limit}}";
+</script>

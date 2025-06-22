@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y:auto;">
+
+<!-- HEAD START -->
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<TITLE>공동구매 신청하기</TITLE>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript" src="../lib/lib.Function.js"></SCRIPT>
+<script type="text/javascript" src="{{skin2}}skin.lib.Shop.js"></SCRIPT>
+<script type="text/javascript" src="../lib/lib.ckForm.js"></SCRIPT>
+
+<script type="text/javascript" >
+<!--
+shop_skin = '{{skin}}/';
+paths = "../";
+// -->
+</script>
+
+<body style="padding:0px;margin:0px;">
+<form name="joinForm" method="post" onsubmit="return false;" action="cooperate_ok.php">
+<input type='hidden' name='gid' value='{{uid}}' />
+<input type='hidden' name='qty' value='{{QTY}}' />
+<input type='hidden' name='p_option' value='{{p_option}}' />
+
+<div id="pageView" style="width:520px;overflow:hidden;">	
+	<div id="coopInfo">		
+		<div style="padding:0 0 10px 0;text-align:left">
+			<font class="title bold">{{GOODS_NAME}} {{GOODS_ICON}}</font>
+		</div>						
+		<div style="margin:8px 0;height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<ul>
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_coop_time.gif" alt="남은시간" /></div>
+				<div class="goodsText num">
+					<span id="countDay" style="font-size:12px;padding:0">00</span>
+					<font class="small">일</font>
+					<span id="countHour" style="font-size:12px;padding:0">00</span>
+					<font class="small">:</font>
+					<span id="countMin" style="font-size:12px;padding:0">00</span>
+					<font class="small">:</font>
+					<span id="countSec" style="font-size:12px;padding:0">00</span>
+				</div>				
+			</li>
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_coop_price.gif" alt="공구가격" /></div>
+				<div class="goodsText mColor bold num">{{COOP_PRICE}}</div>					
+			</li>
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_coop_sale.gif" alt="할인률" /></div>
+				<div class="goodsText"><font class="num mColor bold" style="font-size:12px;">{{COOP_SALE}}%</font></div>					
+			</li>
+			<!-- DYNAMIC @is_reserve@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_reserve.gif" alt="적립금" /></div>
+				<!-- DYNAMIC @is_my_point@ -->
+				<div class="right small gray" style='padding:4px 0 0 8px;background-color:#fff;'>({{TTL}}추가적립 <font class="num orange">{{MY_POINT}}%</font>)&nbsp;</div>
+				<!-- DYNAMIC @is_my_point@ -->
+				<div class="goodsText num gray" id="reserves">{{GOODS_RESERVE}}원</div>					
+			</li>
+			<!-- DYNAMIC @is_reserve@ -->		
+			<!-- DYNAMIC @is_carr@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_carr.gif" alt="개별배송비" /></div>
+				<div class="goodsText small gray">{{GOODS_CARR}}</div>
+			</li>
+			<!-- DYNAMIC @is_carr@ -->			
+			<!-- DYNAMIC @is_option@ -->
+			<li>
+				<div class="small left bold" style="background-color:#fff">
+					<!-- DYNAMIC @is_op_img@ -->
+					<img src="img/shop/ttl_goods_option{{o}}.gif" alt="{{OP_TITLE}}" />
+					<!-- DYNAMIC @is_op_img@ -->
+					<!-- DYNAMIC @is_op_text@ -->
+					<div style="padding:4px 8px 0 8px;">{{OP_TITLE}}</div>
+					<!-- DYNAMIC @is_op_text@ -->						
+				</div>
+				<div class="goodsText small gray" style="padding-top:1px;">
+					<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+					<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+				</div>
+			</li>			
+			<!-- DYNAMIC @is_option@ -->		
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_qty.gif" alt="구매수량" /></div>		
+				<div class="goodsText small gray"><font class="num">{{QTY}}</font>{{GOODS_UNIT}}</div>
+			</li>
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_coop_cell.gif" alt="휴대폰번호" /></div>		
+				<div class="goodsText">
+					<span id="phones1" class="small"></span>&nbsp;&nbsp;
+					<select name="phone11" class="inputs num select_check">
+						<option value="010">010&nbsp;&nbsp;</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>							
+					</select>
+					 - <input type="text"  class="inputs black num" name="phone12" size="5" maxlength="4" onBlur="return ck_phone('1','2');" value="{{PHONE12}}" /> - <input type="text"  class="inputs black num" name="phone13" size="5" maxlength="4" onBlur="return ck_phone('1','3');" value="{{PHONE13}}" />
+					 <script>document.joinForm.phone11.value = '{{PHONE11}}';</script>
+				</div>
+			</li>
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_coop_email.gif" alt="이메일주소" /></div>		
+				<div class="goodsText">
+					<span id="emails" class="small"></span>&nbsp;&nbsp;
+					<input type="hidden" name="email" value="{{EMAIL}}" />
+					<input type="text" class="inputs black num" name="email1" size="10" value="{{EMAIL1}}" onBlur="ck_email();" /> @ <input type="text" class="inputs black num" name="email2" size="12" value="{{EMAIL2}}" onBlur="ck_email();" />
+					<select name="email_select" class="num select_check" onchange="document.joinForm.email2.value=this.value;ck_email();">
+						<option value=''>직접입력</option>
+						<option value=hanmail.net>hanmail.net</option> 
+						<option value=chol.com>chol.com</option>
+						<option value=dreamwiz.com>dreamwiz.com</option> 
+						<option value=empal.com>empal.com</option> 
+						<option value=freechal.com>freechal.com</option> 
+						<option value=gmail.com>gmail.com</option> 
+						<option value=hanafos.com>hanafos.com</option> 
+						<option value=hanmir.com>hanmir.com</option> 
+						<option value=hitel.net>hitel.net</option> 
+						<option value=hotmail.com>hotmail.com</option> 
+						<option value=korea.com>korea.com</option> 
+						<option value=lycos.co.kr>lycos.co.kr</option> 
+						<option value=nate.com>nate.com</option> 
+						<option value=naver.com>naver.com</option> 
+						<option value=netian.com>netian.com</option> 
+						<option value=paran.com>paran.com</option> 
+						<option value=yahoo.com>yahoo.com</option> 
+						<option value=yahoo.co.kr>yahoo.co.kr</option> 							  
+					</select>									
+				</div>
+			</li>
+		</ul>
+		<div class="blank" style="height:20px;">&nbsp;</div>
+		<div style="height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<div class="blank" style="height:20px;">&nbsp;</div>
+
+		<div style="width:500px;text-align:center">
+			<!-- DYNAMIC @is_limit_1@ -->
+			<img src="img/shop/btn_cooperate.gif" class="hand" onclick="return ckCooper();" alt="공동구매신청하기" title="공동구매신청하기" />	
+			<!-- DYNAMIC @is_limit_1@ -->
+			<!-- DYNAMIC @is_limit_2@ -->
+			<img src="img/shop/btn_cooperate_close.gif" alt="공동구매마감" title="공동구매마감" />				
+			<!-- DYNAMIC @is_limit_2@ -->				
+			<!-- DYNAMIC @is_limit_3@ -->
+			<img src="img/shop/btn_cooperate_ready.gif" alt="공동구매준비중" title="공동구매준비중" />				
+			<!-- DYNAMIC @is_limit_3@ -->				
+		</div>	
+	</div>	
+
+	<div style="clear:both;padding:30px 10px 0 20px;line-height:140%;" class="small">
+		! 장바구니, 관심상품, 회원할인 , 쿠폰할인은 공동구매 상품에 적용되지 않습니다.<br />		
+		! 결제(주문)은 공구 성립시 공구가 마감되었거나 공구가가 확정 되었을 경우 '마이페이지 > 공동구매 관리'<br />
+		&nbsp;&nbsp;&nbsp;에서 '결제하기' 버튼을 누르시면 됩니다.<br />
+		! 결제(주문) 이후 교환/반품은 일반상품의 진행 방식과 동일 합니다.<br />
+	</div>
+</div>
+</form>
+
+<script type="text/javascript" >
+<!--
+var f = document.joinForm;
+var serTime = {{SER_TIME}};
+var cooperateTime = {{COOP_TIME}};
+setTimeout(cooperateCount, 1000);
+// -->
+</script>
+
+</BODY>
+</HTML>

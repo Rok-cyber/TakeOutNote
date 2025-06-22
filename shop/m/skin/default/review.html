@@ -1,0 +1,107 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>상품후기</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section>
+		<div id="goodsListHead">
+			<h2>상품후기</h2> 
+			<label>
+				<select title="정렬순서" onchange="getReviews.cgOrder(this.value,1);">
+					<option value="uid">최근등록</option>
+					<option value="best">높은평점</option>
+				</select>
+			</label>
+			<!--
+			<span class="btn">
+				<a href="review_write.php" title="상품후기등록">상품후기등록</a>
+			</span>
+			-->
+		</div>
+		
+		<div id="goodsInfoSub">
+			<h3>상품정보</h3> 
+			<div class="goodsInfoBox">
+				<a href="{{GOODS_LINK}}" title="상품상세보기">
+					<div class="thumbnail"><img src="{{GOODS_IMAGE}}" alt="상품이미지" /></div>
+					<div class="item_info">
+						<p class="goods" title="상품명">{{GOODS_NAME}}</p>
+						<p class="price" title="판매가"><strong>{{GOODS_PRICE2}}</strong>원</p>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div id="reviewInfo">
+			<h3>상품후기정보</h3> 
+			<div class="reviewInfoBox">
+				<div class="reviewHead">
+					<span>전체</span> <em>({{TOTAL}}개)</em>
+					<em> - {{PER_AFTER}}점</em> <span class="review_bg"><em style="width:{{PER_AFTER}}%"></em></span>	
+				</div>
+
+				<ul id="reviewList"></ul>						
+			</div>
+		</div>
+		
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li><a href="javascript:getMultis.listMore();" title="목록 더보기"><span id="listGoodsMore">목록 더보기 (<em id="currentPage">{{PAGE}}</em>/<em>{{TOTAL_PAGE}}</em>)</span></a></li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>	
+</div>
+
+<div id="listLoading">
+	데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	cntNum = 0;
+	function rtnReview(obj,num,point,title,name,buy,date,content,mod,uid) {				
+		newLi = document.createElement('LI');	
+		newLi.id = "review_"+uid;
+
+		div = '<a href="javascript:viewReview('+num+');" title="내용보기">\
+					<p>\
+						<span class="review_bg2"><em style="width:'+point+'%"></em></span>\
+						<span>'+date+'</span> <span>|</span> <span>'+name+'</span>\
+					</p>\
+					<p>'+title+'</p>\
+					<div id="reviewContent_'+num+'">'+content+'</div>\
+				</a>\
+				';
+		
+		newLi.innerHTML = div;
+		obj.appendChild(newLi);		
+		$("#reviewContent_"+num).hide();
+		cntNum++;
+	}
+	
+	ck_str = '{{TOTAL}}';
+
+	if(ck_str>4) $("#contentMore").show();	
+	if(ck_str>0) {	
+		getMultis = new getMulti('reviewList','{{limit}}','{{TOTAL}}','0','{{ajaxstr}}','php/getReview.php','rtnReview');
+		getMultis.display();
+		reviewViewNum = '';	
+
+		if({{TOTAL_PAGE}}<={{PAGE}}) {
+			$("#listGoodsMore")[0].innerHTML = "&nbsp;";
+		}		
+	}
+ -->
+</script>

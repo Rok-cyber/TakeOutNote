@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>회원등급관리</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> 회원등급관리
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>01.</font> <font class="blue">회원등급설정</font> : 회원 레벨은 1~10 까지 있으며 1은 일시중지상태, 9는 부관리자, 10은 관리자 고정 입니다. 회원 레벨별로 등급명, 관리자페이지권한, 제공할인률, 추가적립금, 기본배송비유무 등을 입력 또는 선택 하시고 '수정'을 클릭 하시면 쇼핑몰에 적용 됩니다. <br />
+	<font class="small">
+		! 이벤트 상품구매시 이벤트 할인률과 회원등급별 할인룰 중 큰 할인률을 상품구매시 적용 합니다.<br />
+		! 베송비 무료는 배송비 별도 상품 밒 추가배송비 지역(도서산간)에는 적용 되지 않습니다. <br />
+	</font>
+	&nbsp;<br />
+
+	<font class='eng blue'>02.</font> <font class="blue">관리자페이지 권한설정</font> : 상품관리, 주문관리, 디자인&문서관리, 회원관리, 기타&서비스관리, 쇼핑몰 환경설정 중 접속 가능한 권한에 체크를 하시면 됩니다. 권한구분은 권한제한, 상품등록, 부관리자, 관리자가 있으며 구분에 맞게 권한을 체크 하시면 됩니다. <br />
+	<font class="small">예) 상품등록 구분에서 상품관리만 체크 하였다면 관리자페이지권한이 상품등록인 회원은 상품관리 페이지만 접속이 가능하고 주문관리, 디자인&문서관리, 회원관리, 기타&서비스관리, 쇼핑몰 환경설정에는 '접속권한이 없는 페이지 입니다' 라는 에러 메세지가 뜨며 접속을 할 수 없습니다.</font>
+</div>
+<? if($all!='Y') { ?>
+<div style="height:225px"></div>
+<? } ?>
+</BODY>
+</html>

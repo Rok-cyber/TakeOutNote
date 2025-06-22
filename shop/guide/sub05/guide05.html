@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>SMS관리</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> SMS관리
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>01.</font> <font class="blue">SMS설정</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		<font class='eng green'>A.</font> <font class="green">SMS 아이디</font> : SMS신청시 등록한 아이디를 입력하시면 됩니다.<br />
+		<font class='eng green'>B.</font> <font class="green">SMS 비밀번호</font> : SMS신청시 등록한 비밀번호를 입력하시면 됩니다.<br />
+		<font class='eng green'>C.</font> <font class="green">회신전화번호</font> : 고객이 받는 메세지에 회신번호로 찍히는 전화번호를 입력하시면 됩니다.<br />
+		<font class='eng green'>D.</font> <font class="green">관리자 핸드폰</font> : 관리자에게도 메세지를 발송할 때 사용할 핸드폰번호를 입력하시면 됩니다.<br /><br />
+		<font class="small">
+			! SMS를 사용하실려면 'SMS 신청하기' 버튼을 누르신 후 회원 가입을 하기시 바랍니다.<br />
+			! 회원 가입을 하시면 300캐쉬가 무료로 적립되며 문자 10건 정도를 테스트 해 보실 수 있습니다.<br />
+			! SMS를 발송 하실려면 캐쉬가 있어야 되며 원하시는 금액을 충전하셔서 사용하시면 됩니다.(최소 3,000원 부터 충전이 가능하며 3,000원일 경우 136건의 문자를 발송 할 수 있습니다.)<br />
+			! SMS를 신청후 정보를 입력 하시면 아래에 SMS충전정보가 나타납니다.<br />
+			! SMS는 캐쉬가 충전되어 있어야 발송이 가능합니다.<br />
+			! SMS발송 업체는 Coolsms 이며 자세한 사항은 <a href="http://www.coolsms.co.kr" target=_blank>http://www.coolsms.co.kr</a> 에서 확인 하시기 바랍니다<br /> 
+			
+		</font>	
+	</div>
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>02.</font> <font class="blue">SMS자동발송 관리</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		<font class='eng green'>A.</font> <font class="green">회원가입시 발송</font> : 회원가입시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>B.</font> <font class="green">비밀번호찾기시 발송</font> : 비밀번호찾기시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>C.</font> <font class="green">무통장 주문완료시 발송</font> : 무통장 주문완료시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>D.</font> <font class="green">무통장 입금요청 발송</font> : 무통장 입금요청 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>E.</font> <font class="green">입금확인시 발송</font> : 입금확인시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>F.</font> <font class="green">상품배송시 발송</font> : 상품배송시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>G.</font> <font class="green">주문취소시 발송</font> : 주문취소시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br />
+		<font class='eng green'>H.</font> <font class="green">상품품절시 발송</font> : 상품품절시 발송될 문구와 발송유무를 선택 할 수 있습니다.<br /><br />		
+		
+		<img src="../img/sample_5_51.gif" vspace="8" /><br />
+
+		<font class="small">
+			! 치환코드와 치환되는 값<br /> 
+			{shopName} :  쇼핑몰명 <br />
+			{name} : 회원명 or 주문자명 <br />
+			{goodsName} : 상품명 (상품품절시 발송에만 가능)  <br />
+			{number} : 주문번호 (주문관련 발송에만 가능) <br />
+			{price} : 결제금액 (주문관련 발송에만 가능) <br />
+			{account} : 은행명 계좌번호 입금자명 (무통장 입금요청 발송에만 가능) <br />
+			{deli_comp} : 택배사 (상품배송시 발송에만 가능) <br />
+			{deli_no} :  송장번호 (상품배송시 발송에만 가능) <br />
+		</font>
+	</div>
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>03.</font> <font class="blue">SMS주소록</font>	
+	<div style="padding-left:10px;margin-bottom:10px;">
+		쇼핑몰 회원과는 별도로 SMS발송시 이용할 주소록을 관리 할 수 있습니다.<br />
+		<font class='eng green'>A.</font> <font class="green">그룹</font> : 그릅을 선택하거나 신규그를을 생성할 수 있습니다.<br />
+		<font class='eng green'>B.</font> <font class="green">이름</font> : 이름을 입력하시면 됩니다.<br />
+		<font class='eng green'>C.</font> <font class="green">핸드폰번호</font> : 핸드폰번호를 입력 하시면 됩니다.<br />
+		<font class='eng green'>D.</font> <font class="green">성별</font> : 성별을 선택 하시면 됩니다.<br />
+		<font class='eng green'>E.</font> <font class="green">비고</font> : 기타 관련 사항을 입력 하시면 됩니다.<br />
+	</div>
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>04.</font> <font class="blue">SMS발송</font><br />	
+	<div style="padding-left:10px;margin-bottom:10px;">
+		<font class='eng green'>A.</font> <font class="green">보내는 사람</font> : 발신자번호에 나타날 번호를 입력하시면 됩니다.<br />
+		<font class='eng green'>B.</font> <font class="green">발송 방법</font> : 개별, 회원등급별, 전체회원, 주소록그룹별, 주소록전체 중 선택 하시면 됩니다.<br />
+		<font class='eng green'>C.</font> <font class="green">받는 사람</font> : 개별발송일 경우 수신자번호를 직접 입력해서 추가 하거나 주소록 및 회원검색을 이용하여 추가할 수 있습니다.<br />
+		<font class='eng green'>D.</font> <font class="green">회원등급</font> : 회원등급별발송일 경우 원하시는 등급을 선택 하시면 됩니다.<br />
+		<font class='eng green'>E.</font> <font class="green">주소록그룹</font> : 주소록그룹별발송일 경우 원하시는 그룹을 선택 하시면 됩니다.<br />
+		<font class='eng green'>F.</font> <font class="green">발송 리스트</font> : 발송될 수신자수가 나타납니다.<br />
+		<font class='eng green'>G.</font> <font class="green">예약발송</font> : 예약발송을 하실경우 사용함에 체크 하시고 날짜를 선택 하시면 됩니다.<br />
+		<font class='eng green'>H.</font> <font class="green">발송내용</font> : 좌측 파란색 영역에 발송내용을 입력하시면 됩니다.<br />
+
+		<font class="small">! 문자수가 80Byte 이상일 경우 장문(LMS)발송으로 되며 발송건수는 2건으로 집계 됩니다</font>
+
+		<img src="../img/sample_5_52.gif" vspace="8" /><br />
+
+	</div>
+</div>
+
+<div style="padding-left:10px;">	
+	<font class='eng blue'>05.</font> <font class="blue">메일발송 상세내용보기</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		<font class='eng green'>A.</font> <font class="green">발송시간</font> : 발송시간이 나타 납니다.<br />
+		<font class='eng green'>B.</font> <font class="green">수신번호</font> : 수신번호가 나타 납니다. <br />
+		<font class='eng green'>C.</font> <font class="green">전송결과</font> : 전송결과가 나타 납니다.<br />
+		<font class='eng green'>D.</font> <font class="green">메세지</font> : 발송한 내용이 나타 납니다.<br />
+		<font class='eng green'>E.</font> <font class="green">비고</font> : 에러 메세지나 기타 네세지가 나타 납니다.<br />
+		<font class='eng green'>F.</font> <font class="green">처리상태</font> : 처리상태가 나타 납니다.<br />
+		<font class='eng green'>G.</font> <font class="green">발송타입</font> : 80Byte 이내일 경우 단문으로 81Byte 이상일 경우 장문으로 나타 납니다.<br />
+	</div>
+</div>
+
+</BODY>
+</html>

@@ -1,0 +1,74 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_mem_quit.gif" alt="회원탈퇴신청" title="회원탈퇴신청" />
+	</div>
+
+	<div class="small" style="text-align:left;margin:20px 0 20px 10px;">
+		! 회원탈퇴를 하시면 회원정보와 주문내역, 관심상품, 쇼핑포인트 등 회원님의 모든 정보가 삭제되며 DB에도 남기지 않습니다.<br />
+		! 주문하신 이력이 있는 경우 회원정보와 별도로 주문정보는 쇼핑몰 정책에 따라 일정기간 보유 할 수 있습니다.<br />
+		! 회원탈퇴 후 언제든 재가입을 하실 수 있으나 기존에 사용하던 정보는 더 이상 사용 하실 수 없습니다.<br />
+		! 탈퇴사유와 하고싶은 말을 남겨 주시면 회원님의 의견을 수렴하여 보다 좋은 쇼핑몰이 될 수 있도록 노력 하겠습니다.
+	</div>
+		
+
+
+	<form method="post" name="joinForm" action="php/regist_ok.php" enctype="multipart/form-data">
+	<input type="hidden" name="jmode" value="del">
+	
+	<div style="width:720px; margin-top:20px;">
+		<div id="memberInfo">		
+			<div style="height:150px;border: 1px solid #DDD;padding:20px">
+				<ul>
+					<li>
+						<div class="nextIcon2rq small left bold">이름</div>
+						<div class="left default">
+							{{my_name}}
+						</div>
+					</li>					
+					<li>
+						<div class="nextIcon2rq small left bold">비밀번호확인</div>
+						<div class="left">
+							<input type="password" class="inputs black" name="passwd" maxlength="12" size="20" />
+						</div>
+					</li>		
+					<li>
+						<div class="nextIcon2rq small left bold">탈퇴사유</div>
+						<div class="left">
+							<select name="reason" class="default black">
+								<option value="">선택하세요</option>
+								<option value="1">상품품질불만</option>
+								<option value="2">배송지연</option>
+								<option value="3">교환/환불/반품불만</option>
+								<option value="4">개인정보유출방지</option>
+								<option value="5">기타</option>
+							</select>
+						</div>
+					</li>		
+					<li style="height:56px;background:url(img/shop/dot_line.gif) repeat-x 0px 50px;">
+						<div class="nextIcon2 small left bold">하고싶은 말</div>
+						<div class="left"><textarea class="inputs black default" style="width:500px;height:40px;" name="message"></textarea></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+		
+	<div style="clear:both;height:20px;">&nbsp;</div>		
+	
+	<center>
+	<div style="width:252px;text-align:center">	
+		<div class="left"><img src="img/common/btn_pagePrev.gif" class="hand" onclick="history.back();return false;" alt="이전페이지" title="이전페이지" /></div>
+		<div class="left" style="padding-left:6px;"><img src="img/member/btn_quit.gif" class="hand" onclick="return ckQuit();" alt="회원탈퇴신청" title="회원탈퇴신청" /></div>
+	</div>
+	</center>
+	<div style="clear:both;height:50px;">&nbsp;</div>	
+
+	</form>
+</div>

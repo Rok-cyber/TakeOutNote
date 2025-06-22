@@ -1,0 +1,74 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<div id="pb_sub2">	
+	<form name="signForm" method="post" action="{{ACTION}}" onsubmit="return checkIt()" >
+    <input type="hidden" name="Main" value="{{Main}}" />
+	<input type="hidden" name="ck_bt" />
+
+	<!-- DYNAMIC @is_del@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">등록된 글 삭제</div>
+	</div>
+	<!-- DYNAMIC @is_del@ -->
+
+	<!-- DYNAMIC @is_mdel@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">메모글 삭제</div>
+	</div>
+	<!-- DYNAMIC @is_mdel@ -->
+
+	<!-- DYNAMIC @is_secret@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">비밀글 확인</div>
+	</div>
+	<!-- DYNAMIC @is_secret@ -->
+
+	<!-- DYNAMIC @is_confirm@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">비밀번호 확인</div>
+	</div>
+	<!-- DYNAMIC @is_confirm@ -->
+
+	
+	<!-- DYNAMIC @is_del2@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">이름</div>		
+		<div class="pb_write_input2 pb_default" style="margin-top:3px;">
+			{{NAME}}
+		</div>        		
+	</div>
+
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">제목</div>		
+		<div class="pb_write_input2 pb_default"  style="margin-top:3px;">
+			{{SUBJECT}}
+		</div>        		
+	</div>
+	<!-- DYNAMIC @is_del2@ -->
+
+	<!-- DYNAMIC @is_man@ -->	
+	<div class="pb_write_area" style="border:0px">
+		<div class="pb_write_title pb_small pb_bold">비밀번호</div>		
+		<div class="pb_write_input2">
+			<input class="pb_ip" type="password" name="passwd" size="20" maxlength="20" /> <font class="pb_small">(글 등록시 입력한 비빌번호)</font>
+		</div>        		
+	</div>
+	<!-- DYNAMIC @is_man@ -->
+
+	<div class="pb_bar"></div>	
+
+	<div style="margin:20px 0 20px;text-align:center;width:100px;">
+		<div style="width:150px;">
+			<div id="sBtn3">
+				<a href="#" onclick="return checkIt(2);return false;"><span>확인</span></a>
+			</div>		
+			<div id="sBtn2">
+				<a href="{{Main}}{{addstring}}"><span>취소</span></a>
+			</div>		
+		</div>
+	</div>
+
+	</form>
+</div>

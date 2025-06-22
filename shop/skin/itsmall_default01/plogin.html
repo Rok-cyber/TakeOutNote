@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>로그인</title>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" title="style" />
+
+<body>
+
+<form name="logForm" method="post" action="{{sMain}}php/login_ok.php" onsubmit="return ckLoginForm(this);">
+<input type="hidden" name="url" value="{{type}}" />
+<input type="hidden" name="num" value="{{num}}" />
+<input type="hidden" name="gid" value="{{gid}}" />
+
+<div style="width:400px;padding:30px 0 0 30px;">
+	<div id="defBox" style="width:100%">
+		<div class="left" style="height:150px"></div>
+		<div class="content" style="width:340px;text-align:left">
+			<div><img src="img/common/ttl_plogin.gif" alt="로그인" title="로그인" /></div>
+			<div style="margin:20px 0 0 20px; height:70px;">
+				<div style="float:left">
+					<div>
+						<span class="nextIcon2 small bold">아이디</span>
+						<input type="text" name="id" class="inputs black num" style="margin-left:32px" />
+					</div>
+					<div style="margin-top:6px">
+						<span class="nextIcon2 small bold">비밀번호</span>
+						<input type="password" name="passwd" class="inputs black num" style="margin-left:21px" />
+					</div>				
+				</div>
+				<div style="float:left;padding-left:10px;">
+					<input type="image" src="img/common/btn_plogin.gif" border="0" />
+				</div>				
+			</div>
+			<div style="border-top:1px solid #f6f6f6;height:1px;overflow:hidden;"></div>
+			<div>
+				<div style="margin:30px 0 0 10px;float:left;width:235px;">
+					<span class="nextIcon2 small">아직 회원이 아니세요?<br>&nbsp;&nbsp;&nbsp;&nbsp;회원가입을 하시면 더 많은 혜택이 있습니다. </span>
+				</div>	
+				<div id="sBtn3" style="margin-top:35px;float:left">
+					<a href="#" onclick="top.location.href='../{{Main}}?channel=regist';return false"><span>회원가입</span></a>
+				</div>
+				
+				<div style="margin:10px 0 0 10px;float:left;width:235px;">
+					<span class="nextIcon2 small"><font class="orange">회원아이디</font>를 잊으셨나요?</span>
+				</div>	
+				<div id="sBtn2" style="margin-top:5px;float:left">
+					<a href="#" onclick="top.location.href='../{{Main}}?channel=idpwsearch';return false"><span>&nbsp;&nbsp;ID 찾기&nbsp;&nbsp;</span></a>
+				</div>
+
+				<div style="margin:10px 0 0 10px;float:left;width:235px;">
+					<span class="nextIcon2 small"><font class="orange">비밀번호</font>가 기억이 안나세요?</span>
+				</div>	
+				<div id="sBtn2" style="float:left;margin-top:5px;">
+					<a href="#" onclick="top.location.href='../{{Main}}?channel=idpwsearch';return false"><span>PW 찾기</span></a>
+				</div>
+			</div>
+
+			<div style="clear:both;height:20px;">&nbsp;</div>
+			<div id="sBtn3" style="margin-left:120px;">
+				<!-- DYNAMIC @no_type@ -->
+				<a href="#" onclick="parent.location.href='../{{Main}}?channel=order_form';return false;"><span>비회원 주문하기</span></a>
+				<!-- DYNAMIC @no_type@ -->
+				<!-- DYNAMIC @is_direct@ -->
+				<a href="#" onclick="parent.document.cartForm.submit();return false;"><span>비회원 주문하기</span></a>
+				<!-- DYNAMIC @is_direct@ -->
+				<!-- DYNAMIC @is_type@ -->
+				<a href="#" onclick="parent.document.goodsForm{{num}}.submit();return false;"><span>비회원 주문하기</span></a>
+				<!-- DYNAMIC @is_type@ -->
+			</div>
+
+		</div>
+		<div class="right" style="height:150px"></div>
+	</div>
+</div>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>할인쿠폰다운로드</title>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" title="style" />
+
+<body>
+
+<!-- DYNAMIC @cupon@ -->
+<div style="width:400px;padding:30px 0 0 30px;">	
+	<div id="defBox" style="width:100%">
+		<div class="left" style="height:150px"></div>		
+		<div class="content" style="width:340px;text-align:left">
+			<div><img src="img/common/ttl_pcupon.gif" alt="할인쿠폰다운로드" title="할인쿠폰다운로드" /></div>
+			<div style="height:20px;"></div>
+			<div style="padding-left:20px; height:78px;">
+				<div>
+					<div style="float:left;width:100px;height:26px;"><span id='nextIcon2' class="small bold">쿠폰명</span></div>		
+					<div style="float:left;height:26px;">{{NAME}}</div>		
+				</div>	
+				<div style="clear:both">
+					<div style="float:left;width:100px;height:26px;"><span id='nextIcon2' class="small bold">할인액(율)</span></div>	
+					<div style="float:left;height:26px;" class="num">{{SALE}}</div>		
+				</div>
+				<div style="clear:both;">
+					<div style="float:left;width:100px;height:26px;"><span id='nextIcon2' class="small bold">사용기간</span></div>		
+					<div style="float:left;height:26px;" class="num">{{DATES}}</div>		
+				</div>				
+			</div>
+			<div style="border-top:1px solid #f6f6f6;height:1px;overflow:hidden;"></div>
+			<div style="margin-top:20px;text-align:center">
+				<a href="pcupon_down.php?num={{num}}&gid={{gid}}&down=ok"><img src="img/common/btn_cdown.gif" border="0" alt="할인쿠폰다운로드" title="할인쿠폰다운로드" /></a>
+			</div>
+			
+			<div style="height:30px;"></div>
+			<div style="padding-left:10px;float:left;">
+				<span id='nextIcon2' class="small">발급된 쿠폰은 '마이페이지 > 발급쿠폰내역' 에서 확인 하실 수 있습니다.</span>
+				<p style="height:4px;overflow:hidden;"></p>
+				<span id='nextIcon2' class="small">각 쿠폰은 한번씩만 다운받으실 수 있습니다.</span>
+			</div>				
+		</div>
+		<div class="right" style="height:150px"></div>
+	</div>
+</form>
+<!-- DYNAMIC @cupon@ -->
+
+<!-- DYNAMIC @cupon_ok@ -->
+<div style="width:400px;padding:30px 0 0 10px;">	
+	<div>		
+		<div style="margin-top:20px;text-align:center">
+			<img src="img/common/ttl_cupon_ok.gif" alt="할인쿠폰발급완료" title="할인쿠폰발급완료" />
+		</div>
+
+		<div style="margin-top:20px;text-align:center">
+			<img src="img/common/cupon_img.gif" alt="할인쿠폰" title="할인쿠폰" />
+		</div>		
+	</div>
+</div>
+<!-- DYNAMIC @cupon_ok@ -->
+
+<!-- DYNAMIC @cupon_false@ -->
+<div style="width:400px;padding:30px 0 0 10px;">	
+	<div>		
+		<div style="margin-top:20px;text-align:center">
+			<img src="img/common/ttl_cupon_false.gif" alt="할인쿠폰발급실패" title="할인쿠폰발급실패" />
+		</div>
+
+		<div style="margin-top:20px;text-align:center">
+			<img src="img/common/cupon_img.gif" alt="할인쿠폰" title="할인쿠폰" />
+		</div>		
+	</div>
+</div>
+<!-- DYNAMIC @cupon_false@ -->
+
+</body>
+</html>

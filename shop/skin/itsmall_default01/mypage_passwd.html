@@ -1,0 +1,69 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_mem_passwd.gif" alt="비밀번호변경" title="비밀번호변경" />
+	</div>
+
+	<div class="small" style="text-align:left;margin:20px 0 20px 10px;">
+		! 고객님의 안전한 쇼핑을 위하여 비밀번호는 8자리 이상 설정을 권고 합니다.(영문, 숫자 조합)<br />
+		! 주민등록번호, 생일, 연락처등 개인 정보와 관련된 숫자, 연속된 숫자등은 다른 사람이 쉽게 알아내어 유출의 위험이 있으므로 주의 하시기 바랍니다.
+	</div>
+		
+
+
+	<form method="post" name="joinForm" action="{{sMain}}/php/regist_ok.php" enctype="multipart/form-data">
+	<input type="hidden" name="jmode" value="passwd">
+	
+	<div style="width:720px; margin-top:20px;">
+		<div id="memberInfo">		
+			<div style="height:130px;border: 1px solid #DDD;padding:20px">
+				<ul>
+					<li>
+						<div class="nextIcon2rq small left bold">이름</div>
+						<div class="left default">
+							{{my_name}}
+						</div>
+					</li>
+					<li>
+						<div class="nextIcon2rq small left bold">기존 비밀번호</div>
+						<div class="left">
+							<input type="password" class="inputs black" name="orig_passwd" maxlength="12" size="20" />
+						</div>
+					</li>
+					<li>
+						<div class="nextIcon2rq small left bold">새로운 비밀번호</div>
+						<div class="left">
+							<input type="password" class="inputs black" name="passwd" maxlength="12" size="20" onBlur="return ck_pw1();" />
+							&nbsp;&nbsp;<span id="passwd1s" class="small">영문,숫자 조합(4~12자)</font></span>
+						</div>
+					</li>
+					<li>
+						<div class="nextIcon2rq small left bold">비밀번호확인</div>
+						<div class="left">
+							<input type="password" class="inputs black" name="repasswd" maxlength="12" size="20" onBlur="return ck_pw2();" />
+							&nbsp;&nbsp;<span id="passwd2s" class="small">영문,숫자 조합(4~12자)</font></span>
+						</div>
+					</li>					
+				</ul>
+			</div>
+		</div>
+	</div>
+		
+	<div style="clear:both;height:20px;">&nbsp;</div>		
+	
+	<center>
+	<div style="width:252px;text-align:center">	
+		<div class="left"><img src="img/common/btn_pagePrev.gif" class="hand" onclick="history.back();return false;" alt="이전페이지" title="이전페이지" /></div>
+		<div class="left" style="padding-left:6px;"><img src="img/member/btn_passwd.gif" class="hand" onclick="return ckPasswd();" alt="비밀번호변경" title="비밀번호변경" /></div>
+	</div>
+	</center>
+	<div style="clear:both;height:90px;">&nbsp;</div>	
+
+	</form>
+</div>

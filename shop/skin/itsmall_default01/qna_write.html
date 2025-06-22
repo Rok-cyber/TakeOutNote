@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>상품 Q&A 관리</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<link href="../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+
+<script LANGUAGE="Javascript" src="../lib/lib.Function.js"></script>
+<script LANGUAGE="Javascript" src="../lib/lib.messageBox.js"></script> 
+<script src="../pEdit/pEditor.js"></script>
+
+
+<script language="javascript">
+<!--
+
+function checkItme(cks) {      
+    f=document.comForm;
+
+	<!-- DYNAMIC @is_write1@ -->
+	<!-- DYNAMIC @is_login@ -->
+	f.name.value=f.name.value.trim();
+    if(!f.name.value) {
+        alert('이름을 입력하세요!');
+        f.name.focus();
+        return false;
+    }
+    
+	f.passwd.value=f.passwd.value.trim();
+    if(!f.passwd.value) {
+		alert('비밀번호를 입력하세요!');
+        f.passwd.focus();
+        return false;
+    }
+	<!-- DYNAMIC @is_login@ -->
+	
+	f.title.value=f.title.value.trim();
+    if(!f.title.value) {
+		alert('제목을 입력하세요!');
+        f.title.focus();
+        return false;
+    }
+
+    f.content.value = content.getHtml(); //대체한 textarea에 작성한HTML값 전달	
+	if(!f.content.value) {
+		alert('내용을 입력 하세요!');
+        content.focus();
+        return false;
+    }
+
+	f.ck_w.value	= '{{ck_w}}';
+	f.ck_w2.value	= '{{ck_w2}}';
+	if(cks==1) f.submit();
+	<!-- DYNAMIC @is_write1@ -->
+
+	<!-- DYNAMIC @is_confirm1@ -->
+	if(typeof(f.passwd=='undefined')) {
+		f.submit();
+		return false;
+	}
+	f.passwd.value=f.passwd.value.trim();
+    if(!f.passwd.value) {
+        alert('비밀번호를 입력하세요!');
+        f.passwd.focus();
+        return false;
+    }
+	parent.rtnModify(f.passwd.value,'{{addstring}}');	
+	<!-- DYNAMIC @is_confirm1@ -->
+	
+	return false;
+}
+
+//-->
+</script>
+</head>
+<!-- @HEAD END -->
+
+<body style="margin:0px;padding:0px;">
+
+<div class="tleft" style="padding:20px 0 0 20px;">
+	<form name="comForm" method="post" onsubmit="return checkItme();" action="{{MACTION}}">
+	<!-- DYNAMIC @is_confirm2@ -->		
+	<div>			
+		<!-- DYNAMIC @is_con1@ -->	
+		<div class="small" style="margin:10px 0 20px 0;">			
+			* QNA를 등록 하실때 적으신 비밀번호를 입력 하시기 바랍니다.
+		</div>			
+		<div>
+			<div style="float:left;padding:4px" class="small bold">비밀번호</div>
+			<div style="float:left;padding-left:10px;"><input  type="password" name="passwd" class="ip2" maxlength="20" /></div>
+		</div>						
+		<!-- DYNAMIC @is_con1@ -->	
+
+		<!-- DYNAMIC @is_con2@ -->	
+		<div class="small" style="margin:30px 0 0 0;">			
+			* "{{TITLE}}" 글을 삭제 하시겠습니까?
+		</div>			
+		<!-- DYNAMIC @is_con2@ -->
+		
+		<!-- DYNAMIC @is_con3@ -->	
+		<div class="small" style="margin:30px 0 0 0;">			
+			* "{{TITLE}}" 글의 답변을 삭제 하시겠습니까?
+		</div>			
+		<!-- DYNAMIC @is_con3@ -->
+
+		<div style="clear:both;height:30px;overflow:hidden;">&nbsp;</div>
+		<div style="padding-left:120px;">
+			<div id="sBtn3">
+				<a href="#" onclick="return checkItme('1');"><span>확인</span></a>
+			</div>			
+			<div id="sBtn2">
+				<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>취소</span></a>
+			</div>
+		</div>			
+	</div>
+	<!-- DYNAMIC @is_confirm2@ -->
+	
+	<!-- DYNAMIC @is_write2@ -->
+	<input type="hidden" name="ck_w" />
+	<input type="hidden" name="ck_w2" />
+	<input type="hidden" name="cate" value="{{cate}}" />
+	<input type="hidden" name="number" value="{{number}}" />
+	<input type="hidden" name="tmp_qdir" value="{{tmp_qdir2}}">
+	<div>
+		<div class="small" style="padding-bottom:4px;">! 글 작성시 본 상품과 관련 없는 글, 통신 예절에 어긋난 글은 임의로 삭제될 수 있습니다.</div>				
+		<div style="clear:both;margin-bottom:4px;"> 
+			<!-- DYNAMIC @is_mname1@ -->				
+			<div style="float:left;padding:4px;" class="small bold">이름</div>
+			<div class="default left" style="padding-top:4px;padding-left:10px;padding-right:10px;">{{NAME}}</div>				
+			<!-- DYNAMIC @is_mname1@ -->
+			<!-- DYNAMIC @is_mpw@ -->
+			<input type="hidden" name="name" value="{{NAME}}" />
+			<div style="float:left;padding:4px" class="small bold">비밀번호 확인</div>
+			<div style="float:left;padding-left:10px;"><input  type="password" name="passwd" class="ip2" maxlength="20" /></div>
+			<!-- DYNAMIC @is_mpw@ -->
+			
+			<!-- DYNAMIC @is_mname2@ -->
+			<div style="float:left;padding:4px" class="small bold">이름</div>
+			<div style="float:left;padding-left:10px;padding-right:10px;"><input  type="text" name="name" class="ip2" maxlength="30" /></div>
+			<div style="float:left;padding:4px;" class="small bold">비밀번호</div>
+			<div style="float:left;padding-left:10px;"><input  type="password" name="passwd" class="ip2" maxlength="20" /></div>
+			<!-- DYNAMIC @is_mname2@ -->
+		</div>
+		<!-- DYNAMIC @is_default@ -->
+		<div style="clear:both">
+			<div style="float:left;padding:4px;" class="small bold">제목</div>				
+			<div class="left default" style="padding-left:10px;">				
+				<input  type="text" name="title" class="ip2" maxlength="50" size="90" value="{{TITLE}}" />
+			</div>
+		<div>
+		<!-- DYNAMIC @is_default@ -->
+		<!-- DYNAMIC @is_answer@ -->				
+		<div style="clear:both">
+			<div style="float:left;padding:4px;" class="small bold">제목</div>							
+			<input type="hidden" name="title" value="xxx" />
+			<div class="default left" style="padding-top:4px;padding-left:10px;padding-right:10px;">{{TITLE}}</div>
+		</div>
+		<div class="default" style="clear:both;border:1px solid #CCC; height:88px;width:100%px;background-color:#FAFAFA;overflow:auto;">
+			<div style="padding:3px">{{QUESTION}}</div>
+		</div>					
+		<!-- DYNAMIC @is_answer@ -->				
+		
+		<div style="clear:both;padding-top:10px">				
+			<textarea name="content" id="content">{{CONTENT}}</textarea>
+			<script>var content = new pEditor("content","../pEdit","560","180","{{up_dir}}","popup","hide");</script>
+		</div>			
+		<div style="clear:both;height:10px">&nbsp;</div>
+		<div style="padding-left:210px;">
+			<div id="sBtn3">
+				<a href="#" onclick="return checkItme('1');"><span>작성완료</span></a>
+			</div>
+			<div id="sBtn2">
+				<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>작성취소</span></a>
+			</div>
+		</div>
+		<div style="clear:both;height:10px">&nbsp;</div>
+	</div>		
+	
+	<script language="javascript">
+	<!--
+		parent.pLightBox.cgSize('610','420','상품Q&A수정');
+	// -->
+	</script>
+	<!-- DYNAMIC @is_write2@ -->
+	</form>
+</div>
+</body>
+</html>

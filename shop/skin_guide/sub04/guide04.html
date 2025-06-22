@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>customer_board.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> customer_board.html (게시판 관련 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CUS_MENU}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객센터 레프트 메뉴 (customer_cate.html 이용)</td>
+					</tr>		
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @board_top@ --></font></div>
+			<div style="margin:10px 0 0 28px;">. . . (게시판 상단에 나타날 내용)</div>
+			 
+				
+			<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_title_notice@ --></font><br/>
+					. . . (공지사항일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_title_notice@ --></font>
+				</div>
+			</div>
+
+			<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_title_customer@ --></font><br/>
+					. . . (고객게시판일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_title_customer@ --></font>
+				</div>
+			</div>
+
+			<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_title_faq@ --></font><br/>
+					. . . (FAQ일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_title_faq@ --></font>
+				</div>
+			</div>
+
+			<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_title_counsel@ --></font><br/>
+					. . . (1:1고객상담일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_title_counsel@ --></font>
+				</div>
+			</div>
+
+			<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_title_sales@ --></font><br/>
+					. . . (대량구매문의일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_title_sales@ --></font>
+				</div>
+			</div>
+
+			<div style="width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_title_cooperation@ --></font><br/>
+					. . . (제휴/광고문의일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_title_cooperation@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;margin-top:10px;"><font class="blue">&lt!-- DYNAMIC @board_top@ --></font></div>
+		</div>
+	</div>
+
+
+	
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @board_bottom@ --></font><br/>
+			. . . (게시판 하단에 나타날 내용)<br/>
+			<font class="blue">&lt!-- DYNAMIC @board_bottom@ --></font>
+		</div>
+	</div>
+
+    
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

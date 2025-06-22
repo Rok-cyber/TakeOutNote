@@ -1,0 +1,141 @@
+/******************************************************************
+* =======================================================
+* Previl Board Skin CSS
+*
+* 제 작: gubok kim (email : previl@previl.net,  homepage : http://previl.net)
+*
+* 마지막 수정일: 2007.11.01
+*        
+* =======================================================
+******************************************************************/
+
+/*******************************************************************
+*	DIV 정의
+********************************************************************/
+#pb_sub	{ width:100%; text-align:center }
+	#pb_title_box { width:100%; height:30px; border:1px dotted #B2B2B2; color:#B2B2B2; background-color:#FAFAFA; margin-bottom:10px; }
+	#pb_list_top	{ width:100%; margin-top:20px;}
+	#pb_list		{ clear:both; width:100%; margin-top:4px; float:left; text-align:left; overflow:hidden; }
+	#pb_list_page	{ width:100%; } 
+	#pb_search_box {  background-color:#f5f5f5; }
+	#pb_write_area	{ width:100%; }
+	#pb_memo_box	{ height:120px; border:1px solid #BBBBBB; padding:5px 0px 5px 0px; background-color:#f5f5f5; }
+	#pb_top_title	{ width:100%; height:30px; border-bottom:1px solid #BBBBBB; margin:4px 0px 4px 0px; text-align:center; }	
+	#pb_image_box	{ float:left; border:1px dotted #B2B2B2; background-color:#FAFAFA; margin-top:10px; text-align:center; }
+
+#paging            { padding-top:10px;  text-align:center; }
+#paging .num       { font-family:Tahoma; font-size:11px; padding:0 4px; margin-right:5px;}
+#paging .selected  { color:#333; border:1px solid #bbb; background-color:#efefef;}
+#paging .default  { color:#333; border:1px solid #ccc; background-color:#fff;}
+#paging .defaultOver  { color:#333; border:1px solid bbb; background-color:#efefef; text-decoration:none;}
+
+#nextIcon { background:url(img/icon_next.gif) right 1px no-repeat; padding-right:6px; color:#3399ff;}
+
+.contentBox { width:716px; border:2px solid #f8f8f8; text-align:center; } 
+	.contentBoxIn { border:1px solid #ccc; width:714px; } 
+		.searchField { position:relative;z-index:998;background-color:#fff; border: 1px solid #bbb;text-align:left }
+
+#writeInfo { text-align:left; width:720px; } 
+		#writeInfo ul { margin:0px; padding:30px 0 30px 30px; border:1px solid #ccc; }
+			#writeInfo ul li { clear:both; margin:0px; padding:0px; height:32px; width:95%; } 
+	.writeBox { border:2px solid #f8f8f8; }
+
+.viewInfo { float:left; width:700px; padding-left:8px;}
+	.viewInfo ul { float:left; margin:0px; padding:0px; text-align:left; width:680px; padding:0 10px; }
+		.viewInfo ul li { margin:4px 0 4px 0; padding:2px 0 0 0; width:680px; height:23px; overflow:hidden; text-align:left; background:url(img/dot_line.gif) repeat-x 0px 12px; }
+.viewText { float:right; padding:2px 0 0 5px; background-color:#fff; height:16px; }	
+
+
+input.inputs_bg { border:1px solid #ccc; background:#f8f8f8; height:18px; vertical-align:middle;}
+input.inputs:hover, input.inputs:focus, input.inputs:active { border:1px solid #38c1c9 }
+input.inputs_bg:hover, input.inputs_bg:focus, input.inputs_bg:active { border:1px solid #38c1c9 }
+
+.noticeDiv { background:url(img/icon_notice.gif) no-repeat 0 -1px;padding:1px 0 0 16px; }
+.nextIcon2 { padding-left:8px; width:120px;}
+.nextIcon2rq { background:url(img/icon_nextrq.gif) no-repeat 0px 2px; padding-left:8px; width:120px;}
+
+/*******************************************************************
+*	LINKS
+********************************************************************/
+a.pb_link:link, a.pb_link:visited, a.pb_link:active { color:#666666; text-decoration:none; }
+a.pb_link:hover	{ color:#111111; text-decoration:none; }
+
+
+/*********************************************************************
+*	FONT
+*********************************************************************/
+font.pb_lh15	{ line-height: 1.5em; }
+font.pb_lh18	{ line-height: 1.8em; }
+font.pb_eng		{ font-family:verdana; font-size:9px; }
+font.pb_page_list1	{ font-family:verdana;font-size:11px }
+font.pb_page_list2	{ font-family:verdana;font-size:11px; background-color:#BBBBBB;color:white; font-weight:bold; }
+font.pb_page_list3	{ font-family:tahoma;font-size:8pt }
+
+
+/*********************************************************************
+*	FORM
+*********************************************************************/
+.pb_ip { background-color:#F6F6F6; border:1px solid #BBBBBB; font-family : Tahoma, 굴림, Verdana; font-size : 9pt; color:#666666; height:16px;}
+.pb_ip2 { background-color:#FFFFFF; border:1px solid #BBBBBB; font-family : Tahoma, 굴림, Verdana; font-size : 9pt; color:#666666; height:16px;}
+
+
+/*********************************************************************
+*	Background
+*********************************************************************/
+.pb_bg		{ background-color:#DDDDDD; border:0px; }
+.pb_bar		{ border-top:1px solid #DDDDDD; margin-top:10px; }
+.pb_bar_bg	{ clear:both; border-top:1px solid #BBBBBB; border-bottom:4px solid #EBEBEB; }
+
+
+
+.pb_default		{ font-family : Tahoma, 굴림, Arial, Verdana, Helvetica; font-size : 9pt; color:#666666; }
+.pb_small		{ font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none}
+.pb_eng			{ font-family:Tahoma; font-size:11px;letter-spacing:0px; }
+.pb_bold		{ font-weight:bold; }
+.pb_left_text	{ width:50%; float:left; text-align:left; }
+.pb_right_text	{ width:50%; float:right; text-align:right; }
+.pb_write_area	{ clear:both; width:100%; padding:5px 0px 5px 0px; border-bottom:1px solid #DDDDDD; height:20px;text-align:left; }
+.pb_write_area2	{ clear:both; width:100%; text-align:left; padding-top:5px; }
+.pb_write_title	{ float:left; width:100px; text-align:center; }
+.pb_write_title2{ float:left;width:10%; text-align:center; }
+.pb_write_input	{ float:left; width:80%; padding-left:10px;}
+.pb_write_input2{ float:left; padding-left:10px;}
+.pb_image		{ padding:5px; height:132px; }
+.pb_image_text	{ margin-left:3%; border-top:1px dotted #B2B2B2; width:94%; height:0px; height:44px; }
+
+/*********************************************************************
+*	Button Effect
+*********************************************************************/
+#sBtn1 a{ display:block; background:url('img/sBtn1_bg.gif') left 0; float:left; color:#666; padding-left:6px; text-decoration:none; height:20px; cursor:pointer; margin-right:3px; overflow:hidden}
+#sBtn1 a:hover{ background:url('img/sBtn1_bg.gif') left -21px;}
+#sBtn1 a span{ display:block; float:left; background:url('img/sBtn1_bg.gif') right 0; font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px; line-height:215%; padding-right:6px; height:20px; overflow:hidden}
+#sBtn1 a:hover span{ background:url('img/sBtn1_bg.gif') right -21px; color:#000;} 
+
+#sBtn2 a{ display:block; background:url('img/sBtn2_bg.gif') left 0; float:left; color:#FFF; padding-left:12px; text-decoration:none; height:22px; cursor:pointer; margin-right:3px; overflow:hidden}
+#sBtn2 a span{ display:block; float:left; background:url('img/sBtn2_bg.gif') right 0; font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px; line-height:220%; padding-right:12px; height:22px; overflow:hidden}
+#sBtn3 a{ display:block; background:url('img/sBtn3_bg.gif') left 0; float:left; color:#FFF; padding-left:12px; text-decoration:none; height:22px; cursor:pointer; margin-right:3px; overflow:hidden}
+#sBtn3 a span{ display:block; float:left; background:url('img/sBtn3_bg.gif') right 0; font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px; line-height:220%; padding-right:12px; height:22px; overflow:hidden}
+
+
+/*IE를 제외한 브라우저*/ 
+.clearfix:after { 
+    content: "."; 
+    display: block; 
+    clear: both; 
+    visibility: hidden; 
+    line-height: 0; 
+    height: 0; 
+} 
+/*Inline-block 지원하는 모든 브라우저*/ 
+.clearfix { 
+    display: inline-block; 
+} 
+/*사파리?*/ 
+html[xmlns] .clearfix { 
+    display: block; 
+} 
+  
+/*IE 6 이상에 대한 clearfix*/ 
+* html .clearfix { 
+    height: 1%; 
+} 

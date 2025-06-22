@@ -1,0 +1,734 @@
+<div id="pageOrder">
+	<div>		
+		<div id="subTitle_1">
+			<img src="img/shop/ttl_order.gif" alt="주문/결제" title="주문/결제"  />
+		</div>
+		<div id="subTitle_2">		
+			<div class="left"><img src="img/shop/order_step01_off.gif" alt="스텝1:장바구니" title="스텝1:장바구니" /></div>
+			<div class="left"><img src="img/common/step_next_off.gif" width="13" height="67" alt="arrow" /></div>
+			<div class="left"><img src="img/shop/order_step02_on.gif" alt="스텝2:주문/결제" title="스텝2:주문/결제" /></div>
+			<div class="left"><img src="img/common/step_next_on.gif" width="13" height="67" alt="arrow" /></div>
+			<div class="left"><img src="img/shop/order_step03_off.gif" alt="스텝3:주문완료" title="스텝3:주문완료" /></div>
+		</div>		
+	</div>	
+	
+	<div style="clear:both;height:20px;">&nbsp;</div>
+
+	<div id="list_list">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">						
+			<col width="90" />
+			<col />
+			<col width="80" /> 
+			<col width="40" /> 				
+			<col width="70" />
+			<col width="80" />
+			<thead>
+			<tr height="28" align="center">				
+				<th scope="col" class="small black">이미지</th>
+				<th scope="col" class="small black">상품명/옵션</th>
+				<th scope="col" class="small black">가격</th>
+				<th scope="col" class="small black">수량</th>					
+				<th scope="col" class="small black">적립금</th>
+				<th scope="col" class="small black">합계</th>
+			</tr>
+			</thead>				
+			<tbody>
+			<!-- DYNAMIC @loop_cart@ -->
+			<tr align="center" height="98">
+				<td><a href="{{LINK}}" onfocus="blur();">{{IMAGE}}</a></td>
+				<td align="left" valign="top">
+					<div style="height:68px;" class="clear tleft">
+						<div style="height:8px;overflow:hidden">&nbsp;</div>
+						<div style="height:20px;"><a href="{{LINK}}" onfocus="blur()">{{NAME}}</a>&nbsp;{{ICON}}</div>
+						<div>
+							<!-- DYNAMIC @loop_op@ -->
+							<div style='float:left;padding-right:10px;' class='small left blue'>{{OP_NAME}} : {{OP_SEC_VLS}}&nbsp;</div>
+							<!-- DYNAMIC @loop_op@ -->
+						</div>
+						<div class="clear">
+							<!-- DYNAMIC @is_my_sale@ -->
+							<font class="small">({{TTL}}할인 <font class="num blue">{{MY_SALE}}%</font> 적용)&nbsp;&nbsp;</font>
+							<!-- DYNAMIC @is_my_sale@ -->
+							<!-- DYNAMIC @is_my_point@ -->
+							<font class="small">({{TTL}}추가적립 <font class="num blue">{{MY_POINT}}%</font> 적용)</font>
+							<!-- DYNAMIC @is_my_point@ -->
+							<!-- DYNAMIC @is_my_carr@ -->
+							<font class="small">(배송비 <font class="num blue">{{CARR}}원</font> 별도상품)</font>
+							<!-- DYNAMIC @is_my_carr@ -->
+							<!-- DYNAMIC @is_my_free@ -->
+							<font class="small">(배송비 무료상품)</font>
+							<!-- DYNAMIC @is_my_free@ -->				
+						</div>
+					</div>
+					<div class="clear small tleft">Home > {{LOC}}</div>				
+				</td>				
+				<td class="num orange">{{PRICE}}<font class="small">원</font> {{OP_PRICE}}</td>
+				<td class="num">{{QTY}}<font class="small">{{UNIT}}</font></td>
+				<td class="num">{{RESE}}P</td>
+				<td class="num orange">{{SUM}}<font class="small">원</font></td>
+			</tr>
+			<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>			
+			<!-- DYNAMIC @loop_cart@ -->
+			</tbody>			
+		</table>
+	</div>		
+	
+	<!-- DYNAMIC @is_list@ -->
+	<div class="scrollBox3" style="margin-top:20px;">
+		<div class="top"></div>
+		<div class="content" style="padding-top:10px;">		
+			<div class="left small" style="text-align:left;line-height:220%;padding-left:16px;">
+				주문상품 : <font class="num orange">{{TCNT}}</font>개,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->총할인금액 : <font class="num blue">{{TSALE}}</font>원,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->상품총금액 : <font class="num orange">{{TOTAL}}</font>원,&nbsp;&nbsp;배송비 : <font class="num orange">{{TCARR}}</font>원<br>
+				총적립금 : <font class="num orange">{{TRESE}}</font><font class='num'>P</font>&nbsp;&nbsp;(적립금은 주문완료후 적립처리 됩니다.)&nbsp;
+			</div>
+			<div class="right" style="font-size:20px;padding:4px 36px;">
+				<img src="img/shop/ttl_total_pay.gif" alt='총주문금액' title='총주문금액' /> {{IMG_TOTAL}} <img src="img/shop/ttl_total_won.gif" alt='won' />
+			</div>
+		</div>		
+		<div class="bottom"></div>
+	</div>	
+
+	<form method="post" name="orderForm" action="{{sMain}}php/order_ok.php">	
+	<input type="hidden" name="cash_total" value='{{C_TOTAL2}}' />
+	<input type="hidden" name="tmp_total" value='{{C_TOTAL}}' />
+	<input type="hidden" name="carriage" value='{{carr}}' />
+	<input type="hidden" name="tmp_carr" value='{{carr}}' />
+	<input type="hidden" name="tsale" value='{{tsale}}' />
+	<input type="hidden" name="tmp_cashdc" value='{{cashdc}}' />
+	<input type="hidden" name="direct" value='{{direct}}' />
+	<input type="hidden" name="ckBtn" />
+
+	<div style="width:909px; margin-top:30px;">
+		<div style="float:left;width:200px;">
+			<img src="img/shop/ttl_order_input1.gif" alt="주문자정보입력" title="주문자정보입력" />
+		</div>
+		<div id="orderInfo">		
+			<ul>				
+				<li>
+					<div class="small left bold nextIcon2">주문자</div>
+					<div class="left"><input type=text  class="inputs black default" name="name1" value="{{UNAME}}" /></div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">연락처 1</div>
+					<div class="left">
+						<select name="tel11" class="inputs black num">
+							<option value="02">02</option>
+							<option value='031'>031</option>
+							<option value='032'>032</option>
+							<option value='033'>033</option>
+							<option value='041'>041</option>
+							<option value='042'>042</option>
+							<option value='043'>043</option>
+							<option value='051'>051</option>
+							<option value='052'>052</option>
+							<option value='053'>053</option>
+							<option value='054'>054</option>
+							<option value='055'>055</option>
+							<option value='061'>061</option>
+							<option value='062'>062</option>
+							<option value='063'>063</option>
+							<option value='064'>064</option>
+							<option value='070'>070</option>
+							<option value='0502'>0502</option>
+							<option value='0505'>0505</option>
+							<option value='0303'>0303</option>
+						</select>
+						<script>document.orderForm.tel11.value = '{{TEL1}}';</script>
+						 - <input type=text  class="inputs black num" name="tel12" size="5" maxlength="4" onBlur="return ck_tel('1','2');" value="{{TEL2}}" /> - <input type=text  class="inputs black num" name="tel13" size="5" maxlength="4" onBlur="return ck_tel('1','3');" value="{{TEL3}}" />&nbsp;&nbsp;<span id="tels1" class="small"></span>
+					</div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">연락처 2</div>
+					<div class="left">
+						<select name="phone11" class="inputs black num">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+							<option value="019">019&nbsp;&nbsp;</option>							
+						</select>
+						<script>document.orderForm.phone11.value = '{{PHONE1}}';</script>
+						 - <input type=text  class="inputs black num" name="phone12" size="5" maxlength="4" onBlur="return ck_phone('1','2');" value="{{PHONE2}}" /> - <input type=text  class="inputs black num" name="phone13" size="5" maxlength="4" onBlur="return ck_phone('1','3');" value="{{PHONE3}}" />&nbsp;&nbsp;<span id="phones1" class="small"></span>
+					</div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">이메일</div>
+					<div class="left">
+						<input type="hidden" name="email"  value="{{EMAIL}}" />
+						<input type="text" class="inputs black num" name="email1" size="13" value="{{EMAIL1}}" onBlur="ck_email();" style="ime-mode:inactive;" /> @ <input type="text" class="inputs black num" name="email2" size="15" value="{{EMAIL2}}" onBlur="ck_email();" style="ime-mode:inactive;" />
+						<select name="email_select" class="num" onchange="document.joinForm.email2.value=this.value;ck_email();">
+							<option value=''>직접입력</option>
+							<option value=hanmail.net>hanmail.net</option> 
+							<option value=chol.com>chol.com</option>
+							<option value=dreamwiz.com>dreamwiz.com</option> 
+							<option value=empal.com>empal.com</option> 
+							<option value=freechal.com>freechal.com</option> 
+							<option value=gmail.com>gmail.com</option> 
+							<option value=hanafos.com>hanafos.com</option> 
+							<option value=hanmir.com>hanmir.com</option> 
+							<option value=hitel.net>hitel.net</option> 
+							<option value=hotmail.com>hotmail.com</option> 
+							<option value=korea.com>korea.com</option> 
+							<option value=lycos.co.kr>lycos.co.kr</option> 
+							<option value=nate.com>nate.com</option> 
+							<option value=naver.com>naver.com</option> 
+							<option value=netian.com>netian.com</option> 
+							<option value=paran.com>paran.com</option> 
+							<option value=yahoo.com>yahoo.com</option> 
+							<option value=yahoo.co.kr>yahoo.co.kr</option> 							  
+						</select>
+						&nbsp;&nbsp;<span id="emails" class="small"></span>
+					</div>
+				</li>
+				
+			</ul>
+		</div>
+		
+		<div style="clear:both;margin-bottom:20px;height:21px;width:860px;border-bottom:1px solid #efefef;overflow:hidden">&nbsp;</div>
+
+		<div style="float:left;width:200px;">
+			<img src="img/shop/ttl_order_input2.gif" alt="배송정보입력" title="배송정보입력" />
+		</div>
+		<div id="orderInfo">		
+			<ul>
+				<li>
+					<div class="small left bold nextIcon2">배송지 선택</div>
+					<div class="left small">
+						<input type="checkbox" name="ckEq" id="ckCarr1" onclick="eqInfo(this);" onfocus="blur();" /> <label for='ckCarr1'>주문정보와 동일</label>
+						<!-- DYNAMIC @is_carrinfo1@ -->
+						<input type='checkbox' name='ckEq1' id='ckCarr2' onclick='eqInfo1(this);' onfocus='blur();' /> <label for='ckCarr2'>{{NAME2}}</label>
+						<!-- DYNAMIC @is_carrinfo1@ -->
+						<!-- DYNAMIC @is_carrinfo2@ -->
+						<input type='checkbox' name='ckEq2' id='ckCarr3' onclick='eqInfo2(this);' onfocus='blur();' /> <label for='ckCarr3'>{{NAME3}}</label>
+						<!-- DYNAMIC @is_carrinfo2@ -->
+					</div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">받으시는 분</div>
+					<div class="left"><input type="text"  class="inputs black default" name="name2" value="{{CNAME}}" /></div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">연락처 1</div>
+					<div class="left">
+						<select name="tel21" class="inputs black num">
+							<option value="02">02</option>
+							<option value='031'>031</option>
+							<option value='032'>032</option>
+							<option value='033'>033</option>
+							<option value='041'>041</option>
+							<option value='042'>042</option>
+							<option value='043'>043</option>
+							<option value='051'>051</option>
+							<option value='052'>052</option>
+							<option value='053'>053</option>
+							<option value='054'>054</option>
+							<option value='055'>055</option>
+							<option value='061'>061</option>
+							<option value='062'>062</option>
+							<option value='063'>063</option>
+							<option value='064'>064</option>
+							<option value='070'>070</option>
+							<option value='0502'>0502</option>
+							<option value='0505'>0505</option>
+							<option value='0303'>0303</option>
+						</select>
+						<script>document.orderForm.tel21.value = '{{CTEL1}}';</script>
+						 - <input type=text  class="inputs black num" name="tel22" size="5" maxlength="4" onBlur="return ck_tel('2','2');" value="{{CTEL2}}" /> - <input type=text  class="inputs black num" name="tel23" size="5" maxlength="4" onBlur="return ck_tel('2','3');" value="{{CTEL3}}" />&nbsp;&nbsp;<span id="tels2" class="small"></span>
+					</div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">연락처 2</div>
+					<div class="left">
+						<select name="phone21" class="inputs black num">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="016">016</option>
+							<option value="017">017</option>
+							<option value="018">018</option>
+							<option value="019">019&nbsp;&nbsp;</option>							
+						</select>
+						<script>document.orderForm.phone21.value = '{{CPHONE1}}';</script>
+						 - <input type=text  class="inputs black num" name="phone22" size="5" maxlength="4" onBlur="return ck_phone('2','2');" value="{{CPHONE2}}" /> - <input type=text  class="inputs black num" name="phone23" size="5" maxlength="4" onBlur="return ck_phone('2','3');" value="{{CPHONE3}}" />&nbsp;&nbsp;<span id="phones2" class="small"></span>
+					</div>
+				</li>	
+				<li style="height:52px;background:url(img/shop/dot_line.gif) repeat-x 0px 48px;">
+					<div class="small left bold nextIcon2">배송지 주소</div>
+					<div class="left">
+						<div class="left">
+							<input type=text class="inputs black num" name="zip1" size="4" maxlength="4" onBlur="return ck_zip(1,'',this);" value="{{CZIP1}}" /> - <input type=text class="inputs black num" name="zip2" size="4" maxlength="4" onBlur="return ck_zip(2,'',this);" value="{{CZIP2}}" />
+						</div>
+						<div class="left" style="padding:0 0 0 6px">
+							<img src="img/shop/btn_zipcode.gif" onclick="zipcode2();" class="hand" alt="우편번호찾기" title="우편번호찾기" />
+						</div>
+						<div class="left" style="padding:4px 0 0 4px"><span id="zips" class="small"></span></div>
+						<div style="clear:both;height:4px;overflow:hidden">&nbsp;</div>
+						<div>
+							<input type="text" class="inputs black default" name="addr" size="70" readonly  value="{{CADDR}}" />
+						</div>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_no_message@ -->
+				<li style="height:56px;background:url(img/shop/dot_line.gif) repeat-x 0px 52px;">
+					<div class="small left bold nextIcon2">요청 사항</div>
+					<div class="left"><textarea class="inputs black default" style="width:490px;height:40px;" name="message">{{CMESSAGE}}</textarea></div>
+				</li>
+				<!-- DYNAMIC @is_no_message@ -->
+				<!-- DYNAMIC @is_message@ -->
+				<li style="height:70px;background:url(img/shop/dot_line.gif) repeat-x 0px 69px;">
+					<div class="small left bold nextIcon2">요청 사항</div>
+					<div class="left">
+						<div class="small">
+							<!-- DYNAMIC @is_message1@ -->
+							<input type='hidden' name='Ms1' value='{{MESSAGE1}}' />
+							<input type='checkbox' name='ckMs1' id='ckMs11' onclick='msInfo(this,1);' onfocus='blur();' /><label for='ckMs11'>요청사항1</label>
+							<!-- DYNAMIC @is_message1@ -->
+							<!-- DYNAMIC @is_message2@ -->
+							<input type='hidden' name='Ms2' value='{{MESSAGE2}}' />
+							<input type='checkbox' name='ckMs2' id='ckMs12' onclick='msInfo(this,2);' onfocus='blur();' /><label for='ckMs12'>요청사항2</label>
+							<!-- DYNAMIC @is_message2@ -->
+							<!-- DYNAMIC @is_message3@ -->
+							<input type='hidden' name='Ms3' value='{{MESSAGE3}}' />
+							<input type='checkbox' name='ckMs3' id='ckMs13' onclick='msInfo(this,3);' onfocus='blur();' /><label for='ckMs13'>요청사항3</label>
+							<!-- DYNAMIC @is_message3@ -->
+						</div>
+						<textarea class="inputs black default" style="width:490px;height:40px;" name="message">{{CMESSAGE}}</textarea>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_message@ -->
+			</ul>
+		</div>
+
+		<div style="clear:both;margin-bottom:20px;height:21px;width:860px;border-bottom:1px solid #efefef;overflow:hidden">&nbsp;</div>
+
+		<div style="float:left;width:200px;">
+			<img src="img/shop/ttl_order_input3.gif" alt="결제금액/적립금사용" title="결제금액/적립금사용" />
+		</div>
+		<div id="orderInfo">		
+			<ul>
+				<li>
+					<div class="small left bold nextIcon2">상품 총금액</div>
+					<div class="left num" style="width:80px;text-align:right">{{TOTAL}}<font class="default">원</font></div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">총배송비</div>
+					<div id="carr_total" class="left num" style="width:80px;text-align:right">{{TCARR}}<font class="default">원</font></div>
+					<div id="carr_add" class="left small blue" style="padding-left:10px; display:none;">도서산간 별도 추가료 <font class="num" id="carrMoneys"></font>원 적용
+				</li>
+				<!-- DYNAMIC @is_reserve1@ -->
+				<li>
+					<div class="small left bold nextIcon2">적립된 금액</div>
+					<div class="left num" style="width:80px;text-align:right">{{RESERVE}}P</div>
+					<div class="left small" style="padding-left:10px;">
+						(적립금은 <font class='num blue'>{{RESERVE_USE}}</font>P 이상 일때 사용가능합니다.)&nbsp;
+					</div>
+				</li>
+				<!-- DYNAMIC @is_reserve1@ -->
+				<!-- DYNAMIC @is_reserve2@ -->
+				<li>
+					<div class="small left bold nextIcon2">사용할 적립금</div>
+					<div class="left num" style="width:80px;text-align:right">
+						<input type="text" class="inputs default num" style="text-align:right" name="use_reserve" size="8" maxlength="10" onblur='ckReserve();' onKeydown="onlyNum(this);" onKeyup="onlyNum(this);" value=0 />P
+					</div>
+					<div class="left" style="padding:3px 0 0 4px"><input type="text" class="hd small" size="50" name="reserves" disabled /></div>
+				</li>
+				<!-- DYNAMIC @is_reserve2@ -->
+				<!-- DYNAMIC @is_cupon@ -->
+				<li>
+					<div class="small left bold nextIcon2">쿠폰할인</div>
+					<div class="left num" style="width:80px;text-align:right">
+						<input type="text" class="inputs default num" style="text-align:right" name="use_cupon" size="8" maxlength="10" value="0" readonly />원
+						<input type="hidden" name="cupon" />
+					</div>
+					<div class="left" style="padding-left:6px;display:none" id='cc_cupon'><img src="img/shop/btn_cancel_cupon.gif" class="hand" onclick="cancelCupon();" /></div>
+					<div class="left" style="padding-left:6px"><img src="img/shop/btn_use_cupon.gif" class="hand" onclick="pLightBox.show('php/pcupon_use.php?direct={{direct}}','iframe','620','420','■ 쿠폰사용하기','20')" /></div>
+					<div class="left small" style="padding:2px 0 0 6px">(보유한 쿠폰 <font class='orange num'>{{CNUM}}</font>장)&nbsp;</div>
+				</li>
+				<!-- DYNAMIC @is_cupon@ -->
+				<!-- DYNAMIC @is_cash_dc@ -->
+				<li>
+					<div class="small left bold nextIcon2">현금결제추가할인</div>
+					<div id="cash_dc" class="left num bold blue" style="width:80px;text-align:right">{{CASHDC}}<font class="default">원</font></div>
+				</li>
+				<!-- DYNAMIC @is_cash_dc@ -->				
+				<li>
+					<div class="small left bold nextIcon2">총결제금액</div>
+					<div id="cash_money" class="left num bold orange" style="width:80px;text-align:right">{{TOTAL3}}<font class="default">원</font></div>
+				</li>				
+			</ul>
+		</div>
+
+		<div style="clear:both;margin-bottom:20px;height:21px;width:860px;border-bottom:1px solid #efefef;overflow:hidden">&nbsp;</div>
+
+		<div style="float:left;width:200px;">
+			<img src="img/shop/ttl_order_input4.gif" alt="결제수단선택" title="결제수단선택" />
+		</div>
+		<div id="orderInfo">		
+			<ul id="orderIe">
+				<li>					
+					<div class="left">						
+						<!-- DYNAMIC @is_bank1@ -->
+						<input type="radio" name="cash_type" id='cashTypeB' value='B' onfocus="blur();" checked="checked" onclick="cashClick('block')" /> <label for='cashTypeB'>무통장 입금</label>					
+						<!-- DYNAMIC @is_bank1@ -->
+						<!-- DYNAMIC @is_card1@ -->
+						<input type="radio" name="cash_type" value='C' id='cashTypeC' onfocus="blur();" onclick="cashClick('none')" /> <label for='cashTypeC'>신용카드</label>
+						<!-- DYNAMIC @is_card1@ -->
+						<!-- DYNAMIC @is_card2@ -->
+						<input type="radio" name="cash_type" value='R' id='cashTypeR' onfocus="blur();" onclick="cashClick('none')" /> <label for='cashTypeR'>실시간 계좌이체</label>
+						<!-- DYNAMIC @is_card2@ -->
+						<!-- DYNAMIC @is_card3@ -->
+						<input type="radio" name="cash_type" value='V' id='cashTypeV' onfocus="blur();" onclick="cashClick('none')" /> <label for='cashTypeV'>가상계좌</label>
+						<!-- DYNAMIC @is_card3@ -->
+						<!-- DYNAMIC @is_card4@ -->
+						<input type="radio" name="cash_type" value='H' id='cashTypeH' onfocus="blur();" onclick="cashClick('none')" /> <label for='cashTypeH'>핸드폰</label>
+						<!-- DYNAMIC @is_card4@ -->
+						<!-- DYNAMIC @is_card@ -->
+						&nbsp;&nbsp;<span id="cards" class="small"></span>
+						<!-- DYNAMIC @is_card@ -->
+						<!-- DYNAMIC @is_test@ -->
+						&nbsp;&nbsp;<font class="small blue">결제 테스트 중 입니다. 실 결제가 이루어지지 않습니다!</font>
+						<!-- DYNAMIC @is_test@ -->
+					</div>
+				</li>
+			</ul>
+			<ul id="orderOther" style="display:none;">
+				<li>					
+					<div class="left">						
+						<input type="radio" name="cash_type" id='cashTypeB' value='B' onfocus="blur();" checked="checked" onclick="cashClick('block')" /> <label for='cashTypeB'>무통장 입금</label>					
+						&nbsp;&nbsp;<font class="small blue">IE이외의 브라우저에서는 신용카드 및 전자결제를 이용하실 수 없습니다</font>
+					</div>
+				</li>
+			</ul>
+			<!-- DYNAMIC @is_bank2@ -->
+			<ul id="bankInfo">				
+				<li>
+					<div class="small left bold nextIcon2">입금은행 선택</div>
+					<div class="left"><select name="bank_name" class="inputs black default">{{BANK_SELECT}}</select></div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">입금자 성명</div>
+					<div class="left"><input type="text" class="inputs black default" name="pay_name" value="{{UNAME}}" /></div>
+				</li>
+				<li>
+					<div class="small left bold nextIcon2">입금 예정일</div>
+					<div class="left">
+						<select name="myear" class="inputs black num">{{PYEAR}}</select> &nbsp; 
+				        <select name="mmonth" class="inputs black num">{{PMONTH}}</select> &nbsp; 
+						<select name="mday" class="inputs black num">{{PDAY}}</select>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_bank_cash@ -->
+				<li style="height:52px;background:url(img/shop/dot_line.gif) repeat-x 0px 48px;">
+					<div class="small left bold nextIcon2">현금영수증 신청</div>
+					<div class="left">
+						<div style="padding-bottom:4px;">
+							<input type='radio' name='cash_ctype' id='use1' value='A' checked onclick="cashCgType('1');">&nbsp;<label for='use1'>소득공제용</label>&nbsp;<input type='radio' name='cash_ctype' id='use2' value='B' onclick="cashCgType('2');">&nbsp;<label for='use2'>지출증빙용</label>
+						</div>
+						<div id="pay1">
+							<input type='radio' name='pay_type' id='use3' value='A' checked>&nbsp;<label for='use3'>핸드폰번호</label>
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell1 size="3" maxlength=3> - 
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell2 size="4" maxlength=4> - 
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell3 size="4" maxlength=4>
+							&nbsp;<input type='radio' name='pay_type' id='use4' value='B'>&nbsp;<label for='use4'>주민등록번호</label>
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=jumin1 size="6" maxlength=6> - 
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=jumin2 size="7" maxlength=7>					
+						</div>
+						<div id="pay2" style="display:none">
+							<input type='radio' name='pay_type' id='use5' value='C'>&nbsp;<label for='use5'>사업자번호</label>
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum1 size="3" maxlength=3> - 
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum2 size="2" maxlength=2> - 
+							<input type=text  class="inputs black num" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum3 size="5" maxlength=5>
+						</div>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_bank_cash@ -->
+			</ul>
+			<!-- DYNAMIC @is_bank2@ -->
+			
+		</div>
+	</div>
+   
+    <div style="clear:both;margin-bottom:20px;height:21px;width:860px;border-bottom:1px solid #efefef;overflow:hidden">&nbsp;</div>
+
+	<!-- DYNAMIC @is_guest@ -->
+	<div>
+		<div style="text-align:left;padding:10px 0 5px 20px;" class="small"><img src="img/member/ttl_bar.gif" align="absmiddle"	alt='bar' />&nbsp;<b>비회원 이용약관 동의 : </b> 내용을 확인하신 후 동의여부를 표시해 주세요.</div>
+		<div style="border:1px solid #bbb; background-color:#EFEFEF; padding:10px;width:840px;height:85px">
+			<div id="agreeBox2">{{USED}}</div>										
+		</div>
+
+		<div style="clear:both;padding-left:20px;" class="small bold">
+			<div style="height:10px;"></div>
+			<div style='float:left;'><input type="checkbox" name="agree1" id='agree1y' value="Y" /></div>
+			<div style='float:left;padding-top:2px;'> <label for='agree1y'>이용약관에 동의 합니다.</label></div>
+			<div style="height:20px;"></div>
+		</div>
+
+		<div style="text-align:left;padding:10px 0 5px 20px;" class="small"><img src="img/member/ttl_bar.gif" align="absmiddle" 	alt='bar' />&nbsp;<b>비회원 개인정보취급방침 동의 : </b> 내용을 확인하신 후 동의여부를 표시해 주세요.</div>
+		<div style="border:1px solid #bbb; background-color:#EFEFEF; padding:10px;width:840px;height:85px">
+			<div id="agreeBox2">{{PRIV}}</div>										
+		</div>
+
+		<div style="clear:both;padding-left:20px;" class="small bold">
+			<div style="height:10px;"></div>
+			<div style='float:left;'><input type="checkbox" name="agree2" id='agree2y' value="Y" /></div>
+			<div style='float:left;padding-top:2px;'> <label for='agree2y'>개인정보취급방침에 동의 합니다.</label></div>
+			<div style="height:20px;"></div>
+		</div>
+	</div>
+	<!-- DYNAMIC @is_guest@ -->
+
+	<div style="height:20px;">&nbsp;</div>		
+	<div style="width:231px;text-align:center">
+		<div class="left"><img src="img/shop/btn_cash.gif" class="hand" onclick="return ckOrder();" alt="결제하기" title="결제하기" /></div>
+		<div class="left" style="padding-left:6px;"><a href="{{Main}}?channel=cart"><img src="img/shop/btn_pcart.gif" border="0" alt="장바구니로가기" title="장바구니로가기" /></a></div>
+	</div>
+	<div style="clear:both;height:20px;">&nbsp;</div>		
+	</form>
+	
+	<!-- DYNAMIC @is_list@ -->
+		
+			
+	<!-- DYNAMIC @no_cart@ -->
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/shop/no_cart.gif" alt="장바구니 없음 이미지" title="장바구니 없음 이미지" />
+	</div>
+	<!-- DYNAMIC @no_cart@ -->
+
+</div>
+
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+f = document.orderForm;
+
+function defInfo(){
+	f.name2.value = '';
+	f.tel21.value = '02';
+	f.tel22.value = '';
+	f.tel23.value = '';
+	f.phone21.value = '010';
+	f.phone22.value = '';
+	f.phone23.value = '';
+	f.zip1.value = '';
+	f.zip2.value = '';
+	f.addr.value = '';
+	ckCarrArea();
+}
+
+function eqInfo(obj) {
+	if(obj.checked) {
+		f.addr.value = '';
+		ckCarrArea();
+		f.name2.value = f.name1.value;
+		f.tel21.value = f.tel11.value;
+		f.tel22.value = f.tel12.value;
+		f.tel23.value = f.tel13.value;
+		f.phone21.value = f.phone11.value;
+		f.phone22.value = f.phone12.value;
+		f.phone23.value = f.phone13.value;
+		f.zip1.value = '{{ZIP1}}';
+		f.zip2.value = '{{ZIP2}}';
+		f.addr.value = '{{ADDR}}';
+		
+		if(typeof(f.ckEq1)!='undefined') f.ckEq1.checked = false;
+		if(typeof(f.ckEq2)!='undefined') f.ckEq2.checked = false;
+		ckCarrArea();
+	}
+	else defInfo();
+}
+
+function eqInfo1(obj) {
+	if(obj.checked) {
+		f.addr.value = '';
+		ckCarrArea();
+		f.name2.value = '{{NAME2}}';
+		f.tel21.value = '{{TEL21}}';
+		f.tel22.value = '{{TEL22}}';
+		f.tel23.value = '{{TEL23}}';
+		f.phone21.value = '{{PHONE21}}';
+		f.phone22.value = '{{PHONE22}}';
+		f.phone23.value = '{{PHONE23}}';
+		f.zip1.value = '{{ZIP21}}';
+		f.zip2.value = '{{ZIP22}}';
+		f.addr.value = '{{ADDR2}}';
+		f.ckEq.checked = false;
+		if(typeof(f.ckEq2)!='undefined') f.ckEq2.checked = false;
+		ckCarrArea();
+	}
+	else defInfo();
+}
+
+function eqInfo2(obj) {
+	if(obj.checked) {
+		f.addr.value = '';
+		ckCarrArea();
+		f.name2.value = '{{NAME3}}';
+		f.tel21.value = '{{TEL31}}';
+		f.tel22.value = '{{TEL32}}';
+		f.tel23.value = '{{TEL33}}';
+		f.phone21.value = '{{PHONE31}}';
+		f.phone22.value = '{{PHONE32}}';
+		f.phone23.value = '{{PHONE33}}';
+		f.zip1.value = '{{ZIP31}}';
+		f.zip2.value = '{{ZIP32}}';
+		f.addr.value = '{{ADDR3}}';
+		f.ckEq.checked = false;
+		f.ckEq1.checked = false;
+		ckCarrArea();
+	}
+	else defInfo();
+}
+
+function ckCard() {
+   if(typeof(f.cash_type[1])=='undefined') return;
+   if(f.cash_type[1].checked==true) { 
+       if(f.cash_total.value < {{CARDUSE1}}) {
+		    document.getElementById('cards').innerHTML = "* 카드결재는 {{CARDUSE2}}원 이상 일때 사용가능합니다.";
+            f.cash_type[1].checked=false;
+			f.cash_type[0].checked=true;
+			cashClick('block');
+       }
+   }
+}
+
+function ckReserve() {
+    if(!f.use_reserve.value) return false;
+	if(!ckNum(f.use_reserve)) {
+		f.use_reserve.value = 0;
+		return false;
+	}
+		
+    if(parseInt(f.use_reserve.value) > {{RESEUSE}}) {
+		f.reserves.value= '적립된 금액을 초과 했습니다.';
+		f.use_reserve.value=0;
+		f.use_reserve.focus();
+		return false;
+    }
+	f.reserves.value= '';
+
+	cashTotal();
+
+	if(parseInt(f.cash_total.value)<0) {
+		f.reserves.value= '결제하시려는 금액을 초과 했습니다.';
+		f.use_reserve.value=0;
+		cashTotal();
+		f.use_reserve.focus();
+		return false;    
+	}
+
+	document.getElementById('cash_money').innerHTML = number_format(f.cash_total.value)+"원";
+
+	ckCard();
+	ckCarrArea();
+}
+
+function ckCupon() {
+    if(!f.cupon.value || !f.use_cupon.value) return false;	
+	
+	if(!ckNum(f.use_cupon)) {
+		f.use_cupon.value = 0;
+		return false;
+	}
+
+	cashTotal();
+	document.getElementById('cash_money').innerHTML = number_format(f.cash_total.value)+"원";
+	document.getElementById('cc_cupon').style.display = 'block';
+
+	ckCard();
+	ckCarrArea();
+}
+
+function cancelCupon() {
+    f.use_cupon.value = 0;
+	f.cupon.value = '';
+
+	cashTotal();
+	document.getElementById('cash_money').innerHTML = number_format(f.cash_total.value)+"원";
+	document.getElementById('cc_cupon').style.display = 'none';
+
+	ckCard();
+	ckCarrArea();
+}
+
+function ckCarrArea() {
+	if(!f.addr.value) {
+		if(document.getElementById('carr_add').style.display=='block') {
+			document.getElementById('carr_add').style.display = 'none';
+			f.carriage.value = parseInt(f.tmp_carr.value);
+			cashTotal();
+			document.getElementById('carr_total').innerHTML = number_format(f.carriage.value)+"원";
+			document.getElementById('cash_money').innerHTML = number_format(f.cash_total.value)+"원";		
+		}
+		return;
+	}
+	
+	if(carrMoney && carrArea) {		
+		cashTotal();
+
+		tmps1 = carrArea.split('|');
+		cMoney = carrMoney.split('|');
+		
+		cnts1 = tmps1.length;
+		for(i=0;i<cnts1;i++) {
+			tmps2 = tmps1[i].split(',');
+			cnts2 = tmps2.length;
+			for(j=0;j<cnts2;j++) {						
+				if(!tmps2[j]) continue;
+				if (f.addr.value.indexOf(tmps2[j]) != -1) {
+				    if(!cMoney[i]) cMoney[i] = 0;
+					document.getElementById('carr_add').style.display = 'block';
+					f.carriage.value = parseInt(f.tmp_carr.value) + parseInt(cMoney[i]);
+					f.cash_total.value = parseInt(f.cash_total.value) + parseInt(cMoney[i]);
+					document.getElementById('carrMoneys').innerHTML = number_format(cMoney[i]);
+					document.getElementById('carr_total').innerHTML = number_format(f.carriage.value)+"원";
+					document.getElementById('cash_money').innerHTML = number_format(f.cash_total.value)+"원";
+					return;
+				}
+			}
+		}
+
+		document.getElementById('carr_add').style.display = 'none';
+		f.carriage.value = parseInt(f.tmp_carr.value);
+		
+		document.getElementById('carr_total').innerHTML = number_format(f.carriage.value)+"원";
+		if(f.cash_total.value<0) {
+			f.cash_total.value = parseInt(f.cash_total.value) + parseInt(f.use_reserve.value); 	
+			f.use_reserve.value = 0; 	
+		}
+		document.getElementById('cash_money').innerHTML = number_format(f.cash_total.value)+"원";
+	}
+}
+
+function cashTotal() {
+	if(typeof(f.use_reserve)=="undefined") use_reserve = 0;
+	else use_reserve = f.use_reserve.value;
+		
+	if(typeof(f.use_cupon)=="undefined") use_cupon = 0;
+	else use_cupon = f.use_cupon.value;
+
+	f.cash_total.value = f.tmp_total.value - use_reserve - use_cupon;
+	
+	if(f.tmp_cashdc.value>0) {
+		if(typeof(f.cash_type[0])=='undefined') ck = f.cash_type;
+		else ck = f.cash_type[0];
+		if(ck.checked==true) {	
+			f.cash_total.value = f.cash_total.value - f.tmp_cashdc.value;
+		}
+	}
+}
+
+var carrArea = '{{CARR_AREA}}';
+var carrMoney = '{{CARR_MONEY}}';
+
+var ua = window.navigator.userAgent;
+if(ua.indexOf('MSIE') > 0 || ua.indexOf('Trident') > 0){
+	f.cash_type[0].checked = true;
+}
+else {
+	$("orderIe").style.display = 'none';
+	$("orderOther").style.display = 'block';	
+}
+
+// -->
+</script>

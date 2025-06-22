@@ -1,0 +1,230 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>after_write.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> after_write.html (이용후기 작성 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{skin2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">사용되는 스킨폴더 경로뒤에 “/”가 추가된 값</td>
+					</tr>							
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{addstring}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 파라미터</td>
+					</tr>						
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_write1@ --></font></div>
+			<div style="margin:10px 0 0 28px;">...(글쓰기 일 경우 나타남)</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ck_w}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">자동등록 방지를 위해 사용되는 값</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ck_w2}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">자동등록 방지를 위해 사용되는 값</td>
+								</tr>									
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right;">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_login@ --></font><br/>
+					. . . (로그인 되지 않았을 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_login@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_write1@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_confirm1@ --></font><br/>
+			. . . (수정 및 삭제일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_confirm1@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_confirm2@ --></font></div>
+			<div style="margin:10px 0 0 28px;">...(수정 및 삭제일 경우 나타남)</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TITLE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글 제목</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right;">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_con1@ --></font><br/>
+					. . . (비회원일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_con1@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right;">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_con2@ --></font><br/>
+					. . . (회원일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_con2@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_confirm2@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_write2@ --></font></div>
+			<div style="margin:10px 0 0 28px;">...(수정 및 삭제일 경우 나타남)</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{cate}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 분류번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{number}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이름</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TITLE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글 제목(수정시에만 값이 존재)</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CONTENT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글 내용(수정시에만 값이 존재)</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{POINT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">평점 (수정시에만 값이 존재)</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right;">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_mname1@ --></font><br/>
+					. . . (비회원 수정일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_mname1@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right;">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_mpw@ --></font><br/>
+					. . . (로그인 되지 않았을 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_mpw@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;float:right;">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_mname2@ --></font><br/>
+					. . . (비회원 등록일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_mname2@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @is_write2@ --></font></div>
+		</div>
+	</div>
+
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

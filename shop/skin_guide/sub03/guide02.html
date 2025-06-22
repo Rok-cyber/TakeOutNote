@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>regist_02.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> regist_02.html (회원가입 폼)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ACTION}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">회원가입폼 처리 페이지</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{REQUIRE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">필수 입력 사항일 경우</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{EDU}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">최종학력</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{HOBBY}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">취미</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{JOB}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">직업</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀1</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀2</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀3</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD4}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀4</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD5}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀5</td>
+					</tr>	
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_jumin@ --></font><br/>
+			. . . (주민번호를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_jumin@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_tel@ --></font><br/>
+			. . . (전화번호를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_tel@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_phone@ --></font><br/>
+			. . . (이동전화번호를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_phone@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_addr@ --></font><br/>
+			. . . (주소를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_addr@ --></font>
+		</div>
+	</div>
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_homepage@ --></font><br/>
+			. . . (홈페이지를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_homepage@ --></font>
+		</div>
+	</div>
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_mess@ --></font><br/>
+			. . . (메신저를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_mess@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_bir@ --></font><br/>
+			. . . (생년월일을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_bir@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_sex@ --></font><br/>
+			. . . (성별을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_sex@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_marr@ --></font><br/>
+			. . . (결혼유무를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_marr@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_edu@ --></font><br/>
+			. . . (최종학력을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_edu@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_hobby@ --></font><br/>
+			. . . (취미를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_hobby@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_job@ --></font><br/>
+			. . . (직업을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_job@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_jobname@ --></font><br/>
+			. . . (직장명을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_jobname@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_info@ --></font><br/>
+			. . . (남기는말씀을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_info@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_mailling@ --></font><br/>
+			. . . (메일수신을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_mailling@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_sms@ --></font><br/>
+			. . . (SMS수신을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_sms@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add1@ --></font><br/>
+			. . . (추가필드1을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add1@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add2@ --></font><br/>
+			. . . (추가필드2을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add2@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add3@ --></font><br/>
+			. . . (추가필드3을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add3@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add4@ --></font><br/>
+			. . . (추가필드4을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add4@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add5@ --></font><br/>
+			. . . (추가필드5을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add5@ --></font>
+		</div>
+	</div>
+    
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

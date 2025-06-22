@@ -1,0 +1,83 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style>.text{mso-number-format:"\@";}</style>
+</head>
+<body>
+
+<table border="1">
+<tr>
+	<th>번호</th>
+	<th>주문상태</th>
+	<th>주문번호</th>
+	<th>주문시간</th>
+	<th>아이디</th>
+	<th>주문고객 성명</th>
+	<th>상품명</th>
+	<th>상품수량</th>
+	<th>상품옵션</th>
+	<th>상품가격</th>
+	<th>상품개별처리상태</th>
+	<th>주문상품 합계</th>
+	<th>배송비</th>
+	<th>적립금 사용 금액</th>	
+	<th>쿠폰 사용 금액</th>	
+	<th>총 결제 금액</th>
+	<th>결제방법</th>
+	<th>택배회사</th>
+	<th>송장번호</th>
+	<th>주문고객 연락처1</th>
+	<th>주문고객 연락처2</th>
+	<th>주문고객 E-mail</th>
+	<th>수취인 성명</th>
+	<th>수취인 연락처1</th>
+	<th>수취인 연락처2</th>
+	<th>수취인 우편번호</th>
+	<th>수취인 주소</th>	
+	<th>주문고객 메모</th>
+</tr>
+<!-- DYNAMIC @loop@ -->
+<tr>
+	<td rowspan={{rowspan}}>{{NUM}}</td>
+	<td rowspan={{rowspan}}>{{LIST1}}</td>
+	<td rowspan={{rowspan}}>{{LIST2}}</td>
+	<td rowspan={{rowspan}}>{{LIST3}}</td>
+	<td rowspan={{rowspan}}>{{LIST4}}</td>
+	<td rowspan={{rowspan}}>{{LIST5}}</td>
+	<td>{{LIST61}}</td>	
+	<td>{{LIST62}}</td>	
+	<td>{{LIST63}}</td>
+	<td>{{LIST65}}</td>
+	<td>{{LIST64}}</td>
+	<td rowspan={{rowspan}}>{{LIST8}}</td>
+	<td rowspan={{rowspan}}>{{LIST9}}</td>
+	<td rowspan={{rowspan}}>{{LIST10}}</td>
+	<td rowspan={{rowspan}}>{{LIST23}}</td>	
+	<td rowspan={{rowspan}}>{{LIST7}}</td>
+	<td rowspan={{rowspan}}>{{LIST11}}</td>
+	<td rowspan={{rowspan}}>{{LIST12}}</td>
+	<td rowspan={{rowspan}}>{{LIST13}}</td>
+	<td rowspan={{rowspan}}>{{LIST14}}</td>
+	<td rowspan={{rowspan}}>{{LIST15}}</td>
+	<td rowspan={{rowspan}}>{{LIST16}}</td>
+	<td rowspan={{rowspan}}>{{LIST17}}</td>
+	<td rowspan={{rowspan}}>{{LIST18}}</td>
+	<td rowspan={{rowspan}}>{{LIST19}}</td>
+	<td rowspan={{rowspan}}>{{LIST20}}</td>
+	<td rowspan={{rowspan}}>{{LIST21}}</td>
+	<td rowspan={{rowspan}}>{{LIST22}}</td>
+</tr>
+<!-- DYNAMIC @gloop@ -->
+<tr>
+	<td>{{LIST61}}</td>	
+	<td>{{LIST62}}</td>	
+	<td>{{LIST63}}</td>
+	<td>{{LIST65}}</td>
+	<td>{{LIST64}}</td>	
+</tr>
+<!-- DYNAMIC @gloop@ -->
+<!-- DYNAMIC @loop@ -->
+</table>
+
+</body>
+</html>

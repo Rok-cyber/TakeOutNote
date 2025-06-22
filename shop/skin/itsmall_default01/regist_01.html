@@ -1,0 +1,98 @@
+<!-- DYNAMIC @is_confirm1@ -->
+<script type="text/javascript">
+<!--
+	function lengthCheck( checkTag )
+	{
+		if ( checkTag.name == "userNo1" )
+		{
+			if ( checkTag.value.length >= 6 )
+			{
+				checkTag.blur();
+				document.all.userNo2.focus();
+			}
+		}
+	}
+// -->
+</script>
+
+<form name="inputForm" method="POST" action="{{sMain}}card/nice_check/RNCheckRequest.php">
+	<input type="hidden" name="name"></input>
+	<input type="hidden" name="jumin1"></input>
+	<input type="hidden" name="jumin2"></input>
+</form>
+<!-- DYNAMIC @is_confirm1@ -->
+
+<div id="pageMember">	
+	<div>
+		<div id="subTitle_1">
+			<img src="img/member/ttl_registration.gif" alt="회원가입" title="회원가입" />
+		</div>
+		<div id="subTitle_2">		
+			<div class="left"><img src="img/member/member_step01_on.gif" alt="스텝1:약관동의" title="스텝1:약관동의" /></div>
+			<div class="left"><img src="img/common/step_next_on.gif" width="13" height="67" alt="arrow" /></div>
+			<div class="left"><img src="img/member/member_step02_off.gif" alt="스텝2:정보입력" title="스텝2:정보입력" /></div>
+			<div class="left"><img src="img/common/step_next_off.gif" width="13" height="67" alt="arrow" /></div>
+			<div class="left"><img src="img/member/member_step03_off.gif" alt="스텝3:가입완료" title="스텝3:가입완료" /></div>
+		</div>
+	</div>	
+
+	<div style="clear:both;">
+		<!-- DYNAMIC @is_default1@ -->
+		<form method="post" name="joinForm" action="{{Main}}?channel=regist" onsubmit="return ckForm();">
+		<input type="hidden" name="jmode" value='new'>
+		<!-- DYNAMIC @is_default1@ -->
+		
+		<!-- DYNAMIC @is_confirm2@ -->
+		<form name="pageForm" method="post" onsubmit="return ckForm2();">
+		<!-- DYNAMIC @is_confirm2@ -->		
+		
+		<div style="text-align:left;padding:20px 0 10px 20px;" class="small"><img src="img/member/ttl_bar.gif" align="absmiddle" 	alt='bar' />&nbsp;<b>이용약관동의 : </b> 내용을 확인하신 후 동의여부를 표시해 주세요.</div>
+		<div style="border:1px solid #bbb; background-color:#EFEFEF; padding:12px;width:840px;height:150px">
+			<div id="agreeBox">{{USED}}</div>										
+		</div>
+
+		<div style="clear:both;padding-left:20px;" class="small bold">
+			<div style="height:10px;"></div>
+			<div style='float:left;'><input type="checkbox" name="agree1" id='agree1y' value="Y" /></div>
+			<div style='float:left;padding-top:2px;'> <label for='agree1y'>이용약관에 동의 합니다.</label></div>
+			<div style="height:20px;"></div>
+		</div>
+
+		<div style="text-align:left;padding:20px 0 10px 20px;" class="small"><img src="img/member/ttl_bar.gif" align="absmiddle" 	alt='bar' />&nbsp;<b>개인정보취급방침 동의 : </b> 내용을 확인하신 후 동의여부를 표시해 주세요.</div>
+		<div style="border:1px solid #bbb; background-color:#EFEFEF; padding:12px;width:840px;height:150px">
+			<div id="agreeBox">{{PRIV}}</div>										
+		</div>
+
+		<div style="clear:both;padding-left:20px;" class="small bold">
+			<div style="height:10px;"></div>
+			<div style='float:left;'><input type="checkbox" name="agree2" id='agree2y' value="Y" /></div>
+			<div style='float:left;padding-top:2px;'> <label for='agree2y'>개인정보취급방침에 동의 합니다.</label></div>
+			<div style="height:20px;"></div>
+		</div>
+		
+		<!-- DYNAMIC @is_confirm3@ -->
+		<div class="small bold" style="clear:both;padding:30px 0 0 20px;text-align:left;"><img src="img/member/ttl_bar.gif" align="absmiddle" 	alt='bar' />&nbsp; {{CTITLE}}</div>
+		<div style="border:1px solid #bbb; background-color:#EFEFEF; padding:12px;width:840px;height:20px">
+			<div style="float:left;padding:3px 0 0 40px;" class="small bold">이름</div>
+			<div style="float:left;padding-left:10px;"><input type="text" id="userNm" name="userNm" style="ime-mode:active;width:100;"  class="inputs black" size=10></div>
+			<div style="float:left;padding:3px 0 0 40px;" class="small bold">주민등록번호</div>
+			<div style="float:left;padding-left:10px;"><input type="text" id="userNo1" name="userNo1" class="inputs black" size=8 maxlength="6" onKeyUp="javascript:lengthCheck( this );"> - <input type="password" id="userNo2" name="userNo2" class="inputs black" size=9 maxlength="7" onKeyUp="javascript:lengthCheck( this );"></div>		
+		</div>
+		<div class="small" style="clear:both;padding:10px 0 0 20px;text-align:left;">
+			! 입력하신 주민등록번호는 별도 저장되지 않으며, 신용평가기관을 통한 실명확인용으로만 이용됩니다.<br />
+			! 타인의 주민등록번호를 도용하여 가입하는 행위는 3년 이하의 징역 또는 1천 만원 이하의 벌금에 부과될 수 있습니다.<br />
+			[관련 법률: 주민등록법 제37조(벌칙) 제9호(시행일 2006.09.24)] 
+		</div>
+		<!-- DYNAMIC @is_confirm3@ -->
+
+		
+		<div style="height:20px;">&nbsp;</div>		
+		<div style="width:176px;text-align:center">
+			<div class="left"><input type="image" src="img/common/btn_confirm.gif" align="absmiddle" alt="확인" title="확인" onfocus="blur();" /></div>
+			<div class="left" style="padding-left:6px;"><img src="img/common/btn_cancel.gif" alt="취소" title="취소" class="hand" onfocus="blur();" onclick="history.back();" /></div>
+		</div>
+		<div style="clear:both;height:20px;">&nbsp;</div>		
+		</form>	
+	</div>
+
+</div>

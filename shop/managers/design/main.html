@@ -1,0 +1,547 @@
+<?
+$skin_inc = "Y";
+include "../html/top_inc.html"; // 상단 HTML 
+
+$img_path = "../../image/design/";
+$up_dir   = previlEncode("../../image/up_img/main/");
+
+/******************** 메인 설정 *************************/
+$sql = "SELECT code FROM mall_design WHERE mode='M'";
+$main = explode("|*|",$mysql->get_one($sql));
+
+/******************** 설정 설명 *************************
+0->메인이미지,1->인기상품사용유무,2->추천상품사용유무,3->추천상품갯수,4->신상품사용유무,5->신상품갯수
+6~13->삽입코드 유무,코드 , 14->이미지사용유무, 15->인기상품갯수, 16~19->사입코드2 유무,코드, 20->메인하단박스 사용유무, 21~24->삽입코드 유무,코드, 25->브랜드 사용유무, 26->메인이미지링크,27->공동구매상품사용유무,28->공동구매상품갯수,29,30->공구상품아래삽입코드
+******************** 설정 설명 *************************/ 
+
+if($main[0]) {
+	$MAIN_IMG = imgSizeCh($img_path,$main[0],'600');
+	$size = @GetImageSize($img_path.$main[0]);	
+	$MAIN_SIZE = "{$size[0]}px * {$size[1]}px ";
+} 
+else $MAIN_IMG = "&nbsp;등록된 이미지 없음";
+
+$H_INSERT = htmlspecialchars(stripslashes($main[7]));
+$R_INSERT = htmlspecialchars(stripslashes($main[9]));
+$N_INSERT = htmlspecialchars(stripslashes($main[11]));
+$C_INSERT = htmlspecialchars(stripslashes($main[13]));
+$C2_INSERT = htmlspecialchars(stripslashes($main[17]));
+$B2_INSERT = htmlspecialchars(stripslashes($main[19]));
+$ND_INSERT = htmlspecialchars(stripslashes($main[22]));
+$CD_INSERT = htmlspecialchars(stripslashes($main[30]));
+$M_INSERT = htmlspecialchars(stripslashes($main[24]));
+
+$skin_hit = explode(",",$SKIN_DEFINE['main_hit_cnt']);
+$skin_reco = explode(",",$SKIN_DEFINE['main_reco_cnt']);
+$skin_new = explode(",",$SKIN_DEFINE['main_new_cnt']);
+$skin_cooper = explode(",",$SKIN_DEFINE['main_cooper_cnt']);
+
+?>
+
+<SCRIPT language="JavaScript">
+<!--
+function ckMain(ck){
+    var form = document.mainForm;    
+	if(ck) form.submit();
+}
+
+function ckCode(cname){
+	form = document.codeForm;
+	eval("form."+cname+".value = "+cname+".getHtml()")
+    form.code_name.value = cname;
+	form.submit();
+	return false;
+}
+
+//-->
+</SCRIPT>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_main.gif" alt="메인디자인관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>쇼핑몰 메인 페이지의 디자인을 설정 하실 수 있는 곳 입니다. 적용된 스킨에따라 작동되지 않을 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!---------------------------- 메인이미지 관리 ----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_main_img.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='mainForm' method='post' action='design_post.php?mode=main' enctype="multipart/form-data" onsubmit="return ckMain();">
+					<TR height=30 align=left> 
+						<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메인이미지</font></td>
+						<td bgcolor="#FFFFFF" colspan=3 style='padding:4px;'>&nbsp;<?=$MAIN_IMG?></td>
+					</tr>
+					<TR height=30 align=left>
+					<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사이즈</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<font class="eng"><?=$MAIN_SIZE?></a>&nbsp;&nbsp;<font class='small blue'>(<?=$SKIN_DEFINE['main_img']?>)</font></td>
+					</tr>
+					<TR height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이미지 등록</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='file' class=ta size=50 name='main_img'>&nbsp;&nbsp;<font class=small>플래쉬 사용가능</font> </td>
+					</tr>
+					<TR height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;링크 주소</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>&nbsp;<input type='text' class=ta size=80 name='main_link' value='<?=$main[26];?>'></td>
+					</tr>
+					<TR height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사용 유무</font></td>
+						<td bgcolor="#EEEEEE" colspan=3>
+							<input type='radio' name='img_use' id='img_use1' value='1' onfocus='blur();' />&nbsp;<label for='img_use1'>사용함</label>
+							<input type='radio' name='img_use' id='img_use2' value='2' onfocus='blur();' />&nbsp;<label for='img_use2'>사용안함</label>
+						</td>
+					</tr>
+					<TR height=30 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 이미지 사이즈가 크면 레이아웃이 깨저 나올 수 있습니다.
+								&nbsp;이미지 사이즈를 지켜 주시기 바랍니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckMain('1');"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!---------------------------- @메인이미지 관리 끝 ----------------------------------->
+<TR><TD height=20></TD></TR>
+
+<!---------------------------- 메인 상품 관리 ----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_main_goods.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='goodsForm' method='post' action='design_post.php?mode=mgoods' target='HFrm'>
+					<TR height=30 align=left> 
+						<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;인기 상품</font></td>
+						<td bgcolor="#EEEEEE">
+							<input type='radio' name='hit_use' id='hit_use1' value='0' onfocus='blur();'>&nbsp;<label for='hit_use1'>사용안함</label>
+							<input type='radio' name='hit_use' id='hit_use2' value='1' onfocus='blur();'>&nbsp;<label for='hit_use2'>리스트형</label>
+							<input type='radio' name='hit_use' id='hit_use3' value='2' onfocus='blur();'>&nbsp;<label for='hit_use3'>상품이동형</label>
+							<input type='radio' name='hit_use' id='hit_use4' value='3' onfocus='blur();'>&nbsp;<label for='hit_use4'>상품그룹이동형</label>
+						</td>
+						<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+						<td bgcolor="#EEEEEE" width="120">&nbsp;
+							<select name=hit_num>
+							<?
+							for($i=0,$cnt=count($skin_hit);$i<$cnt;$i++) {
+								echo "<option value='{$skin_hit[$i]}'>{$skin_hit[$i]}</option>";
+							}
+							?>
+							</select>개							
+						</td>
+					</tr>
+					<TR height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추천 상품</font></td>
+						<td bgcolor="#EEEEEE">
+							<input type='radio' name='reco_use' id='reco_use1' value='0' onfocus='blur();'>&nbsp;<label for='reco_use1'>사용안함</label>
+							<input type='radio' name='reco_use' id='reco_use2' value='1' onfocus='blur();'>&nbsp;<label for='reco_use2'>리스트형</label>
+							<input type='radio' name='reco_use' id='reco_use3' value='2' onfocus='blur();'>&nbsp;<label for='reco_use3'>상품이동형</label>
+							<input type='radio' name='reco_use' id='reco_use4' value='3' onfocus='blur();'>&nbsp;<label for='reco_use4'>상품그룹이동형</label>
+						</td> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+						<td bgcolor="#EEEEEE">&nbsp;
+							<select name=reco_num>
+							<?
+							for($i=0,$cnt=count($skin_reco);$i<$cnt;$i++) {
+								echo "<option value='{$skin_reco[$i]}'>{$skin_reco[$i]}</option>";
+							}
+							?>
+							</select>개							
+						</td>
+					</tr>
+					<TR height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;새로운 상품</font></td>
+						<td bgcolor="#EEEEEE">
+							<input type='radio' name='new_use' id='new_use1' value='0' onfocus='blur();'>&nbsp;<label for='new_use1'>사용안함</label>
+							<input type='radio' name='new_use' id='new_use2' value='1' onfocus='blur();'>&nbsp;<label for='new_use2'>리스트형</label>
+							<input type='radio' name='new_use' id='new_use3' value='2' onfocus='blur();'>&nbsp;<label for='new_use3'>상품이동형</label>
+							<input type='radio' name='new_use' id='new_use4' value='3' onfocus='blur();'>&nbsp;<label for='new_use4'>상품그룹이동형</label>		
+						</td> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+						<td bgcolor="#EEEEEE">&nbsp;
+							<select name=new_num>
+							<?
+							for($i=0,$cnt=count($skin_new);$i<$cnt;$i++) {
+								echo "<option value='{$skin_new[$i]}'>{$skin_new[$i]}</option>";
+							}
+							?>
+                            </select>개							
+						</td>
+					</tr>
+					<TR height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공동구매 상품</font></td>
+						<td bgcolor="#EEEEEE">
+							<input type='radio' name='cooper_use' id='cooper_use1' value='0' onfocus='blur();'>&nbsp;<label for='cooper_use1'>사용안함</label>
+							<input type='radio' name='cooper_use' id='cooper_use2' value='1' onfocus='blur();'>&nbsp;<label for='cooper_use2'>리스트형</label>
+							<input type='radio' name='cooper_use' id='cooper_use3' value='2' onfocus='blur();'>&nbsp;<label for='cooper_use3'>상품이동형</label>
+							<input type='radio' name='cooper_use' id='cooper_use4' value='3' onfocus='blur();'>&nbsp;<label for='cooper_use4'>상품그룹이동형</label>		
+						</td> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 갯수</font></td> 
+						<td bgcolor="#EEEEEE">&nbsp;
+							<select name=cooper_num>
+							<?
+							for($i=0,$cnt=count($skin_cooper);$i<$cnt;$i++) {
+								echo "<option value='{$skin_cooper[$i]}'>{$skin_cooper[$i]}</option>";
+							}
+							?>
+                            </select>개							
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;하단 MBox</font></td>
+						<td bgcolor="#EEEEEE" colspan="3">
+							<input type='radio' name='mbox_use' id='mbox_use1' value='1' <?=$M_CHECKED[1]?> onfocus='blur();'>&nbsp;<label for='mbox_use1'>사용함</label>
+							<input type='radio' name='mbox_use' id='mbox_use2' value='2' <?=$M_CHECKED[2]?> onfocus='blur();'>&nbsp;<label for='mbox_use2'>사용안함</label>	&nbsp;&nbsp;<font class='small'>(주간클릭베스트, 주간판매베스트, 베스트이용후기, 공지사항)</font>
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;브랜드 SHOP</font></td>
+						<td bgcolor="#EEEEEE" colspan="3">
+							<input type='radio' name='brand_use' id='brand_use1' value='1' <?=$S_CHECKED[1]?> onfocus='blur();'>&nbsp;<label for='brand_use1'>사용함</label>
+							<input type='radio' name='brand_use' id='brand_use2' value='2' <?=$S_CHECKED[2]?> onfocus='blur();'>&nbsp;<label for='brand_use2'>사용안함</label>	&nbsp;&nbsp;<font class='small'>(브랜드 로고가 등록되어 있으면 이미지로 나옵니다. 이미지 등록 및 관리는 <a href='../multi_board/board.php?code=brand' target="_blank"><font class="blue small">브랜드관리</font></a>에서 가능 합니다.)</font>
+						</td>
+					</tr>
+					<TR height=58 align=left>
+                        <td  bgcolor="#ffffff" colspan='4' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+								! 메인페이지에 나타나는 상품들의 사용유무와 갯수를 수정 하실 수 있습니다.
+								&nbsp;XML파일로 제공이 되어 플래시 파일과 연동이 가능 합니다.<br />
+								! 리스트 형태는 출력갯수에 따라 출력되는 줄수가 늘어나면서 나타나고 상품이동형은 출력갯수 만큼의 상품이 좌우로 이동 되며 나타나고<br /> 상품그룹이동형은 출력갯수중 진열되는 상품 수만큼 그룹으로 나눠 그룹별로 나타 납니다.<br />
+								! 브랜드 SHOP은 좌즉 분류메뉴 출력시 적용이 됩니다.
+							</div>
+								
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.goodsForm.submit();return false;"><span class="blue">설정저장</span></a>
+							</div>	
+						 </td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!---------------------------- @메인 상품 관리 끝 ----------------------------------->
+
+<TR><TD height=20></TD></TR>
+
+<!---------------------------- 메인 디스플래이 관리 ----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_main_display.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='codeForm' method='post' action='design_post.php?mode=code' target='HFrm'>
+					<input type="hidden" name="code_name">
+					
+					<tr height=30 align=left> 
+						<td class=gr_bg width="20%"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;인기상품 위 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='hit_up_use' id='hup_use1' value='1' onfocus='blur();' /> <label for='hup_use1'>사용함</label>
+							<input type='radio' name='hit_up_use' id='hup_use2' value='2' onfocus='blur();' /> <label for='hup_use2'>사용안함</label> 
+							<input type="text" style="border:0;background-color:#EEE" size="50">
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="hit_insert" id="hit_insert"><?=$H_INSERT?></textarea>
+							<script>var hit_insert = new pEditor("hit_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>					
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 인기상품 위에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode1']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('hit_insert');"><span class="blue">설정저장</span></a>
+							</div>								
+						</td>
+					</tr>
+
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추천상품 위 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='reco_up_use' id='rup_use1' value='1' onfocus='blur();' /> <label for='rup_use1'>사용함</label>
+							<input type='radio' name='reco_up_use' id='rup_use2' value='2' onfocus='blur();' /> <label for='rup_use2'>사용안함</label> 
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="reco_insert" id="reco_insert"><?=$R_INSERT?></textarea>
+							<script>var reco_insert = new pEditor("reco_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 추천상품 위에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode2']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('reco_insert');"><span class="blue">설정저장</span></a>
+							</div>	
+						</td>
+					</tr>              
+
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;새로운상품 위 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='new_up_use' id='nup_use1' value='1' onfocus='blur();' /> <label for='nup_use1'>사용함</label>
+							<input type='radio' name='new_up_use' id='nup_use2' value='2' onfocus='blur();' /> <label for='nup_use2'>사용안함</label> 
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="new_insert" id="new_insert"><?=$N_INSERT?></textarea>
+							<script>var new_insert = new pEditor("new_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 새로운상품 위에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode3']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('new_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>
+					
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;새로운상품 아래 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='new_down_use' id='ndw_use1' value='1' onfocus='blur();' /> <label for='ndw_use1'>사용함</label>
+							<input type='radio' name='new_down_use' id='ndw_use2' value='2' onfocus='blur();' /> <label for='ndw_use2'>사용안함</label> 
+						</td>						
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="new_down_insert" id="new_down_insert"><?=$ND_INSERT?></textarea>
+							<script>var new_down_insert = new pEditor("new_down_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 새로운상품 아래에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode4']?> 
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('new_down_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>	
+					
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공구상품 아래 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='cooper_down_use' id='cdw_use1' value='1' onfocus='blur();' /> <label for='cdw_use1'>사용함</label>
+							<input type='radio' name='cooper_down_use' id='cdw_use2' value='2' onfocus='blur();' /> <label for='cdw_use2'>사용안함</label> 
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="cooper_down_insert" id="cooper_down_insert"><?=$CD_INSERT?></textarea>
+							<script>var cooper_down_insert = new pEditor("cooper_down_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  	
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 공동구매상품 아래에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode5']?> 
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('cooper_down_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>			
+
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;MBOX 위 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='box_up_use' id='bdw_use1' value='1' onfocus='blur();' /> <label for='bdw_use1'>사용함</label>
+							<input type='radio' name='box_up_use' id='bdw_use2' value='2' onfocus='blur();' /> <label for='bdw_use2'>사용안함</label> </td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="box_insert" id="box_insert"><?=$M_INSERT?></textarea>
+							<script>var box_insert = new pEditor("box_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  					
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! MBOX 위에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode6']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('box_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>			
+
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;MBOX 아래 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='copy_up_use' id='cup_use1' value='1' onfocus='blur();' /> <label for='cup_use1'>사용함</label>
+							<input type='radio' name='copy_up_use' id='cup_use2' value='2' onfocus='blur();' /> <label for='cup_use2'>사용안함</label> </td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="copy_insert" id="copy_insert"><?=$C_INSERT?></textarea>
+							<script>var copy_insert = new pEditor("copy_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2'  style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 신상품 아래에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_mcode5']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('copy_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>			
+					
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메인분류 아래 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='cate_down_use' id='cdw_use1' value='1' onfocus='blur();' /> <label for='cdw_use1'>사용함</label>
+							<input type='radio' name='cate_down_use' id='cdw_use2' value='2' onfocus='blur();' /> <label for='cdw_use2'>사용안함</label> 
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="cate_insert" id="cate_insert"><?=$C2_INSERT?></textarea>
+							<script>var cate_insert = new pEditor("cate_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 메인 카테고리 박스 아래에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_lcode1']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('cate_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>
+					
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메인배너 아래 삽입코드</td>
+						<td bgcolor="#EEEEEE" style="padding-left:6px;">
+							<input type='radio' name='banner_down_use' id='bdw_use1' value='1' onfocus='blur();' /> <label for='bdw_use1'>사용함</label>
+							<input type='radio' name='banner_down_use' id='bdw_use2' value='2' onfocus='blur();' /> <label for='bdw_use2'>사용안함</label> 
+						</td>
+					</tr>
+					<tr>
+						<td bgcolor=#FFFFFF colspan='2' align=left>
+							<textarea name="banner_insert" id="banner_insert"><?=$B2_INSERT?></textarea>
+							<script>var banner_insert = new pEditor("banner_insert","../../pEdit","762","200","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=30 align=left>
+                        <td  bgcolor="#ffffff" align='right' colspan='2' style="padding-left:6px">
+							<div style="float:left;padding-top:6px;" class='small'>
+							! 메인배너 아래에 나타날 디자인을 꾸미시면 됩니다. <?=$SKIN_DEFINE['main_lcode2']?>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckCode('banner_insert');"><span class="blue">설정저장</span></a>
+							</div>
+						</td>
+					</tr>				
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!---------------------------- @메인디스플래이 관리 끝 ----------------------------------->
+<TR><TD height=20></TD></TR>
+</TABLE>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<iframe name="HFrm" style="display:none;"></iframe>
+
+<script>
+frm = document.goodsForm;
+frm2 = document.codeForm;
+document.mainForm.img_use[<?=($main[14]-1);?>].checked=true;
+frm.hit_use[<?=($main[1]);?>].checked=true;
+frm.reco_use[<?=($main[2]);?>].checked=true;
+frm.new_use[<?=($main[4]);?>].checked=true;
+frm.cooper_use[<?=($main[27]);?>].checked=true;
+frm.mbox_use[<?=($main[20]-1);?>].checked=true;
+frm.brand_use[<?=($main[25]-1);?>].checked=true;
+frm2.hit_up_use[<?=($main[6]-1);?>].checked=true;
+frm2.reco_up_use[<?=($main[8]-1);?>].checked=true;
+frm2.new_up_use[<?=($main[10]-1);?>].checked=true;
+frm2.new_down_use[<?=($main[21]-1);?>].checked=true;
+frm2.cooper_down_use[<?=($main[29]-1);?>].checked=true;
+frm2.box_up_use[<?=($main[23]-1);?>].checked=true;
+frm2.copy_up_use[<?=($main[12]-1);?>].checked=true;
+frm2.cate_down_use[<?=($main[16]-1);?>].checked=true;
+frm2.banner_down_use[<?=($main[18]-1);?>].checked=true;
+
+frm.hit_num.value = <?=$main[15]?>;
+frm.reco_num.value = <?=$main[3]?>;
+frm.new_num.value = <?=$main[5]?>;
+frm.cooper_num.value = <?=$main[28]?>;
+
+pE[0] = hit_insert;
+pE[1] = reco_insert;
+pE[2] = new_insert;
+pE[3] = new_down_insert;
+pE[4] = cooper_down_insert;
+pE[5] = box_insert;
+pE[6] = copy_insert;
+pE[7] = cate_insert;
+pE[8] = banner_insert;
+</script>
+
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

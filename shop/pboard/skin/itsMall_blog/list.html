@@ -1,0 +1,63 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<div id="pb_sub">
+    <div id="pb_list">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col />
+			<col width="95" />        									
+			<tbody>
+			<form method="post" name="del"><input type="hidden" name="Main" value="{{Main}}" />
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td align=left style='padding-left:8px;'>
+				    <!-- DYNAMIC @is_catename@ --><font class="pb_small" style="color:#3399ff">[{{CATENAME}}]</font><!-- DYNAMIC @is_catename@ -->
+					<a href="{{VLINK}}" class="pb_link pb_default">{{SUBJECT}}</a> 
+					<!-- DYNAMIC @is_mcnt@ -->&nbsp;<font class="pb_eng" style="color:#ff6600">({{MEMOCNT}})</font><!-- DYNAMIC @is_mcnt@ -->
+					<!-- DYNAMIC @is_file@ -->&nbsp;<img src="img/icon_file.gif" alt="file" /><!-- DYNAMIC @is_file@ -->
+					{{NEWS}}
+				</td>
+				<td>
+					<!-- DYNAMIC @is_times@ --><font class="pb_eng" style="color:#777"><b>Today, {{TIMES}}</b></font><!-- DYNAMIC @is_times@ -->
+					<!-- DYNAMIC @is_dates@ --><font class="pb_eng" style="color:#777">{{D_MM}}/{{D_DD}}, {{TIMES}}</font><!-- DYNAMIC @is_dates@ -->
+				</td>					
+			</tr>			
+			<tr><td height="1" class="pb_bg" colspan="2"></td></tr>
+			<!-- DYNAMIC @loop@ -->		
+			
+			<!-- DYNAMIC @no_loop@ -->			
+			<tr height="100">
+				<td colspan="2" align="center" class="pb_default">등록 된글이 없습니다.</td>
+			</tr>			
+			<tr><td height="1" class="pb_bg" colspan="2"></td></tr>
+			<!-- DYNAMIC @no_loop@ -->				
+			
+			<tr><td height="10" colspan="2"></td></tr>
+			</form>
+			</tbody>			
+		</table>
+	</div>
+
+	<div id="pb_list_page">
+		<div class="pb_left_text">
+			<!-- DYNAMIC @is_write@ -->
+			<div id="sBtn3">
+				<a href="{{WLINK}}"><span>등록하기</span></a>
+			</div>
+			<!-- DYNAMIC @is_write@ -->			
+	    </div>
+	</div>
+
+	
+	<div id="pb_list_page">		
+		<div id="paging" class="pb_right_text pb_small">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->	
+		</div>
+	</div>
+	
+	<div style="clear:both;height:20px;">&nbsp;</div>
+</div>	

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y:auto;">
+<head>
+<title>{{TITLE}}</title>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<style type="text/css">
+.small	{ font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none;}
+.white	{ color:#fff; }
+.input_check, .input_radio{ width:13px;height:13px;vertical-align:middle; }
+</style>
+
+<script type="text/javascript">
+<!--
+function setCookie( name, value, expiredays ){ 
+	var todayDate = new Date(); 
+	todayDate.setDate(todayDate.getDate() + expiredays); 
+	document.cookie = name + "=" + escape(value) + "; path=/; expires=" + todayDate.toGMTString() + ";" 
+} 
+
+function closeWin(pop_name){ 
+	setCookie(pop_name, "1" , 1); 
+	self.close();
+} 
+// -->
+</script>
+
+</head>
+
+<body topmargin=0 leftmargin=0>
+<!-- LAYER AREA  -->
+<div style="width:100%">{{PCODE}}</div>
+<!-- DYNAMIC @is_close@ -->
+<div style="background-color:#999; text-align:right; height:20px;" class="small white">
+	<div style="padding:4px 10px 0 0;">
+		창 닫기 
+		<input type="checkbox" onClick="{{close}}" class="input_check" />
+	</div>
+</div>
+<!-- DYNAMIC @is_close@ -->
+<!-- DYNAMIC @is_days@ -->
+<div style="background-color:#999; text-align:right; height:20px;" class="small white">
+	<div style="padding:4px 10px 0 0;">
+		오늘 하루 이창 닫기 
+		<input type="checkbox" onClick="closeWin('{{POP_NAME}}')" class="input_check" />
+	</div>
+</div>
+<!-- DYNAMIC @is_days@ -->
+<!-- LAYER AREA  -->
+</body>
+</html>

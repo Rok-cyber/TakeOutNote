@@ -1,0 +1,60 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<div id="pb_sub">	
+	<form name="signForm" method="post" action="{{ACTION}}" onsubmit="return checkIt()" >
+    <input type="hidden" name="Main" value="{{Main}}" />
+	<input type="hidden" name="ck_bt" />
+	
+	<div style="height:20px"></div>
+
+	<div id="writeInfo">
+		<!-- DYNAMIC @is_del@ -->
+		<div style="padding:8px 0;"><img src="img/ttl_deletes.gif" alt="등록된 글 삭제" /></div>
+		<!-- DYNAMIC @is_del@ -->
+		<!-- DYNAMIC @is_mdel@ -->
+		<div style="padding:8px 0;"><img src="img/ttl_mdelete" alt="메모글 삭제" /></div>
+		<!-- DYNAMIC @is_mdel@ -->
+		<!-- DYNAMIC @is_secret@ -->
+		<div style="padding:8px 0;"><img src="img/ttl_passwds" alt="비밀글 확인" /></div>
+		<!-- DYNAMIC @is_secret@ -->
+		<!-- DYNAMIC @is_confirm@ -->
+		<div style="padding:8px 0;"><img src="img/ttl_confirm.gif" alt="비밀번호 확인" /></div>
+		<!-- DYNAMIC @is_confirm@ -->
+		<div class="writeBox clearfix">			
+			<ul style="padding-bottom:15px;">							
+				<!-- DYNAMIC @is_del2@ -->
+				<li>
+					<div class="left nextIcon2"><img src="img/ttl_name.gif" alt="이름" /></div>
+					<div class="left">
+						{{NAME}}
+					</div>
+				</li>	
+				<li>
+					<div class="left nextIcon2"><img src="img/ttl_title.gif" alt="제목" /></div>
+					<div class="left">
+						{{SUBJECT}}
+					</div>
+				</li>	
+				<!-- DYNAMIC @is_del2@ -->
+				<!-- DYNAMIC @is_man@ -->	
+				<li>
+					<div class="left nextIcon2"><img src="img/ttl_passwd.gif" alt="비밀번호" /></div>
+					<div class="left">
+						<input class="inputs_bg pb_default" type="password" name="passwd" size="20" maxlength="20" />&nbsp;&nbsp;<font class="pb_small">(글 등록시 입력한 비빌번호)&nbsp;</font>
+					</div>
+				</li>
+				<!-- DYNAMIC @is_man@ -->	
+			</ul>			
+		</div>
+	</div>
+	
+	<div style="margin:20px 0 20px;text-align:center;width:100%;">
+		<a href="#" onclick="return checkIt(2);return false;"><img src="img/btn_confirm.gif" alt="등록하기" /></a>		
+		<a href="{{Main}}{{addstring}}"><img src="img/btn_cancel2.gif" alt="취소" /></a>
+		</div>
+	</div>
+
+	</form>
+</div>

@@ -1,0 +1,262 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+######################## lib include
+$img_path = "../../image/design/";
+$up_dir   = previlEncode("../../image/up_img/mail/");
+
+$sql = "SELECT code FROM mall_design WHERE mode='F'";
+$mail = explode("|*|",stripslashes($mysql->get_one($sql)));
+
+if($mail[0]) $MAIL_IMG1 = imgSizeCh($img_path,$mail[0],'600');
+else $MAIL_IMG1 = "등록된 이미지 없음";
+$size1 = @GetImageSize($img_path.$mail[0]);
+$MAIL_SIZE1 = "$size1[0]px * $size1[1]px ";
+
+$CKD1[$mail[2]] = "checked";
+$CKD2[$mail[4]] = "checked";
+$CKD3[$mail[6]] = "checked";
+?>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function ckMail(ck){
+	var f = document.mailForm1;
+	if(!f.img1.value) {
+		alert('이미지를 선택하시기 바랍니다!');
+		f.img1.focus();
+		return false;
+	}
+	if(ck) f.submit();
+	return false;
+}
+
+function ckMails(num) {
+	var f = eval("document.mailForm"+(num+1))
+	eval("f.info"+num+".value = info"+num+".getHtml()")
+	f.submit();
+	return false;
+}
+
+-->
+</SCRIPT>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_mail.gif" alt="메일발송디자인관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>메일을 보낼때 나오는 문구와 메일이미지 디자인을 설정 하실 수 있는 곳 입니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!---------------------------- 쇼핑몰 메일 이미지 관리 시작----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_mail_img1.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='mailForm1' method='post' action='design_post.php?mode=mail1' enctype="multipart/form-data" onsubmit="return ckMail();">
+					<tr height=30 align=left> 
+						<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;등록된 이미지</font></td>
+						<td bgcolor="#FFFFFF" align=center style="padding:5px;"><?=$MAIL_IMG1?></td>
+					</tr>
+					<tr height=30 align=left>
+					<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사이즈</td>
+						<td bgcolor="#EEEEEE">&nbsp;<font class="eng"><?=$MAIL_SIZE1?></font>&nbsp;&nbsp;<font class="small blue">(가로 : 760)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이미지 등록</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='file' class=ta size=50 name='img1'>&nbsp;&nbsp;<font class=small>플래쉬 사용가능</font> </td>
+					</tr>
+					<tr height=30 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 회원가입, 상품구매등 메일에 사용되는 이미지입니다. 이미지 사이즈를 지켜 주시기 바랍니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckMail('1');"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!---------------------------- @쇼핑몰 메일 이미지 관리 끝 ----------------------------------->
+
+<TR><TD height=20></TD></TR>
+<!---------------------------- 회원가입 축하메일 START ----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_mail_img2.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='mailForm2' method='post' action='design_post.php?mode=mail2'>					
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;자동발송여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='type' id='type1' value='1' <?=$CKD1[1]?> onfocus='blur();'  />&nbsp;<label for='type1'>자동으로 보냄</label>
+						<input type='radio' name='type' id='type2' value='2' <?=$CKD1[2]?> onfocus='blur();'  />&nbsp;<label for='type2'>보내지 않음</label>
+						<input type="text" style="border:0;background-color:#EEE" size="50">
+						</td>							
+					</tr>
+					<tr align=left>
+						<td bgcolor=#FFFFFF colspan=2>
+							<textarea name="info1" id="info1"><?=stripslashes($mail[3])?></textarea>
+							<script>var info1 = new pEditor("info1","../../pEdit","762","150","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=38 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 회원가입시 축하문구를 적어 주시면 됩니다. <br/>
+								! 치환코드 - <font class="eng blue">{shopName}</font> : 쇼핑몰명 &nbsp;&nbsp;<font class="eng blue">{name}</font> : 회원명
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;padding-top:6px;">
+								<a href="#" onclick="return ckMails(1);"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!---------------------------- @회원가입 축하메일 END ----------------------------------->
+<TR><TD height=20></TD></TR>
+<!---------------------------- 상품구매시 메일 START ----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_mail_img3.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='mailForm3' method='post' action='design_post.php?mode=mail3'>					
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;자동발송여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='type' id='type3' value='1' <?=$CKD2[1]?> onfocus='blur();'  />&nbsp;<label for='type3'>자동으로 보냄</label>
+						<input type='radio' name='type' id='type4' value='2' <?=$CKD2[2]?> onfocus='blur();'  />&nbsp;<label for='type4'>보내지 않음</label>
+						<input type="text" style="border:0;background-color:#EEE" size="50">
+						</td>							
+					</tr>
+					<tr align=left>
+						<td bgcolor=#FFFFFF colspan=2>
+							<textarea name="info2" id="info2"><?=stripslashes($mail[5])?></textarea>
+							<script>var info2 = new pEditor("info2","../../pEdit","762","150","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=38 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 상품 구매시 문구를 적어 주시면 됩니다. <br/>
+								! 치환코드 - <font class="eng blue">{shopName}</font> : 쇼핑몰명 &nbsp;&nbsp;<font class="eng blue">{name}</font> : 구매자명 &nbsp;&nbsp;<font class="eng blue">{price}</font> : 결제금액
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;padding-top:6px;">
+								<a href="#" onclick="return ckMails(2);"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<!---------------------------- 상품구매시 메일 START ----------------------------------->
+<TR><TD>&nbsp;<img src='./img/t_mail_img4.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='mailForm4' method='post' action='design_post.php?mode=mail4'>					
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;자동발송여부</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='type' id='type5' value='1' <?=$CKD3[1]?> onfocus='blur();'  />&nbsp;<label for='type5'>자동으로 보냄</label>
+						<input type='radio' name='type' id='type6' value='2' <?=$CKD3[2]?> onfocus='blur();'  />&nbsp;<label for='type6'>보내지 않음</label>
+						<input type="text" style="border:0;background-color:#EEE" size="50">
+						</td>							
+					</tr>
+					<tr align=left>
+						<td bgcolor=#FFFFFF colspan=2>
+							<textarea name="info3" id="info3"><?=stripslashes($mail[7])?></textarea>
+							<script>var info3 = new pEditor("info3","../../pEdit","762","150","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+						</td>
+					</tr>  
+					<tr height=56 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 상품 발송시 문구를 적어 주시면 됩니다. <br/>
+								! 치환코드 - <font class="eng blue">{shopName}</font> : 쇼핑몰명 &nbsp;&nbsp;<font class="eng blue">{name}</font> : 구매자명 &nbsp;&nbsp;<font class="eng blue">{deli_comp}</font> : 택배사 &nbsp;&nbsp;<font class="eng blue">{deli_no}</font> : 송장번호<br/>
+								! 택배사, 송장번호는 진행단계 처리시 배송정보에 등록해 주셔야 최환이 됩니다.  <br/>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;padding-top:6px;">
+								<a href="#" onclick="return ckMails(3);"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20 align=left></TD></TR>
+<!---------------------------- @상품구매시 메일 END ----------------------------------->
+</TABLE>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<script LANGUAGE="JavaScript">
+<!--
+pE[0] = info1;
+pE[1] = info2;
+pE[2] = info3;
+//-->
+</script>
+
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

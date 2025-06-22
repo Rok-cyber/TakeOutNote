@@ -1,0 +1,54 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function printClick() {
+    var temp = document.getElementById('printArea').innerHTML;
+	if (temp) {		
+		temp_css = "<link rel='StyleSheet' HREF='../html/style.css' type='text/css' title='style'>\n";
+		temp_print = "\n<script>function sleep(){ window.close(); };window.print();setTimeout('sleep()', 1000);<\/script>";
+		preWindow= open("", '','width=840,height=230');          
+		preWindow.document.open();
+		preWindow.document.write("<html><body>");
+		preWindow.document.write(temp_css);
+		preWindow.document.write(temp);
+		preWindow.document.write(temp_print);
+		preWindow.document.write("</body></html>");
+		preWindow.document.close();
+		
+    }	
+}	
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_affiliate_sale.gif" alt="Affiliate정산관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>Affiliate 에서 발생한 업체별, 년별, 월별, 일별, 상세 커미션 정산통계를 보실 수 있습니다. 정산통계는 배송완료일 경우에만 집계 됩니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td colspan=2 height=20></td></tr>
+<tr>
+	<td align=center>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#FFFFFF'>		
+		<tr><td align="center" colspan="2">
+			
+			<div id="tabTop">
+				<div class="{{tabs1}} small"><a href="affiliate_sale.php" onfocus="this.blur();">업체별정산통계</a></div>
+				<div class="{{tabs2}} small"><a href="affiliate_sale.php?mode=year" onfocus="this.blur();">년별정산통계</a></div>
+				<div class="{{tabs3}} small"><a href="affiliate_sale.php?mode=month" onfocus="this.blur();">월별정산통계</a></div>
+				<div class="{{tabs4}} small"><a href="affiliate_sale.php?mode=day" onfocus="this.blur();">일별정산통계</a></div>
+				<div class="{{tabs5}} small"><a href="affiliate_sale.php?mode=detail" onfocus="this.blur();">정산상세내역</a></div>				
+			</div>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr><td colspan=2 height=10></td></tr>
+</table>

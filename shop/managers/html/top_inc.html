@@ -1,0 +1,879 @@
+<? 
+header("Pragma: no-cache"); // 페이지 항상 새로 불러오기
+include "../ad_init.php";
+
+$MENU_ARR = Array();
+$MENU_ARR[0] = Array();
+$MENU_ARR[0][] = Array("상품관리","shopping/goods_list.php","m_shop.gif","N");
+$MENU_ARR[0][] = Array("분류관리","shopping/cate_manager.html","N","N");
+$MENU_ARR[0][] = Array("상품리스트","shopping/goods_list.php","Y","11","Y");
+$MENU_ARR[0][] = Array("상품등록","shopping/goods_write.php","Y","N");
+$MENU_ARR[0][] = Array("일괄상품등록","shopping/goods_adds.html","N","N");
+$MENU_ARR[0][] = Array("공동구매관리","shopping/coop_goods_list.php","N","16");
+$MENU_ARR[0][] = Array("브랜드관리","multi_board/board.php?code=brand","N","12");
+$MENU_ARR[0][] = Array("기획전관리","multi_board/board.php?code=special","N","14");
+$MENU_ARR[0][] = Array("이벤트관리","multi_board/board.php?code=event","N","0");
+$MENU_ARR[0][] = Array("상품평관리","multi_board/board.php?code=goods_point","N","N");
+$MENU_ARR[0][] = Array("상품Q&A관리","multi_board/board.php?code=goods_qna","Y","N");
+
+$MENU_ARR[1] = Array();
+$MENU_ARR[1][] = Array("주문/데이타관리","order/order_main.html","m_order.gif","N");
+$MENU_ARR[1][] = Array("주문관리","order/order_list.php","Y","1");
+$MENU_ARR[1][] = Array("일괄송장번호등록","order/order_carr.html","N","N");
+$MENU_ARR[1][] = Array("현금영수증관리","order/cash_tax_list.php","N","10");
+$MENU_ARR[1][] = Array("매출통계","etcs/sale.php?mode=detail","Y","2");
+$MENU_ARR[1][] = Array("판매/클릭순위","order/goods_rank.php?mode=o1","N","3");
+$MENU_ARR[1][] = Array("제휴마케팅관리","multi_board/board.php?code=affiliate","N","15");
+$MENU_ARR[1][] = Array("데이타 관리","etcs/data.php","N","N");
+
+
+$MENU_ARR[2] = Array();
+$MENU_ARR[2][] = Array("디자인/문서관리","design/main.html","m_design.gif","N");
+$MENU_ARR[2][] = Array("상/하단디자인관리","design/common.html","N","N");
+$MENU_ARR[2][] = Array("메인디자인관리","design/main.html","N","N");
+$MENU_ARR[2][] = Array("분류디자인관리","design/main2.html","N","N");
+$MENU_ARR[2][] = Array("메일발송디자인관리","design/mail.html","N","N");
+$MENU_ARR[2][] = Array("기본문서관리","design/document.html?mode=A","N","4");
+$MENU_ARR[2][] = Array("추가페이지관리","multi_board/board.php?code=add_page","N","N");
+$MENU_ARR[2][] = Array("스킨선택","design/skin.html","N","N");
+
+$MENU_ARR[3] = Array();
+$MENU_ARR[3][] = Array("회원관리(mail/sms)","member/member_list.php","m_member.gif","N");
+$MENU_ARR[3][] = Array("회원관리","member/member_list.php","Y","13","Y");
+$MENU_ARR[3][] = Array("회원등급관리","member/member_level.php","N","N");
+$MENU_ARR[3][] = Array("메일관리","member/mail_form.html","N","5");
+$MENU_ARR[3][] = Array("SMS관리","member/sms_conf.html","N","6");
+$MENU_ARR[3][] = Array("적립금관리","multi_board/board.php?code=reserve","N","N");
+$MENU_ARR[3][] = Array("쿠폰관리","member/cupon_list.php","N","7");
+$MENU_ARR[3][] = Array("출석체크관리","member/attendance_list.php","N","17");
+$MENU_ARR[3][] = Array("회원탈퇴사유관리","multi_board/board.php?code=member_quit","N","N");
+
+$MENU_ARR[4] = Array();
+$MENU_ARR[4][] = Array("기타서비스관리","board/board_list.php","m_etc.gif","N");
+$MENU_ARR[4][] = Array("게시판관리","board/board_list.php","N","8");
+$MENU_ARR[4][] = Array("팝업관리","multi_board/board.php?code=popup","N","N");
+$MENU_ARR[4][] = Array("배너관리","multi_board/board.php?code=banner","N","N");
+$MENU_ARR[4][] = Array("검색어관리","multi_board/board.php?code=search","N","N");
+$MENU_ARR[4][] = Array("자동완성검색어관리","multi_board/board.php?code=auto_search","N","N");
+$MENU_ARR[4][] = Array("접속통계","etcs/count.php?channel=hour","Y","9");
+$MENU_ARR[4][] = Array("가격비교엔진관리","etcs/compare.html","N","N");
+
+$MENU_ARR[5] = Array();
+$MENU_ARR[5][] = Array("쇼핑몰환경설정","conf/conf.html","m_shop2.gif","N");
+$MENU_ARR[5][] = Array("사업자정보&기본정보","conf/conf.html#t1","N","N");
+$MENU_ARR[5][] = Array("결제정책","conf/conf.html#t2","N","N");
+$MENU_ARR[5][] = Array("적립금&배송정책","conf/conf.html#t3","N","N");
+$MENU_ARR[5][] = Array("SSL정책","conf/conf.html#t4","N","N");
+$MENU_ARR[5][] = Array("실명확인정책","conf/conf.html#t5","N","N");
+$MENU_ARR[5][] = Array("기타정책","conf/conf.html#t6","N","N");
+$MENU_ARR[5][] = Array("택배회사관리","conf/conf.html#t7","N","N");
+$MENU_ARR[5][] = Array("배송/반품/환불정보","conf/conf.html#t8","N","N");
+
+$MENU_ARR[6] = Array();
+$MENU_ARR[6][] = Array("상품환경설정","shopping/goods_conf.html","m_config.gif","N");
+$MENU_ARR[6][] = Array("옵션관리","shopping/goods_conf.html#t2","N","N");
+$MENU_ARR[6][] = Array("제조사 관리","shopping/goods_conf.html#t3","N","N");
+$MENU_ARR[6][] = Array("원산지관리","shopping/goods_conf.html#t4","N","N");
+$MENU_ARR[6][] = Array("판매단위관리","shopping/goods_conf.html#t5","N","N");
+$MENU_ARR[6][] = Array("아이콘관리","shopping/goods_conf.html#t6","N","N");
+
+$MENU_ARR[7] = Array();
+$MENU_ARR[7][] = Array("모바일샵","mobile/conf.php","m_mobile.gif","N");
+$MENU_ARR[7][] = Array("모바일샵기본설정","mobile/conf.php","N","N");
+$MENU_ARR[7][] = Array("고객센터정보설정","mobile/center.php","N","N");
+$MENU_ARR[7][] = Array("배너관리","multi_board/board.php?code=mobile_banner","N","N");
+$MENU_ARR[7][] = Array("스킨선택","mobile/skin.php","N","N");
+
+
+$SMENU_ARR[0]  = Array('이벤트리스트'=>'multi_board/board.php?code=event','이벤트등록'=>'multi_board/board.php?code=event&mode=write');
+$SMENU_ARR[1]  = Array('주문처리현황'=>'order/order_main.html','주문리스트'=>'order/order_list.php','취소/반품/교환내역'=>'order/order_glist.php','취소/반품/교환접수리스트'=>'order/order_cancel_list.php','횐불접수리스트'=>'order/order_refund_list.php');
+$SMENU_ARR[2]  = Array('년별통계'=>'etcs/sale.php?mode=year','월별통계'=>'etcs/sale.php?mode=month','일별통계'=>'etcs/sale.php?mode=day','상세내역'=>'etcs/sale.php?mode=detail','상품별통계'=>'etcs/sale.php?mode=goods');
+$SMENU_ARR[3]  = Array('총판매순위'=>'order/goods_rank.php?mode=o1','한달간판매순위'=>'order/goods_rank.php?mode=o2','한주간판매순위'=>'order/goods_rank.php?mode=o3','일판매순위'=>'order/goods_rank.php?mode=o4','한달간클릭순위'=>'order/goods_rank.php?mode=c1','한주간클릭순위'=>'order/goods_rank.php?mode=c2','일클릭순위'=>'order/goods_rank.php?mode=c3');
+$SMENU_ARR[4]  = Array('회사소개'=>'design/document.html?mode=A','이용약관'=>'design/document.html?mode=B','개인정보취급방침'=>'design/document.html?mode=C','이용안내'=>'design/document.html?mode=D');
+$SMENU_ARR[5]  = Array('회원메일링'=>'member/mail_form.html','메일발송내역'=>'member/maillog_list.php');
+$SMENU_ARR[6]  = Array('SMS설정'=>'member/sms_conf.html','SMS자동발송관리'=>'member/sms_autoform.php','SMS주소록'=>'multi_board/board.php?code=sms_addr','SMS샘플관리'=>'multi_board/board.php?code=sms_sample','SMS발송'=>'member/sms_send.html','SMS발송내역'=>'multi_board/board.php?code=sms_list');
+$SMENU_ARR[7]  = Array('쿠폰리스트'=>'member/cupon_list.php','쿠폰등록'=>'member/cupon_write.php','쿠폰발급리스트'=>'member/cupon_down_list.php');
+$SMENU_ARR[8]  = Array('공지사항'=>'board/board.html?code=notice','고객게시판'=>'board/board.html?code=customer','자주하는 질문과 답변'=>'board/board.html?code=faq','1:1고객문의'=>'board/board.html?code=counsel','1:1 Affiliate문의'=>'board/board.html?code=affil_counsel','대량구매문의'=>'board/board.html?code=sales','제휴/광고 문의'=>'board/board.html?code=cooperation');
+$SMENU_ARR[9]  = Array('년별통계'=>'etcs/count.php?channel=year','월별통계'=>'etcs/count.php?channel=month','일별통계'=>'etcs/count.php?channel=day','시간별통계'=>'etcs/count.php?channel=hour','BROWSER별통계'=>'etcs/count.php?channel=browser','OS별통계'=>'etcs/count.php?channel=os','사이트별통계'=>'etcs/count.php?channel=site','접속경로별통계'=>'etcs/count.php?channel=refer','검색어별통계'=>'etcs/count.php?channel=keyword');
+$SMENU_ARR[10]  = Array('현금영수증설정'=>'order/cash_tax_conf.html','현금영수증발급/조회'=>'order/cash_tax_list.php','현금영수증개별발급'=>'order/cash_tax_write.html');
+$SMENU_ARR[11]  = Array('상품리스트'=>'shopping/goods_list.php','전시상품리스트'=>'shopping/goods_display.php','브랜드상품리스트'=>'shopping/goods_brand.php','기획전상품리스트'=>'shopping/goods_special.php','이벤트상품리스트'=>'shopping/goods_event.php','상품정보일괄수정'=>'shopping/goods_modify_list.php');
+$SMENU_ARR[12]  = Array('브랜드리스트'=>'multi_board/board.php?code=brand','브랜드등록'=>'multi_board/board.php?code=brand&mode=write');
+$SMENU_ARR[13]  = Array('회원리스트'=>'member/member_list.php','회원등록'=>'member/member_write.php','회원일괄등록'=>'member/member_adds.html','회원가입양식설정'=>'member/mem_form.html');
+$SMENU_ARR[14]  = Array('기획전리스트'=>'multi_board/board.php?code=special','기획전등록'=>'multi_board/board.php?code=special&mode=write');
+$SMENU_ARR[15]  = Array('Affiliate관리'=>'multi_board/board.php?code=affiliate','Affiliate배너관리'=>'multi_board/board.php?code=affiliate_banner','Affiliate주문관리'=>'order/affiliate_order_list.php','Affiliate정산관리'=>'etcs/affiliate_sale.php','Affiliate접속통계'=>'etcs/affiliate_count.php','Affiliate송금내역'=>'multi_board/board.php?code=affiliate_account');
+$SMENU_ARR[16]  = Array('공동구매설정'=>'shopping/coop_conf.html','공동구매상품리스트'=>'shopping/coop_goods_list.php','공동구매상품등록'=>'shopping/coop_goods_write.php','공동구매신청리스트'=>'shopping/coop_participation_list.php');
+$SMENU_ARR[17]  = Array('출석체크리스트'=>'member/attendance_list.php','출석체크등록'=>'member/attendance_write.php','출석체크참여리스트'=>'member/attendance_check_list.php');
+
+$sub_pages ="goods_list.php|coop_goods_list.php|goods_display.php|goods_special.php|goods_brand.php|goods_event.php|order_glist.php|order_refund_list.php|order_cancel_list.php|sale.php\?mode=year|sale.php\?mode=month|sale.php\?mode=detail|sale.php\?mode=day|sale.php\?mode=goods|maillog_list.php|cupon_list.php|cupon_down_list.php|attendance_list.php|attendance_check_list.php|attendance_member_list.php|count.php\?channel=year|count.php\?channel=month|count.php\?channel=day|count.php\?channel=hour|count.php\?channel=browser|count.php\?channel=os|count.php\?channel=site|count.php\?channel=refer|count.php\?channel=keyword|cash_tax_list.php|member_list.php|affiliate_sale.php|affiliate_count.php|mail_form.html|goods_modify_list.php|coop_conf.html|sms_send.html|coop_participation_list.php";
+
+$sql = "SELECT code FROM mall_aconf WHERE mode='A'";
+$admin_infos = $mysql->get_one($sql);
+$admin_infos = explode("|",$admin_infos);
+
+if($admin_infos[9]==2) {
+	$disp2 = "block";
+	$disp1 = "none";
+	$height = "158";
+	$bgcnt = 2;
+	$btn_top = "173";
+}
+else {
+	$disp1 = "block";
+	$disp2 = "none";
+	$height = "80";
+	$bgcnt = 1;
+	$btn_top = "95";
+}
+
+$access_arr = Array('goods','order','design','member','etc','conf');
+
+if(!eregi( 'Firefox', getenv("HTTP_USER_AGENT"))) { 
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<? } ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>itsMall 관리자페이지</TITLE>
+<script LANGUAGE="JavaScript" src="../../lib/lib.Function.js"></script> 
+<script LANGUAGE="JavaScript" src="../../lib/lib.lightBox.js"></script> 
+<script language="JavaScript" src="../../lib/lib.Swap.js" charset="UTF-8"></script>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+
+<script LANGUAGE="JavaScript">
+<!--
+var swfUpload = '';
+var boardType = '';
+var shop_path = "<?=$ShopPath?>";
+
+function ckAsearch(num){
+	f = document.TsearchForm;
+	if(!f.word.value.trim()){
+		alert("검색어를 입력 하세요");
+		f.word.focus();
+		return false;
+	}
+	switch(f.field.value) {
+		case "member" : f.action = "../member/member_list.php";	break;
+		case "order" : f.action = "../order/order_list.php";	break;
+		case "goods" : f.action = "../shopping/goods_list.php";	break;			
+	}
+
+	f.field.value = "multi";
+	if(num) f.submit();
+}
+
+function topMenuAll(num){
+	if(num==1) {
+		document.getElementById('topMenu1').style.display = 'none';
+		document.getElementById('topMenu21').style.display = 'block';
+		document.getElementById('topMenu22').style.display = 'block';
+		document.getElementById('topHeight').style.height = '158px';
+		document.getElementById('topHeight').style.background = 'url(../html/img/top_bg2.gif)';		
+		if(document.getElementById("scaleBtDiv")) document.getElementById("scaleBtDiv").style.top = parseInt(document.getElementById("scaleBtDiv").style.top) + 77 + 'px';
+	}
+	else {
+		document.getElementById('topMenu1').style.display = 'block';
+		document.getElementById('topMenu21').style.display = 'none';
+		document.getElementById('topMenu22').style.display = 'none';
+		document.getElementById('topHeight').style.height = '80px';
+		document.getElementById('topHeight').style.background = 'url(../html/img/top_bg1.gif)';
+		if(document.getElementById("scaleBtDiv")) document.getElementById("scaleBtDiv").style.top = parseInt(document.getElementById("scaleBtDiv").style.top) - 77 + 'px';
+	}		
+}
+
+//-->
+</script>
+</HEAD>
+
+<BODY id='bodys' style="margin:0; padding:0;background:url('../html/img/background.gif');">
+<div style="width:100%;height:<?=$height?>px; overflow:hidden;background:url(../html/img/top_bg<?=$bgcnt?>.gif)" id="topHeight">
+	<div style="float:left;width:994px;overflow:hiden">		
+		<div style="float:left; width:200px;overflow:hidden">
+			<div style="height:80px;">
+				<center style='padding:12px 0 0 2px;'>
+					<a href="../index.html" onfocus='this.blur();'><img src="../html/img/logo.gif"  border="0" alt='logo' /></a>
+				</center>
+			</div>
+			<div style='padding:10px 0 0 28px;text-align:left; display:<?=$disp2?>' id="topMenu21">								
+				<div style="height:26px;">
+					<a href="#" onclick="<?=$ACCESS_MANAGER['goods']=='Y' ? "location.href='../shopping/goods_conf.html'" : "";?>"><img src="../html/img/btn_goods_conf.gif" border='0' alt="상품환경설정" /></a>	
+				</div>
+				<div style='height:6px;overflow:hidden;'>&nbsp;</div>
+				<div style="height:26px;">
+					<a href="#" onclick="<?=$ACCESS_MANAGER['conf']=='Y' ? "location.href='../conf/conf.html'" : "";?>"><img src="../html/img/btn_shop_conf.gif" border='0' alt="쇼핑몰환경설정" /></a>				
+				</div>
+			</div>	
+		</div>
+		
+		<div style="height:4px;overflow:hidden"></div>
+
+		<div style="float:left; width:794px;overflow:hidden">					
+			
+			<div style="float:left;height:24px;width:380px;padding-left:4px;" class="small gray">
+				<div style="height:1px;overflow:hidden;">&nbsp;</div>
+				<form name="TsearchForm" method="post" onsubmit="return ckAsearch();">
+				<input type="hidden" name="field" value='' />
+				
+				<div id='sBox' style="z-index:998;background-color:#FFF; border: 2px solid #eaeaea;width:80px; height:18px;" class='left'></div>
+				<script type="text/javascript">
+					<!--
+					shop_skin = "<?=$ShopPath?>/managers/html/";
+					sBoxs = new selectBox('sBox',document.TsearchForm.field,'','',26,204);
+					sBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:11px;letter-spacing:-1px;line-height:160%";
+					sBoxs.img1.src = '../html/img/common/icon_select_down2.gif';
+					sBoxs.img2.src = '../html/img/common/icon_select_up2.gif';
+					sBoxs.addItem('회원리스트','member');
+					sBoxs.addItem('주문리스트','order');					
+					sBoxs.addItem('상품리스트','goods');					
+					sBoxs.secNum = 1;
+					sBoxs.show('color');
+					//-->
+				</script>	
+
+				<div id='sText' style="position:relative;z-index:998;background-color:#FFF; border: 2px solid #eaeaea;width:230px; height:18px;margin-left:1px;margin-left:2px;" class='left'>
+					<input type="text" name="word" style="border-width:0px;" size="36" />
+				</div>
+				<div class="left" style="height:22px;overflow:hidden;">
+					<img src="../html/img/btn_search_icon.gif" onfocus="blur();" alt="검색" title="검색" class="hand" onclick="ckAsearch(1);" style='vertical-align:top' />
+				</div>
+				</form>
+			</div>	
+
+			<div style='float:left;text-align:right;height:24px;width:406px;padding-right:4px;' class="small">				
+				<div style="height:6px;overflow:hidden;">&nbsp;</div>
+				<a href="../mobile/conf.php" style="color:#fff;" title="모바일샵"><b>모바일샵</b></a>
+				<img src="../html/img/menu_bar.gif" border="0" alt="menu bar" hspace="4" />
+				<? if($my_level==10) { ?>
+				<a href="#" onclick="pLightBox.show('../html/admin_conf.html','iframe', 445, 320,'■ 관리자 메인 메뉴 설정',30,'');" style="color:#fff;" title="관리자페이지 환경설정">메뉴설정</a>
+				<img src="../html/img/menu_bar.gif" border="0" alt="menu bar" hspace="4" />
+				<? } ?>				
+				<a href="#" onclick="location.href='../../php/logout.php?manager=1'" style="color:#fff;">로그아웃</a>
+				<img src="../html/img/menu_bar.gif" border="0" alt="menu bar" hspace="4" />
+				<a href="#" onclick="window.open('../../','');" style="color:#fff;">쇼핑몰보기</a>		
+				<img src="../html/img/menu_bar.gif" border="0" alt="menu bar" hspace="4" />
+				<a href="#" onclick="window.open('../../guide/','guide','width=848,height=650,scrollbars=yes');"  style="color:#fff;">메뉴얼보기</a>
+			</div>	
+
+			<div style="height:6px;overflow:hidden;clear:both;"></div>
+
+			<div style='width:794px;display:<?=$disp1?>' id="topMenu1">
+				<div style='height:8px;overflow:hidden'><img src="../html/img/mbox_top.gif" border="0" style="vertical-align:top" /></div>
+				<div style='height:21px;width:793px;background:url(../html/img/mbox_bg.gif) repeat-y;overflow:hidden;'>
+					<div style="height:2px;overflow:hidden">&nbsp;</div>
+<?
+	for($i=0,$cnt=5;$i<$cnt;$i++) {
+		$i2 = $i+1;
+		
+		if($ACCESS_MANAGER[$access_arr[$i]]=='N') {
+			$links1 = "#";
+		}
+		else $links1 = "../{$MENU_ARR[$i][0][1]}";
+
+		echo "					
+					<div class='topMenuDiv3'>
+						<img src='../html/img/icons_0{$i2}.gif' alt='{$MENU_ARR[$i][0][0]} icon' style='padding-right:4px;' /><a href='{$links1}'><img src='../html/img/ttl_tmenu{$i2}.gif' border='0' alt='{$MENU_ARR[$i][0][0]}' /></a>
+					</div>		
+		";
+	}
+?>					
+					<div style="float:right;padding-right:10px;">
+						<img src="../html/img/icon_open2.gif" border='0' alt="메뉴전체보기" title="메뉴전체보기" style="cursor:pointer" onclick="topMenuAll(1);" /></a>	
+					</div>
+					<div style="float:right;padding-right:2px;">
+						<a href="#" onclick="<?=$ACCESS_MANAGER['conf']=='Y' ? "location.href='../conf/conf.html'" : "";?>"><img src="../html/img/btn_shop_conf2.gif" border='0' alt="쇼핑몰환경설정" /></a>	
+					</div>
+					<div style="float:right;padding-right:2px;">
+						<a href="#" onclick="<?=$ACCESS_MANAGER['goods']=='Y' ? "location.href='../shopping/goods_conf.html'" : "";?>"><img src="../html/img/btn_goods_conf2.gif" border='0' alt="상품환경설정" /></a>	
+					</div>
+					
+				</div>
+
+				<div style='height:10px;overflow:hidden'><img src="../html/img/mbox_bottom.gif" border="0" style="vertical-align:top" /></div>		
+			
+			</div>
+
+		
+			<div style='width:794px;display:<?=$disp2?>;' id="topMenu22">
+				<div style='height:8px;overflow:hidden'><img src="../html/img/mbox_top.gif" border="0" style="vertical-align:top" /></div>
+				<div style='height:98px;width:793px;background:url(../html/img/mbox_bg.gif) repeat-y;;overflow:hidden;'>
+					<div style="height:2px;overflow:hidden">&nbsp;</div>
+<?
+	for($i=0,$cnt=5;$i<$cnt;$i++) {
+		$i2 = $i+1;
+		if($ACCESS_MANAGER[$access_arr[$i]]=='N') {
+			$links1 = "#";
+		}
+		else $links1 = "../{$MENU_ARR[$i][0][1]}";
+		echo "					
+					<div class='topMenuDiv1'>
+						<img src='../html/img/icons_0{$i2}.gif' alt='{$MENU_ARR[$i][0][0]} icon' style='padding-right:4px;' /><a href='{$links1}'><img src='../html/img/ttl_tmenu{$i2}.gif' border='0' alt='{$MENU_ARR[$i][0][0]}' /></a>
+					</div>
+					<div class='topMenuDiv2'>					
+		";
+		for($j=1,$cnt2=count($MENU_ARR[$i]);$j<$cnt2;$j++){						
+			if($ACCESS_MANAGER[$access_arr[$i]]=='N') {
+				$links2 = "#' style='color:#bbb;text-decoration:none;";
+			}
+			else $links2 = "../{$MENU_ARR[$i][$j][1]}";
+
+			if($MENU_ARR[$i][$j][2]=='Y') $color1 = "style='color:#39f'";
+			else $color1 = "";
+
+			echo "<a href='{$links2}' class='small' {$color1}>{$MENU_ARR[$i][$j][0]}</a>&nbsp;";
+		}
+		echo "		</div>\n";
+		
+		if($i!=4)	echo "	<div class='topMenuLine'></div>\n";			
+		else {
+			echo "	<div style=\"position:relative;top:-18px;float:right;padding-right:10px;\">
+						<img src=\"../html/img/icon_close2.gif\" border='0' alt=\"메뉴간략보기\" title=\"메뉴간략보기\" style=\"cursor:pointer\" onclick=\"topMenuAll(2);\" /></a>	
+					</div>
+			";
+		}
+		
+	}
+?>					
+				</div>
+
+				<div style='height:10px;overflow:hidden'><img src="../html/img/mbox_bottom.gif" border="0" style="vertical-align:top" /></div>		
+			
+			</div>	
+
+		</div>
+		<div style="clear:both;height:8px;overflow:hidden;"></div>
+	</div>		
+</div>
+
+<div style="width:994px;" class="clearfix">
+	<div style="height:3px;overflow:hidden;background-color:#6e7175">&nbsp;</div>
+	<div id="left_gab" style="height:580px;">&nbsp;</div>
+	<div id="left">
+<?
+unset($disp1,$disp2,$bgcnt,$height,$links1,$links2);
+if("{$menu_name[2]}/{$menu_name[3]}"=="html/index.html") {
+	include "{$lib_path}/lib.Shop.php";
+
+	$version = readFiles("../../include/version.txt");
+	
+	$sql = "SELECT code FROM mall_aconf WHERE mode='I'";
+	$infos = $mysql->get_one($sql);
+	$infos = explode("|",$infos);
+
+?>				
+		<div id="IDS_DIV_FRAME1">
+
+<? if($admin_infos[0]==1) { ?>		
+			<div class="leftBox" id="infoBox">
+				<span toggle='drag'>
+				<div class="top">
+					<div style="padding:7px 0 0 12px;">
+						<div class='left'><img src="../html/img/leftBox_ttl_info.gif" alt="쇼핑몰정보" /></div>
+						<div style='float:right;padding-right:8px;'>
+							<span toggle='expand' attr:min="Gopened(this)" attr:max="Gclosed(this)" attr:animate='none' attr:strata="5"><img src="../html/img/icon_fold.gif" alt="접기" title="접기" class="hand" /></span>
+						</div>
+						<div style='float:right;padding-right:4px;'>
+							<img src="../html/img/icon_conf.gif" alt="설정" title="설정" onclick="confClick('info')" class="hand" />
+						</div>
+					</div>
+				</div>
+				</span>
+				<span toggle='gadget'>
+				<div class="content">
+					<div class='content_top'></div>
+					<div style="padding:10px 0 0 14px; line-height:180%" class="small">
+						버전 :	<font class="eng bold blue"><?=$version?></font><br/>						
+<?
+if($infos[0]==1) {
+	$sql = "SELECT code FROM mall_design WHERE mode='A'";
+	$tmps = $mysql->get_one($sql);
+	$tmps = explode("|*|",stripslashes($tmps));
+	$tmps = str_replace("http://","",$tmps);
+	echo "				도메인 : <font class='eng'>{$tmps[0]}</font><br/>\n";
+}
+if($infos[1]==1) {
+	$sql = "SELECT signdate FROM pboard_member WHERE uid=1";
+	$tmps = date("Y.m.d",$mysql->get_one($sql));
+	echo "				최초 설치일 : <font class='eng'>{$tmps}</font><br/>\n";
+}
+if($infos[2]==1) {
+	$size = filesize("../../include/zip.db");
+	$orig_size = getZip('ck');
+	if(is_numeric($orig_size)) {
+		if($size==$orig_size) $tmps = "최신파일";
+		else $tmps = "<a href='zipcode_update.php'>업데이트하기</a>";
+	}
+	else $tmps = "최신파일";
+	echo "				우편번호 : <font class='small bold'>{$tmps}</font><br/>\n";
+}
+if($infos[3]==1) {
+	$sql = "SELECT count(*) FROM mall_goods";
+	$tmps = number_format($mysql->get_one($sql));
+	echo "				등록 상품 : <font class='eng bold'>{$tmps}</font> 개<br/>\n";
+}
+if($infos[4]==1) {
+	$tmps = pmallSmsCnt(); 	
+	if($tmps=='-1') {
+		echo "			발송가능 <font class='eng'>SMS</font> : <a href='../member/sms_conf.html'>미신청</a><br/>\n";
+	}
+	else {
+		echo "			발송가능 <font class='eng'>SMS</font> : <font class='eng bold'>{$tmps}</font> 건<br/>\n";
+	}
+}
+if($infos[5]==1) {
+	$tmps = @`du -sh ../../`; 
+	if($tmps) $tmps = str_replace('../../','',$tmps);
+	else $tmps = "<font class='small'>서버미지원</font>";
+
+	if(eregi('G',$tmps)) {
+		$tmps = str_replace("G","",$tmps);
+		$tmps3 = $tmps * 1024;
+		$tmps = number_format($tmps3)."M";
+	}
+	else $tmps3 = intval($tmps);
+
+	if($infos[7]) { 
+		$tmps2 = " / ".number_format($infos[7])."M";
+		$per = @round(($tmps3/$infos[7])*100);
+	}
+	echo "				<div>사용 용량 : <font class='eng bold blue'>{$tmps}</font><font class='eng'>{$tmps2}</font></div>
+						<div style='float:left;margin-top:7px; width:101px;height:12px;background:url(../html/img/per_bar.gif) no-repeat;'>			
+							<div style='position:relative;top:-4px;'>
+								<img src='../html/img/per_line.gif' width='{$per}%' height='10' alt='Line' />
+							</div>							
+						</div>					
+						<div style='float:left;padding-left:10px;' class='eng'>{$per}%</div>
+						<div style='clear:both'></div>
+	";
+	unset($per,$temp2);
+}
+if($infos[6]==1 && $infos[8]) {
+	if(!eregi("http://",$infos[8])) $infos[8] = "http://".$infos[8];
+	for($i=0;$i<10;$i++) {
+		$tmps = join("",socketPost($infos[8]));		
+		if(trim($tmps)) break;
+	}
+	if($tmps) {
+		$pos1 = strpos($tmps, "\"green") + 8;		
+		$pos2 = strpos($tmps, "<", $pos1);
+		$data1 = substr($tmps, $pos1, ($pos2-$pos1));
+
+		$pos_tmp = strpos($tmps, "\"green",$pos2)+1;		
+		$pos_tmp = strpos($tmps, "\"green",$pos_tmp)+1;		
+		$pos1 = strpos($tmps, "\"green",$pos_tmp) + 8;		
+		$pos2 = strpos($tmps, "<", $pos1);
+		$data2 = substr($tmps, $pos1, ($pos2-$pos1));
+		$data2 = round($data2/1000);
+
+		$pos_tmp = strpos($tmps, "\"green",$pos2)+1;		
+		$pos_tmp = strpos($tmps, "\"green",$pos_tmp)+1;		
+		$pos_tmp = strpos($tmps, "\"green",$pos_tmp)+1;				
+		$pos1 = strpos($tmps, "\"green",$pos_tmp) + 8;		
+		$pos2 = strpos($tmps, "<", $pos1);
+		$data3 = substr($tmps, $pos1, ($pos2-$pos1));
+				
+		echo "				<a href='{$infos[8]}' target='_blank' title='전송량 모니터링'>트래픽 용량</a> : <font class='eng bold blue'>{$data2}M</font> / <font class='eng'>{$data3}</font><br/>\n";
+		echo "				<div style='float:left;margin:7px 0 0 0;width:101px;height:12px;background:url(../html/img/per_bar.gif) no-repeat;'>			<div style='position:relative;top:-5px;'>
+									<img src='../html/img/per_line.gif' width='{$data1}%' height='10' alt='Line' />
+								</div>							
+							</div>					
+							<div style='float:left;padding:0 0 0 10px;' class='eng'>{$data1}%</div>
+							<div style='clear:both'></div>
+		";
+	};
+}
+?>
+					</div>
+
+				</div>
+				<div class="bottom"></div>			
+				</span>
+			</div>		
+<? 
+}
+if($admin_infos[1]==1) {
+?>
+			<div class="leftBox" id="menuBox">								
+				<span toggle='drag'>
+				<div class="top">					
+					<div style="padding:7px 0 0 12px;">
+						<div class='left'><img src="../html/img/leftBox_ttl_menu.gif" alt="자주사용하는메뉴" /></div>
+						<div style='float:right;padding-right:8px;'>
+							<span toggle='expand' attr:min="Gopened(this)" attr:max="Gclosed(this)" attr:animate='none' attr:strata="5"><img src="../html/img/icon_fold.gif" alt="접기" title="접기" class="hand" /></span>
+						</div>
+						<div style='float:right;padding-right:4px;'>
+							<img src="../html/img/icon_conf.gif" alt="설정" title="설정" onclick="confClick('menu')" class="hand" />
+						</div>
+					</div>
+				</div>
+				</span>			
+				<span toggle='gadget'>
+				<div class="content">
+					<div class='content_top'></div>
+					<div style="padding:4px 0 0 10px;" class="small bold">					
+						<ul>
+<? 
+	$sql = "SELECT code FROM mall_aconf WHERE mode='M'";
+	$menus = $mysql->get_one($sql);
+	$menus = explode("|",$menus);
+
+	$cnt=count($menus);
+	if($menus[$cnt-1]=='today') {
+			echo "			<li>
+								<div style='height:4px;overflow:hidden'>&nbsp;</div>
+								<a href='../order/order_list.php?sdate1=today'>오늘주문</a>
+							</li>
+			";
+	}
+
+	for($i=0;$i<$cnt;$i++) {
+		if($menus[$i]=='today') continue;
+		$tmps = explode("_",$menus[$i]);
+			echo "			<li>
+								<div style='height:4px;overflow:hidden'>&nbsp;</div>
+								<a href='../{$MENU_ARR[$tmps[0]][$tmps[1]][1]}'>{$MENU_ARR[$tmps[0]][$tmps[1]][0]}</a>
+							</li>
+			";
+	}
+?>
+						</ul>
+					</div>
+
+				</div>				
+				<div class="bottom"></div>
+				</span>
+			</div>	
+<? 
+}
+if($admin_infos[2]==1) {
+?>
+			<div class="leftBox" id="siteBox">	
+				<span toggle='drag'>
+				<div class="top">					
+					<div style="padding:7px 0 0 12px;">
+						<div class='left'><img src="../html/img/leftBox_ttl_site.gif" alt="자주가는사이트" /></div>
+						<div style='float:right;padding-right:8px;'>
+							<span toggle='expand' attr:min="Gopened(this)" attr:max="Gclosed(this)" attr:animate='none' attr:strata="5"><img src="../html/img/icon_fold.gif" alt="접기" title="접기" class="hand" /></span>
+						</div>
+						<div style='float:right;padding-right:4px;'>
+							<img src="../html/img/icon_conf.gif" alt="설정" title="설정" onclick="confClick('site')" class="hand" />
+						</div>
+					</div>								
+				</div>
+				</span>
+				<span toggle='gadget'>
+				<div class="content">
+					<div class='content_top'></div>
+					<div style="padding:4px 0 0 10px;" class="small bold">					
+						<ul>
+<?
+$sql = "SELECT code FROM mall_aconf WHERE mode='S'";
+$code = $mysql->get_one($sql);
+
+$code = explode("|",$code);
+for($i=0,$cnt=count($code);$i<$cnt;$i+=2){
+	if(!eregi('http://',$code[$i+1])) $code[$i+1] = "http://".$code[$i+1];
+	echo "					<li>
+								<div style='height:4px;overflow:hidden'>&nbsp;</div>
+								<a href='#' onclick=\"window.open('{$code[$i+1]}');return false;\">{$code[$i]}</a>
+							</li>
+		";
+}
+?>
+						</ul>
+					</div>
+
+				</div>				
+				<div class="bottom"></div>
+				</span>
+			</div>	
+<? 
+}
+if($admin_infos[3]==1) {
+?>
+			<div class="leftBox" id="calBox">	
+				<span toggle='drag'>
+				<div class="top">					
+					<div style="padding:7px 0 0 12px;">
+						<div class='left'><img src="../html/img/leftBox_ttl_calendar.gif" alt="Calendar" /></div>
+						<div style='float:right;padding-right:8px;'>
+							<span toggle='expand' attr:min="Gopened(this)" attr:max="Gclosed(this)" attr:animate='none' attr:strata="5"><img src="../html/img/icon_fold.gif" alt="접기" title="접기" class="hand" /></span>
+						</div>
+						<div style='float:right;padding-right:4px;'>
+							<img src="../html/img/icon_conf.gif" alt="설정" title="설정" onclick="confClick('schedule')" class="hand" /> 
+						</div>
+					</div>								
+				</div>
+				</span>
+				<span toggle='gadget'>
+				<div class="content">
+					<div class='content_top'></div>
+					<div style="padding:4px 0 0 5px;">	
+						<iframe name="calendar" src="calendar.php" frameborder='0' framespacing='0' marginheight='0' marginwidth='0'  scrolling='no' width='174' height='160' bgcolor='#ffffff'></iframe>			
+					</div>
+				</div>				
+				<div class="bottom"></div>
+				</span>
+			</div>	
+
+<? 
+}
+if($admin_infos[4]==1) {
+
+$sql = "SELECT code FROM mall_aconf WHERE mode='R'";
+$code = $mysql->get_one($sql);
+
+$code = explode("|",$code);
+if($code[0]==1) $img = '<img src="../html/img/leftBox_ttl_member1.gif" alt="최근등록된회원" />';
+else $img = '<img src="../html/img/leftBox_ttl_member2.gif" alt="회원랭킹" />';
+?>
+			<div class="leftBox" id="memBox">	
+				<span toggle='drag'>
+				<div class="top">					
+					<div style="padding:7px 0 0 12px;">
+						<div class='left'><?=$img?></div>
+						<div style='float:right;padding-right:8px;'>
+							<span toggle='expand' attr:min="Gopened(this)" attr:max="Gclosed(this)" attr:animate='none' attr:strata="5"><img src="../html/img/icon_fold.gif" alt="접기" title="접기" class="hand" /></span>
+						</div>
+						<div style='float:right;padding-right:4px;'>
+							<img src="../html/img/icon_conf.gif" alt="설정" title="설정" onclick="confClick('member')" class="hand" /> 
+						</div>
+					</div>								
+				</div>
+				</span>
+				<span toggle='gadget'>
+				<div class="content">
+					<div class='content_top'></div>
+					<div style="padding:4px 0 0 10px;" class="small bold">					
+						<ul>
+<?
+switch($code[0]) {
+	case "1" :
+		$sql = "SELECT name, id, signdate FROM pboard_member WHERE uid>1 ORDER BY signdate DESC LIMIT {$code[2]}";
+	break;
+	case "2" :
+		$sql = "SELECT name, id, cnts FROM pboard_member WHERE uid>1 ORDER BY cnts DESC LIMIT {$code[2]}";
+	break;
+	case "3" :
+		$sql = "SELECT a.name, a.id , COUNT(b.id) as ocnt FROM pboard_member a, mall_order_info b WHERE a.uid >1 && a.id=b.id && b.order_status!='Z' GROUP BY b.id ORDER BY ocnt DESC LIMIT  {$code[2]}";
+	break;
+	case "4" :
+		$sql = "SELECT a.name, a.id , SUM(pay_total) as pay_price FROM pboard_member a, mall_order_info b WHERE a.uid >1 && a.id=b.id && b.order_status!='Z' GROUP BY b.id ORDER BY pay_price DESC LIMIT  {$code[2]}";
+	break;
+}
+
+$mysql->query($sql);
+
+while($row=$mysql->fetch_array()){
+	if($code[1]==1) $member1 = "<font class='eng'>".stripslashes($row['id'])."</font>";
+	else $member1 = stripslashes($row['name']);
+	switch($code[0]) {
+		case "1" : $member2 = date("m-d",$row['signdate']); $member3 = ''; break;
+		case "2" : $member2 = number_format($row['cnts']); $member3 = '회'; break;
+		case "3" : $member2 = number_format($row['ocnt']); $member3 = '건'; break;
+		case "4" : $member2 = number_format($row['pay_price'],$ckFloatCnt); $member3 = '원'; break;
+	}
+
+	echo "					<li style='font-weight:normal;'>
+								<div style='height:4px;overflow:hidden'>&nbsp;</div>
+								<a title='CRM보기' href='#' onclick=\"pLightBox.show('../member/member_crm.php?mid={$row['id']}','iframe','700','450','■ {$row['name']}({$row['id']}) 회원 CRM',10);return false;\">{$member1}</a>&nbsp;&nbsp;(<font class='eng'>{$member2}</font>{$member3})
+							</li>
+		";
+}
+unset($member1,$member2,$member3,$img);
+?>
+						</ul>
+					</div>
+
+				</div>					
+				<div class="bottom"></div>
+				</span>
+			</div>	
+<? } ?>		
+		</div>	
+<?
+}
+else {
+	$MENU_NUM = '';
+	for($i=0,$cnt=count($MENU_ARR);$i<$cnt;$i++) {
+		for($j=0,$cnt2=count($MENU_ARR[$i]);$j<$cnt2;$j++){						
+			if(eregi('code=',$menu_name[3]) && ($menu_name[3]!='board.php?code=event&mode=write' && $menu_name[3]!='board.php?code=brand&mode=write' && $menu_name[3]!='board.php?code=special&mode=write')) {
+				$tmps = explode("&",$menu_name[3]);
+				$menu_name[3] = $tmps[0];
+			}
+			
+			if($MENU_ARR[$i][$j][3]!='N') {
+				$SNUM = $MENU_ARR[$i][$j][3];					
+				foreach($SMENU_ARR[$SNUM] as $key => $value) {
+					if($value == "{$menu_name[2]}/{$menu_name[3]}") {					
+						$MENU_NUM = $i;					
+						break;
+					}
+					if(eregi($sub_pages,$value)) {											
+						$value = str_replace("?","\?",$value);					
+						if(eregi($value,"{$menu_name[2]}/{$menu_name[3]}")) {						
+							$MENU_NUM = $i;					
+							break;
+						}
+					}
+				}
+			}
+			else if(($MENU_ARR[$i][$j][1] == "{$menu_name[2]}/{$menu_name[3]}" && $MENU_ARR[$i][$j][4]!='Y') || (eregi($MENU_ARR[$i][$j][1],"{$menu_name[2]}/{$menu_name[3]}") && $MENU_ARR[$i][$j][4]=='Y')) {
+				$MENU_NUM = $i;
+				break;
+			}
+			if($MENU_NUM) break;			
+		}
+		if($MENU_NUM) break;			
+	}
+
+	if(!$MENU_NUM) {
+		if($menu_name[3]=="order_list.php\?sdate1=today") { $menu_name[3]="order_list.php"; $MENU_NUM = 1; }
+		else if(eregi("coop_goods_write.php\?mode=modify",$menu_name[3])) { $menu_name[3]="coop_goods_list.php"; $MENU_NUM = 0; }
+		else if(eregi("goods_write.php\?mode=modify",$menu_name[3])) { $menu_name[3]="goods_list.php"; $MENU_NUM = 0; }		
+		else if(eregi("order_list.php|order_view.php",$menu_name[3])) { 
+			if(eregi("gs=",$menu_name[3])) {
+				$tmps = explode("&",$menu_name[3]);
+				$menu_name[3] = $tmps[0]; 
+				$menu_name[3] = str_replace("view","list",$menu_name[3]);
+			}
+			else $menu_name[3] = "order_list.php";
+			$MENU_NUM = 1; 
+		}
+		else if(eregi("goods_rank.php",$menu_name[3])) { 
+			if(eregi("mode=",$menu_name[3])) {
+				$tmps = explode("&",$menu_name[3]);
+				$menu_name[3] = $tmps[0]; 		
+			}
+			else $menu_name[3] = "goods_rank.php";
+			$MENU_NUM = 1; 
+		}
+		else if(eregi("board.html|board_write.php|board_list.php",$menu_name[3])) { $menu_name[3]="board_list.php"; $MENU_NUM = 4; }
+		else if(eregi("member_view.php",$menu_name[3])) { $menu_name[3]="member_list.php"; $MENU_NUM = 3; }
+		else if(eregi("mail_form.html",$menu_name[3])) { $menu_name[3]="mail_form.html?type=all"; $MENU_NUM = 3; }
+		else if(eregi("maillog_view.php",$menu_name[3])) { $menu_name[3]="maillog_list.php"; $MENU_NUM = 3; }
+		else if(eregi("cupon_write.php",$menu_name[3])) { $menu_name[3]="cupon_write.php"; $MENU_NUM = 3; }
+		else if(eregi("attendance_write.php",$menu_name[3])) { $menu_name[3]="attendance_write.php"; $MENU_NUM = 3; }
+		else if(eregi("cate_manager.html",$menu_name[3])) { $menu_name[3]="cate_manager.html"; $MENU_NUM = 0; }
+		else if(eregi("coop_goods_write.php",$menu_name[3])) { $menu_name[3]="coop_goods_write.php"; $MENU_NUM = 0; }		
+		else if(eregi("goods_write.php",$menu_name[3])) { $menu_name[3]="goods_write.php"; $MENU_NUM = 0; }		
+		else if(eregi("main2.html",$menu_name[3])) { $menu_name[3]="main2.html"; $MENU_NUM = 2; }
+		else if(eregi("goods_modify_list.php",$menu_name[3])) { $menu_name[3]="goods_modify_list.php"; $MENU_NUM = 0; }		
+		
+	}
+
+	echo "
+		<div class='leftBox2' id='leftBox'>	
+			<div class='top'>					
+				<div style='padding:9px 0 0 12px;'>
+					<div class='left'><img src='../html/img/{$MENU_ARR[$MENU_NUM][0][2]}' border='0' alt='{$MENU_ARR[$MENU_NUM][0][0]}' /></div>
+				</div>
+				<div style='float:right;padding:2px 8px;'>
+					<img src='../html/img/icon_exit.gif' alt='닫기' title='닫기' border='0' id='scaleBt2' style='cursor:pointer' />
+				</div>
+			</div>
+			<div class='content'>
+				<div class='content_top'></div>
+				<div style='padding:4px 0 0 10px;' id='leftHeight'>	
+				
+				<center>
+				<div id='leftMenu'>				
+					<ul>
+						
+		";
+
+	for($i=1,$cnt=count($MENU_ARR[$MENU_NUM]);$i<$cnt;$i++){
+		
+		$class1 = $style1 = '';
+		if(($MENU_ARR[$MENU_NUM][$i][1] == "{$menu_name[2]}/{$menu_name[3]}" && $MENU_ARR[$MENU_NUM][$i][4]!='Y') || (eregi($MENU_ARR[$MENU_NUM][$i][1],"{$menu_name[2]}/{$menu_name[3]}") && $MENU_ARR[$MENU_NUM][$i][4]=='Y')) {
+			$class1='orange';
+			$style1 = "style='background:url(../html/img/left_menu_bg_sec.gif) no-repeat;'";
+		}
+		else if($MENU_ARR[$MENU_NUM][$i][3]!='N') {
+			$SNUM = $MENU_ARR[$MENU_NUM][$i][3];					
+			foreach($SMENU_ARR[$SNUM] as $key => $value) {
+				if($value == "{$menu_name[2]}/{$menu_name[3]}") {								
+					$class1 = 'orange';			
+					$style1 = "style='background:url(../html/img/left_menu_bg_sec.gif) no-repeat;'";
+					break;
+				}
+				if(eregi($sub_pages,$value)) {											
+					$value = str_replace("?","\?",$value);					
+					if(eregi($value,"{$menu_name[2]}/{$menu_name[3]}")) {						
+						$class1='orange';								
+						$style1 = "style='background:url(../html/img/left_menu_bg_sec.gif) no-repeat;'";
+						break;
+					}
+				}
+			}	
+		}	
+
+		echo "			
+						<li {$style1}>
+							<div style='height:6px;overflow:hidden'>&nbsp;</div>
+							<a href='../{$MENU_ARR[$MENU_NUM][$i][1]}' onfocus='this.blur()'><font class='{$class1} small bold'>{$MENU_ARR[$MENU_NUM][$i][0]}</font></a>
+						</li>\n
+			";
+	
+		if($MENU_ARR[$MENU_NUM][$i][3]!='N') {	
+			$SNUM = $MENU_ARR[$MENU_NUM][$i][3];
+			
+			$cnt2 = count($SMENU_ARR[$SNUM]);
+			$height = ($cnt2 * 20) + 6;
+			
+			echo "
+						<li style='background:url();padding-left:20px;height:{$height}px;overflow:hidden;'>
+							<div id='leftMenu2' style='width:142px;background-color:#fafafa'>
+								<ul>
+			";
+
+			foreach($SMENU_ARR[$SNUM] as $key => $value) {			
+				$class2 = "";	
+				if($value == "{$menu_name[2]}/{$menu_name[3]}") $class2='orange';
+				else if(eregi($sub_pages,$value)) {
+					if(eregi($value,"{$menu_name[2]}/{$menu_name[3]}")) $class2='orange';
+				}						
+
+				echo "
+									<li>
+										<div style='height:4px;overflow:hidden'>&nbsp;</div>
+										<a href='../{$value}' onfocus='this.blur();'><font class='{$class2} small'>{$key}</font></a>
+									</li>\n
+					";	
+			}			
+			echo "					
+								</ul>							
+							</div>						
+						</li>
+						<li style='background:url();padding-left:9px;height:5px;overflow:hidden;'>
+							<div style='height:1px;background-color:#dddddd;width:152px;overflow:hidden;'>&nbsp;</div>
+						</li>
+				";
+		}
+	}
+?>					
+						<li style="background:url();height:16px;overflow:hidden;"></li>
+					</ul>			
+				</div>			
+				</center>
+			</div>
+			<div class="bottom"></div>			
+		</div>		
+	</div>
+
+<script LANGUAGE="JavaScript">
+<!--
+	var pE = new Array();
+//-->
+</script>
+
+		
+<? 
+unset($admin_infos);
+} 
+?>
+
+	</div>
+	<div id="body_gab">&nbsp;</div>
+	<div id='body'>

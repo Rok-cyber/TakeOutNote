@@ -1,0 +1,78 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+	if(!form.word.value) {
+		alert('검색어를 등록하세요.');
+		form.word.focus();
+		return false;
+	}   
+
+	form.word.value = form.word.value.toLowerCase(); 
+	for(i=0,cnt=form.word.value.length;i<cnt;i++){
+		var ch = form.word.value.charAt(i);
+		if(tmp = getJamoCodes(ch)) {
+			if(i==0) form.split_word.value = tmp;	
+			else form.split_word.value += ','+tmp;	
+		} 
+		else {
+			form.split_word.value += ch;
+		}
+	}	
+	form.submit();
+	return false;
+}
+
+//-->
+</script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+    <form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+	<input type=hidden name=split_word>
+	<input type=hidden name=ckd value={{mode}}>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;검색어</font></td>
+							<td bgcolor="#EFEFEF" style='padding-left:8px;'>
+								<input type=text class=ta name=word value='{{FORM1}}' size=30>
+							</td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;출력 순위</font></td>
+							<td bgcolor="#EFEFEF" style='padding-left:8px;'>
+								<input type=text class=ta name=rank value='{{FORM2}}' size=5 onkeyup="ckNum(this);" onkeydown="ckNum(this);">
+							</td>
+						</tr>
+						<tr height=30>
+							<td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 출력순위가 높을 수록 상단에 나타납니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>
+						</tr>							
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

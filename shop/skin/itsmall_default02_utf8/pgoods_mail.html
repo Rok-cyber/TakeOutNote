@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y:auto;">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>상품복사하기</title>
+<link rel="StyleSheet" href="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript"  src="../lib/lib.Function.js"></script>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+
+<body>
+<div id="pageView" style="width:500px;padding-left:8px;">	
+	<div style="margin:0 0 10px 0;line-height:160%;text-align:left" class="small">
+	
+	</div>
+	
+	<div id="goodsHtml">
+		<div style="text-align:left;border:4px solid #EFEFEF;width:490px;">
+			<div style="height:15px;padding:10px">
+				<div style="width:220px; float:left;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;font-weight:bold">
+					<a href="{{SHOP_URL}}" target="_blank">{{SHOP_NAME}}</a>
+				</div>
+				<div style="width:250px;text-align:right;float:right;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;">
+					<a href="{{SHOP_URL}}?channel=view&amp;uid={{uid}}&amp;cate={{P_CATE}}" target="_blank">상품상세보기</a>
+				</div>
+			</div>
+
+			<div style="width:150px;float:left;padding:0px 10px">
+				<img src='{{GOODS_IMG}}' border='0' width='150' alt="{{GOODS_NAME}}" />
+			</div>		
+			
+			<div style="float:right;width:290px;padding:0 10px 0 0;">			
+				<div style="font-weight:bold; color:#38c1c9; overflow:hidden;height:15px;width:300px;">{{GOODS_NAME}}</div>
+				<div style="margin:2px 0 8px 0;height:1px;background-color:#e3e3e3;">&nbsp;</div>
+				<ul style="margin:0; padding:0;">									
+					<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">판매가격</div>
+						<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;font-weight:bold">{{GOODS_PRICE}}</div>
+					</li>
+					<!-- DYNAMIC @is_reserve@ -->
+					<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">적립금</div>
+						<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{GOODS_RESERVE}}P</div>
+					</li>
+					<!-- DYNAMIC @is_reserve@ -->
+					<!-- DYNAMIC @is_brand@ -->
+					<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">브랜드</div>
+						<div class="left small">{{GOODS_BRAND}}</div>
+					</li>
+					<!-- DYNAMIC @is_brand@ -->
+					<!-- DYNAMIC @is_comp@ -->
+					<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">제조사</div>
+						<div class="left small">{{GOODS_COMP}}</div>
+					</li>
+					<!-- DYNAMIC @is_comp@ -->
+					<!-- DYNAMIC @is_made@ -->
+					<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">원산지</div>
+						<div class="left small">{{GOODS_MADE}}</div>
+					</li>
+					<!-- DYNAMIC @is_made@ -->		
+					<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+						<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+						<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">보낸날</div>
+						<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{DATE}}</div>
+					</li>
+				</ul>			
+			</div>	
+			<div style="clear:both;height:1px;overflow:hidden;">&nbsp;</div>
+			<div style="margin:10px;font-family:돋움,돋움체,Tahoma;height:14px;padding:4px 0 4px 0;text-align:center;font-size:8pt;letter-spacing:-1px;border:1px solid #DADADA; background-color:#EFEFEF">
+				상품정보는 보낸날을 기준으로 작성된 것이므로 최근정보를 반드시 확인 해 주세요.
+			</div>
+		</div>
+	</div>
+
+	<form name="mailForm" method="post" onsubmit="return checkIts();" action="../php/pgoods_mail_ok.php">
+	<input type="hidden" name="gInfo" />
+	<div style="margin:20px 0 10px 0;line-height:160%;text-align:left;height:160px;" class="small">
+			<div style="clear:both;margin-bottom:4px;"> 
+				<div style="float:left;padding:4px; width:60px;" class="small bold">보내는사람</div>
+				<div style="float:left;padding-left:10px;padding-right:10px;"><input  type="text" name="name1" class="inputs_bg default" maxlength="30" size="15" value="" /></div>
+				<div style="float:left;padding:4px;width:85px;" class="small bold">보내는사람 주소</div>
+				<div style="float:left;padding-left:10px;"><input  type="text" name="email1" class="inputs_bg default" size="25" value="" /></div>				
+			</div>
+			<div style="clear:both;margin-bottom:4px;"> 
+				<div style="float:left;padding:4px ;width:60px;" class="small bold">받는사람</div>
+				<div style="float:left;padding-left:10px;padding-right:10px;"><input  type="text" name="name2" class="inputs_bg default" maxlength="30"  size="15" /></div>
+				<div style="float:left;padding:4px;width:85px;" class="small bold">받는사람 주소</div>
+				<div style="float:left;padding-left:10px;"><input  type="text" name="email2" class="inputs_bg default" size="25" /></div>				
+			</div>
+			<div style="clear:both">
+				<div style="float:left;padding:4px;width:60px;" class="small bold">제목</div>
+				<div class="left" style="padding-left:10px;"><input  type="text" name="title" class="inputs_bg default" maxlength="50" style="width:407px;" value="" /></div>	
+			</div>
+			<div style="clear:both">
+				<div style="float:left;padding:4px;width:60px;" class="small bold">내용</div>
+				<div class="left" style="padding-left:10px;"><textarea name="content" cols=56 class="inputs_bg default" style="height:80px;"></textarea></div>	
+			</div>
+	</div>
+
+	<div style="padding:15px 0 0 160px;">
+		<div id="sBtn3">			
+			<a href="#" onclick="return checkIts(1);"><span>메일 보내기</span></a>
+		</div>
+		<div id="sBtn2">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>&nbsp;&nbsp;닫기&nbsp;&nbsp;</span></a>
+		</div>
+	</div>
+	</form>
+
+</div>
+
+<script language="javascript">
+<!--
+
+function checkIts(cks) {      
+    f=document.mailForm;
+
+	f.gInfo.value = document.getElementById("goodsHtml").innerHTML;
+
+	f.name1.value=f.name1.value.trim();
+    if(!f.name1.value) {
+        alert('보내는 사람을 입력하세요!');
+        f.name1.focus();
+        return false;
+    }
+
+	f.email1.value=f.email1.value.trim();
+    if(!f.email1.value) {
+        alert('보내는 사람 주소를 입력하세요!');
+        f.email1.focus();
+        return false;
+    }
+
+	f.name2.value=f.name2.value.trim();
+    if(!f.name2.value) {
+        alert('받는 사람을 입력하세요!');
+        f.name2.focus();
+        return false;
+    }
+
+	f.email2.value=f.email2.value.trim();
+    if(!f.email2.value) {
+        alert('받는 사람 주소를 입력하세요!');
+        f.email2.focus();
+        return false;
+    }
+
+	f.title.value=f.title.value.trim();
+    if(!f.title.value) {
+        alert('제목을 입력하세요!');
+        f.title.focus();
+        return false;
+    }
+
+	if(cks==1) f.submit();
+
+	return false;
+}
+</script>
+
+</body>
+</html>

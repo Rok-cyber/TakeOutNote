@@ -1,0 +1,248 @@
+<div id="cusMenu">
+	<!-- 고객센터 메뉴 START -->
+	{{CUS_MENU}}
+	<!-- @고객센터 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_after2.gif" alt="이용후기" title="이용후기" />
+	</div>
+
+	<div style="margin-top:20px;text-align:left" class="small">
+		! 이용후기 등록은 상품 상세보기페이지 하단에 '이용후기등록' 버튼을 클릭 하시고 등록 하시면 됩니다.<br />	
+	</div>
+	
+	<div id="alist_top">
+		<div id='order_uid' class="tab_on small"><a href="#" onfocus="this.blur();" onclick="return getAfters.cgOrder('uid');">최근등록순</a></div>
+		<div id='order_best' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getAfters.cgOrder('best');">평점높은순</a></div>
+		<div class="right">
+			<form name="limitForm">								
+			<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+			<div id='limitBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px; text-align:left;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				limitBoxs = new selectBox('limitBox','','{{Main}}','5');
+				limitBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				limitBoxs.img1.src = 'img/common/icon_select_down2.gif';
+				limitBoxs.img2.src = 'img/common/icon_select_up2.gif';
+				limitBoxs.addItem('10개씩 보기','10');
+				limitBoxs.addItem('20개씩 보기','20');
+				limitBoxs.addItem('30개씩 보기','30');
+				limitBoxs.addItem('50개씩 보기','50');
+				limitBoxs.show('cate');
+				limitBoxs.secNum = 1;
+				limitBoxs.mout();
+			// -->
+			</script>									
+			</form>
+		</div>		
+	</div>
+	
+	<div style="margin-top:10px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{CNT_AFTER}} , <font id="paging_page">{{PAGE}}</font>/<font id="paging_total">{{PAGE_TOTAL}}</font> <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="50" /> 			
+			<col width="70" /> 						
+			<col width="432" />			
+			<col width="70" /> 			
+			<col width="90" /> 
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>
+				<th scope="col" class="small black">번호</th>
+				<th scope="col" class="small black">이미지</th>				
+				<th scope="col" class="small black">상품명/제목</th>
+				<th scope="col" class="small black">평점/작성자</th>
+				<th scope="col" class="small black">작성일</th>				
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody id="list_after"></tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @no_after@ -->
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/shop/no_after.gif" alt="이용후기 없음 이미지" title="이용후기 없음 이미지" />
+	</div>
+	<!-- DYNAMIC @no_after@ -->
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div id="paging" class="small"></div>
+
+	<div style="clear:both;height:20px;">&nbsp;</div>
+	<div style="height:36px; background:url(img/customer/box_search_bg.gif)">		
+		<form name="searchForm" method="get" action="{{Main}}">
+		<input type="hidden" name="channel" value='after2'>
+		<input type="hidden" name="limit" value='{{limit}}'>
+		<input type="hidden" name="field" value='{{field}}'>
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="5" />
+			<col />
+			<col width="5" />
+			<tbody>
+			<tr>
+				<td><img src="img/customer/box_search_left.gif" /></td>
+				<td align="center" style="border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4">
+					<table cellspacing="0" cellpadding="0" border="0" width="412">
+					<col width="78" />
+					<col width="64" />
+					<col width="174" />
+					<col width="96" />
+					<tbody>
+					<tr>
+						<td>
+							<img src="img/customer/ttl_search.gif" align="absmiddle" alt="search" title="search" />
+						</td>						
+						<td align="left">
+						    <div  style='position:absolute'>
+								<div id='PsBox' style="position:relative;top:-11px;left:-0px;background-color:#FFF; border: 1px solid #BBB;width:60px; height:20px; float:left;text-align:left;" ></div>
+								<script>
+									PsBoxs = new selectBox('PsBox',document.searchForm.field);							
+									PsBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333";
+									PsBoxs.addItem('제목','title');
+									PsBoxs.addItem('이름','name');
+									PsBoxs.addItem('내용','content');
+									PsBoxs.addItem('상품명','goods_name');
+									PsBoxs.show();
+
+									if(document.searchForm.field.value) {
+										PsBoxs.initSelect(document.searchForm.field.value);								
+									}
+								</script>
+							</div>
+						</td>
+						<td>
+							<input type=text class="ip2" name="word" size="30" value="{{word}}" style="height:18px;line-height:180%" />
+						</td>
+						<td>
+							<a href='#' onfocus='this.blur();' onclick="document.searchForm.submit();return false;" /><img src="img/customer/btn_search.gif" border="0" height="22" align="absmiddle" alt="검색" title="검색" /></a><img src='img/common/blank.gif' width="1"><a href="{{Main}}?channel=after2" onfocus="this.blur();"><img src="img/customer/btn_cancel.gif" border="0" align="absmiddle" height="22" alt="취소" title="취소" /></a>
+						</td>			
+					</tr>
+					<tbody>
+					</table>
+				</td>
+				<td><img src="img/customer/box_search_right.gif" /></td>
+			</tr>
+			</tbody>
+		</table>		
+		</form>		
+	</div>	
+
+	<div style="clear:both;height:20px"></div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function rtnRowAfter(obj,num,point,title,name,buy,date,content,mod,uid,name2,link,image,dragd) {		
+	newRow = document.createElement('TR');			
+	newRow.style.height = "32px";
+	newRow.align = "center";
+	
+	newCell = document.createElement('TD');	
+	newCell.rowSpan = 2;
+	newCell.colSpan = 2;
+	newCell.onclick = function() { viewAfter(num) }
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = '<font class="num">'+num+'</font>';
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.rowSpan = 2;
+	newCell.innerHTML = '<div style="float:left;cursor:move;border:2px solid #FFF; height:55px;width:55px;background:url('+image+')" onclick="viewGoods(\''+link+'\');" '+dragd+'><img src="'+image+'" alt="'+name+'" border="0" width="55" height="55" /></div>';
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	newCell.innerHTML = '<a href="'+link+'" title="상품상세보기"><font class="blue small">'+name2+'</font></a>';
+	newRow.appendChild(newCell);	
+		
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	newCell.onclick = function() { viewAfter(num) }
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = '<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:2px;"><div style="width:'+point+'%;overflow:hidden"><img src="img/shop/icon_star.gif" /></div></div>';
+	newRow.appendChild(newCell);
+
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 2;
+	newCell.rowSpan = 2;
+	newCell.onclick = function() { viewAfter(num) }
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = '<font class="num">'+date+'</font>';
+	newRow.appendChild(newCell);		
+
+	obj.appendChild(newRow);	
+
+	newRow = document.createElement('TR');			
+	newRow.style.height = "32px";
+	newRow.align = "center";
+		
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	newCell.onclick = function() { viewAfter(num) }
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = title;
+	if(buy==1) newCell.innerHTML += " <img src='img/shop/icon_buyer.gif' alt='구매자' title='구매자' align='absmiddle' />";
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.onclick = function() { viewAfter(num) }
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = name;	
+	newRow.appendChild(newCell);
+
+	obj.appendChild(newRow);	
+	
+	newRow = document.createElement('TR');				
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 7;	
+	newCell.style.height = 1;
+		
+	if(mod==1) {
+		tmps = '<div style="margin:20px 0 4px 0">';
+		tmps += '<img src="img/shop/btn_modify.gif"  class="hand" onclick="pLightBox.show(\'php/after_write.php?pmode=confirm&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 비밀번호 확인\',\'20\');" alt="이용후기수정" title="이용후기수정" />&nbsp;';
+		tmps += '<img src="img/shop/btn_delete.gif"   class="hand" onclick="pLightBox.show(\'php/after_write.php?pmode=delete&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 이용후기 삭제\',\'20\');" alt="이용후기삭제" title="이용후기삭제" />';
+		tmps += '</div>';
+	} 
+	else tmps = '';
+
+	newCell.innerHTML = '<table cellspacing="0" cellpadding="0" border="0" style="padding:6px 0px 6px 0px; border:1px solid #EFEFEF; border-bottom:0px; display:none" bgcolor="#FAFAFA" id="after_'+num+'"><tr><td height="50"><div style="padding:0 20px 0 20px;width:678px;overflow:hidden;" id="afterContent'+num+'">'+content+tmps+'</div></td></tr></table>';
+	
+	newRow.appendChild(newCell);
+	obj.appendChild(newRow);
+
+	newRow = document.createElement('TR');			
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 7;
+	newCell.style.height = 1;
+	newCell.style.backgroundColor = "#F1F1F1";
+	newCell.innerHTML = "<img src='" + shop_skin + "/img/common/blank.gif' width=1 height=1 alt='blank' />";;
+	newRow.appendChild(newCell);
+
+	obj.appendChild(newRow);
+	imgSizeConv("afterContent"+num,670);
+}
+
+
+getAfters = new getAfter('{{limit}}','{{CNT_AFTER}}','0','{{afterstr}}');
+getAfters.display();
+aPage = new ajaxPaging('aPage','paging',getAfters,'{{CNT_AFTER}}','{{limit}}','10','alist_top','paging_page','paging_total');
+aPage.makePage();
+aPage.printPage();
+afterViewNum = '';
+
+// -->
+</script>

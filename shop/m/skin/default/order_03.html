@@ -1,0 +1,278 @@
+<div id="contents">
+	<section id="headline">
+		<h1>주문완료</h1>
+		<a href="{{Main}}" class="btn_back"><span><img src="img/common/btn_back.png" alt="메인화면" /></span></a>		
+	</section>
+	
+	<section id="orderForm">
+		<ul>
+			<li class="title" onclick="detailView($(this),$('.cartList'))">01 주문 상품 정보 (총{{TCNT}}개)</li>
+			<li class="cartList">
+				<div id="cartList" class="orderForm">
+					<h2>주문상품목록</h2> 
+					<div class="cartListTop">&nbsp;</div>
+					<!-- DYNAMIC @loop_cart@ -->
+					<!-- DYNAMIC @is_cart_sum@ -->
+					<div class="cartListSum">
+						<p>
+							{{VENDOR}} 
+							<span>
+							<!-- DYNAMIC @is_vendor_carr11@ -->
+							({{VENDOR_CARR1}}원 미만 배송비 <strong>{{VENDOR_CARR2}}</strong>원)
+							<!-- DYNAMIC @is_vendor_carr11@ -->
+							<!-- DYNAMIC @is_vendor_carr12@ -->
+							(배송비 무료)
+							<!-- DYNAMIC @is_vendor_carr12@ -->
+							</span>
+						</p>
+						<p>
+							배송비 : <strong>{{VENDOR_CARR}}</strong>원, 총합계금액 : <strong>{{VENDOR_TOTAL}}</strong>원
+						</p>
+					</div>
+					<div class="cartListTop2">&nbsp;</div>
+					<!-- DYNAMIC @is_cart_sum@ -->
+					<div class="cartListbox">
+						<div class="cartInfo">
+							<div class="item_box">
+								<a href="{{LINK}}" title="상품상세보기">
+									<div class="thumbnail"><img src="{{OIMAGE}}" alt="상품이미지" /></div>
+									<div class="item_info">
+										<p class="goods" title="상품명">{{NAME}}</p>						
+										<!-- DYNAMIC @is_my_carr@ -->
+										<span>배송비 {{CARR}}원 별도상품</span>
+										<!-- DYNAMIC @is_my_carr@ -->
+										<!-- DYNAMIC @is_my_free@ -->
+										<span>배송비 무료상품</span>
+										<!-- DYNAMIC @is_my_free@ -->
+									</div>
+								</a>
+							</div>
+							<!-- DYNAMIC @is_op@ -->
+							<div class="options">
+								<!-- DYNAMIC @loop_op@ -->
+								<p><span>{{OP_NAME}}</span> <span>{{OP_SEC_VLS}}</span></p>
+								<!-- DYNAMIC @loop_op@ -->
+							</div>
+							<!-- DYNAMIC @is_op@ -->
+
+							<table summary="상품구매정보">
+							<col width="40%" /> 
+							<col width="60%" />
+							<tbody>
+							<tr>
+								<th>상품금액</th>
+								<td>{{PRICE}}원</td>
+							</tr>
+							<tr>
+								<th>상품수량</th>
+								<td>{{QTY}}개</td>
+							</tr>
+							<tr>
+								<th>적립금</th>
+								<td>{{RESE}}원</td>
+							</tr>
+							<tr>
+								<th>합계금액</th>
+								<td><strong>{{SUM}}</strong>원</td>
+							</tr>
+							<tbody>
+							</table>
+						</div>
+					</div>
+					<!-- DYNAMIC @loop_cart@ -->
+					<!-- DYNAMIC @is_cart_sum2@ -->
+					<div class="cartListSum">
+						<p>
+							{{VENDOR}} 
+							<span>
+							<!-- DYNAMIC @is_vendor_carr21@ -->
+							({{VENDOR_CARR1}}원 미만 배송비 <strong>{{VENDOR_CARR2}}</strong>원)
+							<!-- DYNAMIC @is_vendor_carr21@ -->
+							<!-- DYNAMIC @is_vendor_carr22@ -->
+							(배송비 무료)
+							<!-- DYNAMIC @is_vendor_carr22@ -->
+							</span>
+						</p>
+						<p>
+							배송비 : <strong>{{VENDOR_CARR}}</strong>원, 총합계금액 : <strong>{{VENDOR_TOTAL}}</strong>원
+						</p>
+					</div>
+					<!-- DYNAMIC @is_cart_sum2@ -->
+				</div>		
+			</li>
+			<li class="title" onclick="detailView($(this),$('.cartSum'))">02 할인 및 최종 결제 금액 ({{TOTAL2}}원)</li>
+			<li class="cartSum">
+				<fieldset>
+				<legend>할인 적용</legend>
+					<dl class="orderSale">
+					<!-- DYNAMIC @is_cupon@ -->
+					<dt>쿠폰 할인 </dt>
+					<dd>
+						<ul>
+							<li>
+								<!-- DYNAMIC @loop_cupon@ -->
+								{{C_NAME}} - <em>{{C_SALE}}</em>{{C_STYPE}}
+								<!-- DYNAMIC @loop_cupon@ -->
+							</li>
+							<li></li>
+							<li>{{CUPON}}원</li>
+						</ul>						
+					</dd>
+					<!-- DYNAMIC @is_cupon@ -->
+					<!-- DYNAMIC @is_reserve@ -->
+					<dt>적립금 사용</dt>
+					<dd>
+						<ul>
+							<li></li>
+							<li></li>
+							<li>{{RESERVE}}P</li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_reserve@ -->
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<dt id="cashDcUse1">현금결제 할인</dt>
+					<dd id="cashDcUse2">
+						<ul>
+							<li>{{CASHDC2}}%</li>
+							<li></li>
+							<li>{{CASHDC}}원</li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<dt id="carrAdd1">도서산간 추가 배송비</dt>
+					<dd id="carrAdd2">
+						<ul>
+							<li></li>
+							<li></li>
+							<li><em id="carrMoneys">0</em>원</li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_reserve_save@ -->
+					<dt>구매확정시 적립금</dt>
+					<dd>
+						<ul>
+							<li></li>
+							<li></li>
+							<li>{{TRESE}}P</li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_reserve_save@ -->
+					</dl>
+				</fieldset>
+				<div id="cartSum" class="orderForm">
+					<table summary="상품결제금액">
+					<col width="40%" /> 
+					<col width="60%" />
+					<tbody>
+					<tr>
+						<th>총 상품금액</th>
+						<td><em>{{TOTAL}}</em>원</td>
+					</tr>
+					<tr>
+						<th>총 배송비</th>
+						<td>(+) <em id="carrTotal">{{TCARR}}</em>원</td>
+					</tr>
+					<tr>
+						<th>총 할인금액</th>
+						<td>(-) <em id="saleTotal">{{TSALES}}</em>원</td>
+					</tr>
+					<tr>
+						<th>최종결제금액</th>
+						<td><strong id="cashMoney">{{TOTAL3}}</strong>원</td>
+					</tr>
+					</tbody>
+					</table>							
+				</div>
+			</li>			
+			<li class="title" onclick="detailView($(this),$('.orderCarr'))">03 배송지 정보</li>
+			<li class="orderCarr">
+				<fieldset>
+				<legend>배송지 정보</legend>
+					<dl class="orderInput">
+					<dt>수령인</dt>
+					<dd>
+						{{NAME}}
+					</dd>
+					<dt>연락처1</dt>
+					<dd>
+						{{TEL}}
+					</dd>
+					<dt>연락처2</dt>
+					<dd>
+						{{PHONE}}
+					</dd>
+					<dt>배송지</dt>
+					<dd>
+						({{ZIPCODE}}) {{ADDRESS}}
+					</dd>					
+					<dt>요청사항</dt>
+					<dd>
+						{{MESSAGE}}
+					</dd>
+					</dl>
+				</fieldset>
+			</li>
+			<li class="title" onclick="detailView($(this),$('.orderCash'))">04 결제 정보</li>
+			<li class="orderCash">
+				<fieldset>
+				<legend>결제 정보</legend>					
+					<dl class="orderInput">
+					<dt>결제 수단</dt>
+					<dd>
+						{{CASH_TYPE}}
+					</dd>	
+					<!-- DYNAMIC @is_card@ -->	
+					<dt>결제정보</dt>
+					<dd>
+						<script type="text/javascript">
+							var pay_info = '{{CARD_INFO}}';
+							var pay_info2 = pay_info.split(',');
+
+							for(i=0,cnt=pay_info2.length;i<cnt;i++) {
+								document.write("<div>"+pay_info2[i]+"</div>");
+							}								
+						// -->
+						</script>
+					</dd>
+					<!-- DYNAMIC @is_card@ -->	
+					<!-- DYNAMIC @is_bank@ -->
+					<dt>입금은행</dt>
+					<dd>
+						{{BANK_NAME}}
+					</dd>	
+					<dt>입금자 성명</dt>
+					<dd>
+						{{PAY_NAME}}
+					</dd>
+					<dt>입금 예정일</dt>
+					<dd>
+						{{PAY_DATE}}
+					</dd>
+					<!-- DYNAMIC @is_bank@ -->
+					</dl>
+				</fieldset>
+			</li>
+		</ul>
+
+		<div id="cartBtn">
+			<p class="btn" onclick="window.location.href='{{Main}}'" title="메인페이지">메인페이지</p>
+		</div>
+		
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>&nbsp;</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<script type="text/javascript">
+<!--
+	$("#contentMore").show();	
+ -->
+</script>

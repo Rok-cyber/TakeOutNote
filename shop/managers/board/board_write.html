@@ -1,0 +1,455 @@
+<script language="javascript">
+<!--
+
+function checkIt() {    
+	form=document.creatForm;
+
+	var valid = "abcdefghijklmnopqrstuvwxyz0123456789_"; 
+
+	if(form.ck_bt.value=='1')  { alert('게시판 생성 버튼을 여러번 누르시면 안됩니다'); return false; }
+   
+	function ck_value(name,msg) {
+		var ch=0;
+		eval("if(!form."+name+".value) { ch = 1 }")
+		if(ch==1) { 
+			alert(msg);
+			eval("form."+name+".focus()")
+			return 1;
+		} 
+	} 
+   
+	if(ck_value('b_name','게시판 이름을 입력하세요!')==1) return false;
+	
+	form.b_name.value = form.b_name.value.toLowerCase(); 
+	for (var i=0; i<form.b_name.value.length; i++) { 
+		temp = "" + form.b_name.value.substring(i, i+1); 
+		if (valid.indexOf(temp) == "-1") { 
+			alert("게시판 이름은 영문, 숫자, '_' 만 가능 합니다");
+			form.b_name.value = "";
+			form.b_name.focus();
+			return false;
+		}
+	} 
+
+	if(ck_value('title','게시판 타이틀을 입력하세요!')==1) return false;
+	if(ck_value('b_w_size','게시판 가로 크기를 입력하세요!')==1) return false;
+	form.ck_bt.value='1';
+}
+
+function Change(color){
+	document.creatForm.bg_color.value='#'+color;
+	document.getElementById('divColor').style.display='none';
+}
+
+function secEditor(value){
+	f = document.creatForm;
+	if(value){		
+		f.option3.disabled = true;
+		f.option8.disabled = true;
+	} 
+	else {
+		f.option3.disabled = false;	
+		f.option8.disabled = false;	
+	}
+}
+
+function ckDsp(st) {
+	var form = document.creatForm; 
+	for (i = cnt = 0; i < form.elements.length; i++) {
+		eval("if(form.elements[i].name == 'option7[]' && form.elements[i].value!=st )  form.elements[i].checked = false; ")
+		eval("if(form.elements[i].name == 'option7[]' && form.elements[i].value==st )  form.elements[i].checked = true; ")
+	}
+}
+	
+
+//-->
+</script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_board.gif" alt="게시판관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>생성된 게시판 리스트를 확인 하거나 설정을 변경 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<form name="creatForm" method="post" action='./board_ok.php' onsubmit="return checkIt()">
+<input type="hidden" name="ck_bt">
+
+<!-- 기본설정 시작 -->
+<TR><TD height="40"><img src="img/bo_t11.gif" border="0" align="absmiddle"></TD></TR>
+<TR>
+	<TD style="padding:4px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">
+        <tr><td height="10"></td></tr>
+		<tr>
+			<td valign="top"> 
+				<table border="0" cellpadding="0" cellspacing="0" width="96%" align="center">
+	            <tr>
+					<td height="24" width="20%"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;게시판 이름</font></td>
+					<td>
+						<!-- DYNAMIC @is_modify1@ -->					
+				        <input class="ta" type="text" name="b_name" style="width:200px" value="{{NAME}}" readonly>&nbsp;&nbsp;&nbsp;&nbsp;<font class='small orange'>(게시판 이름은 수정이 불가능합니다.)</font>
+						<input type="hidden" name="uid" value="{{uid}}"><input type="hidden" name="mode" value="modify">
+                		<!-- DYNAMIC @is_modify1@ -->					
+						<!-- DYNAMIC @is_write1@ -->					
+						<input class="ta" type="text" name="b_name" style="width:200px">&nbsp;&nbsp;&nbsp;&nbsp;<font class=small>(영문, 숫자,'_' 만 가능)</font>
+						<!-- DYNAMIC @is_write1@ -->					
+					</td>
+			    </tr>
+			    <tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;스킨 선택</font></td>
+					<td>
+						<select name="s_name">{{SNAME}}</select>					 
+				  </td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타이틀</font></td>
+					<td>
+						<input class="ta" type="text" name="title" style="width:200px;" value="{{TITLE}}">					  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;가로크기</font></td>
+					<td>
+						<input class="ta" type="text" name="b_w_size" maxlength="4" style="width:40px;" value="{{BW_SIZE}}">&nbsp;&nbsp;&nbsp;&nbsp;게시판 가로크기 <font class="small">(100이하이면 %로 설정)</font>
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;페이지당 목록수</font></td>
+					<td>
+						<input class="ta" type="text" name="inpage" maxlength="3" style="width:30px;" value="{{INPAGE}}">&nbsp;&nbsp;&nbsp;&nbsp;한페이지당 출력될 목록의 수 <font class="small">(1~999)</font>  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;페이지 표시수</font></td>
+					<td>
+						<input class="ta" type="text" name="pagelink" maxlength="3" style="width:30px;" value="{{PAGELINK}}">&nbsp;&nbsp;&nbsp;&nbsp;목록의 아래부분에 표시될 페이지의 갯수 <font class="small">(1~999)</font>  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배경색상</font></td>
+					<td>
+						<input class="ta" type="text" name="bg_color" maxlength="10" style="width:80px;"  value="{{BGCOLOR}}">&nbsp;&nbsp;&nbsp;&nbsp;게시판 배경에 나타날 색상 <font class="small">(<font class="hand" onclick="document.creatForm.bg_color.value='transparent'">투명</font>)</font>&nbsp;&nbsp;<img src="img/b_color.gif" align="absmiddle" class="hand" onclick="document.getElementById('divColor').style.display='block';">
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제목 글 제한수</font></td>
+					<td>
+						<input class="ta" type="text" name="word_limit" maxlength="4" style="width:40px;" value="{{WORDLIMIT}}">&nbsp;&nbsp;&nbsp;&nbsp;리스트에 나타날 제목 글 제한수 <font class="small">( 0 : 제한 안함)</font>
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이미지 제한크기</font></td>
+					<td>
+						<input class="ta" type="text" name="img_limit" maxlength="4" style="width:40px;" value="{{IMGLIMIT}}">&nbsp;&nbsp;&nbsp;&nbsp;글읽기에 나타날 이미지 제한크기 <font class="small">( 0 : 제한 안함)</font>
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				</table>
+			</td>
+		</tr>
+		<tr><td height="10"></td></tr>
+		</table>
+	</TD>		   
+</TR>
+
+<!-- 기본설정 끝 -->
+
+<TR><TD height="24"></TD></TR>
+
+<!-- 옵션설정 시작 -->
+
+<TR><TD height="40"><img src="img/bo_t12.gif" border="0" align="absmiddle"></TD></TR>
+<TR>
+	<TD style="padding:4px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">
+        <tr><td height="10"></td></tr>
+		<tr>
+			<td valign="top"> 
+				<table border="0" cellpadding="0" cellspacing="0" width="96%" align="center">	            
+			    <tr>
+					 <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;웹에디터사용</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="editor" value="Y" {{CK19}} onclick="secEditor(this.checked)">&nbsp;&nbsp;웹에디터 기능사용 
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전체목록 출력</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option1" value="Y" {{CK1}}>&nbsp;&nbsp;글내용볼때 아래에 전체 리스트 출력 기능사용		  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+			    <tr>
+					 <td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;카테고리</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option2" value="Y" {{CK2}}>&nbsp;&nbsp;카테고리 기능사용				  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;HTML</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option3" value="Y" {{CK3}}>&nbsp;&nbsp;HTML허용 기능사용
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;공지사항</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option4" value="Y" {{CK4}}>&nbsp;&nbsp;공지사항 기능사용
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+			    <tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;자료실</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option5" value="Y" {{CK5}}>&nbsp;&nbsp;자료실 기능사용	&nbsp;&nbsp;<font><font class="small bTitle">&nbsp;&nbsp;*&nbsp;업로드 파일수 : </font>
+						<select name="up_num">{{UPNUM}}</select>
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+			    <tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;간단한 답글</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option6" value="Y" {{CK6}}>&nbsp;&nbsp;간단한 답글 기능사용	  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+			    <tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비밀글</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option7[]" value="N" {{CK7N}} onclick="ckDsp('N')">&nbsp;&nbsp;비밀글 사용안함 
+						<input type="checkbox" onfocus='blur();' name="option7[]" value="Y" {{CK7Y}} onclick="ckDsp('Y')">&nbsp;&nbsp;비밀글 사용자선택 
+						<input type="checkbox" onfocus='blur();' name="option7[]" value="A" {{CK7A}} onclick="ckDsp('A')">&nbsp;&nbsp;비밀글 기본적용
+						&nbsp;&nbsp;<font class="small">(관리자와 비번 아는 사람만 볼수 있음)</font>  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;답변메일</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option11" value="Y" {{CK13}}>&nbsp;&nbsp;답변글을 메일로 받을수 있음			  
+					</td>
+			    </tr>				
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;동영상 링크</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option8" value="Y" {{CK8}}>&nbsp;&nbsp;링크된 동영상파일(플래쉬포함) 보기 기능사용
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;관련사이트 링크</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option9" value="Y" {{CK9}}>&nbsp;&nbsp;관련사이트 링크 기능사용&nbsp;&nbsp;<font><font class="small bTitle">&nbsp;&nbsp;*&nbsp;링크 가능수 : </font>
+						<select name="link_num">{{LINKNUM}}</select></td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<!-- <tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;로그인 아이콘</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option10" value="Y" {{CK10}}>&nbsp;&nbsp;게시판에 로그인 아이콘 보이기		  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr>  -->
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;새글 표시 시간</font></td>
+					<td>
+						<input class="ta" type="text" name="option18" maxlength="4" style="width:40px;" value="{{OP18}}">&nbsp;&nbsp;등록 후 새글로 표시되는 시간	  		  
+					</td>
+			    </tr>				
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;내용글 제한수</font></td>
+					<td>
+						<input class="ta" type="text" name="option13" maxlength="4" style="width:40px;" value="{{OP17}}">&nbsp;&nbsp;방명록 형태의 리스트에 나타날 내용 글 제한수 <font class="small">( 0 : 제한 안함 )</font>	  		  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;방명록 형태</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option12" value="Y" {{CK16}}>&nbsp;&nbsp;리스트시 글내용을 가지고 옵니다. 글수가 많을면 속도가 느려질 수 있습니다.</font>			  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;블로그 형태</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option21" value="Y" {{CK21}}>&nbsp;&nbsp;블로그 형태(글보기 부터 출력)를 사용 합니다.</font> <font class="small">( 블로그형태 스킨일 경우만 적용 )</font>		  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;게시판 관리회원</font></td>
+					<td>
+						<input class="ta" type=text name=bo_admin value="{{BOADMIN}}">&nbsp;&nbsp;게시판을 관리할 회원 아이디 <font class="small">( 글 수정,삭제 가능 )</font>			  
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;갤러리 옵션 #1</font></td>
+					<td>
+						<input class="ta" type="text" name="img_cnt" maxlength="4" style="width:40px;" value="{{IMGCNT}}">&nbsp;&nbsp;갤러리일 경우 한줄에 보여줄 사진 수
+					</td>
+			    </tr>				
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;갤러리 옵션 #2</font></td>
+					<td>
+						<input class="ta" type="text" name="img_sz" maxlength="4" style="width:40px;" value="{{IMGSZ}}">&nbsp;&nbsp;갤러리일 경우 보여줄 사진 사이즈 <font class="small">(가로)</font>
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;갤러리 옵션 #3</font></td>
+					<td>
+						<input type="checkbox" onfocus='blur();' name="option20" value="Y" {{CK20}}>&nbsp;&nbsp;갤러리 사진 사이즈 비율로 고정 <font class="small">(4:3) </font>
+					</td>
+			    </tr>
+				<tr><td height="1" colspan="2" bgcolor="#CCCCCC"></td></tr> 
+				</table>
+			</td>
+		</tr>
+		<tr><td height="10"></td></tr>
+		</table>
+	</TD>		   
+</TR>
+
+<!-- 옵션설정 끝 -->
+
+<TR><TD height="24"></TD></TR>
+
+<!-- Header & Footer 설정 시작 -->
+
+<TR><TD height="40"><img src="img/bo_t13.gif" border="0" align="absmiddle"></TD></TR>
+<TR>
+	<TD style="padding:4px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">
+        <tr><td height="10"></td></tr>
+		<tr>
+			<td valign="top"> 
+				<table border="0" cellpadding="0" cellspacing="0" width="96%" align="center">
+	            <tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Header File</font></td>
+					<td>
+						<input type="text" name="header_url" class="ta" style="width:200px" value="{{HEADER_URL}}">&nbsp;&nbsp;게시판 상단에 불러올 파일
+					</td>
+			    </tr>
+				<tr><td height="4"></td></tr>
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Header Contents</font></td>
+					<td>
+						<textarea name="header" cols="80" rows="5" class="ta">{{HEADER}}</textarea>
+					</td>
+			    </tr>
+				<tr><td height=2></td></tr>
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Footer File</font></td>
+					<td>
+						<input type="text" name="footer_url" class="ta" style="width:200px" value="{{FOOTER_URL}}">&nbsp;&nbsp;게시판 하단에 불러올 파일
+					</td>
+			    </tr>
+				<tr><td height="4"`></td></tr>
+				<tr>
+					<td height="24"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Footer Contents</font></td>
+					<td>
+						<textarea name="footer" cols="80" rows="5" class="ta">{{FOOTER}}</textarea>
+					</td>
+			    </tr>
+                </table>
+			</td>
+		</tr>
+		<tr><td height="10"></td></tr>
+		</table>
+	</TD>		   
+</TR>
+
+<!-- Header & Footer 설정 끝 -->
+
+<TR><TD height="24"></TD></TR> 
+<TR>
+	<TD align="center">
+		<!-- DYNAMIC @is_write2@ -->
+		<input type="image" src="img/btn_write.gif" onfocus="blur();">&nbsp;		
+		<!-- DYNAMIC @is_write2@ -->
+		<!-- DYNAMIC @is_modify2@ -->
+		<input type="image" src="img/btn_modify.gif" onfocus="blur();">&nbsp;
+		<!-- DYNAMIC @is_modify2@ -->
+		<a href="board_list.php"><img src="img/btn_cancel.gif" onfocus='this.blur();' class="hand" align="absmiddle"></a>
+	</TD>
+</TR>
+<TR><TD height="24"></TD></TR> 
+</form>
+</TABLE>
+
+
+
+<div id="divColor" style="width:236px; height:400px; position:absolute; left:633px; top:264px; z-index:1; display:none"> 
+	
+	<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" style="border:1px #cccccc solid;">
+	<tr height="24"><td valign="center" bgcolor="#ffffff"><img src="img/s_color.gif" border="0"></td></tr>
+	<tr><td height="1" bgcolor="#cccccc"></td></tr>
+	<tr><td height="5" bgcolor="#f7f7f7"></td></tr>
+	<tr>
+		<td align="center" bgcolor="#f7f7f7">
+     
+			<TABLE border cellpadding="1" cellspacing="0" bordercolordark="#FFFFFF" bordercolorlight="#000033" bgcolor="#000033">
+			<tr> 
+
+<script language=JavaScript>
+c = new Array();
+c[1] = new Array('FF0000','FFFF00','00FF00','00FFFF','0000FF','FF00FF','FFFFFF','E6E6E6','DADADA','CDCDCD','C1C1C1','B4B4B4','A7A7A7','9A9A9A','8E8E8E','818181');
+c[2] = new Array('ED1C24','FFF200','00A651','00AEEF','2E3192','EC008C','737373','666666','595959','4B4B4B','3D3D3D','303030','212121','131313','050505','000000');
+c[3] = new Array('F69679','F9AD81','FDC689','FFF799','C4DF9B','A3D39C','82CA9C','7ACCC8','6DCFF6','7DA7D9','8393CA','8781BD','A186BE','BD8CBF','F49AC1','F5989D');
+c[4] = new Array('F26C4F','F9AD81','FBAF5D','FFF568','ACD373','7CC576','3CB878','1CBBB4','00BFF3','448CCB','5674B9','605CA8','8560A8','A864A8','F06EAA','F26D7D');
+c[5] = new Array('F26D7D','F26522','F7941D','FFF200','8DC63F','39B54A','00A651','00A99D','00AEEF','0072BC','0054A6','2E3192','662D91','92278F','EC008C','ED145B');
+c[6] = new Array('9E0B0E','A0410D','A36209','ABA000','598527','197B30','007236','00746B','0076A3','004A80','003471','1B1464','440E62','630460','9E005D','9E005D');
+c[7] = new Array('9E005D','7B2E00','7D4900','827B00','406618','005E20','005826','005952','005B7F','003663','002157','0D004C','32004B','4B0049','7B0046','7A0026');
+c[8] = new Array('C7B299','998675','736357','534741','362F2D','C69C6D','A67C52','8C6239','754C24','603913','FFFFFF','FFFFFF','FFFFFF','FFFFFF','FFFFFF','FFFFFF');
+
+for (i=1;i<=8;i++){
+	if(i>1) document.write( "</tr>\n<tr>\n");
+	for (j=0;j <=15;j++){
+		colour = c[i][j];
+		document.write("<td bgcolor=\"#"+colour+"\" width=\"10\" class=\"text\">");
+		document.write("<img src=\"img/pixel.gif\" width=\"10\" height=\"10\" border=\"0\" onclick=\"Change('"+colour+"')\" style='cursor:pointer;'></td>\n");
+	}
+}
+
+</script>
+
+			</TABLE>	 
+		</td>
+	</tr>
+	<tr><td height=3 bgcolor=#f7f7f7></td></tr>
+	</table>
+
+</div>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+<script>
+if(document.creatForm.editor.checked) secEditor(document.creatForm.editor.checked);
+</script>

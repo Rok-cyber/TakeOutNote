@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>적립금관리</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> 적립금관리
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>01.</font> <font class="blue">적립금관리 리스트</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		적립내역 리스트를 확인 하거나 검색할 수 있습니다.<br />
+		적립내용을 클릭 하시면 수정 할 수 있습니다. <br />
+		적립아이디를 클릭 하시면 회원의 기본정보, 주문정보 등 자세한 정보를 확인 할 수 있습니다.<br />		
+	</div>
+</div>
+
+<div style="padding-left:10px;">
+	<font class='eng blue'>02.</font> <font class="blue">적립금 등록하기</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		<font class='eng green'>A.</font> <font class="green">적립 아이디</font> : 적립 아이디를 '회원검색하기'를 클릭 하셔서 이름으로 검색 하신 후 선택 하시면 됩니다.<br />
+		<font class='eng green'>B.</font> <font class="green">적립내용</font> : 적립내용을 입력 하시면 됩니다.<br />
+		<font class='eng green'>C.</font> <font class="green">적립금액</font> : 적립금액을 입력 하시면 됩니다.<br />
+		<font class='eng green'>D.</font> <font class="green">적립상태</font> : 적립대기, 적립완료, 적립사용, 적립취소에서 선택 하시면 됩니다. 적립대기는 상품주문 후 수령확인 전 까지의 상태 입니다. 적립완료는 회원에게 해당 금액만큼 적립금이 플러스되며 적립사용은 회원의 적립금에서 해당 금액만큼 적립금이 마이너스됩니다. 적립취소는 적립완료나 적립사용상태에서 원래대로 되돌려 줍니다.<br />&nbsp;<br />
+	</div>
+
+	<font class="small">
+		! 쇼핑몰에서 이벤트 당첨회원이나 특별회원에게 적립금을 주실때 사용 하시면 됩니다.
+	</font>
+</div>
+
+
+<? if($all!='Y') { ?>
+<div style="height:130px"></div>
+<? } ?>
+</BODY>
+</html>

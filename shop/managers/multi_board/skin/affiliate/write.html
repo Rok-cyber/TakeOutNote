@@ -1,0 +1,217 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+	<!-- DYNAMIC @is_write1@ -->   
+	if(!form.id.value) {
+		alert('업체ID을 입력 하세요.');
+		form.id.focus();
+		return false;
+	}	
+	if(!form.passwd.value) {
+		alert('비밀번호를 입력 하세요.');
+		form.passwd.focus();
+		return false;
+	}
+	<!-- DYNAMIC @is_write1@ -->   
+	if(form.passwd.value && !form.repasswd.value) {
+		alert('비밀번호 확인을 입력 하세요.');
+		form.repasswd.focus();
+		return false;
+	}
+	if(!form.commission.value) {
+		alert('커미션을 입력 하세요.');
+		form.commission.focus();
+		return false;
+	}
+	form.submit();
+	return false;
+}
+
+function ck_id() {
+	f = document.signForm;
+	if(!f.id.value) return false;
+	if(f.id.value.length<4||f.id.value.length>12) {
+		document.getElementById("ids").innerHTML="* 아이디는 4 ~ 12 자여야 합니다.";
+		f.id.value = ""; 
+		f.id.focus();
+		return false;
+	} 
+	var valid = "abcdefghijklmnopqrstuvwxyz0123456789_"; 
+	var startChar = "abcdefghijklmnopqrstuvwxyz"; 
+	var temp; 
+	f.id.value = f.id.value.toLowerCase(); 
+	temp = f.id.value.substring(0,1); 
+	if (startChar.indexOf(temp) == "-1") {
+		document.getElementById("ids").innerHTML="* 아이디의 첫 글자는 영문이어야 합니다.";
+		f.id.value = ""; 
+		f.id.focus();
+		return false;
+	}
+	for (var i=0; i<f.id.value.length; i++) { 
+		temp = "" + f.id.value.substring(i, i+1); 
+		if (valid.indexOf(temp) == "-1") { 
+			document.getElementById("ids").innerHTML="* 아이디는 영문과 숫자, _ 로만 해야 합니다.";
+			f.id.value = "";
+			f.id.focus();
+			return false;
+		}
+	} 
+
+	document.getElementById("ids").innerHTML="* 아이디 중복 검사중입니다!";
+
+	aObj = new AjaxObject;             
+	aObj.getHttpRequest("checkId.php?code=affiliate&sid="+f.id.value, "idCkOk","data"); 	
+}		
+
+function idCkOk(data){
+	f = document.signForm;
+	if(data['item']=="true") {
+		document.getElementById("ids").innerHTML = "* 사용할 수 있는 아이디 입니다.";
+		f.passwd.focus();
+	}
+	else if(data['item']=="false") {
+		document.getElementById("ids").innerHTML = "* 이미 사용중 입니다.";
+		f.id.value = "";
+		f.id.focus();
+	}
+	else document.getElementById("ids").innerHTML = "시스템 에러 입니다.";
+}
+
+/***************** 비밀번호 체크 스크립트 *********************/
+function ck_pw1() {
+	f = document.signForm;
+	if(!f.passwd.value) return false;
+	if(f.passwd.value.length<4||f.passwd.value.length>12) {
+		document.getElementById("passwd1s").innerHTML="* 비밀번호는 4 ~ 12 자여야 합니다.";
+		f.passwd.focus();
+		return false;
+	} 
+	var valid = "abcdefghijklmnopqrstuvwxyz0123456789_"; 
+	var temp; 
+	f.passwd.value = f.passwd.value.toLowerCase(); 
+	for (var i=0; i<f.passwd.value.length; i++) { 
+		temp = "" + f.passwd.value.substring(i, i+1); 
+		if (valid.indexOf(temp) == "-1") { 
+			document.getElementById("passwd1s").innerHTML="* 비밀번호는 영문과 숫자, _ 로만 해야 합니다.";
+			f.passwd.value = "";
+			f.passwd.focus();
+			return false;
+		}
+	} 
+	document.getElementById("passwd1s").innerHTML = "";
+	return;
+}
+
+function ck_pw2() {	
+	f = document.signForm;
+	if(!f.repasswd.value) return false;
+	if(f.passwd.value != f.repasswd.value) { 
+		document.getElementById("passwd2s").innerHTML="* 패스워드가 일치하지 않습니다.";
+		f.passwd.value = '';
+		f.repasswd.value = '';
+		f.passwd.focus();
+		return false; 
+	}
+    document.getElementById("passwd2s").innerHTML="";
+	return;
+}
+
+
+//-->
+</script>
+
+<script type="text/javascript" src="../../lib/lib.ajax.js"></script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+    <form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">						
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle2">&nbsp;&nbsp;*&nbsp;업체승인</font></td>
+							<td bgcolor="#EFEFEF" colspan=3 style="padding-left:6px;">
+								<input type=radio name=auth value='Y' {{CKD1Y}}>승인
+								<input type=radio name=auth value='N' {{CKD1N}}>보류
+							</td>
+						</tr>	
+						<!-- DYNAMIC @is_write2@ --> 
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle2">&nbsp;&nbsp;*&nbsp;업체ID</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=id value='{{FORM2}}' size=27 maxlength="12" onBlur="return ck_id();" style="ime-mode:inactive;" />&nbsp;&nbsp;<span id="ids" class="small">영문,숫자 조합(4~12자)</font></span><span id="ids2"></span>
+							</td>
+						</tr>	
+						<!-- DYNAMIC @is_write2@ --> 
+						<!-- DYNAMIC @is_modify1@ --> 
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle2">&nbsp;&nbsp;*&nbsp;업체ID</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;{{FORM2}}&nbsp;&nbsp;<span id="ids" class="small">(업체ID 수정 불가)</font></span>
+							</td>
+						</tr>	
+						<!-- DYNAMIC @is_modify1@ --> 
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle2">&nbsp;&nbsp;*&nbsp;비밀번호 {{TMODE}}</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=password class=ta name=passwd size=30 maxlength="12"onBlur="return ck_pw1();" />&nbsp;&nbsp;<span id="passwd1s" class="small">영문,숫자 조합(4~12자)</font></span></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비밀번호 확인</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=password class=ta name=repasswd  maxlength="12" size="30" onBlur="return ck_pw2();" />&nbsp;&nbsp;<span id="passwd2s" class="small">영문,숫자 조합(4~12자)</font></span></td>
+						</tr>						
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;업체명</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=name value='{{FORM3}}' size=30></td>
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;업체 연락처</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=cell value='{{FORM4}}' size=30></td>							
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이메일</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=email value='{{FORM5}}' size=80></td>
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle2">&nbsp;&nbsp;*&nbsp;판매 커미션</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text  class="ta2 eng" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" name=commission value='{{FORM6}}' size=3 maxlength=3>%</td>
+						</tr>							
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;정산 계좌정보</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;은행명 : <input type=text class=ta name=bank_name value='{{FORM7}}' size=20>&nbsp;&nbsp;계좌번호 : <input type=text class=ta name=bank_num value='{{FORM8}}' size=20>&nbsp;&nbsp;예금주 : <input type=text class=ta name=bank_owner value='{{FORM9}}' size=10>
+							</td>							
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;정산일(매월)</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=bank_day value='{{FORM10}}' size=10>일</td>
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메모</font></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<textarea name="memo" cols="85" rows="8" class="ta">{{FORM11}}</textarea></td>
+						</tr>						
+						<tr height=38>
+							<td  bgcolor="#ffffff" colspan=4  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;padding-top:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>
+						</tr>							
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

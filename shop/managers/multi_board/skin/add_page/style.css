@@ -1,0 +1,63 @@
+/******************************************************************
+* =======================================================
+* Previl CSS
+*
+* 제 작: gubok kim (email : previl@previl.net,  homepage : http://previl.net)
+*
+* 마지막 수정일: 2003.02.25
+*        
+* =======================================================
+******************************************************************/
+
+/*********************************************************************
+*	GLOBAL
+*********************************************************************/
+
+A:link,A:visited,A:active {font-family:굴림체; color:#000000;text-decoration:none;font-size: 9pt;}
+A:hover {font-family:굴림체; color:#93979C;text-decoration:none;font-size: 9pt;}
+
+font {font-family:굴림; font-size: 9.3pt; color:#505050;}
+
+body, table, tr, td, select, textarea, input{ 
+ 		font-family:굴림체, seoul, arial, helvetica;
+ 		font-size: 9pt;
+ 		color: #000000;
+		scrollbar-3dlight-color:595959;
+	        scrollbar-arrow-color:ffffff;
+	        scrollbar-base-color:CFCFCF;
+	        scrollbar-darkshadow-color:FFFFFF;
+	        scrollbar-face-color:CFCFCF;
+	        scrollbar-highlight-color:FFFFF;
+	        scrollbar-shadow-color:595959
+ }
+
+
+
+/*********************************************************************
+*	FONT
+*********************************************************************/
+font.1 {font-weight:bold;}
+font.2 {font-size: 8.0pt;}
+font.3 {font-size: 9.3pt; line-height: 1.5em}
+
+
+/*********************************************************************
+*	BOARDER
+*********************************************************************/
+.all { border-width:1; border-color:#999999; border-style:solid; }
+.left { border-left-width:1; border-left-color:#999999; border-left-style:solid; }
+.right { border-right-width:1; border-right-color:#999999; border-right-style:solid; }
+.top { border-top-width:1; border-top-color:#999999; border-top-style:solid; }
+.bottom { border-bottom-width:1; border-bottom-color:#999999; border-bottom-style:solid; }
+
+
+/*********************************************************************
+*	FORM
+*********************************************************************/
+.bt {background-color:#efefef; color:#1E1F20; border-width:1; border-color:rgb(130,132,131); border-style:solid; height=20px }
+.ta { color:#1E1F20; border-width:1; border-color:rgb(130,132,131); border-style:solid;}
+
+/*********************************************************************
+*	Background
+*********************************************************************/
+.gr_bg { filter:progid:dximagetransform.microsoft.gradient(gradienttype=0,startcolorstr=#cdcdcd,endcolorstr=#dcdcdc); }

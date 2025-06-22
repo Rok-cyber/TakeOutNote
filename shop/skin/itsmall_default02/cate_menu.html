@@ -1,0 +1,97 @@
+<div id="cateMenu">
+	<div style="height:22px;text-align:left">
+		<img src='img/main/ttl_category.gif' alt="SHOPPING CATEGORY" title="SHOPPING CATEGORY" />
+	</div>
+	<div id="catemenu_top"><img src="img/main/cate_menu_top.gif" alt=" " /></div>
+	<div id="catemenu_center">
+		<div style="background:url(img/main/cate_menu_grad_bg.gif) no-repeat; padding-top:6px;">
+			<ul>			
+				<!-- DYNAMIC @loop_cate@ -->			
+				<li class="small" {{LAYER}}>
+					<!-- DYNAMIC @is_text@ -->
+					<div style="height:4px;overflow:hidden">&nbsp;</div>
+					<img src='img/common/menu_icon.gif' alt="bar" title="bar" style="padding:0 4px 0 8px;" />
+					<!-- DYNAMIC @is_text@ -->
+					<span id='font{{CNUM}}' class='hand' onclick="window.location.href='{{Main}}?channel={{channel_type}}&amp;cate={{channel_cate}}';" >{{CATE_NAME}}</span>
+				</li>			
+				<!-- DYNAMIC @loop_cate@ -->
+				<!-- DYNAMIC @no_cate@ -->
+				<li style="height:50px;text-align:center"><img src='img/common/no_cate_menu.gif' alt='No Cate' /></li>
+				<!-- DYNAMIC @no_cate@ -->					
+			</ul>
+		</div>
+	</div>
+	<div id="catemenu_bottom"><img src="img/main/cate_menu_bottom.gif" alt=" " /></div>
+
+	<!-- DYNAMIC @loop_smenu@ -->
+	<div id='AR{{CNUM}}' style="position:absolute; z-index:2;top:{{ck_top2}}px;left:146px;display:none;"><img src='img/main/box_cate_arrow.gif' alt='arrow' /></div>
+	<div id='CM{{CNUM}}' style="top:{{ck_top}}px; left:150px" class="cateMenuCss" onmouseover="openCM('{{CNUM}}','','','1');" onmouseout="closeCM('{{CNUM}}');">
+		<div><img src='img/main/box_cate_top.gif' alt="서브카테고리박스상단" title="서브카테고리박스상단" /></div>		
+		<div class="CM_cbody">
+			<div style="padding:0px 4px 0px 10px;">
+				<ul>
+					<!-- DYNAMIC @loop_scate@ -->
+					<li class="small">
+						<!-- DYNAMIC @is_text2@ -->
+						<div style="height:4px;overflow:hidden"></div>
+						<img  hspace="4" src='img/common/menu_icon2.gif' alt='' />
+						<!-- DYNAMIC @is_text2@ -->
+						<span class='hand' onclick="window.location.href='{{Main}}?channel={{channel_type}}&amp;cate={{channel_cate}}';" onmouseover="this.style.color='#38c1c9';" onmouseout="this.style.color='';">{{SCATE_NAME}}</span>
+					</li>
+					<!-- DYNAMIC @loop_scate@ -->
+
+					<!-- DYNAMIC @no_scate@ -->
+					<li class="small" style="padding:4px 0 0 10px">
+						등록된 하위분류가 없습니다.
+					</li>
+					<!-- DYNAMIC @no_scate@ -->	
+
+					<!-- DYNAMIC @cate_banner@ -->
+					<li class="small" style="padding-top:4px;">
+						<a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a>
+					</li>
+					<!-- DYNAMIC @cate_banner@ -->	
+
+				</ul>
+			</div>
+		</div>
+		<div><img src='img/main/box_cate_bottom.gif' alt="서브카테고리박스하단" /></div>
+	</div>
+	<!-- DYNAMIC @loop_smenu@ -->
+</div>
+
+<!-- DYNAMIC @is_brand@ -->
+<div id="brandMenu" style="margin-top:10px;text-align:left">			
+	<div style="height:22px;text-align:left">
+		<img src='img/main/ttl_brand.gif' alt="BRAND SHOP" title="BRAND SHOP" />
+	</div>
+	<div id="brand_top"><img src="img/main/cate_menu_top.gif" alt=" " /></div>
+	<div id="brand_center">										
+		<div class="blank">&nbsp;</div>
+		<ul>
+			<!-- DYNAMIC @loop_brand@ -->
+			<li class="small bold">
+				<!-- DYNAMIC @is_brand_text@ -->
+				<div style="height:4px;overflow:hidden">&nbsp;</div>
+				<img src='img/common/brand_icon.gif'  alt="bar" title="bar" style="padding:0 4px 0 8px;" />
+				<!-- DYNAMIC @is_brand_text@ -->
+				<a href='{{Main}}?channel=brand&amp;uid={{NUM}}'>{{BRAND}}</a>
+			</li>
+			<!-- DYNAMIC @loop_brand@ -->
+		</ul>
+	</div>
+	<div id="brand_bottom"><img src="img/main/cate_menu_bottom.gif" alt="브랜드박스 하단" /></div>
+</div>
+<!-- DYNAMIC @is_brand@ -->
+
+<!-- 배너 START -->
+<!-- DYNAMIC @is_banner@ -->
+<div class="leftBanner">
+	<!-- DYNAMIC @loop_banner@ -->
+	<div class="banner"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+	<!-- DYNAMIC @loop_banner@ -->			
+</div>
+<!-- DYNAMIC @is_banner@ -->
+<!-- @배너 END -->
+
+<script type="text/javascript">var cateColor = "#38c1c9";</script>

@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>goods_best.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> goods_new.html (신 상품 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 상품수</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC_MON}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택한가격대</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{limit}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 리스트 출력 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{order}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택된 정렬방법</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MaxMoney}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">가격검색시 한도값</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC10}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">10개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC20}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">20개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC30}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">30개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC50}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">50개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{Pstart}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">시작 블록 번호</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ajaxstring}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">ajax연동 파라미터</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_sec_mon@ --></font><br/>
+			. . . (가격검색일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_sec_mon@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_loop@ --></font><br/>
+			. . . (상품이 없을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_loop@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;" class="blue">
+			리스트 결과를 AJAX를 이용해 받아와서 listDesign.js에서 정의된 아래 함수를 호출후 내용이 나타남<br/><br/>
+
+rtnCell(obj,uid,image,link,dragd,name,icon,loc,price,rese,ccnt,tag,sout,cp_price,rank,cooperate,cate) : 리스트형일 경우<br/>
+rtnImg(uid,image,link,dragd,name,icon,price,ccnt,sout,cp_price,rank,cooperate,cate) : 이미지형일 경우<br/><br/>
+
+obj 	: list_after (id)<br/>
+uid	: 등록 uid<br/>
+image	: 상품 이미지<br/>
+link	: 상품 상세 페이지 링크주소<br/>
+dragd	: 드래그정보<br/>
+name	: 상품명<br/>
+icon	: 상품 아이콘<br/>
+loc	: 상품위치(분류)<br/>
+price	: 상품가격<br/>
+rese	: 적립금<br/>
+ccnt	: 이용후기 등록 수<br/>
+tag	: 등록 태그<br/>
+sout	: 품절시 값 : 1<br/><br/>
+cp_price	: 쿠폰적용가<br/><br/>
+rank	: 베스트 상품 페이지에서만 사용 순위<br/><br/>
+cooperate	: 공동구매 상품일때 값 : 1<br/><br/>
+cate	: 분류번호<br/><br/>
+
+해당 정보를 받아서 DOM형태로 코드 생성 후 출력
+<br/>
+
+		</div>
+	</div>
+
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

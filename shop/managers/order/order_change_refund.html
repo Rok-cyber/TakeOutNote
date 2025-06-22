@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>취소/반품상품 환불처리</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+<script LANGUAGE="JavaScript" src="../../lib/lib.lightBox.js"></script> 
+<script LANGUAGE="JavaScript" src="../../lib/lib.Function.js"></script> 
+
+<script language="JavaScript"> 
+function ckForm(){
+	var f = document.changeForm;
+	if(!f.total.value) {
+		alert("최종환불금액을 입력 하시기 바랍니다");
+		f.total.focus();
+		return false;
+	}
+}
+
+function ckTotal(){
+	var f = document.changeForm;
+	if(f.c_total.value>0){
+		f.total.value = eval(f.g_total.value) - eval(f.c_total.value);
+	}
+
+}
+</script>
+</HEAD>
+
+<BODY style="padding:0px;margin:0px;">
+
+<TABLE width=96% align=center cellpadding=0 cellspacing=0 border=0>
+<FORM name='changeForm' method='post' action='order_change_ok.php?mode=refund' onsubmit="return ckForm();">
+<input type=hidden name=order_num value='{{order_num}}'>
+<input type=hidden name=uid value='{{uid}}'>
+
+<tr><td height=10></td></tr>	
+<TR><TD><img src='./img/v_2th.gif' align=absmiddle border=0></td></tr>	
+<tr>
+	<td align=center>
+		<table width="100%" border=0 cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE">
+		<tr>
+			<td>
+				<table width="100%" border=0 cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
+				<tr> 
+					<td> 
+						<table width="100%" border="0" cellspacing="1" cellpadding="0">
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문번호</font></td>
+							  <td bgcolor="#efefef" class="eng orange" width=220>&nbsp;{{order_num}}</td>						  
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문시간</font></td>
+							  <td bgcolor="#efefef" class="eng">&nbsp;{{TIME}}</td>	
+						</tr>																										
+						<tr height=30 align=left>
+							  <td class=gr_bg width=115><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문고객 성명</font></td>
+							  <td colspan=3 bgcolor="#efefef">
+								<div style="float:left; padding:1px 6px 0 6px;">{{NAME1}}</div>								
+								<!-- DYNAMIC @is_id@ -->
+								<div style="float:left; padding:1px 10px 0 1px;" class="eng">/ {{MID}}</div>
+								<div id="sBtn1" style="padding-left:6px;">
+									<a href="#" onclick="pLightBox.show('../member/member_crm.php?mid={{MID}}','iframe','700','450','■ {{NAME1}}({{MID}}) 회원 CRM',10);return false;"><span class="green">CRM 보기</span></a>	
+								</div>
+								<!-- DYNAMIC @is_id@ -->
+							  </td>
+						</tr>
+						<!-- DYNAMIC @is_reserve@ -->
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;사용한 적립금</font></td>
+							  <td bgcolor="#efefef" colspan=3 class="eng blue">&nbsp;{{RESERVE}}</td>						  
+						</tr>																		
+						<!-- DYNAMIC @is_reserve@ -->
+						<!-- DYNAMIC @is_cupon@ -->
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;사용한 쿠폰</font></td>
+							  <td bgcolor="#efefef" colspan=3 class="eng">
+								<div class="left blue" style="padding-top:4px;">&nbsp;{{CUPON}}</div>
+								<div class="left small" style="text-align:right;padding:2px 0 0 6px;">
+									<a href='{{C_LINK}}' target='_blank' class="small" title="회원발급쿠폰보기">
+									<!-- DYNAMIC @loop_cupon@ -->
+									<div style="padding:2px;text-alig:left;">{{C_NAME}} - <font class="num">{{C_SALE}}</font>{{C_STYPE}}할인</div>
+									<!-- DYNAMIC @loop_cupon@ -->
+									</a>
+								</div>									  
+							  </td>						  
+						</tr>								
+						<!-- DYNAMIC @is_cupon@ -->
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;배송비</font></td>
+							  <td bgcolor="#efefef" colspan=3 class="eng">&nbsp;{{TCARR}} {{TCARRS}} <!-- DYNAMIC @is_mcarr@ -->(기본배송비무료회원)<!-- DYNAMIC @is_mcarr@ --> {{C_CARR}}</td>						  
+						</tr>	
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;총결제금액</font></td>
+							  <td bgcolor="#efefef" colspan=3 class="eng bold">&nbsp;{{TOTAL3}} {{TOTALS}}</td>						  
+						</tr>					
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;결제방법</font></td>
+							  <td bgcolor="#efefef" colspan=3>&nbsp;{{CASH_TYPE}}</td>						  
+						</tr>													
+						<!-- DYNAMIC @is_bank@ -->
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;입금정보</font></td>
+							  <td bgcolor="#efefef" colspan=3 class="eng small">&nbsp;[{{BANK_NAME}}] , 입금자 성명 : {{PAY_NAME}} , 입금 예정일 : {{PAY_DATE}}</td>						  
+						</tr>																								
+						<!-- DYNAMIC @is_bank_cash@ -->
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;현금영수증</font></td>
+							  <td bgcolor="#efefef" colspan=3 class=eng>&nbsp;{{CASH_INFO}}</td>						  
+						</tr>	
+						<!-- DYNAMIC @is_bank_cash@ -->
+						<!-- DYNAMIC @is_bank@ -->
+						<!-- DYNAMIC @is_card@ -->
+						<tr height=30 align=left>
+							  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;결제정보</font></td>
+							  <td bgcolor="#efefef" colspan=3>&nbsp;{{CARD_INFO}}</td>						  
+						</tr>																		
+						<!-- DYNAMIC @is_card@ -->
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>					 
+		</table>
+	</td>
+</tr>
+<tr><td height=10></td></tr>
+<TR><TD><img src='./img/ttl_change_01.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<TR>
+		<TD>
+			<TABLE  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<TR>
+				<TD>
+					<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+							<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>
+							<td align="center" class=gr_bg><font class="bTitle small">상품명 / 옵션</font></td>
+							<td width=8% align="center" class=gr_bg><font class="bTitle small">수량</font></td>
+							<td width=12% align="center" class=gr_bg><font class="bTitle small">개별배송비</font></td>
+							<td width=12% align="center" class=gr_bg><font class="bTitle small">합계</font></td>
+							<td width=15% align="center" class=gr_bg><font class="bTitle small">진행상황</font></td>
+						</tr>
+						<!-- DYNAMIC @loop_change@ -->
+						<tr height=24 bgcolor='#ffffff'>
+							<td align=center class='eng'>{{ii}}</td>
+							<td align="left" style='padding-left:6px;'>{{NAME}} <font class='small'>{{OP_SEC_VLS}}</font></td>
+							<td align=center class='eng'>{{QTY}}</td>
+							<td align=right class='eng' style='padding-right:6px;'>{{CARR}}원</td>
+							<td align=right class='eng' style='padding-right:6px;'>{{SUM}}</td>
+							<td align=center class="small">{{STATUS}}</td>
+						</tr>
+						<!-- DYNAMIC @loop_change@ -->
+						<tr height=24 bgcolor='#ffffff'>
+							<td align=center class='eng'></td>
+							<td align="left" style='padding-left:6px;'></td>
+							<td align=center class='eng'></td>
+							<td align=right class='eng bold' style='padding-right:6px;'>{{CARR_SUM2}}원</td>
+							<td align=right class='eng bold' style='padding-right:6px;'>{{PAY_SUM2}}원</td>
+							<td align=center class='eng bold' style='padding-right:6px;'>{{PAY_SUM3}}원</td>
+						</tr>
+					</table>	
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=10></TD></TR>
+<TR><TD><img src='./img/ttl_change_02.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<TR>
+		<TD>
+			<TABLE  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=1 cellspacing=1>					
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;처리 담당자</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' class=ta name='name' size='20' value="{{my_name}}"></TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품환불금액</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' name='g_total' size="13" class="ta2 eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" onfocus="this.select();" value="{{PAY_TOTAL}}" onblur="ckTotal();">원&nbsp;&nbsp;<font class=small>배송비가 있는경우 상품금액에 배송비를 더하시면 됩니다.</font></TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;환불수수료</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' name='c_total' size="13" class="ta2 eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" onfocus="this.select();" value="0" onblur="ckTotal();">원&nbsp;&nbsp;<font class=small>취소/반품으로 인해 발생된 반송비용, 추가 배송료, 기타 수수료, 쿠폰할인금액</font></TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;최종환불금액</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' name='total' size="13" class="ta2 eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" onfocus="this.select();" value="{{PAY_TOTAL}}">원</TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD width=115 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;적립금 환원</font></TD>
+						<TD bgcolor=#EFEFEF>&nbsp;<input type='text' name='reserve' size="13" class="ta2 eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" onfocus="this.select();" value="0">원&nbsp;&nbsp;<font class=small>적립금사용 주문시 환원되는 적립금</font></TD>
+					</TR>
+					<TR height=30 align=left>
+						<TD class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메모</font></TD>
+						<TD bgcolor=#EFEFEF style="padding:3px 0 3px 6px;">
+							<textarea name=message rows=5 class=ta style='width:99%'>{{memo}}</textarea>
+						</TD>
+					</TR>
+					<!-- DYNAMIC @is_card2@ -->
+					<TR height=30 align=left>
+						<TD class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;카드결제 취소</font></TD>
+						<TD bgcolor=#EFEFEF style="padding-left:6px;">
+							<input type="checkbox" name="card" value='Y' checked><font class="small bold">카드취소/부분취소 처리</font>&nbsp;&nbsp;<font class=small>카드 결제 주문일 경우 PG사(전자지불 카드결제사)의 회원사 관리자페이지에서 카드취소/부분취소 처리</font>
+						</TD>
+					</TR>
+					<!-- DYNAMIC @is_card2@ -->					
+					<TR height=30 align=left>
+						<TD class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;환불계좌정보</font></TD>
+						<TD bgcolor=#EFEFEF style="padding-left:6px;">
+							<font class="small bold">은행명 : </font><input type='text' size='14' name=bank class=ta value='{{rbank}}'>&nbsp;,&nbsp;
+							<font class="small bold">계좌번호 : </font><input type='text' size='18' name=bank_num class=ta value='{{rbank_num}}'>&nbsp;,&nbsp;
+							<font class="small bold">예금주 : </font><input type='text' size='10' name=bank_name class=ta  value='{{rbank_name}}'>&nbsp;				
+						</TD>
+					</TR>					
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<TR><TD align=center><input type='image' src='./img/btn_change.gif' border=0 onfocus='blur();' align=absmiddle>&nbsp;<img src='../shopping/img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"></TD></TR>
+<TR><TD height=30></TD></TR>
+</FORM>
+</TABLE>
+
+<div class="small" style="padding:0 0 20px 10px;">
+	! 최종 환불금액이란 상품환불금액에서 환불수수료를 제한 금액을 말합니다.<br />
+	! 카드결제일 경우 PG사(전자지불 카드결제사)의 회원사 관리자페이지에 카드취소나 카드부분취소처리를 한 후 '카드취소/부분취소 처리'에 체크 하시면 됩니다.<br />
+	! 카드결제일 경우라도 카드취소처리를 하지 않고 환불입금하실경우 '카드취소/부분취소 처리'에 체크하지 않고 환불계좌정보를 입력하시면 됩니다.<br />
+</div>
+
+</BODY>
+</HTML>

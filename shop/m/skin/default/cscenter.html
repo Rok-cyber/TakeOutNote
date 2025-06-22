@@ -1,0 +1,66 @@
+
+<div id="contents">
+	<section id="headline">
+		<h1>고객센터</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section id="cscenter">
+		<div class="cscenterHelp">
+			<p><strong>무엇을 도와드릴까요?</strong></p>
+			<p>항상 고객님의 입장에서 귀담아 듣겠습니다.</p>
+		</div>
+
+		<div class="recentNotice">
+			<h2>공지사항 최근글</h3> 
+			<ul>
+				<li class="title" onclick="window.location.href='{{Main}}?channel=board&code=notice';">공지사항</li>
+				<li class="sub">
+					<ul>
+						<!-- DYNAMIC @loop_notice@ -->	
+						<li onclick="window.location.href='{{Main}}?channel=board_view&amp;code=notice&amp;no={{NO}}'">
+							{{SUBJECT}}
+							<span>{{D_YYYY}}-{{D_MM}}-{{D_DD}}</span>
+						</li>
+						<!-- DYNAMIC @loop_notice@ -->	
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="cscenterInfo">
+			<h2>고객센터정보</h2>
+			<div>
+				<h3>고객센터</h3>
+				<p><span>전화번호</span> : <em>{{TEL}}</em><p>
+				<p><span>팩스번호</span> : <em>{{FAX}}</em><p>
+				<p><span>이메일</span> : <em>{{EMAIL}}</em><p>
+				<h3>고객상담시간</h3>
+				<p><span>평일</span> : <em>{{TIME1}}</em><p>
+				<p><span>토요일</span> : <em>{{TIME2}}</em><p>
+				<p><span>휴일</span> : <em>{{TIME3}}</em><p>
+				<p><span>점심시간</span> : <em>{{TIME4}}</em><p>
+			</div>
+		</div>
+		
+	</section>
+	
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>	
+	
+</div>
+
+<script type="text/javascript">
+<!--
+	$("#contentMore").show();	
+ -->
+</script>

@@ -1,0 +1,84 @@
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+	<td align=center>
+		<table border=0 cellpadding="0" cellspacing="0" align=center bgcolor='#FFFFFF' width="100%">
+		<form name=searchForm method=get action={{ACTION}}>
+		<input type=hidden name=mode value={{mode}}>
+		<tr>
+			<td  colspan=2 align=right>
+				<div class="boxText small orange">Affiliate</div> 
+				<div style='float:left;padding-left:8px;padding-right:10px;'> 
+					<select name='affiliates'>
+						<option value=''>전체</option>
+						{{AFFILIATE}}						
+					</select>
+				</div>	
+				<div class="boxText small orange">기간선택</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					{{SELECT}}
+				</div>	
+				
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="printClick();return false;"><span class="green">프린트하기</span></a>
+				</div>
+			</td>
+		</tr>	
+		</form>
+		<tr><td colspan=2 height=10></td></tr>
+		<tr>
+
+		<td colspan=2>
+			<div id="printArea">
+			
+			<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+			 <tr><td>
+			   <table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+			   <tr><td align=center>
+					<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+					<tr><td align=right colspan=6 height=30 bgcolor=#FFFFFF class="small bold">{{AFFILIATES}}<font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 총 {{TITLES}} : <font class=eng>{{TOTAL}}</font>원 &nbsp;</td></tr>
+					<tr height=34>
+						<td width=15% align=center class=gr_bg><font class="bTitle small">일별</font></td>
+						<td width=15% align=center class=gr_bg><font class="bTitle small">상품건수</font></td>
+						<td width=15% align=center class=gr_bg><font class="bTitle small">상품금액</font></td>
+						<td width=15% align=center class=gr_bg><font class="bTitle small">쿠폰할인</font></td>
+						<td width=20% align=center class=gr_bg><font class="bTitle small">주문합계<br />(상품금액-쿠폰할인)</font></td>
+						<td width=20% align=center class=gr_bg><font class="bTitle small">커미션</font></td>
+					</tr>
+					<!-- DYNAMIC @loop@ -->
+					<tr height=24 bgcolor='#F4F4F4'>
+						<td align=center class=eng>{{DAYS}}</td>
+						<td align=right>{{SALE1}}건&nbsp;</td>
+						<td align=right class=eng>{{SALE2}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE3}}원&nbsp;</td>
+						<td align=right class='eng blue'>{{SALE4}}원&nbsp;</td>
+						<td align=right class='eng orange'>{{SALE5}}원&nbsp;</td>
+					</tr>
+					<!-- DYNAMIC @loop@ -->
+					<tr height=24 bgcolor='#EFEFEF'>
+						<td align=center class=bold>합계</b></td>
+						<td align=right class='eng bold'>{{TSALE1}}건</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE2}}원</font>&nbsp;</td>
+						<td align=right class='eng bold'>{{TSALE3}}원</font>&nbsp;</td>
+						<td align=right class='eng blue bold'>{{TSALE4}}원</font>&nbsp;</td>
+						<td align=right class='eng orange bold'>{{TSALE5}}원</font>&nbsp;</td>						
+					</tr>
+					<tr><td align=right colspan=6 height=30 bgcolor=#FFFFFF class="small bold">{{AFFILIATES}}<font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 총 {{TITLES}} : <font class=eng>{{TOTAL}}</font>원 &nbsp;</td></tr>
+					</table>
+				    </td></tr>
+				</table>
+			    </td>
+			</tr>
+			</table>
+		
+			</div>
+			</td>
+		</tr>
+		<tr><td height=20 colspan=2></td></tr>
+		</table>
+      </td>
+</tr>
+</table>

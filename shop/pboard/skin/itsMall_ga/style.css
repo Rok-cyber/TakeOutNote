@@ -1,0 +1,121 @@
+/******************************************************************
+* =======================================================
+* Previl Board Skin CSS
+*
+* 제 작: gubok kim (email : previl@previl.net,  homepage : http://previl.net)
+*
+* 마지막 수정일: 2007.11.01
+*        
+* =======================================================
+******************************************************************/
+
+/*******************************************************************
+*	DIV 정의
+********************************************************************/
+#pb_sub	{ width:100%; text-align:center }
+	#pb_title_box { width:100%; height:30px; border:1px dotted #B2B2B2; color:#B2B2B2; background-color:#FAFAFA; margin-bottom:10px; }
+	#pb_list_top	{ width:100%; }
+	#pb_list		{ width:100%; float:left; text-align:left; overflow:hidden;}
+	#pb_list_page	{ width:100%; } 
+	#pb_search_box {  background-color:#f5f5f5; }
+	#pb_write_area	{ width:100%; }
+	#pb_memo_box	{ height:120px; border:1px solid #BBBBBB; padding:5px 0px 5px 0px; background-color:#f5f5f5; }
+	#pb_top_title	{ width:100%; height:30px; border-bottom:1px solid #BBBBBB; margin:4px 0px 4px 0px; text-align:center; }	
+	#pb_image_box	{ float:left; border:1px dotted #B2B2B2; background-color:#FAFAFA; margin-top:10px; text-align:center; }
+#pb_sub2	{ width:400px; float:center; text-align:center; margin-top:50px;}
+
+#paging            { clear:both;}
+#paging .numbox    { border-left:1px solid #ccc; padding-left:6px; font-family:Tahoma; font-size:11px; margin-left:6px;}
+#paging .num       { font-family:Tahoma; font-size:11px; border-right:1px solid #ccc; padding-right:8px; margin-right:5px; text-decoration:none;}
+#paging .num2       { font-family:Tahoma; font-size:11px; padding-right:4px; margin-right:2px; text-decoration:none;}
+#paging #prevPage  { background:url(/pboard/skin/Previl_ga/img/icon_prev.gif) left 1px no-repeat; padding-left:6px;}
+#paging #nextPage  { background:url(/pboard/skin/Previl_ga/img/icon_next.gif) right 1px no-repeat; padding-right:6px;}
+#paging .selected  { font-weight:bold; color:#333; }
+
+#nextIcon { background:url(/pboard/skin/Previl_ga/img/icon_next.gif) right 1px no-repeat; padding-right:6px; color:#3399ff;}
+
+/*******************************************************************
+*	LINKS
+********************************************************************/
+a.pb_link:link, a.pb_link:visited, a.pb_link:active { color:#666666; text-decoration:none; }
+a.pb_link:hover	{ color:#111111; text-decoration:none; }
+
+
+/*********************************************************************
+*	FONT
+*********************************************************************/
+font.pb_lh15	{ line-height: 1.5em; }
+font.pb_lh18	{ line-height: 1.8em; }
+font.pb_eng		{ font-family:verdana; font-size:9px; }
+font.pb_page_list1	{ font-family:verdana;font-size:11px }
+font.pb_page_list2	{ font-family:verdana;font-size:11px; background-color:#BBBBBB;color:white; font-weight:bold; }
+font.pb_page_list3	{ font-family:tahoma;font-size:11px }
+
+
+/*********************************************************************
+*	FORM
+*********************************************************************/
+.pb_ip { background-color:#F6F6F6; border:1px solid #BBBBBB; font-family : Tahoma, 굴림, Verdana; font-size : 9pt; color:#666666; height:16px;}
+.pb_ip2 { background-color:#FFFFFF; border:1px solid #BBBBBB; font-family : Tahoma, 굴림, Verdana; font-size : 9pt; color:#666666; height:16px;}
+
+
+/*********************************************************************
+*	Background
+*********************************************************************/
+.pb_bg		{ background-color:#DDDDDD; border:0px; }
+.pb_bar		{ border-top:1px solid #DDDDDD; margin-top:10px; }
+.pb_bar_bg	{ clear:both; border-top:1px solid #BBBBBB; border-bottom:4px solid #EBEBEB; }
+
+
+
+.pb_default		{ font-family : Tahoma, 굴림, Arial, Verdana, Helvetica; font-size : 9pt; color:#666666; }
+.pb_small		{ font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px;text-decoration:none}
+.pb_bold		{ font-weight:bold; }
+.pb_left_text	{ width:50%; float:left; text-align:left; }
+.pb_right_text	{ width:50%; float:right; text-align:right; }
+.pb_write_area	{ clear:both; width:100%; padding:5px 0px 5px 0px; border-bottom:1px solid #DDDDDD; height:20px;text-align:left; }
+.pb_write_area2	{ clear:both; width:100%; text-align:left; padding-top:5px; }
+.pb_write_title	{ float:left; width:100px; text-align:center; }
+.pb_write_title2{ float:left;width:10%; text-align:center; }
+.pb_write_input	{ float:left; width:80%; padding-left:10px;}
+.pb_write_input2{ float:left; padding-left:10px;}
+.pb_image		{ padding:5px; height:132px; }
+.pb_image_text	{ margin-left:3%; border-top:1px dotted #B2B2B2; width:94%; height:0px; height:44px; }
+
+/*********************************************************************
+*	Button Effect
+*********************************************************************/
+#sBtn1 a{ display:block; background:url('img/sBtn1_bg.gif') left 0; float:left; color:#666; padding-left:6px; text-decoration:none; height:20px; cursor:pointer; margin-right:3px; overflow:hidden}
+#sBtn1 a:hover{ background:url('img/sBtn1_bg.gif') left -21px;}
+#sBtn1 a span{ display:block; float:left; background:url('img/sBtn1_bg.gif') right 0; font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px; line-height:215%; padding-right:6px; height:20px; overflow:hidden}
+#sBtn1 a:hover span{ background:url('img/sBtn1_bg.gif') right -21px; color:#000;} 
+
+#sBtn2 a{ display:block; background:url('img/sBtn2_bg.gif') left 0; float:left; color:#FFF; padding-left:12px; text-decoration:none; height:22px; cursor:pointer; margin-right:3px; overflow:hidden}
+#sBtn2 a span{ display:block; float:left; background:url('img/sBtn2_bg.gif') right 0; font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px; line-height:220%; padding-right:12px; height:22px; overflow:hidden}
+#sBtn3 a{ display:block; background:url('img/sBtn3_bg.gif') left 0; float:left; color:#FFF; padding-left:12px; text-decoration:none; height:22px; cursor:pointer; margin-right:3px; overflow:hidden}
+#sBtn3 a span{ display:block; float:left; background:url('img/sBtn3_bg.gif') right 0; font-family:돋움,돋움체,Tahoma;font-size:11px;letter-spacing:-1px; line-height:220%; padding-right:12px; height:22px; overflow:hidden}
+
+img { vertical-align:middle; }
+
+/*IE를 제외한 브라우저*/ 
+.clearfix:after { 
+    content: "."; 
+    display: block; 
+    clear: both; 
+    visibility: hidden; 
+    line-height: 0; 
+    height: 0; 
+} 
+/*Inline-block 지원하는 모든 브라우저*/ 
+.clearfix { 
+    display: inline-block; 
+} 
+/*사파리?*/ 
+html[xmlns] .clearfix { 
+    display: block; 
+} 
+  
+/*IE 6 이상에 대한 clearfix*/ 
+* html .clearfix { 
+    height: 1%; 
+} 

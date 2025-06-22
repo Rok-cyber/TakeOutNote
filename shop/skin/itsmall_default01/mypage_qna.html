@@ -1,0 +1,120 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_qna.gif" alt="나의 상품Q&A" title="나의 상품Q&A" />
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="50" /> 			
+			<col width="50" /> 			
+			<col width="140" /> 			
+			<col />			
+			<col width="90" /> 
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>
+				<th scope="col" class="small black">번호</th>				
+				<th scope="col" class="small black">답변</th>
+				<th scope="col" class="small black">상품명</th>
+				<th scope="col" class="small black">제목</th>				
+				<th scope="col" class="small black">작성일</th>				
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td></td>
+				<td class="num">{{NUM}}</td>
+				<td>
+					<!-- DYNAMIC @is_an1@ -->
+					<img src='img/shop/icon_answer.gif' />
+					<!-- DYNAMIC @is_an1@ -->
+					<!-- DYNAMIC @is_an2@ -->
+					<img src='img/shop/icon_noans.gif' />
+					<!-- DYNAMIC @is_an2@ -->				
+				</td>
+				<td align="left" class="small"><a href="{{Main}}?channel=view&amp;uid={{NUMBER}}&amp;cate={{CATE}}" title="상품상세보기">{{NAME}}</a></td>
+				<td align="left" onclick="viewQna({{NUM}})" class="hand">					
+					{{TITLE}}
+				</td>				
+				<td class="num">{{DATE}}</td>				
+				<td></td>
+			</tr>		
+			<tr>
+				<td colspan="7" align="left">
+					<table cellspacing="0" cellpadding="0" border="0" style="padding:6px 20px 6px 20px; border:1px solid #EFEFEF; border-bottom:0px; display:none" bgcolor="#FAFAFA" id="qna_{{NUM}}" width="100%">
+						<tr>
+							<td width="109" align="center" valign="top"><img src="img/shop/ttl_question.gif" /></td>
+							<td width="611" height="50">
+								{{CONTENT}}
+								<div style="margin:20px 0 4px 0">
+									<img src="img/shop/btn_modify.gif" class="hand" onclick="pLightBox.show('php/qna_write.php?pmode=confirm&uid={{UID}}','iframe','400','180','■ 비밀번호 확인','20');" alt="상품Q&A수정" title="상품Q&A수정" />&nbsp;
+									<img src="img/shop/btn_delete.gif" class="hand" onclick="pLightBox.show('php/qna_write.php?pmode=delete2&uid={{UID}}','iframe','400','180','■ 이용후기 삭제','20');" alt="상품Q&A삭제" title="상품Q&A삭제" />
+								</div>
+							</td>
+						</tr>
+						<!-- DYNAMIC @is_answer@ -->
+						<tr>
+							<td colspan="2">
+								<div style="width:100%;height:2px;background-color:#FFF;overflow:hidden"></div>
+							</td>
+						</tr>
+						<tr>
+							<td align="center" valign="top">
+								<img src="img/shop/ttl_answer.gif" />
+							</td>
+							<td>{{ANSWER}}</td>
+						</tr>
+						<!-- DYNAMIC @is_answer@ -->
+					</table>
+				</td>
+			</tr>
+			<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->											
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/shop/no_qna.gif" alt="상품Q&A없음이미지" title="상품Q&A없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+
+	<div style="clear:both;height:20px"></div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+qnaViewNum = '';
+// -->
+</script>

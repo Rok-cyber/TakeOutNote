@@ -1,0 +1,598 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>view_cooperate.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> view_cooperate.html (공구상품 상세 보기)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_IMG}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 이미지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PREV_GOODS}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">같은 분류내 이전 상품 링크주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NEXT_GOODS}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">같은 분류내 다음 상품 링크주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{P_UID}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 uid</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{P_PRICE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품가격(숫자로만)</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{cate}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 분류 번호</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{number}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 번호</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{DEF_QTY}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">기본 판매 수량</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{Q_UNIT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">재고수량</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_UNIT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">판매단위</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CKLOGIN}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">로그인 확인(y,n)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_NAME}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품명</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_ICON}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 아이콘</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_OPRICE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">소비자 가격</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_PRICE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품가격</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_RESERVE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품적립금</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TTL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이벤트, 회원 할인 구분</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MY_SALE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">할인률</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MY_POINT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 적립률</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_CPRICE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">쿠폰적용가격</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CUID}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">쿠폰번호</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_BRAND}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">브랜드</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_COMP}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">제조사</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_MADE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">원산지</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_CARR}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송비 별도 금액</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_TITLE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">옵션명</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_VALUES}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">옵션내용</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUM1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객평점 이미지1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUM2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객평점 이미지2</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUM3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객평점 이미지3</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUM4}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객평점</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNT_AFTER}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록된 이용후기 갯수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_EXPL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 상세 설명</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUM_AFTER}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객평점 평균</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNT_QNA}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록된 상품 Q&A 갯수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNT_RELATE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">관련상품 갯수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{INFO}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송/반품/환불 정보</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{afterstr}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이용후기 추가 파라미터</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{qnastr}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 Q&A 추가 파라미터</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{oclick}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">태그 등록 가능할 경우 등록되게</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+    
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<div><font class="blue">&lt!-- DYNAMIC @is_ot_img@ --></font></div>
+			<div style="margin:10px 0 0 28px;">. . . (다른 이미지가 있는 경우 나타남)<br/></div>
+
+					<div style="margin:10px 0 10px 0">			    
+						<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+						<tr>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+								<tr>
+									<td>
+										<table border="0" cellpadding="2" cellspacing="1" width="100%">
+										<tr height="26"> 
+											<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+											<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+										</tr>	
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OWIDTH}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">다른 상품 이미지 총 가로 사이즈(자동계산))</td>
+										</tr>	
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OCNT}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">다른상품 갯수</td>
+										</tr>											
+										</table>
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</div>
+			
+			<div style="clear:both;width:95%;float:right;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+				<div style="padding:10px;">
+					
+					<div><font class="blue">&lt!-- DYNAMIC @loop_ot_img@ --></font></div>
+					<div style="margin:10px 0 0 28px;">다른 이미지 리스트</div>
+					<div style="margin:10px 0 10px 0">			    
+						<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+						<tr>
+							<td>
+								<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+								<tr>
+									<td>
+										<table border="0" cellpadding="2" cellspacing="1" width="100%">
+										<tr height="26"> 
+											<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+											<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+										</tr>	
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OT_IMG1}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">다른 이미지(작은)</td>
+										</tr>	
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OT_IMG2}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">다른 이미지(큰)</td>
+										</tr>
+										<tr height="26"> 
+											<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{GOODS_OIMG}}</font></td>
+											<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">기본 상품 이미지</td>
+										</tr>
+										</table>
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</div>
+					<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_ot_img@ --></font></div>
+				</div>
+			</div>
+			<div style="clear:both;margin-top:10px;"><font class="blue">&lt!-- DYNAMIC @is_ot_img@ --></font></div>
+		</div>
+		
+	</div>
+	
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_oprice@ --></font><br/>
+			. . . (소비자 가격이 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_oprice@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_my_sale@ --></font><br/>
+			. . . (할인 상품일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_my_sale@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_event@ --></font><br/>
+			. . . (이벤트 상품일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_event@ --></font>
+		</div>
+	</div>
+
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_cupon@ --></font><br/>
+			. . . (쿠폰발행 상품일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_cupon@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_my_point@ --></font><br/>
+			. . . (추가 적립금이 있는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_my_point@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_brand@ --></font><br/>
+			. . . (브랜드가 있을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_brand@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_comp@ --></font><br/>
+			. . . (제조사가 있을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_comp@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_made@ --></font><br/>
+			. . . (원산지가 있을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_made@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_carr@ --></font><br/>
+			. . . (배송비 별도 상품일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_carr@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_option@ --></font><br/>
+			. . . (옵션이 있을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_option@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_limit@ --></font><br/>
+			. . . (구매가능할 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_limit@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_limit@ --></font><br/>
+			. . . (품절일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_limit@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_limit2@ --></font><br/>
+			. . . (구매가능할 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_limit2@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_limit3@ --></font><br/>
+			. . . (품절일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_limit3@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop_Tafter@ --></font></div>
+			<div style="margin:10px 0 0 28px;">최근 작성된 이용후기 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ATITLE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이용후기 제목</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADATE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이용후기 등록일</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_Tafter@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop_tag@ --></font></div>
+			<div style="margin:10px 0 0 28px;">등록된 태그 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TLINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">태그 검색결과 링크 주소</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RND}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">랜덤값(1~8)</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TAG}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">태그</td>
+								</tr>	
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_tag@ --></font></div>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_tag@ --></font><br/>
+			. . . (태그가 있을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_tag@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_after@ --></font><br/>
+			. . . (이용후기가 없을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_after@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_qna@ --></font><br/>
+			. . . (상품Q&A가 없을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_qna@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+		<div style="padding:10px;">
+						
+			<div><font class="blue">&lt!-- DYNAMIC @loop_relate@ --></font></div>
+			<div style="margin:10px 0 0 28px;">상품 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{i}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">출력번호</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{IMAGE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 이미지</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{LINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 상세보기 링크 주소</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{DRAGD}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">드래그 정보</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품명</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PRICE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품가격</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{QLINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">퀵뷰 링크 주소</td>
+								</tr>										
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_relate@ --></font></div>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_relate@ --></font><br/>
+			. . . (관련상품이 없을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_relate@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;" class="blue">
+			리스트 결과를 AJAX를 이용해 받아와서 아래 함수를 호출후 내용이 나타남<br/><br/>
+rtnRowAfter(obj,num,point,title,name,buy,date,content,mod,uid,name2,link,image,dragd)<br/>
+obj 	: list_after (id)<br/>
+num	: 출력 번호<br/>
+point	: 평점<br/>
+title	: 제목<br/>
+name	: 이름<br/>
+buy	: 구매자가 등록했을 경우<br/>
+date	: 등록일<br/>
+content	: 내용<br/>
+mod	:수정일 경우<br/>
+uid	: 등록 uid<br/>
+name2	: 상품명<br/>
+link	: 상품 상세 페이지 링크주소<br/>
+dragd	: 드래그정보<br/><br/>
+
+rtnRowQna(obj,num,title,name,ans,date,content,answer,mod,uid) <br/>
+obj 	: list_after (id)<br/>
+num	: 출력 번호<br/>
+title	: 제목<br/>
+name	: 이름<br/>
+ans	: 답변유무<br/>
+date	: 등록일<br/>
+content	: 내용<br/>
+answer	: 답변내용<br/>
+mod	:수정일 경우<br/>
+uid	: 등록 uid<br/>
+<br/><br/>
+
+해당 정보를 받아서 DOM형태로 코드 생성 후 출력<br/>
+
+		</div>
+	</div>
+
+	
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

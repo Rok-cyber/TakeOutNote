@@ -1,0 +1,188 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+$DAY1 = date("Y-m-d");
+$DAY2 = date("Y-m-d", strtotime('-3 DAY', time()));
+$DAY3 = date('Y-m-d', strtotime('-1 WEEK', time()));
+$DAY4 = date('Y-m-d', strtotime('-1 MONTH', time()));
+$DAY5 = date('Y-m-d', strtotime('-6 MONTH', time()));
+
+?>
+<SCRIPT language="JavaScript">
+<!--
+
+function putDay(date1,date2,num) {
+	f = document.carr2Form;
+	if(!num) num = 0;
+	if(!date1) {
+		eval("f.sdate"+(1+num)+".value = ''")
+		eval("f.sdate"+(2+num)+".value = ''")		
+	} 
+	else {
+		eval("f.sdate"+(1+num)+".value = date1")
+		eval("f.sdate"+(2+num)+".value = date2")
+	}
+}
+
+function ckForm(){
+	f = document.carr1Form;
+	if(!f.csv.value) {
+		alert('CSV파일을 등록 하시기 바랍니다.');
+		f.csv.focus();
+		return false;
+	}
+	f.submit();
+	return false;
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_carr.gif" alt="일괄송장번호등록" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>다수 주문건의 송장번호를 엑셀파일로 만들어 주문정보에 일괄 반영할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td>&nbsp;<img src='./img/ttl_carr_csv.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='carr1Form' method='post' enctype="multipart/form-data" action='carr_post.php?mode=csv'>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;택배회사 선택</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<SELECT name=carr>
+								<?
+								$sql = "SELECT uid,name,code FROM mall_design WHERE mode='Z'  ORDER BY uid ASC";
+								$mysql->query($sql);
+								for($i=0; $row = $mysql->fetch_array(); $i++) {
+									echo "<option value='{$row['uid']}'>".stripslashes($row['name'])."</option>\n";
+								}
+								?>
+							</SELECT>						
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;엑셀파일 등록</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type='file' class=ta size=50 name='csv'>&nbsp;&nbsp;
+							<font class=small>엑셀(CSV) 파일만 등록 가능 합니다.</font> 
+						</td>
+					</tr>
+					
+					<tr height=100 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								! 엑셀(CSV)파일 형식은 "주문번호,주문자,송장번호" 입니다. '배송준비중'상태의 주문은 자동으로 '배송중'으로 단계가 변경 됩니다.<br />
+								! 엑셀로 작업하셔서 다른이름으로 저장을 누르시고 파일형식을 CSV(쉼표로분리)로 선택하시고 저장하시면 됩니다. <br />
+								! 저장된 CSV파일을 열어 보시면 아래처럼 저장되어 있습니다.<br />
+								&nbsp;&nbsp;08-0926-144319-8901,홍길동,123456789<br />
+								&nbsp;&nbsp;08-0929-144319-5601,홍길동,234567891<br />
+								&nbsp;&nbsp;08-0930-144319-8781,홍길동,345678912<br />
+								&nbsp;&nbsp;&nbsp;.&nbsp;.&nbsp;.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();"><span class="blue">일괄처리</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+<tr><td>&nbsp;<img src='./img/ttl_carr_create.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='carr2Form' method='post' action='carr_post.php?mode=create'>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주문 처리 단계</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type="checkbox" name="ck1" id='ck1' value="1" /> <label for='ck1'>배송준비중</label>
+							<input type="checkbox" name="ck2" id='ck2' value="1" checked /> <label for='ck2'>배송중</label>
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주문일</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="bt2" size="10" name="sdate1" value=""> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="bt2"  size="10" name="sdate2" value="">
+							<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay('<?=$DAY1?>','<?=$DAY1?>')" align="absmiddle">
+							<img src="../html/img/btn_day2.gif" class="hand" onclick="putDay('<?=$DAY2?>','<?=$DAY1?>')" align="absmiddle">
+							<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay('<?=$DAY3?>','<?=$DAY1?>')" align="absmiddle">
+							<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay('<?=$DAY4?>','<?=$DAY1?>')" align="absmiddle">
+							<img src="../html/img/btn_day6.gif" class="hand" onclick="putDay('<?=$DAY5?>','<?=$DAY1?>')" align="absmiddle">
+							<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">		
+							<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+								<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+							</div>
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;단계 처리일</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="bt2" size="10" name="sdate3" value=""> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="bt2"  size="10" name="sdate4" value="">
+							<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay('<?=$DAY1?>','<?=$DAY1?>',2)" align="absmiddle">
+							<img src="../html/img/btn_day2.gif" class="hand" onclick="putDay('<?=$DAY2?>','<?=$DAY1?>',2)" align="absmiddle">
+							<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay('<?=$DAY3?>','<?=$DAY1?>',2)" align="absmiddle">
+							<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay('<?=$DAY4?>','<?=$DAY1?>',2)" align="absmiddle">
+							<img src="../html/img/btn_day6.gif" class="hand" onclick="putDay('<?=$DAY5?>','<?=$DAY1?>',2)" align="absmiddle">
+							<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay('','',2)" align="absmiddle">									
+						</td>
+					</tr>
+					
+					<tr height=48 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								! 해당 조건을 선택하시고 'CSV파일 다운'버튼을 클릭하셔서 고객님의 컴퓨터에 저장 하시면 됩니다. <br />
+								! 송장번호가 등록되지 않은 주문일 경우에만 CSV파일로 생성 됩니다.<br />
+								! 저장된 파일을 여시면 주문번호와 주문자 부분은 자동으로 채워져 있고 송장번호만 등록 하시고 저장하시면 됩니다.								
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.carr2Form.submit();return false;"><span class="blue">CSV파일 다운</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td colspan=2 height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

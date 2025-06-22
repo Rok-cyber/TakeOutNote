@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>주문상품 취소/반품/교환 신청하기</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript"  src="../lib/lib.Function.js"></script>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+
+
+<script language="Javascript"> 
+function ckForm(){
+	var f = document.changeForm;
+	if(!f.reason_code.value) {
+		alert("{{TTL}}사유를 선택 하시기 바랍니다");
+		f.reason_code.focus();
+		return false;
+	}
+	
+	<!-- DYNAMIC @is_bank1@ -->		
+	if(!f.bank.value || !f.bank_num.value || !f.bank_name.value) {
+		alert("환불계좌정보를 입력 하시기 바랍니다");
+		return false;
+	}
+	<!-- DYNAMIC @is_bank1@ -->		
+	f.submit();
+	return false;
+}
+</script>
+</head>
+
+<body style="padding:0px; margin:0px;">
+<center>
+<div style="width:700px">
+
+	<div style="text-align:left;height:30px;margin-top:20px;"> 
+		<img src="img/shop/ttl_order_change01.gif" alt="선택된상품정보" title="선택된상품정보" />
+	</div>
+
+	<div style="width:700px;">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">						
+			<col width="30" />
+			<col />
+			<col width="60" /> 
+			<col width="85" />
+			<col width="85" />
+			<col width="90" />
+			<thead>
+			<tr  height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center"> 				
+				<th scope="col" class="small black">번호</th>
+				<th scope="col" class="small black">상품명 / 옵션</th>
+				<th scope="col" class="small black">수량</th>					
+				<th scope="col" class="small black">개별배송비</th>
+				<th scope="col" class="small black">합계</th>
+				<th scope="col" class="small black">진행상황</th>
+			</tr>
+			</thead>				
+			<tbody>
+			<!-- DYNAMIC @loop_change@ -->
+			<tr align="center" height="30">
+				<td class="num">{{ii}}</td>
+				<td align="left" style='padding-left:6px;'>{{NAME}} <font class='small'>{{OP_SEC_VLS}}</font></td>					
+				<td class="num">{{QTY}}</td>
+				<td class="num">{{CARR}}원</td>
+				<td class="num orange">{{SUM}}</td>
+				<td  class="small">{{STATUS}}</td>
+			</tr>
+			<tr><td colspan="6" height="1" bgcolor="#F1F1F1"></td></tr>			
+			<!-- DYNAMIC @loop_change@ -->
+			</tbody>			
+		</table>
+	</div>	
+	
+	<div style="text-align:left;height:30px;margin-top:20px;"> 
+		<img src="img/shop/ttl_order_change02.gif" alt="신청정보입력" title="신청정보입력" />
+	</div>
+	
+	<form name='changeForm' method='post' action='order_change_ok.php' onsubmit="return ckForm();">
+	<input type='hidden' name='order_num' value='{{order_num}}' />
+	<input type='hidden' name='status' value='{{status}}' />
+	<input type='hidden' name='sgoods' value='{{sgoods}}' />
+	<div style="width:700px;">		
+		<div id="memberInfo" class="clearfix">		
+			<div style="border: 1px solid #DDD;padding:20px" class="clearfix">	
+				<ul>				
+					<li style="width:640px;">
+						<div id="nextIcon2" class="small left bold">{{TTL}}사유</div>
+						<div class="left">
+							<select name='reason_code' class="default">
+								<option value="">선택</div>
+								{{REASON}}
+							</select>
+						</div>
+					</li>
+					<li style="height:100px;background:url(img/shop/dot_line.gif) repeat-x 0px 99px;width:640px;">
+						<div id="nextIcon2" class="small left bold">기타 사항</div>
+						<div class="left">
+							<textarea class="inputs black default" style="width:490px;height:90px;" name="message"></textarea>
+						</div>
+					</li>
+					<!-- DYNAMIC @is_bank2@ -->
+					<li style="width:640px;">
+						<div id="nextIcon2" class="small left bold">환불계좌정보</div>
+						<div class="left">
+							<font class="small bold">은행명 : </font><input type='text' size='14' name='bank' class="inputs black default" />&nbsp;,&nbsp;
+							<font class="small bold">계좌번호 : </font><input type='text' size='18' name='bank_num' class="inputs black default" />&nbsp;,&nbsp;
+							<font class="small bold">예금주 : </font><input type='text' size='10' name='bank_name' class="inputs black default" />&nbsp;
+						</div>
+					</li>
+					<!-- DYNAMIC @is_bank2@ -->					
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div style="clear:both;height:20px;">&nbsp;</div>
+
+	<center>
+	<div style="width:140px;">
+		<div id="sBtn3">
+			<a href="#" onclick="return ckForm('1');"><span>신청완료</span></a>
+		</div>
+		<div id="sBtn2">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>신청취소</span></a>
+		</div>
+	</div>
+	</center>
+
+	<div style="clear:both;height:30px;">&nbsp;</div>
+	<div style="text-align:left" class="small">		
+		! 해당 상품의 상세설명페이지의 교환/반품/환불 안내을 먼저 확인 하시기 바랍니다.<br />
+		! 고객의 단순한 변심으로 교환, 반품 및 환불을 요구할 때 수반되는 배송비는 고객님께서 부담하셔야 합니다.<br />
+		! 교환 신청일 경우 동일 상품의 동일 옵션으로만 가능합니다<br />		
+		! 반품 및 교환 신청일 경우 반송하신 택배회사와 송장번호를 기타 사항에 입력 하시면 됩니다.<br />		
+	</div>
+</div>
+</form>
+</center>
+</body>
+</html>

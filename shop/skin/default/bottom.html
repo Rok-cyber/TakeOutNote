@@ -1,0 +1,331 @@
+	</div>  <!-- DIV(TOP START) -->
+</div>
+
+<div id="footer" style='z-Index:1;'>
+	<div id="copyMenu">
+		<ul style="width:560px">
+			<li style="background:url();padding-left:0;"><a href='{{Main}}?channel=docu&amp;mode=A'><img src="img/bottom/company.gif" alt="회사소개" title="회사소개" /></a></li>
+			<li><a href='{{Main}}?channel=docu&amp;mode=B'><img src="img/bottom/used.gif" alt="이용약관" title="이용약관" /></a></li>
+			<li><a href='{{Main}}?channel=docu&amp;mode=C'><img src="img/bottom/private.gif" alt="개인정보취급방침" title="개인정보취급방침" /></a></li>
+			<li><a href='{{Main}}?channel=customer'><img src="img/bottom/center.gif" alt="고객센터" title="고객센터" /></a></li>
+			<li><a href='{{Main}}?channel=docu&amp;mode=D'><img src="img/bottom/infor.gif" alt="이용안내" title="이용안내" /></a></li>
+			<li><a href='{{Main}}?channel=board&amp;code=sales'><img src="img/bottom/sales.gif" alt="대량구매문의" title="대량구매문의" /></a></li>
+			<li><a href='{{Main}}?channel=board&amp;code=cooperation'><img src="img/bottom/cooperation.gif" alt="제휴/광고문의" title="제휴/광고문의" /></a></li>
+		</ul>
+		
+		<div style='float:right;padding:8px 84px 0 0;'>
+			<a href="{{Main}}"><img src="img/bottom/btn_home.gif" alt="home" title="home" /></a> &nbsp;&nbsp;				
+			<a href="#" onclick="goTop();return false;"><img src="img/bottom/btn_top.gif" alt="top" title="top" /></a>
+		</div>		
+	</div>	
+	
+	<div style="clear:both;height:5px;overflow:hidden;">&nbsp;</div>
+	<div style="width:918px;border:1px solid #aaa;height:6px;background-color:#ccc;overflow:hidden;float:left;">&nbsp;</div>
+	<div style="clear:both;height:15px;overflow:hidden;">&nbsp;</div>
+	
+	<!-- DYNAMIC @is_cimg1@ -->
+	<div id="copyImg">
+		<img src="{{B_COPY}}" alt="카피라이트" />
+	</div>
+	<!-- DYNAMIC @is_cimg1@ -->
+	
+	<!-- DYNAMIC @is_cimg2@ -->
+	<div id="copyImg">		
+		<div id="copyText">
+			<ul>
+				<li class="small">주소&nbsp;&nbsp;<font class='gray'>{{CO_ADDR}}</font>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;고객센터&nbsp;&nbsp;<font class="num gray">{{CO_TEL}}</font>&nbsp;&nbsp;&nbsp;&nbsp;팩스&nbsp;&nbsp;<font class="num gray">{{CO_FAX}}</font>&nbsp;&nbsp;&nbsp;&nbsp;E-mail&nbsp;&nbsp;<a href="mailto:{{CO_EMAIL}}" class="num gray">{{CO_EMAIL}}</a></li>
+				<li class="small">
+					<div class="left">
+						상호&nbsp;&nbsp;<font class='gray'>{{CO_NAME}}</font>&nbsp;&nbsp;&nbsp;&nbsp;대표&nbsp;&nbsp;<font class='gray'>{{CO_AD}}</font>&nbsp;&nbsp;&nbsp;&nbsp;사업자 등록번호&nbsp;&nbsp;<font class="num gray">{{CO_NUM1}}</font>&nbsp;&nbsp;&nbsp;&nbsp;통신판매업 신고번호&nbsp;&nbsp;<font class="small gray">{{CO_NUM2}}</font>
+					</div>
+					<div class="left" style="padding-left:6px;">
+						<a href="{{CO_LINK}}" target="_blank"><img src="img/bottom/btn_cinfo.gif" alt="사업자정보확인" /></a>
+					</div>
+				</li>
+				<li class="small">관리 책임자&nbsp;&nbsp;<font class='gray'>{{CO_SAD}}</font>&nbsp;&nbsp;&nbsp;&nbsp;개인정보관리자&nbsp;&nbsp;<font class='gray'>{{CO_SAD}}</font></li>				
+				<li class="num gray" style="padding-top:10px;">Copyright {{START_YEAR}}&nbsp;&nbsp;&nbsp;&nbsp;<font class="smll black">{{CO_NAME2}}</font>&nbsp;&nbsp;&nbsp;&nbsp;All Right Reserved.</li>
+			</ul>
+		</div>		
+		<div id="copyLogo">{{T_LOGO}}</div>
+	</div>
+	<!-- DYNAMIC @is_cimg2@ -->	
+
+	<div style="clear:both;height:38px;">&nbsp;</div>
+
+</div>
+
+<!-- DYNAMIC @is_fixed_ie6@ -->
+</center>
+<!-- DYNAMIC @is_fixed_ie6@ -->
+
+<div id="rightBoxHold">	
+	<div id="rBoxArea">
+		<div class="small bold" style="border:1px solid #ccc;height:25px;width:73px;">
+			<div style="padding-top:6px;"><img src="img/bottom/ttl_hold_today.gif" alt="최근본상품" /></div>
+		</div>
+		<div id="rBox">
+			<div style="border-left:1px solid #ccc;border-right:1px solid #ccc;width:73px;">
+				<div style="height:8px;overflow:hidden;"></div>						
+				<div style="height:10px;overflow:hidden;"><img src="img/common/icon_arrow_prev_off.gif" class="hand" onclick="rTodayBoxDiv.scroll('up');" id="rTodayBoxDivImgPrev" alt='prev' style="vertical-align:top;" /></div>
+				<div style="height:4px;overflow:hidden;"></div>						
+				<div id="rMenuGoods">	
+					<div id='rTodayBox' style="position:relative;left:0px;top:0px;height:400px">
+
+						<!-- DYNAMIC @loop_today_goods@ -->
+						<ul id="tGoods_{{CATE}}{{NUMBER}}">				
+							<li style="height:60px">
+								<div>
+									<a href="{{LINK}}" onfocus="this.blur()"><img src='{{IMAGE}}' width='58' height='58' style='border:1px solid #DADADA' alt="{{NAME}}" onmouseover="this.style.border='1px solid #999999'" onmouseout="this.style.border='1px solid #DADADA'" /></a>
+								</div>
+								<div style="position:relative;left:22px;top:-18px;"><img src="img/common/icon_del.gif" class="hand" onclick="delGoods('{{CATE}}','{{NUMBER}}')"  alt="최근본상품삭제" title="최근상품삭제" style='vertical-align:top' /></div>
+							</li>
+							<li>
+								<center>
+								<div style="padding-top:4px;height:14px;width:64px;overflow:hidden;">
+									<a href="{{LINK}}" onfocus="this.blur()" class="small" title="{{NAME}}">{{NAME}}</a>
+								</div>
+								</center>
+							</li>					
+							<li  class="num green">{{PRICE}}</li>
+						</ul>
+						<!-- DYNAMIC @loop_today_goods@ -->
+
+						<!-- DYNAMIC @empty_today_goods@ -->
+						<ul style="height:200px;">				
+							<li style="height:120px;"></li>
+							<li class="small gray" style="line-height:140%;">오늘 본 상품이 <br/>없습니다.</li>
+						</ul>
+						<!-- DYNAMIC @empty_today_goods@ -->
+
+					</div>
+				</div>
+				<div style="height:15px;overflow:hidden;"><img src="img/common/icon_arrow_next_off.gif" class="hand" onclick="rTodayBoxDiv.scroll('down');" id="rTodayBoxDivImgNext" alt='next' style="vertical-align:top;" /></div>
+				<div style="height:6px;overflow:hidden"></div>
+			</div>					
+		</div>				
+
+		<div class="small gray" style="border:1px solid #ccc;height:25px;width:73px;">
+			<div style="padding-top:6px;">
+				<a href="#" onclick="window.history.back();return false;"><img src="img/bottom/ttl_hold_prev.gif" alt="이전페이지" /></a>
+				<img src="img/bottom/hold_bar.gif" alt="line" />			
+				<a href="#" class="num" onclick="goTop();return false;"><img src="img/bottom/ttl_hold_top.gif" alt="TOP" /></a>
+			</div>
+		</div>
+
+		<div style="padding-top:6px;">
+			<!-- DYNAMIC @loop_banner@ -->
+			<div class="banner2"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+			<!-- DYNAMIC @loop_banner@ -->
+		</div>	
+	</div>
+</div>
+
+<div id="quickBarHold">
+	<div id="quickBarTop">
+		<div style="float:left; padding:5px 0 0 5px;">
+			<div class="num white bold hand" id="quickBarToday" onclick="quickBarChange2('Today');" style="background:url(img/bottom/qbar_today.gif) no-repeat;">
+				<div id="quickBarTodayCnt" style="padding:6px 0 0 40px;">({{Tcnt}})</div>
+			</div>
+			<div class="num white bold hand" id="quickBarCart" onclick="quickBarChange2('Cart');" style="background:url(img/bottom/qbar_cart.gif) no-repeat;">
+				<div id="quickBarCartCnt" style="padding:6px 0 0 38px;">({{Ccnt}})</div>
+			</div>
+			<div class="num white bold hand" id="quickBarWish" onclick="quickBarChange2('Wish');" style="background:url(img/bottom/qbar_wish.gif) no-repeat;">
+				<div id="quickBarWishCnt" style="padding:6px 0 0 38px;">({{Wcnt}})</div>
+			</div>
+		</div>
+		<div style="float:right;padding-top:5px;"><img src="img/bottom/qbar_arrow_up.gif" alt="open" title="open" id="quickBarArrow" class="hand" onclick="quickBarChange(this)" /></div>
+	</div>
+	<div id="quickBarBody" style="height:185px">
+		<div style="padding:7px 0 0 13px">
+			<div id="quickBarTodayBox" style="display:none;">
+				<div class="quickBarGoods">				
+					<div class="left" style="width:54px;padding-top:70px;">
+						<div><img src="img/bottom/icon_arrow_prev_off.gif" class="hand" onclick="qTodayBoxDiv.scroll('left');" id="qTodayBoxDivImgPrev" alt="prev" /></div>
+					</div>
+					<div class="quickBarGoodsList">						
+						<div style="height:10px;overflow:hidden;">&nbsp;</div>
+						<div id='qTodayBox' style="position:relative;left:0px;top:0px;width:{{qbTodayWidth}}px">							
+							<!-- DYNAMIC @loop_qb_today_goods@ -->
+							<div class="quickBarGoodsBox" id="qBarToday_{{CATE}}{{NUMBER}}">
+								<div class="quickBarGoodsBoxImg" onclick="quickBarCheck('Today',{{CATE}}{{NUMBER}})">
+									<div><img src="{{IMAGE}}" alt="{{NAME}}" border="0" width="80" height="80" class="imgBoder" /></div>
+									<div class="quickBarCheckIcon"><img src="img/bottom/icon_check.gif" class="hand" alt="check" style="vertical-align:top" id="quickBarTodayCheck_{{CATE}}{{NUMBER}}" /></div>
+								</div>
+								<div class="quickBarGoodsBoxName">
+									<a href="{{LINK}}" class="small">{{NAME}}</a>
+								</div>
+								<div class="quickBarGoodsBoxPrice">
+									<div class="num bold">{{PRICE2}}</div>
+								</div>	
+							</div>
+							<!-- DYNAMIC @loop_qb_today_goods@ -->									
+							<div class="small quickBarNoGoods" style="display:{{dispqToday}}" id="qBarToday_no">				
+								최근 본 상품이 없습니다.
+							</div>							
+						</div>
+					</div>
+					<div class="left" style="width:54px;padding-top:70px;">
+						<div><img src="img/bottom/icon_arrow_next_off.gif" class="hand" onclick="qTodayBoxDiv.scroll('right');" id="qTodayBoxDivImgNext" alt="next" /></div>
+					</div>					
+				</div>
+				<div class="quickBarGoodsRight">
+					<div><img src="img/bottom/ttl_qbar_today.gif" alt="최근본상품" title="최근본상품" /></div>				
+					<div style="padding-top:57px;width:159px;">
+						<div style="height:23px;overflow:hidden;">
+							<span><img src="img/bottom/btn_qbar_sall.gif" alt="전체선택" title="전체선택" class="hand" onclick="quickBarCheckAll('Today');" /></span>
+							<span style="padding-left:2px;"><img src="img/bottom/btn_qbar_sdel.gif" alt="선택삭제" title="선택삭제" class="hand" onclick="quickBarCheckDel('Today');" /></span>				
+						</div>
+						<div style="padding-top:5px;"><img src="img/bottom/btn_qbar_wish.gif" alt="관심상품담기" title="관심상품담기" class="hand" onclick="quickBarCheckWish();" /></div>
+						<div style="padding-top:5px;"><img src="img/bottom/btn_qbar_cart.gif" alt="장바구니담기" title="장바구니담기" class="hand" onclick="quickBarCheckCart('Today');" /></div>
+					</div>
+				</div>
+			</div>
+
+			<div id="quickBarCartBox" style="display:none;">
+				<form name="qCartForm" method="post" action="">
+				<input type="hidden" name="uid" />
+				<div class="quickBarGoods">				
+					<div class="left" style="width:54px;padding-top:70px;">
+						<div><img src="img/bottom/icon_arrow_prev_off.gif" class="hand" onclick="qCartBoxDiv.scroll('left');" id="qCartBoxDivImgPrev" alt="prev" /></div>
+					</div>
+					<div class="quickBarGoodsList">
+						<div style="height:10px;overflow:hidden;">&nbsp;</div>
+						<div id='qCartBox' style="position:relative;left:0px;top:0px;width:{{qbCartWidth}}px">
+							<!-- DYNAMIC @loop_qb_cart_goods@ -->
+							<div class="quickBarGoodsBox" id="qBarCart_{{UID}}">
+								<div class="quickBarGoodsBoxImg" onclick="quickBarCheck('Cart',{{UID}})">
+									<div><img src="{{IMAGE}}" alt="{{NAME}}" border='0' width='80' height='80' class="imgBoder" /></div>
+									<div class="quickBarCheckIcon"><img src="img/bottom/icon_check.gif" class="hand" alt="check" style='vertical-align:top' id="quickBarCartCheck_{{UID}}" /></div>
+								</div>
+								<div class="quickBarGoodsBoxName">
+									<a href="{{LINK}}" class="small">{{NAME}}</a>
+								</div>
+								<div class="quickBarGoodsBoxPrice">
+									<div class="num bold left" id="quickBarCartPrice_{{UID}}">{{PRICE2}}</div>
+									<div style="padding-left:10px;" class="num left"><span id="qucilBarCartQty_{{UID}}">{{QTY}}</span>EA</div>
+								</div>	
+								<div class="quickBarGoodsBoxOption">											
+									<img src="img/bottom/btn_option_change.gif" alt="옵션변경" class="hand" onclick="pLightBox.show('php/poption_select.php?uid={{UID}}','iframe',720,340,'■ 상품옵션변경','20');" id="quickBarOptionImg1_{{UID}}" style="display:{{OPTION_DSP1}}" />	
+									<img src="img/bottom/btn_option_select.gif" alt="옵션선택" class="hand" onclick="pLightBox.show('php/poption_select.php?uid={{UID}}','iframe',720,340,'■ 상품옵션선택','20');" id="quickBarOptionImg2_{{UID}}" style="display:{{OPTION_DSP2}}" />	
+								</div>	
+								<input type="hidden" name="price_{{UID}}" value="{{OPRICE}}" />
+								<input type="hidden" name="qty_{{UID}}" value="{{QTY}}" />
+								<input type="hidden" name="option_{{UID}}" value="{{OPTION}}" />
+							</div>							
+							<!-- DYNAMIC @loop_qb_cart_goods@ -->		
+							<div class="small quickBarNoGoods" style="display:{{dispqCart}}" id="qBarCart_no">				
+								장바구니에 담긴 상품이 없습니다.
+							</div>
+						</div>
+					</div>
+					<div class="left" style="width:54px;padding-top:70px;">
+						<div><img src="img/bottom/icon_arrow_next_off.gif" class="hand" onclick="qCartBoxDiv.scroll('right');" id="qCartBoxDivImgNext" alt="next" /></div>
+					</div>					
+				</div>
+
+				<div class="quickBarGoodsRight">
+					<div><img src="img/bottom/ttl_qbar_cart.gif" alt="장바구니" title="장바구니" /></div>				
+					<div style="clear:both;height:9px;overflow:hidden;">&nbsp;</div>
+					<div>
+						<div class="left small white" style="border-bottom:1px solid #666;width:59px;height:16px;">선택합계 : </div>
+						<div class="left num white" id="quickBarCartSum1">0<font class="small">원</font></div>
+						<div style="clear:both;height:4px;overflow:hidden;">&nbsp;</div>
+						<div class="left small white" style="border-bottom:1px solid #666;width:59px;height:16px;">전체합계 : </div>
+						<div class="left num white" id="quickBarCartSum2">{{CART_SUM}}<font class="small">원</font></div>
+					</div>
+					<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+					<div>
+						<div style="height:23px;overflow:hidden;">
+							<span><img src="img/bottom/btn_qbar_sall.gif" alt="전체선택" title="전체선택" class="hand" onclick="quickBarCheckAll('Cart');" /></span>
+							<span style="padding-left:2px;"><img src="img/bottom/btn_qbar_sdel.gif" alt="선택삭제" title="선택삭제" class="hand" onclick="quickBarCheckDel('Cart');" /></span>
+						</div>						
+						<div style="padding-top:5px;"><img src="img/bottom/btn_qbar_sorder.gif" alt="선택주문" title="선택주문" class="hand" onclick="quickBarOrderSec();" /></div>
+						<div style="padding-top:5px;"><img src="img/bottom/btn_qbar_aorder.gif" alt="전체주문" title="전체주문" class="hand" onclick="quickBarOrder();" /></div>
+					</div>
+				</div>
+				</form>
+			</div>		
+			
+			<div id="quickBarWishBox" style="display:none;">
+				<div class="quickBarGoods">					
+					<div class="left" style="width:54px;padding-top:70px;">
+						<div><img src="img/bottom/icon_arrow_prev_off.gif" class="hand" onclick="qWishBoxDiv.scroll('left');" id="qWishBoxDivImgPrev" alt="prev" /></div>
+					</div>
+					<div class="quickBarGoodsList">
+						<div style="height:10px;overflow:hidden;">&nbsp;</div>
+						<div id='qWishBox' style="position:relative;left:0px;top:0px;width:{{qbWishWidth}}px">							
+							<!-- DYNAMIC @loop_qb_wish_goods@ -->
+							<div class="quickBarGoodsBox" id="qBarWish_{{UID}}">
+								<div class="quickBarGoodsBoxImg" onclick="quickBarCheck('Wish',{{UID}})">
+									<div><img src="{{IMAGE}}" alt="{{NAME}}" border="0" width="80" height="80" class="imgBoder" /></div>
+									<div class="quickBarCheckIcon"><img src="img/bottom/icon_check.gif" class="hand" alt="check" style="vertical-align:top" id="quickBarWishCheck_{{UID}}" /></div>
+								</div>
+								<div class="quickBarGoodsBoxName">
+									<a href="{{LINK}}" class="small">{{NAME}}</a>
+								</div>
+								<div class="quickBarGoodsBoxPrice">
+									<div class="num bold">{{PRICE2}}</div>
+								</div>																	
+							</div>
+							<!-- DYNAMIC @loop_qb_wish_goods@ -->		
+							<div class="small quickBarNoGoods" style="display:{{dispqWish}}" id="qBarWish_no">				
+								관심상품에 담긴 상품이 없습니다.
+							</div>
+						</div>
+					</div>
+					<div class="left" style="width:54px;padding-top:70px;">
+						<div><img src="img/bottom/icon_arrow_next_off.gif" class="hand" onclick="qWishBoxDiv.scroll('right');" id="qWishBoxDivImgNext" alt="next" /></div>
+					</div>					
+				</div>
+
+				<div class="quickBarGoodsRight">
+					<div><img src="img/bottom/ttl_qbar_wish.gif" alt="관심상품" title="관심상품" /></div>				
+					<div style="clear:both;height:10px;overflow:hidden;">&nbsp;</div>
+					<div style="height:30px;" class="small gray">
+						<!-- DYNAMIC @qb_login@ -->
+						관심상품은 로그인을 하셔야만<br /> 보실 수 있습니다.								
+						<!-- DYNAMIC @qb_login@ -->
+					</div>
+					<div style="padding-top:49px;">
+						<div style="height:23px;overflow:hidden;">
+							<span><img src="img/bottom/btn_qbar_sall.gif" alt="전체선택" title="전체선택" class="hand" onclick="quickBarCheckAll('Wish');" /></span>
+							<span style="padding-left:2px;"><img src="img/bottom/btn_qbar_sdel.gif" alt="선택삭제" title="선택삭제" class="hand" onclick="quickBarCheckDel('Wish');" /></span>	
+						</div>
+						<div style="padding-top:5px;"><img src="img/bottom/btn_qbar_cart.gif" alt="장바구니담기" title="장바구니담기" class="hand" onclick="quickBarCheckCart('Wish');" /></div>
+					</div>
+				</div>
+
+			</div>		
+		</div>		
+		<div class="quickBarBottom"><img src="img/bottom/qbar_bottom.gif" alt="bottom" /></div>
+	</div>
+</div>
+
+<!-- DYNAMIC @is_fixed_default@ -->
+</center>
+<!-- DYNAMIC @is_fixed_default@ -->
+
+
+<script type="text/javascript">
+<!--
+var ckLogins = "{{CKLOGIN}}";
+rTodayBoxDiv = new itemScroll2('rTodayBox','{{Tcnt}}','3','92');  //객체아이디,총상품수,보여줄상품수,스크롤 거리
+
+qTodayBoxDiv = new quickBarScroll('qTodayBox','{{Tcnt}}','6','100');
+if({{Tcnt}}>6) $('qTodayBoxDivImgNext').src = qTodayBoxDiv.img2.src;
+
+qWishBoxDiv = new quickBarScroll('qWishBox','{{Wcnt}}','6','100');
+if({{Wcnt}}>6) $('qWishBoxDivImgNext').src = qWishBoxDiv.img2.src;
+
+qCartBoxDiv = new quickBarScroll('qCartBox','{{Ccnt}}','6','100');
+if({{Ccnt}}>6) $('qCartBoxDivImgNext').src = qCartBoxDiv.img2.src;
+
+
+var quickBarGoodsWishAdd = '<div class="quickBarGoodsBoxImg" onclick="quickBarCheck(\'[TYPE]\',[UID])"><div><img src="[IMAGE]" alt="[NAME]" border="0" width="80" height="80" class="imgBoder" /></div><div class="quickBarCheckIcon"><img src="img/bottom/icon_check.gif" class="hand" alt="check" style="vertical-align:top" id="quickBar[TYPE]Check_[UID]" /></div></div><div class="quickBarGoodsBoxName"><a href="[LINK]" class="small">[NAME]</a></div><div class="quickBarGoodsBoxPrice"><div class="num bold left">[PRICE2]</div></div>';
+
+var quickBarGoodsCartAdd = '<div class="quickBarGoodsBoxImg" onclick="quickBarCheck(\'[TYPE]\',[UID])"><div><img src="[IMAGE]" alt="[NAME]" border="0" width="80" height="80" class="imgBoder" /></div><div class="quickBarCheckIcon"><img src="img/bottom/icon_check.gif" class="hand" alt="check" style="vertical-align:top" id="quickBar[TYPE]Check_[UID]" /></div></div><div class="quickBarGoodsBoxName"><a href="[LINK]" class="small">[NAME]</a></div><div class="quickBarGoodsBoxPrice"><div class="num bold left" id="quickBarCartPrice_[UID]">[PRICE2]</div><div style="padding-left:10px;" class="num left"><span id="qucilBarCartQty_[UID]">[QTY]</span>EA</div></div><div class="quickBarGoodsBoxOption"><img src="img/bottom/btn_option_change.gif" alt="옵션변경" class="hand" onclick="pLightBox.show(\'php/poption_select.php?uid=[UID]\',\'iframe\',720,340,\'■ 상품옵션변경\',\'20\');" id="quickBarOptionImg1_[UID]" style="display:none" /><img src="img/bottom/btn_option_select.gif" alt="옵션선택" class="hand" onclick="pLightBox.show(\'php/poption_select.php?uid=[UID]\',\'iframe\',720,340,\'■ 상품옵션선택\',\'20\');" id="quickBarOptionImg2_[UID]" style="display:none" /></div><input type="hidden" name="price_[UID]" value="[OPRICE]" /><input type="hidden" name="qty_[UID]" value="[QTY2]" /><input type="hidden" name="option_[UID]" value="[OPTION]" />';
+
+var quickBarGoodsWidth = "100";
+
+//-->
+</script>

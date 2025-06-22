@@ -1,0 +1,271 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>테이블 생성</title>
+<link rel=StyleSheet HREF='dialog.css' type='text/css' title='CSS'>
+
+<script src="dialogComm.js"></script>
+
+<style>
+BODY	{border-style:none;margin:0px;padding:10px;background-color:#EBEAE7}
+</style>
+
+<script>
+
+var Args	= window.opener.dialogArguments;
+var tProps	= Args.arguments;
+
+function Init() {    
+   
+	if (tProps) {
+        tableProp.trows.value = tProps.rows;        
+        tableProp.tcols.value = tProps.cols;
+
+        tableProp.tborder.value = tProps.border;
+        tableProp.tcpad.value = tProps.cellPadding;
+        tableProp.tcspc.value = tProps.cellSpacing;
+		document.getElementById('tbcolor').style.backgroundColor = tProps.bgColor;
+		document.getElementById('tcolor').style.backgroundColor = tProps.borderColor;
+        
+		
+		if(tProps.align=='left') document.all.imgAlign2.className = "imgAlignOn";
+		else if(tProps.align=='right') document.all.imgAlign3.className = "imgAlignOn";
+		else document.all.imgAlign1.className = "imgAlignOn";
+        
+        if (tProps.width) {
+            if (!isNaN(tProps.width) || (tProps.width.substr(tProps.width.length-2,2).toLowerCase() == "px")) {
+			    if (!isNaN(tProps.width)) tableProp.twidth.value = tProps.width;
+			    else  tableProp.twidth.value = tProps.width.substr(0,tProps.width.length-2);
+			    tableProp.twunits.options[0].selected = false;
+			    tableProp.twunits.options[1].selected = true;
+            } else {          
+			    tableProp.twidth.value = tProps.width.substr(0,tProps.width.length-1);
+			    tableProp.twunits.options[0].selected = true;
+			    tableProp.twunits.options[1].selected = false;
+            }
+        }
+        if (tProps.width) {
+            if (!isNaN(tProps.height) || (tProps.height.substr(tProps.height.length-2,2).toLowerCase() == "px")) {
+                if (!isNaN(tProps.height)) tableProp.theight.value = tProps.height;
+                else tableProp.theight.value = tProps.height.substr(0,tProps.height.length-2);
+			    tableProp.thunits.options[0].selected = false;
+			    tableProp.thunits.options[1].selected = true;
+             } else {
+                 tableProp.theight.value = tProps.height.substr(0,tProps.height.length-1);
+			     tableProp.thunits.options[0].selected = true;
+			     tableProp.thunits.options[1].selected = false;
+			 }
+        }
+		if(tProps.align=='left') document.all.imgAlign2.className = "imgAlignOn";
+		else if(tProps.align=='right') document.all.imgAlign3.className = "imgAlignOn";
+		else document.all.imgAlign1.className = "imgAlignOn";
+		tableProp.talign.value=tProps.align;
+
+    } else {        
+        tableProp.trows.value = '3';
+        tableProp.tcols.value = '3';
+		tableProp.tcpad.value = '1';
+		tableProp.tcspc.value = '1';
+        tableProp.tborder.value = '1';
+		document.all.imgAlign1.className = "imgAlignOn";
+    }
+	setColorPicker();
+}
+
+function validateParams() {
+    if (isNaN(parseInt(tableProp.trows.value))) {
+        alert('가로갯수를 입력하세요!');
+        tableProp.trows.focus();
+        return false;
+    }
+    if (isNaN(parseInt(tableProp.tcols.value))) {
+        alert('세로갯수를 입력하세요!');
+        tableProp.tcols.focus();
+        return false;
+    }
+    
+    if (isNaN(parseInt(tableProp.twidth.value)) && tableProp.twidth.value != '') {
+        alert('가로크기는 숫자만 입력하세요!');
+        tableProp.twidth.focus();
+        return false;
+    }
+    if (isNaN(parseInt(tableProp.theight.value)) && tableProp.theight.value != '') {
+        alert('세로크기는 숫자만 입력하세요!');
+        tableProp.theight.focus();
+        return false;
+	}    
+    if (isNaN(parseInt(tableProp.tborder.value)) && tableProp.tborder.value != '') {
+        alert('두께는 숫자만 입력하세요!');
+        tableProp.tborder.focus();
+        return false;
+    }
+    if (isNaN(parseInt(tableProp.tcpad.value)) && tableProp.tcpad.value != '') {
+        alert('셀안쪽 여백은 숫자만 입력하세요!');
+        tableProp.tcpad.focus();
+        return false;
+    }
+    if (isNaN(parseInt(tableProp.tcspc.value)) && tableProp.tcspc.value != '') {
+        alert('셀간격은 숫자만 입력하세요!');
+        tableProp.tcspc.focus();
+        return false;
+    }
+    
+    return true;
+}
+
+function checkCreateTable() {    
+    if (validateParams()) {
+      var tProps = {};
+      tProps.width = (tableProp.twidth.value)?(tableProp.twidth.value + tableProp.twunits.value):'';
+      tProps.height = (tableProp.theight.value)?(tableProp.theight.value + tableProp.thunits.value):'';      
+      tProps.cols = tableProp.tcols.value;
+      tProps.rows = tableProp.trows.value
+      tProps.cellPadding = tableProp.tcpad.value;
+      tProps.cellSpacing = tableProp.tcspc.value;
+
+	  tProps.align = (tableProp.talign.value)?(tableProp.talign.value):'';      
+	  tProps.border = tableProp.tborder.value;
+	  
+	  tProps.borderColor= (document.getElementById('tcolor').style.backgroundColor)? hexColor('tcolor'):'';	  
+	  tProps.bgColor = (document.getElementById('tbcolor').style.backgroundColor)?hexColor('tbcolor'):'';	  
+	  tProps.background=(tableProp.tbimage.value)?tableProp.tbimage.value:'';      
+
+	  if(Args.callback) eval('window.opener.'+Args.callback + '(Args.Editor, tProps,Args.obj)');
+      self.close();	 
+    }
+}
+
+
+function setImgAlignType(sAlign) {
+	document.all.imgAlign1.className = "imgAlign";
+	document.all.imgAlign2.className = "imgAlign";
+	document.all.imgAlign3.className = "imgAlign";
+
+	event.srcElement.className = "imgAlignOn";
+	tableProp.talign.value = sAlign;
+}
+
+
+</script>
+
+
+<body scroll=no onLoad="Init()">
+
+<form name="tableProp" onsubmit="return false">
+
+<fieldset style="width:100%;padding:8px">
+
+<fieldset style="width:100%;padding:8px">
+<legend> 셀 & 크기 & 간격 </legend>
+	<center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+	    <td width=40></td> 
+		<td width=80>가로 갯수</td>
+		<td width=110><input type="text" name="trows" size="5" maxlength="3"></td>
+		<td width=80>세로 갯수</td>
+		<td width=110><input type="text" name="tcols" size="5" maxlength="3"></td>
+	</tr>
+	<tr>
+		<td></td>
+		<td>가로 크기</td>
+		<td>
+		  <input type="text" name="twidth" size="5" maxlength="3">
+		  <select size="1" name="twunits">
+			  <option value="%">%</option>
+			  <option value="px">px</option>
+		  </select>		
+		</td>
+		<td>세로 크기</td>
+		<td>
+		  <input type="text" name="theight" size="5" maxlength="3">
+		  <select size="1" name="thunits">
+			  <option value="%">%</option>
+			  <option value="px">px</option>
+		  </select>		
+		</td>
+	</tr>
+	<tr>
+	    <td></td>
+		<td>셀간격</td>
+		<td><input type="text" name="tcpad" size="5" maxlength="3"></td>
+		<td>셀안쪽 여백</td>
+		<td><input type="text" name="tcspc" size="5" maxlength="3"></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<fieldset style="width:100%;padding:8px">
+<legend> 레이아웃 </legend>
+	<center>
+	<table border=0 cellpadding=5 cellspacing=0 width=100% class=fixed>
+	<input type=hidden name=talign>
+	<tr align=center>
+		<td width=20%></td>
+		<td><img id=imgAlign1 class='imgAlign' onclick="setImgAlignType('newline')" src=../img/imgInsertImageAlignType_newline.png border=0></td>
+		<td><img id=imgAlign2 class='imgAlign' onclick="setImgAlignType('left')" src=../img/imgInsertImageAlignType_left.png border=0></td>
+		<td><img id=imgAlign3 class='imgAlign' onclick="setImgAlignType('right')" src=../img/imgInsertImageAlignType_right.png border=0></td>
+		<td width=20%></td>
+	</tr>
+	<tr align=center>
+		<td></td>
+		<td>줄바꿈</td>
+		<td>왼쪽</td>
+		<td>오른쪽</td>
+		<td></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<fieldset style="width:100%;padding:8px">
+<legend> 테두리 </legend>
+	<center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+	    <td width=20%></td>
+		<td width=40>두께</td>
+		<td width=100><input type="text" name="tborder" size="5" maxlength="3"></td>
+		<td width=40>색상</td>
+		<td width=100><button onclick="cpShow(this)" style="border:0px;width:50px;background-color:#8c8c8c" onfocus="this.blur();" id=tcolor>&nbsp;&nbsp;&nbsp;</button></td>
+		<td width=20%></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<fieldset style="width:100%;padding:8px">
+<legend> 배경 </legend>
+	<center>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+	    <td width=10%></td> 
+		<td width=80>배경색</td>
+		<td width=200><button onclick="cpShow(this)" style="border:0px;width:50px;background-color:#ffffff" onfocus="this.blur();" id=tbcolor>&nbsp;&nbsp;&nbsp;</button></td>				
+	</tr>
+	<tr>
+	    <td></td>
+	    <td width=80>배경이미지</td>
+		<td width=200><input type="text" name="tbimage" size="50"></td>		
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+
+<center>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+	<td height=40 align=right style="padding-right:5px"><button onclick="checkCreateTable()" class='tah11px bold' style="width:80px">OK</button></td>
+	<td style="padding-left:5px"><button style="width:80px" onclick="self.close()" class='tah11px'>CANCEL</button></td>
+</tr>
+</table>
+
+</form>
+</center>
+
+
+</div>
+
+</body>
+</html>

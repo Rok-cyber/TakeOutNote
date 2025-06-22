@@ -1,0 +1,23 @@
+<div id="contents">
+	<section id="headline">
+		<h1>{{CNAME}}</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<div id="cardPay">
+		<p>
+			{{CNAME}} 처리 중 입니다.<br /><br />
+			결제 미완료 일경우 주문내역이 남아 있어 <br />마이페이지 > 주문내역에서 다시 결제를 하실 수 있습니다.
+		</p>
+	</div>
+
+	<div id="rePay">
+		<p class="btn" onclick="window.location.href='{{LINK}}'" title="재결제">재결제</p>
+	</div>
+
+	<div id='payBtn'>
+        <p class="btn" onclick="jsf__pay()" title="확인">확인</p>
+    </div>
+
+	<div id="darks" class="inDarkLayer"></div>
+</div>

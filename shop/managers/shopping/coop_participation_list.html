@@ -1,0 +1,342 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function delSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	
+	if ( cnt <= 0) {
+		alert("삭제할 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		if (window.confirm("삭제시 총 신청수량은 변경되지 않습니다. 정말로 삭제 하시겠습니까?")) {
+			frm.action = "./coop_post.php?{{addstring}}";
+			frm.submit();
+			return;
+		} 
+		else return;
+	}
+}
+
+function delSend2(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	
+	if ( cnt <= 0) {
+		alert("주문취소할 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		if (window.confirm("주문취소시 카드결제건은 CP 관리자 페이지에서 수동으로 처리하시기 바랍니다. 정말로 취소 하시겠습니까?")) {
+			frm.action = "../order/order_post.php?{{addstring}}";
+			frm.mode.value = 'coop_cancel';
+			frm.submit();
+			return;
+		} 
+		else return;
+	}
+}
+
+function chCheck(frm){
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			frm.elements[j].checked = true;
+		}
+	}
+	return false;
+}
+
+function ckEnter(){
+	if(event.keyCode==13) {
+		document.searchForm.submit();
+	}
+}
+//-->
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_coop_participation.gif" alt="공동구매신청리스트" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>해당 상품의 공동구매 신청리스트를 확인 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!-- DYNAMIC @is_gid@ -->
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_coop_goods.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td colspan=2>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">이미지</font></td>
+							<td align=center class=gr_bg><font class="bTitle small">상품명/공구기간</font></td>
+							<td width=10% align=center class=gr_bg><font class="bTitle small">시작/현재가</font></td>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">판매수량</font></td>
+							<td width=7% align=center class=gr_bg><font class="bTitle small">신청수</font></td>
+							<td width=7% align=center class=gr_bg><font class="bTitle small">주문수</font></td>
+							<td width=10% align=center class=gr_bg><font class="bTitle small">성립수량</font></td>							
+						</tr>
+						<tr height=22 bgcolor="#FFFFFF">					
+							<td><a href='{{SMain}}?channel=view&uid={{gid}}' target='_blank' title='쇼핑몰 상세설명 보기'>{{IMAGE}}</a></td>
+							<td align="left" style="padding-left:6px;">
+								<div>
+									<div style="float:left;width:0px;height:54px"></div>
+									<div style="float:left">
+										<div style='padding-top:4px;line-height:120%;overflow:hidden'>{{NAME}}&nbsp{{ICON}}</div>
+										<div style='padding-top:4px;height:16px;overflow:hidden' class="eng bold">
+											{{SDATE}} ~ {{EDATE}}
+										</div>	
+										<div style='float:left;margin-top:4px;height:18px;border:1px solid #ccc;background-color:#fff' class='small'>
+											<div style='padding:4px 8px 0 8px;'>{{STATUS}}</div>
+										</div>
+										<div style='float:left;margin:4px 0 0 8px;height:18px;border:1px solid #ccc;background-color:#fff;' class='small'>
+											<div style='padding:4px 8px 0 8px;'>{{STATUS2}}</div>
+										</div>
+										<div style='float:left;margin:4px 0 0 8px;height:18px;border:1px solid #ccc;background-color:#fff;' class='small'>
+											<div style='padding:4px 8px 0 8px;'>{{STATUS3}}</div>
+										</div>										
+									</div>
+								</div>								
+							</td>
+							<td align=right style="padding-right:6px;line-height:200%">
+								<font class="eng ">{{PRICE}}</font><br />
+								<font class="eng bold">{{COOP_PRICE}}</font><br>
+								<img src='img/icon_point.gif' align='absmiddle'><font class="eng">{{RESERVE}}</font>
+							</td>
+							<td class="small">{{QTY}}</td>
+							<td class="eng">{{CNT}}<font class='small'>건</font></td>
+							<td class="eng"><a href="../order/order_list.php?field=p_number&word={{gid}}" target="_blank" title="주문내역보기">{{ORDER}}<font class='small'>건</font></a></td>
+							<td class="eng">{{SCNT}}건</td>
+						</tr>						
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+     </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+		<div id="sBtn1" style="padding-left:2px;">					
+			<a href="#" onclick="pLightBox.show('coop_send_sms.html?uid={{gid}}','iframe','600','400','■ 공구 신청자 SMS발송',10);return false;"><span class="blue">신청자 SMS발송</span></a>
+			<a href="#" onclick="pLightBox.show('coop_send_mail.html?uid={{gid}}','iframe','600','500','■ 공구 신청자 메일발송',10);return false;"><span class="blue">신청자 메일발송</span></a>			
+		</div>
+	</td>
+</tr>
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_coop_participation.gif" border=0 align=absmiddle></td></tr>
+<!-- DYNAMIC @is_gid@ -->
+<tr><td height=10></td></tr>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="post" action="{{ACTION}}" onsubmit='return false;'>
+		<input type="hidden" name="gid" value="{{gid}}">
+		<tr><td height='6'></td></tr>		
+		<tr>			
+			<td height="28" style="padding-left:10px;">				
+				<div class="boxText small orange">신청상태</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="status">
+						<option value=''>전체</option>
+						<option value='A'>신청완료</option>
+						<option value='B'>주문완료</option>
+						<option value='D'>신청취소</option>
+					</select>					
+				</div>
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+						<option value='id'>회원아이디</option>
+						<option value='cell'>핸드폰</option>
+						<option value='email'>이메일</option>
+						{{OP_GNAME}}
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2" onkeydown="ckEnter();">
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=50%><font class="small">&nbsp;전체 : <font class="eng">{{TOTAL}}</font> 건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지</font></td>
+    <td align=right></td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<!-- DYNAMIC @is_type1@ -->
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<td width=5% align=center class=gr_bg><font class="bTitle small"><a href="#" onclick="return chCheck(document.delForm)" onfocus="this.blur();">√</font></a></font></td>
+							<td width=12% align=center class=gr_bg><font class="bTitle small">신청회원</font></td>		
+							<td align=center class=gr_bg><font class="bTitle small">상품명</font></td>					
+							<td width=11% align=center class=gr_bg><font class="bTitle small">공구가/할인률</font></td>		
+							<td width=7% align=center class=gr_bg><font class="bTitle small">신청수량</font></td>									
+							<td width=15% align=center class=gr_bg><font class="bTitle small">핸드폰/이메일</font></td>									
+							<td width=8% align=center class=gr_bg><font class="bTitle small">신청상태</font></td>		
+							<td width=11% align=center class=gr_bg><font class="bTitle small">신청일</font></td>
+						</tr>
+						<form METHOD=POST name='delForm'>
+						<input type="hidden" name="mode" value="del">
+						<!-- DYNAMIC @loop1@ -->
+						<tr height=36 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=center>{{DEL}}</td>
+							<!-- DYNAMIC @is_man2@ -->							
+							<td align="center">
+								<a href="#" onclick="pLightBox.show('../member/member_crm.php?mid={{ID}}','iframe','700','450','■ {{NAME}}({{ID}}) 회원 CRM',10);return false;" title="CRM보기"><font class="eng">{{ID}}</font> <font class="small">({{NAME}})</font></a>
+							</td>
+							<td align=left class="small" style="padding-left:6px;"><a href="coop_goods_write.php?mode=modify&uid={{GUID}}" title="상품정보수정">{{GNAME}}</a></td>
+							<td align=right class="eng blue" style="padding-right:6px;">{{GPRICE}}<br /><font class='eng'>{{GSALE}}%</font></td>
+							<td align=center class="eng">{{QTY}}</td>
+							<td align=center class="eng">{{CELL}}<br />{{EMAIL}}</td>							
+							<td align=center class="small">
+								<div>{{STATUS}}</div>
+								<!-- DYNAMIC @is_order1@ --><div style='margin-top:4px;'><span style="padding-left:8px;" id='nextIcon' class="hand small" onclick="pLightBox.show('../order/order_view.php?pop=1&order_num={{ORDER_NUM}}','iframe','840','580','■ 주문내역 상세보기',10);return false;">주문내역</span></div><!-- DYNAMIC @is_order1@ -->
+							</td>
+							<td align=center class="eng">{{DATE}}</td>
+						</tr>
+						<!-- DYNAMIC @loop1@ -->
+						<!-- DYNAMIC @is_type1@ -->
+
+						<!-- DYNAMIC @is_type2@ -->
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<td width=5% align=center class=gr_bg><font class="bTitle small"><a href="#" onclick="return chCheck(document.delForm)" onfocus="this.blur();">√</font></a></font></td>
+							<td width=15% align=center class=gr_bg><font class="bTitle small">신청회원</font></td>		
+							<td width=15% align=center class=gr_bg><font class="bTitle small">핸드폰</font></td>		
+							<td align=center class=gr_bg><font class="bTitle small">이메일</font></td>									
+							<td width=10% align=center class=gr_bg><font class="bTitle small">신청수량</font></td>		
+							<td width=12% align=center class=gr_bg><font class="bTitle small">신청상태</font></td>		
+							<td width=15% align=center class=gr_bg><font class="bTitle small">신청일</font></td>
+						</tr>
+						<form METHOD=POST name='delForm'>
+						<input type="hidden" name="mode" value="del">
+						<!-- DYNAMIC @loop2@ -->
+						<tr height=22 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=center>{{DEL}}</td>
+							<!-- DYNAMIC @is_man2@ -->							
+							<td align="center">
+								<a href="#" onclick="pLightBox.show('../member/member_crm.php?mid={{ID}}','iframe','700','450','■ {{NAME}}({{ID}}) 회원 CRM',10);return false;" title="CRM보기"><font class="eng">{{ID}}</font> <font class="small">({{NAME}})</font></a>
+							</td>
+							<td align=center class="eng">{{CELL}}</td>
+							<td align=center class="eng">{{EMAIL}}</td>
+							<td align=center class="eng">{{QTY}}</td>
+							<td align=center class="small">{{STATUS}} <!-- DYNAMIC @is_order2@ --><span style="padding-left:8px;" id='nextIcon' class="hand small" onclick="pLightBox.show('../order/order_view.php?pop=1&order_num={{ORDER_NUM}}','iframe','840','580','■ 주문내역 상세보기',10);return false;">주문내역</span><!-- DYNAMIC @is_order2@ -->							
+							</td>
+							<td align=center class="eng">{{DATE}}</td>
+						</tr>
+						<!-- DYNAMIC @loop2@ -->
+						<!-- DYNAMIC @is_type2@ -->
+
+
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=60>
+							<td align=center colspan=10 bgcolor=#ffffff>신청(검색)된 내역이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+     </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+	<!-- 페이징,검색... start -->
+		<table border = 0 cellspacing=0 cellpadding=0 width=100%>
+		<tr>
+			<td width=40%>
+				<div id="sBtn1" style="padding-left:2px;">					
+					<!-- DYNAMIC @is_man3@ -->
+					<a href="#" onclick="delSend(document.delForm);return false;"><span class="blue">선택 삭제하기</span></a>
+					<a href="#" onclick="delSend2(document.delForm);return false;"><span class="blue">선택 주문취소</span></a>
+					<!-- DYNAMIC @is_man3@ -->
+				</div>          
+			</td>
+			<td align=right id=paging>{{PAGING}}</td>
+		</tr>
+		</table>
+		<!-- 페이징,검색... end -->
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+document.searchForm.status.value = '{{status}}';
+document.searchForm.field.value = '{{field}}';
+document.searchForm.limit.value = '{{limit}}';
+</script>

@@ -1,0 +1,62 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>로그인</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section id="login">
+		<p><strong>"{{BM_NAME}}"</strong>에 오신걸 환영합니다.</p>
+
+		<form name="logForm" method="post" action="{{sMain}}php/login_ok.php">
+		<input type="hidden" name="url" value="{{type}}" />
+		<input type="hidden" name="channel2" value="{{channel2}}" />
+		<input type="hidden" name="num" value="{{num}}" />
+		
+		<div class="loginForm">
+			<fieldset>
+				<legend>로그인 정보 입력</legend>
+				<div class="inputs">	
+					<label><input type="text" name="id" id="id" value="{{S_ID}}" maxlength="20" placeholder="아이디" autocomplete="off" /></label>
+					<label><input type="password" name="passwd" id="passwd" maxlength="16" placeholder="비밀번호" autocomplete="off" /></label>
+					<span><button class="btn" onclick="return ckLoginForm(this.form);">로그인</button></span>
+				</div>
+				<p class="checkboxStyle"><input type="checkbox" name="save_id" value="Y" id="save_id"><label for="save_id" onclick="return;"><span></span> 아이디 저장</label></p>
+				<p class="checkboxStyle"><input type="checkbox" name="auto_in" value="Y" id="auto_in"><label for="auto_in" onclick="return;"><span></span> 로그인 유지</label></p>	
+			</fieldset>			
+		</div>
+		</form>
+			
+		<!-- DYNAMIC @is_guest_order@ -->
+		<div class="guestBtn">
+			<p class="btn" onclick="window.location.href='{{Main}}?channel=order_form{{corder}}';" title="비회원주문하기">비회원주문하기</p>			
+		</div>
+		<!-- DYNAMIC @is_guest_order@ -->
+
+		<!-- DYNAMIC @is_osearch@ -->
+		<div class="guestBtn">
+			<p class="btn" onclick="$('#orderSearch').toggle()" title="비회원주문/배송조회">비회원 주문/배송조회</p>			
+		</div>
+
+		<form name="osearchForm" method="get" action="{{Main}}">
+		<input type="hidden" name="channel" value="osearch" />
+		
+		<div id="orderSearch" class="loginForm hide">
+			<fieldset>
+				<legend>비회원 주문/배송조회 정보 입력</legend>
+				<div class="inputs">	
+					<label><input type="text" name="name" id="name" value="" maxlength="20" placeholder="주문자명" autocomplete="off" /></label>
+					<label><input type="text" name="order_num" id="order_num" maxlength="20" placeholder="주문번호" autocomplete="off" /></label>
+					<span><button class="btn" onclick="return ckoSearch(this.form);">비회원<br />주문/배송조회</button></span>
+				</div>	
+			</fieldset>			
+		</div>
+		</form>
+		<!-- DYNAMIC @is_osearch@ -->
+		
+		<div class="help">회원가입, 아이디, 비밀번호 찾기는 PC버전 {{BM_NAME}}({{BM_URL}})에서 이용하실 수 있습니다.</div>
+
+	</section>
+
+</div>

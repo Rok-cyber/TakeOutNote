@@ -1,0 +1,144 @@
+<script type="text/javascript" src="{{skin}}/listDesign.js"></script>
+<script type="text/javascript" src="lib/lib.moneyBar.js"></script>
+
+<div id="subMain">
+	
+	<div>
+		<div id="subTitle">
+			<img src="img/shop/ttl_new_goods.gif" alt="신상품" title="신상품" />
+		</div>
+	</div>	
+
+	<div style="clear:both;height:20px;">&nbsp;</div>
+
+	<div class="scrollBox3">
+		<div class="top"></div>
+		<div class="content" style="width:909px;padding-top:10px;">		
+			<div style="float:left;width:250px;padding-left:30px;">
+				<div class="small bold orange"></div>
+				<div style="padding-top:6px;" class="small">총 상품수 <font class="num orange">{{TOTAL}}</font>건</div>
+			</div>			
+			<div style="float:left;height:44px;width:600px;">
+				<div style="position:relative;float:left;width:370px;">
+					<div id="pmoneyBarDiv"></div>
+				</div>
+				<!-- DYNAMIC @is_sec_mon@ -->
+				<div class="left small green">선택한조건 : <font class="num">{{SEC_MON}}</font> <a href="{{Main}}?channel=new" onfocus="this.blur();"><img src="img/common/icon_x.gif" border="0" align="absmiddle" alt="선택해제" /></a></div>
+				<!-- DYNAMIC @is_sec_mon@ -->					
+			</div>				
+		</div>
+		<div class="bottom"></div>
+	</div>	
+
+	<form name="moneySeatch" method="get" action="{{Main}}">
+	<input type="hidden" name="channel" value="new" />
+	<input type="hidden" name="mo1" />
+	<input type="hidden" name="mo2" />
+	<input type="hidden" name="order" value="{{order}}" />
+	<input type="hidden" name="limit" value="{{limit}}" />
+	</form>
+
+	<script language="javascript">
+	<!--
+	pmoneyBar.show("pmoneyBarDiv","rtnValue","{{skin}}/","216","{{MaxMoney}}");
+	// -->
+	</script>
+
+
+	<div id="list" style="margin-top:20px;">	
+		<div id="list_top">
+			<div id='order_uid' class="tab_on small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('uid',1);">신상품순</a></div>
+			<div id='order_best' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('best',1);">인기상품순</a></div>
+			<div id='order_price' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('price',1);">낮은 가격순</a></div>
+			<div id='order_price2' class="tab_off small"><a href="#" onfocus="this.blur();" onclick="return getLists.cgOrder('price2',1);">높은 가격순</a></div>
+			
+			<div class="right">
+				<form name="limitForm">								
+				<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+				<div id='limitBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px; text-align:left;" class='left'></div>
+				<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+				<script type="text/javascript">
+				<!--
+					limitBoxs = new selectBox('limitBox','','{{Main}}','4');
+					limitBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+					limitBoxs.img1.src = 'img/common/icon_select_down2.gif';
+					limitBoxs.img2.src = 'img/common/icon_select_up2.gif';
+					{{LIMIT_OPTION2}}
+					limitBoxs.show('cate');
+					limitBoxs.secNum = {{SEC_LIMIT}};
+					limitBoxs.mout();
+				// -->
+				</script>									
+				</form>
+			</div>			
+
+			<div class="right">
+				<a href="#" onfocus="this.blur();" onclick="return getLists.cgType('img',1)"><img src="img/common/icon_img_off.gif" align="absmiddle" alt='이미지형' title='이미지형' id="imgof_img" /></a>
+			</div>
+			<div class="right">
+				<a href="#" onfocus="this.blur();" onclick="return getLists.cgType('list',1)"><img src="img/common/icon_list_on.gif" align="absmiddle" alt='리스트형' title='리스트형' id="imgof_list" /></a>
+			</div>	
+		</div>
+		
+		<form name="listForm">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col />
+			<col width="120" /> 
+			<col width="120" />        			
+            <thead>
+            <tr height="28">
+                <th scope="col" class="small black">상품명</th>
+				<th align="right" scope="col" class="small black">가격/적립금</th>
+				<th scope="col" class="small black">상품평</th>
+            </tr>
+			</thead>
+			
+			<tbody id="list_table"></tbody>
+			<!-- id:listTable 에 리스트가 나옵니다. -->
+			</table>
+		</div>
+
+		<div id="list_img" style="display:none">						
+			<!-- id:lis_img 에 이미지가 나옵니다. -->
+		</div>	
+		</form>
+		
+		<!-- DYNAMIC @no_loop@ -->
+		<div>
+			<img src="img/shop/no_goods3.gif" alt="상품이 없습니다" />
+		</div>
+		<!-- DYNAMIC @no_loop@ -->
+
+	</div>
+
+	<div style='clear:both;'>
+	    <div style="height:10px;">&nbsp;</div>
+		<div style='clear:both;text-align:left;'>
+			<img src="img/shop/btn_compare.gif" class="hand" onclick="secCompare();return false;" alt="선택상품 비교하기" />
+			<img src="img/shop/btn_cart_all.gif" class="hand" onclick="cartPost();return false;" alt="선택상품 장바구니담기" />
+		</div>
+		<div id="paging" class="small" style=""></div>
+	</div>
+	
+	<div style="height:20px"></div>		
+</div>
+
+<script type="text/javascript">
+<!--
+
+getLists = new getList('{{limit}}','list','uid','{{TOTAL}}','{{Pstart}}','{{ajaxstring}}');
+getLists.display();
+aPage = new ajaxPaging('aPage','paging',getLists,'{{TOTAL}}','{{limit}}','10');
+<!-- DYNAMIC @is_page@ -->
+aPage.page={{page}};
+<!-- DYNAMIC @is_page@ -->
+aPage.makePage();
+aPage.printPage();
+
+getLists.cgOrder('{{order}}');
+
+checkCookieVar();
+
+// -->
+</script>

@@ -1,0 +1,101 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+	if(!form.location.value) {
+		alert('페이지 제목을 입력하세요.');
+		form.location.focus();
+		 return false;
+	}
+	
+	form.html.value = html.getHtml();
+	if(!form.html.value) {
+		alert('페이지 코드를 입력히세요.');
+		html.focus();
+		return false;
+	} 
+
+	form.submit();
+	return false;
+}
+/-->
+</script>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<table width=100% border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/write_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}" onsubmit='return ckIt();'>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;페이지 제목</font></div></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=location value='{{FORM1}}' size=80></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;Left Menu</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;
+								<select name='leftmenu'>
+									<option value=''>사용안함</option>
+									<option value='1'>고객센터</option>
+									<option value='2'>메인분류</option>
+									<option value='3'>마이페이지</option>
+								</select>								
+								&nbsp;&nbsp;<font class="small">선택된 좌측메뉴가 나타나게 합니다. 사용시 가로사이즈를 메뉴사이즈 만큼 줄이시기 바랍니다.</font>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;게시판 연결</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;
+								<select name='board'>
+									<option value=''>연결안함</option>
+									{{BOARD}}
+								</select>
+								&nbsp;&nbsp;<font class="small">연결할 게시판을 선택 하시기 바랍니다(게시판 관리에서 추가 하시면 됩니다.)</font>
+							</td>
+						</tr>
+						<tr height=120> 							
+							<td bgcolor="#FFFFFF" colspan=2>
+								<textarea name="html" id="html">{{FORM4}}</textarea>
+								<script>var html = new pEditor("html","../../pEdit","762","250","{{up_dir}}","basic","hide"); //에디터 생성</script>
+							</td>
+						</tr>
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 페이지 내용을 넣으실때 가로 사이즈는 <font class=eng>{{SZ}}px</font> 이하로 작업 하시기 바랍니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>							 
+						</tr>				
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=30></td></tr>
+</table>
+
+<script LANGUAGE="JavaScript">
+<!--
+document.signForm.leftmenu.value = '{{FORM2}}';
+pE[0] = html;
+//-->
+</script>

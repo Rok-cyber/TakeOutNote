@@ -1,0 +1,189 @@
+<div id="contents">
+	<section id="headline">
+		<h1>장바구니</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section>
+		<!-- DYNAMIC @is_list@ -->		
+		<form name="cartForm" method="post" action="php/cart_ok.php" onsubmit="return false;">
+		<input type="hidden" name="type" />
+		<input type="hidden" name="p_uid" />
+		<input type="hidden" name="p_qty" />
+		<input type="hidden" name="p_option" />
+		<input type='hidden' name='ckLogin' value='{{CKLOG}}' />
+	
+		<section id="cartList">
+			<h2>장바구니상품목록</h2> 
+			<div class="cartListTop">&nbsp;</div>
+			<!-- DYNAMIC @loop_cart@ -->
+			<!-- DYNAMIC @is_cart_sum@ -->
+			<div class="cartListSum">
+				<p>
+					{{VENDOR}} 
+					<span>
+					<!-- DYNAMIC @is_vendor_carr11@ -->
+					({{VENDOR_CARR1}}원 미만 배송비 <strong>{{VENDOR_CARR2}}</strong>원)
+					<!-- DYNAMIC @is_vendor_carr11@ -->
+					<!-- DYNAMIC @is_vendor_carr12@ -->
+					(배송비 무료)
+					<!-- DYNAMIC @is_vendor_carr12@ -->
+					</span>
+				</p>
+				<p>
+					배송비 : <strong>{{VENDOR_CARR}}</strong>원, 총합계금액 : <strong>{{VENDOR_TOTAL}}</strong>원
+				</p>
+			</div>
+			<div class="cartListTop2">&nbsp;</div>
+			<!-- DYNAMIC @is_cart_sum@ -->
+			<div class="cartListbox">
+				<div class="cartCheck">
+					<p class="checkboxStyle"><input type="checkbox" name="item[]" value="{{UID}}" id="ckbox{{TCNT}}"><label for="ckbox{{TCNT}}" onclick="return;"><span></span></label></p>
+				</div>
+				<div class="cartInfo">
+					<div class="item_box">
+						<a href="{{LINK}}" title="상품상세보기">
+							<div class="thumbnail"><img src="{{OIMAGE}}" alt="상품이미지" /></div>
+							<div class="item_info">
+								<p class="goods" title="상품명">{{NAME}}</p>						
+								<!-- DYNAMIC @is_my_carr@ -->
+								<span>배송비 {{CARR}}원 별도상품</span>
+								<!-- DYNAMIC @is_my_carr@ -->
+								<!-- DYNAMIC @is_my_free@ -->
+								<span>배송비 무료상품</span>
+								<!-- DYNAMIC @is_my_free@ -->
+								<span><a href="{{Main}}?channel=option_select&uid={{UID}}"><img src="img/common/btn_option_change.gif" alt="선택사항변경" /></a></span>
+							</div>
+						</a>
+					</div>
+					<!-- DYNAMIC @is_op@ -->
+					<div class="options">
+						<!-- DYNAMIC @loop_op@ -->
+						<p><span>{{OP_NAME}}</span> <span>{{OP_SEC_VLS}}</span></p>
+						<!-- DYNAMIC @loop_op@ -->
+					</div>
+					<!-- DYNAMIC @is_op@ -->
+
+					<table summary="상품구매정보">
+					<col width="40%" /> 
+					<col width="60%" />
+					<tbody>
+					<tr>
+						<th>상품금액</th>
+						<td>{{PRICE}}원</td>
+					</tr>
+					<tr>
+						<th>상품수량</th>
+						<td>{{QTY}}개</td>
+					</tr>
+					<tr>
+						<th>적립금</th>
+						<td>{{RESE}}원</td>
+					</tr>
+					<tr>
+						<th>합계금액</th>
+						<td><strong>{{SUM}}</strong>원</td>
+					</tr>
+					<tbody>
+					</table>
+				
+					<ul>
+						<li><p class="active" onclick="ordPost({{UID}})" title="주문하기">주문하기</p></li>
+						<li>&nbsp;</li>
+						<li><p class="active" onclick="delPost({{UID}})" title="삭제">삭제</p></li>
+					</ul>
+				</div>
+			</div>
+			<!-- DYNAMIC @loop_cart@ -->
+			<!-- DYNAMIC @is_cart_sum2@ -->
+			<div class="cartListSum">
+				<p>
+					{{VENDOR}} 
+					<span>
+					<!-- DYNAMIC @is_vendor_carr21@ -->
+					({{VENDOR_CARR1}}원 미만 배송비 <strong>{{VENDOR_CARR2}}</strong>원)
+					<!-- DYNAMIC @is_vendor_carr21@ -->
+					<!-- DYNAMIC @is_vendor_carr22@ -->
+					(배송비 무료)
+					<!-- DYNAMIC @is_vendor_carr22@ -->
+					</span>
+				</p>
+				<p>
+					배송비 : <strong>{{VENDOR_CARR}}</strong>원, 총합계금액 : <strong>{{VENDOR_TOTAL}}</strong>원
+				</p>
+			</div>
+			<!-- DYNAMIC @is_cart_sum2@ -->
+
+			<ul>
+				<li><p class="active" onclick="cartSecPost('corder')" title="선택상품주문">선택상품주문</p></li>
+				<li>&nbsp;</li>
+				<li><p class="active" onclick="cartSecPost('cdel')" title="선택상품삭제">선택상품삭제</p></li>
+			</ul>
+		</section>				
+
+		<section id="cartSum">
+			<table summary="상품결제예정금액">
+			<col width="40%" /> 
+			<col width="60%" />
+			<tbody>
+			<tr>
+				<th>총 상품금액</th>
+				<td>{{TOTAL}}원</td>
+			</tr>
+			<tr>
+				<th>총 배송비</th>
+				<td>{{TCARR}}원</td>
+			</tr>
+			<tr>
+				<th>결제예정금액</th>
+				<td><strong>{{TOTAL2}}</strong>원</td>
+			</tr>
+			<tbody>
+			</table>							
+		</section>
+
+		<section id="cartBtn">
+			<p class="btn" onclick="orderPost()" title="전체상품주문">전체상품주문</p>
+		</section>
+
+		<section id="cartHelp">
+			<p>회원일경우 로그인을 하시면 이전에 장바구니에 담긴 상품이 그대로 남아 있습니다.</p>
+		</section>
+		
+		</form>		
+		<!-- DYNAMIC @is_list@ -->
+
+		<!-- DYNAMIC @no_cart@ -->	
+		<section id="noContent">
+			<p>! 장바구에 담긴 상품이 없습니다.</p>
+		</section>
+		<!-- DYNAMIC @no_cart@ -->
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<script type="text/javascript">
+<!--
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentHeight = $(document).height();
+	
+	if(scrollHeight<documentHeight) {
+		$("#contentMore").show();	
+	}
+
+	if(typeof(document.cartForm)!='undefined') {
+		if(document.cartForm.ckLogin.value=='Y') $("#cartHelp").hide();
+	}
+ -->
+</script>

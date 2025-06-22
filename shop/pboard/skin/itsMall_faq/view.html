@@ -1,0 +1,193 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<div id="pb_sub">
+	
+	<div id="pb_search_box" style="height:36px;">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="5" />
+			<col />
+			<col width="200" />
+			<col width="5" />
+			<tbody>
+			<tr>
+				<td><img src="img/box_search_left.gif" alt='' /></td>
+				<td align="left" style="padding-left:6px;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4" class="pb_default">{{SUBJECT}}</td>
+				<td align="right" style="padding-top:2px;border-top:1px solid #e4e4e4;border-bottom:1px solid #e4e4e4">					
+					<font class="pb_eng">{{D_YYYY}}-{{D_MM}}-{{D_DD}} {{D_AP}} {{D_HH}}:{{D_II}}&nbsp;</font>
+				</td>
+				<td><img src="img/box_search_right.gif" alt='' /></td>
+			</tr>
+			</tbody>
+		</table>		
+	</div>	
+
+	<!-- DYNAMIC @is_slink@ -->
+	<div class="pb_write_area" style="margin-top:4px;">		
+		<div style="float:right;">
+			<a href="{{SLINK}}" target="_blank" class="pb_link pb_default">{{SLINK}}</a>
+		</div>
+	</div>
+	<!-- DYNAMIC @is_slink@ -->
+
+	<!-- DYNAMIC @is_pds@ -->
+	<div class="pb_write_area" style="margin-top:4px;">		
+		<div style="float:right;">
+			<!-- DYNAMIC @pds_loop@ -->
+			{{FDOT}}<a href="{{FLINK}}" class="pb_link pb_default pb_small">{{FILE}}</a>&nbsp;<font class="pb_eng">({{FSIZE}})</font>
+			<!-- DYNAMIC @pds_loop@ -->
+			&nbsp;&nbsp;<font class="pb_eng">Down : {{DOWN}}</font>			
+		</div>
+	</div>
+	<!-- DYNAMIC @is_pds@ -->
+
+	<div class="pb_write_area2 clearfix" style="border:0px;">
+	    <div style="float:left;height:150px;"></div>
+	    
+		<!-- DYNAMIC @is_mlink@ --><p style="margin-top:10px">{{MLINK}}</p><!-- DYNAMIC @is_mlink@ -->
+		<!-- DYNAMIC @is_img@ --><p style="margin-top:10px">{{IMAGE}}</p><!-- DYNAMIC @is_img@ -->
+		<div style="float:left;padding:5px" class="pb_default">
+			<font class="pb_lh15;">{{COMMENT}}</font>
+		</div>
+	</div>
+
+	<div style="margin:20px 0 20px;border-top:1px solid #EEE;padding-top:10px;">
+		<div id="sBtn2"  style="float:right">
+			<a href="{{Main}}{{addstring}}"><span>목록보기</span></a>
+			<a href="{{LINK4}}"><span>등록하기</span></a>
+		</div>	
+		<div id="sBtn3" style="float:right">
+			<!-- DYNAMIC @is_modify@ -->			
+			<a href="{{LINK2}}"><span>수정하기</span></a>
+			<a href="{{LINK3}}"><span>삭제하기</span></a>
+			<!-- DYNAMIC @is_modify@ -->
+		</div>				
+	</div>
+	<div style="clear:both;height:20px"></div>
+
+
+	<!-- DYNAMIC @is_memo@ -->
+	<!-- 댓글 시작 -->
+
+    <!-- DYNAMIC @mloop@ -->
+	
+	<div class="pb_write_area2" style="border-top:1px solid #EEE">		
+		<div style="float:left">
+			<font class="pb_bold pb_default">{{MNAME}}</font>&nbsp; <font class="pb_eng">({{MDATE}})</font>
+		</div>
+		<div style="float:right;">
+			<!-- DYNAMIC @is_user@ -->
+			<a href="{{MDEL}}" id="nextIcon" class="pb_small pb_link">삭제</a>
+			<!-- DYNAMIC @is_user@ -->
+		</div>
+	</div>
+
+	<div class="pb_write_area" style="border:0px;overflow:hidden;height:100%;">
+		<font class="pb_lh15 pb_default">{{MCOMMENT}}</font>
+	</div>	
+	<!-- DYNAMIC @mloop@ -->
+
+    <!-- DYNAMIC @is_mwrite@ -->
+	<p style="margin:10px"></p>
+	
+	<form name="comform" method="post" onsubmit="return checkItme();" action="{{MACTION}}">
+    <input type="hidden" name="Main" value="{{Main}}">
+	<input type="hidden" name="ck_w" />
+	<input type="hidden" name="ck_w2" />
+
+	<div style="height:120px; background:url(img/box_memo_bg.gif) repeat-x">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="5" />
+			<col />
+			<col width="4" />
+			<col width="82" />			
+			<col width="5" />
+			<tbody>
+			<tr>
+				<td rowspan="2"><img src="img/box_memo_left.gif" alt='' /></td>
+				<td align="left" valign="top">
+					<div class="pb_write_area2" style="height:27px;">
+						<!-- DYNAMIC @is_mname1@ -->
+						<div class="pb_write_title2 pb_small pb_bold" style="padding-top:6px;">이름</div>
+						<div class="pb_default" style="padding-top:6px;">{{my_name}}</div>
+						<input type="hidden" name="meid" value="{{my_id}}" />						
+						<!-- DYNAMIC @is_mname1@ -->
+						<!-- DYNAMIC @is_mname2@ -->
+						<div class="pb_write_title2 pb_small pb_bold" style="padding-top:4px;">이름</div>
+						<div style="float:left"><input  type="text" name="mename" class="pb_ip2" maxlength="30" /></div>
+						<div class="pb_write_title2 pb_small pb_bold" style="padding-top:4px;">비밀번호</div>
+						<div style="float:left"><input  type="password" name="mepasswd" class="pb_ip2" maxlength="20" /></div>
+						<!-- DYNAMIC @is_mname2@ -->
+						<div style="clear:both;height:5px;overflow:hidden"></div>
+					</div>
+
+					<table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:82px; background:url(img/box_memo2_bg.gif)">
+						<col width="5" />
+						<col width="99%" />
+						<col width="5" />
+						<tbody>
+						<tr>
+							<td><img src="img/box_memo2_left.gif" alt='' /></td>
+							<td align="left">
+								<textarea class="pb_default" name="mecomment"  style="width:99%; height:60px;border:0px;overflow:auto"></textarea>
+							</td>								
+							<td><img src="img/box_memo2_right.gif" alt='' /></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+				<td></td>
+				<td valign="top">
+					<div style="height:32px"></div>
+					<table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:82px; background:url(img/box_memo2_bg.gif);">
+						<col width="5" />
+						<col />							
+						<col width="5" />
+						<tbody>
+						<tr>
+							<td><img src="img/box_memo2_left.gif" /></td>
+							<td align="center" class="pb_small pb_bold hand" onclick="return checkItme(1);">
+								입력<br />하기
+							</td>								
+							<td><img src="img/box_memo2_right.gif" alt='' /></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+				<td rowspan="2"><img src="img/box_memo_right.gif" alt='' /></td>
+			</tr>
+			</tbody>
+		</table>		
+	</div>	
+
+	</form>
+	<!-- DYNAMIC @is_mwrite@ -->
+
+    <!-- @댓글 끝 -->
+	<!-- DYNAMIC @is_memo@ -->
+
+    	<!-- DYNAMIC @is_prev@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title"><font class="pb_eng">prev</font></div>
+		<div class="pb_write_input" style="background:url(img/bar2.gif) no-repeat;">
+			<a href="{{PLINK}}" class="pb_link pb_default">{{PSUBJECT}}</a>
+		    <!-- DYNAMIC @is_pmcnt@ --><font class="pb_eng">*{{PMEMOCNT}}</font><!-- DYNAMIC @is_pmcnt@ -->
+			&nbsp;({{PNAME}})
+		</div>
+	</div>
+	<!-- DYNAMIC @is_prev@ -->
+
+	<!-- DYNAMIC @is_next@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title"><font class="pb_eng">next</font></div>
+		<div class="pb_write_input" style="background:url(img/bar2.gif) no-repeat;">
+			<a href="{{NLINK}}" class="pb_link pb_default">{{NSUBJECT}}</a>
+		    <!-- DYNAMIC @is_nmcnt@ --><font class="pb_eng">*{{NMEMOCNT}}</font><!-- DYNAMIC @is_nmcnt@ -->
+			&nbsp;({{NNAME}})
+		</div>
+	</div>
+	<!-- DYNAMIC @is_next@ -->
+
+</div>
+<!-- Writed IP : {{IP}} -->

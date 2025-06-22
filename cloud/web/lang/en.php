@@ -1,0 +1,33 @@
+<?php
+$lng = array(
+	'login' => 'Log-in', 
+	'betaservice' => 'Beta Service', 
+	'group' => 'Group', 
+	'list' => 'List', 
+	'regdate' => 'Date Registration', 
+	'lastupdate' => 'LastUpdate', 
+	'search' => 'Search', 
+	'usage' => 'Usage', 
+	'mypage' => 'My info', 
+	'logout' => 'Logout', 
+	'filename' => 'Filename', 
+	'moddate' => 'Date Modified', 
+	'note' => 'Note', 
+	'urlcopy' => 'Copy Url', 
+	'storetime' => 'Date Stored', 
+	'location' => 'Location', 
+	'alarm' => 'Alarm', 
+	'save' => 'Save', 
+	'result' => 'Result', 
+	'capacity' => 'Capacity', 
+	'notesetpublic' => 'Note has been set to public.\nGuest user can access this note from URL.', 
+	'notesetprivate' => 'Note has been set to private.\nGuest user cannot access this note.',
+	'extrasetpublic' => 'This info has been set to public.', 
+	'extrasetprivate' => 'This info has been set to private.', 	
+	'replydeleteconfirm' => 'If you can not recover deleted.\r\nAre you sure?', 	
+	'alert_private' => 'The private note', 	
+	'fail' => 'Failed', 
+	'user' => 'User', 
+	'password' => 'Password'
+);
+?>

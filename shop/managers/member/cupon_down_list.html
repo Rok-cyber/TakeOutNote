@@ -1,0 +1,451 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+var tmp_slevel = new Array();
+var tmp_smem = new Array();
+
+function ckForm() {      
+	f=document.signForm;
+	
+	if(f.range[1].checked==true) {
+		for(i=0;i<tmp_slevel.length;i++){
+			if(tmp_slevel[i]!='') {
+				if(!f.slevel.value) f.slevel.value = tmp_slevel[i];
+				else f.slevel.value = f.slevel.value + '|' + tmp_slevel[i];
+			}
+		}
+
+		if(!f.slevel.value) {
+			alert("등급을 추가 하시기 바랍니다");
+			return false;
+		}
+	}
+	else if(f.range[2].checked==true) {
+		for(i=0;i<tmp_smem.length;i++){
+			if(tmp_smem[i]!='') {
+				if(!f.smem.value) f.smem.value = tmp_smem[i];
+				else f.smem.value = f.smem.value + '|' + tmp_smem[i];
+			}
+		}
+		
+		if(!f.smem.value) {
+			alert("회원을 추가 하시기 바랍니다");
+			return false;
+		}
+
+	}
+}
+
+function delSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	
+	if ( cnt <= 0) {
+		alert("삭제할 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		if (window.confirm("쿠폰삭제시 회원에게 이미 발급된 쿠폰도 함께 삭제 됩니다. 정말로 삭제 하시겠습니까?")) {
+			frm.action = "./cupon_post.php?{{addstring}}";
+			frm.submit();
+			return;
+		} 
+		else return;
+	}
+}
+
+function chCheck(frm){
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			frm.elements[j].checked = true;
+		}
+	}
+	return false;
+}
+
+function secLevel(){
+	f = document.signForm;
+	cList = document.getElementById("levelList");
+	cnt = tmp_slevel.length;
+
+	for(i=0;i<cnt;i++) {
+		if(tmp_slevel[i]==f.level.value) {
+			alert('이미 선택하신 등급 입니다.');
+			return false;
+		}		
+	}
+	
+	cName = f.level[f.level.selectedIndex].text;
+	cName = cName + '&nbsp;&nbsp;<img src="img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delLevel('+f.level.value+');" />';
+
+	var nList = document.createElement("div");
+	nList.id = "list_"+f.level.value;	
+	if(document.all) nList.style.styleFloat = 'left';
+	else nList.style.cssFloat = 'left';
+
+	nList.style.height = '18px';
+	nList.className = 'small';
+	nList.style.padding = '6px 10px 0 6px';
+	nList.innerHTML = cName;
+    
+	cList.appendChild(nList);
+	cnts = cList.childNodes.length;
+	
+	tmp_slevel[cnt] = f.level.value;
+
+	f.range[1].checked = true;
+	if(cnts==1) cList.style.display = 'block';
+	return false;
+}
+
+function delLevel(num) {
+	if(!num) return;
+	cList = document.getElementById("levelList");
+	element = document.getElementById('list_'+num);
+
+	element.innerHtml ='';
+	cList.removeChild(element);
+	
+	if(document.selection) var cnt = cList.childNodes.length;
+	else var cnt = cList.childNodes.length -2;
+	
+	for(i=0;i<tmp_slevel.length;i++){
+		if(tmp_slevel[i]==num) tmp_slevel[i]='';
+	}
+        
+	if(cnt==0) {			
+		cList.style.display='none';	
+	}		
+}
+
+function secMem(str){
+	f = document.signForm;
+	mList = document.getElementById("memList");
+	cnt = tmp_smem.length;
+
+	str = str.split("|*|");
+	scnt = str.length;
+
+	for(j=0;j<scnt;j++) {
+		tmps = str[j].split('|');
+		for(i=cks=0;i<cnt;i++) {
+			if(tmp_smem[i]==tmps[0]) {
+				cks = 1;
+				break;
+			}		
+		}
+		if(cks==1) continue;
+	
+		cName = tmps[0] + ' (' + tmps[1] + ')';
+		cName = cName + '&nbsp;&nbsp;<img src="img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delMem(\''+ tmps[0] +'\');" />';
+
+		var nList = document.createElement("div");
+		nList.id = "list_"+ tmps[0];
+		if(document.all) nList.style.styleFloat = 'left';
+		else nList.style.cssFloat = 'left';
+
+		nList.style.height = '18px';
+		nList.className = 'small';
+		nList.style.padding = '6px 10px 0 6px';
+		nList.innerHTML = cName;
+		
+		mList.appendChild(nList);
+		cnts = mList.childNodes.length;
+		
+		tmp_smem[cnt] = tmps[0];
+
+		f.range[2].checked = true;
+		if(cnts==1) mList.style.display = 'block';
+	}
+}
+
+function delMem(num) {
+	if(!num) return;
+	mList = document.getElementById("memList");
+	element = document.getElementById('list_'+num);
+
+	element.innerHtml ='';
+	mList.removeChild(element);
+	
+	if(document.selection) var cnt = mList.childNodes.length;
+	else var cnt = mList.childNodes.length -2;
+	
+	for(i=0;i<tmp_smem.length;i++){
+		if(tmp_smem[i]==num) tmp_smem[i]='';
+	}
+        
+	if(cnt==0) {			
+		mList.style.display='none';	
+	}		
+}
+//-->
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_cupon_list.gif" alt="쿠폰발급리스트" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>회원에게 발급된 쿠폰 리스트를 확인 하거나 회원에게 쿠폰을 발급 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!-- DYNAMIC @is_pid@ -->
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_scupon.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td colspan=2>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td align=center class=gr_bg><font class="bTitle small">쿠폰명</font></td>
+							<td width=12% align=center class=gr_bg><font class="bTitle small">쿠폰방식</font></td>		
+							<td width=10% align=center class=gr_bg><font class="bTitle small">할인금액(율)</font></td>		
+							<td width=20% align=center class=gr_bg><font class="bTitle small">적용기간</font></td>		
+							<td width=9% align=center class=gr_bg><font class="bTitle small">수량</font></td>		
+							<td width=9% align=center class=gr_bg><font class="bTitle small">발급된수</font></td>		
+							<td width=10% align=center class=gr_bg><font class="bTitle small">등록일</font></td>
+						</tr>
+
+						<tr height=22 bgcolor="#FFFFFF">					
+							<td align="left" style="padding-left:6px;">{{NAME}}</td>
+							<td align=center class="small">{{TYPE}}</td>
+							<td align=center class="eng">{{SALE}}{{STYPE}}</td>
+							<td align=center class="eng">{{DATES}}</td>
+							<td align=center>{{QTY}}</td>
+							<td align=center><font class="eng">{{CNTS}}</font>건</td>
+							<td align=center class=eng>{{DATE}}</td>
+						</tr>						
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+     </td>
+</tr>
+<!-- DYNAMIC @is_pid@ -->
+<!-- DYNAMIC @is_pid2@ -->
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_swrite.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td colspan=2>
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%">
+						<form name="signForm" method="post" action="cupon_post.php" onsubmit="return ckForm();">
+						<input type="hidden" name="mode" value="member">
+						<input type="hidden" name="pid" value="{{pid}}">
+						<tr height=30> 							
+							<td bgcolor="#EFEFEF" width=100% style="padding:6px 0 0 6px" align=left>
+								<div><input type=radio name=range value='1' checked> 전체 회원 발급</div>								
+								
+								<div style='margin-top:4px;' id="cateDiv">
+									<div style="float:left;padding-right:10px;">
+										<input type=radio name=range value='2'> 특정 등급 발급
+									</div>	
+
+									<div style='float:left'>
+										<input type="hidden" name="slevel">										
+										<font class="small bold">등급선택 : </font>										
+										<select name="level">{{LEVEL}}</select>										
+									</div>
+										
+									<div id="sBtn1" style="float:left;padding-left:4px;">
+										<a href="#" onclick="return secLevel();"><span class="green">추가하기</span></a>	
+									</div>	
+									<div style='clear:both;height:8px;overflow:hidden;'>&nbsp;</div>
+									<div id="levelList" style='width:600px;border:1px solid #dadada; background-color:#FFF;display:none;' class="clearfix"></div>
+								</div>
+								
+								<div style='margin:4px 0 4px 0;clear:both;float:left'>
+									<div style="float:left;padding-right:10px;">
+										<input type=radio name=range value='3'> 특정 회원 발급
+										<input type="hidden" name="smem">
+									</div>
+									<div id="sBtn1" style="float:left;padding:0 0 0 4px;">
+										<a href="#" onclick="pLightBox.show('../member/search_member.php?type=1','iframe','420','320','■ 화원 찾기',10);return false;"><span class="green">회원검색하기</span></a>	
+									</div>
+									<div style='clear:both;height:8px;overflow:hidden;'>&nbsp;</div>
+									<div id="memList" style='width:600px;border:1px solid #dadada; background-color:#FFF;padding:2px;display:none;' class="clearfix"></div>		
+								</div>
+								<div style="float:right;padding:0 20px 8px;"><input type="image" src='img/btn_cupon.gif' border='0' /></div>
+							</td>
+						</tr>
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+     </td>
+</tr>
+<!-- DYNAMIC @is_pid2@ -->
+<tr><td height=10></td></tr>
+<tr><td><img src="img/ttl_slist.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="post" action="{{ACTION}}" onsubmit='return false;'>
+		<input type="hidden" name="pid" value="{{pid}}">
+		<tr><td height='6'></td></tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">				
+				<div class="boxText small orange">쿠폰상태</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="status">
+						<option value=''>전체</option>
+						<option value='A'>발급완료</option>
+						<option value='B'>사용완료</option>
+						<option value='C'>기간만료</option>
+					</select>					
+				</div>
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+						<option value='name'>쿠폰명</option>
+						<option value='id'>회원아이디</option>
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2">
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=50%><font class="small">&nbsp;전체 : <font class="eng">{{TOTAL}}</font> 건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지</font></td>
+    <td align=right></td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=5% align=center class=gr_bg><font class="bTitle small"><a href="#" onclick="return chCheck(document.delForm)" onfocus="this.blur();">√</font></a></font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td align=center class=gr_bg><font class="bTitle small">쿠폰명</font></td>
+							<td width=15% align=center class=gr_bg><font class="bTitle small">발급받은회원</font></td>		
+							<td width=15% align=center class=gr_bg><font class="bTitle small">쿠폰상태</font></td>		
+							<td width=13% align=center class=gr_bg><font class="bTitle small">사용일</font></td>		
+							<td width=13% align=center class=gr_bg><font class="bTitle small">발급일</font></td>
+						</tr>
+						<form METHOD=POST name='delForm'>
+						<input type="hidden" name="mode" value="cdel">
+						<!-- DYNAMIC @loop@ -->
+						<tr height=22 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align=center>{{DEL}}</td>
+							<!-- DYNAMIC @is_man2@ -->
+							<td align="left" style="padding-left:6px;">{{CNAME}}</td>
+							<td align="center">
+								<a href="#" onclick="pLightBox.show('member_crm.php?mid={{ID}}','iframe','700','450','■ {{NAME}}({{ID}}) 회원 CRM',10);return false;" title="CRM보기"><font class="eng">{{ID}}</font> <font class="small">({{NAME}})</font></a>
+							</td>
+							<td align=center>{{STATUS}}</td>
+							<td align=center class="eng">{{UDATE}}</td>
+							<td align=center class="eng">{{DATE}}</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=60>
+							<td align=center colspan=7 bgcolor=#ffffff>발급(검색)된 쿠폰이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+     </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+	<!-- 페이징,검색... start -->
+		<table border = 0 cellspacing=0 cellpadding=0 width=100%>
+		<tr>
+			<td width=40%>
+				<div id="sBtn1" style="padding-left:2px;">					
+					<!-- DYNAMIC @is_man3@ -->
+					<a href="#" onclick="delSend(document.delForm);return false;"><span class="blue">선택 삭제하기</span></a>
+					<!-- DYNAMIC @is_man3@ -->
+				</div>          
+			</td>
+			<td align=right id=paging>{{PAGING}}</td>
+		</tr>
+		</table>
+		<!-- 페이징,검색... end -->
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+document.searchForm.status.value = '{{status}}';
+document.searchForm.field.value = '{{field}}';
+document.searchForm.limit.value = '{{limit}}';
+</script>

@@ -1,0 +1,791 @@
+<div id="contents">
+	<section id="headline">
+		<h1>주문/결제</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section id="orderForm">
+		<form method="post" name="orderForm" action="{{sMain}}php/order_ok.php">	
+		<input type="hidden" name="cash_total" value='{{C_TOTAL2}}' />
+		<input type="hidden" name="tmp_total" value='{{C_TOTAL}}' />
+		<input type="hidden" name="carriage" value='{{carr}}' />
+		<input type="hidden" name="tmp_carr" value='{{carr}}' />
+		<input type="hidden" name="tsale" value='{{tsale}}' />
+		<input type="hidden" name="tmp_cashdc" value='{{cashdc}}' />
+		<input type="hidden" name="direct" value='{{direct}}' />
+		<input type="hidden" name="ckBtn" />
+
+		<ul>
+			<li class="title" onclick="detailView($(this),$('.cartList'))">01 주문 상품 정보 (총{{TCNT}}개)</li>
+			<li class="cartList">
+				<!-- DYNAMIC @is_list@ -->		
+				<div id="cartList" class="orderForm">
+					<h2>장바구니상품목록</h2> 
+					<div class="cartListTop">&nbsp;</div>
+					<!-- DYNAMIC @loop_cart@ -->
+					<!-- DYNAMIC @is_cart_sum@ -->
+					<div class="cartListSum">
+						<p>
+							{{VENDOR}} 
+							<span>
+							<!-- DYNAMIC @is_vendor_carr11@ -->
+							({{VENDOR_CARR1}}원 미만 배송비 <strong>{{VENDOR_CARR2}}</strong>원)
+							<!-- DYNAMIC @is_vendor_carr11@ -->
+							<!-- DYNAMIC @is_vendor_carr12@ -->
+							(배송비 무료)
+							<!-- DYNAMIC @is_vendor_carr12@ -->
+							</span>
+						</p>
+						<p>
+							배송비 : <strong>{{VENDOR_CARR}}</strong>원, 총합계금액 : <strong>{{VENDOR_TOTAL}}</strong>원
+						</p>
+					</div>
+					<div class="cartListTop2">&nbsp;</div>
+					<!-- DYNAMIC @is_cart_sum@ -->
+					<div class="cartListbox">
+						<div class="cartInfo">
+							<div class="item_box">
+								<a href="{{LINK}}" title="상품상세보기">
+									<div class="thumbnail"><img src="{{OIMAGE}}" alt="상품이미지" /></div>
+									<div class="item_info">
+										<p class="goods" title="상품명">{{NAME}}</p>						
+										<!-- DYNAMIC @is_my_carr@ -->
+										<span>배송비 {{CARR}}원 별도상품</span>
+										<!-- DYNAMIC @is_my_carr@ -->
+										<!-- DYNAMIC @is_my_free@ -->
+										<span>배송비 무료상품</span>
+										<!-- DYNAMIC @is_my_free@ -->
+									</div>
+								</a>
+							</div>
+							<!-- DYNAMIC @is_op@ -->
+							<div class="options">
+								<!-- DYNAMIC @loop_op@ -->
+								<p><span>{{OP_NAME}}</span> <span>{{OP_SEC_VLS}}</span></p>
+								<!-- DYNAMIC @loop_op@ -->
+							</div>
+							<!-- DYNAMIC @is_op@ -->
+
+							<table summary="상품구매정보">
+							<col width="40%" /> 
+							<col width="60%" />
+							<tbody>
+							<tr>
+								<th>상품금액</th>
+								<td>{{PRICE}}원</td>
+							</tr>
+							<tr>
+								<th>상품수량</th>
+								<td>{{QTY}}개</td>
+							</tr>
+							<tr>
+								<th>적립금</th>
+								<td>{{RESE}}원</td>
+							</tr>
+							<tr>
+								<th>합계금액</th>
+								<td><strong>{{SUM}}</strong>원</td>
+							</tr>
+							<tbody>
+							</table>
+						</div>
+					</div>
+					<!-- DYNAMIC @loop_cart@ -->
+					<!-- DYNAMIC @is_cart_sum2@ -->
+					<div class="cartListSum">
+						<p>
+							{{VENDOR}} 
+							<span>
+							<!-- DYNAMIC @is_vendor_carr21@ -->
+							({{VENDOR_CARR1}}원 미만 배송비 <strong>{{VENDOR_CARR2}}</strong>원)
+							<!-- DYNAMIC @is_vendor_carr21@ -->
+							<!-- DYNAMIC @is_vendor_carr22@ -->
+							(배송비 무료)
+							<!-- DYNAMIC @is_vendor_carr22@ -->
+							</span>
+						</p>
+						<p>
+							배송비 : <strong>{{VENDOR_CARR}}</strong>원, 총합계금액 : <strong>{{VENDOR_TOTAL}}</strong>원
+						</p>
+					</div>
+					<!-- DYNAMIC @is_cart_sum2@ -->
+				</div>		
+			</li>
+			<li class="title" onclick="detailView($(this),$('.cartSum'))">02 할인 및 최종 결제 금액 ({{TOTAL2}}원)</li>
+			<li class="cartSum">
+				<fieldset>
+				<legend>할인 적용</legend>
+					<dl class="orderSale">
+					<!-- DYNAMIC @is_cupon@ -->
+					<dt>쿠폰 할인 (<em>{{CNUM}}</em>장)</dt>
+					<dd>
+						<ul>
+							<li><input type="text" title="쿠폰할인금액" name="use_cupon" value="0" readonly="readonly" /><input type="hidden" name="cupon" /></li>
+							<li>원</li>
+							<li><p onclick="couponUse('{{direct}}')" title="쿠폰선택"><span>쿠폰선택</span></p></li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_cupon@ -->
+					<!-- DYNAMIC @is_reserve1@ -->
+					<dt>적립금 사용 (<em>{{RESERVE}}</em>P)</dt>
+					<dd>
+						<ul>
+							<li><input type="text" title="적립금사용금액" name="use_reserve" value="0" onblur="ckReserve()" /></li>
+							<li>P</li>
+							<li><p onclick="useReserve()" title="전체사용"><span>전체사용</span></p></li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_reserve1@ -->
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<dt id="cashDcUse1">현금결제 할인</dt>
+					<dd id="cashDcUse2">
+						<ul>
+							<li><em id="carrMoneys">{{CASHDC}}</em></li>
+							<li>원</li>
+							<li></li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_cash_dc@ -->
+					<dt id="carrAdd1">도서산간 추가 배송비</dt>
+					<dd id="carrAdd2">
+						<ul>
+							<li><em id="carrMoneys">{{TRESE}}</em></li>
+							<li>원</li>
+							<li></li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_reserve2@ -->
+					<dt>구매확정시 적립금</dt>
+					<dd>
+						<ul>
+							<li>{{TRESE}}</li>
+							<li>P</li>
+							<li></li>
+						</ul>
+					</dd>
+					<!-- DYNAMIC @is_reserve2@ -->
+					</dl>
+				</fieldset>
+				<div id="cartSum" class="orderForm">
+					<table summary="상품결제예정금액">
+					<col width="40%" /> 
+					<col width="60%" />
+					<tbody>
+					<tr>
+						<th>총 상품금액</th>
+						<td><em>{{TOTAL}}</em>원</td>
+					</tr>
+					<tr>
+						<th>총 배송비</th>
+						<td>(+) <em id="carrTotal">{{TCARR}}</em>원</td>
+					</tr>
+					<tr>
+						<th>총 할인금액</th>
+						<td>(-) <em id="saleTotal">0</em>원</td>
+					</tr>
+					<tr>
+						<th>최종결제금액</th>
+						<td><strong id="cashMoney">{{TOTAL2}}</strong>원</td>
+					</tr>
+					</tbody>
+					</table>							
+				</div>
+			</li>
+			<li class="title" onclick="detailView($(this),$('.orderInfo'))">03 주문자 정보</li>
+			<li class="orderInfo">
+				<fieldset>
+				<legend>주문자정보 작성</legend>
+					<dl class="orderInput">
+					<dt>주문자</dt>
+					<dd>
+						<input type="text" title="수령자 입력" name="name1" value="{{UNAME}}" class="names" />
+					</dd>
+					<dt>연락처1</dt>
+					<dd>
+						<ul>
+							<li>
+								<select title="연락처1 첫째자리 선택" name="tel11">
+									<option value="02">02</option>
+									<option value='031'>031</option>
+									<option value='032'>032</option>
+									<option value='033'>033</option>
+									<option value='041'>041</option>
+									<option value='042'>042</option>
+									<option value='043'>043</option>
+									<option value='051'>051</option>
+									<option value='052'>052</option>
+									<option value='053'>053</option>
+									<option value='054'>054</option>
+									<option value='055'>055</option>
+									<option value='061'>061</option>
+									<option value='062'>062</option>
+									<option value='063'>063</option>
+									<option value='064'>064</option>
+									<option value='070'>070</option>
+									<option value='0502'>0502</option>
+									<option value='0505'>0505</option>
+									<option value='0303'>0303</option>
+								</select>
+								<script>document.orderForm.tel11.value = '{{TEL1}}';</script>
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처1 둘째자리 입력" name="tel12" maxlength="4" value="{{TEL2}}" pattern="[0-9]*" />
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처1 셋째자리 입력" name="tel13" maxlength="4" value="{{TEL3}}" pattern="[0-9]*" />
+							</li>							
+						</ul>
+					</dd>
+					<dt>연락처2</dt>
+					<dd>
+						<ul>
+							<li>
+								<select title="연락처2 첫째자리 선택" name="phone11">
+									<option value="010">010</option>
+									<option value="011">011</option>
+									<option value="016">016</option>
+									<option value="017">017</option>
+									<option value="018">018</option>
+									<option value="019">019</option>
+								</select>
+								<script>document.orderForm.phone11.value = '{{PHONE1}}';</script>
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처2 둘째자리 입력" name="phone12" maxlength="4" value="{{PHONE2}}" pattern="[0-9]*" />
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처2 셋째자리 입력" name="phone13" maxlength="4" value="{{PHONE3}}" pattern="[0-9]*" />
+							</li>							
+						</ul>
+					</dd>
+					<dt>이메일 주소</dt>
+					<dd>
+						<input type="hidden" name="email"  value="{{EMAIL}}" />
+						<ul>
+							<li>
+								<input type="text" title="이메일주소 앞자리" name="email1" value="{{EMAIL1}}" />
+							</li>
+							<li>@</li>
+							<li>
+								<input type="text" title="이메일주소 뒷자리" name="email2" value="{{EMAIL2}}" />
+							</li>
+							<li></li>
+							<li>
+								<select name="email_select" onchange="document.orderForm.email2.value=this.value;">
+									<option value=''>직접입력</option>
+									<option value=hanmail.net>hanmail.net</option> 
+									<option value=chol.com>chol.com</option>
+									<option value=dreamwiz.com>dreamwiz.com</option> 
+									<option value=empal.com>empal.com</option> 
+									<option value=freechal.com>freechal.com</option> 
+									<option value=gmail.com>gmail.com</option> 
+									<option value=hanafos.com>hanafos.com</option> 
+									<option value=hanmir.com>hanmir.com</option> 
+									<option value=hitel.net>hitel.net</option> 
+									<option value=hotmail.com>hotmail.com</option> 
+									<option value=korea.com>korea.com</option> 
+									<option value=lycos.co.kr>lycos.co.kr</option> 
+									<option value=nate.com>nate.com</option> 
+									<option value=naver.com>naver.com</option> 
+									<option value=netian.com>netian.com</option> 
+									<option value=paran.com>paran.com</option> 
+									<option value=yahoo.com>yahoo.com</option> 
+									<option value=yahoo.co.kr>yahoo.co.kr</option> 							  
+								</select>							
+							</li>							
+						</ul>
+					</dd>	
+					</dl>
+				</fieldset>
+			</li>
+			<li class="title" onclick="detailView($(this),$('.orderCarr'))">04 배송지 정보</li>
+			<li class="orderCarr">
+				<fieldset>
+				<legend>배송지 작성</legend>
+					<dl class="orderInput">
+					<dt>배송지 선택</dt>
+					<dd>
+						<div>
+							<select title="배송지 선택" name="secCarr" class="names" onchange="carrInfoChange(this.value)">
+								<option value="">배송지 선택</option>
+								<option value="1">주문정보와 동일</option>								
+								<!-- DYNAMIC @is_carrinfo1@ -->
+								<option value="2">{{NAME2}}</option>
+								<!-- DYNAMIC @is_carrinfo1@ -->
+								<!-- DYNAMIC @is_carrinfo2@ -->
+								<option value="3">{{NAME3}}</option>
+								<!-- DYNAMIC @is_carrinfo2@ -->
+								<!-- DYNAMIC @is_carrrecent@ -->
+								<option value="4">최근 배송지</option>
+								<!-- DYNAMIC @is_carrrecent@ -->
+							</select>
+						</div>
+					</dd>
+					<dt>수령인</dt>
+					<dd>
+						<input type="text" title="수령인 입력" name="name2" value="{{CNAME}}" class="names" />
+					</dd>
+					<dt>연락처1</dt>
+					<dd>
+						<ul>
+							<li>
+								<select title="연락처1 첫째자리 선택" name="tel21">
+									<option value="02">02</option>
+									<option value='031'>031</option>
+									<option value='032'>032</option>
+									<option value='033'>033</option>
+									<option value='041'>041</option>
+									<option value='042'>042</option>
+									<option value='043'>043</option>
+									<option value='051'>051</option>
+									<option value='052'>052</option>
+									<option value='053'>053</option>
+									<option value='054'>054</option>
+									<option value='055'>055</option>
+									<option value='061'>061</option>
+									<option value='062'>062</option>
+									<option value='063'>063</option>
+									<option value='064'>064</option>
+									<option value='070'>070</option>
+									<option value='0502'>0502</option>
+									<option value='0505'>0505</option>
+									<option value='0303'>0303</option>
+								</select>
+								<script>document.orderForm.tel21.value = '{{CTEL1}}';</script>
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처1 둘째자리 입력" name="tel22" maxlength="4" value="{{CTEL2}}" pattern="[0-9]*" />
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처1 셋째자리 입력" name="tel23" maxlength="4" value="{{CTEL3}}" pattern="[0-9]*" />
+							</li>							
+						</ul>
+					</dd>
+					<dt>연락처2</dt>
+					<dd>
+						<ul>
+							<li>
+								<select title="연락처2 첫째자리 선택" name="phone21">
+									<option value="010">010</option>
+									<option value="011">011</option>
+									<option value="016">016</option>
+									<option value="017">017</option>
+									<option value="018">018</option>
+									<option value="019">019</option>
+								</select>
+								<script>document.orderForm.phone21.value = '{{CPHONE1}}';</script>
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처2 둘째자리 입력" name="phone22" maxlength="4" value="{{CPHONE2}}" pattern="[0-9]*" />
+							</li>
+							<li class="gap">-</li>
+							<li>
+								<input type="tel" title="연락처2 셋째자리 입력" name="phone23" maxlength="4" value="{{CPHONE3}}" pattern="[0-9]*" />
+							</li>							
+						</ul>
+					</dd>
+					<dt>배송지</dt>
+					<dd>
+						<ul>
+							<li>
+								<input type="text" title="우편번호 앞자리" readonly="readonly" name="zip1" value="{{CZIP1}}" />
+							</li>
+							<li>-</li>
+							<li>
+								<input type="text" title="우편번호 뒷자리" readonly="readonly" name="zip2" value="{{CZIP2}}" />
+							</li>
+							<li></li>
+							<li>
+								<p onclick="zipcode()"><span>우편번호</span></p>
+							</li>							
+						</ul>
+						<p><input type="text" title="주소 입력" readonly="readonly"  name="addr" value="{{CADDR}}" class="names" /></p>
+					</dd>					
+					<dt>요청사항</dt>
+					<dd>
+						<div>
+							<select title="요청사항 선택" name="secMessage" class="names" onchange="messageInput(this.value)">
+								<option value="">요청사항 입력선택</option>
+								<option value="배송전, 연락 바랍니다.">배송전, 연락 바랍니다.</option>
+								<option value="부재시, 전화주시거나 또는 문자 남겨주세요.">부재시, 전화주시거나 또는 문자 남겨주세요.</option>
+								<option value="부재시, 경비실에 맡겨주세요.">부재시, 경비실에 맡겨주세요.</option>
+								<!-- DYNAMIC @is_message1@ -->
+								<option value="{{MESSAGE1}}">(고객입력#1)&nbsp;&nbsp;{{MESSAGE1}}</option>
+								<!-- DYNAMIC @is_message1@ -->
+								<!-- DYNAMIC @is_message2@ -->
+								<option value="{{MESSAGE2}}">(고객입력#2)&nbsp;&nbsp;{{MESSAGE3}}</option>
+								<!-- DYNAMIC @is_message2@ -->
+								<!-- DYNAMIC @is_message3@ -->
+								<option value="{{MESSAGE3}}">(고객입력#2)&nbsp;&nbsp;{{MESSAGE3}}</option>
+								<!-- DYNAMIC @is_message3@ -->
+							</select>
+							<textarea title="요청사항 입력" rows="3" name="message" class="names">{{CMESSAGE}}</textarea>
+						</div>
+					</dd>
+					</dl>
+				</fieldset>
+			</li>
+			<li class="title" onclick="detailView($(this),$('.orderCash'))">05 결제 수단 선택</li>
+			<li class="orderCash">
+				<fieldset>
+				<legend>결제 수단 선택</legend>
+					<div>
+						<input type="hidden" name="cash_type" value="" />
+						<ul>
+							<!-- DYNAMIC @is_bank1@ -->
+							<li><p id="cashTypeB" onclick="cashType('B')">무통장<br />입금</p></li>
+							<!-- DYNAMIC @is_bank1@ -->
+							<!-- DYNAMIC @is_card1@ -->
+							<li><p id="cashTypeC" onclick="cashType('C')">신용카드</p></li>
+							<!-- DYNAMIC @is_card1@ -->
+							<!-- DYNAMIC @is_card2@ -->
+							<li><p id="cashTypeR" onclick="cashType('R')">실시간<br />계좌이체</p></li>
+							<!-- DYNAMIC @is_card2@ -->
+							<!-- DYNAMIC @is_card3@ -->
+							<li><p id="cashTypeV" onclick="cashType('V')">가상<br />계좌이체</p></>
+							<!-- DYNAMIC @is_card3@ -->
+							<!-- DYNAMIC @is_card4@ -->
+							<li><p id="cashTypeH" onclick="cashType('H')">핸드폰</p></li>
+							<!-- DYNAMIC @is_card4@ -->
+						</ul>
+					</div>
+					
+					<div class="bankSelect">
+						<dl class="orderInput">
+						<dt>입금은행 선택</dt>
+						<dd>
+							<div>
+								<select title="입금은행 선택" name="bank_name" class="names">
+									{{BANK_SELECT}}
+								</select>
+							</div>
+						</dd>	
+						<dt>입금자 성명</dt>
+						<dd>
+							<div>
+								<input type="text" class="names" name="pay_name" value="{{UNAME}}" />
+							</div>
+						</dd>
+						<dt>입금 예정일</dt>
+						<dd>
+							<ul>
+								<li>
+									<select title="년도 선택" name="myear">{{PYEAR}}</select>
+								</li>
+								<li></li>
+								<li>
+									<select title="월 선택" name="mmonth">{{PMONTH}}</select>
+								</li>
+								<li></li>
+								<li>
+									<select title="일선택" name="mday">{{PDAY}}</select>
+								</li>							
+							</ul>
+						</dd>
+						</dl>
+					</div>
+				</fieldset>
+			</li>
+		</ul>
+
+		<div id="cartBtn">
+			<p class="btn" onclick="return ckOrder()" title="결제하기">결제하기</p>
+		</div>
+		<!-- DYNAMIC @is_list@ -->
+
+		<!-- DYNAMIC @no_cart@ -->	
+		<div id="noContent">
+			<p>! 장바구에 담긴 상품이 없습니다.</p>
+		</div>
+		<!-- DYNAMIC @no_cart@ -->
+
+		</form>
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<script type="text/javascript">
+<!--
+	$("#contentMore").show();	
+	
+	f = document.orderForm;
+
+	function carrInfoChange(type) { 
+		
+		f.addr.value = '';
+		ckCarrArea();	
+
+		switch(type) {  //주문자 정보
+			case "1" :
+				f.name2.value = f.name1.value;
+				f.tel21.value = f.tel11.value;
+				f.tel22.value = f.tel12.value;
+				f.tel23.value = f.tel13.value;
+				f.phone21.value = f.phone11.value;
+				f.phone22.value = f.phone12.value;
+				f.phone23.value = f.phone13.value;
+				f.zip1.value = '{{ZIP1}}';
+				f.zip2.value = '{{ZIP2}}';
+				f.addr.value = '{{ADDR}}';			
+			break; 
+
+			case "2" : //추가 배송지1
+				f.name2.value = '{{NAME2}}';
+				f.tel21.value = '{{TEL21}}';
+				f.tel22.value = '{{TEL22}}';
+				f.tel23.value = '{{TEL23}}';
+				f.phone21.value = '{{PHONE21}}';
+				f.phone22.value = '{{PHONE22}}';
+				f.phone23.value = '{{PHONE23}}';
+				f.zip1.value = '{{ZIP21}}';
+				f.zip2.value = '{{ZIP22}}';
+				f.addr.value = '{{ADDR2}}';
+			break;
+
+			case "3" : // 추가 배송지2
+				f.name2.value = '{{NAME3}}';
+				f.tel21.value = '{{TEL31}}';
+				f.tel22.value = '{{TEL32}}';
+				f.tel23.value = '{{TEL33}}';
+				f.phone21.value = '{{PHONE31}}';
+				f.phone22.value = '{{PHONE32}}';
+				f.phone23.value = '{{PHONE33}}';
+				f.zip1.value = '{{ZIP31}}';
+				f.zip2.value = '{{ZIP32}}';
+				f.addr.value = '{{ADDR3}}';
+			break;
+			
+			case "4" : // 최근 배송지
+				f.name2.value = '{{NAME4}}';
+				f.tel21.value = '{{TEL41}}';
+				f.tel22.value = '{{TEL42}}';
+				f.tel23.value = '{{TEL43}}';
+				f.phone21.value = '{{PHONE41}}';
+				f.phone22.value = '{{PHONE42}}';
+				f.phone23.value = '{{PHONE43}}';
+				f.zip1.value = '{{ZIP41}}';
+				f.zip2.value = '{{ZIP42}}';
+				f.addr.value = '{{ADDR4}}';
+			break;
+
+			default :
+				f.name2.value = '';
+				f.tel21.value = '02';
+				f.tel22.value = '';
+				f.tel23.value = '';
+				f.phone21.value = '010';
+				f.phone22.value = '';
+				f.phone23.value = '';
+				f.zip1.value = '';
+				f.zip2.value = '';
+			break;
+		}
+
+		ckCarrArea();
+	}
+	
+	function ckCard() {
+	   if(typeof(f.cash_type[1])=='undefined') return;
+	   if(f.cash_type[1].checked==true) { 
+		   if(f.cash_total.value < {{CARDUSE1}}) {
+				messageBox.show('카드결재는 {{CARDUSE2}}원 이상 일때 사용가능합니다.','200','140','카드 사용 확인');
+				f.cash_type[1].checked=false;
+				f.cash_type[0].checked=true;
+				cashClick('block');
+		   }
+	   }
+	}
+
+	function useReserve() {		
+		if(f.use_reserve.value=={{RESEUSE}}) return false;
+		if({{RESEUSE}} < {{RESERVE_USE2}}) {
+			messageBox.show('적립금은 {{RESERVE_USE}}P 이상부터 사용이 가능 합니다.','200','140','적립금 사용 확인');
+			return false;
+		}
+		if(parseInt(f.cash_total.value)<={{RESEUSE}}) {
+			f.use_reserve.value = parseInt(f.cash_total.value);
+		}
+		else {
+			f.use_reserve.value = {{RESEUSE}};
+		}
+		ckReserve();
+	}
+
+	function ckReserve() {
+		if(!f.use_reserve.value) return false;
+		if(!ckNum(f.use_reserve)) {
+			f.use_reserve.value = 0;
+			return false;
+		}
+			
+		if(parseInt(f.use_reserve.value) > {{RESEUSE}}) {
+			messageBox.show('적립된 금액을 초과 했습니다.','200','140','적립금 사용 확인');
+			f.use_reserve.value=0;
+			f.use_reserve.focus();
+			return false;
+		}
+		
+		if(parseInt(f.cash_total.value)<0) {
+			messageBox.show('결제하시려는 금액을 초과 했습니다.','200','140','적립금 사용 확인');
+			f.use_reserve.value=0;
+			cashTotal();
+			f.use_reserve.focus();
+			return false;    
+		}
+
+		cashTotal();
+		$('#cashMoney')[0].innerHTML = number_format(f.cash_total.value);
+
+		ckCard();
+		ckCarrArea();
+	}
+
+	function ckCupon() {
+		if(!f.cupon.value || !f.use_cupon.value) return false;	
+		
+		if(!ckNum(f.use_cupon)) {
+			f.use_cupon.value = 0;
+			return false;
+		}
+
+		cashTotal();
+		$('#cashMoney')[0].innerHTML = number_format(f.cash_total.value);
+		
+		ckCard();
+		ckCarrArea();
+	}
+
+	function cancelCupon() {
+		f.use_cupon.value = 0;
+		f.cupon.value = '';
+
+		cashTotal();
+		$('#cashMoney')[0].innerHTML = number_format(f.cash_total.value);
+		
+		ckCard();
+		ckCarrArea();
+	}
+
+	function ckCarrArea() {
+		if(!f.addr.value) {
+			if($('#carrAdd1').css("display")=='block') {
+				$('#carrAdd1').hide();
+				$('#carrAdd2').hide();
+				
+				f.carriage.value = parseInt(f.tmp_carr.value);				
+				cashTotal();
+				
+				$('#carrTotal')[0].innerHTML = number_format(f.carriage.value);
+				$('#cashMoney')[0].innerHTML = number_format(f.cash_total.value);		
+			}
+			return;
+		}
+		
+		carrEtc = 0;
+		if(carrMoney[0] && carrArea[0]) {		
+			cashTotal();
+
+			for(k=0,cnt=carrArea.length;k<cnt;k++) {
+				tmps1 = carrArea[k].split('|');
+				cMoney = carrMoney[k].split('|');
+				
+				cnts1 = tmps1.length;
+				for(i=0;i<cnts1;i++) {
+					tmps2 = tmps1[i].split(',');
+					cnts2 = tmps2.length;
+					for(j=0;j<cnts2;j++) {						
+						if(!tmps2[j]) continue;
+						if (f.addr.value.indexOf(tmps2[j]) != -1) {
+							if(!cMoney[i]) cMoney[i] = 0;					
+							carrEtc = parseInt(carrEtc) + parseInt(cMoney[i]);
+							break;
+						}
+					}
+				}
+			}
+
+			if(carrEtc>0) {
+				$('#carrAdd1').show();
+				$('#carrAdd2').show();
+				
+				f.carriage.value = parseInt(f.tmp_carr.value) + parseInt(carrEtc);
+				f.cash_total.value = parseInt(f.cash_total.value) + parseInt(carrEtc);
+				
+				$('#carrMoneys')[0].innerHTML = number_format(carrEtc);
+				$('#carrTotal')[0].innerHTML = number_format(f.carriage.value);
+				$('#cashMoney')[0].innerHTML = number_format(f.cash_total.value);
+				return;
+			}
+
+			$('#carrAdd1').hide();
+			$('#carrAdd2').hide();
+			
+			f.carriage.value = parseInt(f.tmp_carr.value);
+			
+			$('#carrTotal')[0].innerHTML = number_format(f.carriage.value);
+			if(f.cash_total.value<0) {
+				f.cash_total.value = parseInt(f.cash_total.value) + parseInt(f.use_reserve.value); 	
+				f.use_reserve.value = 0; 	
+			}
+			$('#cashMoney')[0].innerHTML = number_format(f.cash_total.value);
+		}
+	}
+
+	function cashTotal() {
+		if(typeof(f.use_reserve)=="undefined") use_reserve = 0;
+		else use_reserve = f.use_reserve.value;
+			
+		if(typeof(f.use_cupon)=="undefined") use_cupon = 0;
+		else use_cupon = f.use_cupon.value;
+
+		f.cash_total.value = f.tmp_total.value - use_reserve - use_cupon;
+		
+		if(f.tmp_cashdc.value>0) {
+			if(typeof(f.cash_type[0])=='undefined') ck = f.cash_type;
+			else ck = f.cash_type[0];
+			if(ck.checked==true) {	
+				f.cash_total.value = f.cash_total.value - f.tmp_cashdc.value;
+				$('#saleTotal')[0].innerHTML = number_format(parseInt(use_reserve) +  parseInt(use_cupon) +  parseInt(f.tmp_cashdc.value));
+				$('#cashDcUse1').show();
+				$('#cashDcUse2').show();
+			}
+			else {
+				$('#saleTotal')[0].innerHTML = number_format(parseInt(use_reserve) +  parseInt(use_cupon));
+				$('#cashDcUse1').hide();
+				$('#cashDcUse2').hide();
+			}
+		}
+		$('#saleTotal')[0].innerHTML = number_format(parseInt(use_reserve) +  parseInt(use_cupon));
+	}
+
+	var carrArea = new Array();
+	var carrMoney = new Array();
+
+	<!-- DYNAMIC @etc_carr@ -->
+	carrArea[{{k}}] = "{{CARR_AREA}}";
+	carrMoney[{{k}}] = "{{CARR_MONEY}}";
+	<!-- DYNAMIC @etc_carr@ -->
+
+ -->
+</script>
+<style>
+#orderForm li.orderCash li{width:{{cash_cnt}}%;}
+</style>

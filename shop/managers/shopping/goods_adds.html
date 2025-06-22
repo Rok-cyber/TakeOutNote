@@ -1,0 +1,208 @@
+<?
+$skin_inc = "Y";
+include "../html/top_inc.html"; // 상단 HTML 
+?>
+<SCRIPT language="JavaScript">
+<!--
+
+function ckForm(){
+	f = document.carr1Form;
+	if(!f.excels.value) {
+		alert('엑셀파일을 등록 하시기 바랍니다.');
+		f.excels.focus();
+		return false;
+	}
+	f.submit();
+	return false;
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_goods_all.gif" alt="일괄상품등록" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>다수 상품정보를 엑셀파일로 만들어 일괄적으로 상품을 등록 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td>&nbsp;<img src='./img/ttl_goods_csv.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='carr1Form' method='post' enctype="multipart/form-data" action='goods_post.php?mode=excel'>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;엑셀파일 등록</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type='file' class=ta size=50 name='excels'>&nbsp;&nbsp;
+							<font class=small>엑셀(CSV) 파일만 등록 가능</font> 
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;분류코드매칭</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">
+							<div style="float:left;padding:0 20px 0 6px;">
+								<input type="checkbox" name="martching" value="1" /> <font class=small>분류코드를 매칭하여 등록</font>							
+							</div>
+							<div id="sBtn1">
+								<a href="#" onclick="pLightBox.show('cate_code_matching.html','iframe', 760, 600,'■ 분류코드 매칭 설정',30,'');"><span class="blue">분류코드 매칭 설정</span></a>				
+							</div>
+						</td>
+					</tr>	
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타서버 이미지 복사</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3" class="small" style="padding-left:6px;">
+							<input type="checkbox" name="get_img" value='Y' />&nbsp;&nbsp;상품 상세내역에 링크된 타서버 이미지를 본 쇼핑몰에 저장 후 링크를 변경하는 기능입니다.
+						</td>
+					</tr>	
+					<tr height=130 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								! 엑셀(CSV)파일 형식
+								<div class='orange small' style="padding:10px 0 10px 0;">
+									구분코드,분류코드, 상품명, 소비자가, 판매가, 제조사, 원산지, 브랜드, 모델명, 적립금, 재고, 큰이미지, 중간이미지, 리스트이미지, 작은이미지,<br /> 디스플레이 이미지, 이미지자동생성, 상품 다른 이미지, 상품상세설명, 상품옵션
+								</div>
+								! 엑셀로 작업하셔서 다른이름으로 저장을 누르시고 파일형식을 CSV(쉼표로분리)로 선택하시고 저장하시면 됩니다. <br />
+								! 대량상품 등록일 경우 서버 부하 및 처리 시간이 많이 걸릴 수 있으니 분할해서 처리 하시기 바랍니다.<br />
+								! 분류코드매칭을 사용하여 등록 할 경우 먼저 '분류코드 매칭 설정'에서 설정된 매칭정보를 이용하여 분류코드가 자동으로 등록 됩니다.<br />
+								! 엑셀샘플파일을 다운 받으시고 참고 하시기 바랍니다. [<a href='goods_sample_down.php'><font class='green small'>엑셀샘플파일 다운받기</font></a>]
+
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();"><span class="blue">일괄처리</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+<tr><td align=center>
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26" align=left> 
+						<td colspan=2 align=center class="gr_bg bold small">상품정보 엑셀 작성 안내</td>
+					</tr>	
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;구분코드</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">|itsmall| <font class="small orange">(상품구분을 위한 코드로 '|itsmall|' 로 입력 하시면 됩니다. 필수 사항입니다.)</font></td>					
+					</tr>	
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;분류코드</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">100100100100/ <font class="small orange">(분류관리에서 등록된 분류코드+'/')</font></td>					
+					</tr>					
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품명</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">아이폰애플 iPhone 4 (16GB)</td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;소비자가</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">200000 <font class="small orange">(숫자만 입력)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;판매가</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">150000 <font class="small orange">(숫자만 입력)</font></td>
+					</tr>			
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제조사</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">애플</td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;원산지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">한국</td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;브랜드</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">iPhone <font class="small orange">(등록된 브랜드가 없을 경우 자동으로 새로운 브랜드가 생성 됩니다.)</font></td>
+					</tr>
+
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;모델명</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">iPhone 4G16</td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;적립금</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">B <font class="small orange">(A:없음, B:쇼핑몰 환경정책, 1~99 : 별도책정 ex. 5%경우 : 5)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;재고</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">99 <font class="small orange">(A:무제한, B:품절, C:상품숨김, 0~ : 한정판매 ex. 100개일 경우 : 100, 등록만 되고 출력이 안되어야 될때 : B)</font></td>
+					</tr>					
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;큰 이미지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">http://itsmall.kr/images/10001.jpg  <font class="small orange">(상품 이미지가 존재하는 URL, gif/jpg 이미지만 가능, <?=$SKIN_DEFINE['img1']?>)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;중간 이미지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">http://itsmall.kr/images/10001.jpg  <font class="small orange">(상품 이미지가 존재하는 URL, gif/jpg 이미지만 가능, <?=$SKIN_DEFINE['img2']?>)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;리스트 이미지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">http://itsmall.kr/images/10001.jpg  <font class="small orange">(상품 이미지가 존재하는 URL, gif/jpg 이미지만 가능, <?=$SKIN_DEFINE['img3']?>)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;작은 이미지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">http://itsmall.kr/images/10001.jpg  <font class="small orange">(상품 이미지가 존재하는 URL, gif/jpg 이미지만 가능, <?=$SKIN_DEFINE['img4']?>)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;디스플레이 이미지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">http://itsmall.kr/images/10001.jpg  <font class="small orange">(상품 이미지가 존재하는 URL, gif/jpg 이미지만 가능, <?=$SKIN_DEFINE['img5']?>)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이미지 자동생성</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">Y  <font class="small orange">(Y : 큰 이미지를 이용 다른 이미지 자동생성, N : 자동생성안함)</font></td>
+					</tr>
+					<tr height="36" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 다른 이미지</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">http://itsmall.kr/images/10001.jpg|http://itsmall.kr/images/10002.jpg  <br />
+						<font class="small orange">(상품 이미지가 존재하는 URL, gif/jpg 이미지만 가능, '|'구분으로 다수 입력가능 <?=$SKIN_DEFINE['other']?>)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품상세설명</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">상품에 대한 상세설명을 입력 (html을 등록 하셔도 됩니다.)</td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;옵션</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">색상,흰색,0,99,aaaaaa|색상,검정,1000,99,sssssss <font class="small orange">(옵션명,옵션항목,추가금액,재고수량,비고|옵션명,옵션항목,추가금액,재고수량,비고 . . . )</font></td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</td></tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

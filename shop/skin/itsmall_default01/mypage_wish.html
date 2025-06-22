@@ -1,0 +1,105 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_wish.gif" alt="관심상품목록" title="관심상품목록" />
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="40" /> 
+			<col width="90" />
+			<col />			
+			<col width="80" /> 
+			<col width="70" />
+			<col width="80" />      					
+			<col width="40" />      						
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>
+                <th scope="col" class="small black hand" onclick="ckAll('wish');" title="반전">선택</th>
+				<th scope="col" class="small black">이미지</th>
+				<th scope="col" class="small black">상품명/메모</th>
+				<th scope="col" class="small black">가격</th>
+				<th scope="col" class="small black">적립금</th>				
+				<th scope="col" class="small black">저장일</th>				
+				<th scope="col" class="small black">처리</th>
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			<form name="wishForm" method="post" action="php/wish_ok.php" onsubmit="return false;" target="HFrm">
+			<input type="hidden" name="uid" />
+			<input type="hidden" name="type" />
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td></td>
+				<td>
+					<div><input type="checkbox" name="item[]" value="{{UID}}"></div>
+					<div style="margin-top:4px;"><img src="img/common/icon_qview.gif" class="hand" onclick="openQview({{QLINK}});" alt="퀵뷰" title="퀵뷰" /></div>
+					<div style="margin-top:4px;"><img src="img/common/icon_nwin.gif" class="hand" onclick="openView('{{LINK}}');" alt="새창보기" title="새창보기" /></div>
+				</td>
+				<td style="padding:6px;">
+					<div style="cursor:move;border:2px solid #FFF; height:80px;width:80px;background:url({{IMAGE}});" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></div>
+				</td>
+				<td align="left">
+					<div style="height:44px;" class="clear tleft"><a href="{{LINK}}" onfocus="blur()">{{NAME}}</a><br>{{ICON}}</div>
+					<div class="small tleft">
+						<input type="text" name="memo{{UID}}" value="{{MEMO}}" class="inputs small" size="45" maxlength="200" />
+						<br />Home > {{LOC}}
+					</div>				
+				</td>
+				<td class="num orange">{{PRICE}}</td>
+				<td class="num">{{RESE}}원</td>				
+				<td class="num">{{DATE}}</td>				
+				<td class="num orange">
+					<span id='modIcon{{UID}}' class="nextmIcon1 small green hand" onclick="wishPost({{UID}},'mod')">수정</span><br />
+					<span id='nextIcon' class="small green hand" onclick="wishPost({{UID}},'del')">삭제</span>
+				</td>
+				<td></td>
+			</tr>			
+			<tr><td colspan="9" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->								
+			</form>
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div style="height:30px;">
+		<div id="sBtn3" style="float:left;">
+			<a href="#" onclick="return wishPost2('wdel');"><span>선택항목 삭제</span></a>
+			<a href="#" onclick="return wishPost2('cart');"><span>장바구니에 담기</span></a>
+		</div>
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/customer/no_wish.gif" alt="관심상품없음이미지" title="관심상품없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+
+	<div style="clear:both;height:20px"></div>
+</div>

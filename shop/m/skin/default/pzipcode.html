@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko" xml:lang="ko">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>우편번호 검색</title>
+
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" title="style" />
+<script type="text/javascript">
+<!--
+var pops = 1;
+ -->
+</script>
+<script type="text/javascript" src="{{skin2}}js/jquery.min.js"></script>
+
+<script LANGUAGE="Javascript">
+<!--
+
+function put_post(post_no1, post_no2, address) {
+    var f =document.postForm;
+	f.zip1.value=post_no1;
+    f.zip2.value=post_no2;
+    f.addr.value=address;	
+	f.addr2.focus();
+}
+
+function ckIt(cnt){ 
+    var f =document.postForm;	
+    if(typeof(f.addr)!="undefined" && f.addr.value) {
+        var f2 =parent.document.{{fname}}Form;
+		f2.zip{{ocnt}}1.value=f.zip1.value;
+		f2.zip{{ocnt}}2.value=f.zip2.value;
+		f2.addr{{ocnt}}.value=f.addr.value + " " + f.addr2.value;
+
+		<!-- DYNAMIC @is_order@ -->
+		parent.ckCarrArea();
+		<!-- DYNAMIC @is_order@ -->
+
+		parent.pLightBox.hide();
+		return false;
+    }	
+      
+    if(!f.keyword.value){
+        alert('동/면/읍 이름을 입력하세요!');
+        f.keyword.focus();
+	    return false;
+    }
+
+	if(f.keyword.value.length<2) {
+		alert('최소 이름을 2자리이상 입력하세요!');
+		f.keyword.focus();
+		return false;
+	}
+
+	 if(cnt) f.submit();
+	 return false;
+}
+// -->
+</script>
+
+
+<body>
+
+<section id="zipcode">
+	<h1>우편번호 검색</h1>
+
+	<form name="postForm" method="post" onsubmit='return ckIt();'>
+	<input type="hidden" name="fname" value="{{fname}}" />
+	<input type="hidden" name="ocnt" value="{{ocnt}}" />
+		
+	<fieldset>
+		<legend>우편번호 검색</legend>
+		<ul>	
+			<li><label><input type="text" name="keyword" id="keyword" value="" placeholder="동/읍/면 이름입력 예)잠실동" autocomplete="off" /></label></li>
+			<li><button class="btn" onclick="return ckIt('1');">검색</button></li>
+			<li><button class="btn" onclick="parent.pLightBox.hide();return false;">닫기</button></li>
+		</ul>		
+	</fieldset>
+	
+	<!-- DYNAMIC @is_search@ -->
+
+	<div class="zipcodeList">
+		<ul>	
+			<!-- DYNAMIC @loop@ -->
+			<li>
+				<p>{{post_no1}} - {{post_no2}}</p>
+				<p>{{addr2}}</p>
+				<p onclick="put_post('{{post_no1}}','{{post_no2}}','{{addr}}')" title="선택"><span>선택</span></p>			
+			</li>
+			<!-- DYNAMIC @loop@ -->
+		</ul>		
+	</div>		
+
+	<fieldset class="inputs">
+		<legend>주소 입력</legend>
+		<ul>
+			<li>
+				<input type="text" title="우편번호 앞자리" readonly="readonly" name="zip1" value="" />
+			</li>
+			<li>-</li>
+			<li>
+				<input type="text" title="우편번호 뒷자리" readonly="readonly" name="zip2" value="" />
+			</li>			
+		</ul>
+		<p><input type="text" title="주소 입력" readonly="readonly"  name="addr" value="" class="names" /></p>	
+		<p><input type="text" title="상세주소 입력" name="addr2" value="" placeholder="상세주소 입력" /></p>	
+	</fieldset>
+	
+
+	<ul class="btn">
+		<li><p class="active" onclick="return ckIt('1');" title="입력하기">입력하기</p></li>
+		<li>&nbsp;</li>
+		<li><p class="active" onclick="parent.pLightBox.hide(); return false;" title="창닫기">창닫기</p></li>
+	</ul>	
+	<!-- DYNAMIC @is_search@ -->
+
+	</form>
+</section>
+
+<script language="javascript">
+<!--
+	var h = ($("#zipcode")[0].offsetHeight)
+	parent.pLightBox.cgSize(h);
+// -->
+</script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+  form=document.signForm;
+  if(!form.subject.value) {
+      alert('팝업 제목을 입력하세요.');
+      form.subject.focus();
+      return false;
+   }
+   if(!form.info3.value) {
+      alert('팝업창 가로 사이즈를 입력히세요.');
+      form.info3.focus();
+      return false;
+   } 
+   if(!form.info4.value) {
+      alert('팝업창 세로 사이즈를 입력히세요.');
+      form.info4.focus();
+      return false;
+   } 
+   
+   form.comment.value = comment.getHtml();
+
+   if(!form.comment.value) {
+      alert('팝업 내용을 입력히세요.');
+      comment.focus();
+      return false;
+   } 
+
+   form.submit();
+   return false;
+}
+
+//-->
+</script>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width='120'><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팝업 제목</font></div></td>
+							<td bgcolor="#EFEFEF" colspan=3>&nbsp;<input type=text class=ta name=subject value='{{FORM1}}' size=100></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팝업 상태</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=radio name=status id='sta1' value='1' {{CKD1}} onfocus=blur();><label for='sta1'>사용</label> <input type=radio name=status id='sta2' value='2' {{CKD2}} onfocus=blur();><label for='sta2'>일시정지</label></td>
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팝업 형태</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=radio name=days id='days1' value='1' {{CKD3}} onfocus=blur();><label for='days1'>하루에 한번만</label> <input type=radio name=days id='days2' value='2' {{CKD4}} onfocus=blur();><label for='days2'>항상</label></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팝업 타입</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=radio name=type id='type1' value='1' {{CKD5}} onfocus=blur();><label for='type1'>일반팝업창</label> <input type=radio name=type id='type2' value='2' {{CKD6}} onfocus=blur();><label for='type2'>레이어</label></td>
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;종료 날짜</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=end_date value='{{FORM5}}' size=10 onfocus="new CalendarFrame.Calendar(this)">
+							<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+							<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe></div>
+							</td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팝업창 위치</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;위에서 <input type=text class=ta name=info1 value='{{INFO1}}' size=5> , 왼쪽에서 <input type=text class=ta name=info2 value='{{INFO2}}' size=5></td>
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;팝업창 크기</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;가로 <input type=text class=ta name=info3 value='{{INFO3}}' size=5> , 세로 <input type=text class=ta name=info4 value='{{INFO4}}' size=5>
+							</td>
+						</tr>
+						<tr height=120> 							
+							<td bgcolor="#FFFFFF" colspan='4'>
+								<div>
+									<textarea name="comment" id="comment">{{FORM7}}</textarea>
+									<script>
+										var comment = new pEditor("comment","../../pEdit","758","250","{{up_dir}}","basic","hide"); //에디터 생성
+									</script>
+								<div>
+							</td>
+						</tr>
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=4  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 팝업종료날짜를 입력하지 않으면 팝업이 계속 나타나며 상태에서 일시정지를 하면 나타나지 않습니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>							 
+						</tr>					
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+<script LANGUAGE="JavaScript">
+<!--
+pE[0] = comment;
+//-->
+</script>

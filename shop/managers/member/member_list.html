@@ -1,0 +1,345 @@
+<div class="mainBox2" id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_member.gif" alt="회원관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>등록된 회원 리스트를 확인 하거나 검색 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="get" action="{{ACTION}}" onsubmit='return false;'>
+		<tr><td height='6'></td></tr>
+		<tr>
+			<td height="28" style="padding-left:10px;">			
+				<div class="boxText small orange">등급</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='levels'>
+						<option value=''>전체</option>
+						<option value='1'>일시정지</option>
+						{{LEVEL}}
+						<option value='9'>부관리자</option>
+						<option value='10'>관리자</option>
+
+					</select>
+				</div>				
+				<div class="boxText small orange">메일링</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='mailling'>
+						<option value=''>전체</option>
+						<option value='Y'>허용</option>
+						<option value='N'>허용안함</option>
+					</select>
+				</div>	
+				<div class="boxText small orange">SMS</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='sms'>
+						<option value=''>전체</option>
+						<option value='Y'>허용</option>
+						<option value='N'>허용안함</option>
+					</select>
+				</div>	
+				<div class="boxText small orange">승인</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='auth'>
+						<option value=''>전체</option>
+						<option value='Y'>승인</option>
+						<option value='N'>미승인</option>
+					</select>
+				</div>				
+				<div class="boxText small orange">성별</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name='sex'>
+						<option value=''>전체</option>
+						<option value='F'>남자</option>
+						<option value='M'>여자</option>
+					</select>
+				</div>							
+			</td>
+		</tr>
+		<tr>
+			<td height="28" style="padding-left:10px;">				
+				<div class="boxText small orange">기간조건</div> 
+				<div style='float:left;padding-left:6px;'> 
+					<select name='dates'>						
+						<option value='signdate'>가입일</option>
+						<option value='logtime'>최종접속일</option>
+					</select>
+				</div>	
+				<div style='float:left;padding-left:6px;'>
+					<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="bt2" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="bt2"  size="10" name="sdate2" value="{{sdate2}}">
+					<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day2.gif" class="hand" onclick="putDay('{{DAY2}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day5.gif" class="hand" onclick="putDay('{{DAY5}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day6.gif" class="hand" onclick="putDay('{{DAY6}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">				
+				</div>
+				<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+					<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+				</div>
+			</td>
+		</tr>
+		<tr>			
+			<td height="28" style="padding-left:10px;">				
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+					   <option value='name'>이름</option>					   
+					   <option value='id'>아이디</option>					   
+					   <option value='tel'>전화번호</option>					   
+					   <option value='hphone'>핸드폰번호</option>					   
+					   <option value='email'>이메일</option>					   
+					   <option value='address'>주소</option>	
+					   <option value='multi'>통합</option>	
+					</select>
+					<input type=text name='word' size="25" value="{{word}}" class="bt2" onkeydown="ckEnter();">
+				</div>		
+				<div class="boxText small orange">정렬</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="order">
+						<option value="signdate DESC">가입일↓</option>
+						<option value="signdate ASC">가입일↑</option>
+						<option value="logtime DESC">최종접속일↓</option>
+						<option value="logtime ASC">최종접속일↑</option>
+						<option value="reserve DESC">적립금↓</option>
+						<option value="reserve ASC">적립금↑</option>
+						<option value="cnts DESC">방문수↓</option>
+						<option value="cnts ASC">방문수↑</option>
+						<option value="name DESC">이름↓</option>
+						<option value="name ASC">이름↑</option>
+						<option value="id DESC">아이디↓</option>
+						<option value="id ASC">아이디↑</option>
+					</select>
+					
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=50%><font class="small">&nbsp;전체 : <font class="eng">{{TOTAL}}</font> 건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지</font></td>
+    <td align=right></td>
+</tr>
+<tr>
+	<td colspan=2>
+		<!-- 게시판 리스트 start -->
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td align=center>
+						<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+						<tr height=24 >
+							<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+							<td width=3% align=center class=gr_bg><font class="bTitle small"><a href='#' onclick="return chCheck(document.delForm)" onfocus='this.blur();'>√</a></font></td>
+							<td width=9% align=center class=gr_bg><font class="bTitle small">이름</font></td>
+							<td width=9% align=center class=gr_bg><font class="bTitle small">아이디</font></td>
+							<td width=7% align=center class=gr_bg><font class="bTitle small">CRM</font></td>
+							<td align=center class=gr_bg><font class="bTitle small">등급</font></td>
+							<td width=7% align=center class=gr_bg><font class="bTitle small">주문건수</font></td>
+							<td width=8% align=center class=gr_bg><font class="bTitle small">적립금</font></td>
+							<td width=7% align=center class=gr_bg><font class="bTitle small">방문</font></td>
+							<td width=6% align=center class=gr_bg><font class="bTitle small">메일링</font></td>
+							<td width=6% align=center class=gr_bg><font class="bTitle small">SMS</font></td>
+							<td width=5% align=center class=gr_bg><font class="bTitle small">승인</font></td>
+							<td width=10% align=center class=gr_bg><font class="bTitle small">최종접속일</font></td>
+							<td width=9% align=center class=gr_bg><font class="bTitle small">가입일</font></td>
+						</tr>
+						<form METHOD=POST name="delForm">
+						<!-- DYNAMIC @loop@ -->
+						<tr height=22 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor="#F4F4F4" onMouseOut=this.style.backgroundColor="">
+							<td align=center class=eng>{{NUM}}</td>
+							<td align=center>{{DEL}}</td>
+							<td align=center>{{LIST1}}</td>
+							<td align=center class=eng>{{LIST2}}</td>
+							<td align=center>
+								<div style='padding-top:4px;'><span id='nextIcon' class="hand small" onclick="pLightBox.show('member_crm.php?mid={{LIST2}}','iframe','700','450','■ {{NAME}}({{LIST2}}) 회원 CRM',10);return false;">CRM보기</span></div> 
+							</td>
+							<td align=center>{{LIST11}}</td>
+							<td align=right style='padding-right:3px;'>{{LIST7}}건</td>							
+							<td align=right style='padding-right:3px;'>{{LIST8}}원</td>							
+							<td align=right style='padding-right:3px;' class=eng>{{LIST9}}회</td>
+							<td align=center class=small>{{LIST4}}</td>
+							<td align=center class=small>{{LIST12}}</td>
+							<td align=center class=small>{{LIST10}}</td>
+							<td align=center class=eng>{{LIST5}}</td>
+							<td align=center class=eng>{{LIST6}}</td>
+						</tr>
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @noloop@ -->
+						<tr height=60>
+							<td align=center colspan=14 bgcolor=#ffffff>등록(검색)된 회원이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @noloop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+    </td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+    <td colspan=2>
+	<!-- 페이징,검색... start -->
+		<table border = 0 cellspacing=0 cellpadding=0 width=100%>
+		<tr>
+			<td width=48%>
+				<div id="sBtn1" style="padding-left:2px;">					
+					<a href="#" onclick="delSend(document.delForm);return false;"><span class="blue">선택 삭제하기</span></a>
+					<a href="#" onclick="mailSend(document.delForm);return false;"><span class="blue">선택 메일보내기</span></a>
+					<a href="#" onclick="mailSend2(document.delForm);return false;"><span class="blue">검색결과 메일보내기</span></a>
+					<a href="#" onclick="smsSend(document.delForm);return false;"><span class="blue">선택 SMS 발송</span></a>
+				</div>          
+			</td>
+			<td align=right id=paging>{{PAGING}}</td>
+		</tr>
+		</table>
+		<!-- 페이징,검색... end -->
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<script>
+document.searchForm.levels.value = '{{levels}}';
+document.searchForm.mailling.value = '{{mailling}}';
+document.searchForm.auth.value = '{{auth}}';
+document.searchForm.sex.value = '{{sex}}';
+document.searchForm.dates.value = '{{dates}}';
+document.searchForm.field.value = '{{field}}';
+document.searchForm.order.value = '{{order}}';
+document.searchForm.limit.value = '{{limit}}';
+
+function delSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) cnt++;
+	}
+
+	if(cnt<=0) {
+		alert("삭제할 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		if (window.confirm("정말로 삭제 할까요?")) {
+			frm.action = "./member_ok.php?mode=del";
+			frm.submit();
+			return;
+		} 
+		else return;		
+	}
+
+}
+
+function chCheck(frm){
+	for (j=0,cnt=frm.elements.length;j<cnt;j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			if(frm.elements[j].disabled==false) frm.elements[j].checked = true;
+		}
+	}
+	return false;
+}
+
+function mailSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	if ( cnt <= 0) {
+		alert("보낼 메일을 선택하세요!");
+		return false;
+	} 
+	else {
+		frm.action = "./mail_form.html";
+		frm.submit();
+		return;
+	}
+}
+
+function mailSend2(frm){
+	frm.action = "./mail_form.html?type=search&{{mailstring}}";
+	frm.submit();
+}
+
+function smsSend(frm){
+	for (i = cnt = 0; i < frm.elements.length; i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			cnt++;
+		}
+	}
+	if ( cnt <= 0) {
+		alert("보낼 목록을 선택하세요!");
+		return false;
+	} 
+	else {
+		frm.action = "../member/sms_send.html?type=mem";
+		frm.submit();
+		return;
+	}
+}
+
+
+function putDay(date1,date2) {
+	f = document.searchForm;
+	if(!date1) {
+		f.sdate1.value = '';
+		f.sdate2.value = '';
+	} 
+	else {
+		f.sdate1.value = date1;
+		f.sdate2.value = date2;
+	}
+}
+
+function ckEnter(){
+	if(event.keyCode==13) {
+		searchForm.submit();
+		return false;
+	}
+}
+</script>

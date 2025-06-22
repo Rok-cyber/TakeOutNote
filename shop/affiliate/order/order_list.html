@@ -1,0 +1,292 @@
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function putDay(date1,date2) {
+	f = document.searchForm;
+	if(!date1) {
+		f.sdate1.value = '';
+		f.sdate2.value = '';
+	} 
+	else {
+		f.sdate1.value = date1;
+		f.sdate2.value = date2;
+	}
+}
+
+function ckSearch(){
+	f = document.searchForm;
+	
+	if(f.sdate1.value && !f.sdate2.value) {
+		alert('주문일 조건을 입력 하세요!');
+		f.sdate2.focus();
+		return false;
+	}
+
+	if(!f.sdate1.value && f.sdate2.value) {
+		alert('주문일 조건을 입력 하세요!');
+		f.sdate1.focus();
+		return false;
+	}
+		
+
+	f.submit();
+	return false;
+}
+
+
+function secSend(){
+	frm = document.selectForm;
+
+	for (i=ck=0,cnt=frm.elements.length;i<cnt;i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			ck = 1;
+			break;
+		}
+	}
+	if (ck == 0) {
+		alert("목록을 하나 이상 선택하셔야 됩니다!");
+		return false;
+	} 
+	else {		
+		frm.action = "./affiliate_order_excel.php?type=check";	
+		frm.submit();
+		return;		
+    }  
+}
+
+function chCheck(){
+	frm = document.selectForm;
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			frm.elements[j].checked = true;
+		}
+
+	}
+	return false;
+}
+
+function ckEnter(){
+	if(event.keyCode==13) {
+		return ckSearch();
+	}
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_order.gif" alt="주문관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>상품 주문내역을 확인 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td colspan=2 height=20></td></tr>
+<tr>
+	<td align=center>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#FFFFFF'>		
+		<tr>
+			<td align="center" colspan="2">			
+				<div id="tabTop">
+					<!-- DYNAMIC @loop_tab@ -->
+					<div class="{{tabs}} small"><a href="order_list.php{{LNS}}" onfocus="this.blur();">{{TTL}}</a></div>
+					<!-- DYNAMIC @loop_tab@ -->
+				</div>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr><td colspan=2 height=10></td></tr>
+</table>
+
+<table border="0" width='99%' align="center" cellpadding="0" cellspacing=0>
+<tr>
+  <td colspan=2>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#EFEFEF' class="all">
+		<form name="searchForm" method="get" action="{{ACTION}}" onsubmit='return false;'>
+		<input type="hidden" name="gs" value="{{gs}}" />
+		<tr><td height='6'></td></tr>		
+		<tr>
+			<td height="28" style="padding-left:10px;">								
+				<div class="boxText small orange">주문일</div> 
+				<div style='float:left;padding-left:6px;'>
+					<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="ta2 eng" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="ta2 eng"  size="10" name="sdate2" value="{{sdate2}}">
+					<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day2.gif" class="hand" onclick="putDay('{{DAY2}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day6.gif" class="hand" onclick="putDay('{{DAY5}}','{{DAY1}}')" align="absmiddle">
+					<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">				
+				</div>
+				<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+					<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+				</div>				
+			</td>
+		</tr>
+		<tr>
+			<td height="28" style="padding-left:10px;">
+				<div class="boxText small orange">검색어</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="field">
+					   <option value='order_num'>주문번호</option>
+					   <option value='id'>아이디</option>					   
+					   <option value='name1'>주문자</option>
+					   <option value='p_name'>상품명</option>					   
+					</select>
+					<input type=text name='word' size="30" value="{{word}}" class="bt2" onkeydown="ckEnter();">
+				</div>
+				<div class="boxText small orange">결제방법</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="type">
+						<option value="">전체</option>						
+						<option value="B">무통장</option>
+						<option value="C">카드결제</option>
+						<option value="R">계좌이체</option>
+						<option value="H">핸드폰</option>						
+					</select>
+					
+				</div>
+				<div class="boxText small orange">출력수</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<select name="limit">
+						<option value="10">10개</option>
+						<option value="20">20개</option>
+						<option value="30">30개</option>
+						<option value="50">50개</option>
+						<option value="100">100개</option>
+					</select>					
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="return ckSearch();"><span class="green">검색하기</span></a>
+					<a href="{{CANCEL}}"><span class="green">초기화</span></a>
+				</div>
+
+			</td>
+		</tr>
+		<tr><td height='4'></td></tr>
+		</form>
+		</table>
+  </td>	
+</tr>
+<tr><td height=20 colspan=2></td></tr>
+<tr height=20>
+	<td width=30% class="small"> &nbsp;검색된 주문수 : <font class="eng">{{TOTAL}}</font>건 &nbsp;&nbsp;<font class="eng">{{PAGE}}</font> 페이지.</FONT></td>
+	<td align=right class="small bold blue" style='padding-right:4px;'></td>
+</tr>
+<tr>
+	<td colspan="2">
+		<!-- 게시판 리스트 start -->
+		<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+		<tr>
+			<td>
+				<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			    <tr>
+					<td align="center">
+						<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+							<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=3% align=center class=gr_bg><a href='#' onclick="return chCheck();" onfocus='this.blur();'><font class="bTitle small">√</font></a></td>
+							<!-- DYNAMIC @is_man1@ -->
+							<td width=9% align="center" class=gr_bg><font class="bTitle small">주문일자</font></td>
+							<td width=8% align="center" class=gr_bg><font class="bTitle small">주문자정보</font></td>
+							<td align="center" class=gr_bg><font class="bTitle small">상품명</font></td>
+							<td width=5% align="center" class=gr_bg><font class="bTitle small">수량</font></td>
+							<td width=10% align="center" class=gr_bg><font class="bTitle small">판매금액</font></td>	
+							<td width=10% align="center" class=gr_bg><font class="bTitle small">진행상황</font></td>
+							<td width=7% align="center" class=gr_bg><font class="bTitle small">쿠폰할인</font></td>
+							<td width=9% align="center" class=gr_bg><font class="bTitle small">커미션</font></td>
+							<td width=8% align="center" class=gr_bg><font class="bTitle small">결제상태</font></td>
+						</tr>
+						<form method="post" name='selectForm'>
+						<!-- DYNAMIC @loop@ -->
+						
+						<!-- DYNAMIC @type1@ -->
+						<tr bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor='#F4F4F4' onMouseOut=this.style.backgroundColor=''>
+							<td height=36 align="center" class="eng" {{ROWSPAN}}>{{NUM}}</td>							
+							<td {{ROWSPAN}}>{{DEL}}</td>							
+							<td align="center" {{ROWSPAN}}>{{LIST2}}</td>
+							<td align="center" style="padding:2px;" {{ROWSPAN}} class="small">
+								<div style='padding:3px 8px 0 8px;'>{{LIST3}}</div>
+								<div style='padding:3px 8px 0 8px;' >{{LIST4}}</div>
+								</a>																
+							</td>
+							<td height=24 align="left" style='padding-left:6px;' class='small'>{{LIST5}}</td>
+							<td align="right" class="eng" style='padding-right:6px;'>{{LIST6}}개</td>
+							<td align="right" class="eng" style='padding-right:6px;'><font class="blue eng">{{LIST7}}원</font></td>
+							<td align="center" class="small">{{LIST8}} {{CARR_INFO}}</td>
+							<td align="right" class="eng" {{ROWSPAN}} style='padding-right:6px;'><font class="blue eng">{{LIST10}}원</font></td>
+							<td align="right" class="eng" {{ROWSPAN}} style='padding-right:6px;'><font class="blue eng">{{LIST12}}</font></td>
+							<td align="center" class="eng" {{ROWSPAN}}>{{LIST9}}</td>
+						</tr>
+						<!-- DYNAMIC @type1@ -->
+						
+						<!-- DYNAMIC @type2@ -->
+						<tr height=24 bgcolor={{BGCOLOR}} onMouseOver=this.style.backgroundColor='#F4F4F4' onMouseOut=this.style.backgroundColor=''>
+							<td align="left" style='padding-left:6px;' class='small'>{{LIST5}}</td>
+							<td align="right" class="eng" style='padding-right:6px;'>{{LIST6}}개</td>
+							<td align="right" class="eng" style='padding-right:6px;'><font class="blue eng">{{LIST7}}원</font></td>
+							<td align="center" class="small">{{LIST8}} {{CARR_INFO}}</td>							
+						</tr>
+						<!-- DYNAMIC @type2@ -->
+
+
+						<!-- DYNAMIC @loop@ -->
+						<!-- DYNAMIC @is_loop@ -->
+						<tr height=100>
+							<td align="center" colspan=11 bgcolor="#ffffff">접수(검색)된 주문이 없습니다.</td>
+						</tr>
+						<!-- DYNAMIC @is_loop@ -->
+						</form>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		<!-- 게시판 리스트 end -->
+	</td>
+</tr>
+<tr><td height=8 colspan=2></td></tr>
+<tr>
+     <td colspan=2>
+	 <!-- 페이징,검색... start -->
+	 <table border = 0 cellspacing=0 cellpadding=0 width=100%>
+	 <form name="secForm">
+	 <tr>
+		<td width=60%></td>
+	    <td align=right id="paging">{{PAGING}}</td>
+	 </tr>
+	 </form>
+	 </table>
+	 <!-- 페이징,검색... end -->
+	 </td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+searchForm.field.value	= "{{field}}";
+searchForm.type.value	= "{{type}}";
+searchForm.limit.value	= "{{limit}}";
+</script>

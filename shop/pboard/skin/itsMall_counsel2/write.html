@@ -1,0 +1,223 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<!-- DYNAMIC @is_editer1@ -->
+<link href="/{{ShopPath}}pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="/{{ShopPath}}pEdit/pEditor.js"></script>
+<!-- DYNAMIC @is_editer1@ -->
+
+<div id="pb_sub">
+	
+	<form name="signForm" enctype="multipart/form-data" method="post" action="{{ACTION}}" onsubmit="return checkIt()" >
+    <input type="hidden" name="Main" value="{{Main}}" />
+	<input type="hidden" name="remail" value="1" />
+	<input type="hidden" name="passwd" value="guest" />
+	<input type="hidden" name="ck_w" /><input type="hidden" name="ck_w2" />
+	<input type="hidden" name="ck_bt" />
+	<!-- DYNAMIC @is_editer2@ -->
+	<input type="hidden" name="tmp_dir" value="{{tmp_dir2}}" />	
+	<input  type="hidden" name="html_type" value="1" />
+	<!-- DYNAMIC @is_editer2@ -->
+
+	<div class="pb_small" style="text-align:left;padding:4px 4px 14px 4px;">
+		! 대량구매진행시에는 기존의 상품판매가격보다 할인된 가격으로 제품을 공급받으실 수 있습니다.<br />
+		! 신청서를 작성해 주시면 담당자가 검토 후 전화나 이메일로 연락 드리겠습니다.  <br />
+		! <img src="img/check_icon.gif" alt='required' /> 아이콘 항목은 필수 입력 사항 입니다.
+	</div>
+	<div style="width:98%;border: 4px solid #FAFAFA;">
+		<div style="border: 1px solid #DDD;padding:18px 24px 18px 24px">
+		
+			<!-- DYNAMIC @is_modify@ -->
+			<div id="pb_title_box">
+				<div style="padding-top:6px;" class="pb_default pb_bold">등록된 글 수정</div>
+			</div>
+			<!-- DYNAMIC @is_modify@ -->
+
+			<!-- DYNAMIC @is_reply@ -->
+			<div id="pb_title_box">
+				<div style="padding-top:6px;" class="pb_default pb_bold">답변 글 등록</div>
+			</div>
+			<!-- DYNAMIC @is_reply@ -->
+
+			<!-- DYNAMIC @is_cate@ -->              
+			<div class="pb_write_area">
+				<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' /> 분류</div>		
+				<div class="pb_write_input">
+					<select name="cate" class="pb_default">{{OPTION}}</select>
+				</div>        		
+			</div>
+			<!-- DYNAMIC @is_cate@ -->
+			
+			<!-- DYNAMIC @is_hcate@ --><input type="hidden" name="cate" value="{{CATE}}" /><!-- DYNAMIC @is_hcate@ -->
+			
+			<!-- DYNAMIC @is_info1@ -->
+			<div class="pb_write_area">
+				<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' /> 이름</div>		
+				<div class="pb_write_input">
+					<input class="pb_ip" type="text" name="name" size="20" value="{{NAME}}" maxlength="30" />
+				</div>        		
+			</div>
+
+			<div class="pb_write_area">
+				<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' /> 이메일</div>		
+				<div class="pb_write_input">
+					<input class="pb_ip" type="text" name="email" size="40" value="{{EMAIL}}" maxlength="50" />
+				</div>        		
+			</div>
+			
+			<!-- DYNAMIC @is_info1@ -->
+
+			<div class="pb_write_area" >
+				<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' /> 연락처</div>		
+				<div class="pb_write_input">
+					<input class="pb_ip" type="text" name="subject" size="30" value="{{SUBJECT}}" maxlength="40" />
+				</div>        		
+			</div>	
+			
+			<!-- DYNAMIC @is_pds@ -->
+			<div class="pb_write_area">
+				<div class="pb_write_title pb_small pb_bold">파일업로드</div>		
+				<div class="pb_write_input">			
+					<div style="float:left;padding-right:4px;"><input type="text" name="filetext{{FNUM}}" size="40" class="pb_ip" /></div>
+					<div style="float:left">
+						<img src="img/btn_file.gif" alt="File Search" class="hand" />
+					</div>
+					<div style="float:left;position:relative;left:-90px"><input type="file" name="userfile{{FNUM}}" size="1" style="height:24px; filter:alpha(opacity=0);opacity:0; -moz-opacity:0;cursor:pointer" onchange="this.form.filetext{{FNUM}}.value=this.value;this.blur();" /></div>
+				</div>     		
+			</div>
+			<!-- DYNAMIC @is_pds@ -->
+
+			<!-- DYNAMIC @is_file@ -->	
+			<div class="pb_write_area pb_small pb_bold">
+				<div class="pb_write_title pb_small pb_bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;파일삭제</div>		
+				<div class="pb_write_input">
+					{{SAVEDFILE}}
+				</div>        		
+			</div>	
+			<!-- DYNAMIC @is_file@ -->	
+			
+			<div id="other">
+			
+				<div class="pb_write_area">
+					<div class="pb_write_title pb_small pb_bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;주소</div>		
+					<div class="pb_write_input">
+						<input class="pb_ip" type="text" name="homepage" size="80" value="{{HOMEPAGE}}" maxlength="80" />
+					</div>        		
+				</div>	
+				
+				<div class="pb_write_area">
+					<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' />대상상품명</div>		
+					<div class="pb_write_input">
+						<input class="pb_ip" type="text" name="slink[]" size="40" value="{{SLINK1}}" maxlength="80" id="slink1" />      
+						&nbsp;&nbsp;<font class="pb_small">상품이 복수일 경우 기타문의내용에 자세히 적으시면 됩니다.</font>
+					</div>        		
+				</div>
+				<div class="pb_write_area">
+					<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' />희망수량</div>		
+					<div class="pb_write_input">
+						<input class="pb_ip" type="text" name="slink[]" size="10" value="{{SLINK2}}" maxlength="80" id="slink2" />   
+					</div>        		
+				</div>
+				<div class="pb_write_area">
+					<div class="pb_write_title pb_small pb_bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;희망납기일</div>		
+					<div class="pb_write_input">
+						<input class="pb_ip" type="text" name="slink[]" size="40" value="{{SLINK3}}" maxlength="80" />      	
+					</div>        		
+				</div>
+
+			</div>
+
+			<!-- DYNAMIC @is_default@ -->
+			<div class="pb_write_area" style="border:0px;height:204px;text-align:center;background:url();">
+				<div class="pb_write_title pb_small pb_bold"><img src="img/check_icon.gif" alt='required' /> 기타문의내용</div>		
+				<div class="pb_write_input">
+					<textarea name="comment" style="width:100%;height:200px" class="pb_ip">{{COMMENT}}</textarea>
+				</div>
+			</div>	
+			<!-- DYNAMIC @is_default@ -->
+
+			<!-- DYNAMIC @is_editer3@ -->
+			<div style="margin-top:10px;">
+				<center>
+					<textarea name="comment" id="comment">{{COMMENT}}</textarea>
+					<script>var comment = new pEditor("comment","/{{ShopPath}}pEdit","{{we_width}}","200","{{up_dir}}","basic2"); //에디터 생성</script>
+				</center>
+			</div>
+			<!-- DYNAMIC @is_editer3@ -->
+
+		</div>
+
+	</div>
+
+	<div style="margin:20px 0 20px;text-align:center;width:100%;">
+		<center>
+		<div style="width:140px;">
+			<!-- DYNAMIC @is_write2@ -->	
+			<div id="sBtn3">						
+				<a href="#" onclick="return checkIt();return false;"><span>입력완료</span></a>
+			</div>		
+			<div id="sBtn2">
+				<a href="#" onclick="document.signForm.reset();return false;"><span>다시작성</span></a>
+			</div>						
+			<!-- DYNAMIC @is_write2@ -->	
+
+			<!-- DYNAMIC @is_modify2@ -->			
+			<div id="sBtn3">						
+				<a href="#" onclick="return checkIt();return false;"><span>수정하기</span></a>			
+			</div>
+			<div id="sBtn2">
+				<a href="{{Main}}{{addstring}}"><span>목록보기</span></a>
+			</div>		
+			<!-- DYNAMIC @is_modify2@ -->	
+			
+			<!-- DYNAMIC @is_reply2@ -->	
+			<div id="sBtn3">						
+				<a href="#" onclick="return checkIt();return false;"><span>답변하기</span></a>
+			</div>		
+			<div id="sBtn2">
+				<a href="{{Main}}{{addstring}}"><span>목록보기</span></a>
+			</div>		
+			<script>document.getElementById("other").style.display='none';</script>
+			<!-- DYNAMIC @is_reply2@ -->	
+			
+		</div>
+		</center>
+	</div>
+
+	</form>	
+
+</div>
+
+<p style="clear:both;height:20px;"></p>
+
+<!-- 업로드중 플래시 필수 -->
+<div id="uploading" style="display:none;margin:50px;">
+	<EMBED src="img/data_up.swf" border="0" width="459" height="167"></EMBED>
+</div>
+
+<script language="javascript">
+
+function checkIt2() {
+	form = document.signForm;
+
+	if(!document.getElementById("slink1").value) {
+		alert("대상상품명을 입력 하세요");
+		document.getElementById("slink1").focus();
+		return false;
+	}
+
+	if(!document.getElementById("slink2").value) {
+		alert("희망수량을 입력 하세요");
+		document.getElementById("slink2").focus();
+		return false;
+	}
+
+	/* 사용자 체크 추가 부분  */
+	form.ck_bt.value='1';
+	document.getElementById('pb_sub').style.display = "none";
+	document.getElementById('uploading').style.display = "block";
+	form.submit();
+	return false;
+}
+</script>

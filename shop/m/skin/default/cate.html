@@ -1,0 +1,44 @@
+<div id="contents">
+	<section id="headline">
+		<h1>{{SCATE_NAME}}</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>
+	</section>
+	
+	<!-- DYNAMIC @is_cate@ -->
+	<section id="cateIndicator">
+		<ul>
+			<li><a href="{{Main}}?channel=cate">홈</a></li>
+			<!-- DYNAMIC @loop_scate@ --><li>{{CATE_LOCA}}</li><!-- DYNAMIC @loop_scate@ -->
+		</ul>
+	</section>
+	<!-- DYNAMIC @is_cate@ -->
+
+	<section id="cateList">
+		<ul>
+			<!-- DYNAMIC @loop_cate@ -->
+			<li><a href="{{Main}}?channel={{CHANNEL}}&cate={{CATE}}">{{CATE_NAME}} (<em>{{CCNT}}</em>)</a></li>
+			<!-- DYNAMIC @loop_cate@ -->
+		</ul>
+	</section>
+
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>	
+
+	<script type="text/javascript">
+	<!--
+		var scrollHeight = $(window).scrollTop() + $(window).height();
+		var documentHeight = $(document).height();
+		
+		if(scrollHeight<documentHeight) $("#contentMore").show();
+	 -->
+	</script>
+</div>

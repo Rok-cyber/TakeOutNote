@@ -1,0 +1,144 @@
+<div id='location'>
+	<div style="height:28px;">
+		<div id="top_cate">			
+			{{SHOP_CATE}}
+			<!-- DYNAMIC @is_tcate@ -->
+			<div id="scateImgs">
+				<img src='img/main/cate_view_none.gif' class='hand mt4' onmouseover="scateShow('');" onmouseout="scateShow('none')" id='scateImg' alt='전체분류보기' />
+			</div>
+			<div id='scateBox' onmouseover="scateShow('');" onmouseout="scateShow('none')">
+				<div style="height:9px;overflow:hidden"><img src='img/main/cate_menu_top2.gif' alt='box top' style="vertical-align:top" /></div>
+				<div id='scate_cbody'>
+					<ul style='text-align:left;'>
+						<!-- DYNAMIC @loop_tcate@ -->						
+						<li class="small">
+							<!-- DYNAMIC @is_text@ -->
+							<div style="height:4px;overflow:hidden"></div>
+							<img  hspace="4" src='img/common/menu_icon.gif' alt="bar아이콘" title="bar아이콘" />
+							<!-- DYNAMIC @is_text@ -->
+							<font class='hand' onclick="window.location.href='{{Main}}?channel=main2&amp;cate={{tcate}}';" onmouseover="this.style.color='#3399ff';" onmouseout="this.style.color='';">{{CATE_NAME}}</font>
+						</li>
+						<!-- DYNAMIC @loop_tcate@ -->
+					</ul>
+				</div>
+				<div style="height:9px;overflow:hidden"><img src='img/main/cate_menu_bottom2.gif' alt='box bottom' style="vertical-align:top" /></div>
+			</div>			
+			<!-- DYNAMIC @is_tcate@ -->
+		</div>
+		<div id="top_loc">
+			<div class="small left" style='line-height:200%'><a href='{{Main}}' onfocus='this.blur();'>홈</a>&nbsp;</div>
+
+			<!-- DYNAMIC @is_seccate1@ -->
+			<div class="left" style="margin-left:8px;"><img src="img/common/selectBox_left.gif" alt='box left' /></div>
+			<div id='c1Box' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:150px; height:18px; text-align:left;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				c1Boxs = new selectBox('c1Box','','{{Main}}');
+				c1Boxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				c1Boxs.img1.src = 'img/common/icon_select_down2.gif';
+				c1Boxs.img2.src = 'img/common/icon_select_up2.gif';
+				<!-- DYNAMIC @loop_seccate1@ -->
+				c1Boxs.addItem('{{CNAME}}','{{CCATE}}');
+				<!-- DYNAMIC @loop_seccate1@ -->
+				c1Boxs.show('cate');
+				c1Boxs.secNum = {{CSEC1}};
+				c1Boxs.mout();
+			// -->
+			</script>	
+			<!-- DYNAMIC @is_seccate1@ -->
+			
+			<!-- DYNAMIC @is_seccate2@ -->
+			<div class="left" style="margin-left:8px;"><img src="img/common/selectBox_left.gif" alt='box left' /></div>
+			<div id='c2Box' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:150px; height:18px; text-align:left;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				c2Boxs = new selectBox('c2Box','','{{Main}}');
+				c2Boxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				c2Boxs.img1.src = 'img/common/icon_select_down2.gif';
+				c2Boxs.img2.src = 'img/common/icon_select_up2.gif';
+				<!-- DYNAMIC @loop_seccate2@ -->
+				c2Boxs.addItem('{{CNAME}}','{{CCATE}}');
+				<!-- DYNAMIC @loop_seccate2@ -->
+				c2Boxs.show('cate');
+				c2Boxs.secNum = {{CSEC2}};
+				c2Boxs.mout();
+			// -->
+			</script>	
+			<!-- DYNAMIC @is_seccate2@ -->
+
+			<!-- DYNAMIC @is_seccate3@ -->
+			<div class="left" style="margin-left:8px;"><img src="img/common/selectBox_left.gif" alt='box left' /></div>
+			<div id='c3Box' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:150px; height:18px; text-align:left;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				c3Boxs = new selectBox('c3Box','','{{Main}}');
+				c3Boxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				c3Boxs.img1.src = 'img/common/icon_select_down2.gif';
+				c3Boxs.img2.src = 'img/common/icon_select_up2.gif';
+				<!-- DYNAMIC @loop_seccate3@ -->
+				c3Boxs.addItem('{{CNAME}}','{{CCATE}}');
+				<!-- DYNAMIC @loop_seccate3@ -->
+				c3Boxs.show('cate');
+				c3Boxs.secNum = {{CSEC3}};
+				c3Boxs.mout();
+			// -->
+			</script>	
+			<!-- DYNAMIC @is_seccate3@ -->
+
+			<!-- DYNAMIC @is_seccate4@ -->
+			<div class="left" style="margin-left:8px;"><img src="img/common/selectBox_left.gif" alt='box left' /></div>
+			<div id='c4Box' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:150px; height:18px; text-align:left;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				c4Boxs = new selectBox('c4Box','','{{Main}}');
+				c4Boxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				c4Boxs.img1.src = 'img/common/icon_select_down2.gif';
+				c4Boxs.img2.src = 'img/common/icon_select_up2.gif';
+				<!-- DYNAMIC @loop_seccate4@ -->
+				c4Boxs.addItem('{{CNAME}}','{{CCATE}}');
+				<!-- DYNAMIC @loop_seccate4@ -->
+				c4Boxs.show('cate');
+				c4Boxs.secNum = {{CSEC4}};
+				c4Boxs.mout();
+			// -->
+			</script>	
+			<!-- DYNAMIC @is_seccate4@ -->
+			
+			<div class="small left" style='line-height:200%'>
+				<!-- DYNAMIC @define_location@ -->
+				LOCATION(>,)
+				<!-- DYNAMIC @define_location@ -->	
+			</div>
+
+			<!-- DYNAMIC @is_sbe_page@ -->
+			<div class="left" style="margin-left:8px;"><img src="img/common/selectBox_left.gif" alt='box left' /></div>
+			<div id='c1Box' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:150px; height:18px; text-align:left;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				c1Boxs = new selectBox('c1Box','','{{Main}}',{{NUMS}});
+				c1Boxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				c1Boxs.img1.src = 'img/common/icon_select_down2.gif';
+				c1Boxs.img2.src = 'img/common/icon_select_up2.gif';
+				<!-- DYNAMIC @loop_sbe_list@ -->
+				c1Boxs.addItem('{{CNAME}}','{{CUID}}');
+				<!-- DYNAMIC @loop_sbe_list@ -->
+				c1Boxs.show('cate');
+				c1Boxs.secNum = {{CSEC1}};
+				c1Boxs.mout();
+			// -->
+			</script>
+			<!-- DYNAMIC @is_sbe_page@ -->
+
+			<div style='float:right;line-height:200%;padding-right:4px;'>
+				<img src="img/common/icon_arrow_hprev.gif" alt="아이콘 이전" />
+				<a href="#" class="small" onclick="history.back();return false;">이전</a> &nbsp;&nbsp;								
+			</div>
+		</div>
+	</div>
+	<div id="loc_bottom"></div>
+</div>

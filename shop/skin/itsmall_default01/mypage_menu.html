@@ -1,0 +1,66 @@
+	<div style="background:url(img/customer/box_customer_bg.gif);width:180px;">
+		<div style="height:51px;">
+			<a href="{{Main}}?channel=mypage" onfocus="this.blur();"><img src="img/customer/ttl_mypage.gif" border="0" alt="마이페이지" title="마이페이지" /></a>
+		</div>
+		<div id="menuSub">			
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=order" onfocus="this.blur();"><img src="img/customer/ttl_menu_order.gif" border="0" alt="주문/배송조회" title="주문/배송조회" /></a>
+			</div>
+
+			<ul>
+				<li><a href="{{Main}}?channel=order" onfocus="this.blur();" class="small">주문/배송조회</a></li>
+				<li><a href="{{Main}}?channel=order_cancel" onfocus="this.blur();" class="small">취소/반품/교환 내역</a></li>
+			</ul>
+
+			<div style="margin:0px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=wish" onfocus="this.blur();"><img src="img/customer/ttl_menu_wish.gif" border="0" alt="관심상품목록" title="관심상품목록" /></a>
+			</div>
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=reserve" onfocus="this.blur();"><img src="img/customer/ttl_menu_reserve.gif" border="0" alt="적립금내역" title="적립금내역" /></a>
+			</div>
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=cupon" onfocus="this.blur();"><img src="img/customer/ttl_menu_cupon.gif" border="0" alt="발급쿠폰내역" title="발급쿠폰내역" /></a>
+			</div>
+			
+			<!-- DYNAMIC @is_cooperate@ -->
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=cooperate_list" onfocus="this.blur();"><img src="img/customer/ttl_menu_cooperate.gif" border="0" alt="공동구매신청내역" title="공동구매신청내역" /></a>
+			</div>
+			<!-- DYNAMIC @is_cooperate@ -->
+
+			<div style="margin:4px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=counsel" onfocus="this.blur();"><img src="img/customer/ttl_menu_counsel2.gif" border="0" alt="상품평&문의관리" title="상품평&문의관리" /></a>
+			</div>
+
+			<ul>
+				<li><a href="{{Main}}?channel=after" onfocus="this.blur();" class="small">나의 이용후기</a></li>
+				<li><a href="{{Main}}?channel=qna" onfocus="this.blur();" class="small">나의 상품Q&A</a></li>
+				<li><a href="{{Main}}?channel=counsel" onfocus="this.blur();" class="small">1:1 고객상담 내역</a></li>				
+			</ul>	
+
+			<div style="margin:0px 0 4px;height:22px;">
+				<a href="{{Main}}?channel=modify" onfocus="this.blur();"><img src="img/customer/ttl_menu_member.gif" border="0" alt="회원정보관리" title="회원정보관리" /></a>
+			</div>
+
+			<ul>
+				<li><a href="{{Main}}?channel=modify" onfocus="this.blur();" class="small">회원정보 수정</a></li>
+				<li><a href="{{Main}}?channel=passwd" onfocus="this.blur();" class="small">비밀번호 변경</a></li>
+				<li><a href="{{Main}}?channel=quit" onfocus="this.blur();" class="small">회원탈퇴 신청</a></li>				
+			</ul>			
+		</div>
+		<div style="height:14px; overflow:hidden">
+			<img src="img/customer/box_customer_bottom.gif" border="0" alt='bottom' />
+		</div>
+	</div> 
+
+	<!-- 배너 START -->
+	<div id="banner">
+		<ul>
+			<!-- DYNAMIC @loop_banner@ -->
+			<li style="background:url()"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></li>
+			<!-- DYNAMIC @loop_banner@ -->	
+		</ul>
+	</div>
+	<!-- @배너 END -->

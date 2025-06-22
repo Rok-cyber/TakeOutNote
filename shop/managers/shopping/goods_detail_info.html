@@ -1,0 +1,634 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<title>품목별 상품정보 고시내용 안내</title>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</head>
+
+<script>
+function $() {
+	var elements = new Array();
+	for (var i = 0; i < arguments.length; i++) {
+		var element = arguments[i];
+		if (typeof element == 'string')
+			element = document.getElementById(element);
+		if (arguments.length == 1)
+			return element;
+		elements.push(element);
+	}
+	return elements;
+}
+
+var ck_num = 0;
+
+function ck_view(num) {
+	if(num<ck_num){ 
+		num2 = parseInt(num) - 1;
+		$("detail"+num2).focus();
+	}
+	else $("detail"+num).focus();	
+	ck_num = num;
+}
+
+</script>
+
+<style>
+#lists ul li { text-align:left;padding:4px 0 0 8px; float:left; width:142px; }
+#details { border:1px solid #dadada; padding:12px; height:210px; overflow:auto }
+#details .boxs { border:1px solid #e3e3e3; background-color:#fafafa; padding:8px; }
+#details .hd { border:0px; background:#fff; height:14px; }
+</style>
+
+<body style="padding:5px 7px 8px 7px;">
+
+<div class="small bold orange">! 전자상거래 등에서의 상품정보제공 고시</div>
+<div style="height:4px;overflow:hidden;">&nbsp;</div>
+<div id="lists" class="small">	
+	<ul>
+		<li><a href="#" onclick="ck_view(1);return false;">의류</a></li>
+		<li><a href="#" onclick="ck_view(2);return false;">구두/신발</a></li>
+		<li><a href="#" onclick="ck_view(3);return false;">가방</a></li>
+		<li><a href="#" onclick="ck_view(4);return false;">패션잡화</a></li>
+		<li><a href="#" onclick="ck_view(5);return false;">침구류/커튼</a></li>
+		<li><a href="#" onclick="ck_view(6);return false;">가구</a></li>
+		<li><a href="#" onclick="ck_view(7);return false;">영상가전</a></li>
+		<li><a href="#" onclick="ck_view(8);return false;">가정용 전기제품</a></li>
+		<li><a href="#" onclick="ck_view(9);return false;">계절가전(에어컨/온풍기)</a></li>
+		<li><a href="#" onclick="ck_view(10);return false;">사무용기기</a></li>
+		<li><a href="#" onclick="ck_view(11);return false;">광학기기(디지털카메라/캠코더)</a></li>
+		<li><a href="#" onclick="ck_view(12);return false;">소형전자(MP3/전자사전 등)</a></li>
+		<li><a href="#" onclick="ck_view(13);return false;">휴대폰</a></li>
+		<li><a href="#" onclick="ck_view(14);return false;">네비게이션</a></li>
+		<li><a href="#" onclick="ck_view(15);return false;">자동차용품</a></li>
+		<li><a href="#" onclick="ck_view(16);return false;">의료기기</a></li>
+		<li><a href="#" onclick="ck_view(17);return false;">주방용품</a></li>
+		<li><a href="#" onclick="ck_view(18);return false;">화장품</a></li>
+		<li><a href="#" onclick="ck_view(19);return false;">귀금속/보석/시계류</a></li>
+		<li><a href="#" onclick="ck_view(20);return false;">식품(농수산물)</a></li>
+		<li><a href="#" onclick="ck_view(21);return false;">일반식품</a></li>
+		<li><a href="#" onclick="ck_view(22);return false;">건강기능식품/체중조절식품</a></li>
+		<li><a href="#" onclick="ck_view(23);return false;">영유아용품</a></li>
+		<li><a href="#" onclick="ck_view(24);return false;">악기</a></li>
+		<li><a href="#" onclick="ck_view(25);return false;">스포츠용품</a></li>
+		<li><a href="#" onclick="ck_view(26);return false;">서적</a></li>
+		<li><a href="#" onclick="ck_view(27);return false;">호텔/펜션예약</a></li>
+		<li><a href="#" onclick="ck_view(28);return false;">여행패키지</a></li>
+		<li><a href="#" onclick="ck_view(29);return false;">항공권</a></li>
+		<li><a href="#" onclick="ck_view(30);return false;">자동차대여서비스</a></li>
+		<li><a href="#" onclick="ck_view(31);return false;">물품대여서비스(정수기, 비데, 공기청정기 등)</a></li>
+		<li><a href="#" onclick="ck_view(32);return false;">물품대여서비스(서적, 유아용품, 행사용품 등)</a></li>
+		<li><a href="#" onclick="ck_view(33);return false;">디지털콘텐츠(음원, 게임, 인터넷강의 등)</a></li>
+		<li><a href="#" onclick="ck_view(34);return false;">상품권/쿠폰</a></li>
+		<li><a href="#" onclick="ck_view(35);return false;">기타</a></li>
+	</ul>
+</div>
+
+<div style="clear:both; height:20px;overflow:hidden;">&nbsp;</div>
+
+<div id="details" class="small">
+	<ul>
+		<li>
+			<div class="small bold"><font class="eng">1.</font> 의류</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font> 제품 소재 (섬유의 조성 또는 혼용률을 백분율로 표시, 기능성인 경우 성적서 또는 허가서)</li>
+				<li><font class='eng'>2.</font>  색상</li>
+				<li><font class='eng'>3.</font>  치수</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  제조국</li>
+				<li><font class='eng'>6.</font>  세탁방법 및 취급시 주의사항</li>
+				<li><font class='eng'>7.</font>  제조연월</li>
+				<li><font class='eng'>8.</font>  품질보증기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail1" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">2.</font> 구두 / 신발</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  제품 소재 (운동화인 경우에는 겉감, 안감을 구분하여 표시)</li>
+				<li><font class='eng'>2.</font>  색상</li>
+				<li><font class='eng'>3.</font>  치수</li>
+				<li>발길이: 해외사이즈 표기시 국내사이즈 병행 표기(mm)</li>
+				<li>굽높이 (굽 재료를 사용하는 여성화에 한함, cm)</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  제조국</li>
+				<li><font class='eng'>6.</font>  취급시 주의사항</li>
+				<li><font class='eng'>7.</font>  품질보증기준</li>
+				<li><font class='eng'>8.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail2" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">3.</font> 가방</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  종류</li>
+				<li><font class='eng'>2.</font>  소재</li>
+				<li><font class='eng'>3.</font>  색상</li>
+				<li><font class='eng'>4.</font>  크기</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  취급시 주의사항</li>
+				<li><font class='eng'>8.</font>  품질보증기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail3" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">4.</font> 패션잡화 (모자 / 벨트 / 액세서리)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  종류</li>
+				<li><font class='eng'>2.</font>  소재</li>
+				<li><font class='eng'>3.</font>  치수</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  제조국</li>
+				<li><font class='eng'>6.</font>  취급시 주의사항</li>
+				<li><font class='eng'>7.</font>  품질보증기준</li>
+				<li><font class='eng'>8.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail4" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">5.</font> 침구류 / 커튼</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  제품 소재 (섬유의 조성 또는 혼용률을 백분율로 표시)충전재를 사용한 제품은 충전재를 함께 표기</li>
+				<li><font class='eng'>2.</font>  색상</li>
+				<li><font class='eng'>3.</font>  치수</li>
+				<li><font class='eng'>4.</font>  제품구성</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  세탁방법 및 취급시 주의사항</li>
+				<li><font class='eng'>8.</font>  품질보증 기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail5" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">6.</font> 가구(침대 / 소파 / 싱크대 / DIY제품)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명</li>
+				<li><font class='eng'>2.</font>  KC 인증 필 유무 (품질경영 및 공산품안전관리법 상 안전 · 품질표시대상공산품에 한함)</li>
+				<li><font class='eng'>3.</font>  색상</li>
+				<li><font class='eng'>4.</font>  구성품</li>
+				<li><font class='eng'>5.</font>  주요 소재</li>
+				<li><font class='eng'>6.</font>  제조자, 수입품의 경우 수입자를 함께 표기 (구성품 별 제조자가 다른 경우 각 구성품의 제조자, 수입자)</li>
+				<li><font class='eng'>7.</font>  제조국 (구성품 별 제조국이 다른 경우 각 구성품의 제조국)</li>
+				<li><font class='eng'>8.</font>  크기</li>
+				<li><font class='eng'>9.</font>  배송 · 설치비용</li>
+				<li><font class='eng'>10.</font>  품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail6" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">7.</font> 영상가전(TV류)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  전기용품 안전인증 필 유무 (전기용품안전관리법 상 안전인증대상전기용품, 자율안전확인대상전기용품, 공급자적합성확인대상전기용품에 한함)</li>
+				<li><font class='eng'>3.</font>  정격전압, 소비전력, 에너지소비효율등급 (에너지이용합리화법 상 의무대상상품에 한함)</li>
+				<li><font class='eng'>4.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  크기 (형태포함)</li>
+				<li><font class='eng'>8.</font>  화면사양 (크기, 해상도, 화면비율 등)</li>
+				<li><font class='eng'>9.</font>  품질보증기준</li>
+				<li><font class='eng'>10.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail7" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">8.</font> 가정용 전기제품(냉장고 / 세탁기 / 식기세척기 / 전자레인지)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  전기용품 안전인증 필 유무 (전기용품안전관리법 상 안전인증대상전기용품, 자율안전확인대상전기용품, 공급자적합성확인대상전기용품에 한함)</li>
+				<li><font class='eng'>3.</font>  정격전압, 소비전력, 에너지소비효율등급 (에너지이용합리화법 상 의무대상상품에 한함)</li>
+				<li><font class='eng'>4.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  크기(용량, 형태 포함)</li>
+				<li><font class='eng'>8.</font>  품질보증기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail8" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">9.</font> 계절가전(에어컨 / 온풍기)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  전기용품 안전인증 필 유무 (전기용품안전관리법 상 안전인증대상전기용품, 자율안전확인대상전기용품, 공급자적합성확인대상전기용품에 한함)</li>
+				<li><font class='eng'>3.</font>  정격전압, 소비전력, 에너지소비효율등급 (에너지이용합리화법 상 의무대상상품에 한함)</li>
+				<li><font class='eng'>4.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  크기(형태 및 실외기 포함)</li>
+				<li><font class='eng'>8.</font>  냉난방면적</li>
+				<li><font class='eng'>9.</font>  추가설치비용</li>
+				<li><font class='eng'>10.</font>  품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail9" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">10.</font> 사무용기기(컴퓨터 / 노트북 / 프린터)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  KCC 인증 필 유무 (전파법 상 인증대상상품에 한함, MIC 인증 필 혼용 가능) </li>
+				<li><font class='eng'>3.</font>  정격전압, 소비전력, 에너지소비효율등급 (에너지이용합리화법 상 의무대상상품에 한함)</li>
+				<li><font class='eng'>4.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  크기, 무게 (무게는 노트북에 한함)</li>
+				<li><font class='eng'>8.</font>  주요 사양 (컴퓨터와 노트북의 경우 성능, 용량, 운영체제 포함여부 등 / 프린터의 경우 인쇄 속도 등)</li>
+				<li><font class='eng'>9.</font>  품질보증기준</li>
+				<li><font class='eng'>10.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail10" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">11.</font> 광학기기(디지털카메라 / 캠코더)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  KCC 인증 필 유무 (전파법 상 인증대상상품에 한함, MIC 인증 필 혼용 가능)</li>
+				<li><font class='eng'>3.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  제조국</li>
+				<li><font class='eng'>6.</font>  크기, 무게</li>
+				<li><font class='eng'>7.</font>  주요 사양</li>
+				<li><font class='eng'>8.</font>  품질보증기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail11" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">12.</font> 소형전자(MP3 / 전자사전 등)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  KC 인증 필 유무 (전파법 상 인증대상상품에 한함, MIC 인증 필 혼용 가능) </li>
+				<li><font class='eng'>3.</font>  정격전압, 소비전력</li>
+				<li><font class='eng'>4.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  크기, 무게</li>
+				<li><font class='eng'>8.</font>  주요 사양</li>
+				<li><font class='eng'>9.</font>  품질보증기준</li>
+				<li><font class='eng'>10.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail12" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">13.</font> 휴대폰</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  KCC 인증 필 유무 (전파법 상 인증대상상품에 한함, MIC 인증 필 혼용 가능)</li>
+				<li><font class='eng'>3.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  제조국</li>
+				<li><font class='eng'>6.</font>  크기, 무게</li>
+				<li><font class='eng'>7.</font>  이동통신 가입조건</li>
+				<li><font class='eng'>7-1.</font> 이동통신사</li>
+				<li><font class='eng'>7-2.</font> 가입절차</li>
+				<li><font class='eng'>7-3.</font> 소비자의 추가적인 부담사항 (가입비, 유심카드 구입비 등 추가로 부담하여야 할 금액, 부가서비스, 의무사용기간, 위약금 등)</li>
+				<li><font class='eng'>8.</font>  주요사양</li>
+				<li><font class='eng'>9.</font>  품질보증기준</li>
+				<li><font class='eng'>10.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail13" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">14.</font> 내비게이션</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  KCC 인증 필 유무 (전파법 상 인증대상상품에 한함, MIC 인증 필 혼용 가능) </li>
+				<li><font class='eng'>3.</font>  정격전압, 소비전력</li>
+				<li><font class='eng'>4.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  크기, 무게 </li>
+				<li><font class='eng'>8.</font>  주요 사양</li>
+				<li><font class='eng'>9.</font>  맵 업데이트 비용 및 무상기간</li>
+				<li><font class='eng'>10.</font>  품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail14" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">15.</font> 자동차용품 (자동차부품 / 기타 자동차용품)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>3.</font>  자동차관리법에 따른 자동차부품 자기인증 유무 (인증 대상 자동차부품에 한함)</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  제조국</li>
+				<li><font class='eng'>6.</font>  크기</li>
+				<li><font class='eng'>7.</font>  적용차종</li>
+				<li><font class='eng'>8.</font>  품질보증기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail15" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">16.</font> 의료기기</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  의료기기법상 허가 · 신고 번호(허가 · 신고 대상 의료기기에 한함) 및 광고사전심의필 유무</li>
+				<li><font class='eng'>3.</font>  전기용품안전관리법상 KC 인증 필 유무 (안전인증 또는 자율안전확인 대상 전기용품에 한함)</li>
+				<li><font class='eng'>4.</font>  정격전압, 소비전력 (전기용품에 한함)</li>
+				<li><font class='eng'>5.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>6.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>7.</font>  제조국</li>
+				<li><font class='eng'>8.</font>  제품의 사용목적 및 사용방법</li>
+				<li><font class='eng'>9.</font>  취급시 주의사항</li>
+				<li>10.품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail16" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">17.</font> 주방용품</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  재질</li>
+				<li><font class='eng'>3.</font>  구성품</li>
+				<li><font class='eng'>4.</font>  크기</li>
+				<li><font class='eng'>5.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>6.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>7.</font>  제조국</li>
+				<li><font class='eng'>8.</font>  품질보증기준</li>
+				<li><font class='eng'>9.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail17" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">18.</font> 화장품</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  용량 및 중량</li>
+				<li><font class='eng'>2.</font>  제품 주요 사양 (피부타입, 색상(호, 번) 등)</li>
+				<li><font class='eng'>3.</font>  제조연월과 사용기한</li>
+				<li><font class='eng'>4.</font>  사용방법</li>
+				<li><font class='eng'>5.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>6.</font>  제조국</li>
+				<li><font class='eng'>7.</font>  주요성분</li>
+				<li><font class='eng'>8.</font>  기능성 화장품의 경우 화장품법에 따른 식품의약품안전청 심사 필 유무 (미백, 주름개선, 자외선차단 등)</li>
+				<li><font class='eng'>9.</font>  사용 시 주의사항</li>
+				<li><font class='eng'>10.</font>  품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail18" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">19.</font> 귀금속 / 보석 / 시계류</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  소재 / 순도 / 밴드재질 (시계의 경우)</li>
+				<li><font class='eng'>2.</font>  중량</li>
+				<li><font class='eng'>3.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>4.</font>  제조국 (원산지와 가공지 등이 다를 경우 함께 표기)</li>
+				<li><font class='eng'>5.</font>  치수</li>
+				<li><font class='eng'>6.</font>  착용 시 주의사항</li>
+				<li><font class='eng'>7.</font>  주요 사양</li>
+				<li><font class='eng'>7-1.</font> 귀금속, 보석류 - 등급</li>
+				<li><font class='eng'>7-2.</font> 시계 - 기능, 방수 등</li>
+				<li><font class='eng'>8.</font>  보증서 제공여부</li>
+				<li><font class='eng'>9.</font>  품질보증기준</li>
+				<li><font class='eng'>10.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail19" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">20.</font> 식품(농수산물)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  포장단위별 용량(중량), 수량, 크기</li>
+				<li><font class='eng'>2.</font>  생산연월일과 유통기한</li>
+				<li><font class='eng'>3.</font>  원산지</li>
+				<li><font class='eng'>4.</font>  생산자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  관련법상 표시사항</li>
+				<li><font class='eng'>5-1.</font> 농산물 - 농산물품질관리법상 유전자변형농산물 표시, 지리적표시</li>
+				<li><font class='eng'>5-2.</font> 축산물 - 축산법에 따른 등급 표시, 쇠고기의 경우 이력관리에 따른 표시 유무</li>
+				<li><font class='eng'>5-3.</font> 수산물 - 수산물품질관리법상 유전자변형수산물 표시, 지리적표시</li>
+				<li><font class='eng'>6.</font>  상품구성</li>
+				<li><font class='eng'>7.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail20" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">21.</font> 일반식품</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  포장단위별 용량(중량), 수량, 크기</li>
+				<li><font class='eng'>2.</font>  제조연월일과 유통기한</li>
+				<li><font class='eng'>3.</font>  원산지</li>
+				<li><font class='eng'>4.</font>  생산자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  식품위생법에 따른 용기 · 포장 표시사항</li>
+				<li><font class='eng'>5-1.</font>  식품의 유형</li>
+				<li><font class='eng'>5-2.</font>  영양성분</li>
+				<li><font class='eng'>5-3.</font>  원재료명 및 함량</li>
+				<li><font class='eng'>5-4.</font>  유전자재조합식품에 해당하는 경우의 표시</li>
+				<li><font class='eng'>5-5.</font>  영유아식 또는 체중조절식품 등에 해당하는 경우 광고 심의필 유무</li>
+				<li><font class='eng'>5-6.</font>  수입식품에 해당하는 경우 신고 필 유무</li>
+				<li><font class='eng'>6.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail21" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">22.</font> 건강기능식품 / 체중조절식품</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  포장단위별 용량(중량), 수량, 크기</li>
+				<li><font class='eng'>2.</font>  제조연월일과 유통기한</li>
+				<li><font class='eng'>3.</font>  원산지</li>
+				<li><font class='eng'>4.</font>  생산자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  식품위생법 및 건강기능식품에 관한 법률에 따른 용기 · 포장 표시사항</li>
+				<li><font class='eng'>5-1.</font>  식품의 유형</li>
+				<li><font class='eng'>5-2.</font>  영양성분</li>
+				<li><font class='eng'>5-3.</font>  원재료명 및 함량</li>
+				<li><font class='eng'>5-4.</font>  유전자재조합식품 여부</li>
+				<li><font class='eng'>5-5.</font>  광고 심의필 유무</li>
+				<li><font class='eng'>5-6.</font>  수입식품에 해당하는 경우 신고 필 유무</li>
+				<li><font class='eng'>5-7.</font>  섭취 시 주의사항 및 부작용 발생 가능성</li>
+				<li><font class='eng'>5-8.</font>  질병의 예방 및 치료를 위한 의약품이 아니라는 내용의 문구</li>
+				<li><font class='eng'>6.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail22" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">23.</font> 영유아용품</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  KC 인증 필 (품질경영 및 공산품안전관리법 상 안전인증대상 또는 자율안전확인대상 공산품에 한함)</li>
+				<li><font class='eng'>3.</font>  크기, 중량</li>
+				<li><font class='eng'>4.</font>  색상</li>
+				<li><font class='eng'>5.</font>  재질 (섬유의 경우 혼용률)</li>
+				<li><font class='eng'>6.</font>  사용연령</li>
+				<li><font class='eng'>7.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>8.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>9.</font>  제조국</li>
+				<li><font class='eng'>10.</font>  취급방법 및 취급시 주의사항, 안전표시 (주의, 경고 등)</li>
+				<li><font class='eng'>11.</font>  품질보증기준</li>
+				<li><font class='eng'>12.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail23" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">24.</font> 악기</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  크기</li>
+				<li><font class='eng'>3.</font>  색상</li>
+				<li><font class='eng'>4.</font>  재질</li>
+				<li><font class='eng'>5.</font>  제품 구성</li>
+				<li><font class='eng'>6.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>7.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>8.</font>  제조국</li>
+				<li><font class='eng'>9.</font>  상품별 세부 사양</li>
+				<li><font class='eng'>10.</font>  품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail24" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">25.</font> 스포츠용품</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  크기, 중량</li>
+				<li><font class='eng'>3.</font>  색상</li>
+				<li><font class='eng'>4.</font>  재질</li>
+				<li><font class='eng'>5.</font>  제품 구성</li>
+				<li><font class='eng'>6.</font>  동일모델의 출시년월</li>
+				<li><font class='eng'>7.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>8.</font>  제조국</li>
+				<li><font class='eng'>9.</font>  상품별 세부 사양</li>
+				<li><font class='eng'>10.</font>  품질보증기준</li>
+				<li><font class='eng'>11.</font>  A/S 책임자와 전화번호</li>
+			</ul>
+			<input type="text" id="detail25" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">26.</font> 서적</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  도서명</li>
+				<li><font class='eng'>2.</font>  저자, 출판사</li>
+				<li><font class='eng'>3.</font>  크기</li>
+				<li><font class='eng'>4.</font>  쪽수</li>
+				<li><font class='eng'>5.</font>  제품 구성 (전집 또는 세트일 경우 낱권 구성, CD 등)</li>
+				<li><font class='eng'>6.</font>  출간일</li>
+				<li><font class='eng'>7.</font>  목차 또는 책소개</li>
+			</ul>
+			<input type="text" id="detail26" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">27.</font> 호텔 / 펜션 예약</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  국가 또는 지역명</li>
+				<li><font class='eng'>2.</font>  숙소형태</li>
+				<li><font class='eng'>3.</font>  등급, 객실타입</li>
+				<li><font class='eng'>4.</font>  사용가능 인원, 인원 추가 시 비용</li>
+				<li><font class='eng'>5.</font>  부대시설, 제공 서비스 (조식 등)</li>
+				<li><font class='eng'>6.</font>  취소 규정 (환불, 위약금 등)</li>
+				<li><font class='eng'>7.</font>  예약담당 연락처</li>
+			</ul>
+			<input type="text" id="detail27" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">28.</font> 여행패키지</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  여행사</li>
+				<li><font class='eng'>2.</font>  이용항공편</li>
+				<li><font class='eng'>3.</font>  여행기간 및 일정</li>
+				<li><font class='eng'>4.</font>  총 예정 인원, 출발 가능 인원</li>
+				<li><font class='eng'>5.</font>  숙박정보</li>
+				<li><font class='eng'>6.</font>  포함 내역 (식사, 인솔자, 공연관람 등)</li>
+				<li><font class='eng'>7.</font>  추가 경비 항목과 금액 (유류할증료, 공항이용료, 관광지 입장료, 안내원수수료, 식사비용, 선택사항 등)</li>
+				<li><font class='eng'>8.</font>  취소 규정 (환불, 위약금 등)</li>
+				<li><font class='eng'>9.</font>  해외여행의 경우 외교통상부가 지정하는 여행경보단계</li>
+				<li><font class='eng'>10.</font>  예약담당 연락처</li>
+			</ul>
+			<input type="text" id="detail28" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">29.</font> 항공권</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  요금조건, 왕복 · 편도 여부</li>
+				<li><font class='eng'>2.</font>  유효기간</li>
+				<li><font class='eng'>3.</font>  제한사항 (출발일, 귀국일 변경가능 여부 등)</li>
+				<li><font class='eng'>4.</font>  티켓수령방법</li>
+				<li><font class='eng'>5.</font>  좌석종류</li>
+				<li><font class='eng'>6.</font>  추가 경비 항목과 금액 (유류할증료, 공항이용료 등)</li>
+				<li><font class='eng'>7.</font>  취소 규정 (환불, 위약금 등)</li>
+				<li><font class='eng'>8.</font>  예약담당 연락처</li>
+			</ul>
+			<input type="text" id="detail29" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">30.</font> 자동차 대여 서비스 (렌터카)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  차종</li>
+				<li><font class='eng'>2.</font>  소유권 이전 조건 (소유권이 이전되는 경우에 한함)</li>
+				<li><font class='eng'>3.</font>  추가 선택 시 비용 (자차면책제도, 내비게이션 등)</li>
+				<li><font class='eng'>4.</font>  차량 반환 시 연료대금 정산 방법</li>
+				<li><font class='eng'>5.</font>  차량의 고장 · 훼손 시 소비자 책임</li>
+				<li><font class='eng'>6.</font>  예약 취소 또는 중도 해약 시 환불 기준</li>
+				<li><font class='eng'>7.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail30" class="hd" />
+		</li>
+		<li>			
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">31.</font> 물품대여 서비스 (정수기, 비데, 공기청정기 등)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  소유권 이전 조건 (소유권이 이전되는 경우에 한함)</li>
+				<li><font class='eng'>3.</font>  유지보수 조건 (점검 · 필터교환 주기, 추가 비용 등)</li>
+				<li><font class='eng'>4.</font>  상품의 고장 · 분실 · 훼손 시 소비자 책임</li>
+				<li><font class='eng'>5.</font>  중도 해약 시 환불 기준</li>
+				<li><font class='eng'>6.</font>  제품 사양 (용량, 소비전력 등)</li>
+				<li><font class='eng'>7.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail31" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">32.</font> 물품대여 서비스 (서적, 유아용품, 행사용품 등)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  소유권 이전 조건 (소유권이 이전되는 경우에 한함)</li>
+				<li><font class='eng'>3.</font>  상품의 고장 · 분실 · 훼손 시 소비자 책임</li>
+				<li><font class='eng'>4.</font>  중도 해약 시 환불 기준</li>
+				<li><font class='eng'>5.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail32" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">33.</font> 디지털 콘텐츠 (음원, 게임, 인터넷강의 등)</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  제작자 또는 공급자</li>
+				<li><font class='eng'>2.</font>  이용조건, 이용기간</li>
+				<li><font class='eng'>3.</font>  상품 제공 방식 (CD, 다운로드, 실시간 스트리밍 등)</li>
+				<li><font class='eng'>4.</font>  최소 시스템 사양, 필수 소프트웨어</li>
+				<li><font class='eng'>5.</font>  청약철회 또는 계약의 해제 · 해지에 따른 효과</li>
+				<li><font class='eng'>6.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail33" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">34.</font> 상품권 / 쿠폰</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  발행자</li>
+				<li><font class='eng'>2.</font>  유효기간, 이용조건 (유효기간 경과 시 보상 기준, 사용제한품목 및 기간 등)</li>
+				<li><font class='eng'>3.</font>  이용 가능 매장</li>
+				<li><font class='eng'>4.</font>  잔액 환급 조건</li>
+				<li><font class='eng'>5.</font>  소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail34" class="hd" />
+		</li>
+		<li>
+			<div  class="small bold" style="padding-top:15px;"><font class="eng">35.</font> 기타</div>
+			<ul class="boxs">
+				<li><font class='eng'>1.</font>  품명 및 모델명</li>
+				<li><font class='eng'>2.</font>  법에 의한 인증 · 허가 등을 받았음을 확인할 수 있는 경우 그에 대한 사항</li>
+				<li><font class='eng'>3.</font>  제조국 또는 원산지</li>
+				<li><font class='eng'>4.</font>  제조자, 수입품의 경우 수입자를 함께 표기</li>
+				<li><font class='eng'>5.</font>  A/S 책임자와 전화번호 또는 소비자상담 관련 전화번호</li>
+			</ul>
+			<input type="text" id="detail35" class="hd" />
+		</li>
+	</ul>
+</div>
+
+
+</body>
+</HTML>

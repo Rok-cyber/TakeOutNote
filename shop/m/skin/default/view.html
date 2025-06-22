@@ -1,0 +1,330 @@
+<div id="contents">
+	<section id="headline">
+		<h1>상품보기</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>
+	</section>
+	
+	<section id="goodsInfo">
+		<form name="goodsForm" method="post" onsubmit="return false;" action="php/cart_ok.php">
+		<input type='hidden' name='p_price' value='{{P_PRICE}}' />
+		<input type='hidden' name='p_price2' value='{{P_PRICE2}}' />
+		<input type='hidden' name='p_price3' value='{{P_PRICE3}}' />
+		<input type='hidden' name='p_total' value='{{P_TOTAL}}' />
+		<input type='hidden' name='p_total2' value='{{P_TOTAL2}}' />
+		<input type='hidden' name='p_reserve' value='{{P_RESERVE}}' />
+		<input type='hidden' name='p_sale' value='{{MY_SALE}}' />
+		<input type='hidden' name='p_cate' value='{{cate}}' />
+		<input type='hidden' name='p_number' value='{{uid}}' />
+		<input type='hidden' name='p_carr' value='{{P_CARR}}' />
+		<input type='hidden' name='type' />
+		<input type='hidden' name='defQty' value='{{DEF_QTY}}' />
+		<input type='hidden' name='sQty' value='{{S_QTY}}' />
+		<input type='hidden' name='goodsUnit' value='{{GOODS_UNIT}}' />
+		<input type='hidden' name='ckLogin' value='{{CKLOGIN}}' />
+		<input type='hidden' name='page' value='{{page}}' />
+		<input type='hidden' name='direct' value='N' />
+		<input type='hidden' name='ckCart' value='{{ckCart}}' />
+		<input type='hidden' name='p_option' />
+		<input type='hidden' name='p_op' value='0' />
+		<input type='hidden' name='p_op_cnt' value='{{op_cnt}}' />
+		<input type='hidden' name='cp_type' value='{{CP_TYPE}}' />
+		<input type='hidden' name='cp_sale' value='{{CP_SALE}}' />
+		<input type='hidden' name='cp_sale_type' value='{{CP_SALE_TYPE}}' />
+
+		<section id="goodsName">
+			<h2>{{GOODS_NAME}}</h2>
+		</section>
+
+		<section id="goodsImage">
+			<h2>상품사진</h2>
+			<div class="slidings">
+				<div id="otherImage" class="wrap">
+					<figure><img src="{{GOODS_IMG}}" alt="{{GOODS_NAME}} 사진" /></figure>
+					<!-- DYNAMIC @loop_ot_img@ -->
+					<figure >
+						<img src="{{OT_IMG2}}" alt="{{GOODS_NAME}} 다른사진" />
+					</figure>
+					<!-- DYNAMIC @loop_ot_img@ -->
+				</div>		
+
+				<!-- DYNAMIC @is_ot_img@ -->
+				<p id="imgPagination">
+					<span><a href="#"></a><em id="currentImg">1</em> / <em>{{OCNT}}</em></span>
+				</p>
+				<script type="text/javascript">
+					var otherImages = BaramangSwipe.template.otherImage("#otherImage", "p#imgPagination");
+					otherImages.load().refreshPagination();
+				</script>
+				<!-- DYNAMIC @is_ot_img@ -->
+
+			</div>			
+		</section>
+
+		<section id="goodsPrice">
+			<h2>상품가격</h2>
+			<ul>
+				<li>
+					<p><em id="prices">{{GOODS_PRICE}}</em><span>원</span></p>
+				</li>
+				<li>
+					<p>
+						<span>상품공유</span>
+						<span class="snsList">
+							<img src="img/common/share_facebook.gif" onclick="sendSNS('fa','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="페이스북 공유하기" title="페이스북 공유하기" />&nbsp;
+							<img src="img/common/share_twitter.gif" onclick="sendSNS('tw','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="트위터 공유하기" title="트위터 공유하기" />&nbsp;
+							<img src="img/common/share_metoday.gif" onclick="sendSNS('me','{{SHARE_GOODS}}','{{SHARE_URL}}','{{SHARE_TAG}}');" alt="미투데이 공유하기" title="미투데이 공유하기" />&nbsp;
+							<img src="img/common/share_yozm.gif" onclick="sendSNS('yz','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="요즘 공유하기" title="요즘 공유하기" />
+						</span>
+					</p>
+					<p>
+						<a href="{{Main}}?channel=review&number={{uid}}" title="상품후기보기">
+							<span>상품후기</span><em>({{CNT_AFTER}}개)</em>
+							<span class="review_bg"><em style="width:{{PER_AFTER}}%"></em></span>
+						</a>
+					</p>					
+				</li>
+			</ul>
+		</section>
+
+		<section id="goodsBasicInfo">
+			<h2>상품기본정보</h2>
+			<table summary="상품기본정보">
+			<col width="35%" /> 
+			<col width="65%" />
+			<tbody>
+			<!-- DYNAMIC @is_oprice@ -->
+			<tr>
+				<th>소비자가</th>
+				<td><s>{{GOODS_OPRICE}}</s>원</td>
+			</tr>
+			<!-- DYNAMIC @is_oprice@ -->
+			<tr>
+				<th>판매가</th>
+				<td><strong id="prices1">{{GOODS_ORIG_PRICE}}</strong>원</td>
+			</tr>
+			<!-- DYNAMIC @is_my_sale@ -->
+			<tr>
+				<th>할인가</th>
+				<td><strong id="prices2">{{GOODS_PRICE}}</strong> ({{TTL}}할인 <em>{{MY_SALE}}%</em>)</td>
+			</tr>
+			<!-- DYNAMIC @is_my_sale@ -->
+			<!-- DYNAMIC @is_cupon@ -->
+			<tr>
+				<th>쿠폰적용가격</th>
+				<td><strong id="prices3">{{GOODS_CPRICE}}</strong> <a href="javascript:cuponDown({{CUID}},{{uid}},'{{CKLOGIN}}');">[할인쿠폰 다운로드]</td>
+			</tr>
+			<!-- DYNAMIC @is_cupon@ -->
+			<!-- DYNAMIC @is_reserve@ -->
+			<tr>
+				<th>적립금</th>
+				<td>
+					<span id="reserves">{{GOODS_RESERVE}}</span>원
+					<!-- DYNAMIC @is_my_point@ -->
+					({{TTL}}추가적립 <em>{{MY_POINT}}%</em>)
+					<!-- DYNAMIC @is_my_point@ -->
+				</td>
+			</tr>
+			<!-- DYNAMIC @is_reserve@ -->
+			<!-- DYNAMIC @is_model@ -->
+			<tr>
+				<th>모델명</th>
+				<td>{{GOODS_MODEL}}</td>
+			</tr>
+			<!-- DYNAMIC @is_model@ -->
+			<!-- DYNAMIC @is_comp@ -->
+			<tr>
+				<th>제조사</th>
+				<td>{{GOODS_COMP}}</td>
+			</tr>
+			<!-- DYNAMIC @is_comp@ -->
+			<!-- DYNAMIC @is_made@ -->
+			<tr>
+				<th>원산지</th>
+				<td>{{GOODS_MADE}}</td>
+			</tr>
+			<!-- DYNAMIC @is_made@ -->
+			<!-- DYNAMIC @is_brand@ -->
+			<tr>
+				<th>브랜드</th>
+				<td><a href='{{Main}}?channel=brand&amp;uid={{PLUS}}'>{{GOODS_BRAND}}</a></td>
+			</tr>
+			<!-- DYNAMIC @is_brand@ -->
+			<!-- DYNAMIC @is_event@ -->
+			<tr>
+				<th>관련이벤트</th>
+				<td><a href='{{Main}}?channel=event&amp;uid={{PLUS}}'>{{GOODS_EVENT}}</a></td>
+			</tr>
+			<!-- DYNAMIC @is_event@ -->
+			<!-- DYNAMIC @is_carr@ -->
+			<tr>
+				<th>개별배송비</th>
+				<td>{{GOODS_CARR}}원</td>
+			</tr>
+			<!-- DYNAMIC @is_carr@ -->
+			<!-- DYNAMIC @is_carr_free@ -->
+			<tr>
+				<th>배송비</th>
+				<td>배송비 무료</td>
+			</tr>
+			<!-- DYNAMIC @is_carr_free@ -->
+			</tbody>
+			</table>			
+		</section>
+
+		<section id="goodsOpQty">
+			<h2>옵션/수량선택</h2>
+			
+			<!-- DYNAMIC @is_option@ -->
+			<p>{{OP_TITLE}}</p>
+			<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+			<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+			<!-- DYNAMIC @is_option@ -->
+
+			<p>수량</p>
+			<select name='p_qty' class='opSelect' onchange="ckTotal()">{{QTY_LIST}}</select>
+			
+			<p class="tPrice">
+				<span>합계금액</span>
+				<span><em id="totalPrice">{{GOODS_PRICE}}</em>원</span>
+			</p>
+			<ul>
+				<!-- DYNAMIC @is_limit2@ -->
+				<li><p class="active" onclick="return ckGoods('order');" title="바로구매하기">바로구매</p></li>
+				<li><p class="active" onclick="return ckGoods('cart');" title="장바구니담기">장바구니</p></li>
+				<!-- DYNAMIC @is_limit2@ -->
+				<!-- DYNAMIC @is_limit3@ -->
+				<li><p>바로구매</p></li>
+				<li><p>장바구니</p></li>
+				<!-- DYNAMIC @is_limit3@ -->
+				<li><p class="active" onclick="wishAdd({{cate}},{{uid}},'{{CKLOGIN}}');" title="관심상품등록">관심상품</p></li>
+			</ul>
+		</section>
+
+		<section id="goodsMoreInfo">
+			<ul>
+				<li>
+					<a href="{{Main}}?channel=review&number={{uid}}" title="상품후기보기">
+						<div>
+							<span>상품 후기</span> <em>({{CNT_AFTER}}개)</em>
+							<em> - {{PER_AFTER}}점</em> <span class="review_bg"><em style="width:{{PER_AFTER}}%"></em></span>				
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="{{Main}}?channel=qna&number={{uid}}" title="상품문의보기">
+						<div>
+							<span>상품 문의</span> <em>({{CNT_QNA}}개)</em>
+						</div>
+					</a>
+				</li>
+				<li>
+					<a href="{{Main}}?channel=detail&uid={{uid}}" title="상품상세정보보기">
+						<div>
+							<span>상품 상세 정보</span>	
+						</div>
+					</a>
+				</li>
+				<!-- DYNAMIC @is_goods_info@ -->
+				<li onclick="detailView($(this),$('.goodsBasicDetail'))">
+					<span>상품 일반 정보</span>
+				</li>
+				<li class="goodsBasicDetail">				
+					<table summary="상품일반정보">
+					<col width="30%" /> 
+					<col width="70%" />
+					<tbody>
+					<!-- DYNAMIC @loop_info@ -->
+					<tr>
+						<th>{{opName}}</th>
+						<td>{{opContent}}</td>
+					</tr>
+					<!-- DYNAMIC @loop_info@ -->
+					</tbody>
+					</table>
+				</li>				
+				<!-- DYNAMIC @is_goods_info@ -->
+				<!-- DYNAMIC @is_vendor@ -->
+				<li onclick="detailView($(this),$('.goodsBasicVendor'))">
+					<span>판매자 정보</span>					
+				</li>	
+				<li class="goodsBasicVendor">	
+					<table summary="판매자정보">
+					<col width="30%" /> 
+					<col width="70%" />
+					<tbody>		
+					<tr class="title">
+						<th class="title">{{M_NAME}}</th>
+						<td class="title"><a href="{{Main}}?channel=minishop&vendor={{GOODS_VENDOR}}">미니샵가기</a></td>
+					</tr>
+					<tr>
+						<th class="pt10">상호</th>
+						<td class="pt10">{{M_COMP}}</td>
+					</tr>					
+					<tr>
+						<th>연락처</th>
+						<td>{{M_TEL}}</td>
+					</tr>					
+					<tr>
+						<th>이메일</th>
+						<td>{{M_EMAIL}}</td>
+					</tr>					
+					<tr>
+						<th>주소</th>
+						<td>{{M_ADDR}}</td>
+					</tr>					
+					</tbody>
+					</table>
+				</li>				
+				<!-- DYNAMIC @is_vendor@ -->
+				<li onclick="detailView($(this),$('.goodsBasicHelp'))">
+					<span>배송 / 반품 / 환불 정보</span>					
+				</li>
+				<li class="goodsBasicHelp">
+					<div style="width:98%;line-height:1.4em">{{INFO}}</div>
+				</li>
+				<!-- DYNAMIC @is_relate@ -->
+				<li onclick="detailView($(this),$('.goodsBasicRelative'))">
+					<span>관련 상품</span>
+				</li>
+				<li class="goodsBasicRelative">
+					<ul id="relativeGoodsList">
+						<!-- DYNAMIC @loop_relate@ -->		
+						<li>			
+							<div class="item_box">
+								<a href="{{LINK}}" title="상품상세보기">
+									<div class="thumbnail"><img src="{{IMAGE}}" alt="{{NAME}} 사진" /></div>
+									<div class="item_info">
+										<p class="goods" title="상품명">{{NAME}}</p>
+										<p class="price" title="가격"><strong>{{PRICE2}}</strong>원</p>		
+									</div>
+								</a>
+							</div>
+						</li>
+						<!-- DYNAMIC @loop_relate@ -->					
+					</ul>
+					<p id="relativeGoodsListPagination" class="pagination" title="관련상품순서">
+						<!-- DYNAMIC @loop_sicon@ -->
+						<span>{{i}}</span>
+						<!-- DYNAMIC @loop_sicon@ -->
+					</p>
+				
+					<script type="text/javascript">
+						var relativeGoodsList = BaramangSwipe.template.mainGoodsList("#relativeGoodsList", "p#relativeGoodsListPagination");
+						relativeGoodsList.load().refreshPagination();
+					</script>
+				</li>
+				<!-- DYNAMIC @is_relate@ -->
+			</ul>			
+		<section>
+
+		</form>	
+
+	</section>
+	
+</div>
+
+<script type="text/javascript">
+<!--
+	if({{DEF_QTY2}}>1) ckTotal();	
+-->
+</script>

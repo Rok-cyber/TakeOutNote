@@ -1,0 +1,94 @@
+<table border="0" width="99%" align="center" cellpadding="0" cellspacing=0>
+<!-- DYNAMIC @search_form1@ -->
+<form name=searchForm method=get action='{{MAIN}}'>  
+<input type=hidden name=channel value={{channel}}>
+<tr>
+	<td  colspan=2 align=right>
+		<div class="boxText small orange">기간선택</div> 
+		<div style='float:left;padding-left:6px;padding-right:10px;'> 
+			{{SELECT}}
+		</div>	
+		
+		<div id="sBtn1" style="padding-left:6px;">
+			<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+		</div>
+	</td>
+</tr>	
+</form>
+<!-- DYNAMIC @search_form1@ -->
+<!-- DYNAMIC @search_form2@ -->
+<form name=searchForm method=get action='{{MAIN}}'>  
+<input type=hidden name=channel value={{channel}}>
+<tr>
+	<td  colspan=2 align=right>
+	</td>
+</tr>	
+</form>
+<!-- DYNAMIC @search_form2@ -->
+<tr><td height=10 align=left></td></tr>
+<tr>
+	<td align=center>
+	    <table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+		<tr>
+		    <td>
+			    <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+						<tr height=24>
+							<td width=12% align=center class=gr_bg><font class="bTitle small">{{TTL1}}</font></td>
+							<td width=15% align=center class=gr_bg><font class="bTitle small">방문자수</font></td>
+							<td width=15% align=center class=gr_bg><font class="bTitle small">페이지뷰</font></td>
+							<td align=center class=gr_bg><font class="bTitle small">그래프</font></td>					
+						  </tr>
+						  <!-- DYNAMIC @loop@ -->
+						  <tr height=24 bgcolor='#FFFFFF'>
+							<td align=center><font class=eng>{{TTL2}}</font></td>
+							<td align=center><font class='eng mcolor'>{{CNT}} : {{PER}}%</font></td>
+							<td align=center><font class='eng satur'>{{CNT2}} : {{PER2}}%</font></td>
+							<td valign=middle align=center>
+							   <table border='0' cellpadding='0' cellspacing='0' width=94%>
+							     <tr>
+								   <td height=10 align=left>
+								     <table border='0' cellpadding='0' cellspacing='0' width='{{GRP}}%' height='8' background='img/grp_bg.gif'>
+									   <tr><td ></td></tr>
+									 </table>
+									</td>
+								   </tr>
+								   <tr>
+								   <td height=10 align=left>
+								     <table border='0' cellpadding='0' cellspacing='0' width='{{GRP2}}%' height='8' background='img/grp_bg2.gif'>
+									   <tr><td ></td></tr>
+									 </table>
+									</td>
+								   </tr>
+								 </table>
+							  </td>					
+							</tr>
+							<!-- DYNAMIC @loop@ -->
+							<!-- DYNAMIC @is_hour@ -->
+							<tr><td align=right colspan=4 height=40 bgcolor=#FFFFFF><font class='small bold'><font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 <font class=eng>{{day}}</font>일 총 방문자수 : <font class=eng>{{TOTAL}}</font>회&nbsp;시간 평균 : <font class=eng>{{EVE}}</font>회&nbsp;&nbsp;&nbsp;<font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 <font class=eng>{{day}}</font>일 총 페이지뷰 : <font class=eng>{{TOTAL2}}</font>회&nbsp;시간 평균 : <font class=eng>{{EVE2}}</font>회&nbsp;&nbsp;</font></td></tr>
+							<!-- DYNAMIC @is_hour@ -->
+							<!-- DYNAMIC @is_day@ -->
+							<tr><td align=right colspan=4 height=40 bgcolor=#FFFFFF><font class='small bold'><font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 총 방문자수 : <font class=eng>{{TOTAL}}</font>회&nbsp;일 평균 : <font class=eng>{{EVE}}</font>회&nbsp;&nbsp;&nbsp;<font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 총 페이지뷰 : <font class=eng>{{TOTAL2}}</font>회&nbsp;일 평균 : <font class=eng>{{EVE2}}</font>회&nbsp;&nbsp;</font></td></tr>
+							<!-- DYNAMIC @is_day@ -->
+							<!-- DYNAMIC @is_month@ -->
+							<tr><td align=right colspan=4 height=40 bgcolor=#FFFFFF><font class='small bold'><font class=eng>{{year}}</font>년 총 방문자수 : <font class=eng>{{TOTAL}}</font>회&nbsp;월 평균 : <font class=eng>{{EVE}}</font>회&nbsp;&nbsp;&nbsp;<font class=eng>{{year}}</font>년 총 페이지뷰 : <font class=eng>{{TOTAL2}}</font>회&nbsp;월 평균 : <font class=eng>{{EVE2}}</font>회&nbsp;&nbsp;</font></td></tr>
+							<!-- DYNAMIC @is_month@ -->
+							<!-- DYNAMIC @is_year@ -->
+							<tr><td align=right colspan=4 height=40 bgcolor=#FFFFFF><font class='small bold'>총 방문자수 : <font class=eng>{{TOTAL}}</font>회&nbsp;평균 : <font class=eng>{{EVE}}</font>회&nbsp;&nbsp;&nbsp;총 페이지뷰 : <font class=eng>{{TOTAL2}}</font>회&nbsp;평균 : <font class=eng>{{EVE2}}</font>회&nbsp;&nbsp;</font></td></tr>
+							<!-- DYNAMIC @is_year@ -->
+							<!-- DYNAMIC @is_affili@ -->
+							<tr><td align=right colspan=4 height=40 bgcolor=#FFFFFF><font class='small bold'><font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 <font class=eng>{{day}}</font>일 총 방문자수 : <font class=eng>{{TOTAL}}</font>회&nbsp;업체 평균 : <font class=eng>{{EVE}}</font>회&nbsp;&nbsp;&nbsp;<font class=eng>{{year}}</font>년 <font class=eng>{{month}}</font>월 <font class=eng>{{day}}</font>일 총 페이지뷰 : <font class=eng>{{TOTAL2}}</font>회&nbsp;업체 평균 : <font class=eng>{{EVE2}}</font>회&nbsp;&nbsp;</font></td></tr>
+							<!-- DYNAMIC @is_affili@ -->
+						</table>
+				    </td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr><td height=30 colspan=2></td></tr>
+</table>

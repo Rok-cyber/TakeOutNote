@@ -1,0 +1,219 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+$sql = "SELECT message1 FROM mall_sms_auto WHERE code='info'";
+$row = $mysql->get_one($sql);
+
+$pw_msg = "SMS신청시 등록한 비밀번호";
+
+$ck_auth = 'N';
+$row = explode("|",stripslashes($row));
+
+if($row[0] && $row[1]) {
+	$sms_id = $row[0];
+	$sms_pw2 = $row[1];
+	$sms_pw = previlDecode($row[1]);
+	$tel1 = explode("-",$row[2]);
+	$tel2 = explode("-",$row[3]);
+	
+	
+	require_once("{$lib_path}/coolsms.php");
+
+	// 객체를 생성합니다.
+	$sms = new coolsms();
+
+	// 아이디, 비밀번호를 입력합니다.
+	$sms->setuser($sms_id, $sms_pw);
+
+	// 서버에 연결합니다.
+	if ($sms->connect())
+	{
+		// 보유 크레딧을 읽어옵니다.
+		$result = $sms->remain();
+	} else {
+		// 오류처리
+		//echo "서버에 연결할 수 없습니다.";
+	}
+
+	// 연결을 끊습니다.
+	$sms->disconnect();
+
+	// 결과를 출력합니다.
+	if ($result["RESULT-CODE"] == "00" || $result["RESULT-CODE"] == "30")	// RESULT-CODE 가 00이면 성공.
+	{
+		$sms_cash = $result["CASH"];
+		$sms_point = $result["POINT"];
+		$sms_ball = $result["DROP"];
+		$sms_cnt = $result["CREDITS"];
+		$ck_auth = 'Y';
+	}
+	else {
+		$sms_cash = $sms_point = $sms_ball = $sms_cnt = 0; //$result["RESULT-MESSAGE"]; 
+	}	
+
+	$pw_msg = "등록되었습니다. 비밀번호는 변경되었을 경우에만 입력 하시기 바랍니다";
+}
+?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function ckForm(){
+	f = document.basicForm;
+	if(!f.sms_id.value) {
+		alert("SMS 아이디를 입력 하세요!");
+		f.sms_id.focus();
+		return false;
+	}
+	if(!f.sms_pw.value && !f.sms_pw2.value) {
+		alert("SMS 비밀번호를 입력 하세요!");
+		f.sms_pw.focus();
+		return false;
+	}
+	if(!f.sms_tel11.value || !f.sms_tel12.value) {
+		alert("회신 전화번호를 입력 하세요!");
+		f.sms_tel11.focus();
+		return false;
+	}
+	if(!f.sms_tel21.value || !f.sms_tel22.value) {
+		alert("관리자 핸드폰번호를 입력 하세요!");
+		f.sms_tel21.focus();
+		return false;
+	}
+	f.submit();
+}
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_sms_conf.gif" alt="SMS설정" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>SMS 신청 및 기본정보를 설정하거나 충전정보를 확인 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td>&nbsp;<img src='./img/t_conf.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='basicForm' method='post' action='sms_post.php?mode=conf'>
+					<input type="hidden" name="sms_pw2" value="<?=$sms_pw2?>">
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SMS 아이디</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' class=ta name='sms_id' size='20' value='<?=$sms_id?>'>&nbsp;&nbsp;<font class=small>(SMS신청시 등록한 아이디)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SMS 비밀번호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='password' class=ta name='sms_pw' size='22' >&nbsp;&nbsp;<font class=small>(<?=$pw_msg?>)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;회신전화번호</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type="text" class="bt2 eng" name="sms_tel11" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel1[0]?>"> - <input type="text" class="bt2 eng" name="sms_tel12" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel1[1]?>"> - <input type="text" class="bt2 eng" name="sms_tel13" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);"  value="<?=$tel1[2]?>">&nbsp;&nbsp;<font class=small>(고객이 받는 메세지에 회신번호로 찍히는 전화번호)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;관리자 핸드폰</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type="text" class="bt2 eng" name="sms_tel21" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel2[0]?>"> - <input type="text" class="bt2 eng" name="sms_tel22" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" value="<?=$tel2[1]?>"> - <input type="text" class="bt2 eng" name="sms_tel23" size="5" maxlength="4" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);"  value="<?=$tel2[2]?>">&nbsp;&nbsp;<font class=small>(관리자에게도 메세지를 발송할 때 사용할 핸드폰번호)</font></td>
+					</tr>
+					
+					<tr height=50 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								! SMS를 사용하실려면 먼저 아래의 'SMS 신청하기' 버튼을 누르신 후 회원 가입을 하기시 바랍니다.<br/>
+								! SMS는 캐쉬가 충전되어 있어야 발송이 가능합니다.</br>
+								! SMS발송 업체는 Coolsms 이며 자세한 사항은 <a href='http://www.coolsms.co.kr/' target=_blank>http://www.coolsms.co.kr</a> 에서 확인 하시기 바랍니다.
+
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();return false;"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+<? if($ck_auth=='N') { ?>
+<tr>
+	<td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td bgcolor="#FFFFFF" style="padding:10px;" width="25%">
+					<a href="http://www.coolsms.co.kr/acct/signup.php" target="_blank"><img src="img/btn_sms_join.gif" border="0"></a>
+				</td>
+				<td bgcolor="#FFFFFF" style="padding:10px;" class='small' align=left>
+					! SMS발송 업체는 Coolsms 이며 'SMS 신청하기' 버튼을 누르신 후 회원 가입을 하시면 됩니다.</br>
+					! 회원 가입을 하시면 300캐쉬가 무료로 적립되며 문자 10건 정도를 테스트 해 보실 수 있습니다.</br>
+					! SMS를 발송 하실려면 캐쉬가 있어야 되며 원하시는 금액을 충전하셔서 사용하시면 됩니다.(최소 5,000원 부터 충전이 가능하며 5,000원일 경우 250건의 문자를 발송 할 수 있습니다.)
+				</td>
+
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</td>
+</tr>
+<? } else if($ck_auth=='Y') { ?>
+<tr><td>&nbsp;<img src='./img/t_conf2.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<tr height=30 align=left> 
+						<td class=gr_bg width="120"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;충전된 캐쉬</font></td>
+						<td bgcolor="#EEEEEE"><div>&nbsp;<?=$sms_cash?>원&nbsp;&nbsp;<span id='nextIcon' class="hand small" onclick="window.open('http://www.coolsms.co.kr/recharge');return false;">캐쉬충전하기</span></div> </td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;충전된 포인트</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<?=$sms_point?>포인트&nbsp;&nbsp;<font class=small>(발송실패건에 대해 포인트로 보상됩니다.)</font></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;발송가능 문자수</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<b><?=$sms_cnt?>건</b>&nbsp;&nbsp;<font class=small>(단문일 경우의 발송건수입니다.)</font></td>
+					</tr>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+
+<? } ?>
+
+<tr><td height=20></td></tr>
+</table>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

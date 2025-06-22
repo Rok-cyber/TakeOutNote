@@ -1,0 +1,263 @@
+<? 
+include "../html/top_inc.html";     /*** TOP INCLUDE ***/
+
+$type = $_GET['type'];
+$item = $_POST['item'];
+
+$up_dir   = previlEncode("../../image/up_img/mail/");
+
+$level_cnt = "";
+for($i=1;$i<11;$i++) {
+	$sql = "SELECT count(*) FROM pboard_member WHERE level='{$i}' && uid>1";
+	$leve_cnt[$i] = $mysql->get_one($sql);
+}
+
+$sql = "SELECT name, code FROM mall_design WHERE mode='L' && name!='10' ORDER BY name ASC";
+$mysql->query($sql);
+
+for($i=2;$i<9;$i++) {
+	$row = $mysql->fetch_array();
+	while($row['name']!=$i) {
+		$LEVEL .= "<option value='{$i}'>LV{$i}({$leve_cnt[$i]}명)</option>";
+		$LV[$i] = "LV{$i}";
+		if($i==8) break;
+		$i++;
+	}
+	if($row['name']==$i) {
+		$tmps = explode("|",$row['code']);
+		$LEVEL .= "<option value='{$i}'>".stripslashes($tmps[0])."({$leve_cnt[$i]}명)</option>";
+		$LV[$i] = stripslashes($tmps[0]);
+	}
+}
+
+############ 메일링 회원수 불러오기 ####################
+$sql = "SELECT count(*) FROM pboard_member WHERE mailling ='Y' && uid > 1";
+$mail_cnt = $mysql->get_one($sql);
+
+if($type=='search') {
+	$field		= isset($_GET['field']) ? $_GET['field'] : $_POST['field'];
+	$word		= isset($_GET['word']) ? urldecode($_GET['word']) : urldecode($_POST['word']);
+	$sdate1		= isset($_GET['sdate1']) ? $_GET['sdate1'] : $_POST['sdate1'];
+	$sdate2		= isset($_GET['sdate2']) ? $_GET['sdate2'] : $_POST['sdate2'];
+	$dates		= isset($_GET['dates']) ? $_GET['dates'] : $_POST['dates'];
+	$auth		= isset($_GET['auth']) ? $_GET['auth'] : $_POST['auth'];
+	$sex		= isset($_GET['sex']) ? $_GET['sex'] : $_POST['sex'];
+	$level		= isset($_GET['level']) ? $_GET['level'] : $_POST['level'];
+	$mailling	= isset($_GET['mailling']) ? $_GET['mailling'] : $_POST['mailling'];
+
+	if($word) {
+		$addstring .= "&field={$field}&word={$word}";
+		$where .= "&& INSTR({$field},'{$word}')";
+	}
+
+	if($sdate1 && $sdate2) {		
+		if($sdate1 > $sdate2) {$tmp = $sdate1; $sdate1 = $sdate2; $sdate2 = $tmp;}
+		$addstring .= "&sdate1={$sdate1}&sdate2={$sdate2}&dates={$dates}";	
+		if($sdate1==$sdate2) $where .= "&& INSTR({$dates},'{$sdate1}') ";
+		else $where .= "&& ({$dates} BETWEEN '{$sdate1}' AND '{$sdate2}' || INSTR({$dates},'{$sdate2}'))";		
+	}  
+
+	if($auth) {
+		$addstring .= "&auth={$auth}";
+		$where .= " && auth='{$auth}'";
+	}
+
+	if($sex) {
+		$addstring .= "&sex={$sex}";
+		$where .= " && sex='{$sex}'";
+	}
+
+	if($level) {
+		$addstring .= "&level={$level}";
+		$where .= " && level='{$level}'";
+	}
+
+	if($mailling) {
+		$addstring .= "&mailling={$mailling}";
+		$where .= " && mailling='{$mailling}'";
+	}
+	
+	$sql = "SELECT count(*) FROM pboard_member WHERE uid > 1 {$where}";
+	$mail_cnt = $mysql->get_one($sql);	
+
+}
+
+for($i = 0, $ct_num = count($item); $i < $ct_num; $i++) {
+    $sql = "SELECT email FROM pboard_member WHERE uid >1 && uid='{$item[$i]}'";
+	$row = $mysql->get_one($sql);
+	if($i=='0') $m_to = $row;
+	else $m_to .= ",".$row;
+}
+
+?>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function ck_mailform() {
+	var f=document.mailling;
+	if(f.ck_bt.value=='1') alert('start 버튼을 여러번 누르시면 안됩니다.');
+   
+<? if($type!='search') { ?>    
+	if(f.send_type[0].checked) {
+		if(!f.m_to.value) {
+			alert('받는 사람을 입력해주세요.');
+			f.m_to.focus();
+			return false; 		
+		}
+	}
+<? } ?>
+	
+	if(!f.subject.value) {
+		alert('제목을 입력해주세요.');
+		f.subject.focus();
+		return false; 		
+	}
+
+	f.content.value = content.getHtml();
+
+	if(!f.content.value) {
+		 alert('내용을 입력해주세요.');
+		 content.focus();
+		 return false; 		
+	}
+    f.ck_bt.value='1';
+}
+
+function cgType(num) {
+	document.getElementById("type1").style.display = 'none';
+	document.getElementById("type2").style.display = 'none';
+	document.getElementById("type3").style.display = 'none';
+
+	switch(num) {
+		case 1 : 
+			document.getElementById("type1").style.display = 'table-row';
+		break;
+		case 2 :
+			document.getElementById("type2").style.display = 'table-row';
+		break;
+		case 3 :
+			document.getElementById("type3").style.display = 'table-row';
+		break;	
+	}
+
+}
+
+//-->
+</SCRIPT>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_mmail.gif" alt="회원메일링" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>회원에게 전체 메일이나 개별메일을 보낼 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td><img src="img/ttl_mailform.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="mailling" enctype='multipart/form-data' method="post" action="mail_ok.php?<?=$addstring?>" onsubmit="return ck_mailform()">
+	    <table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td >
+	 					<table border="0" cellpadding="0" cellspacing="1" width="100%">
+						<tr height=30>
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;발송 방법</font></td>
+							<td bgcolor="#efefef">
+							<? if($type=='search') { ?>
+								&nbsp;<input type="radio" name="send_type" value="4" id='stype4' checked /><label for='stype4'>회원리스트 검색 결과</label>
+							<? } else { ?>
+								&nbsp;<input type="radio" name="send_type" value="1" id='stype1' checked onclick="cgType(1);" /><label for='stype1'>개별</label>
+								<input type="radio" name="send_type" value="2" onclick="cgType(2);" id='stype2' /><label for='stype2'>회원등급별</label>
+								<input type="radio" name="send_type" value="3" onclick="cgType(3);" id='stype3' /><label for='stype3'>전체회원</label>								
+							<? } ?>
+								<input type="text" style="border:0;background-color:#efefef" size=50 />
+							</td>
+						</tr>
+						<tr height=30 id="type1" <? if($type=='search') echo "style='display:none;'";?> >
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;받는 사람</font></td>
+							<td bgcolor="#efefef">&nbsp;<input type=text class=ta name=m_to style='width:90%' value='<?=$m_to?>'></td>
+						</tr>
+						<tr height=30 id="type2" style="display:none">
+							<td class=gr_bg><font class="bold small">&nbsp;&nbsp;*&nbsp;회원 등급 선택</td>
+							<td bgcolor='#EFEFEF'>
+								&nbsp;<select name='mlevel'>
+									<option value="">선택</option>
+									<option value='1'>일시정지(<?=$leve_cnt[1]?>명)</option>
+									<?=$LEVEL?>
+									<option value='9'>부관리자(<?=$leve_cnt[9]?>명)</option>
+									<option value='10'>관리자(<?=$leve_cnt[10]?>명)</option>
+								</select>
+								&nbsp;&nbsp;<font class=small><input type="checkbox" name="mail_ok" value="Y" />메일링 수신 허용 회원만 발송</font>
+							</td>
+						</tr>						
+						<tr height=30 id="type3" style="display:none">
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;단체 메일링</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;총보낼 메일건수: <font class=eng><?=$mail_cnt?></font>건</td>
+						</tr>
+						<? if($type=='search') { ?>
+						<tr height=30>
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;검색 결과 메일링</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;총보낼 메일건수: <font class=eng><?=$mail_cnt?></font>건</td>
+						</tr>
+						<? } ?>
+						<tr>
+							<td  height=30 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제 목</font></td>
+							<td bgcolor="#efefef" height=30 >&nbsp;<input type=text class=ta name=subject style="width:90%" value="<?=$mail_str?>"></td>
+						</tr>
+						<tr>							
+							<td bgcolor="#ffffff" colspan=2 style="padding:2px;"> 
+								<textarea name="content" id="content"></textarea>
+								<script>var content = new pEditor("content","../../pEdit","758","300","<?=$up_dir?>","basic","hide"); //에디터 생성</script>
+							</td>
+						</tr>
+						<tr>
+							<td bgcolor="#FFFFFF" colspan=2 height=54 style="padding-left:6px;" class=small>
+								! 전체회원 메일링은 메일수신허용 회원에게만 발송 되며 메일주소의 타당성은 발송중 처리되므로 실제발송건수와 다를수 있습니다.<br>
+								! 메일은 쇼핑몰 기본 메일폼을 이용 합니다. 내용 부분 가로 사이즈 700이하로 작성하시기 바랍니다.<br>
+								! 메일을 100통이상 전송할경우 시스템에따라 수초내지 수분의 시간이 지연됩니다.<BR>								
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+<tr><td align=center><input type=image src='img/btn_mailling.gif' border=0 align=absmiddle onfocus=blur()>
+<input type=hidden name=ck_bt>
+</td></tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<script LANGUAGE="JavaScript">
+<!--
+pE[0] = content;
+//-->
+</script>
+
+
+<? include "../html/bottom_inc.html";     /*** BOTTOM INCLUDE ***/ ?>

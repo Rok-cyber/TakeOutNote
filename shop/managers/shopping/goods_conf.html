@@ -1,0 +1,417 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+$img_path = "../../image/icon/";
+
+?>
+
+<SCRIPT language="JavaScript">
+<!--
+function ckBrand(mode,frm){
+   var form = eval("document."+frm+"Form")   
+   var b_name ='';
+   
+   if(frm=='option') b_name = '옵션';
+   else if(frm=='comp') b_name = '제조사';
+   else if(frm=='made') b_name = '원산지';
+   else b_name = '판매단위';
+
+   form.b_mode.value=mode;
+   switch(mode) {
+   case "ins" :
+   	   if(!form.name.value) {
+			window.alert(b_name+'를 입력해주세요!');
+			form.name.focus();
+			return false;
+	   }
+   break;
+   case "mod" :
+	   if(!form.b_num.value) {
+			window.alert('먼저 변경할 '+b_name+'를 선택하세요!');
+			form.s_cate.focus();
+			return false;
+	   }
+	   if(!form.re_name.value) {
+			window.alert('변경할 '+b_name+'명을 입력해주세요!');
+			form.re_name.focus();
+			return false;
+	   }	   
+   break;
+   case "del" :
+	   if(!form.b_num.value) {
+			window.alert('먼저 삭제할 '+b_name+'를 선택하세요!');
+			form.s_cate.focus();
+			return false;
+	   }	  
+   break;
+
+   }
+   form.submit();
+   return false;   
+}
+
+function ckIcon(){
+   var form = document.iconForm;
+   if(!form.icon.value) {
+		window.alert('아이콘을 입력하시기 바랍니다.');
+		form.icon.focus();
+		return false;
+   }
+   form.action = "conf_post.php?mode=icon_i";
+   form.submit();
+}
+
+function delIcon(){
+    var form = document.iconForm;
+	for (i = cnt = 0; i < form.elements.length; i++) {
+		if(form.elements[i].name == 'icon_arr[]' && form.elements[i].checked == true) {
+		cnt++;
+		}
+	}
+	if ( cnt <= 0) {
+		alert("삭제할 아이콘 목록을 선택하세요!");
+		return false;
+	} else {
+		form.action = "./conf_post.php?mode=icon_d";
+		form.submit();		
+    }  
+}
+
+function clickEvent(frm){
+   var form = eval("document."+frm+"Form")
+   sIndex=form.s_cate.selectedIndex;  
+   if(sIndex==-1) return;
+   form.re_name.value = form.s_cate.options[sIndex].text;
+   form.b_num.value = form.s_cate.value;
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_goods_conf.gif" alt="상품환경설정" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>상품등록에 사용되는 옵션, 제조회사, 판매단위, 아이콘 등을 설정 하는 곳 입니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!--  옵션관리 시작 -->
+<TR><TD><a name="t2"></a><img src='./img/t_option.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<TR>
+				<TD>
+					<TABLE border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='optionForm' method='post' action='conf_post.php?mode=option' onsubmit="return ckBrand('ins','option');">
+					<input type=hidden name=b_mode>
+					<input type=hidden name=b_num>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;옵션 선택</font></TD>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;옵션 등록</font></TD>						
+					</TR>
+					<TR>
+						<TD width=50% bgcolor=#EFEFEF align=center rowspan=3>
+						<SELECT name=s_cate size=6 style='width:100%;background:#FFFFFF;' onclick="clickEvent('option')" >
+							<?
+							$sql = "SELECT uid,name FROM mall_goods_conf WHERE mode='O'  ORDER BY uid ASC";
+							$mysql->query($sql);
+							for($i=0; $row = $mysql->fetch_object(); $i++) {
+								echo "<option value='{$row->uid}'>".stripslashes($row->name)."</option>\n";
+							}
+							?>
+						</SELECT>
+						</TD>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('ins','option');"><span class="blue">옵션등록</span></a>							
+							</div>
+						</TD>					
+					</TR>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;옵션 수정/삭제</font></TD>						
+					</TR>
+					<TR>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=re_name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('mod','option');"><span class="blue">옵션수정</span></a>
+								<a href="#" onclick="return ckBrand('del','option');"><span class="blue">옵션삭제</span></a>
+							</div>
+						</TD>					
+					</TR>					
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!--  @옵션관리 끝 -->
+<TR><TD height=20></TD></TR>
+<!--  제조사관리 시작 -->
+<TR><TD><a name="t3"></a><img src='./img/t_comp.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<TR>
+				<TD>
+					<TABLE border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='compForm' method='post' action='conf_post.php?mode=comp' onsubmit="return ckBrand('ins','comp');">
+					<input type=hidden name=b_mode>
+					<input type=hidden name=b_num>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;제조사 선택</font></TD>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;제조사 등록</font></TD>						
+					</TR>
+					<TR>
+						<TD width=50% bgcolor=#EFEFEF align=center rowspan=3>
+						<SELECT name=s_cate size=6 style='width:100%;background:#FFFFFF;' onclick="clickEvent('comp')" >
+							<?
+							$sql = "SELECT uid,name FROM mall_goods_conf WHERE mode='C'  ORDER BY uid ASC";
+							$mysql->query($sql);
+							for($i=0; $row = $mysql->fetch_object(); $i++) {
+								echo "<option value='{$row->uid}'>".stripslashes($row->name)."</option>\n";
+							}
+							?>
+						</SELECT>
+						</TD>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('ins','comp');"><span class="blue">제조사등록</span></a>							
+							</div>
+						</TD>					
+					</TR>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;제조사 수정/삭제</font></TD>						
+					</TR>
+					<TR>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=re_name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('mod','comp');"><span class="blue">제조사수정</span></a>
+								<a href="#" onclick="return ckBrand('del','comp');"><span class="blue">제조사삭제</span></a>
+							</div>
+						</TD>					
+					</TR>					
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!--  @제조사관리 끝 -->
+<TR><TD height=20></TD></TR>
+<!--  원산지관리 시작 -->
+<TR><TD><a name="t4"></a><img src='./img/t_made.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<TR>
+				<TD>
+					<TABLE border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='madeForm' method='post' action='conf_post.php?mode=made' onsubmit="return ckBrand('ins','made');">
+					<input type=hidden name=b_mode>
+					<input type=hidden name=b_num>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;원산지 선택</font></TD>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;원산지 등록</font></TD>						
+					</TR>
+					<TR>
+						<TD width=50% bgcolor=#EFEFEF align=center rowspan=3>
+						<SELECT name=s_cate size=6 style='width:100%;background:#FFFFFF;' onclick="clickEvent('made')" >
+							<?
+							$sql = "SELECT uid,name FROM mall_goods_conf WHERE mode='M'  ORDER BY uid ASC";
+							$mysql->query($sql);
+							for($i=0; $row = $mysql->fetch_object(); $i++) {
+								echo "<option value='$row->uid'>".stripslashes($row->name)."</option>\n";
+							}
+							?>
+						</SELECT>
+						</TD>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('ins','made');"><span class="blue">원산지등록</span></a>
+							</div>
+						</TD>					
+					</TR>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;원산지 수정/삭제</font></TD>						
+					</TR>
+					<TR>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=re_name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('mod','made');"><span class="blue">원산지수정</span></a>
+								<a href="#" onclick="return ckBrand('del','made');"><span class="blue">원산지삭제</span></a>
+							</div>
+						</TD>					
+					</TR>					
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!--  @원산지관리 끝 -->
+<TR><TD height=20></TD></TR>
+<!--  판매단위관리 시작 -->
+<TR><TD><a name="t5"></a><img src='./img/t_qty.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<TR>
+				<TD>
+					<TABLE border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='unitForm' method='post' action='conf_post.php?mode=unit' onsubmit="return ckBrand('ins','unit');">
+					<input type=hidden name=b_mode>
+					<input type=hidden name=b_num>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;판매단위 선택</font></TD>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;판매단위 등록</font></TD>						
+					</TR>
+					<TR>
+						<TD width=50% bgcolor=#EFEFEF align=center rowspan=3>
+						<SELECT name=s_cate size=6 style='width:100%;background:#FFFFFF;' onclick="clickEvent('unit')" >
+							<?
+							$sql = "SELECT uid,name FROM mall_goods_conf WHERE mode='U'  ORDER BY uid ASC";
+							$mysql->query($sql);
+							for($i=0; $row = $mysql->fetch_object(); $i++) {
+								echo "<option value='$row->uid'>".stripslashes($row->name)."</option>\n";
+							}
+							?>
+						</SELECT>
+						</TD>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('ins','unit');"><span class="blue">판매단위등록</span></a>
+							</div>
+						</TD>					
+					</TR>
+					<TR height=30>
+						<TD width=50% class=gr_bg align=center><font class="small bTitle">*&nbsp;판매단위 수정/삭제</font></TD>						
+					</TR>
+					<TR>
+						<TD height=30 width=50% bgcolor=#EFEFEF>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type=text name=re_name class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckBrand('mod','unit');"><span class="blue">판매단위수정</span></a>
+								<a href="#" onclick="return ckBrand('del','unit');"><span class="blue">판매단위삭제</span></a>
+							</div>			
+						</TD>					
+					</TR>					
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!--  @판매단위관리 끝 -->
+
+<TR><TD height=20></TD></TR>
+
+<!--  아이콘관리 시작 -->
+<TR><TD><a name="t6"></a><img src='./img/t_icon.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width='100%'>
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width='100%'>
+			<TR>
+				<TD>
+					<TABLE border=0 width='100%' cellpadding=0 cellspacing=1>
+					<FORM name='iconForm' method='post' enctype="multipart/form-data">
+					<tr height=30> 
+						<td class=gr_bg width="115" align="center"><font class="small bTitle">*&nbsp;아이콘 등록</font></td>
+						<td bgcolor="#EFEFEF" colspan=3>
+							<div style="padding:0 6px 0 6px;float:left">
+								<input type='file' size='40' name=icon class=ta>
+							</div>
+							<div id="sBtn1" style="float:left;">
+								<a href="#" onclick="return ckIcon();"><span class="blue">아이콘등록</span></a>
+								<a href="#" onclick="return delIcon();"><span class="blue">아이콘삭제</span></a>
+							</div>	
+						</td>
+					</tr>
+					<tr height=30> 
+						<td class=gr_bg width="115" align="center"><font class="small bTitle">*&nbsp;등록된 아이콘</font></td>
+						<td bgcolor="#FFFFFF" colspan=3 align="left">
+						<?
+                              $sql  = "SELECT uid,name FROM mall_goods_conf WHERE mode='I' ORDER BY uid ASC";
+							  $mysql->query($sql);
+							  while($data=$mysql->fetch_array()){
+
+                                  echo "&nbsp;".imgSizeCh($img_path,$data[name],'50')."<input type=checkbox name=icon_arr[] onfocus='blur();' value='$data[uid]'>";
+                                 
+							  }
+						?>
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!--  @판매단위관리 끝 -->
+
+<TR><TD height=20></TD></TR>
+</TABLE>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

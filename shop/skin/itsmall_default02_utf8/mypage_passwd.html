@@ -1,0 +1,69 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle">  
+		<img src="img/member/ttl_passwd_change.gif" alt="비밀번호변경" title="비밀번호변경" />
+	</div>
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<div class="small" style="text-align:left;margin:20px 0 20px 10px;">
+		<div class="noticeDiv">고객님의 안전한 쇼핑을 위하여 비밀번호는 8자리 이상 설정을 권고 합니다.(영문, 숫자 조합)</div>
+		<div class="noticeDiv" style="margin-top:6px">주민등록번호, 생일, 연락처등 개인 정보와 관련된 숫자, 연속된 숫자등은 다른 사람이 쉽게 알아내어 유출의 위험이 있으므로 주의 하시기 바랍니다.</div>
+	</div>
+
+	<form method="post" name="joinForm" action="{{sMain}}/php/regist_ok.php" enctype="multipart/form-data">
+	<input type="hidden" name="jmode" value="passwd">
+	
+	<div id="memberInfo">		
+		<div class="memberBox clearfix">
+			<ul>
+				<li>
+					<div class="left nextIcon2"><img src="img/member/ttl_name.gif" alt="성명" /></div>
+					<div class="left default">
+						{{my_name}}
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_orig_passwd.gif" alt="기존 비밀번호" /></div>
+					<div class="left">
+						<input type="password" class="inputs_bg black" name="orig_passwd" maxlength="12" size="20" />
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_new_passwd.gif" alt="새로운 비밀번호" /></div>
+					<div class="left">
+						<input type="password" class="inputs_bg black" name="passwd" maxlength="12" size="20" onBlur="return ck_pw1();" />
+						&nbsp;&nbsp;<span id="passwd1s" class="small noticeDiv">영문,숫자 조합(4~12자)</font></span>
+					</div>
+				</li>
+				<li>
+					<div class="left nextIcon2rq"><img src="img/member/ttl_repasswd.gif" alt="비밀번호확인" /></div>
+					<div class="left">
+						<input type="password" class="inputs_bg black" name="repasswd" maxlength="12" size="20" onBlur="return ck_pw2();" />
+						&nbsp;&nbsp;<span id="passwd2s" class="small noticeDiv">영문,숫자 조합(4~12자)</font></span>
+					</div>
+				</li>					
+			</ul>
+		</div>
+	</div>
+		
+	<div class="blank" style="height:30px;">&nbsp;</div>
+
+	<center>			
+		<div style="width:252px;">
+			<div class="left"><img src="img/common/btn_pagePrev.gif" class="hand" onclick="history.back();return false;" alt="이전페이지" title="이전페이지" /></div>
+			<div class="left" style="padding-left:6px;"><img src="img/member/btn_passwd.gif" class="hand" onclick="return ckPasswd();" alt="비밀번호변경" title="비밀번호변경" /></div>
+		</div>	
+	</center>	
+	<div class="blank" style="height:20px;">&nbsp;</div>
+
+	</form>	
+</div>

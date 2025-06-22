@@ -1,0 +1,185 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+?>
+<SCRIPT language="JavaScript">
+<!--
+
+function ckForm(){
+	f = document.carr1Form;
+	if(!f.excels.value) {
+		alert('엑셀파일을 등록 하시기 바랍니다.');
+		f.excels.focus();
+		return false;
+	}
+	f.submit();
+	return false;
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_member_all.gif" alt="일괄회원등록" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>다수 회원정보를 엑셀파일로 만들어 일괄적으로 회원을 등록 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td>&nbsp;<img src='./img/ttl_member_csv.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='carr1Form' method='post' enctype="multipart/form-data" action='member_ok.php?mode=excel'>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;엑셀파일 등록</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type='file' class=ta size=50 name='excels'>&nbsp;&nbsp;
+							<font class=small>엑셀(CSV) 파일만 등록 가능</font> 
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비밀번호 암호화 유무</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type='checkbox' name='encode' value='Y'>암호화 되어있음&nbsp;&nbsp;<font class=small>체크시 비밀번호는 암호화(md5)된 상태 그대로 저장되고 체크하지 않으면 암호화(md5)하여 저장됨</font> 
+						</td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=140><font class="small bTitle">&nbsp;&nbsp;*&nbsp;회원혜택제공</font></td>
+						<td bgcolor="#EEEEEE" width=660 colspan="3">&nbsp;
+							<input type='checkbox' name='benefit' value='Y'>&nbsp;&nbsp;<font class=small>체크시 회원가입시 제공되는 적립금이나 쿠폰의 혜택이 같이 적용 됩니다.</font> 
+						</td>
+					</tr>
+					<tr height=130 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								! 엑셀(CSV)파일 형식<br /><br />
+								<font class='orange small'>이름, 아이디, 비밀번호, 주민번호, 전화번호, 이동전화번호, 우편번호, 주소, 이메일, 생년월일, 음/양, 성별, 메일수신, SMS수신, 적립금, 회원등급,<br /> 추가필드1, 추가필드2&nbsp;</font><br /><br />
+								! 엑셀로 작업하셔서 다른이름으로 저장을 누르시고 파일형식을 CSV(쉼표로분리)로 선택하시고 저장하시면 됩니다.<br /> 
+								! 비밀번호 암호화는 MD5만 지원 됩니다.<br />
+								! 대량회원 등록일 경우 서버 부하 및 처리 시간이 많이 걸릴 수 있으니 분할해서 처리 하시기 바랍니다.<br />
+								! 엑셀샘플파일을 다운 받으시고 참고 하시기 바랍니다. [<a href='memberAllSample.csv'><font class='green small'>엑셀샘플파일 다운받기</font></a>]
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();"><span class="blue">일괄처리</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+<tr><td align=center>
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26" align=left> 
+						<td colspan=2 align=center class="gr_bg bold small">회원정보 엑셀 작성 안내</td>
+					</tr>	
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이름</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">홍길동</td>					
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;아이디</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">test01 <font class="small orange">(영문,숫자 조합(4~12자) )</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비밀번호</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">1111 <font class="small orange">(영문,숫자 조합(4~12자) )</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주민번호</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">990101-1111111 <font class="small orange">(등록시 뒤 7자리는 암호화(md5) 됨)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전화번호</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">053-111-1111 <font class="small orange">('-' 입력)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이동전화번호</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">010-111-1111 <font class="small orange">('-' 입력)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;우편번호</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">700-000 <font class="small orange">('-' 입력)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주소</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">대구 동구 신암동 111-11번지</td>
+					</tr>					
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이메일</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">master@elbon.co.kr</td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;생년월일</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">1999-12-01 <font class="small orange">('-' 입력)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;음/양</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">1 <font class="small orange">(음력 : 1, 양력 : 2)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;성별</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">M <font class="small orange">남자 : M, 여자 : F</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메일수신</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">Y <font class="small orange">(수신함 : Y, 수신안함 : N)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SMS수신</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">Y <font class="small orange">(수신함 : Y, 수신안함 : N)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;적립금</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">1000 <font class="small orange">(초기 적립금)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;회원등급</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">2 <font class="small orange">(1 : 일시중지, 2 ~ 8 : 일반회원, 9 : 부관리자 , 10 : 관리자)</font></td>
+					</tr>
+					<tr height="26" align=left> 
+						<td bgcolor="#EFEFEF" width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가필드 1~2</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">1111 <font class="small orange">회원가입양식에서 설정한 추가필드</font></td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+	</td></tr>
+<tr><td height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

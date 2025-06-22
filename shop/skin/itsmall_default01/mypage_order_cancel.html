@@ -1,0 +1,150 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" title="style">
+<!-- DYNAMIC @is_style@ -->
+
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div style="text-align:left"> 
+		<img src="img/customer/ttl_order_cancel.gif" alt="취소/교환/반품내역" title="취소/교환/반품내역" />
+	</div>
+
+	<div style="margin-top:20px;text-align:left" class="small">
+		! 주문번호를 누르시면 상세주문내역을 보실 수 있습니다.<br />		
+		! 주문 취소/반품/교환 신청은 주문상세 내역에서 하시면 됩니다.<br />		
+	</div>
+	
+	<div id="box720" style="margin-top:20px;">
+		<div class="top"></div>
+		<div class="content" style="width:720px;height:20px;">		
+			<form name="orderForm" method="post" action="{{Main}}?channel=order_cancel" onsubmit="ckOsearch();">
+			<div class="left" style="width:20px;">&nbsp;</div>
+			<div class="boxText small orange">주문상태</div> 
+			<div style='float:left;padding-left:6px;padding-right:10px;'> 
+				<select name="status" class="default">
+					<option value="">전체</option>						
+					<option value="Z">주문취소</option>
+					<option value="X">상품반품</option>
+					<option value="Y">상품교환</option>
+				</select>
+			</div>
+			<div class="boxText small orange">주문일</div> 
+			<div style='float:left;padding-left:6px;'>
+				<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="inputs num" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="inputs num"  size="10" name="sdate2" value="{{sdate2}}">
+				<img src="img/customer/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day6.gif" class="hand" onclick="putDay('{{DAY5}}','{{DAY1}}')" align="absmiddle">
+				<img src="img/customer/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">				
+			</div>	
+			<div style="float:left;padding:1px 0 0 6px;">
+				<input type="image" src="img/customer/btn_search2.gif" style="border:0px;" />
+			</div>
+			<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+				<iframe name="CalendarFrame" src="{{skin}}/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+			</div>
+			</form>
+		</div>		
+		<div class="bottom"></div>
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div style="width:100%;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="120" /> 
+			<col />
+			<col width="50"/>			
+			<col width="60" /> 
+			<col width="70" />
+			<col width="80" />
+			<col width="80" />
+			<col width="90" />      					
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>                
+				<th scope="col" class="small black">주문번호</th>
+				<th scope="col" class="small black">주문상품명</th>
+				<th scope="col" class="small black">주문수량</th>
+				<th scope="col" class="small black">개별배송비</th>
+				<th scope="col" align="right" class="small black">판매금액</th>				
+				<th scope="col" class="small black">진행상황</th>
+				<th scope="col" class="small black">결제상태</th>
+				<th scope="col" class="small black">주문일</th>
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<!-- DYNAMIC @type1@ -->
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td style="border-bottom:1px solid #f1f1f1" {{ROWSPAN}}></td>
+				<td style="border-bottom:1px solid #f1f1f1" class="num orange" {{ROWSPAN}}><a href="{{Main}}?channel=order_detail&amp;order_num={{NUM}}{{addstring}}" title="주문내역상세보기">{{NUM}}</a></td>
+				<td style="border-bottom:1px solid #f1f1f1" align="left" class="small">{{NAME}}</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="num">{{CNT}}개</td>				
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num">{{CARRIAGE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num blue">{{PRICE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="small">{{STATUS1}}</td>				
+				<td style="border-bottom:1px solid #f1f1f1" class="small" {{ROWSPAN}}>{{STATUS2}}</td>				
+				<td style="border-bottom:1px solid #f1f1f1" class="num" {{ROWSPAN}}>{{DATE}}</td>				
+				<td style="border-bottom:1px solid #f1f1f1" {{ROWSPAN}}></td>
+			</tr>						
+			<!-- DYNAMIC @type1@ -->
+			<!-- DYNAMIC @type2@ -->
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td style="border-bottom:1px solid #f1f1f1" align="left" class="small">{{NAME}}</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="num">{{CNT}}개</td>				
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num">{{CARRIAGE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" align="right" style="padding-right:10px;" class="num blue">{{PRICE}}원</td>
+				<td style="border-bottom:1px solid #f1f1f1" class="small">{{STATUS1}}</td>								
+			</tr>
+			<!-- DYNAMIC @type2@ -->
+			<!-- DYNAMIC @loop@ -->								
+			
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div style="clear:both;height:16px;"></div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/customer/no_order.gif" alt="주문된상품없음이미지" title="주문된상품없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+	<div style="clear:both;height:20px"></div>
+	<div>
+		<img src="img/customer/order_cancel_help1.gif" alt="주문취소 절차" title="주문취소 절차" />
+	</div>
+	<div style="padding-top:8px;">
+		<img src="img/customer/order_cancel_help2.gif" alt="반품절차" title="반품절차" />
+	</div>
+	<div style="padding-top:8px;">
+		<img src="img/customer/order_cancel_help3.gif" alt="교환절차" title="교환절차" />
+	</div>
+
+	<div style="clear:both;height:20px"></div>
+
+</div>

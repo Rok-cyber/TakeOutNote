@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>상품 비교하기</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript" src="../lib/lib.Function.js"></script>
+<script type="text/javascript" src="../lib/lib.ckForm.js"></script>
+<script type="text/javascript" src="{{skin2}}skin.lib.Shop.js"></script>
+<script type="text/javascript" src="../lib/lib.lightBox.js"></script> 
+<script type="text/javascript" src="../lib/lib.messageBox.js"></script> 
+<script type="text/javascript" src="../lib/lib.ajax.js"></script>
+
+<script type="text/javascript" >
+<!--
+shop_skin = '{{skin}}/';
+paths = "../";
+// -->
+</script>
+
+<body style="padding:0;margin-left:10px;">
+<div id="pageView" style="width:800px">	
+	<div id="compareBox{{cnt}}">
+		<div class="top"></div>
+		<!-- DYNAMIC @loop_goods@ -->	
+
+		<div class="content">		
+			<div style="text-align:center;">{{GOODS_IMG}}</div>
+			<ul style="margin-top:10px;">
+				<form name="goodsForm{{num}}" method="post" onsubmit="return false;" action="cart_ok.php">
+				<input type='hidden' name='p_price' value='{{P_PRICE}}' />
+				<input type='hidden' name='p_cate' value='{{P_CATE}}' />
+				<input type='hidden' name='p_number' value='{{P_UID}}' />
+				<input type='hidden' name='defQty' value='{{DEF_QTY}}' />
+				<input type='hidden' name='sQty' value='{{S_QTY}}' />
+				<input type='hidden' name='goodsUint' value='{{GOODS_UNIT}}' />
+				<input type='hidden' name='ckLogin' value='{{CKLOGIN}}' />
+				<input type='hidden' name='type' />
+				<input type='hidden' name='pop' value='1' />
+				<input type='hidden' name='direct' value='N' />
+				<input type='hidden' name='ckCart' value='{{ckCart}}' />
+				<input type='hidden' name='p_option' value='' />
+				<input type='hidden' name='p_op' value='0' />
+				<input type='hidden' name='p_op_cnt' value='{{op_cnt}}' />
+
+				<li style="background:url();margin:0px;height:36px;" class="blue bold">
+					{{GOODS_NAME}}
+				</li>					
+				<li>
+					<div class="small left bold nextIcon3">판매가격</div>
+					<div class="left num orange">{{GOODS_PRICE}}</div>
+				</li>
+				<!-- DYNAMIC @is_cupon@ -->
+				<li>
+					<div class="small left bold nextIcon3">쿠폰적용가격</div>
+					<div class="left num orange">{{GOODS_CPRICE}}</div>
+					<div class="left" style="padding-left:8px;position:relative;top:-2px;"><img src="img/shop/btn_cupon.gif" class="hand" onclick="cuponDown2({{CUID}},{{P_UID}});" alt="할인쿠폰다운" title="할인쿠폰다운" /></div>
+				</li>			
+				<!-- DYNAMIC @is_cupon@ -->
+				<li>
+					<div class="small left bold nextIcon3">적립금</div>
+					<div class="left num">{{GOODS_RESERVE}}원</div>
+				</li>
+				<!-- DYNAMIC @is_brand@ -->
+				<li>
+					<div class="small left bold nextIcon3">브랜드</div>
+					<div class="left default">{{GOODS_BRAND}}</div>
+					<div class="left" style="padding-left:8px;position:relative;top:-2px;"><img src="img/shop/btn_brand.gif" border="0" class='hand' onclick="parent.location.href='../{{Main}}?channel=brand&uid={{PLUS}}';"  alt="브랜드샵가기" title="브랜드샵가기" /></div>
+				</li>
+				<!-- DYNAMIC @is_brand@ -->
+				<!-- DYNAMIC @is_event@ -->
+				<li>
+					<div class="small left bold nextIcon3">관련이벤트</div>
+					<div class="left num"><a href='#' onclick="parent.location.href='../{{Main}}?channel=event&amp;uid={{PLUS}}';">{{GOODS_EVENT}}</a></div>
+				</li>
+				<!-- DYNAMIC @is_event@ -->
+				<!-- DYNAMIC @is_comp@ -->
+				<li>
+					<div class="small left bold nextIcon3">제조사</div>
+					<div class="left default">{{GOODS_COMP}}</div>
+				</li>
+				<!-- DYNAMIC @is_comp@ -->
+				<!-- DYNAMIC @is_made@ -->
+				<li>
+					<div class="small left bold nextIcon3">원산지</div>
+					<div class="left default">{{GOODS_MADE}}</div>
+				</li>
+				<!-- DYNAMIC @is_made@ -->
+				<!-- DYNAMIC @is_option@ -->
+				<li>
+					<div class="small left bold nextIcon3">{{OP_TITLE}}</div>
+					<div class="left default">
+						<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+						<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+					</div>
+				</li>			
+				<!-- DYNAMIC @is_option@ -->	
+				<!-- DYNAMIC @no_limit@ -->
+				<li>
+					<div class="small left bold nextIcon3">구매수량</div>
+					<div class="left"><input type="text" name="p_qty" size="4" value="{{DEF_QTY}}" class="inputs black num" onKeydown="onlyNum(this);" onKeyup="onlyNum(this);" /> {{GOODS_UNIT}}</div>
+				</li>
+				<!-- DYNAMIC @no_limit@ -->
+				<!-- DYNAMIC @is_limit@ -->
+				<li>
+					<div class="left nextIcon3"></div>
+					<div class="left blue">현재 상품은 품절입니다.</div>
+				</li>
+				<!-- DYNAMIC @is_limit@ -->	
+				</form>
+			</ul>	
+			
+			<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+
+			<div style="text-align:left;">
+				<!-- DYNAMIC @is_limit2@ -->
+				<div id="sBtn3" style="float:left">
+					<a href="#" onclick="return ckGoods2('order',{{num}});return false;"><span>구매하기</span></a>
+				</div>
+				<div id="sBtn2" style="float:left">
+					<a href="#" onclick="return ckGoods2('cart',{{num}});return false;"><span>장바구니담기</span></a>
+				</div>
+				<!-- DYNAMIC @is_limit2@ -->
+				<!-- DYNAMIC @is_limit3@ -->
+				<!-- DYNAMIC @is_limit3@ -->				
+			</div>				
+		</div>			
+		<!-- DYNAMIC @loop_goods@ -->	
+		<div class="bottom"></div>
+	</div>	
+	
+</div>
+
+</body>
+</html>

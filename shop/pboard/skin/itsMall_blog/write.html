@@ -1,0 +1,221 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<!-- DYNAMIC @is_editer1@ -->
+<link href="/{{ShopPath}}pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="/{{ShopPath}}pEdit/pEditor.js"></script>
+<!-- DYNAMIC @is_editer1@ -->
+
+<div id="pb_sub">
+	
+	<form name="signForm" enctype="multipart/form-data" method="post" action="{{ACTION}}" onsubmit="return checkIt()" >
+    <input type="hidden" name="Main" value="{{Main}}" />
+	<input type="hidden" name="ck_w"><input type="hidden" name="ck_w2" />
+	<input type="hidden" name="ck_bt" />
+	<!-- DYNAMIC @is_editer2@ -->
+	<input type="hidden" name="tmp_dir" value="{{tmp_dir2}}" />	
+	<input  type="hidden" name="html_type" value="1" />
+	<!-- DYNAMIC @is_editer2@ -->
+
+	<div style="height:20px"></div>
+
+	<!-- DYNAMIC @is_write@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">새로운 글 등록</div>
+	</div>
+	<!-- DYNAMIC @is_write@ -->
+
+	<!-- DYNAMIC @is_modify@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">등록된 글 수정</div>
+	</div>
+	<!-- DYNAMIC @is_modify@ -->
+
+	<!-- DYNAMIC @is_reply@ -->
+	<div id="pb_title_box">
+		<div style="padding-top:6px;" class="pb_default pb_bold">답변 글 등록</div>
+	</div>
+	<!-- DYNAMIC @is_reply@ -->
+	
+	<!-- DYNAMIC @is_option@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">옵션</div>
+		<div class="pb_write_input pb_default">
+			<!-- DYNAMIC @is_html@ -->
+			<input  type=checkbox name=html_type onfocus="blur();" value="1" {{OP_CK1}} style="border:0px" />HTML
+			<!-- DYNAMIC @is_html@ -->
+			<!-- DYNAMIC @is_notice@ -->
+			<input  type=checkbox name=notice onfocus="blur();" value="1" {{OP_CK2}} style="border:0px" />공지사항
+			<!-- DYNAMIC @is_notice@ -->
+			<!-- DYNAMIC @is_serect@ -->
+			<input  type="checkbox" name="secret" value="1" {{OP_CK3}} style="border:0px" />비밀글
+			<!-- DYNAMIC @is_serect@ -->
+			<!-- DYNAMIC @is_serect2@ -->
+			<input  type="hidden" name="secret" value="1" />
+			<!-- DYNAMIC @is_serect2@ -->
+			<!-- DYNAMIC @is_remail@ -->
+			<input  type=checkbox name=remail onfocus="blur();" value="1" {{OP_CK4}} style="border:0px" /><font color="#666666">답변메일받기</font></font>
+			<!-- DYNAMIC @is_remail@ -->
+		</div>  
+	</div>		
+	<!-- DYNAMIC @is_option@ -->
+	
+	<!-- DYNAMIC @is_info1@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">이름</div>		
+		<div class="pb_write_input">
+			<input class="pb_ip" type="text" name="name" size="20" value="{{NAME}}" maxlength="30" />
+		</div>        		
+	</div>
+
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">이메일</div>		
+		<div class="pb_write_input">
+			<input class="pb_ip" type="text" name="email" size="40" value="{{EMAIL}}" maxlength="50" />
+		</div>        		
+	</div>
+
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">홈페이지</div>		
+		<div class="pb_write_input">
+			<input class="pb_ip" type="text" name="homepage" size="40" value="{{HOMEPAGE}}" maxlength="50" />
+		</div>        		
+	</div>	
+	<!-- DYNAMIC @is_info1@ -->
+
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">제목</div>		
+		<div class="pb_write_input">
+			<input class="pb_ip" type="text" name="subject" style="width:90%" value="{{SUBJECT}}" maxlength="80" />
+		</div>        		
+	</div>
+	
+	<!-- DYNAMIC @is_info2@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">비밀번호</div>		
+		<div class="pb_write_input">
+			<input class="pb_ip" type="password" name="passwd" size="20" maxlength="20" />
+		</div>        		
+	</div>
+	<!-- DYNAMIC @is_info2@ -->
+
+	<!-- DYNAMIC @is_info3@ --><input type="hidden" name="impass" value='{{IMPASS}}' /><!-- DYNAMIC @is_info3@ -->
+	
+	<!-- DYNAMIC @is_cate@ -->              
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">분류</div>		
+		<div class="pb_write_input">
+			<select name="cate" class="pb_default">{{OPTION}}</select>
+		</div>        		
+	</div>
+    <!-- DYNAMIC @is_cate@ -->
+	
+	<!-- DYNAMIC @is_hcate@ --><input type="hidden" name="cate" value="{{CATE}}" /><!-- DYNAMIC @is_hcate@ -->
+
+	<!-- DYNAMIC @is_pds@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">파일업로드</div>		
+		<div class="pb_write_input">			
+			<div style="float:left;padding-right:4px;"><input type="text" name="filetext{{FNUM}}" size="40" class="pb_ip" /></div>
+			<div style="float:left">
+				<img src="img/btn_file.gif" alt="File Search" class="hand">
+			</div>
+			<div style="float:left;position:relative;left:-90px"><input type="file" name="userfile{{FNUM}}" size="1" style="height:24px; filter:alpha(opacity=0);opacity:0; -moz-opacity:0;cursor:pointer" onchange="this.form.filetext{{FNUM}}.value=this.value;this.blur();" /></div>
+		</div>     		
+	</div>
+	<!-- DYNAMIC @is_pds@ -->
+	
+	<!-- DYNAMIC @is_file@ -->	
+	<div class="pb_write_area pb_small pb_bold">
+		<div class="pb_write_title pb_small pb_bold">파일삭제</div>		
+		<div class="pb_write_input">
+			{{SAVEDFILE}}
+		</div>        		
+	</div>	
+	<!-- DYNAMIC @is_file@ -->	
+
+	<!-- DYNAMIC @is_slink@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">관련링크</div>		
+		<div class="pb_write_input">
+			<input class="pb_ip" type="text" name="slink[]" style="width:60%" value="{{SLINK}}" maxlength="80" />      		
+		</div>        		
+	</div>
+	<!-- DYNAMIC @is_slink@ -->
+
+	<!-- DYNAMIC @is_mlink@ -->
+	<div class="pb_write_area">
+		<div class="pb_write_title pb_small pb_bold">동영상링크</div>	
+		<div class="pb_write_input pb_default">
+			<input class="pb_ip" type="text" name="mlink" style="width:40%" value="{{MLINK}}" maxlength="80" />
+			&nbsp;&nbsp;가로크기 <input class="pb_ip" type="text" name="width" size="4" maxlength="4" value="{{WIDTH}}" />
+			&nbsp;세로크기 <input class="pb_ip" type="text" name="height" size="4" maxlength="4" value="{{HEIGHT}}" />	
+		</div>
+	</div>
+	<!-- DYNAMIC @is_mlink@ -->
+	
+	<!-- DYNAMIC @is_default@ -->
+	<div class="pb_write_area" style="border:0px;height:254px;text-align:center;background:url(img/dot_line.gif) repeat-x 0px 253px;">
+		<div class="pb_write_title pb_small pb_bold">내용</div>		
+		<div class="pb_write_input">
+			<textarea name="comment" style="width:100%;height:240px" class="pb_ip">{{COMMENT}}</textarea>
+		</div>
+	</div>	
+	<!-- DYNAMIC @is_default@ -->
+
+	<!-- DYNAMIC @is_editer3@ -->
+	<div style="margin-top:10px;">
+		<center>
+			<textarea name="comment" id="comment">{{COMMENT}}</textarea>
+			<script>var comment = new pEditor("comment","/{{ShopPath}}pEdit","{{we_width}}","300","{{up_dir}}","basic2"); //에디터 생성</script>
+		</center>
+	</div>
+	<!-- DYNAMIC @is_editer3@ -->
+
+	<div style="margin:20px 0 20px;text-align:center;width:100%;">
+		<center>
+		<div style="width:140px;">
+			<div id="sBtn3">
+				<!-- DYNAMIC @is_write2@ -->			
+				<a href="#" onclick="return checkIt();return false;"><span>등록하기</span></a>
+				<!-- DYNAMIC @is_write2@ -->			
+				<!-- DYNAMIC @is_modify2@ -->			
+				<a href="#" onclick="return checkIt();return false;"><span>수정하기</span></a>
+				<!-- DYNAMIC @is_modify2@ -->			
+				<!-- DYNAMIC @is_reply2@ -->			
+				<a href="#" onclick="return checkIt();return false;"><span>답글달기</span></a>
+				<!-- DYNAMIC @is_reply2@ -->			
+			</div>		
+			<div id="sBtn2">
+				<a href="{{Main}}{{addstring}}"><span>목록보기</span></a>
+			</div>		
+		</div>
+		</center>
+	</div>
+
+	</form>	
+
+</div>
+
+<p style="clear:both;height:20px;"></p>
+
+<!-- 업로드중 플래시 필수 -->
+<div id="uploading" style="display:none;margin:50px;">
+	<EMBED src="img/data_up.swf" border="0" width="459" height="167"></EMBED>
+</div>
+
+<script type="text/javascript">
+<!--
+function checkIt2() {
+	form = document.signForm;
+
+	/* 사용자 체크 추가 부분  */
+	form.ck_bt.value='1';
+	document.getElementById('pb_sub').style.display = "none";
+	document.getElementById('uploading').style.display = "block";
+	form.submit();
+	return false;
+}
+-->
+</script>

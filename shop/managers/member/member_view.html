@@ -1,0 +1,232 @@
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_member.gif" alt="회원관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>등록된 회원 리스트를 확인 하거나 검색 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td height=10></td></tr>
+<tr><td><img src="img/mem_t1.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signform" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+						<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이름</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;<input type="text" class=ta name=name value="{{FORM1}}" /></td>
+						</tr>
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;아이디</font></td>
+							<td bgcolor="#efefef">
+								<div style="float:left; padding:1px 10px 0 6px;" class="eng">{{FORM2}}</div>
+								<div id="sBtn1" style="padding-left:6px;">
+									<a href="#" onclick="pLightBox.show('../member/member_crm.php?mid={{FORM2}}','iframe','700','450','■ {{FORM1}}({{FORM2}}) 회원 CRM',10);return false;"><span class="green">CRM 보기</span></a>	
+									<a href="member_login_ok.php?id={{FORM2}}"><span class="green">회원 아이디로 로그인 하기</span></a>	
+								</div>
+							</td>
+						</tr> 
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;비밀번호</font></td>
+							<td bgcolor="#efefef">&nbsp;&nbsp;<input type="password" class=ta name=passwd>&nbsp;&nbsp;<font class=small>( * 보안상 비밀번호는 변경만 가능합니다.)</font></td>
+						</tr> 
+						<!-- DYNAMIC @is_jumin@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주민번호</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM3}} - *******</font>&nbsp;&nbsp;<font class=small>( * 주민번호 뒷자리는 개인정보 보호상 암호화 되어 알 수 없습니다.)</font></td>
+						</tr> 
+						<!-- DYNAMIC @is_jumin@ -->
+						<!-- DYNAMIC @is_tel@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전화번호</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM5}}</font></td>
+						</tr> 
+						<!-- DYNAMIC @is_tel@ -->
+						<!-- DYNAMIC @is_phone@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이동전화번호</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM6}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_phone@ -->
+						<!-- DYNAMIC @is_addr@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;주소</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>({{FORM7}} ) {{FORM8}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_addr@ -->
+						
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이메일</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM9}}</font></td>
+						</tr>
+						
+						<!-- DYNAMIC @is_homepage@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;홈페이지</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM10}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_homepage@ -->
+						<!-- DYNAMIC @is_mess@ -->	
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메신저</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM11}}</font></td>
+						</tr>			   
+						<!-- DYNAMIC @is_mess@ -->
+						<!-- DYNAMIC @is_bir@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;생년월일</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font class=eng>{{FORM12}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_bir@ -->
+						<!-- DYNAMIC @is_sex@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;성별</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM13}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_sex@ -->
+						<!-- DYNAMIC @is_marr@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;결혼유무</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM14}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_marr@ -->
+						<!-- DYNAMIC @is_edu@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;최종학력</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM15}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_edu@ -->
+						<!-- DYNAMIC @is_hobby@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;취미</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM16}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_hobby@ -->
+						<!-- DYNAMIC @is_job@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;직업</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM17}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_job@ -->
+						<!-- DYNAMIC @is_jobname@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;직장명</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM18}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_jobname@ -->
+						<!-- DYNAMIC @is_info@ -->
+						<tr style="word-break:break-all">
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;개인소개</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:10px">&nbsp;&nbsp;<font>{{FORM19}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_info@ -->
+						<!-- DYNAMIC @is_mailling@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메일수신</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<input type="radio"  name="mailling" id='maillingy' value="Y" {{CKDMY}} /><label for='maillingy'>수신허용</label> &nbsp;&nbsp;<input type="radio"  name="mailling" id='maillingn' value="N" {{CKDMN}} /><label for='maillingn'>수신허용안함</label></td>
+						</tr>
+						<!-- DYNAMIC @is_mailling@ -->
+						<!-- DYNAMIC @is_sms@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;SMS수신</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<input type="radio"  name="sms" id='smsy' value="Y" {{CKDSY}} /><label for='smsy'>수신허용</label> &nbsp;&nbsp;<input type="radio"  name="sms" id='smsn' value="N" {{CKDSN}} /><label for='smsn'>수신허용안함</label></td>
+						</tr>
+						<!-- DYNAMIC @is_sms@ -->
+						<!-- DYNAMIC @is_icon@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;아이콘</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM21}}</font></td>
+						</tr>  
+						<!-- DYNAMIC @is_icon@ -->
+						<!-- DYNAMIC @is_add1@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;{{TADD1}}</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM25}}</font></td>
+						</tr>  
+						<!-- DYNAMIC @is_add1@ -->
+						<!-- DYNAMIC @is_add2@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;{{TADD2}}</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM26}}</font></td>
+						</tr>  
+						<!-- DYNAMIC @is_add2@ -->
+						<!-- DYNAMIC @is_add3@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;{{TADD3}}</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM27}}</font></td>
+						</tr>  
+						<!-- DYNAMIC @is_add3@ -->
+						<!-- DYNAMIC @is_add4@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;{{TADD4}}</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM28}}</font></td>
+						</tr>  
+						<!-- DYNAMIC @is_add4@ -->
+						<!-- DYNAMIC @is_add5@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;{{TADD5}}</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<font>{{FORM29}}</font></td>
+						</tr>  
+						<!-- DYNAMIC @is_add5@ -->
+						<tr>
+							<td height=30 class=gr_bg width=20% ><font class="small bTitle">&nbsp;&nbsp;*&nbsp;승인</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;
+								<select name="mauth"><option value="Y">승인</option><option value="N">미승인</select>
+								<script>document.signform.mauth.value="{{FORM24}}";</script>
+							</td>
+						</tr>  
+						<tr>
+							<td height=30 class=gr_bg width=20%><font class="small bTitle">&nbsp;&nbsp;*&nbsp;회원등급</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;&nbsp;<select name='level'>
+									<option value='1'>일시정지</option>
+									{{LEVEL}}
+									<option value='9'>부관리자</option>
+									<option value='10'>관리자</option>
+								</select>							
+							</td>
+						</tr>
+						<tr height=30>
+							<td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 비밀번호와 회원 등급만 수정 하실 수 있습니다. 회원등급은 회원등급관리에서 확인하시면 됩니다.
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="document.signform.submit();return false;"><span class="blue">수정하기</span></a>
+									<a href="{{LIST}}"><span class="blue">수정취소</span></a>
+								</div>	
+							</td>		
+						</tr>							
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<script>
+document.signform.level.value={{level}};
+</script>

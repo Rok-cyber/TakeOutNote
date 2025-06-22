@@ -1,0 +1,526 @@
+<SCRIPT language="JavaScript">
+<!--
+
+function putDay(date1,date2) {
+	f = document.goodsForm;
+	if(!date1) {
+		f.sdate1.value = '';
+		f.sdate2.value = '';
+	} 
+	else {
+		f.sdate1.value = date1;
+		f.sdate2.value = date2;
+	}
+}
+
+function putDay2(date1,date2) {
+	f = document.orderForm;
+	if(!date1) {
+		f.sdate1.value = '';
+		f.sdate2.value = '';
+	} 
+	else {
+		f.sdate1.value = date1;
+		f.sdate2.value = date2;
+	}
+}
+
+function putDay3(date1,date2) {
+	f = document.memberForm;
+	if(!date1) {
+		f.sdate1.value = '';
+		f.sdate2.value = '';
+	} 
+	else {
+		f.sdate1.value = date1;
+		f.sdate2.value = date2;
+	}
+}
+
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_data.gif" alt="데이터관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>쇼핑몰 데이터를 백업 받으실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<TR><TD><img src='./img/ttl_data_goods.gif'></TD></TR>
+<TR><TD>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='goodsForm' method='post' action='goods_excel.php'>
+					<TR height=30 align=left> 
+						<td class=gr_bg width="140"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;검색조건선택</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 width=660>
+							<table border="0" cellpadding="0" cellspacing="0" width="660">
+							<tr><td height='6'></td></tr>
+							<tr>			
+								<td height="28" style="padding-left:10px;">									
+									<div class="boxText small orange">쇼핑분류</div> 	
+									<div style='float:left;padding-left:6px;'>
+										<input type="hidden" name="seccate">
+										<select name="cate1"></select>
+										<select name="cate2"></select>
+										<select name="cate3"></select>
+										<select name="cate4"></select>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td height="28" style="padding-left:10px;">	
+									<div class="boxText small orange">상품가격</div>
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<input type="text" class="ta2 eng" size="8" name="smoney1" value="{{smoney1}}" onkeydown="ckNum(this);" onkeyup="ckNum(this);" maxlength="10"> ~  <input type="text" class="ta2 eng" size="8" name="smoney2" value="{{smoney2}}" onkeydown="ckNum(this);" onkeyup="ckNum(this);" maxlength="10">
+									</div>		
+									<div class="boxText small orange">상품등록일</div> 
+									<div style='float:left;padding-left:6px;'>
+										<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="ta2 eng" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="ta2 eng" size="10" name="sdate2" value="{{sdate2}}">
+										<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay('','')" align="absmiddle">				
+									</div>
+									<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+										<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<td height="28" style="padding-left:10px;">									
+									<div class="boxText small orange">검색어</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="field">
+										   <option value='name'>상품명</option>
+										   <option value='model'>모델명</option>
+										   <option value='tag'>태그명</option>					   
+										</select>
+										<input type=text name='word' size="25" value="{{word}}" class="bt2">
+									</div>
+									<div class="boxText small orange">재고상태</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name='s_qty'>
+											<option value=''>전체</option>
+											<option value='1'>무제한</option>
+											<option value='2'>품절</option>
+											<option value='3'>상품숨김</option>
+											<option value='4'>한정판매</option>
+										</select>
+									</div>										
+									<div class="boxText small orange">정렬</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="order">
+											<option value="uid DESC">등록일↓</option>
+											<option value="uid ASC">등록일↑</option>
+											<option value="moddate DESC">수정일↓</option>
+											<option value="moddate ASC">수정일↑</option>
+											<option value="name DESC">상품명↓</option>
+											<option value="name ASC">상품명↑</option>
+											<option value="price DESC">가격↓</option>
+											<option value="price ASC">가격↑</option>
+										</select>
+										
+									</div>									
+								</td>
+							</tr>
+							<tr><td height='4'></td></tr>							
+							</table>								
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td class=gr_bg width="140"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;항목(필드)선택</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 width=660>
+							<table border="0" cellpadding="0" cellspacing="0" width="660">
+							<tr><td height='6'></td></tr>
+							<tr>
+								<td width=660 style="padding-left:6px;">
+									<!-- DYNAMIC @loop1@ -->
+									<div style="float:left;width:160px;" class="small">{{GFIELD}}</div>
+									<!-- DYNAMIC @loop1@ -->
+								</td>
+							</tr>							
+							<tr><td height='4'></td></tr>
+							</table>								
+						</td>
+					</tr>		
+					<TR height=30 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 검색조건과 항목을 선택 하시고 다운로드 하시면 됩니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.goodsForm.submit();return false"><span class="blue">Excel파일다운</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<!---------------------------- @메인이미지 관리 끝 ----------------------------------->
+<TR><TD height=20></TD></TR>
+<TR><TD><img src='./img/ttl_data_order.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='orderForm' method='post' action='order_excel.php'>
+					<TR height=30 align=left> 
+						<td class=gr_bg width="140"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;검색조건선택</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 width=660>
+							<table border="0" cellpadding="0" cellspacing="0" width="660">
+							<tr><td height='6'></td></tr>
+							<tr>
+								<td height="28" style="padding-left:10px;">
+									<div class="boxText small orange">결제금액</div>
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<input type="text" class="ta2 eng" size="8" name="smoney1" value="{{smoney1}}" onkeydown="ckNum(this);" onkeyup="ckNum(this);" maxlength="10"> ~  <input type="text" class="ta2 eng" size="8" name="smoney2" value="{{smoney2}}" onkeydown="ckNum(this);" onkeyup="ckNum(this);" maxlength="10">
+									</div>				
+									<div class="boxText small orange">주문일</div> 
+									<div style='float:left;padding-left:6px;'>
+										<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="ta2 eng" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="ta2 eng" size="10" name="sdate2" value="{{sdate2}}">
+										<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay2('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay2('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay2('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay2('','')" align="absmiddle">				
+									</div>									
+								</td>
+							</tr>
+							<tr>
+								<td height="28" style="padding-left:10px;">
+									<div class="boxText small orange">검색어</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="field">
+										   <option value='order_num'>주문번호</option>
+										   <option value='id'>아이디</option>					   
+										   <option value='name1'>주문자</option>
+										   <option value='name2'>수취자</option>					   
+										   <option value='pay_name'>입금자</option>	
+										   <option value='p_name'>상품명</option>					   
+										</select>
+										<input type=text name='word' size="16" value="{{word}}" class="bt2">
+									</div>
+									<div class="boxText small orange">결제방법</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="type">
+											<option value="">전체</option>						
+											<option value="B">무통장</option>
+											<option value="C">카드결제</option>
+											<!-- <option value="E">계좌이체</option>
+											<option value="H">핸드폰</option> -->
+										</select>
+										
+									</div>
+									<div class="boxText small orange">결제상태</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="status">
+											<option value="">전체</option>						
+											<option value="B">성공</option>
+											<option value="A">실패</option>
+										</select>
+										
+									</div>
+								</td>
+							</tr>
+							<tr><td height='4'></td></tr>							
+							</table>								
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td class=gr_bg width="140"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;항목(필드)선택</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 width=660>
+							<table border="0" cellpadding="0" cellspacing="0" width="660">
+							<tr><td height='6'></td></tr>
+							<tr>
+								<td width=660 style="padding-left:6px;">
+									<!-- DYNAMIC @loop2@ -->
+									<div style="float:left;width:160px;" class="small">{{GFIELD}}</div>
+									<!-- DYNAMIC @loop2@ -->
+								</td>
+							</tr>							
+							<tr><td height='4'></td></tr>
+							</table>								
+						</td>
+					</tr>		
+					<TR height=30 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 검색조건과 항목을 선택 하시고 다운로드 하시면 됩니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.orderForm.submit();return false"><span class="blue">Excel파일다운</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+
+<TR><TD height=20></TD></TR>
+<TR><TD><img src='./img/ttl_data_member.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='memberForm' method='post' action='member_excel.php'>
+					<TR height=30 align=left> 
+						<td class=gr_bg width="140"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;검색조건선택</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 width=660>
+							<table border="0" cellpadding="0" cellspacing="0" width="660">
+							<tr><td height='6'></td></tr>
+							<tr>
+								<td height="28" style="padding-left:10px;">			
+									<div class="boxText small orange">등급</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name='level'>
+											<option value=''>전체</option>
+											<option value='1'>일시정지</option>
+											{{LEVEL}}
+											<option value='9'>부관리자</option>
+											<option value='10'>관리자</option>
+
+										</select>
+									</div>				
+									<div class="boxText small orange">메일링</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name='mailling'>
+											<option value=''>전체</option>
+											<option value='Y'>허용</option>
+											<option value='N'>허용안함</option>
+										</select>
+									</div>				
+									<div class="boxText small orange">승인</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name='auth'>
+											<option value=''>전체</option>
+											<option value='Y'>승인</option>
+											<option value='N'>미승인</option>
+										</select>
+									</div>				
+									<div class="boxText small orange">성별</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name='sex'>
+											<option value=''>전체</option>
+											<option value='F'>남자</option>
+											<option value='M'>여자</option>
+										</select>
+									</div>							
+								</td>
+							</tr>
+							<tr>
+								<td height="28" style="padding-left:10px;">				
+									<div class="boxText small orange">기간조건</div> 
+									<div style='float:left;padding-left:6px;'> 
+										<select name='dates' style="width:70px">						
+											<option value='signdate'>가입일</option>
+											<option value='logtime'>최종접속일</option>
+										</select>
+									</div>	
+									<div style='float:left;padding-left:6px;'>
+										<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="ta2 eng" size="10" name="sdate1" value="{{sdate1}}"> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="ta2 eng" size="10" name="sdate2" value="{{sdate2}}">
+										<img src="../html/img/btn_day1.gif" class="hand" onclick="putDay3('{{DAY1}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day2.gif" class="hand" onclick="putDay3('{{DAY2}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day3.gif" class="hand" onclick="putDay3('{{DAY3}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day4.gif" class="hand" onclick="putDay3('{{DAY4}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day5.gif" class="hand" onclick="putDay3('{{DAY5}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day6.gif" class="hand" onclick="putDay3('{{DAY6}}','{{DAY1}}')" align="absmiddle">
+										<img src="../html/img/btn_day7.gif" class="hand" onclick="putDay3('','')" align="absmiddle">				
+									</div>									
+								</td>
+							</tr>
+							<tr>			
+								<td height="28" style="padding-left:10px;">				
+									<div class="boxText small orange">검색어</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="field">
+										   <option value='name'>이름</option>					   
+										   <option value='id'>아이디</option>					   
+										   <option value='tel'>전화번호</option>					   
+										   <option value='hphone'>핸드폰번호</option>					   
+										   <option value='email'>이메일</option>					   
+										   <option value='address'>주소</option>					   
+										</select>
+										<input type=text name='word' size="25" value="{{word}}" class="bt2">
+									</div>		
+									<div class="boxText small orange">정렬</div> 
+									<div style='float:left;padding-left:6px;padding-right:10px;'> 
+										<select name="order">
+											<option value="signdate DESC">가입일↓</option>
+											<option value="signdate ASC">가입일↑</option>
+											<option value="logtime DESC">최종접속일↓</option>
+											<option value="logtime ASC">최종접속일↑</option>
+											<option value="reserve DESC">적립금↓</option>
+											<option value="reserve ASC">적립금↑</option>
+											<option value="cnts DESC">방문수↓</option>
+											<option value="cnts ASC">방문수↑</option>
+											<option value="name DESC">이름↓</option>
+											<option value="name ASC">이름↑</option>
+											<option value="id DESC">아이디↓</option>
+											<option value="id ASC">아이디↑</option>
+										</select>
+										
+									</div>									
+								</td>
+							</tr>
+							<tr><td height='4'></td></tr>							
+							</table>								
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td class=gr_bg width="140"><font class="small bTitle">&nbsp;&nbsp;*&nbsp;항목(필드)선택</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 width=660>
+							<table border="0" cellpadding="0" cellspacing="0" width="660">
+							<tr><td height='6'></td></tr>
+							<tr>
+								<td width=660 style="padding-left:6px;">
+									<!-- DYNAMIC @loop3@ -->
+									<div style="float:left;width:160px;" class="small">{{GFIELD}}</div>
+									<!-- DYNAMIC @loop3@ -->
+								</td>
+							</tr>							
+							<tr><td height='4'></td></tr>
+							</table>								
+						</td>
+					</tr>		
+					<TR height=30 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 검색조건과 항목을 선택 하시고 다운로드 하시면 됩니다.
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="document.memberForm.submit();return false"><span class="blue">Excel파일다운</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+
+<TR><TD height=30></TD></TR>
+<tr><td style="padding-left:10px;"><a href="db_dump.php"><img src="img/btn_db_all.gif" border="0"></td></tr>
+<TR><TD height=20></TD></TR>
+</TABLE>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<iframe name="HFrm" style="display:none;"></iframe>
+
+<script>
+
+{{tmps1}}
+{{tmps2}}
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+    goodsForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+goodsForm.cate2.options[0]=new Option(CATEname[0][1][0],CATEname[0][1][0])
+goodsForm.cate3.options[0]=new Option(CATEname[0][1][1][0],CATEname[0][1][1][0])
+goodsForm.cate4.options[0]=new Option(CATEname[0][1][1][1],CATEname[0][1][1][1])
+
+goodsForm.cate1.onchange=function(e){
+	for(i=goodsForm.cate2.length;i>0;i--){
+		goodsForm.cate2.options[i]=null;
+	}
+	for(i=goodsForm.cate3.length;i>0;i--){
+		goodsForm.cate3.options[i]=null;
+	}
+	for(i=goodsForm.cate4.length;i>0;i--){
+		goodsForm.cate4.options[i]=null;
+	}
+	
+	sIndex = goodsForm.cate1.selectedIndex;
+	if(sIndex!=0) {
+		for(i=1,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+			if(CATEname[sIndex][i][0]) goodsForm.cate2.options[i]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+			else goodsForm.cate2.options[i]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+		}
+	}
+	goodsForm.seccate.value = goodsForm.cate1.value;	
+}
+
+goodsForm.cate2.onchange=function(e){
+	for(i=goodsForm.cate3.length;i>0;i--){
+		goodsForm.cate3.options[i]=null;
+	}	
+	for(i=goodsForm.cate4.length;i>0;i--){
+		goodsForm.cate4.options[i]=null;
+	}
+	
+	sIndex2 = goodsForm.cate2.selectedIndex;
+	if(sIndex2!=0) {
+		for(i=1,sIndex=goodsForm.cate1.selectedIndex,cnt=CATEname[sIndex][sIndex2].slice(1).length;i<=cnt;i++){	
+			if(typeof(CATEname[sIndex][sIndex2][i][0])!='undefined') { 		
+			goodsForm.cate3.options[i]=new Option(CATEname[sIndex][sIndex2][i][0],CATEnum[sIndex][sIndex2][i][0]);		
+			
+			}
+		}   
+		goodsForm.seccate.value = goodsForm.cate2.value;	
+	}
+	else goodsForm.seccate.value = goodsForm.cate1.value;
+}
+
+goodsForm.cate3.onchange=function(e){
+	for(i=goodsForm.cate4.length;i>0;i--){
+		goodsForm.cate4.options[i]=null;
+	}
+
+	sIndex3 = goodsForm.cate3.selectedIndex;
+	if(sIndex3!=0) {
+		for(i=1,sIndex=goodsForm.cate1.selectedIndex,sIndex2=goodsForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2][sIndex3].slice(1).length;i<=cnt;i++){
+			if(typeof(CATEname[sIndex][sIndex2][sIndex3][i])!='undefined') goodsForm.cate4.options[i]=new Option(CATEname[sIndex][sIndex2][sIndex3][i],CATEnum[sIndex][sIndex2][sIndex3][i]);
+		}
+		goodsForm.seccate.value = goodsForm.cate3.value;	
+	}
+	else goodsForm.seccate.value = goodsForm.cate2.value;
+}
+
+goodsForm.cate4.onchange=function(e){
+	sIndex=goodsForm.cate4.selectedIndex;   
+	if(sIndex!=0) goodsForm.seccate.value = goodsForm.cate4.value;	
+	else goodsForm.seccate.value = goodsForm.cate3.value;
+}
+</script>

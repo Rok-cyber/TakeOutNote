@@ -1,0 +1,109 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle"> 
+		<img src="img/member/ttl_point.gif" alt="적립금내역" title="적립금내역" />
+	</div>	
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">							
+			<div class="blank" style="height:16px;">&nbsp;</div>
+
+			<div style="width:60px;float:left">&nbsp;</div>
+			<div class="memInfo2">
+				<ul>
+					<li>
+						<div class="left"><img src="img/member/ttl_pinfo_01.gif" alt="총적립금" /></div>
+						<div class="goodsText mColor num">{{TOTAL_MONEY}}<font class="small gray">P</font></div>
+					</li>					
+				</ul>
+			</div>
+			<div style="width:15px;float:left">&nbsp;</div>
+			<div class="memInfo2">
+				<ul>
+					<li>
+						<div class="left"><img src="img/member/ttl_pinfo_02.gif" alt="사용가능적립금" /></div>
+						<div class="goodsText mColor num"><b>{{TOTAL_USE}}</b><font class="small gray">P</font></div>
+					</li>					
+				</ul>
+			</div>
+			<div style="width:15px;float:left">&nbsp;</div>
+			<div class="memInfo2">
+				<ul>
+					<li>
+						<div class="left"><img src="img/member/ttl_pinfo_03.gif" alt="대기중적립금" /></div>
+						<div class="goodsText num">{{MONEY1}}<font class="small gray">P</font></div>
+					</li>
+				</ul>
+			</div>
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div id="list_list" style="margin:0px;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="50" /> 			
+			<col />			
+			<col width="100" /> 
+			<col width="100" />
+			<col width="100" />      					
+			<thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/member/ttl_list_num.gif" alt="번호" /></th>
+				<th scope="col"><img src="img/member/ttl_list_ptitle.gif" alt="적립내역" /></th>
+				<th scope="col"><img src="img/member/ttl_list_pprice.gif" alt="적립금액" /></th>
+				<th scope="col"><img src="img/member/ttl_list_pstatus.gif" alt="적립상태" /></th>		
+				<th scope="col"><img src="img/member/ttl_list_pdate.gif" alt="적립일자" /></th>			
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td class="num">{{NUM}}</td>
+				<td align="left" class="small">{{NAME}}</td>
+				<td align="right" style="padding-right:10px;"><font class="num status{{TYPE}}">{{MONEY}}</font><font class="small gray">P</font></td>				
+				<td class="small status{{TYPE}}">{{STATUS}}</td>				
+				<td class="num">{{DATE}}</td>				
+			</tr>			
+			<tr><td colspan="5" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->											
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div class="clear" style="height:16px;">&nbsp;</div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(box,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/member/no_reserve.gif" alt="적립내역없음" title="적립내역없음" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+</div>

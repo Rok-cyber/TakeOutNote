@@ -1,0 +1,182 @@
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+	<div id="subTitle">
+		<div class="left"><img src="img/shop/ttl_cart.gif" alt="장바구니" title="장바구니" /></div>
+		<div class="right" style="padding-top:30px;"><img src="img/shop/ttl_order_step01.gif" alt="장바구니" title="장바구니" /></div>
+	</div>		
+	
+	<div class="clear" style="height:28px;">&nbsp;</div>
+
+	<form name="cartForm" method="post" action="php/cart_ok.php" onsubmit="return false;">
+	<input type="hidden" name="type" />
+	<input type="hidden" name="p_uid" />
+	<input type="hidden" name="p_qty" />
+	<input type="hidden" name="p_option" />
+
+	<div id="list_list">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col width="40" /> 
+			<col width="90" />
+			<col />
+			<col width="80" /> 
+			<col width="50" /> 				
+			<col width="70" />
+			<col width="80" />
+			<col width="40" />
+			<thead>
+			<tr height="28" align="center">
+				<th scope="col" class="hand" onclick="ckAll();" title="반전"><img src="img/shop/ttl_list_sec.gif" alt="선택" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_img.gif" alt="이미지" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_name.gif" alt="상품명/옵션" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_price.gif" alt="가격" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_qty.gif" alt="수량" /></th>					
+				<th scope="col"><img src="img/shop/ttl_list_point.gif" alt="적립금" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_sum.gif" alt="합계" /></th>
+				<th scope="col"><img src="img/shop/ttl_list_prc.gif" alt="처리" /></th>
+			</tr>
+			</thead>				
+			<tbody>
+			<!-- DYNAMIC @loop_cart@ -->
+			<tr align="center" height="98">
+				<td>
+					<div><input type="checkbox" name="item[]" value="{{UID}}"></div>					
+				</td>
+				<td><a href="{{LINK}}"><img src="{{OIMAGE}}" width="80" style="border:1px solid #efefef" alt="{{NAME}}" /></a></td>
+				<td align="left" valign="top">
+					<div style='padding-top:8px;'>
+						<div style="float:left;width:0px;height:68px"></div>
+						<div class="left tleft">
+							<div><a href="{{LINK}}">{{NAME}}</a>&nbsp;{{ICON}}</div>
+							<!-- DYNAMIC @loop_op@ -->
+							<div>
+								<div style='clear:both;margin-top:4px;width:80px;' class='small left mColor'>{{OP_NAME}}</div>
+								<div style='margin:4px 0 0 10px;' class="left">
+									<select name='p_op_{{UID}}_{{i}}' class='small' vls='{{OP_SEC}}' onchange='ckSelect(this,{{UID}});'>
+										<option value=''>선택</option>
+										{{OP_LIST}}
+									</select>
+								</div>
+							</div>	
+							<!-- DYNAMIC @loop_op@ -->	
+							<input type="hidden" name="p_op_cnt_{{UID}}" value='{{p_op_cnt}}'/>
+							<div class="clear" style="padding-top:4px;">
+								<!-- DYNAMIC @is_my_sale@ -->
+								<font class="small">({{TTL}}할인 <font class="num mColor">{{MY_SALE}}%</font> 적용)&nbsp;&nbsp;</font>
+								<!-- DYNAMIC @is_my_sale@ -->
+								<!-- DYNAMIC @is_my_point@ -->
+								<font class="small">({{TTL}}추가적립 <font class="num mColor">{{MY_POINT}}%</font> 적용)</font>
+								<!-- DYNAMIC @is_my_point@ -->
+								<!-- DYNAMIC @is_my_carr@ -->
+								<font class="small">(배송비 <font class="num mColor">{{CARR}}원</font> 별도상품)</font>
+								<!-- DYNAMIC @is_my_carr@ -->
+								<!-- DYNAMIC @is_my_free@ -->
+								<font class="small">(배송비 무료상품)</font>
+								<!-- DYNAMIC @is_my_free@ -->							
+							</div>
+						</div>
+					</div>
+					<div class="clear small tleft" style='padding-bottom:6px;'>{{LOC}}</div>				
+				</td>				
+				<td class="num">{{PRICE}}<font class="small">원</font> {{OP_PRICE}}</td>
+				<td class="default"><input type=text name='qty{{UID}}' value='{{QTY}}' class="inputs black num" size="3" maxlength="5" onKeydown="onlyNum(this);" onKeyup="onlyNum(this);" />&nbsp;<font class="small">{{UNIT}}</font></td>
+				<td class="num">{{RESE}}P</td>
+				<td class="num bold">{{SUM}}<font class="small">원</font></td>
+				<td class="num">
+					<span id='modIcon{{UID}}' class="nextmIcon1 small mColor hand" onclick="modPost({{UID}})">수정</span><br />
+					<span id='nextIcon' class="small mColor hand" onclick="delPost({{UID}})">삭제</span>
+				</td>
+			</tr>
+			<tr><td colspan="9" height="1" bgcolor="#F1F1F1"></td></tr>			
+			<!-- DYNAMIC @loop_cart@ -->
+			<tr><td colspan="9" height="1" bgcolor="#dddddd"></td></tr>
+			</tbody>			
+		</table>
+	</div>			
+	<!-- DYNAMIC @is_list@ -->
+	
+	<div class="blank" style="height:20px">&nbsp;</div>	
+
+	<div>
+		<div class="left small tleft" style="width:450px;line-height:220%;">
+			주문상품 : <font class="num mColor">{{TCNT}}</font>개,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->총할인금액 : <font class="num mColor">{{TSALE}}</font>원,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->상품총금액 : <font class="num mColor">{{TOTAL}}</font>원,&nbsp;&nbsp;총배송비 : <font class="num mColor">{{TCARR}}</font>원<br>
+			총적립금 : <font class="num mColor">{{TRESE}}</font><font class='num'>P</font>&nbsp;&nbsp;(적립금은 주문완료후 적립처리 됩니다.)
+		</div>
+		<div class="right" style="font-size:20px;padding:4px 6px;">
+			<img src="img/shop/ttl_total_pay.gif" alt="총주문금액" />{{IMG_TOTAL}}<img src="img/shop/ttl_total_won.gif" alt="원" />
+		</div>		
+	</div>	
+
+	<div class="blank" style="height:20px">&nbsp;</div>	
+
+	<div>
+		<div style="float:left">
+			<img src="img/shop/btn_cart_del.gif" class="hand" onclick="cartSecPost('cdel');" alt="선택항목삭제" title="선택항목삭제"  />
+			<img src="img/shop/btn_cart_order.gif" class="hand" onclick="cartSecPost('corder','{{CKLOG}}');" alt="선택항목주문하기" title="선택항목주문하기" />
+			<img src="img/shop/btn_wish_add.gif" class="hand" onclick="addWish('{{CKLOG}}');" alt="관심상품에담기" title="관심상품에담기" />
+		</div>
+		<div style="float:right">		
+			<img src="img/shop/btn_shopping.gif" class="hand" onclick="{{ILINK}}" alt="계속쇼핑하기" title="계속쇼핑하기"  />
+			<img src="img/shop/btn_order.gif" class="hand" onclick="orderPost('{{CKLOG}}');" alt="주문하기" title="주문하기" />		
+		</div>			
+	</div>	
+
+	<!-- DYNAMIC @is_list@ -->
+		
+			
+	<!-- DYNAMIC @no_cart@ -->
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/shop/no_cart.gif" alt="장바구니 없음 이미지" title="장바구니 없음 이미지" />
+	</div>
+	<!-- DYNAMIC @no_cart@ -->
+
+	<div class="blank" style="height:40px">&nbsp;</div>	
+	<div class="tleft">
+		<img src="img/shop/help_cart.gif" alt="장바구니안내" />
+	</div>
+	<div class="blank" style="height:20px">&nbsp;</div>	
+
+	</form>
+</div>
+<!-- @MAIN CENTER END -->
+
+
+
+<script LANGUAGE="JavaScript">
+<!--
+
+var ckOrder = 1;
+var loginWidth = 450;  //로그인 팝업창 가로 크기
+var loginHeight = 360;  //로그인 팝업창 세로 크기
+
+function ckSelect(obj,num) {
+	var f = document.cartForm;
+
+	ckOption(obj);
+
+	if(obj.selectedIndex!=obj.vls) {
+		document.getElementById('modIcon'+num).className= 'nextmIcon2 small green hand';		
+		ckOrder = 0;
+	}
+	else {
+		tmp_cnt = eval("f.p_op_cnt_"+num+".value");
+		for(i=1;i<=tmp_cnt;i++) {
+			tmps = eval("f.p_op_"+num+"_"+i);
+			if(typeof(tmps)!='undefined') {
+				if(tmps.selectedIndex!=tmps.vls) return;
+			}
+		}
+		document.getElementById('modIcon'+num).className= 'nextmIcon1 small green hand';	
+		ckOrder = 1;	
+	}
+}
+
+// -->
+</script>

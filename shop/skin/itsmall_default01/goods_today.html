@@ -1,0 +1,98 @@
+<script type="text/javascript" src="{{skin}}/listDesign.js"></script>
+<script type="text/javascript" src="lib/lib.moneyBar.js"></script>
+
+<div id="subMain">
+	
+	<div>
+		<div id="subTitle">
+			<img src="img/shop/ttl_today.gif" alt="오늘본상품" title="오늘본상품" />
+		</div>
+	</div>	
+
+	<div style="clear:both;height:20px;">&nbsp;</div>
+	
+	<div class="scrollBox3">
+		<div class="top"></div>
+		<div class="content" style="width:909px;padding-top:10px;">		
+			<div style="float:left;width:250px;padding-left:30px;">
+				<div class="small bold orange"></div>
+				<div style="padding-top:6px;" class="small">총 상품수 <font class="num orange">{{TOTAL}}</font>건</div>
+			</div>			
+			<div style="float:left;height:44px;width:600px;">
+				<div style="position:relative;float:left;width:370px;">
+					<div id="pmoneyBarDiv"></div>
+				</div>
+				<!-- DYNAMIC @is_sec_mon@ -->
+				<div class="left small green">선택한조건 : <font class="num">{{SEC_MON}}</font> <a href="{{Main}}?channel=today" onfocus="this.blur();"><img src="img/common/icon_x.gif" border="0" align="absmiddle" alt="선택해제" title="선택해제" /></a></div>
+				<!-- DYNAMIC @is_sec_mon@ -->					
+			</div>				
+		</div>
+		<div class="bottom"></div>
+	</div>	
+
+	<form name="moneySeatch" method="get" action="{{Main}}">
+	<input type="hidden" name="channel" value="today" />
+	<input type="hidden" name="mo1" />
+	<input type="hidden" name="mo2" />
+	</form>
+
+	<script language="javascript">
+	<!--
+	pmoneyBar.show("pmoneyBarDiv","rtnValue","{{skin}}/","216","{{MaxMoney}}");
+	// -->
+	</script>
+
+
+	<div id="list" style="margin-top:20px;">			
+		<form name="listForm">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col />
+			<col width="120" /> 
+			<col width="120" />        			
+            <thead>
+            <tr height="28">
+                <th scope="col" class="small black">상품명</th>
+				<th align="right" scope="col" class="small black">가격/적립금</th>
+				<th scope="col" class="small black">상품평</th>
+            </tr>
+			</thead>
+			
+			<tbody id="list_table"></tbody>
+			<!-- id:listTable 에 리스트가 나옵니다. -->
+			</table>
+		</div>
+
+		<div id="list_img" style="display:none">						
+			<!-- id:lis_img 에 이미지가 나옵니다. -->
+		</div>	
+		</form>
+		
+		<!-- DYNAMIC @no_loop@ -->
+		<div>
+			<img src="img/shop/no_today.gif" alt="상품이 없습니다" />
+		</div>
+		<!-- DYNAMIC @no_loop@ -->
+
+	</div>
+
+	<div style='clear:both;'>
+	    <div style="height:10px;">&nbsp;</div>
+		<div style='clear:both;text-align:left;'>
+			<img src="img/shop/btn_compare.gif" class="hand" onclick="secCompare();return false;" alt="선택상품 비교하기" />
+			<img src="img/shop/btn_cart_all.gif" class="hand" onclick="cartPost();return false;" alt="선택상품 장바구니담기" />
+		</div>
+		<div id="paging" class="small" style=""></div>
+	</div>
+	
+	<div style="height:20px"></div>		
+
+</div>
+
+<script type="text/javascript">
+<!--
+
+getLists = new getList('{{TOTAL}}','list','uid','{{TOTAL}}','','{{ajaxstring}}','php/getToday.php');
+getLists.display();
+// -->
+</script>

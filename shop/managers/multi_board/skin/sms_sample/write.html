@@ -1,0 +1,94 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+  
+	if(form.ckGroup[0].checked==true) {
+		form.groups.value=form.sgroup.value;
+	}
+	else {
+		form.groups.value=form.igroup.value;
+	}
+
+	if(!form.title.value) {
+		alert('제목을 입력 하세요!');
+		form.title.focus();
+		return false;
+	}
+
+	if(!form.message.value) {
+		alert('메세지를 입력 하세요!');
+		form.message.focus();
+		return false;
+	}
+  
+	form.submit();
+  
+	return false;
+}
+
+//-->
+</script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<input type="hidden" name="groups" value="{{FORM1}}">
+		<input type="hidden" name="cell" value="{{FORM3}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;그룹</font></td>
+							<td bgcolor="#EFEFEF">
+								&nbsp;<input type="radio" name="ckGroup" value="1" checked>기존그룹 : 
+								<select name="sgroup" onchange="document.signForm.ckGroup[0].checked=true;">
+									<option value="">선택</option>{{SECGROUP}}
+								</select>
+								&nbsp;<input type="radio" name="ckGroup" value="1">신규그룹 : 
+								<input type=text class=ta name="igroup" value='' size=24 onclick="document.signForm.ckGroup[1].checked=true;">
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제목</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=title value='{{FORM2}}' size=80></td>
+						</tr>	
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;메세지</font></td>
+							<td bgcolor="#EFEFEF" style="padding:6px;">
+								<textarea class=ta rows=5 cols=90 name=message onkeyUP="UpdateChar2(80,400,'message','signForm');">{{FORM3}}</textarea>
+								<div style='margin-top:4px;' class="small">
+									<span id="b_message" class="eng blue">0</span>Bytes / SMS <span id="c_message" class="eng blue">0</span><font class="small">건</font>
+								</div>
+							</td>
+						</tr>						
+						<tr height=30>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 문자수가 80 Byte 이상일 경우 장문(LMS)발송으로 되며 발송건수는 2건으로 집계 됩니다. 
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>		
+							</td>							 
+						</tr>										
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

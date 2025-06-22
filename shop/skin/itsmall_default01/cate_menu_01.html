@@ -1,0 +1,37 @@
+<!-- 중분류 바로 나타나는 형태  -->
+<div id="catemenu">
+	<div id="catemenu_top"><img src="img/main/cate_menu_top.gif" alt="shopping category" title="shopping category" /></div>
+	<div id="catemenu_center">
+		<ul>
+			<!-- DYNAMIC @loop_cate@ -->			
+			<li class="small">
+				<!-- DYNAMIC @is_text@ -->
+				<div style="height:4px;overflow:hidden"></div>
+				<img  hspace="4" src='img/common/menu_icon.gif' alt="bar아이콘" title="bar아이콘" />
+				<!-- DYNAMIC @is_text@ -->
+				<span id='font{{CNUM}}' class='hand' onclick="window.location.href='{{Main}}?channel={{channel_type}}&amp;cate={{channel_cate}}';" >{{CATE_NAME}}</span>
+			</li>			
+
+			<!-- DYNAMIC @loop_smenu@ -->
+			<!-- DYNAMIC @loop_scate@ -->
+			<li class="small">
+				<!-- DYNAMIC @is_text2@ -->
+				<div style="height:4px;overflow:hidden"></div>
+				<img  hspace="4" src='img/common/menu_icon2.gif' alt="bar아이콘" title="bar아이콘" />
+				<!-- DYNAMIC @is_text2@ -->
+				<font class='hand' onclick="window.location.href='{{Main}}?channel={{channel_type}}&amp;cate={{channel_cate}}';" onmouseover="this.style.color='#3399ff';" onmouseout="this.style.color='';">{{SCATE_NAME}}</font>
+			</li>
+			<!-- DYNAMIC @loop_scate@ -->
+			<!-- DYNAMIC @loop_smenu@ -->
+
+			<!-- DYNAMIC @loop_cate@ -->
+			<!-- DYNAMIC @no_cate@ -->
+			<li style="height:50px;"><img src='img/common/no_cate_menu.gif' alt="등록된 분류가 없습니다" /></li>
+			<!-- DYNAMIC @no_cate@ -->					
+		</ul>		
+	</div>
+	<div id="catemenu_bottom"><img src="img/main/cate_menu_bottom.gif" alt="box bottom" /></div>	
+</div>
+
+
+<script type="text/javascript">var cateColor = "#3399ff";</script>

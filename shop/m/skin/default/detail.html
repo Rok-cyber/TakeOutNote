@@ -1,0 +1,67 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>상품상세보기</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section>
+		<div id="goodsInfoSub">
+			<h3>상품정보</h3> 
+			<div class="goodsInfoBox">
+				<a href="{{GOODS_LINK}}" title="상품상세보기">
+					<div class="thumbnail"><img src="{{GOODS_IMAGE}}" alt="상품이미지" /></div>
+					<div class="item_info">
+						<p class="goods" title="상품명">{{GOODS_NAME}}</p>
+						<p class="price" title="판매가"><strong>{{GOODS_PRICE2}}</strong>원</p>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div id="goodsDetail">
+			<h3>상품상세정보</h3> 
+			<div class="explan">{{GOODS_EXPL}}</div> 
+		</div>
+		
+	</section>
+    
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>		
+</div>
+
+<div id="listLoading">
+	상품 데이타를 가져오는 중입니다.
+	<p><img src='img/common/bigWaiting.gif' alt="waiting..." /></p>
+</div>
+
+
+<script type="text/javascript">
+<!--
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentHeight = $(document).height();
+	var limitWidth =  $(document).width()-40;
+	
+	if(scrollHeight<documentHeight) {
+		$("#contentMore").show();	
+	}
+
+	imgSizeConv($(".explan"),limitWidth);
+	
+	$(window).resize(function(){ 
+		limitWidth2 =  $(document).width()-40
+		imgSizeConv($(".explan"),limitWidth2);
+	});
+
+ -->
+</script>

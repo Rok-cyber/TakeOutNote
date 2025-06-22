@@ -1,0 +1,111 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+  form=document.signForm;
+  if(!form.id.value) {
+      alert('적립될 회원 아이디를 입력하세요.');
+      form.id.focus();
+      return false;
+   }
+   if(!form.subject.value) {
+      alert('적립 내용을 입력히세요.');
+      form.subject.focus();
+      return false;
+   } 
+   if(!form.reserve.value) {
+      alert('적립 금액을 입력히세요.');
+      form.reserve.focus();
+      return false;
+   }
+   
+   var  ckStr= form.reserve;
+   for(var i = 0; i < ckStr.value.length; i++) { 
+         var chr = ckStr.value.substr(i,1); 
+         if(chr < '0' || chr > '9') {             
+            alert('적립금은 숫자만 입력 가능합니다.');
+            form.reserve.value="";
+			form.reserve.focus();
+			return false; 
+         } 
+    }
+
+	form.submit();
+	return false;
+}
+
+//-->
+</script>
+
+<table width=100% border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+    <form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;적립 아이디</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<div style="float:left">
+									<input type=text class=ta name=id value='{{FORM1}}' size=12>
+								</div>
+								<div id="sBtn1" style="float:left;padding:0 0 0 4px;">
+									<a href="#" onclick="pLightBox.show('../member/search_member.php','iframe','420','220','■ 화원 찾기',10);return false;"><span class="green">회원검색하기</span></a>	
+								</div>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;*&nbsp;적립 내용</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=subject value='{{FORM2}}' size=60></td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;*&nbsp;적립 금액</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class='ta2 eng' onkeydown='onlyNum(this)' onkeyup='onlyNum(this)' name=reserve value='{{FORM3}}' size=10>원</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;*&nbsp;적립 상태</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<!-- DYNAMIC @is_modify1@ -->
+								<input type=radio name=status value='A' {{CKD1}} onfocus=blur();>적립대기&nbsp;
+								<!-- DYNAMIC @is_modify1@ -->								
+								<input type=radio name=status value='B' {{CKD2}} onfocus=blur();>적립완료&nbsp;
+								<input type=radio name=status value='C' {{CKD3}} onfocus=blur();>적립사용&nbsp;
+								<!-- DYNAMIC @is_modify2@ -->
+								<input type=radio name=status value='D' {{CKD4}} onfocus=blur();>적립취소					
+								<!-- DYNAMIC @is_modify2@ -->
+							</td>
+						</tr>
+						<tr height=78>
+							<td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 적립될 아이디를 확인하시기 바랍니다.<br />
+									* <font class='blue small'>적립대기</font> : 상품 주문 후 배송완료전까지의 적립 대기 상태 입니다.<br />
+									* <font class='blue small'>적립완료</font> : 적립이 완료되어 사용할 수 있는 상태 입니다.<br />
+									* <font class='blue small'>적립사용</font> : 적립금을 사용한 상태 입니다.(적립내역 감소)<br />
+									* <font class='blue small'>적립취소</font> : 적립이 취소된 상태 입니다.(적립내역 감소 안함)<br />
+
+								</div>
+								<div id="sBtn1" style="float:right;padding:10px 6px 0 0;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>
+						</tr>		
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	 </form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

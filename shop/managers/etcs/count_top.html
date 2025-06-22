@@ -1,0 +1,145 @@
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_count.gif" alt="접속통계" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>년별, 월별, 일별, 시간별, 접속경로별 접속통계를 보실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border="0" width=99% align="center" cellpadding="0" cellspacing=0>
+<tr>
+	<td style="padding:3px; background-color:#EEEEEE">
+        <table class="all" border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#EFEFEF">        
+		<tr>
+			<td valign="top"> 
+				<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">				
+				<tr bgcolor="#FFFFFF">
+					<td width=200 height=164 align=center valign=top>	  
+					  <!-- 달력 START -->
+					  <table cellSpacing=0 cellPadding=0 width=180 border=0>
+					    <tr><td height=10 colspan=2></td></tr>
+						<tr><td width=1></td><td align=center></td></tr>
+						<tr>
+						  <td align=center colspan=2 width=100%>
+							<table cellSpacing=0 cellPadding=0 width=90% border=0>
+							  <tr><td height=4></td></tr>
+							  <tr>
+								<td width=15% align=center>
+								  <a href={{MAIN}}?channel={{channel}}&year={{prevyear}}&month={{prevmonth}}&day=1 onfocus='this.blur()'><img src='img/btn_pre.gif' border=0 onfocus='this.blur();' align=absmiddle width=8 height=7></a>        
+								</td>
+								<td width=70% align=center><font class="eng bold">{{year}}년 {{month}}월</font></td>
+								<td width=15% align=center>
+								  <a href={{MAIN}}?channel={{channel}}&year={{nextyear}}&month={{nextmonth}}&day=1 onfocus='this.blur()'><img src='img/btn_next.gif' border=0 onfocus='this.blur();' align=absmiddle width=8 height=7></a>
+								</td>
+							  </tr>		
+							</table>
+						  </td>
+						</tr>
+						<tr><td height=3></td></tr>
+						<tr>
+						  <td align=center>
+							<table cellSpacing=0 cellPadding=0 width=90% border=0>  
+							  <tr>
+								<td class=bmcolor><table cellSpacing=0 cellPadding=0 width=1 height=1 border=0><tr><td bgcolor=ffffff></td></tr></table></td>
+								<td colspan=7 class=bmcolor height=1></td>
+								<td class=bmcolor align=right><table cellSpacing=0 cellPadding=0 width=1 height=1 order=0><tr><td bgcolor=ffffff></td></tr></table></td>
+							  </tr>
+							  <tr><td colspan=9 class=bmcolor height=3></td></tr>
+							  <tr class=bmcolor>
+								<td width=1%></td>
+								<td width=14% align=center><font class='small white'>일</font></td>            
+								<td width=14% align=center><font class='small white'>월</font></td>
+								<td width=14% align=center><font class='small white'>화</font></td>
+								<td width=14% align=center><font class='small white'>수</font></td>
+								<td width=14% align=center><font class='small white'>목</font></td>
+								<td width=14% align=center><font class='small white'>금</font></td>
+								<td width=14% align=center><font class='small white'>토</font></td>
+								<td width=1%></td>
+							  </tr>
+							  <tr><td colspan=9 class=bmcolor height=1></td></tr>
+							  <tr>
+								<td class=bmcolor><table cellSpacing=0 cellPadding=0 width=1 height=1 border=0><tr><td bgcolor=ffffff></td></tr></table></td>
+								<td colspan=7 class=bmcolor height=1></td>
+								<td class=bmcolor align=right><table cellSpacing=0 cellPadding=0 width=1 height=1 order=0><tr><td bgcolor=ffffff></td></tr></table></td>
+							  </tr>
+							  
+							  <tr height=20>
+								<td>{{blank}}</td>
+								<!-- DYNAMIC @loop@ -->
+								<!-- DYNAMIC @is_tr@ -->
+								<td></td></tr><tr height=20><td></td>
+								<!-- DYNAMIC @is_tr@ -->
+								<td align=center valign=middle><a href='{{MAIN}}?channel={{channel}}&year={{year}}&month={{month}}&day={{date}}' onfocus='this.blur();'><font class='eng {{style}}'>{{DATES}}</font></a></td>
+								<!-- DYNAMIC @loop@ -->				
+								<td></td>
+							  </tr>
+							</table>  
+						  </td>
+						</tr>
+						<tr><td height=4></td></tr>
+					  </table>
+					  <!-- 달력 END --> 	
+					</td>
+					<td valign=top align=center>
+					  <table cellSpacing=0 cellPadding=0 width=92% border=0>
+						<tr><td height=10 colspan=4></td></tr>
+						<tr height=28><td colspan=4><font class='eng bold sz14 satur'>Since</font>&nbsp;&nbsp;<font class='eng bold'>{{SINCE}}</font></td></tr>
+						<tr><td height=4 colspan=4></td></tr>
+						<tr height=28>
+						  <td width=20%><font class='eng sz10 satur'>Today</font></td>
+						  <td width=30%><font class='eng'>{{TODAY}}&nbsp;(view:{{TODAY2}})</font></td>
+						  <td width=20%><font class='eng sz10 satur'>Maxinum</font></td>
+						  <td width=30%><font class='eng'>{{MAXI}}</font></td>
+						</tr>
+						<tr height=28>
+						  <td><font class='eng sz10 satur'>Yesterday</font></td>
+						  <td><font class='eng'>{{YESTERDAY}}&nbsp;(view:{{YESTERDAY2}})</font></td>
+						  <td><font class='eng sz10 satur'>Mininum</font></td>
+						  <td><font class='eng'>{{MINI}}</font></td>
+						</tr>
+						<tr height=28>
+						  <td><font class='eng sz10 satur'>This Month</font></td>
+						  <td><font class='eng'>{{MONTH}}&nbsp;(view:{{MONTH2}})</font></td>
+						  <td><font class='eng sz10 satur'>Average</font></td>
+						  <td><font class='eng'>{{AVER}}&nbsp;(view:{{AVER2}})</font></td>
+						</tr>
+						<tr height=28><td colspan=4><font class='eng bold sz12 satur'>Total</font>&nbsp;&nbsp;<font class='eng bold'>{{TOTAL}} {{TOTALS}}&nbsp;(view:{{TOTAL2}})</font></td></tr>
+					  </table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+	</td>
+</table>
+
+<table border="0" cellpadding="0" cellspacing=0 width=99% align="center">
+<tr><td colspan=2 height=20></td></tr>
+<tr>
+	<td align=center>
+		<table border="0" cellpadding="0" cellspacing="0" width="100%" align="center" bgcolor='#FFFFFF'>		
+		<tr><td align="center" colspan="2">
+			
+			<div id="tabTop">
+				<div class="{{tabs1}} small"><a href="../etcs/count.php?channel=year" onfocus="this.blur();">년별통계</a></div>
+				<div class="{{tabs2}} small"><a href="../etcs/count.php?channel=month" onfocus="this.blur();">월별통계</a></div>
+				<div class="{{tabs3}} small"><a href="../etcs/count.php?channel=day" onfocus="this.blur();">일별통계</a></div>
+				<div class="{{tabs4}} small"><a href="../etcs/count.php?channel=hour" onfocus="this.blur();">시간별통계</a></div>
+				<div class="{{tabs5}} small"><a href="../etcs/count.php?channel=browser" onfocus="this.blur();">BROWSER별통계</a></div>
+				<div class="{{tabs6}} small"><a href="../etcs/count.php?channel=os" onfocus="this.blur();">OS별통계</a></div>
+				<div class="{{tabs7}} small"><a href="../etcs/count.php?channel=site" onfocus="this.blur();">사이트별통계</a></div>
+				<div class="{{tabs8}} small"><a href="../etcs/count.php?channel=refer" onfocus="this.blur();">접속경로별통계</a></div>
+				<div class="{{tabs9}} small"><a href="../etcs/count.php?channel=keyword" onfocus="this.blur();">검색어별통계</a></div>
+			</div>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+<tr><td colspan=2 height=10></td></tr>
+</table>

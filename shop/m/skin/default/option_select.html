@@ -1,0 +1,76 @@
+<script type="text/javascript" src="{{skin}}/js/listDesign.js"></script>
+
+<div id="contents">
+	<section id="headline">
+		<h1>상품선택사항/수량변경</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section>
+		<form name="goodsForm" method="post" onsubmit="return false;" action="php/cart_ok.php">
+		<input type='hidden' name='uid' value='{{uid}}' />
+		<input type='hidden' name='p_price' value='{{P_PRICE}}' />
+		<input type='hidden' name='p_price2' value='{{P_PRICE2}}' />
+		<input type='hidden' name='p_price3' value='{{P_PRICE3}}' />
+		<input type='hidden' name='p_total' value='{{P_TOTAL}}' />
+		<input type='hidden' name='p_total2' value='{{P_TOTAL2}}' />
+		<input type='hidden' name='p_sale' value='{{MY_SALE}}' />
+		<input type='hidden' name='p_carr' value='{{P_CARR}}' />
+		<input type='hidden' name='defQty' value='{{DEF_QTY}}' />
+		<input type='hidden' name='sQty' value='{{S_QTY}}' />
+		<input type='hidden' name='goodsUnit' value='{{GOODS_UNIT}}' />
+		<input type='hidden' name='p_option' />
+		<input type='hidden' name='p_op' value='0' />
+		<input type='hidden' name='p_op_cnt' value='{{op_cnt}}' />
+		<input type='hidden' name='cp_type' value='{{CP_TYPE}}' />
+
+		<div id="goodsInfoSub">
+			<h3>상품정보</h3> 
+			<div class="goodsInfoBox">
+				<a href="{{GOODS_LINK}}" title="상품상세보기">
+					<div class="thumbnail"><img src="{{GOODS_IMAGE}}" alt="상품이미지" /></div>
+					<div class="item_info">
+						<p class="goods" title="상품명">{{GOODS_NAME}}</p>
+						<p class="price" title="판매가"><strong>{{GOODS_PRICE2}}</strong>원</p>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<section id="goodsOpQty" class="mt20 mb20">
+			<h2>옵션/수량선택</h2>
+			
+			<!-- DYNAMIC @is_option@ -->
+			<p>{{OP_TITLE}}</p>
+			<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+			<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+			<!-- DYNAMIC @is_option@ -->
+
+			<p>수량</p>
+			<select name='p_qty' class='opSelect' onchange="ckTotal()">{{QTY_LIST}}</select>
+			
+			<p class="tPrice">
+				<span>합계금액</span>
+				<span><em id="totalPrice">{{GOODS_PRICE}}</em>원</span>
+			</p>	
+			<ul>
+				<li class="options"><p class="active" onclick="return changeOption();" title="변경하기">변경하기</p></li>				
+				<li class="options2">&nbsp;</li>
+				<li class="options"><p class="active" onclick="window.location.href='{{Main}}?channel=cart'" title="변경취소">변경취소</p></li>
+			</ul>
+		</section>
+
+		</form>
+
+		
+		
+	</section>   
+
+</div>
+
+<script type="text/javascript">
+<!--
+	document.goodsForm.p_qty.value = "{{GOODS_QTY}}";
+	ckTotal();
+-->
+</script>

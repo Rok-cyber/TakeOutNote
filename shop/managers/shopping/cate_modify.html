@@ -1,0 +1,193 @@
+<?
+ob_start();
+$skin_inc = "Y";
+include "../ad_init.php";
+$img_path = "../../image/cate/";
+$up_dir   = previlEncode("../../image/up_img/cate/");
+
+$last_cate = isset($_GET['last_cate'])? $_GET['last_cate']:'';
+$num = isset($_GET['num'])? $_GET['num']:'';
+
+if(!$last_cate || !$num) alert('정보가 제대로 넘어오지 못했습니다. 다시 시도하세요!','close');
+
+
+$cate = explode(":",$last_cate);
+$sql = "SELECT * FROM mall_cate WHERE cate = '$cate[0]'";
+
+if(!$row = $mysql->one_row($sql)) alert('정보가 제대로 넘어오지 못했습니다. 다시 시도하세요!','close');
+
+$checked[$row['cate_sub']] = "checked";
+$checked2[$row['soldout']] = "checked";
+$list_mode[$row['list_mode']] = "checked";
+$valid[$row['valid']] = "checked";
+
+$img1 = $row['img1'];
+$img2 = $row['img2'];
+$img3 = $row['img3'];
+
+for($i=1;$i<4;$i++){
+    if(${"img".$i}) {
+		$size=@GetImageSize($img_path.${"img".$i});
+		${"image".$i} = imgSizeCh($img_path,${"img".$i},420)."<div style='height:4px;overflow:hidden'>&nbsp;</div><font class='eng'>".$size['0']."px*".$size['1']."px</font>(삭제<input type=checkbox name=del_img".$i." value=1 onfocus='blur();' align=absmiddle>)"; 
+	} else {
+	    ${"image".$i} = "미등록";
+    }
+}
+
+$channel = "list";
+if($num==1 || $num==2){
+	if($row['cate_sub']==1) $channel = "main2";	
+}
+$links = "http://{$_SERVER["HTTP_HOST"]}/index.php?channel={$channel}&amp;cate={$cate[0]}";
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=euc-kr' />
+<TITLE>쇼핑분류 수정</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+
+<script language="JavaScript"> 
+function ckForm(cname){
+	form = document.cateForm;
+	if(!form.re_cate.value) {
+		alert('분류명을 입력 하세요');
+		form.re_cate.focus();
+		return false;
+	}
+}
+</script>
+</HEAD>
+
+<BODY style="padding:0px;margin:0px;">
+
+<table width=96% align=center cellpadding=0 cellspacing=0 border=0>
+<form name='cateForm' method='post' enctype="multipart/form-data" action='cate_post.php?cate_mode=cate_modify' onsubmit="return ckForm();">
+<tr><td height=10></td></tr>
+<tr><td><img src='./img/ttl_cate_basic.gif'></td></tr>
+<tr><td align=center>
+	<table  border="0" cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE" width="100%">
+	<tr>
+		<td>
+			<table  border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#999999" width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<tr height=30 align=left>
+						<td width=140 class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;수정할 분류명</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='text' class=ta name='re_cate' size='35' value='<?=$row[cate_name]?>'></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;링크주소</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<a href="<?=$links?>" target="_blank" class="eng"><?=$links?></a></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;사용상태 설정</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='radio' name='valid' id='valid1' value='1' onfocus="blur();" <?=$valid[1]?>><label for='valid1'>사용</label> <input type='radio' name='valid' id='valid2' value='0' onfocus="blur();" <?=$valid[0]?>><label for='valid2'>미사용(일시중지)</label> &nbsp;<font class=small>(상품에도 같이 적용됨)</font></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;분류 출력순서</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='text' class=ta name='c_number' size='3' value=<?=$row[number]?>>번째</td>
+					</tr>
+					<? if($num!=4) {  ?>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;하위분류 유무</font></td>
+						<td bgcolor=#EFEFEF style="padding-left:6px;">
+							<input type='radio' name='sub' id='sub11' value='1' checked onfocus="blur();" <?=$checked[1]?> /><label for='sub11'>있음</label> 
+							<input type='radio' name='sub' id='sub12' value='0' onfocus="blur();" <?=$checked[0]?> /><label for='sub12'>없음</label>
+						</td>
+					</tr>
+					<? } ?>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품 출력 형태</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='radio' name='v_list' id='v_list1' value='1' onfocus="blur();" <?=$list_mode[1]?>><label for='v_list1'>리스트</label> <input type='radio' name='v_list' id='v_list2' value='2' onfocus="blur();" <?=$list_mode[2]?>><label for='v_list2'>이미지</label></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;품절상품 제일뒤로</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='checkbox' name='soldout' value='1' onfocus="blur();" <?=$checked2[1]?>> 선택  &nbsp;<font class=small>선택시 품절된 상품은 리스트 제일 뒤에 나타납니다</font></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;접급권한 설정</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;
+							<select name='access_level' style='background:#FFFFFF;'>
+								<option value=''>전체</option>
+							<? 
+								$access_level = explode("|",$row['access_level']);
+								if(!$access_level[1]) $access_level[1] = "<";
+								
+								$sql = "SELECT name, code FROM mall_design WHERE mode='L' && name!='10' ORDER BY name ASC";
+								$mysql->query($sql);
+
+								for($i=2;$i<9;$i++) {
+									$row2 = $mysql->fetch_array();
+									
+									while($row2['name']!=$i) {
+										echo  "<option value='{$i}' {$sed}>LV{$i}</option>";
+										if($i==8) break;
+										$i++;
+									}
+									if($row2['name']==$i) {
+										$tmps = explode("|",$row2['code']);
+										echo "<option value='{$i}' {$sed}>".stripslashes($tmps[0])."</option>";							
+									}
+								}									
+							?>
+								<option value='9'>부관리자</option>
+								<option value='10'>관리자</option>
+							</select>
+							<select name='access_type'>
+								<option value="<">이상부터</option>
+								<option value="!=">만</option>
+							</select>	&nbsp;<font class=small>(상품에도 같이 적용됨)</font>	
+							<script>document.cateForm.access_level.value='<?=$access_level[0];?>';document.cateForm.access_type.value='<?=$access_level[1];?>';</script>
+						</td>
+					</tr>
+					<? if($num==1 || $num==2) { ?>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;분류 타이틀 이미지</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='file' class=ta name='img1' size='30'>&nbsp;</td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;등록된 타이틀 이미지</font></td>
+						<td bgcolor=#EFEFEF style="padding:6px;"><?=$image1?></td>
+					</tr>
+					<? 
+					   }
+					   if($num!=4) {
+					?>	
+					
+					 <tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쇼핑메뉴 이미지1</font></td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='file' class=ta name='img2' size='30'>&nbsp;</td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;등록된 메뉴 이미지1</font></td>
+						<td bgcolor=#EFEFEF style="padding:6px;"><?=$image2?></td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쇼핑메뉴 이미지2</td>
+						<td bgcolor=#EFEFEF> &nbsp;<input type='file' class=ta name='img3' size='30'>&nbsp;&nbsp;<font class="small">(마우스 올렸을때)</td>
+					</tr>
+					<tr height=30 align=left>
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;등록된 메뉴 이미지2</td>
+						<td bgcolor=#EFEFEF style="padding:6px;"><?=$image3?></td>
+                    </tr> 
+					<? } ?>
+					<input type=hidden name=last_cate value='<?=$cate[0]?>'>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=10></td></tr>
+<tr><td align=center><input type='image' src='./img/btn_cate_modify.gif' border=0 onfocus='blur();' align=absmiddle>&nbsp;&nbsp;<img  src='./img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"></td></tr>
+<tr><td height=20></td></tr>
+</form>
+</table>
+
+</BODY>
+</HTML>

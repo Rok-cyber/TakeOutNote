@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>일괄송장번호등록</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> 일괄송장번호등록
+</div>
+<div style="padding-left:10px;">
+	<font class='eng blue'>01.</font> <font class="blue">송장번호CSV파일등록/일괄처리</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		먼저 이용하시는 택배회사를 선택 하시면 됩니다.<br />
+		일괄처리를 하면 '상품배송요청'상태의 주문은 자동으로 '상품배송중'으로 단계가 변경 됩니다.<br />
+		엑셀(CSV)파일 형식은 "주문번호,주문자,송장번호" 입니다. 송장번호등록용 CSV파일 생성을 이용 하셔면 송장번호만 입력 하시면 됩니다.<br />
+		엑셀로 작업하셔서 다른이름으로 저장을 누르시고 파일형식을 CSV(쉼표로분리)로 선택하시고 저장하시면 됩니다. <br />
+		저장된 CSV파일을 열어 보시면 아래처럼 저장되어 있습니다.<br />
+		08-0926-144319-8901,홍길동,123456789<br />
+		08-0929-144319-5601,홍길동,234567891<br />
+		08-0930-144319-8781,홍길동,345678912<br />
+		. . . <br />		
+	</div>
+
+	<font class='eng blue'>02.</font> <font class="blue">송장번호등록용 CSV파일 생성</font>
+	<div style="padding-left:10px;margin-bottom:10px;">
+		해당 조건(주문 처리 단계, 주문일, 단계 처리일)을 선택하시고 'CSV파일 다운'버튼을 클릭하셔서 고객님의 컴퓨터에 저장 하시면 됩니다. <br />
+		송장번호가 등록되지 않은 주문일 경우에만 CSV파일로 생성 됩니다.<br />
+		저장된 파일을 여시면 주문번호와 주문자 부분은 자동으로 채워져 있고 송장번호만 등록 하시고 저장하시면 됩니다.
+	</div>
+	<? if($all!='Y') { ?>
+	<div style="height:125px;"></div>
+	<? } ?>
+</div>
+
+</BODY>
+</html>

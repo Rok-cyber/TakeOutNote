@@ -1,0 +1,162 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel=StyleSheet HREF='dialog.css' type='text/css' title='CSS'>
+<style>
+BODY	{border-style:none;margin:0px;padding:10px;background-color:#EBEAE7}
+</style>
+</head>
+
+<script>
+
+var Args	= window.opener.dialogArguments;
+gHtml=Args.Editor.gHtml;
+var g_sUrl;	
+
+function init() {
+
+	document.all.txt.value = gHtml;
+	updateCreateLink();
+	if (gHtml) document.iForm.url.focus();
+	else document.iForm.txt.focus();
+}
+
+function updateCreateLink()
+{
+	var sUrl = document.iForm.url.value;
+	g_sUrl = sUrl;
+
+	var sExt = sUrl.substring(sUrl.lastIndexOf(".")+1);
+	var sComp = sExt.toUpperCase();
+	if (sComp=="WMA"| sComp=="MP3"||sComp=="ASF"||sComp=="WMV"||sComp=="SWF"||sComp=="AVI"||sComp=="MPG") enableExtraFeature(true);
+	else enableExtraFeature(false);
+
+	genHTML();
+}
+
+function enableExtraFeature(bEnable) {
+	if (bEnable) {
+		document.all.ip_extra1.disabled = false;
+		document.all.lb_extra1.disabled = false;
+	} else {
+		document.all.ip_extra1.disabled = true;
+		document.all.lb_extra1.disabled = true;
+	}
+}
+
+function genHTML() {
+	var sClass = document.iForm.sClass.value;
+	if (sClass)	{
+		sClass = "AutoLinkType_"+document.iForm.sClass.value;
+		var sHTML = "<a target=\"_blank\" href=\""+g_sUrl+"\" class=\""+sClass+"\">"+document.all.txt.value+"</a>";
+	} else {
+		var sHTML = "<a target=\"_blank\" href=\""+g_sUrl+"\">"+document.all.txt.value+"</a>";
+	}
+
+	if (document.all.ip_extra1.checked) {
+		sHTML += " [<span style='color:#EF5900;cursor:pointer' isPlaying=0 onclick=\"playMultimediaFile(this)\">바로 재생</span>]";
+	}
+	
+	createLinkPreview.innerHTML = sHTML;
+	if(document.selection) createLinkCode.innerText = sHTML;
+	else {
+	    HTMLElement.prototype.__defineGetter__("innerText", function() { return this.textContent; }); 
+		HTMLElement.prototype.__defineSetter__("innerText", function(txt) { this.textContent = txt; }); 
+		createLinkCode.innerText = sHTML;
+	}
+}
+
+function completeCreateLink() {
+    if(!document.iForm.url.value || !document.all.txt.value) { self.close(); return;}
+	updateCreateLink();
+	var sHTML = createLinkPreview.innerHTML;
+	if(Args.callback) eval('window.opener.'+Args.callback + '(Args.Editor, sHTML)');
+    self.close();
+}
+</script>
+
+
+<body scroll=no onload="init();">
+
+<form action="" onsubmit="return false;" name='iForm' style="margin:0px">
+
+
+<fieldset style="width:100%;padding:8px">
+<legend> 링크 추가 </legend>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+
+	<col width=40 align=right style="padding-top:3px">
+	<col style="padding-left:8px">
+	
+	<tr>
+		<td nowrap><B>텍스트</B></td>
+		<td><textarea onkeyup="updateCreateLink()" id=txt name="txt" size=20 style="width:98%;height:50px"></textarea></td>
+	</tr>
+	<tr>
+		<td nowrap><label for=lb_1 id=ip1 checked class=bold>링크</lable></td>
+		<td><input onkeyup="updateCreateLink()" name="url" type=text size=20 style="width:98%"></td>
+	</tr>
+
+	</table>
+</fieldset>
+<br>
+<fieldset style="width:100%;padding:8px">
+<legend> 스타일 </legend>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+		<td nowrap style="padding-top:6px">링크에 적용할 스타일을 선택하세요</td>
+		<td width=99% valign=top style="padding-left:15px;padding-top:3px">
+			<select name=sClass onchange="updateCreateLink()">
+			<option value="blue">Blue
+			<option value="red">Red
+			<option value="green">Green
+			<option value="">Default
+			</select>
+		</td>
+	</tr>
+	</table>
+</fieldset>
+<br>
+<fieldset style="width:100%;padding:8px">
+<legend> 미리보기 </legend>
+	<center>	
+	<table border=0 cellpadding=5 cellspacing=0 width=100% bgcolor=white>
+	<tr>
+		<td id=createLinkPreview height=30></td>
+	</tr>
+	</table>	
+	</center>
+</fieldset>
+<br>
+<fieldset style="width:100%;padding:8px">
+<legend> 멀티미디어 </legend>
+	<table border=0 cellpadding=0 cellspacing=0 width=100% class=fixed>
+	<tr>
+		<td><input onclick="updateCreateLink()" type=checkbox disabled id=ip_extra1></td>
+		<td style="padding-left:2px;padding-top:4px"><label onclick="updateCreateLink()" disabled id=lb_extra1 for=ip_extra1>'바로 재생' 링크를 추가합니다.</label></td>
+	</tr>
+	</table>
+</fieldset>
+<br><fieldset style="width:100%;padding:8px">
+<legend> 소스 </legend>
+	<center>
+	<table border=0 cellpadding=5 cellspacing=0 width=100%>
+	<tr>
+		<td style="word-break:break-all"><div style="height:60px;overflow:auto;font-family:fixedsys" id=createLinkCode></div></td>
+	</tr>
+	</table>
+	</center>
+</fieldset>
+
+<center>
+<table border=0 cellpadding=0 cellspacing=0>
+<tr>
+	<td height=40 align=right style="padding-right:5px"><button onclick="completeCreateLink()" class='tah11px bold' style="width:80px">OK</button></td>
+	<td style="padding-left:5px"><button style="width:80px" onclick="self.close()" class='tah11px'>CANCEL</button></td>
+</tr>
+</table>
+</center>
+</form>
+
+</body>
+</html>

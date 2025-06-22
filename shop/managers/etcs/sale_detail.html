@@ -1,0 +1,85 @@
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+	<td align=center>
+		<table border=0 cellpadding="0" cellspacing="0" width="100%" align=center bgcolor='#FFFFFF'>		
+		<form name=searchForm method=get action={{ACTION}}>
+		<input type=hidden name=mode value={{mode}}>
+		<tr>
+			<td  colspan=2 align=right>
+				<div class="boxText small orange">기간선택</div> 
+				<div style='float:left;padding-left:6px;padding-right:10px;'> 
+					<input type="text" onfocus="new CalendarFrame.Calendar(this)" class="bt eng" size=10 name=sdate1 value={{sdate1}}> ~ <input type="text" onfocus="new CalendarFrame.Calendar(this)"  class="bt eng" size=10 name=sdate2 value='{{sdate2}}'>
+					<div id="CalendarLayer" style="display:none; width:172px; height:176px">
+					<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="176" border="0" frameborder="0" scrolling="no"></iframe></div>
+				</div>	
+				
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="searchForm.submit();return false;"><span class="green">검색하기</span></a>
+				</div>
+
+				<div id="sBtn1" style="padding-left:6px;">
+					<a href="#" onclick="printClick();return false;"><span class="green">프린트하기</span></a>
+				</div>
+			</td>
+		</tr>		
+		</form>
+		<tr><td colspan=2 height=10></td></tr>
+		<tr>
+
+		<td colspan=2>
+			<div id="printArea">
+			
+			<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+			<tr><td>
+			   <table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+			   <tr><td align=center>
+					<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+					<tr><td align=right colspan=8 height=30 bgcolor=#FFFFFF class="small bold"><font class=eng>{{sdate1}} ~ {{sdate2}}</font> 총 매출 : <font class=eng>{{TOTAL}}</font>원 &nbsp;(주문금액 + 배송비 - 적립금사용 - 쿠폰사용)&nbsp;&nbsp;</td></tr>
+					<tr height=24>
+						<td width=14% align=center class=gr_bg><font class="bTitle small">주문시간</font></td>
+						<td align=center class=gr_bg><font class="bTitle small">상품명</font></td>
+						<td width=12% align=center class=gr_bg><font class="bTitle small">주문금액</font></td>
+						<td width=9% align=center class=gr_bg><font class="bTitle small">배송비</font></td>						
+						<td width=10% align=center class=gr_bg><font class="bTitle small">결제금액</font></td>
+						<td width=8% align=center class=gr_bg><font class="bTitle small">적립금사용</font></td>
+						<td width=8% align=center class=gr_bg><font class="bTitle small">쿠폰사용</font></td>
+						<td width=11% align=center class=gr_bg><font class="bTitle small">처리상황</font></td>
+					</tr>
+					<!-- DYNAMIC @loop@ -->
+					<tr height=24 bgcolor='#F4F4F4'>
+						<td align=center class=eng>{{DATE}}</td>
+						<td align="left" style='padding-left:6px;' class=small>{{SALE1}}</td>
+						<td align=right class=eng>{{SALE2}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE3}}원&nbsp;</td>						
+						<td align=right class=eng>{{SALE4}}원&nbsp;</td>
+						<td align=right class=eng>{{SALE5}}원&nbsp;</td>						
+						<td align=right class=eng>{{SALE7}}원&nbsp;</td>						
+						<td align=center class=small>{{SALE6}}</td>
+					</tr>
+					<!-- DYNAMIC @loop@ -->
+					<tr height=24 bgcolor='#F4F4F4'>
+						<td align=center class=bold>합계</b></td>
+						<td align="left" style='padding-left:6px;' class="eng bold">{{TSALE1}}건</td>
+						<td align=right class="eng bold">{{TSALE2}}원&nbsp;</td>
+						<td align=right class="eng bold">{{TSALE3}}원&nbsp;</td>
+						<td align=right class="eng bold">{{TSALE4}}원&nbsp;</td>
+						<td align=right class="eng bold">{{TSALE5}}원&nbsp;</td>
+						<td align=right class="eng bold">{{TSALE7}}원&nbsp;</td>
+						<td align=right></td>					
+					</tr>
+					<tr><td align=right colspan=8 height=30 bgcolor=#FFFFFF class="small bold"><font class=eng>{{sdate1}} ~ {{sdate2}}</font> 총 매출 : <font class=eng>{{TOTAL}}</font>원 &nbsp;(주문금액 + 배송비 - 적립금사용 - 쿠폰사용)&nbsp;&nbsp;</td></tr>
+					</table>
+				    </td></tr>
+				</table>
+			    </td>
+			</tr>
+			</table>
+			
+			</div>
+			</td>
+		</tr>
+		<tr><td height=20 colspan=2></td></tr>
+		</table>
+      </td>
+</tr>
+</table>

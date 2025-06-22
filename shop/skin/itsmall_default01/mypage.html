@@ -1,0 +1,216 @@
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	<div id="box720">
+		<div class="top2"></div>
+		<div class="content2" style="width:720px;height:86px">		
+			<div style="width:20px;float:left">&nbsp;</div>
+			<div style="width:320px;float:left;text-align:left">
+				<div class="small bold orange">{{my_name}} <img src='img/customer/txt_mypage01.gif' align='absmiddle' /></div>
+				<!-- DYNAMIC @is_member_info@ -->
+				<div class="small bold" style="width:320px;margin:6px 0 0 4px;height:15px;">
+					<div style="float:left;width:70px">- 회원등급</div>
+					<div style="float:left;width:230px;"><font class="blue">{{MY_GRAD}}</font></div>
+				</div>
+				<div class="small" style="width:320px;margin:6px 0 0 4px;;height:15px;">
+					<div style="float:left;width:70px" class="bold">- 회원혜택</div>
+					<div style="float:left;width:240px;"> 적용할인률 : <font class="num blue bold">{{MY_SALE}}%</font>, 추가적립금 : <font class="num blue bold">{{MY_POINT}}%</font> <font class="blue">{{MY_CARR}}</font>
+					</div>
+				</div>				
+				<!-- DYNAMIC @is_member_info@ -->
+				<div class="small bold" style="width:320px;margin:6px 0 0 4px;;height:15px;">
+					<div style="float:left;width:70px">- 주문내역</div>
+					<div style="float:left;width:90px;" class="num"><a href='{{Main}}?channel=order' class="blue"><font class="blue">{{TOTAL_ORDER}}</font></a><font class="small blue">건</font></div>
+					<div style="float:left;width:70px">- 관심상품</div>
+					<div style="float:left;width:90px;" class="num"><a href='{{Main}}?channel=wish'><font class="blue">{{TOTAL_WISH}}</font></a><font class="small blue">개</font></div>
+				</div>
+			</div>
+			<div style="width:20px;float:left">&nbsp;</div>
+			<div style="width:340px;float:left;text-align:left">
+				<div style="width:180px;float:left;text-align:left">
+					<div style="height:25px;"> 
+						<img src="img/customer/ttl_reserve_new.gif" alt="적립금정보" title="적립금정보" />
+					</div>
+					<div class="small bold" style="width:180px;margin:4px 0 0 10px;height:15px;">
+						<div style="float:left;width:90px">- 총 누적 적립금</div>
+						<div style="float:left;width:90px;text-align:right;" class="num orange">{{TOTAL_MONEY}}P</div>
+					</div>
+					<div class="small bold" style="width:180px;margin:5px 0 0 10px;height:15px;">
+						<div style="float:left;width:90px">- 사용가능 적립금</div>
+						<div style="float:left;width:90px;text-align:right;" class="num blue">{{TOTAL_USE}}P</div>
+					</div>
+					<div class="small bold" style="width:180px;margin:5px 0 0 10px;height:15px;">
+						<div style="float:left;width:90px">- 대기 중 적립금</div>
+						<div style="float:left;width:90px;text-align:right;" class="num">{{MONEY1}}P</div>
+					</div>
+				</div>
+
+				<div style="width:20px;float:left;overflow:hidden">&nbsp;</div>
+
+				<div style="width:140px;float:left;text-align:left">
+					<div style="height:25px;"> 
+						<img src="img/customer/ttl_cupon_new.gif" alt="쿠폰정보" title="쿠폰정보" />
+					</div>
+					<div class="small bold" style="width:140px;margin:4px 0 0 10px;height:15px;">
+						<div style="float:left;width:90px">- 총 보유 쿠폰</div>
+						<div style="float:left;width:45px;text-align:right;" class="num orange">{{TOTAL_CUPON}}<font class="small orange">개</font></div>
+					</div>
+					<div class="small bold" style="width:140px;margin:5px 0 0 10px;height:15px;">
+						<div style="float:left;width:90px">- 사용가능 쿠폰</div>
+						<div style="float:left;width:45px;text-align:right;" class="num blue">{{ABLE_CUPON}}<font class="small blue">개</font></div>
+					</div>
+					<div class="small bold" style="width:140px;margin:5px 0 0 10px;height:15px;">
+						<div style="float:left;width:90px">- 사용완료 쿠폰</div>
+						<div style="float:left;width:45px;text-align:right;" class="num">{{USE_CUPON}}<font class="small">개</font></div>
+					</div>
+				</div>
+			</div>			
+		</div>		
+		<div class="bottom2"></div>
+	</div>			
+
+	<div style="clear:both;height:20px"></div>
+
+	<div style="text-align:left"> 
+		<div style="width:300px; float:left;height:25px;"> 
+			<img src="img/customer/ttl_order_new.gif" alt="최근주문내역" title="최근주문내역" />
+		</div>
+		<div style="float:right;width:100px;padding:8px 3px; text-align:right" class="small">
+			<a href='{{Main}}?channel=order'>+ more</a>
+		</div>			
+	</div>
+
+	<div style="width:100%;clear:both;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="130" /> 
+			<col />
+			<col width="70"/>			
+			<col width="75" /> 
+			<col width="70" />
+			<col width="80" />      					
+			<col width="90" />
+			<col width="4" />
+            <thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>                
+				<th scope="col" class="small black">주문번호</th>
+				<th scope="col" class="small black">주문상품명</th>
+				<th scope="col" class="small black">주문상품건수</th>
+				<th scope="col" align="right" style="padding-right:10px;" class="small black">결제금액</th>				
+				<th scope="col" class="small black">결제방법</th>
+				<th scope="col" class="small black">주문상태</th>
+				<th scope="col" class="small black">주문일</th>
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>			
+			<!-- DYNAMIC @loop_order@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td></td>
+				<td class="num orange"><a href="{{Main}}?channel=order_detail&order_num={{NUM}}" title="주문내역상세보기">{{NUM}}</a></td>
+				<td align="left" class="small">{{NAME}}</td>
+				<td class="num">{{CNT}}건</td>				
+				<td align="right" style="padding-right:10px;" class="num blue">{{PRICE}}원</td>
+				<td class="small">{{TYPE}}</td>				
+				<td class="small">
+					{{STATUS}}
+					<!-- DYNAMIC @is_carr@ -->	
+					<br /><img src='img/customer/btn_carr2.gif' class='hand' onclick="searchCarr('{{CLINK}}','{{CNUM}}');" align="absmiddle" />
+					&nbsp;<a href="/php/order_multi_ok.php?mode=carrok&order_num={{NUM}}{{addstring}}"><img src='img/customer/btn_carrok.gif' align="absmiddle" /></a>	
+					<!-- DYNAMIC @is_carr@ -->
+						
+				</td>				
+				<td class="num">{{DATE}}</td>								
+				<td></td>
+			</tr>			
+			<tr><td colspan="9" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop_order@ -->								
+			
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @no_order@ -->			
+	<div style="text-align:center;margin-top:15px;border-bottom:1px solid #F1F1F1;">
+		<img src="img/customer/no_order.gif" alt="주문된상품없음이미지" title="주문된상품없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_order@ -->
+
+	<div style="clear:both;height:20px"></div>
+
+	<div style="text-align:left"> 		
+		<div style="width:300px; float:left;height:25px;"> 
+			<img src="img/customer/ttl_wish_new.gif" alt="최근관심상품" title="최근관심상품" />
+		</div>
+		<div style="float:right;width:100px;padding:8px 3px; text-align:right" class="small">
+			<a href='{{Main}}?channel=wish'>+ more</a>
+		</div>	
+	</div>	
+	
+	<div style="width:100%;clear:both">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="4" />
+			<col width="40" /> 
+			<col width="90" />
+			<col />			
+			<col width="80" /> 
+			<col width="70" />
+			<col width="80" />      								
+			<col width="4" />
+            <thead>
+            <tr align="center" height="28" style="background:url(img/customer/bar_list_bg.gif)">
+				<th scope="col"><img src="img/customer/bar_list_left.gif" /></th>
+                <th scope="col" class="small black"></th>
+				<th scope="col" class="small black">이미지</th>
+				<th scope="col" class="small black">상품명/메모</th>
+				<th scope="col" class="small black">가격</th>
+				<th scope="col" class="small black">적립금</th>				
+				<th scope="col" class="small black">저장일</th>								
+				<th scope="col"><img src="img/customer/bar_list_right.gif" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			<!-- DYNAMIC @loop_wish@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td></td>
+				<td>					
+					<div style="margin-top:4px;"><img src="img/common/icon_qview.gif" class="hand" onclick="openQview({{QLINK}});" alt="퀵뷰" title="퀵뷰" /></div>
+					<div style="margin-top:4px;"><img src="img/common/icon_nwin.gif" class="hand" onclick="openView('{{LINK}}');" alt="새창보기" title="새창보기" /></div>
+				</td>
+				<td style="padding:6px;">
+					<div style="cursor:move;border:2px solid #FFF; height:80px;width:80px;background:url({{IMAGE}});" onclick="viewGoods('{{LINK}}');" {{DRAGD}}></div>
+				</td>
+				<td align="left">
+					<div style="height:44px;" class="clear tleft"><a href="{{LINK}}" onfocus="blur()">{{NAME}}</a><br>{{ICON}}</div>
+					<div class="small tleft">
+						{{MEMO}}
+						<br />Home > {{LOC}}
+					</div>				
+				</td>
+				<td class="num orange">{{PRICE}}</td>
+				<td class="num">{{RESE}}원</td>				
+				<td class="num">{{DATE}}</td>				
+				<td></td>
+			</tr>			
+			<tr><td colspan="8" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop_wish@ -->								
+			</tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @no_wish@ -->			
+	<div style="text-align:center;margin-top:15px;border-bottom:1px solid #F1F1F1;">
+		<img src="img/customer/no_wish.gif" alt="관심상품없음이미지" title="관심상품없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_wish@ -->
+
+	<div style="clear:both;height:20px"></div>
+	
+</div>

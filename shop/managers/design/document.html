@@ -1,0 +1,95 @@
+<?
+$skin_inc = "Y";
+include "../html/top_inc.html"; // 상단 HTML 
+
+######################## lib include
+$up_dir   = previlEncode("../../image/up_img/document/");
+$mode = isset($_GET['mode']) ? $_GET['mode'] : 'A';
+
+$sql = "SELECT code FROM mall_document WHERE mode='{$mode}'";
+$row = $mysql->one_row($sql);
+
+$code = stripslashes($row['code']);
+
+include "docu_default.php";
+$def_code = stripslashes(${"docu_default".$mode});
+
+?>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+
+<script>
+function checkIt() {
+	f = document.docuForm;
+	f.code.value = code.getHtml();	
+}
+function setDefault(){
+	code._doc.body.innerHTML = document.docuForm.def_code.value;
+}
+</script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_docu.gif" alt="기본문서관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>회사소개, 이용약관, 개인정보취급방침, 이용안내 등 쇼핑몰의 기본적인 페이지를 등록하거나 수정하실 수 있는 곳 입니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr>
+	<td height="30" class="small" style="padding-left:10px;">
+	! 최대 <?=$SKIN_DEFINE['docu_code']?>픽셀에 맞춰 스킨이 제작 되었습니다. 주의 하시기 바랍니다.<br>
+	! 아래 기본내용을 운영하시는 쇼핑몰에 맞게 수정 하셔서 사용 하시면 됩니다. <br>
+	<? if($mode=='A' || $mode=='B') { ?>
+	! 치환코드 - <font class="eng blue">{shopName}</font> : 쇼핑몰명
+	<? } else if($mode=="C") {?>
+	! 개인정보관리책임자 성명 및 전화번호, 이메일을 입력 하시기 바랍니다. <br/>
+	! 치환코드 - <font class="eng blue">{shopName}</font> : 쇼핑몰명&nbsp;&nbsp;<font class="eng blue">{name}</font> : 관리자명 &nbsp;&nbsp;<font class="eng blue">{email}</font> : 관리자 이메일 &nbsp;&nbsp;<font class="eng blue">{tel}</font> : 연락처
+	<? } else if($mode=="D") {?>
+	! 무통장 입금 정보, 고객센터 전화번호, 이메일 및 배송정보를 입력 하시기 바랍니다.</br/>
+	! 치환코드 - <font class="eng blue">{shopName}</font> : 쇼핑몰명 &nbsp;&nbsp;<font class="eng blue">{email}</font> : 관리자 이메일 &nbsp;&nbsp;<font class="eng blue">{tel}</font> : 연락처&nbsp;&nbsp;<font class="eng blue">{bankInfo}</font> : 무동장 입금정보(예금주 은행명 계좌번호)<br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font class="eng blue">{carrLimit}</font> : 배송료적용 주문금액&nbsp;&nbsp;<font class="eng blue">{carrPrice}</font> : 배송료
+	<? } ?>
+	</td>
+</tr>
+<!---------------------------- 기본 문서 관리 ----------------------------------->
+<FORM name='docuForm' method='post' action='docu_post.php' enctype="multipart/form-data" onsubmit='checkIt();'>
+<input type=hidden name=mode value='<?=$mode?>'>
+<textarea name="def_code" style="display:none"><?=$def_code?></textarea>
+<TR><TD>&nbsp;<img src='./img/t_docu_code<?=$mode?>.gif'></TD></TR>
+<TR><TD style="padding-left:10px;">
+		<textarea name="code" id="code"><?=$code?></textarea>
+		<script>var code = new pEditor("code","../../pEdit","752","400","<?=$up_dir?>","basic"); //에디터 생성</script>
+    </TD>
+</TR> 
+<!---------------------------- @기본문서 관리 끝 ----------------------------------->
+<TR><TD height="24"></TD></TR> 
+<TR>
+	<TD align="center">
+		<input type="image" src="img/btn_save.gif" onfocus='blur();'>
+		<img src="img/btn_default.gif" onClick="setDefault();" onfocus='this.blur();' class="hand" align="absmiddle">
+		<img src="img/btn_prepage.gif" onClick="history.back()" onfocus='this.blur();' class="hand" align="absmiddle">
+	</TD>
+</TR>
+<TR><TD height="20"></TD></TR> 
+</FORM>
+</TABLE>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+<script LANGUAGE="JavaScript">
+<!--
+pE[0] = code;
+//-->
+</script>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

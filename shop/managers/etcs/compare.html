@@ -1,0 +1,204 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+?>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_compare.gif" alt="가격비교엔진관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>가격비교 서비스 업체에 제공할 상품정보 엔진 페이지를 관리 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<TR><TD>&nbsp;<img src='./img/ttl_compare.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<TR>
+		<TD>
+			<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<TR>
+				<TD>
+					<TABLE border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='compareForm' method='post' action='compare_post.php'>
+					<!-- <TR height=30 align=left> 
+						<td class=gr_bg width="120" rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;오미</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck1" id='ck1' value="1"> <label for='ck1'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://www.omi.co.kr/oop/oop_new/oop_3_1.asp" target="_black">오미입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex1" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/omi.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/omi.php</a>
+						</td>
+					</tr>	 -->
+					<TR height=30 align=left> 
+						<td class=gr_bg rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;네이버지식쇼핑</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck2" id='ck2' value="1"> <label for='ck2'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://join.shopping.naver.com/index.nhn" target="_black">네이버지식쇼핑입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex2" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=56 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/naver.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/naver.php</a> <font class="small">[전체상품]</font><br />
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/naver.php?mode=summ" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/naver.php?mode=summ</a> <font class="small">[요약상품]</font><br />
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/naver.php?mode=new" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/naver.php?mode=new</a> <font class="small">[신규상품]</font><br />
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td class=gr_bg rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;다음 쇼핑하우</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck7" id='ck7' value="1"> <label for='ck6'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://commerceone.biz.daum.net/join/process.daum" target="_black">다음 쇼핑하우입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex7" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=56 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/daum.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/daum.php</a> <font class="small">[전체상품]</font><br />
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/daum.php?mode=summ" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/daum.php?mode=summ</a> <font class="small">[요약상품]</font><br />	
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/daum.php?mode=new" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/daum.php?mode=new</a> <font class="small">[신규상품]</font><br />
+						</td>
+					</tr>	
+					<!-- <TR height=30 align=left> 
+						<td class=gr_bg rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;야후전문몰</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck3" id='ck3' value="1"> <label for='ck3'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://kr.shopping.yahoo.com/index/ysepguide.html" target="_black">야후전문몰입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex3" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/yahoo.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/yahoo.php</a>
+						</td>
+					</tr>	 -->
+					<TR height=30 align=left> 
+						<td class=gr_bg rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;마이마진</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck4" id='ck4' value="1"> <label for='ck4'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://www.mm.co.kr/shop_admin/reg/reg_main.asp" target="_black">마이마진입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex4" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/mm.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/mm.php</a>
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td class=gr_bg rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;에누리</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck5" id='ck5' value="1"> <label for='ck5'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://www.enuri.com/mallregister/Mallregister.jsp?cmd1=11" target="_black">에누리입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex5" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/enuri_cate.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/enuri_cate.php</a>
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td class=gr_bg rowspan=3><font class="small bTitle">&nbsp;&nbsp;*&nbsp;어바웃</font></td>
+						<td bgcolor="#EFEFEF" colspan=3 style='padding-left:6px;'>
+							<input type="checkbox" name="ck6" id='ck6' value="1"> <label for='ck6'>사용함</label>					
+							&nbsp;&nbsp;[<a href="http://member.about.co.kr/LaunchIntroduce/Default.aspx" target="_black">어바웃 입점안내</a>]
+						</td>
+					</tr>	
+					<TR height=30 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<input type="text" name="ex6" size="60" class="ta" />&nbsp;&nbsp;<font class="small">상품명 앞에 들어갈 문구를 입력 하시면 됩니다.</font>
+						</td>
+					</tr>	
+					<TR height=56 align=left> 
+						<td bgcolor="#FFFFFF" colspan=3 class="eng" style="padding-left:6px;">
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/about.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/about.php</a> <font class="small">[전체상품]</font><br />
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/about.php?mode=summ" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/about.php?mode=summ</a> <font class="small">[요약상품]</font><br />
+							<a href="http://<?=$_SERVER["SERVER_NAME"]?>/engine/aboutPoint.php" target="_blank">http://<?=$_SERVER["SERVER_NAME"]?>/engine/aboutPoint.php</a> <font class="small">[상품평]</font>
+						</td>
+					</tr>			
+					<TR height=62 align=left>
+					    <td colspan=4 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;padding-top:6px;" class='small'>
+								! 상품명 머리말을 위한 치환코드 : &nbsp;&nbsp;제조사 -> {maker}, 브랜드 -> {brand}, 모델명 -> {model}<br />								
+								예) 머리말이 '[무료배송 {brand} {model}]' 일 경우 '[무료배송 SKY IM-U100] U100' 이렇게 나타 납니다.<br />
+								! 사용함에 체크된 가격비교 업체 페이지만 사용이 가능합니다. <br />
+								! 가격비교 서비스는 해당 업체와 추가로 계약을 해야만 정상서비스가 이뤄집니다. 
+							</div>
+							<div id="sBtn1" style="float:right;padding:4px 6px;">
+								<a href="#" onclick="document.compareForm.submit();return false"><span class="blue">설정저장</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+</TABLE>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<iframe name="HFrm" style="display:none;"></iframe>
+
+<script>
+f = document.compareForm;
+<?
+$sql = "SELECT code FROM mall_design WHERE mode='X'";
+$row = $mysql->get_one($sql);
+
+$row = explode("|",$row);
+
+for($i=0,$i2=1,$cnt=count($row);$i<$cnt;$i+=2){
+	if($row[$i]==1) echo "f.ck{$i2}.checked=true;\n";
+	if($row[$i+1]) echo "f.ex{$i2}.value='".$row[$i+1]."';\n";
+	$i2++;
+}
+?>
+</script>
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

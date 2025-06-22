@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<HTML xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>상품복사하기</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript"  src="../lib/lib.Function.js"></script>
+<script type="text/javascript"  src="{{skin2}}skin.lib.Shop.js"></script>
+
+<body>
+<div id="pageView" style="width:500px;padding-left:8px;">	
+	<div style="margin:0 0 10px 0;line-height:160%;text-align:left" class="small">
+		! 하단의 '퍼가기'버튼을 누르시면 상품 내용이 복사 됩니다.<br />
+		! 해당 상품을 담아두시고 싶은 블로그, 게시판, 미니홈피, 카페 등에 글 등록시 붙여넣기(ctrl + v)를 하시면<br />
+		&nbsp;&nbsp;아래 형태로 게시됩니다.<br />
+		! 편집기능의 게시판이나 html허용 게시판에만 퍼 갈 수 있습니다.
+	</div>
+	
+	<div id="goodsHtml">
+	<div style="text-align:left;border:4px solid #EFEFEF;width:490px;">
+		<div style="height:15px;padding:10px">
+			<div style="width:220px; float:left;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;font-weight:bold">
+				<a href="{{SHOP_URL}}" target="_blank">{{SHOP_NAME}}</a>
+			</div>
+			<div style="width:250px;text-align:right;float:right;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;">
+				<a href="{{SHOP_URL}}?channel=view&amp;uid={{uid}}&amp;cate={{P_CATE}}" target="_blank">상품상세보기</a>
+			</div>
+		</div>
+
+		<div style="width:150px;float:left;padding:0px 10px">
+			<img src='{{GOODS_IMG}}' border='0' width='150' alt="{{GOODS_NAME}}" />
+		</div>		
+		
+		<div style="float:right;width:290px;padding:0 10px 0 0;">			
+			<div style="font-weight:bold; color:#38c1c9; overflow:hidden;height:15px;width:300px;">{{GOODS_NAME}}</div>
+			<div style="margin:2px 0 8px 0;height:1px;background-color:#e3e3e3;">&nbsp;</div>
+			<ul style="margin:0; padding:0;">									
+				<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+					<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+					<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">판매가격</div>
+					<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;font-weight:bold">{{GOODS_PRICE}}</div>
+				</li>
+				<!-- DYNAMIC @is_reserve@ -->
+				<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+					<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+					<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">적립금</div>
+					<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{GOODS_RESERVE}}P</div>
+				</li>
+				<!-- DYNAMIC @is_reserve@ -->
+				<!-- DYNAMIC @is_brand@ -->
+				<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+					<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+					<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">브랜드</div>
+					<div class="left small">{{GOODS_BRAND}}</div>
+				</li>
+				<!-- DYNAMIC @is_brand@ -->
+				<!-- DYNAMIC @is_comp@ -->
+				<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+					<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+					<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">제조사</div>
+					<div class="left small">{{GOODS_COMP}}</div>
+				</li>
+				<!-- DYNAMIC @is_comp@ -->
+				<!-- DYNAMIC @is_made@ -->
+				<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+					<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+					<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">원산지</div>
+					<div class="left small">{{GOODS_MADE}}</div>
+				</li>
+				<!-- DYNAMIC @is_made@ -->		
+				<li style="border-bottom:1px solid #efefef;height:20px;margin-top:4px;">
+					<div style='float:left;font-size:4px;padding-right:4px;'>■</div>
+					<div style="float:left;font-weight:bold;font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;width:100px;">보낸날</div>
+					<div style="float:left;font-family:Tahoma; font-size:11px;letter-spacing:0px;">{{DATE}}</div>
+				</li>
+			</ul>			
+		</div>	
+		<div style="clear:both;height:1px;overflow:hidden;">&nbsp;</div>
+		<div style="margin:10px;font-family:돋움,돋움체,Tahoma;height:14px;padding:4px 0 4px 0;text-align:center;font-size:8pt;letter-spacing:-1px;border:1px solid #DADADA; background-color:#EFEFEF">
+			상품정보는 퍼온날을 기준으로 작성된 것이므로 최근정보를 반드시 확인 해 주세요.
+		</div>
+	</div>
+	</div>
+
+	<div style="padding:15px 0 0 160px;">
+		<div id="sBtn3">
+			<a href="#" onclick="copyHtml('goodsHtml'); return false;"><span>퍼가기</span></a>
+			<a href="#" onclick="copyHtml('goodsHtml','html'); return false;"><span>Html 복사</span></a>
+		</div>
+		<div id="sBtn2">
+			<a href="#" onclick="parent.pLightBox.hide(); return false;"><span>닫기</span></a>
+		</div>
+	</div>
+
+</div>
+
+</body>
+</html>

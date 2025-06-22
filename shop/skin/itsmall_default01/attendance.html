@@ -1,0 +1,239 @@
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+	<div id="subTitle">
+		<img src="img/member/ttl_attendance_check.gif" alt="출석체크" title="출석체크" />
+	</div>	
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+<!-- DYNAMIC @no_attendance@ -->
+	<div style='height:100px;'>&nbsp;</div>
+	<div style='text-align:center;'>
+		<img src="img/member/no_attendance.gif">
+	</div>
+	<div style='height:100px;'>&nbsp;</div>
+</div>
+<div style='display:none'>
+<!-- DYNAMIC @no_attendance@ -->
+	
+	<!-- DYNAMIC @is_h_up@ -->
+	<div id="s_code01">{{H_CODE}}</div>
+	<!-- DYNAMIC @is_h_up@ -->
+	
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">							
+			<div class="blank" style="height:16px;">&nbsp;</div>
+			<div class="left" style="padding-left:10px;"><b>{{my_name}}</b>회원님은 <b>{{DATES}}</b> 현재 <b class="orange">{{CNTS}}</b>번 출석 하셨습니다.</div>
+			<div class="right" style="padding:0 15px 0 0;">
+				<!-- DYNAMIC @is_attend@ -->
+				<a href="php/attendance_ok.php?uid={{uid}}"><img src="img/member/btn_attendance.gif" alt="출석체크하기" /></a>
+				<!-- DYNAMIC @is_attend@ -->
+			</div>
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+	
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div style="background-color:#ccc">
+		<table border="0" cellpadding="2" cellspacing="1" width="100%">
+		<col width="15%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="14%" />
+		<col width="15%" />						
+		<tr height="60"> 
+			<td colspan="7" bgcolor="#ffffff">
+				<div style="text-align:cengter;">
+					<a href='{{mprev}}'><span id='prevIcon' class="small">이전달</span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<font style="font-family:Georgia; font-size:28px; color:#0982E0;">{{year}}.{{month}}</font>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href='{{mnext}}'><span id='nextIcon' class="small">다음달</span></a>
+				</div>				
+			</td>
+		</tr>
+		<tr height="30" bgcolor="#FFFFFF" align="center">
+			<th scope="col"><b class="small orange">일요일</b></td>
+			<th scope="col"><b class="small">월요일</b></td>
+			<th scope="col"><b class="small">화요일</b></td>
+			<th scope="col"><b class="small">수요일</b></td>
+			<th scope="col"><b class="small">목요일</b></td>
+			<th scope="col"><b class="small">금요일</b></td>
+			<th scope="col"><b class="small blue">토요일</b></td>
+		</tr>
+		<tr height="80" bgcolor="#FFFFFF">	
+			<!-- DYNAMIC @is_empt1@ -->
+			<td valign="top" align="center"><div class="gray num" style="text-align:right;padding-right:6px;">{{WDAY2}}</div></td>
+			<!-- DYNAMIC @is_empt1@ -->
+			<!-- DYNAMIC @is_loop@ -->			 
+			<td valign="top" align="center" bgcolor="{{bgcolor}}">
+				<div class="{{styles}} num" style="text-align:right;padding-right:6px;">{{WDAY}}</div>	
+				<div style="height:80px;text-align:center;padding-top:10px;">
+					<!-- DYNAMIC @is_check@ -->			 
+					<img src="img/member/stemp.gif" alt="출석" />
+					<!-- DYNAMIC @is_check@ -->			 
+				</div>
+			</td>	
+			<!-- DYNAMIC @is_tr@ -->
+			</tr><tr bgcolor='#FFFFFF'>
+			<!-- DYNAMIC @is_tr@ -->
+			<!-- DYNAMIC @is_loop@ -->
+			<!-- DYNAMIC @is_empt2@ -->
+			<td valign="top" align="center"><div class="gray num" style="text-align:right;padding-right:6px;">{{WDAY2}}</div></td>
+			<!-- DYNAMIC @is_empt2@ -->
+		</tr>				  
+		</table>  
+	</div>
+	
+	<div style="height:20px"></div>
+	
+	<!-- DYNAMIC @is_attend2@ -->
+	<form name="comForm" method="post" onsubmit="return ckAttend();" action="php/attendance_ok.php?uid={{uid}}">
+
+	<div style="height:120px; background:url(img/member/box_memo_bg.gif) repeat-x">
+		<table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="5" />
+			<col />
+			<col width="4" />
+			<col width="82" />			
+			<col width="5" />
+			<tbody>
+			<tr>
+				<td rowspan="2"><img src="img/member/box_memo_left.gif" alt='box left' /></td>
+				<td align="left" valign="top">
+					<div style="height:27px; width:100%; text-align:left; padding-top:5px; ">
+						<div class="small bold" style="float:left;width:10%; text-align:center;padding-top:6px;">이름</div>
+						<div style="padding-top:6px;">{{my_name}}</div>
+						<div style="clear:both;height:5px;overflow:hidden"></div>
+					</div>
+					
+					<table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:82px; background:url(img/member/box_memo2_bg.gif)">
+						<col width="5" />
+						<col />							
+						<col width="5" />
+						<tbody>
+						<tr>
+							<td><img src="img/member/box_memo2_left.gif" alt='box left' /></td>
+							<td align="left">
+								<textarea name="comment"  class="default" style="width:99%; height:60px;border:0px;overflow:auto"></textarea>
+							</td>								
+							<td><img src="img/member/box_memo2_right.gif" alt='box right' /></td>
+						</tr>
+						</tbody>
+					</table>
+				</td>
+				<td></td>
+				<td valign="top">
+					<div style="height:32px"></div>
+					<table cellspacing="0" cellpadding="0" border="0" width="100%" style="height:82px; background:url(img/member/box_memo2_bg.gif);">
+						<col width="5" />
+						<col />							
+						<col width="5" />
+						<tbody>
+						<tr>
+							<td><img src="img/member/box_memo2_left.gif" alt='box left' /></td>
+							<td align="center" class="small bold hand" onclick="return ckAttend(1);">
+								출첵<br />하기
+							</td>								
+							<td><img src="img/member/box_memo2_right.gif" alt='box right' /></td>
+						</tr>
+						</tbody>
+					</table>
+
+				</td>
+				<td rowspan="2"><img src="img/member/box_memo_right.gif" alt='box right' /></td>
+			</tr>
+			</tbody>
+		</table>		
+	</div>
+	</form>
+	<!-- DYNAMIC @is_attend2@ -->
+	
+	<!-- DYNAMIC @is_attend3@ -->
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div id="list_list" style="margin:0px;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="50" /> 			
+			<col width="100" /> 
+			<col  /> 
+			<col width="100" />      					
+			<thead>
+            <tr height="28" style="background:url(img/customer/bar_list_bg.gif)" align="center">
+				<th scope="col"><img src="img/member/ttl_list_num.gif" alt="번호" /></th>
+				<th scope="col"><img src="img/member/ttl_list_id.gif" alt="아이디" /></th>
+				<th scope="col"><img src="img/member/ttl_list_comment.gif" alt="내용" /></th>
+				<th scope="col"><img src="img/member/ttl_list_attend_date.gif" alt="출석일" /></th>
+            </tr>
+			</thead>
+			
+			<tbody>
+			
+			<!-- DYNAMIC @loop2@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';" id="listWish{{UID}}">
+				<td class="num">{{NUM}}</td>
+				<td class="num">{{IDS}}</td>
+				<td  align="left">{{COMMENT}} <!-- DYNAMIC @is_del@ --><a href="{{DEL_LINK}}"><img src="img/common/icon_del.gif" alt="icon del" /></a><!-- DYNAMIC @is_del@ --></td>				
+				<td class="num">{{DATE}}</td>								
+			</tr>			
+			<tr><td colspan="5" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop2@ -->											
+			</tbody>			
+		</table>
+	</div>
+	<!-- DYNAMIC @is_loop2@ -->			
+	<div class="clear" style="height:16px;">&nbsp;</div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(box,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>				
+	<!-- DYNAMIC @is_loop2@ -->			
+
+	<!-- DYNAMIC @no_loop2@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/member/no_attendance_comment.gif" alt="출석체크코멘트없음" title="출석체크코멘트없음" />
+	</div>
+	<!-- DYNAMIC @no_loop2@ -->
+	<!-- DYNAMIC @is_attend3@ -->
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+</div>
+
+
+<script LANGUAGE="JavaScript">
+<!--
+
+function ckAttend(num) {
+	var f = document.comForm;
+	
+	if(!f.comment.value.trim()) {
+		alert("내용을 입력 하시기 바랍니다.");
+		f.comment.focus();
+		return false;
+	}
+
+	if(num==1) f.submit();
+}
+
+// -->
+</script>

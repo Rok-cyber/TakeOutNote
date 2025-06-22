@@ -1,0 +1,231 @@
+<div id="cusMenu">
+	<!-- 고객센터 메뉴 START -->
+	{{CUS_MENU}}
+	<!-- @고객센터 메뉴 END -->  
+</div>
+
+<div id="cusContent">
+	
+	<div id="subTitle">
+		<img src="img/customer/ttl_qna2.gif" alt="상품문의" title="상품문의" />
+	</div>
+
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:10px 0 0 20px;">				
+				<form name="searchForm" method="get" action="{{Main}}">
+				<input type="hidden" name="channel" value='qna2'>
+				<input type="hidden" name="limit" value='{{limit}}'>
+				<input type="hidden" name="field" value='{{field}}'>
+				
+				<div id='PsBox' class='left searchField' style="z-index:99999;width:80px; height:18px;"></div>
+				<script>
+					PsBoxs = new selectBox('PsBox',document.searchForm.field);							
+					PsBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333";
+					PsBoxs.addItem('제목','title');
+					PsBoxs.addItem('이름','name');
+					PsBoxs.addItem('내용','content');
+					PsBoxs.addItem('상품명','goods_name');
+					PsBoxs.show();
+
+					if(document.searchForm.field.value) {
+						PsBoxs.initSelect(document.searchForm.field.value);								
+					}
+				</script>
+				<div style="float:left;padding-left:2px;"><input type="text" name="word" size="40" class="whites default" style='border-color:#bbb;vertical-align:top' value="{{word}}" /></div>
+				<div style="float:left;padding-left:2px;"><input type="image" src="img/shop/btn_search.gif" border="0" alt="검색" title="검색" /></div>	
+				<div style="float:left;padding-left:2px;"><a href="{{Main}}?channel=after2"><img src="img/shop/btn_cancel.gif" border="0" alt="검색취소" title="검색취소" /></a></div>	
+				</form>	
+				<div class="right small" style="padding:2px 20px 0 0;">
+					<div class="noticeDiv">등록은 상품상세페이지에서 하실 수 있습니다.</div>
+				</div>
+			</div>			
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>		
+	
+	<div id="alist_top" style="background:url();margin-bottom:4px;margin-top:20px;">
+		<div class="left">
+			<font class="num"><font class="small">전체</font> {{CNT_AFTER}} , <font id="paging_page">{{PAGE}}</font>/<font id="paging_total">{{PAGE_TOTAL}}</font> <font class="small">페이지</font>.</font>
+		</div>
+		<div class="right">
+			<form name="limitForm">								
+			<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+			<div id='limitBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px;" class='left'></div>
+			<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+			<script type="text/javascript">
+			<!--
+				limitBoxs = new selectBox('limitBox','','{{Main}}','7');
+				limitBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+				limitBoxs.img1.src = 'img/common/icon_select_down2.gif';
+				limitBoxs.img2.src = 'img/common/icon_select_up2.gif';
+				limitBoxs.addItem('10개씩 보기','10');
+				limitBoxs.addItem('20개씩 보기','20');
+				limitBoxs.addItem('30개씩 보기','30');
+				limitBoxs.addItem('50개씩 보기','50');
+				limitBoxs.show('cate');
+				limitBoxs.secNum = 1;
+				limitBoxs.mout();
+			// -->
+			</script>									
+			</form>
+		</div>		
+	</div>
+
+	<div id="list_list">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="50" /> 			
+			<col width="70" /> 						
+			<col width="440" />			
+			<col width="70" /> 			
+			<col width="90" /> 
+			<thead>
+            <tr height="28" align="center">
+				<th scope="col"><img src="img/shop/ttl_board_num.gif" alt="번호" /></th>
+				<th scope="col"><img src="img/shop/ttl_board_img.gif" alt="이미지" /></th>
+				<th scope="col"><img src="img/shop/ttl_board_name2.gif" alt="상품명/제목" /></th>
+				<th scope="col"><img src="img/shop/ttl_board_name.gif" alt="작성자" /></th>
+				<th scope="col"><img src="img/shop/ttl_board_date.gif" alt="작성일" /></th>
+			</tr>
+			</thead>			
+			<tbody id="list_qna"></tbody>			
+		</table>
+	</div>
+
+	<!-- DYNAMIC @no_qna@ -->
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/shop/no_qna.gif" alt="Q&A 없음" title="Q&A 없음" />
+	</div>
+	<!-- DYNAMIC @no_qna@ -->
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div class="blank" style="height:16px;">&nbsp;</div>
+	
+	<div id="paging" class="small"></div>
+
+	<div class="blank" style="height:20px">&nbsp;</div>
+</div>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function rtnRowQna(obj,num,title,name,ans,date,content,answer,mod,uid,name2,link,image,dragd,secret) {		
+	var tmps = '', tmps2 = '', tmps3 = '';
+
+	newRow = document.createElement('TR');			
+	newRow.style.height = "32px";
+	newRow.align = "center";
+	
+	newCell = document.createElement('TD');	
+	newCell.rowSpan = 2;
+	
+	if(secret=='Y') newCell.onclick = function() { viewQnaLock(uid, num) }
+	else newCell.onclick = function() { viewQna(num) }
+
+	newCell.style.cursor = "pointer";
+	newCell.innerHTML = '<font class="num">'+num+'</font>';
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.rowSpan = 2;
+	newCell.innerHTML = '<div style="float:left;cursor:pointer;border:2px solid #FFF; height:55px;width:55px;background:url('+image+')" onclick="viewGoods(\''+link+'\');"><img src="'+image+'" alt="'+name+'" border="0" width="55" height="55" /></div>';
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	newCell.innerHTML = '<a href="'+link+'" title="상품상세보기"><font class="mColor small">'+name2+'</font></a>';
+	newRow.appendChild(newCell);	
+	
+	newCell = document.createElement('TD');	
+	newCell.rowSpan = 2;
+	newCell.innerHTML = name;
+	newRow.appendChild(newCell);	
+
+	newCell = document.createElement('TD');	
+	newCell.rowSpan = 2;
+	newCell.innerHTML = '<font class="num">'+date+'</font>';
+	newRow.appendChild(newCell);		
+
+	obj.appendChild(newRow);	
+
+	newRow = document.createElement('TR');			
+	newRow.style.height = "32px";
+	newRow.align = "center";
+
+	newCell = document.createElement('TD');	
+	newCell.align = "left";
+	if(secret=='Y') newCell.onclick = function() { viewQnaLock(uid, num) }
+	else newCell.onclick = function() { viewQna(num) }
+	newCell.style.cursor = "pointer";
+	
+	if(secret=='Y' || secret=='F') title = "<img src='img/shop/icon_lock.gif' alt='icon' style='vertical-align:middle' /> " + title		
+	if(ans==1) title = "<img src='img/shop/icon_answer.gif' alt='icon' style='vertical-align:top' /> " + title;
+	else title = "<img src='img/shop/icon_noans.gif' alt='icon' style='vertical-align:top' /> " + title;
+	newCell.innerHTML = title;		
+	newRow.appendChild(newCell);	
+
+	obj.appendChild(newRow);
+	
+	newRow = document.createElement('TR');			
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 5;	
+	newCell.style.height = 1;
+
+	content = '<span id="qna_content_'+uid+'">'+content+'</span>';
+	answer = '<span id="qna_answer_'+uid+'">'+answer+'</span>';
+		
+	if(mod==1) {
+		tmps = '<div style="padding:20px 0 4px 0">';
+		tmps += '<img src="img/shop/btn_modify.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=confirm&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 비밀번호 확인\',\'20\');" alt="상품Q&A수정" title="상품Q&A수정" />&nbsp;';
+		tmps += '<img src="img/shop/btn_delete.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=delete&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 상품Q&A 삭제\',\'20\');" alt="상품Q&A삭제" title="상품Q&A삭제" />&nbsp;';
+
+		<!-- DYNAMIC @is_admin@ -->
+		if(ans!=1) {
+			tmps += '<img src="img/shop/btn_answer.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=answer&amp;uid='+uid+'\',\'iframe\',\'610\',\'480\',\'■ 상품Q&A 답변달기 \',\'20\');" alt="상품Q&A답변달기" title="상품Q&A답변달기" />';
+		}
+
+		tmps3 = '<div style="padding:20px 0 4px 0">';
+		tmps3 += '<img src="img/shop/btn_modify.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=modify2&amp;uid='+uid+'\',\'iframe\',\'610\',\'480\',\'■ 상품Q&A 답변수정\',\'20\');" alt="상품Q&A답변수정" title="상품Q&A답변수정" />&nbsp;';
+		tmps3 += '<img src="img/shop/btn_delete.gif" class="hand" onclick="pLightBox.show(\'php/qna_write.php?pmode=delete2&amp;uid='+uid+'\',\'iframe\',\'400\',\'180\',\'■ 상품Q&A 답변삭제\',\'20\');" alt="상품Q&A답변삭제" title="상품Q&A답변삭제" />&nbsp;';
+		tmps3 += '</div>';
+		<!-- DYNAMIC @is_admin@ -->	
+
+		tmps += '</div>';
+	} 
+	
+
+	if(ans==1) {
+		tmps2 = '<div style="clear:both;height:1px;background-color:#ddd;width:100%;overflow:hidden;margin-bottom:10px;">&nbsp;</div><div style="float:left;width:109px;text-align:center;overflow:hidden;"><img src="img/shop/ttl_answer.gif" alt="answer" /></div><div style="float:left;width:565px;overflow:hidden;" id="qnaContent2'+num+'">'+answer+tmps3+'</div>';
+	} 
+	
+
+	newCell.innerHTML = '<div style="border:1px solid #EFEFEF; border-bottom:0px; display:none;background-color:#FAFAFA;" id="qna_'+num+'"><div style="padding:10px 20px 6px 20px;word-break:break-all;width:674px;" class="clearfix" ><div style="float:left;width:109px;text-align:center"><img src="img/shop/ttl_question.gif" alt="question" /></div><div style="float:left;width:565px" id="qnaContent1'+num+'">'+content+tmps+'</div>'+tmps2+'</div></div>';
+
+	newRow.appendChild(newCell);
+	obj.appendChild(newRow);
+
+	newRow = document.createElement('TR');			
+	newCell = document.createElement('TD');	
+	newCell.colSpan = 5;
+	newCell.style.height = 1;
+	newCell.style.backgroundColor = "#efefef";
+	newCell.innerHTML = "<img src='" + shop_skin + "/img/common/blank.gif' width=1 height=1 alt='blank' />";
+	newRow.appendChild(newCell);
+
+	obj.appendChild(newRow);
+	imgSizeConv("qnaContent1"+num,670);
+	if(ans==1) imgSizeConv("qnaContent2"+num,670);
+
+}
+
+getQna = new getQna('10','{{CNT_QNA}}','0','{{qnastr}}');
+getQna.display();
+qPage = new ajaxPaging('aPage','paging',getQna,'{{CNT_QNA}}','{{limit}}','10','alist_top','paging_page','paging_total');
+qPage.makePage();
+qPage.printPage("box");
+qnaViewNum = '';
+
+// -->
+</script>

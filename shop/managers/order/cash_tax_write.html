@@ -1,0 +1,216 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+$sql = "SELECT code FROM mall_design WHERE mode='A'";
+$tmp1 = $mysql->get_one($sql);
+$basic=explode("|*|",stripslashes($tmp1));
+
+$ERROR = "! <a href='../conf/conf.html#t1'>쇼핑몰 환경설정 > 사업자정보&기본정보</a>에서 설정한 정보를 이용해 현금영수증이 발급됩니다.";
+if(!$basic[2] || !$basic[3] || !$basic[4] || !$basic[6] || !$basic[7]) {
+	$ERROR = "<font class='orange small'>! 현금영수증 발급자 정보가 없습니다. '<a href='../conf/conf.html#t1'><font class='orange small'>쇼핑몰 환경설정 > 사업자정보&기본정보</font></a>' 에서 설정 하시기 바랍니다.</font>";
+	$cks = 1;
+}
+
+$sql = "SELECT code FROM mall_design WHERE mode='B'";
+$tmp_cash = $mysql->get_one($sql);
+$cash = explode("|*|",stripslashes($tmp_cash));
+
+if($cash[2] && $cash[3]) {
+	if($cash[2]!='KCP') {
+		$SHOP_INFO = "현재 KCP일때만 현금 영수증이 지원 됩니다.";
+	}
+	else {
+		$SHOP_INFO = "{$cash[2]} ({$cash[3]})";
+		$ckCP = 'KCP';
+	}
+}
+else $SHOP_INFO = "<a href='../conf/conf.html#t2'>쇼핑몰 환경설정 > 결제정보</a>에서 전자결제대행사를 설정 하시기 바랍니다.";
+
+?>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+
+function ckForm(){
+	f = document.basicForm;
+
+<? if($cks==1) { ?>	
+	alert("현금영수증 발급자 정보가 없습니다. 쇼핑몰 환경설정 > 사업자정보&기본정보에서 설정 하시기 바랍니다.");
+	return false;	
+<? } ?>
+
+	if(f.ckCP.value!='KCP') {
+		alert("전자결제대행사를 설정 하지 않았거나 KCP가 아닙니다");
+		return false;
+	}
+	
+	if(!f.name.value) {
+		alert("신청자명을을 입력 하세요!");
+		f.name.focus();
+		return false;
+	}
+
+	if(!f.goods_name.value) {
+		alert("상품명을 입력 하세요!");
+		f.goods_name.focus();
+		return false;
+	}
+
+	if(!f.price.value) {
+		alert("신청금액을 입력 하세요!");
+		f.price.focus();
+		return false;
+	}
+	
+	if(f.cash_type[0].checked) {
+		if(f.pay_type[0].checked) {
+			if(!f.cell1.value || !f.cell2.value || !f.cell3.value){
+				alert("연락처를 입력 하세요!");
+				f.cell1.focus();
+				return false;
+			}
+		}
+		else if(f.pay_type[1].checked) {
+			if(!f.jumin1.value || !f.jumin2.value){
+				alert("주민등록번호를 입력 하세요!");
+				f.jumin1.focus();
+				return false;
+			}
+		}		
+	}
+	else if(f.cash_type[1].checked) {
+		if(f.pay_type[2].checked) {
+			if(!f.cnum1.value || !f.cnum2.value || !f.cnum3.value){
+				alert("사업자번호를 입력 하세요!");
+				f.cnum1.focus();
+				return false;
+			}
+		}
+	}
+		
+	f.submit();
+}
+
+function cgType(num) {
+	if(num==1) {
+		document.getElementById("pay1").style.display = 'block';
+		document.getElementById("pay2").style.display = 'none';
+		document.basicForm.pay_type[0].checked = true;
+		document.getElementById("titles").innerHTML = "신청자명";
+	}
+	else {
+		document.getElementById("pay2").style.display = 'block';
+		document.getElementById("pay1").style.display = 'none';
+		document.basicForm.pay_type[2].checked = true;
+		document.getElementById("titles").innerHTML = "사업자명";
+	}
+}
+//-->
+</SCRIPT>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_cash_write.gif" alt="현금영수증개별발급" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>현금영수증을 개별적으로 발급이 가능합니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td>&nbsp;<img src='./img/c_write.gif'></td></tr>
+<tr><td align=center>
+	<table border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width="100%">
+	<tr>
+		<td>
+			<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">
+			<tr>
+				<td>
+					<table border=0 width="100%" cellpadding=0 cellspacing=1>
+					<FORM name='basicForm' method='post' action='cash_tax_post.php?mode=write'>
+					<input type="hidden" name="ckCP" value="<?=$ckCP?>">
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;전자결제대행사</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<?=$SHOP_INFO?></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;발급 용도</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='radio' name='cash_type' id='use1' value='A' checked onclick="cgType('1');">&nbsp;<label for='use1'>소득공제용</label>&nbsp;<input type='radio' name='cash_type' id='use2' value='B' onclick="cgType('2');">&nbsp;<label for='use2'>지출증빙용</label></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;<span id=titles>신청자명</span></font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type=text class="ta" name=name size="15"></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;연락처</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type=text class="ta" name=cell size="20"></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이메일</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type=text class="ta" name=email size="50"></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상품명</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type=text class="ta" name=goods_name size="90"></td>
+					</tr>
+					<tr height=30 align=left> 
+						<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;신청금액</font></td>
+						<td bgcolor="#EEEEEE">&nbsp;<input type='text' name='price' size="13" class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" onfocus="this.select();" maxlength=9>원&nbsp;&nbsp;<font class="small">* 총 상품가격(일반과세업자의 경우는 부가세 10%를 포함하여 신고됩니다.)</font></td>
+					</tr>					
+					<tr height=30 align=left> 
+						<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;인증 종류</font></td>
+						<td bgcolor="#EEEEEE">
+							<div id="pay1">
+								&nbsp;<input type='radio' name='pay_type' id='use3' value='A' checked>&nbsp;<label for='use3'>핸드폰번호</label>
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell1 size="3" maxlength=3> - 
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell2 size="4" maxlength=4> - 
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cell3 size="4" maxlength=4>
+								&nbsp;<input type='radio' name='pay_type' id='use4' value='B'>&nbsp;<label for='use4'>주민등록번호</label>
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=jumin1 size="6" maxlength=6> - 
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=jumin2 size="7" maxlength=7>						
+							</div>
+							<div id="pay2" style="display:none">
+								&nbsp;<input type='radio' name='pay_type' id='use5' value='C'>&nbsp;<label for='use5'>사업자번호</label>
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum1 size="3" maxlength=3> - 
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum2 size="2" maxlength=2> - 
+								<input type=text  class="ta2  eng" onkeyup="onlyNum(this);" onkeydown="onlyNum(this);" name=cnum3 size="5" maxlength=5>
+							</div>
+						</td>
+					</tr>
+					<tr height=80 align=left>
+					    <td colspan=2 bgcolor='#FFFFFF' style='padding-left:6px;'>
+						    <div style="float:left;" class='small'>
+								<?=$ERROR?><br />
+								! 무통장 외 결제수단으로 결제를 했거나 기타 오프라인 판매에 대해서 현금영수증 발급이 가능합니다.<br/>
+								! 현금영수증 발급시 국세청에 통보되기 때문에 정확한 자료를 입력 하셔야 합니다.</br>
+								! 개별발급을 하면 발급요청으로 처리됨으로 발급 후 현금연수증발급/조회 에서 실제 발급을 하셔야 합니다</br>
+								! 개인 정보 보호를 위해 되도록이면 "주민등록번호"는 입력을 자제 하시기 바랍니다.<br/>
+							</div>
+							<div id="sBtn1" style="float:right;padding-right:6px;">
+								<a href="#" onclick="return ckForm();return false;"><span class="blue">개별발급요청</span></a>
+							</div>		
+						</td>
+					</tr>
+					</FORM>
+					</table>		
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</td></tr>
+<tr><td height=20></td></tr>
+</table>
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

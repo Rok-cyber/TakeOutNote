@@ -1,0 +1,635 @@
+<script type="text/javascript" src="{{skin}}/listDesign.js"></script>
+<script type="text/javascript" src="lib/lib.moneyBar.js"></script>
+
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+	
+	<div class="blank">&nbsp;</div>
+
+	<div style="height:22px;text-align:left">
+		<img src='img/main/ttl_click_best.gif' alt="클릭베스트" title="클릭베스트" />
+	</div>
+
+	<div class="bestRankBox">
+		<div>
+			<div class="left"><img src="img/shop/tab_top1_on.gif" alt="top 1" class="hand" onclick="bClickBoxDiv.move(1);" id="tabbClickBox1" /></div>
+			<div class="left"><img src="img/shop/tab_top2.gif" alt="top 2" class="hand" onclick="bClickBoxDiv.move(2);" id="tabbClickBox2" /></div>
+			<div class="left"><img src="img/shop/tab_top3.gif" alt="top 3" class="hand" onclick="bClickBoxDiv.move(3);" id="tabbClickBox3" /></div>
+		</div>
+		<div class="bestRankBoxBody">
+			<div id="bClickBox" style="position:relative;top:0;text-align:left;">
+				<!-- DYNAMIC @loop_goods4@ -->	
+				<div style="width:102px; margin:10px 0 0 44px;" id="bClickGoods{{i}}">						
+					<div style="width:102px;height:102px;text-align:center;overflow:hidden;" onmouseover="viewQuick('bClickBoxQuick{{i}}','on')" onmouseout="viewQuick('bClickBoxQuick{{i}}','')">
+						<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" width='100' height='100' class="imgBoder" /></a></div>
+						<div class="goodsQuickInfo" id="bClickBoxQuick{{i}}">
+							<div class="goodsQuickDefault" id="bClickBoxQuick_zoom{{i}}">
+								<img src="img/common/quick_zoom.gif" border="0" alt="zoom" title="zoom" class="hand" onmouseover="cgImg(this,'on','bClickBoxQuick_zoom{{i}}')"  onmouseout="cgImg(this,'','bClickBoxQuick_zoom{{i}}')" onclick="openQview({{QLINK}});" />
+							</div>
+							<div class="goodsQuickDefault" id="bClickBoxQuick_popup{{i}}">
+								<img src="img/common/quick_popup.gif" border="0"  alt="popup" title="popup" class="hand" onmouseover="cgImg(this,'on','bClickBoxQuick_popup{{i}}')"  onmouseout="cgImg(this,'','bClickBoxQuick_popup{{i}}')" onclick="openView('{{LINK}}');" />
+							</div>
+							<div class="goodsQuickDefault" id="bClickBoxQuick_wish{{i}}">
+								<img src="img/common/quick_wish.gif" border="0"  alt="wish" title="wish" class="hand" onmouseover="cgImg(this,'on','bClickBoxQuick_wish{{i}}')"  onmouseout="cgImg(this,'','bClickBoxQuick_wish{{i}}')" onclick="quickBarCheckWishAdd('{{CATE}}{{QLINK}}');" />
+							</div>
+							<div class="goodsQuickDefault" id="bClickBoxQuick_cart{{i}}" style="width:23%">
+								<img src="img/common/quick_cart.gif" border="0"  alt="cart" title="cart" class="hand" onmouseover="cgImg(this,'on','bClickBoxQuick_cart{{i}}')"  onmouseout="cgImg(this,'','bClickBoxQuick_cart{{i}}')" onclick="gToCart.cartAdd({{CATE}},{{QLINK}});" />
+							</div>
+						</div>
+					</div>
+					<div style="padding-top:10px; height:28px;overflow:hidden;line-height:120%">
+						<a href="{{LINK}}" class="small">{{NAME}}</a>
+					</div>
+					<div style="overflow:hidden;padding-top:4px">
+						<!-- DYNAMIC @is_coupon@ -->	
+						<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+						<!-- DYNAMIC @is_coupon@ -->
+						<div style="float:left;" class="num  bold">{{PRICE2}}</div>
+					</div>						
+				</div>
+				<!-- DYNAMIC @loop_goods4@ -->	
+			</div>
+		</div>
+		<div><img src="img/shop/rank_box_bottom.gif" alt="box bottom" /></div>
+		
+		<script type="text/javascript">
+		<!--
+			bClickBoxDiv = new itemScrollBest('bClickBox','0','1','170');  //객체아이디,총상품수,보여줄상품수,스크롤 거리				
+			for(i=1;i<4;i++) {
+				if($("bClickGoods"+i)) bClickBoxDiv.tcnt++;
+			}				
+		//-->
+		</script>
+	</div>
+
+	<div class="blank">&nbsp;</div>
+
+	<div style="height:22px;text-align:left">
+		<img src='img/main/ttl_order_best.gif' alt="판매베스트" title="판매베스트" />
+	</div>
+
+	<div class="bestRankBox">
+		<div>
+			<div class="left"><img src="img/shop/tab_top1_on.gif" alt="top 1" class="hand" onclick="bOrderBoxDiv.move(1);" id="tabbOrderBox1" /></div>
+			<div class="left"><img src="img/shop/tab_top2.gif" alt="top 2" class="hand" onclick="bOrderBoxDiv.move(2);" id="tabbOrderBox2" /></div>
+			<div class="left"><img src="img/shop/tab_top3.gif" alt="top 3" class="hand" onclick="bOrderBoxDiv.move(3);" id="tabbOrderBox3" /></div>
+		</div>
+		<div class="bestRankBoxBody">
+			<div id="bOrderBox" style="position:relative;top:0;text-align:left;">
+				<!-- DYNAMIC @loop_goods5@ -->	
+				<div style="width:102px; margin:10px 0 0 44px;" id="bOrderGoods{{i}}">						
+					<div style="width:102px;height:102px;text-align:center;overflow:hidden;" onmouseover="viewQuick('bOrderBoxQuick{{i}}','on')" onmouseout="viewQuick('bOrderBoxQuick{{i}}','')">
+						<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" width='100' height='100' class="imgBoder" /></a></div>
+						<div class="goodsQuickInfo" id="bOrderBoxQuick{{i}}">
+							<div class="goodsQuickDefault" id="bOrderBoxQuick_zoom{{i}}">
+								<img src="img/common/quick_zoom.gif" border="0" alt="zoom" title="zoom" class="hand" onmouseover="cgImg(this,'on','bOrderBoxQuick_zoom{{i}}')"  onmouseout="cgImg(this,'','bOrderBoxQuick_zoom{{i}}')" onclick="openQview({{QLINK}});" />
+							</div>
+							<div class="goodsQuickDefault" id="bOrderBoxQuick_popup{{i}}">
+								<img src="img/common/quick_popup.gif" border="0"  alt="popup" title="popup" class="hand" onmouseover="cgImg(this,'on','bOrderBoxQuick_popup{{i}}')"  onmouseout="cgImg(this,'','bOrderBoxQuick_popup{{i}}')" onclick="openView('{{LINK}}');" />
+							</div>
+							<div class="goodsQuickDefault" id="bOrderBoxQuick_wish{{i}}">
+								<img src="img/common/quick_wish.gif" border="0"  alt="wish" title="wish" class="hand" onmouseover="cgImg(this,'on','bOrderBoxQuick_wish{{i}}')"  onmouseout="cgImg(this,'','bOrderBoxQuick_wish{{i}}')" onclick="quickBarCheckWishAdd('{{CATE}}{{QLINK}}');" />
+							</div>
+							<div class="goodsQuickDefault" id="bOrderBoxQuick_cart{{i}}" style="width:23%">
+								<img src="img/common/quick_cart.gif" border="0"  alt="cart" title="cart" class="hand" onmouseover="cgImg(this,'on','bOrderBoxQuick_cart{{i}}')"  onmouseout="cgImg(this,'','bOrderBoxQuick_cart{{i}}')" onclick="gToCart.cartAdd({{CATE}},{{QLINK}});" />
+							</div>
+						</div>
+					</div>
+					<div style="padding-top:10px; height:28px;overflow:hidden;line-height:120%">
+						<a href="{{LINK}}" class="small">{{NAME}}</a>
+					</div>
+					<div style="overflow:hidden;padding-top:4px">
+						<!-- DYNAMIC @is_coupon@ -->	
+						<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+						<!-- DYNAMIC @is_coupon@ -->
+						<div style="float:left;" class="num  bold">{{PRICE2}}</div>
+					</div>						
+				</div>
+				<!-- DYNAMIC @loop_goods5@ -->	
+			</div>
+		</div>
+		<div><img src="img/shop/rank_box_bottom.gif" alt="box bottom" /></div>
+		
+		<script type="text/javascript">
+		<!--
+			bOrderBoxDiv = new itemScrollBest('bOrderBox','0','1','170');  //객체아이디,총상품수,보여줄상품수,스크롤 거리				
+			for(i=1;i<4;i++) {
+				if($("bOrderGoods"+i)) bOrderBoxDiv.tcnt++;
+			}				
+		//-->
+		</script>
+	</div>
+
+	<div class="blank">&nbsp;</div>
+
+	<div style="height:22px;text-align:left">
+		<img src='img/main/ttl_after_best.gif' alt="베스트리뷰" title="베스트리뷰" />
+	</div>
+
+	<div class="bestRankBox">
+		<div>
+			<div class="left"><img src="img/shop/tab_top1_on.gif" alt="top 1" class="hand" onclick="bReviewBoxDiv.move(1);" id="tabbReviewBox1" /></div>
+			<div class="left"><img src="img/shop/tab_top2.gif" alt="top 2" class="hand" onclick="bReviewBoxDiv.move(2);" id="tabbReviewBox2" /></div>
+			<div class="left"><img src="img/shop/tab_top3.gif" alt="top 3" class="hand" onclick="bReviewBoxDiv.move(3);" id="tabbReviewBox3" /></div>
+		</div>
+		<div class="bestRankBoxBody" style="height:154px;">
+			<div id="bReviewBox" style="position:relative;top:0;text-align:left;">
+				<!-- DYNAMIC @loop_goods6@ -->	
+				<div style="width:180px; margin:10px 0 0 10px;" id="bReviewGoods{{i}}">						
+					<div style="float:left; height:82px; width:82px;overflow:hidden;" onmouseover="viewQuick('bReviewBoxQuick{{i}}','on')" onmouseout="viewQuick('bReviewBoxQuick{{i}}','')">
+						<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" border='0' width='80' height='80' class="imgBoder" /></a></div>
+						<div class="goodsQuickInfo" id="bReviewBoxQuick{{i}}">
+							<div class="goodsQuickDefault" id="bReviewBoxQuick_zoom{{i}}">
+								<img src="img/common/quick_zoom.gif" border="0" alt="zoom" title="zoom" class="hand" onmouseover="cgImg(this,'on','bReviewBoxQuick_zoom{{i}}')"  onmouseout="cgImg(this,'','bReviewBoxQuick_zoom{{i}}')" onclick="openQview({{QLINK}});" />
+							</div>
+							<div class="goodsQuickDefault" id="bReviewBoxQuick_popup{{i}}">
+								<img src="img/common/quick_popup.gif" border="0"  alt="popup" title="popup" class="hand" onmouseover="cgImg(this,'on','bReviewBoxQuick_popup{{i}}')"  onmouseout="cgImg(this,'','bReviewBoxQuick_popup{{i}}')" onclick="openView('{{LINK}}');" />
+							</div>
+							<div class="goodsQuickDefault" id="bReviewBoxQuick_wish{{i}}">
+								<img src="img/common/quick_wish.gif" border="0"  alt="wish" title="wish" class="hand" onmouseover="cgImg(this,'on','bReviewBoxQuick_wish{{i}}')"  onmouseout="cgImg(this,'','bReviewBoxQuick_wish{{i}}')" onclick="quickBarCheckWishAdd('{{CATE}}{{QLINK}}');" />
+							</div>
+							<div class="goodsQuickDefault" id="bReviewBoxQuick_cart{{i}}" style="width:23%">
+								<img src="img/common/quick_cart.gif" border="0"  alt="cart" title="cart" class="hand" onmouseover="cgImg(this,'on','bReviewBoxQuick_cart{{i}}')"  onmouseout="cgImg(this,'','bReviewBoxQuick_cart{{i}}')" onclick="gToCart.cartAdd({{CATE}},{{QLINK}});" />
+							</div>
+						</div>
+					</div>
+					<div style="float:left;width:90px;overflow:hidden;">
+						<div style="padding:0 0 6px 6px;">
+							<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:1px;">
+								<div style="width:{{SUM_AFTER}}%;overflow:hidden"><img src="img/shop/icon_star.gif" alt='icon star' /></div>
+							</div>
+						</div>
+						<div style="height:28px;overflow:hidden;;padding:3px 0 0 6px;line-height:120%">
+							<a href="{{LINK}}" class="small black">{{NAME}}</a>
+						</div>
+						<div style="overflow:hidden;;padding:3px 0 0 6px;">
+							<!-- DYNAMIC @is_coupon@ -->	
+							<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+							<!-- DYNAMIC @is_coupon@ -->
+							<div style="float:left;" class="num  bold">{{PRICE2}}</div>
+						</div>
+					</div>						
+					<div style="clear:both;width:170px;height:44px;overflow:hidden;padding-top:10px;line-height:120%">
+						<font class="small gray">{{CONTENT}}</font>
+					</div>					
+				</div>
+				<!-- DYNAMIC @loop_goods6@ -->	
+			</div>
+		</div>
+		<div><img src="img/shop/rank_box_bottom.gif" alt="box bottom" /></div>
+		
+		<script type="text/javascript">
+		<!--
+			bReviewBoxDiv = new itemScrollBest('bReviewBox','0','1','146');  //객체아이디,총상품수,보여줄상품수,스크롤 거리				
+			for(i=1;i<4;i++) {
+				if($("bReviewGoods"+i)) bReviewBoxDiv.tcnt++;
+			}				
+		//-->
+		</script>
+	</div>
+
+	<!-- 배너 START -->
+	<div>
+		<!-- DYNAMIC @loop_banner@ -->
+		<div class="banner"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+		<!-- DYNAMIC @loop_banner@ -->			
+	</div>
+	<!-- @배너 END -->
+
+</div>
+<!-- @MAIN LEFT END -->
+
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+
+	<div class="clear" style="height:25px;">&nbsp;</div>
+
+	<!-- DYNAMIC @is_cate_up@ -->
+	<div class="s_code01">{{CATE_UP_CODE}}</div>
+	<div class="blank">&nbsp;</div>
+	<!-- DYNAMIC @is_cate_up@ -->
+
+	<!-- DYNAMIC @is_scate@ -->
+	<div id="cate_box">
+		<!-- DYNAMIC @loop_cate@ -->
+		<div class="cate_list">
+			<div style="margin-left:20px;">
+				<a href='{{CLINK}}' onfocus='this.blur();' class="small"><font class="{{COLOR1}}">{{CNAME}}</font></a>
+			</div>
+		</div>
+		<!-- DYNAMIC @loop_cate@ -->
+		<div class="blank">&nbsp;</div>
+	</div>
+	<div class="blank" style="height:16px;">&nbsp;</div>
+	<!-- DYNAMIC @is_scate@ -->
+
+	<!-- DYNAMIC @is_hit_up@ -->
+	<div class="s_code01">{{HIT_UP_CODE}}</div>
+	<div class="blank">&nbsp;</div>
+	<!-- DYNAMIC @is_hit_up@ -->
+
+	<!-- DYNAMIC @is_main_goods1@ -->
+	<!--    HIT GOODS START -->		
+	<div id="hitGoods">			
+		<div class="scrollBox">
+			<div class="content" style="width:720px;">
+				<div class="ttlBox">
+					<div class="left"><img src="img/main/ttl_hit.gif" alt="인기상품" title="인기상품" /></div>
+					<div class="right" style="padding-right:6px;">
+						<!-- DYNAMIC @loop_sicon1@ -->
+						<img src='img/main/icon_scroll_dot{{ON}}.gif' border='0' id='hitBoxImg{{i}}' onmouseover="hitBoxDiv.imover('{{i}}')"  onmouseout="hitBoxDiv.imout()" style="cursor:pointer" alt='인기상품{{i}}' />
+						<!-- DYNAMIC @loop_sicon1@ -->
+					</div>
+				</div>
+				<div class="{{BCLASS}}">
+					<!-- DYNAMIC @is_scoll11@ -->
+					<div id="hitBox" style="position:relative;left:0px;top:0px;width:{{SWIDTH}}px" onmouseover="hitBoxDiv.mover()"  onmouseout="hitBoxDiv.mout()">
+					<!-- DYNAMIC @is_scoll11@ -->							
+						<!-- DYNAMIC @loop_goods1@ -->			
+						<div class="scroll_img_box" id="hitBoxGoods{{i}}" {{DSTYLE}}>						
+							<ul>				
+								<li style="height:120px;width:120px;overflow:hidden;" onmouseover="viewQuick('hitBoxQucik{{i}}','on')" onmouseout="viewQuick('hitBoxQucik{{i}}','')">
+									<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" /></a></div>
+									<div class="goodsQuickInfo" style="overflow:hidden;" id="hitBoxQucik{{i}}">
+										<div class="goodsQuickDefault" id="hitBoxQucik_zoom{{i}}">
+											<img src="img/common/quick_zoom.gif" border="0" alt="zoom" title="zoom" class="hand" onmouseover="cgImg(this,'on','hitBoxQucik_zoom{{i}}')"  onmouseout="cgImg(this,'','hitBoxQucik_zoom{{i}}')" onclick="openQview({{QLINK}});" />
+										</div>
+										<div class="goodsQuickDefault" id="hitBoxQucik_popup{{i}}">
+											<img src="img/common/quick_popup.gif" border="0"  alt="popup" title="popup" class="hand" onmouseover="cgImg(this,'on','hitBoxQucik_popup{{i}}')"  onmouseout="cgImg(this,'','hitBoxQucik_popup{{i}}')" onclick="openView('{{LINK}}');" />
+										</div>
+										<div class="goodsQuickDefault" id="hitBoxQucik_wish{{i}}">
+											<img src="img/common/quick_wish.gif" border="0"  alt="wish" title="wish" class="hand" onmouseover="cgImg(this,'on','hitBoxQucik_wish{{i}}')"  onmouseout="cgImg(this,'','hitBoxQucik_wish{{i}}')" onclick="quickBarCheckWishAdd('{{CATE}}{{QLINK}}');" />
+										</div>
+										<div class="goodsQuickDefault" id="hitBoxQucik_cart{{i}}">
+											<img src="img/common/quick_cart.gif" border="0"  alt="cart" title="cart" class="hand" onmouseover="cgImg(this,'on','hitBoxQucik_cart{{i}}')"  onmouseout="cgImg(this,'','hitBoxQucik_cart{{i}}')" onclick="gToCart.cartAdd({{CATE}},{{QLINK}});" />
+										</div>
+									</div>										
+								</li>
+								<li style="height:29px; overflow:hidden;padding-top:4px;"><a href="{{LINK}}">{{NAME}}</a></li>					
+								<li style="padding-top:4px;">
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left" class="num bold">{{PRICE}}</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:left" class="small mColor">[품절]</div>
+									<!-- DYNAMIC @is_soldout@ -->											
+								</li>		
+							</ul>
+						</div>
+						<!-- DYNAMIC @loop_goods1@ -->	
+						
+						<!-- DYNAMIC @no_goods1@ -->	
+						<div style="height:180px; width:720px; text-align:center;">
+							<div style='height:80px'></div>
+							<div class="small">! 상품 준비 중 입니다.</div>
+						</div>
+						<!-- DYNAMIC @no_goods1@ -->
+
+					<!-- DYNAMIC @is_scoll12@ -->
+					</div>	
+					<!-- DYNAMIC @is_scoll12@ -->
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_scoll13@ -->
+	<script type="text/javascript">hitBoxDiv = new itemScroll('hitBox',{{mcnt}},{{vcnt}},144);hitBoxDiv.scroll();</script>
+	<!-- DYNAMIC @is_scoll13@ -->
+	<!-- DYNAMIC @is_move1@ -->
+	<script type="text/javascript">hitBoxDiv = new itemMove('hitBox',{{i}},{{vcnt}});hitBoxDiv.Move();</script>
+	<!-- DYNAMIC @is_move1@ -->
+
+	<!--    @HIT GOODS END -->
+	<!-- DYNAMIC @is_main_goods1@ -->
+
+	<!-- DYNAMIC @is_main_goods2@ -->
+	<!--    RECO GOODS START -->
+	<div style='height:8px;overflow:hidden;clear:both'></div>
+	<div id="recoGoods">			
+		<div class="scrollBox">
+			<div class="top"></div>
+			<div class="content" style="width:720px;">
+				<div class="ttlBox">
+					<div class="left"><img src="img/main/ttl_reco.gif" alt="추천상품" title="추천상품" /></div>
+					<div style="float:right;padding-right:6px;">
+						<!-- DYNAMIC @loop_sicon2@ -->
+						<img src='img/main/icon_scroll_dot{{ON}}.gif' border='0' id='recoBoxImg{{i}}' onmouseover="recoBoxDiv.imover('{{i}}')"  onmouseout="recoBoxDiv.imout()" style="cursor:pointer" alt='추천상품{{i}}' />
+						<!-- DYNAMIC @loop_sicon2@ -->
+					</div>
+				</div>
+
+				<div class="{{BCLASS}}">
+					<!-- DYNAMIC @is_scoll21@ -->
+					<div id="recoBox" style="position:relative;left:0px;top:0px;width:{{SWIDTH}}px" onmouseover="recoBoxDiv.mover()"  onmouseout="recoBoxDiv.mout()">
+					<!-- DYNAMIC @is_scoll21@ -->							
+						<!-- DYNAMIC @loop_goods2@ -->			
+						<div class="scroll_img_box" id="recoBoxGoods{{i}}" {{DSTYLE}}>						
+							<ul>				
+								<li style="height:120px;width:120px;overflow:hidden;" onmouseover="viewQuick('recoBoxQucik{{i}}','on')" onmouseout="viewQuick('recoBoxQucik{{i}}','')">
+									<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" /></a></div>
+									<div class="goodsQuickInfo" id="recoBoxQucik{{i}}">
+										<div class="goodsQuickDefault" id="recoBoxQucik_zoom{{i}}">
+											<img src="img/common/quick_zoom.gif" border="0" alt="zoom" title="zoom" class="hand" onmouseover="cgImg(this,'on','recoBoxQucik_zoom{{i}}')"  onmouseout="cgImg(this,'','recoBoxQucik_zoom{{i}}')" onclick="openQview({{QLINK}});" />
+										</div>
+										<div class="goodsQuickDefault" id="recoBoxQucik_popup{{i}}">
+											<img src="img/common/quick_popup.gif" border="0"  alt="popup" title="popup" class="hand" onmouseover="cgImg(this,'on','recoBoxQucik_popup{{i}}')"  onmouseout="cgImg(this,'','recoBoxQucik_popup{{i}}')" onclick="openView('{{LINK}}');" />
+										</div>
+										<div class="goodsQuickDefault" id="recoBoxQucik_wish{{i}}">
+											<img src="img/common/quick_wish.gif" border="0"  alt="wish" title="wish" class="hand" onmouseover="cgImg(this,'on','recoBoxQucik_wish{{i}}')"  onmouseout="cgImg(this,'','recoBoxQucik_wish{{i}}')" onclick="quickBarCheckWishAdd('{{CATE}}{{QLINK}}');" />
+										</div>
+										<div class="goodsQuickDefault" id="recoBoxQucik_cart{{i}}">
+											<img src="img/common/quick_cart.gif" border="0"  alt="cart" title="cart" class="hand" onmouseover="cgImg(this,'on','recoBoxQucik_cart{{i}}')"  onmouseout="cgImg(this,'','recoBoxQucik_cart{{i}}')" onclick="gToCart.cartAdd({{CATE}},{{QLINK}});" />
+										</div>
+									</div>										
+								</li>							
+								<li style="height:29px; overflow:hidden;padding-top:4px;"><a href="{{LINK}}">{{NAME}}</a></li>					
+								<li style="padding-top:4px;">
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+									<!-- DYNAMIC @is_coupon@ -->
+									<div style="float:left" class="num bold">{{PRICE}}</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:left" class="small mColor">[품절]</div>
+									<!-- DYNAMIC @is_soldout@ -->											
+								</li>		
+							</ul>
+						</div>
+						<!-- DYNAMIC @loop_goods2@ -->				
+
+						<!-- DYNAMIC @no_goods2@ -->	
+						<div style="height:180px; width:720px; text-align:center;">
+							<div style='height:80px'></div>
+							<div class="small">! 상품 준비 중 입니다.</div>
+						</div>
+						<!-- DYNAMIC @no_goods2@ -->
+
+					<!-- DYNAMIC @is_scoll22@ -->
+					</div>	
+					<!-- DYNAMIC @is_scoll22@ -->
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_scoll23@ -->
+	<script type="text/javascript">recoBoxDiv = new itemScroll('recoBox',{{mcnt}},{{vcnt}},144);recoBoxDiv.scroll();</script>
+	<!-- DYNAMIC @is_scoll23@ -->
+	<!-- DYNAMIC @is_move2@ -->
+	<script type="text/javascript">recoBoxDiv = new itemMove('recoBox',{{i}},{{vcnt}});recoBoxDiv.Move();</script>
+	<!-- DYNAMIC @is_move2@ -->
+
+	<!--    @RECO GOODS END -->
+	<!-- DYNAMIC @is_main_goods2@ -->
+
+	<!-- DYNAMIC @is_main_goods3@ -->
+	<!--    NEW GOODS START -->
+	<div style='height:8px;overflow:hidden;clear:both'></div>
+	<div id="newGoods">			
+		<div class="scrollBox">
+			<div class="top"></div>
+			<div class="content" style="width:720px;">
+				<div class="ttlBox">
+					<div class="left"><img src="img/main/ttl_new.gif" alt="신상품" title="신상품" /></div>
+					<div style="float:right;padding-right:6px;">
+						<!-- DYNAMIC @loop_sicon3@ -->
+						<img src='img/main/icon_scroll_dot{{ON}}.gif' border='0' id='newBoxImg{{i}}' onmouseover="newBoxDiv.imover('{{i}}')"  onmouseout="newBoxDiv.imout()" style="cursor:pointer" alt='신상품{{i}}' />
+						<!-- DYNAMIC @loop_sicon3@ -->
+					</div>
+				</div>					
+				<div class="{{BCLASS}}">
+					<!-- DYNAMIC @is_scoll31@ -->
+					<div id="newBox" style="position:relative;left:0px;top:0px;width:{{SWIDTH}}px" onmouseover="newBoxDiv.mover()"  onmouseout="newBoxDiv.mout()">
+					<!-- DYNAMIC @is_scoll31@ -->
+						<!-- DYNAMIC @loop_goods3@ -->			
+						<div class="scroll_img_box" id="newBoxGoods{{i}}" {{DSTYLE}}>						
+							<ul>				
+								<li style="height:120px;width:120px;overflow:hidden;" onmouseover="viewQuick('newBoxQucik{{i}}','on')" onmouseout="viewQuick('newBoxQucik{{i}}','')">
+									<div><a href="{{LINK}}"><img src="{{IMAGE}}" alt="{{NAME}}" /></a></div>
+									<div class="goodsQuickInfo" id="newBoxQucik{{i}}">
+										<div class="goodsQuickDefault" id="newBoxQucik_zoom{{i}}">
+											<img src="img/common/quick_zoom.gif" border="0" alt="zoom" title="zoom" class="hand" onmouseover="cgImg(this,'on','newBoxQucik_zoom{{i}}')"  onmouseout="cgImg(this,'','newBoxQucik_zoom{{i}}')" onclick="openQview({{QLINK}});" />
+										</div>
+										<div class="goodsQuickDefault" id="newBoxQucik_popup{{i}}">
+											<img src="img/common/quick_popup.gif" border="0"  alt="popup" title="popup" class="hand" onmouseover="cgImg(this,'on','newBoxQucik_popup{{i}}')"  onmouseout="cgImg(this,'','newBoxQucik_popup{{i}}')" onclick="openView('{{LINK}}');" />
+										</div>
+										<div class="goodsQuickDefault" id="newBoxQucik_wish{{i}}">
+											<img src="img/common/quick_wish.gif" border="0"  alt="wish" title="wish" class="hand" onmouseover="cgImg(this,'on','newBoxQucik_wish{{i}}')"  onmouseout="cgImg(this,'','newBoxQucik_wish{{i}}')" onclick="quickBarCheckWishAdd('{{CATE}}{{QLINK}}');" />
+										</div>
+										<div class="goodsQuickDefault" id="newBoxQucik_cart{{i}}">
+											<img src="img/common/quick_cart.gif" border="0"  alt="cart" title="cart" class="hand" onmouseover="cgImg(this,'on','newBoxQucik_cart{{i}}')"  onmouseout="cgImg(this,'','newBoxQucik_cart{{i}}')" onclick="gToCart.cartAdd({{CATE}},{{QLINK}});" />
+										</div>
+									</div>										
+								</li>									
+								<li style="height:29px; overflow:hidden;padding-top:4px;"><a href="{{LINK}}">{{NAME}}</a></li>					
+								<li style="padding-top:4px;">
+									<!-- DYNAMIC @is_coupon@ -->	
+									<div style="float:left;padding:2px 2px 0 0 ;"><img src='img/common/icon_coupon.gif' alt='쿠폰가' title='쿠폰가' width='10' height='10' /></div>
+									<!-- DYNAMIC @is_coupon@ -->
+									<div style="float:left" class="num bold">{{PRICE}}</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+									<div style="float:left" class="small mColor">[품절]</div>
+									<!-- DYNAMIC @is_soldout@ -->	
+								</li>												
+							</ul>
+						</div>
+						<!-- DYNAMIC @loop_goods3@ -->	
+						<!-- DYNAMIC @no_goods3@ -->	
+						<div style="height:180px; width:720px; text-align:center;">
+							<div style='height:80px'></div>
+							<div class="small">! 상품 준비 중 입니다.</div>
+						</div>
+						<!-- DYNAMIC @no_goods3@ -->								
+
+					<!-- DYNAMIC @is_scoll32@ -->
+					</div>	
+					<!-- DYNAMIC @is_scoll32@ -->
+				</div>
+			</div>
+			<div class="bottom"></div>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_scoll33@ -->
+	<script type="text/javascript">newBoxDiv = new itemScroll('newBox',{{mcnt}},{{vcnt}},144);newBoxDiv.scroll();</script>
+	<!-- DYNAMIC @is_scoll33@ -->
+	<!-- DYNAMIC @is_move3@ -->
+	<script type="text/javascript">newBoxDiv = new itemMove('newBox',{{i}},{{vcnt}});newBoxDiv.Move();</script>
+	<!-- DYNAMIC @is_move3@ -->
+
+	<!--    @NEW GOODS END -->
+	<!-- DYNAMIC @is_main_goods3@ -->
+	
+	<!-- DYNAMIC @is_cate_goods@ -->
+	<div class="blank">&nbsp;</div>
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:16px 0 0 20px;">				
+				<form name="searchForm2" method="get" onsubmit='return ckSearch2();' action='{{Main}}'>				
+				<input type="hidden" name="channel" value="main2" />
+				<input type="hidden" name="cate" value="{{cate}}" />
+				<input type="hidden" name="field" value="name" />
+				
+				<div id='reBox' class='left searchField' style="width:80px; height:18px;"></div>
+				<script type="text/javascript">
+					<!--
+					reBoxs = new selectBox('reBox',document.searchForm2.field);
+					reBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333";
+					reBoxs.addItem('상품명','name');
+					reBoxs.addItem('태그','tag');
+					reBoxs.addItem('브랜드','brand');
+					reBoxs.show();
+					//-->
+				</script>
+				<div style="float:left;padding-left:2px;"><input type="text" name="search" size="40" class="whites default" style='border-color:#bbb;vertical-align:top' /></div>
+				<div style="float:left;padding-left:2px;"><input type="image" src="img/shop/btn_search.gif" border="0" alt="검색" title="검색" /></div>	
+				<div style="float:left;padding-left:2px;"><a href="{{Main}}?channel=main2{{cstring}}"><img src="img/shop/btn_cancel.gif" border="0" alt="검색취소" title="검색취소" /></a></div>	
+				</form>
+				<!-- DYNAMIC @is_search@ -->
+				&nbsp;&nbsp;&nbsp;&nbsp;<font class="small">검색어 : <font class="mColor">[{{fields}}] {{search}}</font></font>
+				<!-- DYNAMIC @is_search@ -->
+			</div>
+			<div class="blank" style="height:16px;">&nbsp;</div>
+			<div class="left" style="text-align:left;width:170px;">
+				<div style="padding-left:20px;">
+					<div class="small bold mColor">{{SCATENAME}}</div>
+					<div style="padding-top:6px;" class="small">
+						총 상품수 <font class="num mColor">{{TOTAL}}</font>건					
+					</div>
+				</div>
+			</div>			
+			<div class="left" style="height:44px;width:540px;">
+				<div class="left" style="position:relative;width:345px;">
+					<div id="pmoneyBarDiv"></div>
+				</div>
+				<!-- DYNAMIC @is_sec_mon@ -->
+				<div class="right small mColor tleft" style="width:195px;">선택한조건 : <font class="num">{{SEC_MON}}</font> <a href="{{Main}}?channel=main2{{cstring}}{{sstring}}"><img src="img/common/icon_x.gif" border="0" alt="선택해제" title="선택해제" /></a></div>
+				<!-- DYNAMIC @is_sec_mon@ -->					
+			</div>				
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+
+	<form name="moneySeatch" method="get" action="{{Main}}">
+	<input type="hidden" name="channel" value="main2" />
+	<input type="hidden" name="cate" value="{{cate}}" />
+	<input type="hidden" name="mo1" />
+	<input type="hidden" name="mo2" />
+	<input type="hidden" name="order" value="{{order}}" />
+	<input type="hidden" name="limit" value="{{limit}}" />
+	<input type="hidden" name="search" value="{{search}}" />
+	<input type="hidden" name="field" value="{{field}}" />
+	</form>
+
+	<script type="text/javascript">
+	<!--
+	pmoneyBar.show("pmoneyBarDiv","rtnValue","{{skin}}/","216","{{MaxMoney}}");
+
+	// -->
+	</script>
+
+
+	<div id="list" style="margin-top:20px;">	
+		<div id="list_top">
+			<ul>
+				<li><a href="#" onclick="return getLists.cgOrder('uid',1);"><img src="img/common/tab_order_uid_on.gif" alt="신상품순" id='order_uid' /></a></li>
+				<li><a href="#" onclick="return getLists.cgOrder('best',1);"><img src="img/common/tab_order_best_off.gif" alt="인기상품순" id='order_best' /></a></li>
+				<li><a href="#" onclick="return getLists.cgOrder('price',1);"><img src="img/common/tab_order_price_off.gif" alt="낮은가격순" id='order_price' /></a></li>
+				<li><a href="#" onclick="return getLists.cgOrder('price2',1);"><img src="img/common/tab_order_price2_off.gif" alt="높은가격순" id='order_price2' /></a></li>
+			</ul>				
+			<div class="right">
+				<form name="limitForm" method="get" action="">								
+				<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+				<div id='limitBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px; text-align:left;" class='left'></div>
+				<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+				<script type="text/javascript">
+				<!--
+					limitBoxs = new selectBox('limitBox','','{{Main}}','4');
+					limitBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+					limitBoxs.img1.src = 'img/common/icon_select_down2.gif';
+					limitBoxs.img2.src = 'img/common/icon_select_up2.gif';
+					{{LIMIT_OPTION2}}
+					limitBoxs.show('cate');
+					limitBoxs.secNum = {{SEC_LIMIT}};
+					limitBoxs.mout();
+				// -->
+				</script>									
+				</form>
+			</div>			
+			
+			<div class="right">
+				<a href="#" onclick="return getLists.cgType('img',1)"><img src="img/common/icon_img_off.gif" align="absmiddle" alt='이미지형' title='이미지형' id="imgof_img" /></a>
+			</div>
+			<div class="right">
+				<a href="#" onclick="return getLists.cgType('list',1)"><img src="img/common/icon_list_on.gif" align="absmiddle" alt='리스트형' title='리스트형' id="imgof_list" /></a>
+			</div>	
+		</div>
+		
+		<form name="listForm" method="post" action="">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col />
+			<col width="120" /> 
+			<col width="120" />        			
+			<thead>
+			<tr height="28">
+				<th scope="col"><img src="img/common/ttl_list_name.gif" alt="상품명" /></th>
+				<th align="right" scope="col"><img src="img/common/ttl_list_price.gif" alt="가격/적립금" /></th>
+				<th scope="col"><img src="img/common/ttl_list_point.gif" alt="상품평" /></th>
+			</tr>
+			</thead>
+			
+			<tbody id="list_table"></tbody>
+			<!-- id:listTable 에 리스트가 나옵니다. -->
+			</table>
+		</div>
+
+		<div id="list_img" style="display:none">						
+			<!-- id:lis_img 에 이미지가 나옵니다. -->
+		</div>	
+		</form>
+		
+		<!-- DYNAMIC @no_loop@ -->
+		<div style="clear:both;text-align:center">
+			<img src="img/shop/no_goods.gif" alt="상품이 없습니다" />
+		</div>
+		<!-- DYNAMIC @no_loop@ -->
+
+	</div>
+
+	<div style='clear:both;'>
+		<div style="height:10px;">&nbsp;</div>
+		<div style='clear:both;text-align:left;'>
+			<img src="img/shop/btn_compare.gif" class="hand" onclick="secCompare();return false;" alt="선택상품 비교하기" />
+			<img src="img/shop/btn_cart_all.gif" class="hand" onclick="cartPost();return false;" alt="선택상품 장바구니담기" />
+		</div>
+		<div id="paging" class="small" style=""></div>
+	</div>
+	
+	<div style="clear:both;height:20px">&nbsp;</div>		
+
+	<script type="text/javascript">
+	<!--
+	
+	getLists = new getList('{{limit}}','list','uid','{{TOTAL}}','{{Pstart}}','{{ajaxstring}}');
+	getLists.display();
+	aPage = new ajaxPaging('aPage','paging',getLists,'{{TOTAL}}','{{limit}}','7');
+	aPage.makePage();
+	aPage.printPage("box2");
+
+	// -->
+	</script>
+
+	<!-- DYNAMIC @is_cate_goods@ -->
+
+	<!-- DYNAMIC @is_page@ -->
+	<script type="text/javascript">aPage.page={{page}};aPage.makePage();aPage.printPage();</script>
+	<!-- DYNAMIC @is_page@ -->
+	
+	<script type="text/javascript">checkCookieVar();</script>
+</div>
+<!-- @MAIN CENTER END -->

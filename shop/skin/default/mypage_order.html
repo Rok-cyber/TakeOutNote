@@ -1,0 +1,151 @@
+<!-- MAIN LEFT START -->
+<div id="cusMenu">
+	<!-- 마이페이지 메뉴 START -->
+	{{MY_MENU}}
+	<!-- @마이페이지 메뉴 END -->  
+</div>
+<!-- MAIN LEFT START -->
+
+<!-- MAIN CENTER START -->
+<div id="cusContent">
+	<div id="subTitle">
+		<img src="img/member/ttl_order.gif" alt="주문/배송조회" title="주문/배송조회" />
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+
+	<div style="margin-top:20px;text-align:left" class="small">
+		<div class="noticeDiv">주문번호를 누르시면 상세주문내역을 보실 수 있으며 주문상품을 취소/반품/교환 신청을 하실 수 있습니다.</div>
+		<div class="noticeDiv" style="margin-top:6px">상품배송중 상태일 경우 관리자가 택배회사 송장 정보를 입력 하면 '배송조회'로 해당 상품의 배송 상태를 확인 하실 수 있습니다.</div>
+		<div class="noticeDiv" style="margin-top:6px">주문상품 배송완료 후 고객님이 수령확인을 하지 않았거나 거부의사(반품/교환)를 밝히지 않았을 경우 상품배송 후 {{EDATE}}일후 자동으로 배송완료 처리 됩니다.</div>
+	</div>
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+	
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">							
+			<div id="CalendarLayer" style="position:absolute;display:none;top:272px;;width:172px; height:175px">
+				<iframe name="CalendarFrame" src="{{skin}}/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+			</div>
+			<div class="blank" style="height:10px;">&nbsp;</div>
+			<form name="orderForm" method="post" action="{{Main}}?channel=order" onsubmit="ckOsearch();">
+			<input type="hidden" name="status" value='{{status}}' />
+			<div class="left" style="width:20px;">&nbsp;</div>
+			<div class="boxText small mColor" style="margin-right:6px;">주문상태</div> 
+			<div id='PsBox' class='left searchField' style="z-index:99999;width:80px; height:18px;"></div>
+			<script>
+				PsBoxs = new selectBox('PsBox',document.orderForm.status);							
+				PsBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333";
+				PsBoxs.addItem('전체','');
+				PsBoxs.addItem('입금대기중','A');
+				PsBoxs.addItem('결제완료','B');
+				PsBoxs.addItem('배송준비중','C');
+				PsBoxs.addItem('배송중','D');
+				PsBoxs.addItem('배송완료','E');
+				PsBoxs.addItem('취소완료','Z');
+				PsBoxs.show();
+
+				if(document.orderForm.status.value) {
+					PsBoxs.initSelect(document.orderForm.status.value);								
+				}
+			</script>
+			<div class="boxText small mColor" style="margin-left:10px;">주문일</div> 
+			<div style='float:left;padding-left:6px;'>
+				<input type="text" onfocus="new CalendarFrame.Calendar(this,447)" class="inputs_bg num" size="10" name="sdate1" value="{{sdate1}}" /> ~  <input type="text" onfocus="new CalendarFrame.Calendar(this,530)"  class="inputs_bg num"  size="10" name="sdate2" value="{{sdate2}}" style="vertical-align:top;" />&nbsp;
+				<img src="img/member/btn_day1.gif" class="hand" onclick="putDay('{{DAY1}}','{{DAY1}}')" alt="오늘" style="vertical-align:middle;" />
+				<img src="img/member/btn_day3.gif" class="hand" onclick="putDay('{{DAY3}}','{{DAY1}}')" alt="1주일" style="vertical-align:middle;" />
+				<img src="img/member/btn_day4.gif" class="hand" onclick="putDay('{{DAY4}}','{{DAY1}}')" alt="1개월" style="vertical-align:middle;" />
+				<img src="img/member/btn_day6.gif" class="hand" onclick="putDay('{{DAY5}}','{{DAY1}}')" alt="6개월" style="vertical-align:middle;" />
+				<img src="img/member/btn_day7.gif" class="hand" onclick="putDay('','')" alt="전체" style="vertical-align:middle;" />				
+			</div>	
+			<div style="float:left;padding:0 0 0 4px;">
+				<input type="image" src="img/shop/btn_search.gif" style="border:0px;" />
+			</div>			
+			</form>
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+	
+	<div style="margin-top:20px;height:24px;text-align:right;">
+		<font class="num"><font class="small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOTAL_PAGE}} <font class="small">페이지</font>.</font>
+	</div>
+
+	<div id="list_list" style="margin:0px;">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="130" /> 
+			<col />
+			<col width="70"/>			
+			<col width="75" /> 
+			<col width="70" />
+			<col width="80" />      					
+			<col width="90" />
+			<thead>
+            <tr height="28" align="center">
+				<th scope="col"><img src="img/member/ttl_list_onum.gif" alt="주문번호" /></th>
+				<th scope="col"><img src="img/member/ttl_list_gname.gif" alt="주문상품명" /></th>
+				<th scope="col"><img src="img/member/ttl_list_gcnt.gif" alt="주문상품건수" /></th>
+				<th scope="col" align="right" style="padding-right:10px;"><img src="img/member/ttl_list_total.gif" alt="결제금액" /></th>		
+				<th scope="col"><img src="img/member/ttl_list_type.gif" alt="결제방법" /></th>
+				<th scope="col"><img src="img/member/ttl_list_state.gif" alt="주문상태" /></th>
+				<th scope="col"><img src="img/member/ttl_list_date.gif" alt="주문일" /></th>
+		    </tr>
+			</thead>
+			
+			<tbody>			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td class="num orange"><a href="{{Main}}?channel=order_detail&order_num={{NUM}}" title="주문내역상세보기">{{NUM}}</a></td>
+				<td align="left" class="small"><a href="{{Main}}?channel=order_detail&order_num={{NUM}}" title="주문내역상세보기">{{NAME}}</a></td>
+				<td class="num">{{CNT}}건</td>				
+				<td align="right" style="padding-right:10px;" class="num mColor"><b>{{PRICE}}</b><font class="default">원</font></td>
+				<td class="small">{{TYPE}}</td>				
+				<td class="small">
+					{{STATUS}}
+					<!-- DYNAMIC @is_carr@ -->	
+					<div >
+						<img src='img/customer/btn_carr2.gif' class='hand' onclick="searchCarr('{{CLINK}}','{{CNUM}}');" alt="배송조회" title="배송조회" />
+					</div>
+					<div style="padding:4px 0;">
+						<img src='img/customer/btn_carrok.gif' class="hand" onclick="carrOk('{{NUM}}','{{addstring}}');" alt="수령확인" title="수령확인" /></a>	
+					</div>
+					<!-- DYNAMIC @is_carr@ -->						
+				</td>				
+				<td class="num">{{DATE}}</td>												
+			</tr>			
+			<tr><td colspan="7" height="1" bgcolor="#F1F1F1"></td></tr>
+			<!-- DYNAMIC @loop@ -->						
+			</tbody>			
+		</table>
+	</div>		
+
+	<!-- DYNAMIC @is_loop@ -->			
+	<div class="clear" style="height:16px;">&nbsp;</div>
+	
+	<div style="height:30px;">
+		<div id="paging" class="small" style="float:right;">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(box,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>	
+	</div>			
+	<!-- DYNAMIC @is_loop@ -->			
+
+	<!-- DYNAMIC @no_loop@ -->			
+	<div style="text-align:center;margin-top:30px">
+		<img src="img/member/no_order.gif" alt="주문된상품없음이미지" title="주문된상품없음이미지" />
+	</div>
+	<!-- DYNAMIC @no_loop@ -->
+
+	<div class="clear" style="height:20px;">&nbsp;</div>
+</div>
+
+<script language="javascript">
+<!--
+function carrOk(num,str){
+	if(confirm('주문상품 수령확인을 하시겠습니까?')) {
+		window.location.href = 'php/order_multi_ok.php?mode=carrok&order_num='+num+str;
+	}
+}
+
+// -->
+</script>

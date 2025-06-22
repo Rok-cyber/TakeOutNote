@@ -1,0 +1,211 @@
+<div id="subMain">
+	
+	<div>
+		<div id="subTitle">
+			<img src="img/shop/ttl_rss_service.gif" alt="RSS Service" title="RSS Service" />
+		</div>
+	</div>	
+
+	<div style="clear:both;height:20px;">&nbsp;</div>
+
+	<div style="clear:both;width:900px; text-align:left">
+		<div>
+			<img src="img/search/ttl_rss_help.gif" alt="RSS서비스란?" title="RSS서비스란?" />
+		</div>
+
+		<div style="float:left;width:180px;margin-top:20px;">
+			<img src="img/search/ttl_rss_search.gif" alt="검색상품RSS생성하기" title="검색상품RSS생성하기" />
+		</div>
+
+		<div style="float:left;padding-top:32px;" class="small">
+			구독하실 상품을 검색 하셔서 'RSS생성하기'를 누루세요
+		</div>
+
+		<div style="width:100%;border:1px solid #E5E5E5; background-color:#FAFAFA;clear:both">
+			<div style="padding:15px 10px 10px 25px">
+				<form name="dsearchForm" method="post" onsubmit='createRss("{{URL}}/rss/searchGoods.php");return false;'>
+				<div class="small bold mt4 tleft">
+					쇼핑분류&nbsp;&nbsp;&nbsp;
+					<input type="hidden" name="seccate">
+					<select name="cate1" class="small"></select>
+					<select name="cate2" class="small"></select>
+					<select name="cate3" class="small"></select>
+					<select name="cate4" class="small"></select>
+				</div>
+				<div class="small bold mt4 tleft">
+					제조사&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+					<input type="text" name="comp" size="35" class="whites default" />
+				</div>
+				<div class="small bold mt4 tleft">
+					검색어&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="text" name="search" size="35" class="whites default" />							
+				</div>
+				<div style="margin-top:10px;">					
+					<div class="left" style="padding-right:10px;"><input type="image" src="img/search/btn_rss_create.gif" border="0" align="absmiddle" /></div>
+					<div class="left"  id="rssCopy" style="display:none;">
+						<img src='img/search/btn_rss_copy.gif' class='hand' onclick="copyRss('rssUrl','html');" alt='RSS퍼가기' title='RSS퍼가기' />
+					</div>
+					<div id="rssUrl" class="left orange num" style="padding-left:10px;"></div>
+				</div>
+				<div style="clear:both;"></div>
+				</form>
+			</div>
+		</div>
+
+
+		<div style="height:20px; clear:both;"></div>
+		<div style="float:left;width:160px;">
+			<img src="img/search/ttl_rss_main.gif" alt="상품RSS신청하기" title="상품RSS신청하기" />
+		</div>
+
+		<div style="float:left;padding-top:12px;" class="small">
+			구독하실 쇼핑분류를 선택 하셔서 'RSS퍼가기'를 누루세요
+		</div>
+
+		<div style="clear:both;">
+			<table width="100%"  border="0" cellspacing="1" cellpadding="0" bgcolor="#E5E5E5"> 
+				<colgroup>
+					<col width="200"><col width="160"><col width="90"><col width="">
+				</colgroup>  
+
+				<tr bgcolor="#FFFFFF" height="24" align="left"> 
+					<td  style="padding-left:16px;"class="small bold" rowspan="3">메인페이지</td>
+					<td  style="padding-left:16px;"class="small">인기상품정보</td>					
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{URL}}rss/mainGoods.php?type=1");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{URL}}rss/mainGoods.php?type=1" target="_blank">{{URL}}rss/mainGoods.php?type=1</a></td>
+				</tr>
+				<tr  bgcolor="#FFFFFF" height="24" align="left">
+					<td  style="padding-left:16px;"class="small">추천상품정보</td>
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{URL}}rss/mainGoods.php?type=2");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{URL}}rss/mainGoods.php?type=2" target="_blank">{{URL}}rss/mainGoods.php?type=2</a></td>
+				</tr>
+				<tr  bgcolor="#FFFFFF" height="24" align="left">
+					<td  style="padding-left:16px;"class="small">신상품정보</td>
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{URL}}rss/mainGoods.php?type=3");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{URL}}rss/mainGoods.php?type=3" target="_blank">{{URL}}rss/mainGoods.php?type=3</a></td>
+				</tr>
+				<tr bgcolor="#FFFFFF" height="24" align="left"> 
+					<td  style="padding-left:16px;"class="small bold" rowspan="2">전체상품</td>
+					<td  style="padding-left:16px;"class="small">신상품정보</td>					
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{URL}}rss/newGoods.php");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{URL}}rss/newGoods.php" target="_blank">{{URL}}rss/newGoods.php</a></td>
+				</tr>
+				<tr  bgcolor="#FFFFFF" height="24" align="left">
+					<td  style="padding-left:16px;"class="small">베스트 상품정보</td>
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{URL}}rss/bestGoods.php");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{URL}}rss/bestGoods.php" target="_blank">{{URL}}rss/bestGoods.php</a></td>
+				</tr>
+				
+				<!-- DYNAMIC @loop_cate@ -->
+				<tr bgcolor="#FFFFFF" height="24" align="left"> 
+					<td  style="padding-left:16px;"class="small bold" rowspan="2">{{CNAME}}</td>
+					<td  style="padding-left:16px;"class="small">신상품정보</td>					
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{CLINK1}}");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{CLINK1}}" target="_blank">{{CLINK1}}</a></td>
+				</tr>
+				<tr  bgcolor="#FFFFFF" height="24" align="left">
+					<td  style="padding-left:16px;"class="small">베스트 상품정보</td>
+					<td  style="padding-left:16px;"class="small"><img src='img/search/btn_rss_copy.gif' class='hand' onclick='copyRss("{{CLINK2}}");' alt='RSS퍼가기' title='RSS퍼가기' /></td>
+					<td  style="padding-left:16px;"class="num"><a href="{{CLINK2}}" target="_blank">{{CLINK2}}</a></td>
+				</tr>
+				<!-- DYNAMIC @loop_cate@ -->				
+				
+			</table>		
+
+		</div>
+		<div style="height:20px;clear:both;"></div>
+		<div class="small">
+			<img src="img/member/ttl_bar.gif" align="absmiddle" />&nbsp;<b>RSS 리더기</b>
+		</div>
+
+		<div style='margin-top:10px;' class="small">			
+			연모 (<a href='http://www.yeonmo.co.kr' class="num">http://www.yeonmo.co.kr</a>), 
+			한RSS (<a href='http://www.hanrss.co' class="num">http://www.hanrss.com</a>), 
+			피쉬 (<a href='http://www.3fishes.co.kr' class="num">http://www.3fishes.co.kr</a>), 
+			klipfolio (<a href='http://www.klipfolio.com' class="num">http://www.klipfolio.com</a>), 
+			구글리더기 (<a href='http://reader.google.com' class="num">http://reader.google.com</a>)
+		</div>
+
+		<div style="height:30px;clear:both;"></div>
+
+	</div>	
+</div>
+
+<script>
+
+{{tmps1}}
+{{tmps2}}
+
+var dsearchForm = document.dsearchForm;
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+    dsearchForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+dsearchForm.cate2.options[0]=new Option(CATEname[0][1][0],CATEname[0][1][0])
+dsearchForm.cate3.options[0]=new Option(CATEname[0][1][1][0],CATEname[0][1][1][0])
+dsearchForm.cate4.options[0]=new Option(CATEname[0][1][1][1],CATEname[0][1][1][1])
+
+dsearchForm.cate1.onchange=function(e){
+	for(i=dsearchForm.cate2.length;i>0;i--){
+		dsearchForm.cate2.options[i]=null;
+	}
+	for(i=dsearchForm.cate3.length;i>0;i--){
+		dsearchForm.cate3.options[i]=null;
+	}
+	for(i=dsearchForm.cate4.length;i>0;i--){
+		dsearchForm.cate4.options[i]=null;
+	}
+	
+	sIndex = dsearchForm.cate1.selectedIndex;
+	if(sIndex!=0) {
+		for(i=1,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+			if(CATEname[sIndex][i][0]) dsearchForm.cate2.options[i]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+			else dsearchForm.cate2.options[i]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+		}
+	}
+	dsearchForm.seccate.value = dsearchForm.cate1.value;	
+}
+
+dsearchForm.cate2.onchange=function(e){
+	for(i=dsearchForm.cate3.length;i>0;i--){
+		dsearchForm.cate3.options[i]=null;
+	}	
+	for(i=dsearchForm.cate4.length;i>0;i--){
+		dsearchForm.cate4.options[i]=null;
+	}
+	
+	sIndex2 = dsearchForm.cate2.selectedIndex;
+	if(sIndex2!=0) {
+		for(i=1,sIndex=dsearchForm.cate1.selectedIndex,cnt=CATEname[sIndex][sIndex2].slice(1).length;i<=cnt;i++){	
+			if(typeof(CATEname[sIndex][sIndex2][i][0])!='undefined') { 		
+			dsearchForm.cate3.options[i]=new Option(CATEname[sIndex][sIndex2][i][0],CATEnum[sIndex][sIndex2][i][0]);		
+			
+			}
+		}   
+		dsearchForm.seccate.value = dsearchForm.cate2.value;	
+	}
+	else dsearchForm.seccate.value = dsearchForm.cate1.value;
+}
+
+dsearchForm.cate3.onchange=function(e){
+	for(i=dsearchForm.cate4.length;i>0;i--){
+		dsearchForm.cate4.options[i]=null;
+	}
+
+	sIndex3 = dsearchForm.cate3.selectedIndex;
+	if(sIndex3!=0) {
+		for(i=1,sIndex=dsearchForm.cate1.selectedIndex,sIndex2=dsearchForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2][sIndex3].slice(1).length;i<=cnt;i++){
+			if(typeof(CATEname[sIndex][sIndex2][sIndex3][i])!='undefined') dsearchForm.cate4.options[i]=new Option(CATEname[sIndex][sIndex2][sIndex3][i],CATEnum[sIndex][sIndex2][sIndex3][i]);
+		}
+		dsearchForm.seccate.value = dsearchForm.cate3.value;	
+	}
+	else dsearchForm.seccate.value = dsearchForm.cate2.value;
+}
+
+dsearchForm.cate4.onchange=function(e){
+	sIndex=dsearchForm.cate4.selectedIndex;   
+	if(sIndex!=0) dsearchForm.seccate.value = dsearchForm.cate4.value;	
+	else dsearchForm.seccate.value = dsearchForm.cate3.value;
+}
+</script>

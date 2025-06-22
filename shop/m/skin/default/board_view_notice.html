@@ -1,0 +1,74 @@
+
+<div id="contents">
+	<section id="headline">
+		<h1>{{B_NAME}}</h1>
+		<a href="javascript:history.back();" class="btn_back"><span><img src="img/common/btn_back.png" alt="이전화면" /></span></a>		
+	</section>
+	
+	<section id="boardView">
+		<h2>{{B_NAME}} 내용보기</h2>
+		
+		<div class="boardTitle">
+			<p>{{SUBJECT}}</p>
+			<em>Date : {{D_YYYY}}-{{D_MM}}-{{D_DD}} , View : {{HIT}}</em>		
+		</div>
+
+		<div class="boardContent">
+			<!-- DYNAMIC @is_img@ --><p>{{IMAGE}}</p><!-- DYNAMIC @is_img@ -->
+			{{COMMENT}}
+		</div>
+
+		<div id="listBtn">
+			<p class="btn" onclick="window.location.href='{{Main}}?channel=board&code={{code}}{{sddstring}}';" title="목록보기">목록보기</p>
+		</div>
+		
+		<!-- DYNAMIC @is_memo@ -->
+		<div class="boardMemo">
+			<ul>
+				 <!-- DYNAMIC @mloop@ -->
+				<li>
+					<span>{{MNAME}} / </span><em>{{MDATE}}</em>	
+					<p>{{MCOMMENT}}</p>					
+				</li>
+				 <!-- DYNAMIC @mloop@ -->
+			</ul>
+		</div>
+		<!-- DYNAMIC @is_memo@ -->
+		
+		<!-- DYNAMIC @is_prev@ -->
+		<div class="boardPrev">
+			<span>이전글</span><a href="{{PLINK}}" title="이전글">{{PSUBJECT}}</a>
+		</div>
+		<!-- DYNAMIC @is_prev@ -->
+		<!-- DYNAMIC @is_next@ -->
+		<div class="boardNext">
+			<span>다음글</span><a href="{{NLINK}}" title="다음글">{{NSUBJECT}}</a>
+		</div>
+		<!-- DYNAMIC @is_next@ -->
+
+	</section>
+	
+	<section id="contentMore">
+		<ul>
+			<li>
+				<a href="javascript:history.back();" class="btn_more_back"><img src="img/common/btn_back.png" alt="이전화면" /><span> 이전</span></a>
+			</li>
+			<li>&nbsp;</li>
+			<li>
+				<a href="javascript:gotoTop();" class="btn_more_top"><img src="img/common/btn_more_top.png" alt="위로가기" /><span> 위로<span></a>
+			</li>
+		</ul>
+	</section>	
+	
+</div>
+
+<script type="text/javascript">
+<!--
+	var scrollHeight = $(window).scrollTop() + $(window).height();
+	var documentHeight = $(document).height();
+	
+	if(scrollHeight<documentHeight) {
+		$("#contentMore").show();	
+	}	
+ -->
+</script>

@@ -1,0 +1,586 @@
+<script language="javascript">
+<!--
+
+var tmp_scate = new Array();
+var tmp_sgoods = new Array();
+
+function ckIt() {      
+	form=document.signForm;
+
+	if(!form.name.value) {
+		alert('쿠폰명을 입력하세요.');
+		form.name.focus();
+		return false;
+	}
+
+	if(!form.sale.value) {
+		alert('쿠폰할인금액을 입력하세요.');
+		form.sale.focus();
+		return false;
+	}
+	
+	if(form.stype.value=='P' && form.sale.value>100) {
+		alert('할인률은 100%를 넘을 수 없습니다.');
+		form.sale.focus();
+		return false;
+	}
+
+	if(form.dtype[0].checked==true) {
+		if(!form.s_date.value) {
+			alert('시작일을 입력히세요.');
+			form.s_date.focus();
+			return false;
+		} 
+		if(!form.e_date.value) {
+			alert('종료일을 입력히세요.');
+			form.e_date.focus();
+			return false;
+		} 
+	}
+	else {
+		if(!form.days.value) {
+			alert('발급후 사용기간을 입력하세요.');
+			form.days.focus();
+			return false;
+		}
+	}
+
+	if(form.sqty[1].checked==true) {
+		if(!form.qty.value) {
+			alert('쿠폰발급수량을 입력하세요.');
+			form.qty.focus();
+			return false;
+		}
+	}
+
+	if(!form.lmt.value) {
+		alert('쿠폰사용가능금액을 입력하세요.');
+		form.lmt.focus();
+		return false;
+	}
+
+	if(form.range[0].checked==true) {
+		form.scate.value = '';
+		form.sgoods.value = '';
+	}
+	else {
+		for(i=0;i<tmp_scate.length;i++){
+			if(tmp_scate[i]!='') {
+				if(!form.scate.value) form.scate.value = tmp_scate[i];
+				else form.scate.value = form.scate.value + '|' + tmp_scate[i];
+			}
+		}
+
+		for(i=0;i<tmp_sgoods.length;i++){
+			if(tmp_sgoods[i]!='') {
+				if(!form.sgoods.value) form.sgoods.value = tmp_sgoods[i];
+				else form.sgoods.value = form.sgoods.value + '|' + tmp_sgoods[i];
+			}
+		}
+	}
+
+	form.submit();
+	return false;
+}
+
+
+function secCate(ck){
+	f = document.signForm;
+	cList = document.getElementById("cateList");
+	cnt = tmp_scate.length;
+
+	if(!f.seccate.value) {
+		alert('카테고리를 선택 하세요');
+		return false;
+	}
+		
+	for(i=0;i<cnt;i++) {
+		if(tmp_scate[i]==f.seccate.value) {
+			alert('이미 선택하신 분류 입니다.');
+			return false;
+		}		
+	}
+	
+	cName = "- " + f.cate1.options[f.cate1.selectedIndex].text;
+	if(f.cate2.value!=' ==== 2차분류 ==== ') {
+		
+		for(i=0;i<cnt;i++) {
+			if(tmp_scate[i]==f.seccate.value.substr(0,3)+'000000000') {
+				alert('이미 선택하신 상위분류가 존재 합니다.');
+				return false;
+			}		
+		}
+		cName = cName + ' > ' + f.cate2.options[f.cate2.selectedIndex].text;
+
+	}
+	if(f.cate3.value!=' ==== 3차분류 ==== ') {
+		
+		for(i=0;i<cnt;i++) {
+			if(tmp_scate[i]==f.seccate.value.substr(0,6)+'000000') {
+				alert('이미 선택하신 상위분류가 존재 합니다.');
+				return false;
+			}		
+		}
+		cName = cName + ' > ' + f.cate3.options[f.cate3.selectedIndex].text;
+
+	}
+	if(f.cate4.value!=' ==== 4차분류 ==== ') {
+
+		for(i=0;i<cnt;i++) {
+			if(tmp_scate[i]==f.seccate.value.substr(0,9)+'000') {
+				alert('이미 선택하신 상위분류가 존재 합니다.');
+				return false;
+			}		
+		}
+		
+		cName = cName + ' > ' + f.cate4.options[f.cate4.selectedIndex].text;
+	}
+	cName = cName + '&nbsp;&nbsp;<img src="img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delCate('+f.seccate.value+');" />';
+
+	var nList = document.createElement("div");
+	nList.id = "list_"+f.seccate.value;	
+	nList.style.height = '18px';
+	nList.className = 'small';
+	nList.style.padding = '6px 0 0 6px';
+	nList.innerHTML = cName;
+    
+	cList.appendChild(nList);
+	cnts = document.getElementById("cateList").childNodes.length;
+	
+	tmp_scate[cnt] = f.seccate.value;
+
+	if(cnts==1) cList.style.display = 'block';
+	return false;
+}
+
+function delCate(num) {
+	if(!num) return;
+	cList = document.getElementById("cateList");
+	element = document.getElementById('list_'+num);
+
+	element.innerHtml ='';
+	cList.removeChild(element);
+	
+	if(isMsie) var cnt = cList.childNodes.length;
+	else var cnt = cList.childNodes.length -2;
+	
+	for(i=0;i<tmp_scate.length;i++){
+		if(tmp_scate[i]==num) tmp_scate[i]='';
+	}
+        
+	if(cnt==0) {			
+		cList.style.display='none';	
+	}		
+}
+
+function secGoods(str,ck) {
+	if(!str) return;
+	var form = document.signForm;	
+		
+	aObj = new AjaxObject; 
+	tmps = str.split(',');
+	tmps2 = ''; 
+		
+	for(i=0;i<tmps.length;i++){
+		cnt = tmp_sgoods.length;
+		cks = 0;
+		if(tmps[i]) {
+			for(j=0;j<cnt;j++) {
+				if(tmps[i]==tmp_sgoods[j]) {
+					cks = 1;
+					break;
+				}
+			}
+
+			if(cks==0) {				
+				tmp_sgoods[cnt] = tmps[i];	
+				if(!tmps2) tmps2 = tmps[i];
+				else tmps2 += ','+tmps[i];	
+			}
+		}
+	}	
+	if(tmps2) aObj.getHttpRequest("../shopping/goodsInfo.php?uid="+tmps2, "addGoods","data"); 
+	if(!ck) pLightBox.hide();	
+}
+
+function addGoods(data){
+	
+	if(typeof(data['error'])!='undefined') {
+		alert("리스트를 가져오는 중 에러가 발생했씁니다.");
+		return;
+	}
+	
+	if(typeof(data['item'])=='undefined') return;
+	var gList = document.getElementById("goodsList");
+	
+	for(i=0,cnt=data['item'].length;i<cnt;i++){		
+		nList = document.createElement("div");
+	
+		iHtml =  '<div style="text-align:center"><a href="{{SMain}}?channel=view&uid='+data['item'][i]['uid']+'" target=_blank  title="쇼핑몰 상세설명 보기">'+data['item'][i]['image']+'</a></div>';
+		iHtml += '<div style="padding-top:4px;height:26px;overflow:hidden"><a href="../shopping/goods_write.php?mode=modify&uid='+data['item'][i]['uid']+'" target=_blank  title="상품수정하기">'+data['item'][i]['name']+'</a></div>';
+		iHtml += '<div class="eng green">'+data['item'][i]['price']+'원 &nbsp;<img src="../shopping/img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delGoods('+data['item'][i]['uid']+');" /></div>';
+		
+		if(data['item'][i]['sout']!='') {
+			iHtml += '<div style="position:relative;left:0px;top:-123px;width:36px;height:16px;border:1px solid #ff6600;background-color:#fff" class="small orange"><div style="padding:3px 8px 0 8px;">'+data['item'][i]['sout']+'</div></div>';
+		}
+		nList.id = "goods_" + data['item'][i]['uid'];	
+		nList.className = 'small goodsDiv';
+		nList.innerHTML = iHtml;
+		
+		gList.appendChild(nList);
+	}
+	document.getElementById("noGoods").style.display = 'none';		
+}
+
+function delGoods(num) {
+	if(!num) return;
+	
+	gList = document.getElementById("goodsList");
+	element = document.getElementById('goods_'+num);
+	
+	element.innerHtml ='';
+	gList.removeChild(element);
+	
+	if(isMsie) var cnt = gList.childNodes.length;
+	else var cnt = gList.childNodes.length -2;
+
+	for(i=0;i<tmp_sgoods.length;i++){
+		if(tmp_sgoods[i]==num) tmp_sgoods[i]='';
+	}
+        
+	if(cnt==1) {			
+		document.getElementById("noGoods").style.display = 'block';	
+	}			
+}
+
+function clType(type){
+	var form = document.signForm;	
+
+	if(type=='2') {
+		form.range[0].disabled = true;
+		form.range[1].checked = true;
+		document.getElementById("cateDiv").style.display = 'none';
+		document.getElementById("goodsDiv").style.display = 'block';		
+		document.getElementById("lmtDiv").style.display = 'none';
+	}
+	else {
+		form.range[0].disabled = false;
+		document.getElementById("cateDiv").style.display = 'block';
+		document.getElementById("goodsDiv").style.display = 'none';
+		document.getElementById("lmtDiv").style.display = 'table-row';		
+	}
+
+	if(type>1) {
+		document.getElementById("typeDiv").style.display = 'table-row';
+		document.getElementById("oddsDiv").style.display = 'table-row';		
+	}
+	else {
+		document.getElementById("typeDiv").style.display = 'none';
+		document.getElementById("oddsDiv").style.display = 'none';		
+	}
+}
+
+//-->
+</script>
+
+<script src="../../lib/lib.ajax.js"></script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_cupon.gif" alt="쿠폰등록" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>회원에게 발급할 쿠폰을 등록하거나 수정 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<tr><td><img src="img/ttl_cupon_{{mode}}.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign="top" height="650">
+		<form name="signForm" enctype='multipart/form-data' method="post" action="cupon_post.php">
+		<input type="hidden" name="mode" value="{{mode}}" />
+		<input type="hidden" name="uid" value="{{uid}}" />
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰명</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=name value='{{NAME}}' size=80></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰발급방식</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<input type="radio" name="type" id='type1' value="1" onclick="clType('1');"> <label for='type1'>관리자발급</label> 
+								<input type="radio" name="type" id='type2' value="2" onclick="clType('1');"> <label for='type2'>회원가입자동발급</label>
+								<input type="radio" name="type" id='type3' value="3" onclick="clType('2');"> <label for='type3'>상품페이지 다운로드</label> 
+								<input type="radio" name="type" id='type4' value="4" onclick="clType('3');"> <label for='type4'>링크 다운로드</label>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰할인내역</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								총 구매금액에서 <input type=text class="ta2 eng" name=sale value='{{SALE}}' size=8 maxlength=8>
+								<select name="stype">
+									<option value="P">%</option>
+									<option value="W">원</option>
+								</select>를(을) 할인 합니다.
+								&nbsp;&nbsp;
+								<font class="small">(상품페이지 다운로드일경우는 상품금액에서 할인)</font>	
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰발급상품</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								<input type=radio name=range id='range1' value='1'> <label for='range1'>전체 상품</label> <br />
+								<input type=radio name=range id='range2' value='2'> <label for='range2'>특정 분류 및 특정 상품</label> <br />
+								
+								<div style='margin-top:8px;padding-left:6px;' id="cateDiv">
+									<div style='float:left;padding:4px 0 0 0;'>
+										<input type="hidden" name="scate">
+										<input type="hidden" name="seccate">
+										<font class="small bold">분류선택 : </font>
+									</div>
+
+									<div id="sBtn1" style="float:left;padding-left:4px;">
+										<a href="#" onclick="return secCate();"><span class="green">추가하기</span></a>	
+									</div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+
+									<div>
+										<select name="cate1"></select>
+										<select name="cate2"></select>
+										<select name="cate3"></select>
+										<select name="cate4"></select>
+									</div>
+
+									<div id="cateList" style='clear:both;margin:8px 0 8px 0;width:600px;border:1px solid #dadada; background-color:#FFF;display:none;'>
+									</div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+								</div>
+
+								<div style='margin:8px 0 8px 0;clear:both;padding-left:6px;' id="goodsDiv">									
+									<div style='float:left;padding:4px 0 0 0;'>
+										<font class="small bold">상품선택 : </font>
+										<input type="hidden" name="sgoods">
+									</div>
+
+									<div id="sBtn1" style="float:left;padding:0 0 0 4px;">
+										<a href="#" onclick="pLightBox.show('../shopping/search_list.php','iframe','860','500','■ 상품 찾기',10);return false;"><span class="green">상품검색하기</span></a>	
+										<a href="#" onclick="pLightBox.show('../shopping/input_code.php','iframe','500','300','■ 상품 코드입력',10);return false;"><span class="green">상품코드입력</span></a>
+									</div>
+
+									<div style="height:8px;clear:both;overflow:hidden;">&nbsp;</div>
+									
+									<div id="goodsList" style='width:600px;border:1px solid #dadada; background-color:#FFF;padding:2px;' class="clearfix" >
+										<div style='height:138px;' id='noGoods' class="small">
+											<div style='padding:65px 0 0 80px;text-align:center'>! 선택된 상품이 없습니다. 상품검색하기로 상품을 추가 하시기 바랍니다.</div>
+										</div>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰사용기간</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								<input type="radio" name="dtype" value="1" /> 
+															
+								<input type=text class="ta eng" name=s_date value='{{SDATE}}' size=10 onfocus="new CalendarFrame.Calendar(this)">일 부터 <input type=text class="ta eng" name=e_date value='{{EDATE}}' size=10 onfocus="new CalendarFrame.Calendar(this)">일 까지 사용가능
+								<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+								<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+								</div>
+								&nbsp;<font class="small">(기간은 시작일 00:00분 부터 종료일 23:59분 까지 적용 받습니다.)</font> <br />
+								<input type="radio" name="dtype" value="2" /> 발급후 <input type=text class="ta2 eng" name="days" value='{{DAYS}}' size=3 maxlength=3>일간 사용가능
+								
+							</td>
+						</tr>
+						<tr height=30 id="typeDiv"> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰사용설정</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								<input type='checkbox' name='down_type' value='1' onfocus='blur();' {{CKD11}} />쿠폰을 사용한 후 다음번 주문시에도 같은 상품의 쿠폰다운로드를 허용<br />
+								<input type='checkbox' name='use_type' value='1' onfocus='blur();' {{CKD21}} />쿠폰이 적용된 하나의 상품을 한번에 여러개 주문할 때 쿠폰혜택을 모두 제공
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰수량</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								<input type='radio' name='sqty' id='sqty1' value='0' onfocus='blur();' onclick="document.signForm.qty.disabled=true;"><label for='sqty1'>무제한</label>&nbsp;
+								<input type='radio' name='sqty' id='sqty2' value='1' onfocus='blur();' onclick="document.signForm.qty.disabled=false;"><label for='sqty2'>한정발행</label>
+								<input type='text' name='qty' size="5" class="ta2 eng" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" maxlength=5 disabled value="{{QTY}}">개
+							</td>
+						</tr>
+						<tr height=30 id="lmtDiv"> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰사용가능금액</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								총 구매금액이 <input type=text class="ta2 eng" name=lmt value='{{LMT}}' size=8 maxlength=8>
+								원 이상 구매시에만 사용가능 &nbsp;&nbsp;<font class="small">(0원이면 구매금액에 상관없이 사용이 가능)</font>
+							</td>
+						</tr>
+
+						<tr height=30 id="oddsDiv" style="display:none"> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;쿠폰발급확률</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								쿠폰은 <input type='text' name='odds' size="5" class="ta2 eng" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" maxlength=3 value="{{ODDS}}">%의 확률로 발급되며 미발급시 하루에 
+								<input type='text' name='cnts' size="5" class="ta2 eng" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" maxlength=3 value="{{CNTS}}">번까지 발급요청이 가능&nbsp;&nbsp;
+								<font class="small">(100%면 무조건 쿠폰이 발급 됩니다.)</font>
+							</td>
+						</tr>
+						<tr>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding:6px 0 6px 6px;'>
+								<div style="float:left;line-height:140%;" class='small'>
+									! 관리자발급은 쿠폰등록 후 쿠폰리스트에서 관리자가 특정등급이나 특정회원에게 직접 발급합니다. <br />									
+									! 관리자발급은 쿠폰리스트에서 발급된수를 클릭하셔서 특정등급이나 특정회원에게 쿠폰을 발급 할 수 있습니다.<br />
+									! 회원가입자동발급은 회원가입시 자동으로 발급됩니다.<br />
+									! 상품페이지 다운로드는 쇼핑몰 상품상세 페이지에서 직접 쿠폰을 다운로드받습니다. 쿠폰발급상품에서 특정상품이 추가 되어야 됩니다.<br />			! 특정분류 및 특정상품에 발급된 쿠폰은 해당조건에 만족하는 상품을 구매 했을경우에만 사용 가능 합니다.<br />
+									! 쿠폰발급할률은 상품페이지 다운로드나 링크 다운로드에 이용됩니다.<br />
+									! 링크 다운로드는 쇼핑몰에서 배너나 삽입코드를 이용하여 링크시켜서 회원이 직접 쿠폰을 다운로드받습니다.<br />
+									! 링크 다운로드 주소는 "php/pcupon_down.php?num={{uid}}" 이며 자바스크립트 함수 cuponDown({{uid}})을 사용하시면 됩니다.<br />
+									! <b>등록된 쿠폰은 반드시 쿠폰을 발급받은 회원이 없을 경우에만 수정 하시기 바랍니다. 발급받은 회원이 있는경우 새로운 쿠폰을 등록해서 사용하시기 바랍니다.</b>
+								</div>
+								<div id="sBtn1" style="float:right;margin-top:4px;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>							 
+						</tr>					
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=30></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+
+{{tmps1}};
+{{tmps2}};
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+    signForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+signForm.cate2.options[0]=new Option(CATEname[0][1][0],CATEname[0][1][0])
+signForm.cate3.options[0]=new Option(CATEname[0][1][1][0],CATEname[0][1][1][0])
+signForm.cate4.options[0]=new Option(CATEname[0][1][1][1],CATEname[0][1][1][1])
+
+signForm.cate1.onchange=function(e){
+	for(i=signForm.cate2.length;i>0;i--){
+		signForm.cate2.options[i]=null;
+	}
+	for(i=signForm.cate3.length;i>0;i--){
+		signForm.cate3.options[i]=null;
+	}
+	for(i=signForm.cate4.length;i>0;i--){
+		signForm.cate4.options[i]=null;
+	}
+	
+	sIndex = signForm.cate1.selectedIndex;
+	if(sIndex!=0) {
+		for(i=1,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+			if(CATEname[sIndex][i][0]) signForm.cate2.options[i]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+			else signForm.cate2.options[i]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+		}
+	}
+	signForm.seccate.value = signForm.cate1.value;	
+}
+
+signForm.cate2.onchange=function(e){
+	for(i=signForm.cate3.length;i>0;i--){
+		signForm.cate3.options[i]=null;
+	}	
+	for(i=signForm.cate4.length;i>0;i--){
+		signForm.cate4.options[i]=null;
+	}
+	
+	sIndex2 = signForm.cate2.selectedIndex;
+	if(sIndex2!=0) {
+		for(i=1,sIndex=signForm.cate1.selectedIndex,cnt=CATEname[sIndex][sIndex2].slice(1).length;i<=cnt;i++){	
+			if(typeof(CATEname[sIndex][sIndex2][i][0])!='undefined') { 		
+			signForm.cate3.options[i]=new Option(CATEname[sIndex][sIndex2][i][0],CATEnum[sIndex][sIndex2][i][0]);		
+			
+			}
+		}   
+		signForm.seccate.value = signForm.cate2.value;	
+	}
+	else signForm.seccate.value = signForm.cate1.value;
+}
+
+signForm.cate3.onchange=function(e){
+	for(i=signForm.cate4.length;i>0;i--){
+		signForm.cate4.options[i]=null;
+	}
+
+	sIndex3 = signForm.cate3.selectedIndex;
+	if(sIndex3!=0) {
+		for(i=1,sIndex=signForm.cate1.selectedIndex,sIndex2=signForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2][sIndex3].slice(1).length;i<=cnt;i++){
+			if(typeof(CATEname[sIndex][sIndex2][sIndex3][i])!='undefined') signForm.cate4.options[i]=new Option(CATEname[sIndex][sIndex2][sIndex3][i],CATEnum[sIndex][sIndex2][sIndex3][i]);
+		}
+		signForm.seccate.value = signForm.cate3.value;	
+	}
+	else signForm.seccate.value = signForm.cate2.value;
+}
+
+signForm.cate4.onchange=function(e){
+	sIndex=signForm.cate4.selectedIndex;   
+	if(sIndex!=0) signForm.seccate.value = signForm.cate4.value;	
+	else signForm.seccate.value = signForm.cate3.value;
+}
+
+<!-- DYNAMIC @loop_scate@ -->
+signForm.cate1.value = '{{CATE1}}';
+signForm.cate1.onchange();
+signForm.cate2.value = '{{CATE2}}';
+signForm.cate2.onchange();
+signForm.cate3.value = '{{CATE3}}';
+signForm.cate3.onchange();
+signForm.cate4.value = '{{CATE4}}';
+signForm.seccate.value = '{{CATE}}';
+secCate(1);
+<!-- DYNAMIC @loop_scate@ -->
+
+<!-- DYNAMIC @is_sgoods@ -->
+var initGoods = "{{SGOODS}}";
+if(initGoods) {
+	secGoods(initGoods,'1');
+	tmp = initGoods.split(",");
+	for(i=0;i<tmp.length;i++){
+		tmp_sgoods[i] = tmp[i];
+	}	
+	
+}
+<!-- DYNAMIC @is_sgoods@ -->
+
+signForm.type[{{type}}].checked = true;
+signForm.stype.value = '{{stype}}';
+signForm.range[{{range}}].checked = true;
+signForm.dtype[{{dtype}}].checked = true;
+signForm.sqty[{{sqty}}].checked = true;
+
+signForm.type[{{type}}].click();
+if(signForm.sqty[1].checked==true) signForm.qty.disabled = false;
+
+</script>

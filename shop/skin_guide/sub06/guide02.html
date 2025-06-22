@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>order_02.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> order_02.html (주문정보입력 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TCNT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주문상품 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TSALE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 할인 액</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 총 금액</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TCARR}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 배송비</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TRESE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 적립금</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{IMG_TOTAL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주문금액 이미지로 출력</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{C_TOTAL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품합계+배송비</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{carr}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송비 합계금액</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{tsale}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 할인 금액(숫자)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{UNAME}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">회원명</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{EMAIL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이메일 주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADDR}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CARRINFO1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록한 추가 추가배송지1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CARRINFO2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록한 추가 추가배송지2</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESSAGE1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록한 추가 요청사항1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESSAGE2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록한 추가 요청사항2</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESSAGE3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록한 추가 요청사항3</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CARR_ADD}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">도서산간 별도 추가료</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RESERVE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">적립된 금액</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RESERVE_INFO}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">적립금 사용안내</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNUM}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">보유한 쿠폰 갯수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">결제 금액</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{BANK_SELECT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">입금은행</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PYEAR}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이번해</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PMONTH}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이번달</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PDAY}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이번일</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{USED}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이용약관</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PRIV}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">개인정보취급방침</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RESEUSE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">적립금 사용가능 금액</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 회원명</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL21}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL22}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL23}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE21}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 이동전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE22}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 이동전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE23}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 이동전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP21}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 우편번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP22}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 우편번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADDR2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px"> 배송지 추가 주소1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 회원명</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL31}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL32}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL33}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE31}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 이동전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE32}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 이동전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE33}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 이동전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP31}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 우편번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP32}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송지 추가 우편번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADDR3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px"> 배송지 추가 주소1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CARR_AREA}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 배송료 지역</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RESEUSE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 배송료 금액</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+    
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop_cart@ --></font></div>
+			<div style="margin:10px 0 0 28px;">주문 상품 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{LINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품상세 페이지 링크 주소</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{IMAGE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 이미지</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ICON}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 아이콘</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TTL}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이벤트, 회원 할인 구분</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MY_SALE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">할인률</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MY_POINT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 적립률</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CARR}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">배송비 별도 금액</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{LOC}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 위치</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_SEC_VLS}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택한 옵션 내용</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PRICE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품가격</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OP_PRICE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">선택한 옵션 상품가격</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{UID}}	</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 uid</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{QTY}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주문수량</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{UNIT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">판매단위</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{RESE}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 적립금</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUM}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">상품 합계금액</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_my_sale@ --></font><br/>
+					. . . (할인 상품일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_my_sale@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_my_point@ --></font><br/>
+					. . . (추가 적립금이 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_my_point@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_my_carr@ --></font><br/>
+					. . . (배송비 별도 상품일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_my_carr@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @loop_op@ --></font><br/>
+					. . . (선택한 옵션이 있는 경우 반복 출력)<br/>
+					<font class="blue">&lt!-- DYNAMIC @loop_op@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop_cart@ --></font></div>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_list@ --></font></div>
+			<div style="margin:10px 0 0 28px;">. . . (장바구니 상품이 있는 경우 나타남)</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_tsale@ --></font><br/>
+					. . . (상품 할인 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_tsale@ --></font>
+				</div>
+			</div>
+			
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_no_message@ --></font><br/>
+					. . . (등록된 요청사항이 없는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_no_message@ --></font>
+				</div>
+			</div>	
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_message@ --></font><br/>
+					. . . (등록된 요청사항이 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_message@ --></font>
+				</div>
+			</div>	
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_reserve1@ --></font><br/>
+					. . . (적립된 금액이 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_reserve1@ --></font>
+				</div>
+			</div>	
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_reserve2@ --></font><br/>
+					. . . (적립된 금액이 사용가능 한 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_reserve2@ --></font>
+				</div>
+			</div>	
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_cupon@ --></font><br/>
+					. . . (보유한 쿠폰이 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_cupon@ --></font>
+				</div>
+			</div>	
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_cash_dc@ --></font><br/>
+					. . . (현금결제시 할인률이  있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_cash_dc@ --></font>
+				</div>
+			</div>	
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_bank1@ --></font><br/>
+					. . . (무통장 입금 사용 할 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_bank1@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_card1@ --></font><br/>
+					. . . (신용카드결제 사용 할 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_card1@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_test@ --></font><br/>
+					. . . (신용카드 테스트일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_test@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_bank2@ --></font><br/>
+					. . . (무통장 입금일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_bank2@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_card2@ --></font><br/>
+					. . . (신용카드결제일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_card2@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_card2@ --></font><br/>
+					. . . (신용카드결제일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_card2@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_guest@ --></font><br/>
+					. . . (비회원 이용약관 동의 사용 할 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_guest@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;margin-top:10px;"><font class="blue">&lt!-- DYNAMIC @is_list@ --></font></div>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_cart@ --></font><br/>
+			. . . (장바구니 상품이 없는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_cart@ --></font>
+		</div>
+	</div>
+
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

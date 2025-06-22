@@ -1,0 +1,62 @@
+@charset "utf-8";
+
+/*******************************************************************
+*	common default
+********************************************************************/
+
+body { text-align:-moz-center;#text-align:center; margin:0px; margin-left:4px; }
+
+html {
+	
+	scrollbar-face-color: #EFEFEF;
+	scrollbar-shadow-color: gray;
+	scrollbar-highlight-color: white;
+	scrollbar-3dlight-color: gray;
+	scrollbar-darkshadow-color:white;
+	scrollbar-track-color: #F5F5F5;
+	scrollbar-arrow-color: gray;
+}
+
+body, table { font-size: 12px; color: #333333; font-style: normal; font-family: "굴림","verdana"; line-height:1.4em; word-spacing:-1pt; }
+form { margin:0; padding:0;	}
+ul { list-style:none;}
+li img { vertical-align:middle;	} /*for IE image margin*/
+img { border:0px; }
+
+a:link, a:visited { color:#666666; text-decoration:none;  }
+a:active, a:hover { text-decoration:underline; }
+
+#textarea.inputs:hover, textarea.inputs:focus, textarea.inputs:active { background-color:#f8f8f8; }
+
+
+.small	{ font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;}
+.default	{ font-family:굴림,verdana;font-size:12px;}
+.num {font-family:Tahoma; font-size:11px;letter-spacing:0px;}
+.eng {font-family:verdana; font-size:11px; color:#000;letter-spacing:0px;}
+.title	{ font-family : 굴림, Tahoma, Verdana; font-size : 12pt; color:#3399ff;}
+
+.hand	{ cursor:pointer; border:0px }
+.bold	{ font-weight:bold; }
+.left	{ float:left; }
+.right	{ float:right; }
+.tleft	{ text-align:left; }
+
+.white	{ color:#FFF; }
+.blue	{ color:#39f; }
+.green	{ color:#3C0; }
+.orange { color:#F60 }
+.black	{ color:#000 }
+.gray	{ color:#999 }
+.mt4	{ margin-top:4px; } 
+.mt10	{ margin-top:10px; }
+.ball	{ border: 1px solid #DADADA; }
+.clear	{ clear:both }
+.cateColor1 { color:#39f; }
+.cateColor2 { color:#f60; }
+.cateColor3 { color:#000; }
+
+
+#list_top { width:815px; background:url(img/tab_bg.gif); height:22px; }
+	#list_top .tab_on { float:left; width:112px; height:22px; margin-right:2px; background:url(img/tab_bg_on.gif) no-repeat; color:#000000; padding-top:4px;text-align:center; }
+	#list_top .tab_off { float:left; width:112px; height:22px; margin-right:2px; background:url(img/tab_bg_off.gif) no-repeat; color:#000000; padding-top:4px;text-align:center; }
+	

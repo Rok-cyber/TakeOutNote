@@ -1,0 +1,57 @@
+<div>
+	<div style="height:22px;text-align:left">
+		<a href="{{Main}}?channel=customer"><img src='img/customer/ttl_customer_center.gif' alt="고객센터" title="고객센터" /></a>
+	</div>
+	<div id="customermenu_top"><img src="img/main/cate_menu_top.gif" alt=" "  style="vertical-align:top;" /></div>
+	<div id="customermenu_center">
+		<div style="background:url(img/main/cate_menu_grad_bg.gif) no-repeat;">
+			<div class="clear" style="height:8px;">&nbsp;</div>
+			<div class="customerTitle">
+				<a href="{{Main}}?channel=board&amp;code=faq"><img src="img/customer/ttl_menu_faq.gif" border="0" alt="FAQ" title="FAQ" /></a>
+			</div>
+			<ul>
+				<!-- DYNAMIC @loop_faq_cate@ -->
+				<li><a href="{{Main}}?channel=board&amp;code=faq&amp;seccate={{i}}" class="small">{{CNAME}}</a></li>				
+				<!-- DYNAMIC @loop_faq_cate@ -->
+			</ul>
+			<div class="customerTitle" style="height:1px;overflow:hidden;">&nbsp;</div>
+
+			<div class="customerTitle">
+				<a href="{{Main}}?channel=board&amp;code=counsel"><img src="img/customer/ttl_menu_counsel.gif" border="0" alt="1:1고객문의" title="1:1고객문의" /></a>
+			</div>
+			<ul>
+				<!-- DYNAMIC @loop_counsel_cate@ -->
+				<li><a href="{{Main}}?channel=board&amp;code=counsel&amp;seccate={{i}}" class="small">{{CNAME}}</a></li>
+				<!-- DYNAMIC @loop_counsel_cate@ -->
+			</ul>
+			<div class="customerTitle" style="height:1px;">&nbsp;</div>
+
+			<div class="customerTitle">
+				<a href="{{MAIN}}?channel=after2"><img src="img/customer/ttl_menu_after.gif" border="0" alt="상품후기" title="상품후기" /></a>
+			</div>
+
+			<div class="customerTitle">
+				<a href="{{MAIN}}?channel=qna2"><img src="img/customer/ttl_menu_qna.gif" border="0" alt="상품문의" title="상품문의" /></a>
+			</div>
+
+			<div class="customerTitle">
+				<a href="{{MAIN}}?channel=board&amp;code=notice"><img src="img/customer/ttl_menu_notice.gif" border="0" alt="공지사항" title="공지사항" /></a>
+			</div>
+
+			<div class="customerTitle">
+				<a href="{{MAIN}}?channel=board&amp;code=customer"><img src="img/customer/ttl_menu_customer.gif" border="0" alt="고객게시판" title="고객게시판" /></a>
+			</div>
+			<div class="clear" style="height:6px;">&nbsp;</div>
+		</div>				
+	</div>
+
+	<div id="customermenu_bottom"><img src="img/main/cate_menu_bottom.gif" alt=" " style="vertical-align:top;" /></div>
+</div>
+
+<!-- 배너 START -->
+<div class="leftBanner">
+	<!-- DYNAMIC @loop_banner@ -->
+	<div class="banner"><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+	<!-- DYNAMIC @loop_banner@ -->			
+</div>
+<!-- @배너 END -->

@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>공용치환코드</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> 공용치환코드
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{Main}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">index.php (index 페이지)</td>
+					</tr>							
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{{my_id}}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">회원 아이디</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{{my_name}}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">회원 이름</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{{skin}}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">사용되는 스킨폴더 경로</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" style="padding-left:16px"><font class="eng bTitle">{{CATE_MENU}}</font></td>
+						<td bgcolor="#FAFAFA" style="padding-left:8px">분류박스 메뉴(마이페이지, 고객센터는 제외)</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+    
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @loop_xxxx@ --></font><br/>
+			. . . (이부분의 내용이 반복되어 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @loop_xxxx@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_style@ --><br/>
+			&ltlink rel="StyleSheet" HREF="style.css" type="text/css" title="style"><br/>
+			&lt!-- DYNAMIC @is_style@ --></font><br/>
+			로컬 작업시 style을 적용 시켜주기 위해 사용 됩니다. 스킨파일과 같은 위치의 style.css파일을 불러 옵니다. 실제 운영시에는 이 부분이 나타나지 않습니다.
+		</div>
+	</div>
+    <div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

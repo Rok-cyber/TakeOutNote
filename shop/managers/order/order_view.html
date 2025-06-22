@@ -1,0 +1,637 @@
+<!-- DYNAMIC @is_pop_top@ -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+<TITLE>주문내역상세보기</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+<script LANGUAGE="JavaScript" src="../../lib/lib.lightBox.js"></script> 
+</HEAD>
+<body style='margin:0px;padding:0px;' bgcolor="#505357">
+<div style="padding:10px 0 0 10px;">
+<!-- DYNAMIC @is_pop_top@ -->
+
+<script>
+function printClick() {
+    document.getElementById('print1').style.display='block';
+	if(document.getElementById('print2')) document.getElementById('print2').style.display='none';
+	var temp = document.getElementById('printarea').innerHTML;
+	if (temp) {		
+		temp_css = "<link rel='StyleSheet' HREF='../html/style.css' type='text/css' title='style'>\n";
+		temp_print = "\n<script>function sleep(){ window.close(); };window.print();setTimeout('sleep()', 1000);<\/script>";
+		preWindow= open("", '','width=840,height=230');          
+		preWindow.document.open();
+		preWindow.document.write("<html><body>");
+		preWindow.document.write(temp_css);
+		preWindow.document.write(temp);
+		preWindow.document.write(temp_print);
+		preWindow.document.write("</body></html>");
+		preWindow.document.close();
+		
+    }
+	document.getElementById('print1').style.display='none';
+	if(document.getElementById('print2')) document.getElementById('print2').style.display='block';
+}
+
+function ckStep(st) {
+	var form = document.stepForm; 
+	for (i = cnt = 0; i < form.elements.length; i++) {
+			eval("if(form.elements[i].name == 'step[]' && form.elements[i].value!=st )  form.elements[i].checked = false; ")
+			eval("if(form.elements[i].name == 'step[]' && form.elements[i].value==st )  form.elements[i].checked = true; ")
+	}
+	if(st=='DEL') alert(' 삭제처리를 선택 하셨습니다.\n 처리가 되면 주문 정보가 모두 삭제됩니다.'); 
+}
+
+function chCheck(){
+	frm = document.stepForm;
+	for (j = 0;  j< frm.elements.length; j++) {
+		if(frm.elements[j].name == 'item[]' && frm.elements[j].checked == true) { 
+			frm.elements[j].checked = false;
+		} 
+		else {
+			if(frm.elements[j].disabled==false && frm.elements[j].name == 'item[]') frm.elements[j].checked = true;
+		}
+
+	}
+	return false;
+}
+
+function orderChange(status) {	
+	frm = document.stepForm;
+	var sgoods = '';
+
+	if(status=='Z') title = '취소';
+	else if(status=='X') title = '반품';
+	else if(status=='Y') title = '교환';
+
+	
+	for (i=cnt=0;i<frm.elements.length;i++) {
+		if(frm.elements[i].name == 'item[]' && frm.elements[i].checked == true) {
+			if(sgoods) sgoods +=','+frm.elements[i].value;
+			else sgoods = frm.elements[i].value;
+			cnt++;
+		}
+	}
+	
+	if (cnt <= 0) {
+		alert(title+"할 상품을 선택하세요!");
+		return false;
+	} 
+	
+
+	pLightBox.show('order_change.html?status='+status+'&order_num={{order_num}}&sgoods='+sgoods,'iframe','750','550','■ 주문상품 취소/반품/교환 처리하기','20');	
+}
+
+</script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_order.gif" alt="주문관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>주문내역을 확인하고 메모를 입력하거나 진행상황을 처리 할 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>	
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<FORM name=stepForm method=post action='{{ACTION}}'>
+<input type=hidden name=order_num value='{{order_num}}'>
+<input type=hidden name=pop value='{{pop}}'>
+<tr>
+	<td>
+		<div id=printarea>
+		<table border=0 cellspacing=0 cellpadding=0 width="100%" align=center>
+		<!---------------- 주문상품 내역   START  ------------------------->
+		<tr><td height=30><img src='./img/v_1th.gif' align=absmiddle border=0>	</td></tr>	
+		<tr>
+			<td align=center>            
+				<table width=100% border=0 cellspacing=0 cellpadding=0>
+				<tr><td height=1 bgcolor=#cccccc colspan=14></td></tr>
+				<tr><td height=3 bgcolor=#efefef colspan=14></td></tr>		 
+				<tr height=25>
+					<td align=center width=30><a href='#' onclick="return chCheck();" onfocus='this.blur();'><font class="bTitle small">√</font></a></td><td width=1><img src='img/list_bg.gif' border=0></td>
+					 <td align=center width=90><font class="bTitle small">이미지</font></td><td width=1><img src='img/list_bg.gif' border=0></td>
+					 <td align=center><font class="bTitle small">상품명 / 옵션</font></td><td width=1><img src='img/list_bg.gif' border=0></td>
+					 <td width=80 align=center><font class="bTitle small">가격</font></td><td width=1><img src='img/list_bg.gif' border=0></td>
+					 <td width=60 align=center><font class="bTitle small">수량</font></td><td width=1><img src='img/list_bg.gif' border=0></td>
+					 <td width=80 align=center><font class="bTitle small">합계</font></td><td width=1><img src='img/list_bg.gif' border=0></td>						 
+					 <td width=95 align=center><font class="bTitle small">진행상황</font></td>
+				</tr>
+				<!-- DYNAMIC @loop_cart@ -->				   						   
+				<tr><td colspan=14 height=6></td></tr>
+				<tr><td colspan=14 height=1 bgcolor=#EFEFEF></td></tr>
+				<tr><td colspan=14 height=6></td></tr>						   
+				<tr height=40>								 								 
+					<td colspan=2 align=center><input type="checkbox" name="item[]" value="{{UID}}" {{DISA}} /></td>
+					 <td colspan=2 align=center><a href="{{LINK}}" onfocus="blur();" target="_blank" title="쇼핑몰 상세설명 보기">{{IMAGE}}</a></td>
+					 <td colspan=2 valign=top align=left>
+						<div style="float:left;height:68px;"></div>
+						<div style="float:left;">
+							<div style="padding-top:2px">
+								<div style="padding-bottom:4px;"><a href="../shopping/goods_write.php?mode=modify&uid={{UID2}}" onFocus="blur()" title="상품 정보수정 하기">{{NAME}}</a></div>
+								<div>
+									<!-- DYNAMIC @loop_op@ -->
+									<div style='float:left;padding-right:10px;' class='small green'>{{OP_SEC_VLS}}</div>
+									<!-- DYNAMIC @loop_op@ -->
+								</div>
+								<div style="clear:both;">
+									<!-- DYNAMIC @is_my_sale@ -->
+									<font class="small">({{TTL}}할인 <font class="eng blue">{{MY_SALE}}%</font> 적용)&nbsp;</font>
+									<!-- DYNAMIC @is_my_sale@ -->
+									<!-- DYNAMIC @is_my_point@ -->
+									<font class="small">({{TTL}}추가적립 <font class="eng blue">{{MY_POINT}}%</font> 적용)&nbsp;</font>
+									<!-- DYNAMIC @is_my_point@ -->
+									<!-- DYNAMIC @is_my_carr@ -->
+									<font class="small">(배송비 <font class="eng blue">{{CARR}}원</font> 별도상품)&nbsp;</font>
+									<!-- DYNAMIC @is_my_carr@ -->
+									<!-- DYNAMIC @is_my_free@ -->
+									<font class="small">(배송비 무료상품)&nbsp;</font>
+									<!-- DYNAMIC @is_my_free@ -->
+								</div>							
+							</div>							
+						</div>
+						<div class="small tleft" style="clear:both;margin-top:4px;">{{LOC}}</div>
+					 </td> 
+					 <td colspan=2 align=right style="padding-right:6px;"><font class='eng'>{{PRICE}}원 {{OP_PRICE}}</font></td>
+					 <td colspan=2 align=right style="padding-right:6px;"><font class='eng'>{{QTY}}</font>{{UNIT}}</td>								 
+					 <td colspan=2 align=right style="padding-right:6px;"><font class='eng orange'>{{SUM}}원</font></td>	
+					 <td colspan=2 align=center>{{STEP}}<font class="eng"><br>{{LTIME}}</font></td>
+				</tr>				   
+				<!-- DYNAMIC @loop_cart@ -->							
+				<tr><td colspan=14 height=10></td></tr>
+				<!-- DYNAMIC @is_list@ -->
+				<tr><td colspan=14 height=1 bgcolor=#dadada></td></tr>
+				<tr>
+					<td height=30 align=left colspan=14 id="print2">
+						<!-- DYNAMIC @is_statusZ@ -->
+						<div id="sBtn1" style="margin-top:5px;">
+							<a href="#" onclick="orderChange('Z'); return false;"><span>선택상품 취소처리하기</span></a>
+						</div>					
+						<!-- DYNAMIC @is_statusZ@ -->
+						<!-- DYNAMIC @is_statusX@ -->
+						<div id="sBtn1" style="margin-top:5px;">
+							<a href="#" onclick="orderChange('X'); return false;"><span>선택상품 반품처리하기</span></a>
+						</div>					
+						<!-- DYNAMIC @is_statusX@ -->
+						<!-- DYNAMIC @is_statusY@ -->
+						<div id="sBtn1" style="margin-top:5px;">
+							<a href="#" onclick="orderChange('Y'); return false;"><span>선택상품 교환처리하기</span></a>
+						</div>					
+						<!-- DYNAMIC @is_statusY@ -->
+					</td>
+				</tr>
+				<tr>
+					<td colspan=14 align=center>
+						<div style="padding:10px; height:40px;">
+							<div class="small" style="text-align:left;float:left">
+								주문상품 : <font class="eng orange">{{TCNT}}</font>개,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->총할인금액 : <font class="eng blue">{{TSALE}}</font>,&nbsp;&nbsp;<!-- DYNAMIC @is_tsale@ -->상품총금액 : <font class="eng orange">{{TOTAL}}</font>,&nbsp;&nbsp;총배송비 : <font class="eng orange">{{TCARR}}</font><br>
+								총적립금 : <font class="eng orange">{{TRESE}}</font>&nbsp;&nbsp;(적립금은 배송완료후 적립처리 됩니다.)&nbsp;
+							</div>
+							<div class="small bold orange" style="float:right;">
+								총주문금액 : <font class="eng orange">{{TOTAL2}}</font>								
+							</div>
+						</div>								           
+					</td>
+				</tr>		           
+				<tr><td colspan=14 height=1 bgcolor=#dadada></td></tr>
+				<tr><td colspan=14 height=10></td></tr>
+				<tr></tr>		     
+				<!-- DYNAMIC @is_list@ -->   				   
+				</table>		  				   
+			</td>
+		</tr>	
+		<!-- DYNAMIC @is_change@ -->
+		<tr><td height=8 colspan=2></td></tr>		
+		<tr><td height=30><img src='./img/v_5th.gif' align=absmiddle border=0>	</td></tr>	
+		<tr>
+			<td colspan="2">
+				<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td align="center">
+								<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+								<tr height=24>
+									<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>	
+									<td width=30% align="center" class=gr_bg><font class="bTitle small">상품명</font></td>
+									<td width=10% align="center" class=gr_bg><font class="bTitle small">사유</font></td>
+									<td width=8% align="center" class=gr_bg><font class="bTitle small">담당자</font></td>
+									<td align="center" class=gr_bg><font class="bTitle small">메모</font></td>
+									<td width=13% align="center" class=gr_bg><font class="bTitle small">처리상태</font></td>
+									<td width=10% align="center" class=gr_bg><font class="bTitle small">처리일</font></td>
+								</tr>
+								<!-- DYNAMIC @change_loop@ -->
+								<tr height=34 bgcolor=#ffffff>
+									<td align="center" class="eng">{{NUM}}</td>									
+									<td align="left" class="small" style="padding-left:6px">{{GNAME}}</td>
+									<td align="center" class="small">{{REASON}}</td>
+									<td align="center" class="small">{{NAME}}</td>
+									<td align="left" class="small" style="padding-left:6px">{{MEMO}}</td>
+									<td align="center" class="small">{{STATE}} <div style='height:2px;overflow:hidden;'></div>{{STATE2}}</td>
+									<td align="center" class="eng">{{DATE}}</td>
+								</tr>
+								<!-- DYNAMIC @change_loop@ -->
+								<tr height=170 align=left> 
+									<td bgcolor="#FFFFFF" style="padding-left:10px;" colspan=7 class="small">										
+										<font class="green small">! 취소처리 단계</font><br />
+										&nbsp;&nbsp;1 . <font class="blue small">취소요청</font> : 고객이 취소를 신청한 상태<br />
+										&nbsp;&nbsp;2 . <font class="blue small">취소승인</font> : 취소신청상태에서 승인하거나 관리자가 바로 취소 했을경우(환불내역이 있는경우), 적립금 및 재고수량이 원상복구되고 환불대기 상태<br />
+										&nbsp;&nbsp;3 . <font class="blue small">취소완료</font> : 환불내역이 있는경우 결제금액 환불완료되거나 취소가 완료된 상태 (환불내역이 없을 경우 취소승인 단계를 거치지 않습니다.)<br />
+										<font class="green small">! 반품처리 단계</font><br />
+										&nbsp;&nbsp;1 . <font class="blue small">반품요청</font> : 고객이 반품를 신청한 상태<br />
+										&nbsp;&nbsp;2 . <font class="blue small">반품처리중</font> : 반품요청상태에서 승인하거나 관리자가 바로 반품처리 했을경우, 반품상품 회수대기 상태<br />
+										&nbsp;&nbsp;3 . <font class="blue small">반품회수완료</font> : 반품상품 회수완료된 상태, 적립금 및 재고수량이 원상복구
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 . <font class="blue small">반품완료</font> : 결제금액 환불이 완료된 상태<br />
+										<font class="green small">! 교환처리 단계</font><br />
+										&nbsp;&nbsp;1 . <font class="blue small">교환요청</font> : 고객이 교환를 신청한 상태<br />
+										&nbsp;&nbsp;2 . <font class="blue small">교환처리중</font> : 교환요청상태에서 승인하거나 관리자가 바로 교환처리 했을경우 교환상품 회수대기 상태<br />
+										&nbsp;&nbsp;3 . <font class="blue small">교환회수완료</font> : 교환상품 회수완료된 상태
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 . <font class="blue small">교환발송완료</font> : 교환될 상품을 발송 완료한 상태<br />
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>				
+			</td>
+		</tr>
+		<!-- DYNAMIC @is_change@ -->
+		<!-- DYNAMIC @is_refund@ -->
+		<tr><td height=8 colspan=2></td></tr>		
+		<tr><td height=30><img src='./img/v_6th.gif' align=absmiddle border=0>	</td></tr>	
+		<tr>
+			<td colspan="2">
+				<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td align="center">
+								<table border="0" cellpadding="0" cellspacing="1" width="100%" align="center">
+								<tr height=24>
+									<td width=5% align="center" class=gr_bg><font class="bTitle small">번호</font></td>	
+									<td width=30% align="center" class=gr_bg><font class="bTitle small">상품명</font></td>
+									<td width=10% align="center" class=gr_bg><font class="bTitle small">환불수수료</font></td>
+									<td width=11% align="center" class=gr_bg><font class="bTitle small">상품환불금액</font></td>
+									<td width=10% align="center" class=gr_bg><font class="bTitle small">적립금 환원</font></td>
+									<td align="center" class=gr_bg><font class="bTitle small">환불정보</font></td>
+									<td width=10% align="center" class=gr_bg><font class="bTitle small">처리일</font></td>
+								</tr>
+								<!-- DYNAMIC @refund_loop@ -->
+								<tr height=34 bgcolor=#ffffff>
+									<td align="center" class="eng">{{NUM}}</td>									
+									<td align="left" class="small" style="padding-left:6px">{{GNAME}}</td>
+									<td align="center" class="eng">{{REFUND1}}원</td>
+									<td align="center" class="eng blue">{{REFUND2}}원</td>
+									<td align="center" class="eng">{{REFUND3}}원</td>									
+									<td align="center" class="small">{{INFOS}}</td>
+									<td align="center" class="eng">{{DATE}}</td>
+								</tr>
+								<!-- DYNAMIC @refund_loop@ -->
+								<tr height=20 align=left> 
+									<td bgcolor="#FFFFFF" style="padding-left:10px;" colspan=7 class="small">										
+										
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>				
+			</td>
+		</tr>
+		<!-- DYNAMIC @is_refund@ -->
+		<!-- DYNAMIC @is_reserves@ -->
+		<tr><td height=8 colspan=2></td></tr>		
+		<tr><td height=30><img src='./img/v_7th.gif' align=absmiddle border=0>	</td></tr>	
+		<tr>
+			<td colspan=2>				
+				<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+				<tr>
+					<td>
+						<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+						<tr>
+							<td align=center>
+								<table border=0 cellpadding="0" cellspacing="1" width="100%" align=center>
+								<tr height=24 >
+									<td width=5% align=center class=gr_bg><font class="bTitle small">번호</font></td>
+									<td align=center class=gr_bg><font class="bTitle small">적립내용</font></td>
+									<td width=10% align=center class=gr_bg><font class="bTitle small">적립아이디</font></td>
+									<td width=10% align=center class=gr_bg><font class="bTitle small">적립금액</font></td>
+									<td width=10% align=center class=gr_bg><font class="bTitle small">적립상태</font></td>
+									<td width=15% align=center class=gr_bg><font class="bTitle small">처리일</font></td>
+								</tr>
+								<!-- DYNAMIC @reserve_loop@ -->
+								<tr height=22 bgcolor="#ffffff">
+									<td align=center class=eng>{{NUM3}}</td>
+									<td align=left class=small>&nbsp;{{LIST2}}</td>
+									<td align=center class=eng>{{LIST3}}</td>
+									<td align="right" style='padding-right:4px;'><font class=eng>{{LIST4}}</font>원</td>
+									<td align=center class="small">{{LIST5}}</td>
+									<td align=center class=eng>{{LIST6}}</td>
+								</tr>
+								<!-- DYNAMIC @reserve_loop@ -->
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>				
+			</td>
+		</tr>
+		<!-- DYNAMIC @is_reserves@ -->
+		<tr><td height=8 colspan=2></td></tr>
+		<tr><td height=30><img src='./img/v_2th.gif' align=absmiddle border=0>	</td></tr>	
+		<tr>
+			<td align=center>
+				<table width="100%" border=0 cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE">
+	            <tr>
+	    	        <td>
+						<table width="100%" border=0 cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
+						<tr> 
+							<td> 
+								<table width="100%" border="0" cellspacing="1" cellpadding="0">
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문번호</font></td>
+									  <td bgcolor="#efefef" class="eng orange" width=285>&nbsp;{{order_num}}</td>						  
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문시간</font></td>
+									  <td bgcolor="#efefef" class="eng">&nbsp;{{TIME}}</td>	
+								</tr>																										
+								<!-- DYNAMIC @is_reserve@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;사용한 적립금</font></td>
+									  <td bgcolor="#efefef" colspan=3 class="eng blue">&nbsp;{{RESERVE}}</td>						  
+								</tr>																		
+								<!-- DYNAMIC @is_reserve@ -->
+								<!-- DYNAMIC @is_cupon@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;사용한 쿠폰</font></td>
+									  <td bgcolor="#efefef" colspan=3 class="eng">
+										<div class="left blue" style="padding-top:4px;">&nbsp;{{CUPON}}</div>
+										<div class="left small" style="text-align:right;padding:2px 0 0 6px;">
+											<a href='{{C_LINK}}' target='_blank' class="small" title="회원발급쿠폰보기">
+											<!-- DYNAMIC @loop_cupon@ -->
+											<div style="padding:2px;text-alig:left;">{{C_NAME}} - <font class="num">{{C_SALE}}</font>{{C_STYPE}}할인</div>
+											<!-- DYNAMIC @loop_cupon@ -->
+											</a>
+										</div>									  
+									  </td>						  
+								</tr>								
+								<!-- DYNAMIC @is_cupon@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;배송비</font></td>
+									  <td bgcolor="#efefef" colspan=3 class="eng">&nbsp;{{TCARR}} <!-- DYNAMIC @is_mcarr@ -->(기본배송비무료회원)<!-- DYNAMIC @is_mcarr@ --></td>						  
+								</tr>	
+								<!-- DYNAMIC @is_cash_dc@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;현금결제할인</font></td>
+									  <td bgcolor="#efefef" colspan=3 class="eng">&nbsp;{{CASHDC}} ({{CASHDC2}}% 할인)</td>						  
+								</tr>	
+								<!-- DYNAMIC @is_cash_dc@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;총결제금액</font></td>
+									  <td bgcolor="#efefef" colspan=3 class="eng bold">&nbsp;{{TOTAL3}}</td>						  
+								</tr>					
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;결제방법</font></td>
+									  <td bgcolor="#efefef" colspan=3>&nbsp;{{CASH_TYPE}}</td>						  
+								</tr>													
+								<!-- DYNAMIC @is_bank@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;입금은행</font></td>
+									  <td bgcolor="#efefef" colspan=3 class=eng>&nbsp;{{BANK_NAME}}</td>						  
+								</tr>																		
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;입금자 성명</font></td>
+									  <td bgcolor="#efefef" colspan=3>&nbsp;{{PAY_NAME}}</td>						  
+								</tr>	
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;입금 예정일</font></td>
+									  <td bgcolor="#efefef" colspan=3 class=eng>&nbsp;{{PAY_DATE}}</td>						  
+								</tr>	
+								<!-- DYNAMIC @is_bank_cash@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;현금영수증</font></td>
+									  <td bgcolor="#efefef" colspan=3 class=eng>&nbsp;{{CASH_INFO}}</td>						  
+								</tr>	
+								<!-- DYNAMIC @is_bank_cash@ -->
+								<!-- DYNAMIC @is_bank@ -->
+								<!-- DYNAMIC @is_card@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;결제정보</font></td>
+									  <td bgcolor="#efefef" colspan=3>&nbsp;{{CARD_INFO}}</td>						  
+								</tr>																		
+								<!-- DYNAMIC @is_card@ -->
+								<!-- DYNAMIC @is_affiliate@ -->
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;Affiliate</font></td>
+									  <td bgcolor="#efefef" class="eng" width=285>&nbsp;{{AFFILIATE}}</td>						  
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;커미션</font></td>
+									  <td bgcolor="#efefef" class="eng blue">&nbsp;{{AFFILI_COMMI}}</td>	
+								</tr>																		
+								<!-- DYNAMIC @is_affiliate@ -->
+							    </table>
+						    </td>
+						</tr>
+						</table>
+					</td>
+				</tr>					 
+				</table>
+			</td>
+		</tr>
+		<tr><td height=20></td></tr>			
+		<tr>
+			<td height=30><img src='./img/v_3th.gif' align=absmiddle border=0>	</td></tr>	<tr><td align=center>
+				<table width="100%" border=0 cellspacing="4" cellpadding="0" align="center" bgcolor="#EEEEEE">
+	            <tr>
+	    	        <td>
+						<table width="100%" border=0 cellspacing="0" cellpadding="0" align="center" bgcolor="#999999">
+						<tr> 
+							<td> 
+								<table width="100%" border="0" cellspacing="1" cellpadding="0">
+					            <tr height=30 align=left>
+									  <td class=gr_bg width=115><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문고객 성명</font></td>
+									  <td colspan=3 bgcolor="#efefef" width=685>
+										<div style="float:left; padding:1px 6px 0 6px;">{{NAME1}}</div>								
+										<!-- DYNAMIC @is_id@ -->
+										<div style="float:left; padding:1px 10px 0 1px;" class="eng">/ {{MID}}</div>
+										<div id="sBtn1" style="padding-left:6px;">
+											<a href="#" onclick="pLightBox.show('../member/member_crm.php?mid={{MID}}','iframe','700','450','■ {{NAME1}}({{MID}}) 회원 CRM',10);return false;"><span class="green">CRM 보기</span></a>	
+										</div>
+										<!-- DYNAMIC @is_id@ -->
+									  </td>
+								</tr>
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;연락처 1</font></td>
+									  <td bgcolor="#efefef" width="235" class="eng">&nbsp;{{TEL}}</td>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;연락처 2</font></td>
+									  <td bgcolor="#efefef" width="235" class="eng">&nbsp;{{PHONE}}</td>
+								</tr>
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;주문고객 이메일</font></td>
+									  <td colspan=3 bgcolor="#efefef" class="eng">&nbsp;{{EMAIL}}</td>
+								</tr>								
+								<tr height=30 align=left>
+									  <td class=gr_bg width=115><font class="bTitle small">&nbsp;&nbsp;*&nbsp;수취인 성명</font></td>
+									  <td colspan=3 bgcolor="#efefef">&nbsp;<input type="text" class="ta" name="name2" size="30" value="{{NAME2}}" /></td>
+								</tr>
+								<tr height=30 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;연락처 1</font></td>
+									  <td bgcolor="#efefef" class="eng">&nbsp;
+										<input type="text" class="ta eng" name="tel11" size="5" maxlength="4" value="{{TEL1}}" /> - 
+										<input type="text" class="ta eng" name="tel12" size="5" maxlength="4" value="{{TEL2}}" /> - 
+										<input type="text" class="ta eng" name="tel13" size="5" maxlength="4" value="{{TEL3}}" />
+									  </td>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;연락처 2</font></td>
+									  <td bgcolor="#efefef" class="eng">&nbsp;
+										<input type="text" class="ta eng" name="phone11" size="5" maxlength="4" value="{{PHONE1}}" /> - 
+										<input type="text" class="ta eng" name="phone12" size="5" maxlength="4" value="{{PHONE2}}" /> - 
+										<input type="text" class="ta eng" name="phone13" size="5" maxlength="4" value="{{PHONE3}}" />
+									  </td>
+								</tr>
+								<tr height=60 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;배송지 주소</font></td>
+									  <td colspan=3 bgcolor="#efefef" style="padding-left:6px;">
+										<div>	
+											<div style="float:left">
+												<input type="text" class="ta eng" name="zip11" size="4" maxlength="4" value="{{ZIP1}}" /> - <input type="text" class="ta eng" name="zip12" size="4" maxlength="4" value="{{ZIP2}}" />
+											</div>
+											<div id="sBtn1" style="float:left;padding:0px 0 0 8px;">
+												<a href="#" onclick="pLightBox.show('../../php/pzipcode.php?fname=step&ocnt=1','iframe','420','220','■ 우편번호 찾기','20');return false;"><span class="green">우편번호검색</span></a>	
+											</div>
+										</div>
+										
+										<div style="clear:both;padding-top:4px;"><input type="text" class="ta" name="addr1" size="80" value="{{ADDR}}" /></div>
+									  </td>
+								</tr>				
+								<tr height=30 style="word-break:break-all" align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;남기신 말씀</font></td>
+									  <td colspan=3 bgcolor="#efefef" style="padding:6px;">{{MESSAGE}}</td>						  
+								</tr>
+								<tr height=30 style="word-break:break-all;display:none" id=print1 align=left>
+									  <td class=gr_bg width="115"><font class="bTitle small">&nbsp;&nbsp;*&nbsp;관리자 메모</font></td>
+									  <td colspan=3 bgcolor="#efefef" style="padding:6px;">{{ADMESS}}</td>						  
+								</tr>
+								</table>
+						    </td>
+						</tr>
+						</table>
+					</td>
+				</tr>					 
+				</table>
+			</td>
+		</tr>			
+		<!---------------- @주문정보 END  ------------------------->
+			
+        </table>
+		</div>
+		<table border=0 cellspacing=0 cellpadding=0 width="100%" align=center>
+		<tr><td height=20></td></tr>	
+		<!---------------- 관리자 메모 & 처리 START  ------------------------->
+		<tr><td height=30><img src='./img/v_4th.gif' align=absmiddle border=0>	</td></tr>	
+		<tr>
+			<td align=center>
+				<table border=0 cellpadding=4 cellspacing=0 bgcolor=#eeeeee width="100%">
+				<tr>
+					<td>
+						<table border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width="100%">							
+						<tr>
+							<td>
+								<table border=0 width="100%" cellpadding=0 cellspacing=1>
+								<tr height=30 align=left>
+									<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;배송정보&nbsp;&nbsp;</font><font class="small">(택배회사와 운송장 번호를 적어넣으시면 고객이 주문/배송조회 페이지에서 배송상품 위치추적을 이용 할 수 있습니다.)</font></td>
+  								</tr>								
+								<tr align=left >
+									<td bgcolor=#FFFFFF style="padding:6px;">
+										<div style="float:left;padding-right:6px;">
+											<SELECT name="delivery">{{DELIVERY}}</SELECT>										
+											<input type=text name="carr_num" size="30" value='{{CARR_NUM}}' class="ta">
+										</div>										
+										<!-- DYNAMIC @is_carr@ -->
+										<div id="sBtn1">
+											<a href="{{CLINK}}{{CNUM}}" target=_blank><span class="green">배송조회</span></a>	
+										</div>
+										<!-- DYNAMIC @is_carr@ -->
+										<div style="float:left;padding:2px 0 0 10px;">
+											<font class="small">'-'를 제외하고 입력하세요</font>
+										</div>
+									</td>						  
+								</tr>																			
+								<tr height=30 align=left>
+									<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;관리자 메모&nbsp;&nbsp;</font><font class="small">(변경,추가 사항을 적어 놓으시면 편하게 관리하실 수 있습니다.)</font></td>
+  								</tr>								
+								<tr align=left>
+									<td bgcolor=#FFFFFF><textarea name=admess rows=5 style='width:99%'>{{ADMESS}}</textarea></td>	
+								</tr>											
+								<tr height=30 align=left>
+									<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;진행상황 처리&nbsp;&nbsp;<font class="small orange">현재 : {{THIS_STEP}}</font></td>
+								</tr>
+								<tr height=30 align=left>
+								    <td bgcolor="#efefef">&nbsp;
+								         <input type=checkbox value='A' onfocus=blur(); name=step[] id='step1' onclick="ckStep('A')" /><label for='step1'>입금대기중</label>&nbsp;
+										 <input type=checkbox value='B' onfocus=blur(); name=step[] id='step2' onclick="ckStep('B')" /><label for='step2'>결제완료</label>&nbsp;
+										 <input type=checkbox value='C' onfocus=blur(); name=step[] id='step3' onclick="ckStep('C')" /><label for='step3'>배송중준비중</label>&nbsp;
+										 <input type=checkbox value='D' onfocus=blur(); name=step[] id='step4' onclick="ckStep('D')" /><label for='step4'>배송중</label>&nbsp;
+										 <input type=checkbox value='E' onfocus=blur(); name=step[] id='step5' onclick="ckStep('E')" /><label for='step5'>배송완료</label>&nbsp;
+										 <!-- DYNAMIC @is_cancel@ -->		
+										 <input type=checkbox value='Z' onfocus=blur(); name=step[] id='step6' onclick="ckStep('Z')" /><label for='step6'>주문취소</label>&nbsp;
+										 <!-- DYNAMIC @is_cancel@ -->	
+										 <!-- DYNAMIC @is_delete@ -->&nbsp;<input type=checkbox value='DEL' onfocus=blur(); name=step[] id='step8'  onclick="ckStep('DEL')" /><label for='step8'>삭제처리</label><!-- DYNAMIC @is_delete@ -->
+									</td>
+								</tr>
+								<tr height=68 align=left> 
+									<td bgcolor="#FFFFFF" style="padding-left:10px;">
+										<font class=small>
+										! 주문취소는 입금대기중 상태일 경우에만 가능하고 결제완료 이후 주문 취소는 상단 '선택상품취소처리하기'를 이용하시면 됩니다.<br />
+										! 주문취소시 카드결제는 전자결제대행업체 관리자페이지에서 취소 하시기 바랍니다.<br />
+										! 주문취소가 되면 적립금 및 재고수량이 원상복구 됩니다. <br />
+										! 주문취소일 경우에만 '삭제처리'가 나타나며 해당주문 삭제가 가능 합니다.<br />
+										</font>							
+									</td>
+								</tr>
+								</table>
+					        </td>
+						</tr>						 
+						</table>
+					</td>
+				</tr>					 
+				</table>
+			</td>
+		</tr>
+		<tr><td height=20></td></tr>
+		<!---------------- @관리자 메모 & 처리 END  ------------------------->			
+		</table>		
+    </td>
+</tr> 
+<tr>
+	<td align=center>
+		<input type="image" src='./img/btn_submit.gif' border=0 onfocus='blur();' align="absmiddle">&nbsp;&nbsp;<img src='img/btn_print.gif'border=0 onclick="printClick(0);" onfocus='this.blur();' class="hand" align="absmiddle">&nbsp;&nbsp;<!-- DYNAMIC @is_pop_hide@ --><img src='./img/btn_list.gif' class="hand" onclick="window.location.href='{{LIST}}';" onfocus='this.blur();' align="absmiddle"><!-- DYNAMIC @is_pop_hide@ --><!-- DYNAMIC @is_pop_show@ --><img src='../shopping/img/btn_close.gif' class="hand" onclick='parent.pLightBox.hide();' align="absmiddle"><!-- DYNAMIC @is_pop_show@ --></TD></TR>		
+	</td>
+</tr>
+</FORM>	
+<tr><td colspan=2 height=20></td></tr>
+</table>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<!-- DYNAMIC @is_pop_bottom@ -->
+</div>
+</body>
+</html>
+<!-- DYNAMIC @is_pop_bottom@ -->

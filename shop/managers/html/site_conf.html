@@ -1,0 +1,148 @@
+<?
+include "../ad_init.php";
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<TITLE>자주 가는 사이트 설정</TITLE>
+<script LANGUAGE="JavaScript" src="../../lib/lib.Function.js"></script> 
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<script type="text/javascript">
+<!--
+function ckSite(type){
+	f = document.siteForm;
+	if(!f.site_name.value.trim()) {
+		alert("사이드 이름을 입력 하시기 바랍니다.");
+		f.site_name.focus();
+		return false;
+	}
+	if(!f.site_url.value.trim()) {
+		alert("사이드 주소를 입력 하시기 바랍니다.");
+		f.site_url.focus();
+		return false;
+	}
+	if(type!='write') {
+		if(!f.site_num.value) {
+			alert("먼저 사이트를 선택 하시기 바랍니다.");
+			return false;
+		}
+	}
+	f.type.value = type;
+	f.submit();
+	return false;
+}
+
+function selectSite(obj) {
+	var f = document.siteForm;
+	if (obj.options.length > 0){
+   		f.site_name.value = obj.options[obj.selectedIndex].text;
+		f.site_url.value = obj.options[obj.selectedIndex].value;
+		
+		document.getElementById("mod1").style.display = "block";
+		document.getElementById("mod2").style.display = "block";
+		document.getElementById("wri1").style.display = "none";
+		f.site_num.value = obj.selectedIndex + 1;
+	}
+}
+
+function selectCan() {
+	var f = document.siteForm;
+	
+	f.site_list.value ='';
+	f.site_name.value = '';
+	f.site_url.value = '';
+	document.getElementById("mod1").style.display = "none";
+	document.getElementById("mod2").style.display = "none";
+	document.getElementById("wri1").style.display = "block";
+	f.site_num.value = '';
+	return false;
+}
+
+// -->
+</script>
+
+<BODY style="padding:0;margin:0;">
+
+<div>
+	<form name='siteForm' method='post' action='menu_conf_ok.php'>
+	<input type='hidden' name='mode' value='site' />
+	<input type='hidden' name='site_num' />
+	<input type='hidden' name='type' />
+	<div style="padding:20px;">
+		<table border=0 cellpadding=0 cellspacing=0 bgcolor=#CCCCCC width=100%>
+		<tr>
+			<td>
+				<table border=0 width=100% cellpadding=1 cellspacing=1>
+				<tr height=30>
+					<td width=40% align=center class=gr_bg><img src='../html/img/ttl_site_title1.gif' width=85 height=20 valign=absmiddle></td>
+					<td align=center class=gr_bg><img src='../html/img/ttl_site_title2.gif' width=110 height=20 valign=absmiddle></td>
+				</tr>
+				<tr bgcolor=#FFFFFF>
+					<td>
+						<select name='site_list' size=15 style='width:100%;background:#FFFFFF;' onchange="selectSite(this);">
+<?
+$sql = "SELECT code FROM mall_aconf WHERE mode='S'";
+$code = $mysql->get_one($sql);
+
+$code = explode("|",$code);
+
+for($i=0,$cnt=count($code);$i<$cnt;$i+=2){
+   echo "<option value='{$code[$i+1]}'>{$code[$i]}</option>\n";	  
+}  
+?>
+						</select>
+					</td>
+					<td align=center valign=top>
+						<table border=0 cellpadding=0 cellspacing=0 width=306>
+						<tr><td height=25></td><tr>
+						<tr>
+							<td width=60 align=right><img src='../html/img/ttl_site_name.gif'></td>
+							<td align="left"><input  class=bt type=text name=site_name value='' style='width:96%;' onfocus='this.select();'></td>
+						</tr>
+						<tr><td height=15></td><tr>
+						<tr>
+							<td width=60 align=right><img src='../html/img/ttl_site_url.gif'></td>
+							<td align="left"><input  class=bt  type=text name=site_url value='' style='width:96%;' onfocus='this.select();'></td>
+						</tr>	
+						<tr><td height=15></td></tr>
+						<tr id="mod1" style="display:none;">
+							<td width=60 align=right><img src='../html/img/ttl_site_num.gif'></td>
+							<td align="left"><input  class=bt  type=text name=site_move value='' style='width:30px;'>&nbsp;<font class=small>번째로 이동하기</font></td>
+						</tr>  											
+						<tr id="mod2" style="display:none;">
+							<td></td>
+							<td>													
+								<div style="height:15px">&nbsp;</div>
+								<div id="sBtn1">
+									<a href="#" onclick="return ckSite('mod');"><span class="blue">수정하기</span></a>
+									<a href="#" onclick="return ckSite('del');"><span class="blue">삭제하기</span></a>
+									<a href="#" onclick="return selectCan();"><span class="blue">선택취소</span></a>
+								</div>
+							</td>
+						</tr>
+						<tr id="wri1">
+							<td></td>
+							<td>													
+								<div id="sBtn1">
+									<a href="#" onclick="return ckSite('write');"><span class="blue">등록하기</span></a>
+								</div>
+							</td>
+						</tr>
+						</table>	 
+					</td>
+				</tr>									
+				</table>
+			</td>
+		</tr>
+		</table>
+
+	</div>
+	</form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->
+	
+	<div class="blank">&nbsp;</div>	
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">		
+	<div id="subTitle">
+		<img src="img/shop/ttl_cooperate.gif" alt="공동구매" title="공동구매" style="" />
+	</div>
+	
+	<div class="clear" style="height:28px;">&nbsp;</div>	
+
+	<!-- DYNAMIC @is_h_up@ -->
+	<div id="s_code01">{{H_CODE}}</div>
+	<div class="blank">&nbsp;</div>
+	<!-- DYNAMIC @is_h_up@ -->
+
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:16px 0 0 15px;">
+				<div style="float:left;width:180px;">
+					<div class="small bold"></div>
+					<div style="padding-top:3px;" class="small">총 상품수 <font class="num mColor">{{TOTAL}}</font>건</div>
+				</div>			
+				<div style="height:24px;">				
+					<form name="searchForm2" method="get" onsubmit='return ckSearch2();' action='{{Main}}'>				
+					<input type="hidden" name="channel" value="cooperate" />
+					<input type="hidden" name="field" value="name" />
+					<input type="hidden" name="order" value="{{order}}" />
+					<input type="hidden" name="type" value="{{type}}" />
+					
+					<div id='reBox' style="position:relative;z-index:998;background-color:#FFF; border: 1px solid #bbb;width:80px; height:18px;" class='left'></div>
+					<script type="text/javascript">
+						<!--
+						reBoxs = new selectBox('reBox',document.searchForm2.field);
+						reBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333;text-align:left;";
+						reBoxs.addItem('상품명','name');
+						reBoxs.addItem('태그','tag');				
+						reBoxs.show();
+						//-->
+					</script>
+					<div style="float:left;padding-left:2px;"><input type="text" name="search" size="40" class="whites default" style='border-color:#bbb;vertical-align:top' /></div>
+					<div style="float:left;padding-left:2px;"><input type="image" src="img/shop/btn_search.gif" border="0" alt="검색" title="검색" /></div>	
+					<div style="float:left;padding-left:2px;"><a href="{{Main}}?channel=cooperate{{cstring}}"><img src="img/shop/btn_cancel.gif" border="0" alt="검색취소" title="검색취소" /></a></div>	
+					</form>
+					<!-- DYNAMIC @is_search@ -->
+					&nbsp;&nbsp;&nbsp;&nbsp;<font class="small">검색어 : <font class="mColor">[{{fields}}] {{search}}</font></font>
+					<!-- DYNAMIC @is_search@ -->
+				</div>				
+			</div>
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+
+	<div id="list" style="margin-top:20px;">	
+		<div id="list_top">
+			<ul>
+				<li><a href="{{LINK_TYPE}}"><img src="img/shop/tab_all_{{types}}.gif" alt="전체상품" /></a></li>
+				<li><a href="{{LINK_TYPE}}&amp;type=1"><img src="img/shop/tab_cooper1_{{types1}}.gif" alt="공구 진행중" /></a></li>
+				<li><a href="{{LINK_TYPE}}&amp;type=2"><img src="img/shop/tab_cooper2_{{types2}}.gif" alt="공구 성립상품" /></a></li>
+				<li><a href="{{LINK_TYPE}}&amp;type=3"><img src="img/shop/tab_cooper3_{{types3}}.gif" alt="공구 마감상품" /></a></li>
+				<li><a href="{{LINK_TYPE}}&amp;type=4"><img src="img/shop/tab_cooper4_{{types4}}.gif" alt="공구 준비중" /></a></li>
+			</ul>		
+			
+			<div class="right">
+				<form name="orderForm" method="get" action="{{Main}}">		
+				<input type="hidden" name="channel" value="cooperate" />
+				<input type="hidden" name="order" value="uid" />
+				<input type="hidden" name="type" value="{{type}}" />
+				<input type="hidden" name="field" value="{{field}}" />
+				<input type="hidden" name="search" value="{{search}}" />
+
+				<div class="left" style="margin-left:4px;"><img src="img/common/selectBox_left2.gif" alt='box left' /></div>
+				<div id='orderBox' style="position:relative;z-index:99;background-color:#FFF; border: 1px solid #CCC; border-left:0px; border-right:0px; width:90px; height:17px; text-align:left;" class='left'></div>
+				<div class="left"><img src="img/common/selectBox_right2.gif" alt='box right' /></div>
+				<script type="text/javascript">
+				<!--
+					orderBoxs = new selectBox('orderBox',document.orderForm.order,'orderForm',7);
+					orderBoxs.fStyle	= "font-family:돋움,Tahoma;font-size:8pt;letter-spacing:-1px;";
+					orderBoxs.img1.src = 'img/common/icon_select_down2.gif';
+					orderBoxs.img2.src = 'img/common/icon_select_up2.gif';
+					orderBoxs.addItem('최신순','uid');
+					orderBoxs.addItem('마감임박순','edate');
+					orderBoxs.addItem('높은할인률순','sale');
+					orderBoxs.addItem('신청자순','cnt');					
+					orderBoxs.show('cate');
+					orderBoxs.secNum = {{SEC_ORDER}};
+					orderBoxs.mout();	
+					
+				// -->
+				</script>									
+				</form>
+			</div>			
+		</div>
+		
+		<form name="listForm">
+		<div id="list_list">
+			<table cellspacing="0" cellpadding="0" border="0" width="100%">			
+			<col width="130" />
+			<col />
+			<col width="110" /> 
+			<col width="70" />     
+			<col width="180" />     			
+            <thead>
+            <tr height="28">
+				<th scope="col" colspan="2"><img src="img/common/ttl_list_name.gif" alt="상품명" /></th>
+				<th scope="col"><img src="img/common/ttl_cooper_price.gif" alt="현재 공구가격" /></th>
+				<th scope="col"><img src="img/common/ttl_cooper_sale.gif" alt="현재 할인룰" /></th>
+				<th scope="col"><img src="img/common/ttl_cooper_participation.gif" alt="참여인원" /></th>
+			</tr>
+			</thead>			
+			<tbody align="left">
+
+			<!-- DYNAMIC @loop_goods@ -->	
+			<tr height="140">
+				<td><a href="{{LINK}}" onfocus="this.blur()"><img src="{{IMAGE}}" alt="{{NAME}}" width="120" height="120" /></a></td>
+				<td valign="top">
+					<div style="padding-top:10px;"><img src="img/shop/coop_type{{TYPE}}.gif" alt="{{TYPE2}}" /></div>
+					<div style="padding-top:16px;height:36px;overflow:hidden;"><a href="{{LINK}}">{{NAME}}</a>&nbsp;{{ICON}}</div>					
+					<div class="small bold">
+						<font class="num">{{S_MM}}</font>월 <font class="num">{{S_DD}}</font>일 <font class="num">{{S_HH}}</font>:<font class="num">{{S_II}}</font>&nbsp;&nbsp;~&nbsp;&nbsp;<font class="num">{{E_MM}}</font>월 <font class="num">{{E_DD}}</font>일 <font class="num">{{E_HH}}</font>:<font class="num">{{E_II}}</font>
+					</div>
+					<div id="coop_sns">
+						<ul>
+							<li class="left">
+								<img src="img/shop/share_facebook.gif" class="hand" onclick="sendSNS('fa','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="페이스북 공유하기" title="페이스북 공유하기" />
+							</li>
+							<li class="left">
+								<img src="img/shop/share_twitter.gif" class="hand" onclick="sendSNS('tw','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="트위터 공유하기" title="트위터 공유하기" />
+							</li>
+							<li class="left">
+							<img src="img/shop/share_metoday.gif" class="hand" onclick="sendSNS('me','{{SHARE_GOODS}}','{{SHARE_URL}}','{{SHARE_TAG}}');" alt="미투데이 공유하기" title="미투데이 공유하기" />
+							</li>
+							<li class="left">
+								<img src="img/shop/share_yozm.gif" class="hand" onclick="sendSNS('yz','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="요즘 공유하기" title="요즘 공유하기" />
+							</li>
+						</ul>
+					</div>
+				</td>
+				<td align="center">
+					<!-- DYNAMIC @is_price1@ -->	
+					<div class="coop_price1 gray">{{PRICE1}}</div> 
+					<div class="coop_down">&nbsp;</div>
+					<!-- DYNAMIC @is_price1@ -->	
+					<div class="coop_price2 mColor">{{PRICE2}}원</div>
+					<!-- DYNAMIC @is_price3@ -->	
+					<div class="coop_down">&nbsp;</div>
+					<div class="coop_price3">{{PRICE3}}</div>
+					<!-- DYNAMIC @is_price3@ -->	
+				</td>
+				<td class="num mColor num" style="font-size:16px" align="center">{{SALE}}%</td>
+				<td valign="top">										
+					<div style="width:166px;padding-top:20px;">						
+						<div class="{{COOP_ALIGN}}" style="width:{{COOP_PER}}%;">&nbsp;</div>						
+						<div class="{{COOP_ALIGN}}">
+							<div style="height:22px;text-align:{{COOP_ALIGN}};">
+								<div class="num mColor"><b>{{participation}}</b><font class="small gray">개 신청</font></div>
+								<div class="coop_arrow {{COOP_ALIGN}}">&nbsp;</div>
+							</div>
+						</div>
+					</div>					
+					<div style="clear:both;padding-left:6px;">
+						<div style="width:160px;height:18px;background:url(img/shop/coop_bar_bg.gif) no-repeat;text-align:left;">
+							<div style="width:{{COOP_PER2}}%;overflow:hidden;height:10px;"><img src="img/shop/coop_bar.gif" style="verticla-align:top;" alt="bar" /></div>
+						</div>
+					</div>
+					<div>
+						<div class="num gray left">0<font class="small">개</font></div>
+						<div class="num left" style="padding-left:10px;">{{START_CNT}}<font class="small gray">개이상 신청시 공구성립</font></div>
+						<div class="num gray right">{{END_CNT}}<font class="small">개</font></div>
+					</div>
+					<div class="coop_btn_view"><a href="{{LINK}}"><img src="img/shop/btn_goods_view.gif" alt="상품상세보기" /></a></div>
+					<!-- DYNAMIC @is_come@ -->	
+					<div class="coop_come"></div>
+					<!-- DYNAMIC @is_come@ -->						
+				</td>
+			</tr>			
+			<tr><td colspan="5" height="1" bgcolor="#f1f1f1"><div style="height:1px;overflow:hiddenl">&nbsp;</div></td></tr>
+			<!-- DYNAMIC @loop_goods@ -->		 
+
+			<!-- DYNAMIC @no_goods@ -->
+			<tr height="130">
+				<td colspan="5" align="center">
+					<img src="img/shop/no_goods3.gif" alt="상품이 없습니다" />
+				</td>
+			</tr>
+			<!-- DYNAMIC @no_goods@ -->
+
+			</tbody>
+			
+			</table>
+		</div>
+		</form>
+	</div>
+	
+	<div style='clear:both;padding-top:20px;'>
+	    <div id="paging" class="small">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(,,)
+			<!-- DYNAMIC @define_pg@ -->
+		</div>
+	</div>
+	
+	<div style="height:20px"></div>		
+</div>

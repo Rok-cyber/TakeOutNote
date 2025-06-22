@@ -1,0 +1,466 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>mypage_modify.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> mypage_modify.html (마이페이지 회원정보수정)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MY_MENU}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">마이페이지 레프트 분류 메뉴 (mypage_menu.html 이용)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ACTION}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">회원정보수정폼 처리 페이지</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{REQUIRE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">필수 입력 사항일 경우</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{JUMIN1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주민번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL11}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL12}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL13}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE11}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE12}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 가운데자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE13}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{EMAIL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이메일 주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP11}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 앞자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP12}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 뒷자리</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADDR1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{HOMEPAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">홈페이지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESS}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">메신저</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{BIR1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">생년월일(년)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{BIR2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">생년월일(월)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{BIR3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">생년월일(일)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">음력일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">양력일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">남자일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK4}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">여자일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK5}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">미혼일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK6}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">기혼일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{EDU}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">최종학력</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{HOBBY}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">취미</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{JOB}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">직업</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{JOBNAME}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">직장명</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MINFO}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">남기는말씀</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK7}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">메일수신 허용일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CHECK8}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">메일수신 허용안함일 경우 checked</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀1</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADD1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 값1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀2</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADD2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 값2</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀3</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADD3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 값3</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD4}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀4</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADD4}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 값4</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TADD5}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 타이틀5</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADD5}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가필드 값5</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이름(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL21}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 앞자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL22}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 가운데자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL23}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 뒷자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE21}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 앞자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE22}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 가운데자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE23}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 뒷자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP21}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 앞자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP22}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 뒷자리(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADDR2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주소(배송지 정보 1)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이름(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL31}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 앞자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL32}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 가운데자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TEL33}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전화번호 뒷자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE31}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 앞자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE32}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 가운데자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PHONE33}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이동전화번호 뒷자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP31}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 앞자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ZIP32}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">우편번호 뒷자리(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{ADDR3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">주소(배송지 정보 2)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESSAGE1}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">요청 사항 1</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESSAGE2}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">요청 사항 2</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MESSAGE3}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">요청 사항 3</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_jumin@ --></font><br/>
+			. . . (주민번호를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_jumin@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_tel@ --></font><br/>
+			. . . (전화번호를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_tel@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_phone@ --></font><br/>
+			. . . (이동전화번호를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_phone@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_addr@ --></font><br/>
+			. . . (주소를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_addr@ --></font>
+		</div>
+	</div>
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_homepage@ --></font><br/>
+			. . . (홈페이지를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_homepage@ --></font>
+		</div>
+	</div>
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_mess@ --></font><br/>
+			. . . (메신저를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_mess@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_bir@ --></font><br/>
+			. . . (생년월일을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_bir@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_sex@ --></font><br/>
+			. . . (성별을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_sex@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_marr@ --></font><br/>
+			. . . (결혼유무를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_marr@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_edu@ --></font><br/>
+			. . . (최종학력을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_edu@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_hobby@ --></font><br/>
+			. . . (취미를 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_hobby@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_job@ --></font><br/>
+			. . . (직업을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_job@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_jobname@ --></font><br/>
+			. . . (직장명을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_jobname@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_info@ --></font><br/>
+			. . . (남기는말씀을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_info@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_mailling@ --></font><br/>
+			. . . (메일수신을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_mailling@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_sms@ --></font><br/>
+			. . . (SMS수신을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_sms@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add1@ --></font><br/>
+			. . . (추가필드1을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add1@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add2@ --></font><br/>
+			. . . (추가필드2을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add2@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add3@ --></font><br/>
+			. . . (추가필드3을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add3@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add4@ --></font><br/>
+			. . . (추가필드4을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add4@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_add5@ --></font><br/>
+			. . . (추가필드5을 입력받을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_add5@ --></font>
+		</div>
+	</div>
+    
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

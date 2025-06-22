@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>list.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> list.html (리스트 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TODAY}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">오늘 등록된 글 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록된 글 수</td>
+					</tr>					
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">현재 페이지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOPAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">전체 페이지 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CATE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류 리스트(select box형태)</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{Main}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">게시판 메인 페이지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{bo_path}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">게시판 경로</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{WLINK}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글쓰기 링크 주소</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEPALIMIT}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">대용량 자료일 경우 분할검색 분할수</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{searchstring}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">검색 관련 파라미터</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{field}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">검색된 타입</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{word}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">검색된 검색어</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_cate@ --></font><br/>
+			. . . (분류를 사용할 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_cate@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @is_login_v@ --></font></div>
+			<div style="margin:10px 0 0 28px;">로그인 관련 사용시 나타남</div>
+			
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_login@ --></font><br/>
+					. . . (로그인 되지 않았을 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_login@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_logout@ --></font><br/>
+					. . . (로그인 되었을 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_logout@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;margin-top:10px"><font class="blue">&lt!-- DYNAMIC @is_login_v@ --></font></div>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_man1@ --></font><br/>
+			. . . (게시판 관리자일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_man1@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_man2@ --></font><br/>
+			. . . (게시판 관리자일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_man2@ --></font>
+		</div>
+	</div>
+
+	<div style="width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:20px;">
+	    <div style="padding:10px;">
+			
+			<div><font class="blue">&lt!-- DYNAMIC @loop@ --></font></div>
+			<div style="margin:10px 0 0 28px;">글 리스트</div>
+			<div style="margin:10px 0 10px 0">			    
+				<table border="0" cellpadding="0" cellspacing="4" width="96%" bgcolor="#EEEEEE" align="right">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+						<tr>
+							<td>
+								<table border="0" cellpadding="2" cellspacing="1" width="100%">
+								<tr height="26"> 
+									<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+									<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NUM}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">출력 번호</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{DEL}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글 삭제 체크박스(관리자일 경우)</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CATENAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">분류명</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{VLINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">글 보기 링크 주소</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SUBJECT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">제목</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{MEMOCNT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록된 댓글 수</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NEWS}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">새글아이콘</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SNLINK}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이름으로 검색 링크 주소</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{NAME}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이름</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{HIT}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">조회수</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TIMES}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록 시간</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{D_MM}}	</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록 월</td>
+								</tr>	
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{D_DD}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">등록 일</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{EMAIL1}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이메일 (대량구매 게시판에만 사용)</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OSLINK1}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">대상상품명 (대량구매 게시판에만 사용)</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OSLINK2}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">희망수량 (대량구매 게시판에만 사용)</td>
+								</tr>
+								<tr height="26"> 
+									<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{OSLINK3}}</font></td>
+									<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">희망납기일 (대량구매 게시판에만 사용)</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_notice@ --></font><br/>
+					. . . (공지글일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_notice@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_num@ --></font><br/>
+					. . . (공지글이 아닐 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_num@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_man3@ --></font><br/>
+					. . . (게시판 관리자일 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_man3@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_catename@ --></font><br/>
+					. . . (분류가 존재할 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_catename@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_mcnt@ --></font><br/>
+					. . . (등록된 댓글이 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_mcnt@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_file@ --></font><br/>
+					. . . (등롣된 파일이 있는 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_file@ --></font>
+				</div>
+			</div>
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_times@ --></font><br/>
+					. . . (등록일이 오늘인 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_times@ --></font>
+				</div>
+			</div>
+			<div style="clear:both;width:95%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;float:right">
+				<div style="padding:10px;">
+					<font class="blue">&lt!-- DYNAMIC @is_dates@ --></font><br/>
+					. . . (등록일이 오늘이 아닌 경우 나타남)<br/>
+					<font class="blue">&lt!-- DYNAMIC @is_dates@ --></font>
+				</div>
+			</div>
+
+			<div style="clear:both"><font class="blue">&lt!-- DYNAMIC @loop@ --></font></div>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_loop@ --></font><br/>
+			. . . (등록 검색된 글이 없는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_loop@ --></font>
+		</div>
+	</div>	
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_write@ --></font><br/>
+			. . . (글쓰기 권한이 있는 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_write@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_man4@ --></font><br/>
+			. . . (게시판 관리자일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_man4@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @define_pg@ --></font><br/>
+			. . . (2페이지 이상일 경우 나타남)<br/>
+			PAGING(타입(텍스트,이미지),구분자(|),이미지경로) 페이징 정의<br/>
+			<font class="blue">&lt!-- DYNAMIC @define_pg@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_paging@ --></font><br/>
+			. . . (대용량 자료일 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_paging@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @define_pg2@ --></font><br/>
+			. . . (대용량 자료일 경우 분할 페이지가 2페이지 이상일 경우 나타남)<br/>
+			PAGING2(타입(텍스트,이미지),구분자(|),이미지경로) 페이징 정의<br/>
+			<font class="blue">&lt!-- DYNAMIC @define_pg2@ --></font>
+		</div>
+	</div>
+	
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

@@ -1,0 +1,805 @@
+<?
+include "../html/top_inc.html"; // 상단 HTML 
+
+
+######################## 분류 생성 ##############################
+$tmps1	= "CATEname = [";
+$tmps2	= "CATEnum	= [";
+$tmps3	= "CATE1	= [";
+$cnts	= 0;
+$cnts2	= 0;
+$sql = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = 1 && cate!='999000000000' ORDER BY number ASC";
+$mysql->query($sql);
+while($row=$mysql->fetch_array()){    
+	$row['cate_name'] = addslashes($row['cate_name']);
+	if($row['cate_sub']==1) {
+	    if($cnts==1) { 
+			$tmps1.= ",['{$row[cate_name]}→'";		
+			$tmps2.= ",['{$row[cate]}:O'";		
+		}
+		else { 
+			$tmps1.= "['{$row[cate_name]}→'";		
+			$tmps2.= "['{$row[cate]}:O'";		
+        }
+		$sql2 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '2' AND cate_parent = '{$row[cate]}' ORDER BY number ASC";
+		$mysql->query2($sql2);
+		while($row2=$mysql->fetch_array(2)){
+			$row2['cate_name'] = addslashes($row2['cate_name']);
+			if($row2['cate_sub']==1) {
+				$tmps1.= ",['{$row2[cate_name]}→'";	
+				$tmps2.= ",['{$row2[cate]}:O'";	
+				$sql3 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '3' AND cate_parent = '{$row2[cate]}' ORDER BY number ASC";
+				$mysql->query3($sql3);
+				while($row3=$mysql->fetch_array(3)){
+					$row3['cate_name'] = addslashes($row3['cate_name']);
+					if($row3['cate_sub']==1) {
+						$tmps1.= ",['{$row3[cate_name]}→'";	
+						$tmps2.= ",['{$row3[cate]}:O'";	
+						$sql4 = "SELECT cate,cate_name FROM mall_cate WHERE cate_dep = '4' AND cate_parent = '{$row3[cate]}' ORDER BY number ASC";
+						$mysql->query4($sql4);						
+						while($row4=$mysql->fetch_array(4)){							
+							$row4['cate_name'] = addslashes($row4['cate_name']);
+							$tmps1.= ",'{$row4[cate_name]}'";
+							$tmps2.= ",'{$row4[cate]}'";
+						}
+						$tmps1.= "]";
+						$tmps2.= "]";
+					} 
+					else {
+						$tmps1.= ",['{$row3[cate_name]}']";		
+						$tmps2.= ",['{$row3[cate]}:X']";		
+					}					
+				}
+				$tmps1.= "]";
+				$tmps2.= "]";
+			} 
+			else {
+				$tmps1.= ",['{$row2[cate_name]}']";		
+				$tmps2.= ",['{$row2[cate]}:X']";		
+            }
+		}
+
+		if($cnts2==1) $tmps3.= ",['{$row[cate_name]}','{$row[cate]}']";
+		else $tmps3.= "['{$row[cate_name]}','{$row[cate]}']";
+		$cnts2 = 1;
+
+    } 
+	else {
+		if($cnts==1) {
+			$tmps1.= ",['{$row[cate_name]}'";		
+			$tmps2.= ",['{$row[cate]}:X'";		
+		} 
+		else {
+			$tmps1.= "['{$row[cate_name]}'";		
+			$tmps2.= "['{$row[cate]}:X'";		
+		}
+	
+	}
+	$tmps1.= "]";
+	$tmps2.= "]";	
+	$cnts = 1;
+	
+}
+$tmps1.= "]";
+$tmps2.= "]";
+$tmps3.= "]";
+######################## 분류 생성 ##############################
+
+######################## 분류 생성 ##############################
+$tmps21	= "SCATEname = [";
+$tmps22	= "SCATEnum	= [";
+$tmps23	= "SCATE1	= [";
+$cnts	= 0;
+$cnts2	= 0;
+$sql = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = 1 && cate_sub = 1 ORDER BY number ASC";
+$mysql->query($sql);
+while($row=$mysql->fetch_array()){    
+	$row['cate_name'] = addslashes($row['cate_name']);
+	if($row['cate_sub']==1) {
+	    if($cnts==1) { 
+			$tmps21.= ",['{$row[cate_name]}'";		
+			$tmps22.= ",['{$row[cate]}'";		
+		}
+		else { 
+			$tmps21.= "['{$row[cate_name]}'";		
+			$tmps22.= "['{$row[cate]}'";		
+        }
+		$sql2 = "SELECT cate,cate_name,cate_sub FROM mall_cate WHERE cate_dep = '2' AND cate_parent = '{$row[cate]}' ORDER BY number ASC";
+		$mysql->query2($sql2);
+		while($row2=$mysql->fetch_array(2)){
+			$row2['cate_name'] = addslashes($row2['cate_name']);
+			if($row2['cate_sub']==1) {
+				$tmps21.= ",['{$row2[cate_name]}'";	
+				$tmps22.= ",['{$row2[cate]}'";	
+				$tmps21.= "]";
+				$tmps22.= "]";
+			} 			
+		}
+
+		if($cnts2==1) $tmps23.= ",['{$row[cate_name]}','{$row[cate]}']";
+		else $tmps23.= "['{$row[cate_name]}','{$row[cate]}']";
+		$cnts2 = 1;
+    } 
+	
+	$tmps21.= "]";
+	$tmps22.= "]";	
+	$cnts = 1;
+	
+}
+$tmps21.= "]";
+$tmps22.= "]";
+$tmps23.= "]";
+######################## 분류 생성 ##############################
+
+?>
+<script language="JavaScript">
+<!--
+var cate_def;
+var keep1 = "<?=$_GET['keep1'];?>";
+
+<? echo $tmps1."\n".$tmps2."\n".$tmps3."\n".$tmps21."\n".$tmps22."\n".$tmps23;?>
+
+// 하위분류 생성기능 활성화 함수
+function third_disable(type) {
+var aa=type;
+var form=document.add_p;
+	if(type == "no") {
+		form.s_cate.disabled=false;
+		form.s_cate.style.background="#FFFFFF";
+			var ccc = form.last_cate.value;
+			var split_ccc = ccc.split(":");
+			var cc = split_ccc[2];
+			if(cc == "X") { // 하위분류가 없는경우 분류생성버튼을 비활성화시킴
+			form.s_cate.disabled=true;
+			form.s_cate.style.background="#F3F3F3";
+			}
+	} else {
+		form.s_cate.disabled=true;
+		form.s_cate.style.background="#F3F3F3";
+	}
+}
+
+
+function checkIt2(ck) {
+	var form = document.form1;
+	if(!form.big_cate.value) {
+		window.alert('추가할 대분류명을 입력하세요!');
+		form.big_cate.focus();
+		return false;
+	}
+	if(ck) form.submit();
+}
+
+function checkIt3(ck) {
+	var form = document.form2;
+	if(!form.m_cate.value) {
+		window.alert('추가할 중분류명을 입력하세요!');
+		form.m_cate.focus();
+		return false;
+	}
+	if(ck) form.submit();
+}
+
+function checkIt4(ck) {
+	var form = document.form3;
+	if(!form.s_cate.value) {
+		window.alert('추가할 소분류명을 입력하세요!');
+		form.s_cate.focus();
+		return false;
+	}
+	if(ck) form.submit();
+}
+
+function double_modify(num){
+   form = document.myForm;
+   var sec_cate='';
+   if(num==1) { sec_cate = form.cate1.value; }
+   else if(num==2) { sec_cate = form.cate2.value; }
+   else if(num==3) { sec_cate = form.cate3.value; }
+   else { sec_cate = form.cate4.value; }
+   
+   sec_cate = sec_cate.replace("&","|*|");  
+   if(sec_cate) pLightBox.show('cate_modify.html?last_cate='+sec_cate+'&num='+num,'iframe',700,500,'■ '+num+'차 분류정보 수정하기',10);
+}
+
+// 3차분류 생성 및 분류명 변경폼처리
+function last_action(type) {
+	form = document.add_p;
+	if(type == "modify") {		
+	 	if(!form.last_cate.value) {
+				window.alert('선택된 분류가 없습니다!');
+				return false;
+		}
+		if(!form.re_cate.value) {
+			window.alert('수정할 분류명을 입력해주세요!');
+			return false;
+        }
+
+		pLightBox.show('cate_modify.html?last_cate='+form.last_cate.value+'&num='+cate_def,'iframe',700,500,'■ '+cate_def+'차 분류정보 수정하기',10)
+		return false;
+	}
+	if(type == "create") {
+	    if(!form.last_cate.value) {
+			alert('먼저 분류를 선택 하시기 바랍니다.');
+			return false;
+        } 
+		if(!form.s_cate.value) {
+			// 문자열 배열처리검사를 통해 하위분류가 존재하면 해당분류에 하우분류를 등록하지 못함
+			var ck_last = form.last_cate.value;
+			var split_cate = ck_last.split(":");
+			
+			if(split_cate[2] == "X") {
+				window.alert('하위분류가 존재하거나 단일분류입니다!\n하위분류가 존재할경우 생성후 등록해주세요!');
+				return false;
+			}
+			window.alert('추가할 4차분류명을 입력해주세요!');
+			return false;
+		}
+		form.action = "cate_post.php?cate_mode=d_create"; // 3차분류 생성모드로 넘김
+		form.submit();
+		return false;
+	} 
+	if(type == "del") {
+			// 문자열 배열처리검사를 통해 하위분류가 존재하면 해당분류에 하우분류를 등록하지 못함
+			var fff = form.last_cate.value;
+			var split_cate = fff.split(":");
+			var c_name = split_cate[0];
+			if(!c_name) {
+				window.alert('선택된 분류가 없습니다!');
+				return false;
+			}
+			var aa = split_cate[1];
+			if(aa == "O") {
+				window.alert('하위분류가 존재합니다!\n\n하위 분류가 존재할경우 상위분류를 삭제할 수 없습니다!');
+				return false;
+			}
+			if (window.confirm("분류를 삭제 할까요?")) {
+				form.action = "cate_post.php?cate_mode=cate_del";
+				form.submit();
+			} else {
+				return false;
+			}
+
+	}
+}
+
+function cateSort(type,num){
+    form = eval("document.myForm.cate"+num);
+	sIndex=form.selectedIndex;   
+
+	var tmp1=tmp2='';
+	
+    if(!form.value) { 
+	    alert('먼저 분류을 선택 하시기 바랍니다.');
+		return;
+    }
+		 
+	if(type=='up') {
+	    if(sIndex==0) return;
+		sIndex2 = sIndex-1;
+    } else {
+	    if(sIndex==(form.length-1)) return;
+		sIndex2 = sIndex+1;
+    } 	
+	tmp1=form.options[sIndex].value;
+	tmp2=form.options[sIndex].text;
+    form.options[sIndex].value=form.options[sIndex2].value;
+	form.options[sIndex].text=form.options[sIndex2].text;
+	form.options[sIndex2].value=tmp1;
+	form.options[sIndex2].text=tmp2;
+	form.options[sIndex2].selected=true;
+
+	for(c=0; c<form.length; c++){
+	    split_cate = form.options[c].value.split(':');		
+	    if(c==0) eval("document.myForm.save_cate"+num+".value=split_cate[0]")
+		else eval("document.myForm.save_cate"+num+".value = document.myForm.save_cate"+num+".value+'|'+split_cate[0]")
+    }
+	
+}
+
+function sortSave(num){
+    form = eval("document.myForm.save_cate"+num+".value");
+
+	if(!form) { 
+	    alert('먼저 순서를 변경 하시기 바랍니다.');
+		return;
+    }
+
+	window.location.href = "cate_post.php?cate_mode=sort1&cate_sort="+form;
+	
+}
+
+// -->
+</script>
+
+<div class="mainBox2"  id="mainContent">
+	<div class="top">
+		<div style="padding:9px 0 0 12px;">
+			<div class='left'><img src="img/tm_cate.gif" alt="분류관리" /></div>
+			<div class='left small' style='padding:8px 0 0 10px;'>상품분류를 생성하고 수정 하실 수 있습니다.</div>
+		</div>			
+	</div>
+	<div class="content">
+		<div class='content_top'></div>			
+		<div style="padding:0 6px 0 6px;" id='mainHeight'>
+			<div style='height:10px;overflow:hidden'>&nbsp;</div>		
+
+<table border=0 cellpadding="0" cellspacing="0" width="99%" align=center>
+<!-- 대분류 추가폼 시작 -->
+<TR><TD><img src='./img/c_1th.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE width=100% border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE>
+	<TR>
+		<TD>
+			<TABLE width=100% border=0 cellpadding=0 cellspacing=0 bgcolor=#999999>
+			<TR>
+				<TD>
+					<TABLE border=0 width=100% cellpadding=0 cellspacing=1>
+					<FORM name='form1' method='post' enctype="multipart/form-data" action='cate_post.php?cate_mode=b_create' onsubmit="return checkIt2()">
+					<TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;1차분류 입력</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=640>
+							<div style="float:left;padding-left:6px;">
+								<input type='text' class=ta name='big_cate' size='35'>
+							</div>
+							<div id="sBtn1" style="float:left;padding-left:6px;">
+							    <a href="#" onclick="return checkIt2('1');"><span class="blue">1차분류생성</span></a>
+							</div>
+						</TD>
+					</TR>
+					<TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;하위분류 유무</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=240 style="padding-left:6px;">
+							<input type='radio' name='sub' id='sub11' value='1' checked onfocus="blur();"><label for='sub11'>있음</label> 
+							<input type='radio' name='sub' id='sub12' value='0' onfocus="blur();"><label for='sub12'>없음</label>
+						</TD>
+					</TR>
+					<TR height=48> 
+						<td colspan=2 bgcolor="#FFFFFF" align=left  style="padding-left:10px;">
+							<font class=small>
+							! 분류상세 정보는 아래의 분류 수정에서 분류 타이틀 이미지나 메뉴 이미지등 등록 하시기 바랍니다.</br>
+							! 하위분류가 있음으로 선택한 경우 하위분류를 등록 하지 않았을 경우 상품등록시 해당 분류로 상품 등록이되지 않으니 반드시 하위 분류를 등록 하거나 하위분류 없음으로 변경하시기 바랍니다. 
+							</font>
+						</td>
+					</TR>
+					</FORM>
+					</TABLE>		
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<!-- @대분류 추가폼 끝 -->
+
+<!-- 중분류 추가폼 시작 -->
+<TR><TD><img src='./img/c_2th.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE width=100% border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE>
+	<TR>
+		<TD>
+			<TABLE width=100% border=0 cellpadding=0 cellspacing=0 bgcolor=#999999>
+			<TR>
+				<TD>
+					 <TABLE border=0 width=100% cellspacing=1 cellpadding=0 >
+					 <form name='form2' method='post' enctype="multipart/form-data" action='cate_post.php?cate_mode=m_create' onsubmit="return checkIt3()">
+					 <TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;1차분류 선택</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=640>&nbsp;<select name='big_cate' style='width:200px;'></select></TD>
+					 </TR>
+					 <TR  height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;2차분류 입력</font></TD>
+						<TD align=left bgcolor=#FAFAFA> 
+							<div style="float:left;padding-left:6px;">
+								<input type='text' class=ta name='m_cate' size='35'>
+							</div>
+							<div id="sBtn1" style="float:left;padding-left:6px;">
+							    <a href="#" onclick="return checkIt3('1');"><span class="blue">2차분류생성</span></a>
+							</div>
+						</TD>
+					 </TR>
+					 <TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;하위분류 유무</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=240 style="padding-left:6px;">
+							<input type='radio' name='sub' id='sub21' value='1' checked onfocus="blur();"><label for='sub21'>있음</label> 
+							<input type='radio' name='sub' id='sub22' value='0' onfocus="blur();"><label for='sub22'>없음</label>
+						</TD>
+					 </TR>
+					 <TR height=48> 
+						<td colspan=2 bgcolor="#FFFFFF" align=left  style="padding-left:10px;">
+							<font class=small>
+							! 분류상세 정보는 아래의 분류 수정에서 분류 타이틀 이미지나 메뉴 이미지등 등록 하시기 바랍니다.</br>
+							! 하위분류가 있음으로 선택한 경우 하위분류를 등록 하지 않았을 경우 상품등록시 해당 분류로 상품 등록이되지 않으니 반드시 하위 분류를 등록 하거나 하위분류 없음으로 변경하시기 바랍니다. 
+							</font>
+						</td>
+					 </TR>
+					 </form>
+				     </TABLE>
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<!-- @중분류 추가폼 끝 -->
+
+<!-- 소분류 추가폼 시작 -->
+<TR><TD><img src='./img/c_3th.gif'></TD></TR>
+<TR><TD align=center>
+	<TABLE width=100% border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE>
+	<TR>
+		<TD>
+			<TABLE width=100% border=0 cellpadding=0 cellspacing=0 bgcolor=#999999>
+			<TR>
+				<TD>
+					 <TABLE border=0 width=100% cellspacing=1 cellpadding=0 >
+					 <form name='form3' method='post' enctype="multipart/form-data" action='cate_post.php?cate_mode=s_create' onsubmit="return checkIt4()">
+					 <TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;1차분류 선택</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=640>&nbsp;<select name='big_cate' style='width:200;'></select></TD>
+					 </TR>
+					 <TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;2차분류 선택</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=640>&nbsp;<select name='m_cate' style='width:200;'><option value=''>1차분류를 선택 하세요</option></select></TD>
+					 </TR>
+					 <TR  height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;3차분류 입력</font></TD>
+						<TD align=left bgcolor=#FAFAFA> 
+							<div style="float:left;padding-left:6px;">
+								<input type='text' class=ta name='s_cate' size='35'>
+							</div>
+							<div id="sBtn1" style="float:left;padding-left:6px;">
+							    <a href="#" onclick="return checkIt4('1');"><span class="blue">3차분류생성</span></a>
+							</div>
+						</TD>
+					 </TR>
+					 <TR height=30>
+						<TD width=120 class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;하위분류 유무</font></TD>
+						<TD align=left bgcolor=#FAFAFA width=240 style="padding-left:6px;">
+							<input type='radio' name='sub' id='sub31' value='1' onfocus="blur();"><label for='sub31'>있음</label> 
+							<input type='radio' name='sub' id='sub32' value='0' checked onfocus="blur();"><label for='sub32'>없음</label>
+						</TD>
+					 </TR>
+					 <TR height=48> 
+						<td colspan=2 bgcolor="#FFFFFF" align=left  style="padding-left:10px;">
+							<font class=small>
+							! 분류상세 정보는 아래의 분류 수정에서 분류 타이틀 이미지나 메뉴 이미지등 등록 하시기 바랍니다.</br>
+							! 하위분류가 있음으로 선택한 경우 하위분류를 등록 하지 않았을 경우 상품등록시 해당 분류로 상품 등록이되지 않으니 반드시 하위 분류를 등록 하거나 하위분류 없음으로 변경하시기 바랍니다. 
+							</font>
+						</td>
+					 </TR>
+					 </form>
+				     </TABLE>
+				</TD>
+			</TR>
+			</TABLE>
+		</TD>
+	</TR>
+	</TABLE>
+</TD></TR>
+<TR><TD height=20></TD></TR>
+<!-- @소분류 추가폼 끝 -->
+
+<!-- 3차분류 추가 및 분류 관리폼 시작 -->
+<TR><TD><img src='./img/c_4th.gif' align=absmiddle>&nbsp;&nbsp;<font class=small>순서변경 후 '순서적용' 버튼을 누루셔야만 순서가 변경됩니다.</font></TD></TR>
+<TR><TD align=center>
+	<TABLE width=100% border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE>
+	<FORM name=myForm>
+	<TR>
+		<TD>
+			<TABLE width=100% border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width=100%>
+			<TR>
+				<TD>
+					<TABLE width=100% align=center border=0 cellpadding=0 cellspacing=1>
+					<TR height=30>
+						<TD class=gr_bg align=center width=25%><font class="small bTitle">*&nbsp;1차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="small bTitle">*&nbsp;2차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="small bTitle">*&nbsp;3차분류</font></TD>
+						<TD class=gr_bg align=center width=25%><font class="small bTitle">*&nbsp;4차분류</font></TD>
+					</TR>
+					<TR bgcolor=FFFFFF>
+						<TD align=center>
+							<SELECT name=cate1 size=10 style='width:100%;background:#FFFFFF;' ondblclick="double_modify('1')"></SELECT>
+							</TD>
+							<TD>
+							<SELECT name=cate2 size=10 style='width:100%;background:#FFFFFF;' ondblclick="double_modify('2')"></SELECT>
+                            </TD>
+							<TD>
+							<SELECT name=cate3 size=10 style='width:100%;background:#FFFFFF;' ondblclick="double_modify('3')"></SELECT>
+							</TD>
+							<TD>
+							<SELECT name=cate4 size=10 style='width:100%;background:#FFFFFF;' ondblclick="double_modify('4')"></SELECT>
+							<input type=hidden name=path_cate1>
+							<input type=hidden name=path_cate2>
+							<input type=hidden name=path_cate3>
+							<input type=hidden name=save_cate1>
+							<input type=hidden name=save_cate2>
+							<input type=hidden name=save_cate3>
+							<input type=hidden name=save_cate4>
+						</TD>
+					</TR>
+					<tr bgcolor=#FFFFFF height=32>
+					  <td>
+					    <table cellpadding=0 cellspacing=0 border=0 width=94% align=center>
+						  <tr>
+						    <td width=60%>
+								<div id="sBtn1">
+									<a href="#" onclick="cateSort('up',1);"><span >▲ up</span></a>
+									<a href="#" onclick="cateSort('down',1);"><span >▼ down</span></a>
+								</div>							
+							</td>
+							<td width=40% align=right>
+								<div id="sBtn1" style="float:right">
+									<a href="#" onclick="return sortSave(1);"><span >순서적용</span>
+								</div>
+							</td>
+                          </tr>
+						 </table>
+					  </td>
+					  <td>
+					    <table cellpadding=0 cellspacing=0 border=0 width=94% align=center>
+						  <tr>
+						    <td width=60%>
+								<div id="sBtn1">
+									<a href="#" onclick="cateSort('up',2);"><span >▲ up</span></a>
+									<a href="#" onclick="cateSort('down',2);"><span >▼ down</span></a>
+								</div>							
+							</td>
+							<td width=40% align=right>
+								<div id="sBtn1" style="float:right">
+									<a href="#" onclick="return sortSave(2);"><span >순서적용</span>
+								</div>
+							</td>
+                          </tr>
+						 </table>					  
+					  </td>
+					  <td>
+					    <table cellpadding=0 cellspacing=0 border=0 width=94% align=center>
+						  <tr>
+						    <td width=60%>
+								<div id="sBtn1">
+									<a href="#" onclick="cateSort('up',3);"><span >▲ up</span></a>
+									<a href="#" onclick="cateSort('down',3);"><span >▼ down</span></a>
+								</div>							
+							</td>
+							<td width=40% align=right>
+								<div id="sBtn1" style="float:right">
+									<a href="#" onclick="return sortSave(3);"><span >순서적용</span>
+								</div>
+							</td>
+                          </tr>
+						 </table>					  
+					  </td>
+					  <td>
+					    <table cellpadding=0 cellspacing=0 border=0 width=94% align=center>
+						  <tr>
+						    <td width=60%>
+								<div id="sBtn1">
+									<a href="#" onclick="cateSort('up',4);"><span >▲ up</span></a>
+									<a href="#" onclick="cateSort('down',4);"><span >▼ down</span></a>
+								</div>							
+							</td>
+							<td width=40% align=right>
+								<div id="sBtn1" style="float:right">
+									<a href="#" onclick="return sortSave(4);"><span >순서적용</span>
+								</div>
+							</td>
+                          </tr>
+						 </table>					  
+					  </td>
+                    </tr> 
+					</TABLE>
+				</TD>
+			</TR>
+			</TABLE>
+     </TD></TR>
+	 </TABLE>
+	 <TABLE width=100% border=0 cellpadding=3 cellspacing=0>
+	 <TR height=36>
+	     <TD align=left>
+			<font class="bold small">* 선택된 분류 위치 : </font><FONT style="color:#3399ff;" class="eng">HOME</FONT>
+			<input type='text' class=submit3 name='this_path' value='' size=90 style='border-width:0;border-style:solid;color:#0083c7;' readonly>
+			<input type='hidden' name='list_len' value='' readonly>
+		</TD>
+	</TR>
+    </FORM>
+    </TABLE>
+
+	<SCRIPT LANGUAGE="JavaScript">
+	<!--
+	function check_num(form) {
+		if(!form.last_cate.value || form.last_cate.value == 0) {
+			window.alert('선택된 분류가 없습니다! 다시한번확인해주세요.');
+			return;
+		}		
+	form.submit();
+	}
+	//-->
+	</SCRIPT>
+
+	<TABLE border=0 cellpadding=4 cellspacing=0 bgcolor=#EEEEEE width=100%>
+	<FORM method=post name='add_p' action="">
+	<input type='hidden' name='last_cate' value=''>
+	<TR>
+		<TD>
+		<TABLE border=0 cellpadding=0 cellspacing=0 bgcolor=#999999 width=100%>
+		<TR>
+			<TD>
+			<TABLE width=100% border=0 cellpadding=0 cellspacing=1 >
+			<TR height=30>
+				<TD class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;선택된 분류</font></TD>
+				<TD bgcolor=#FAFAFA>
+					<div style="float:left;padding-left:6px;">
+						<input type='text' class=ta name='re_cate' size='35' disabled>
+					</div>
+					<div id="sBtn1" style="float:left;padding-left:6px;">
+					    <a href="#" onclick="return last_action('modify');"><span class="blue">분류수정</span></a>
+						<a href="#" onclick="return last_action('del');"><span class="blue">분류삭제</span></a>
+					</div>
+				</TD>
+			</TR>
+			<TR height=30>
+				<TD class=gr_bg align=left><font class="small bTitle">&nbsp;&nbsp;*&nbsp;4차분류 생성</font></TD>
+				<TD bgcolor=#FAFAFA>
+					<div style="float:left;padding-left:6px;">
+						<input type='text' class=ta name='s_cate' size='35' disabled>
+					</div>
+					<div id="sBtn1" style="float:left;padding-left:6px;">
+						<a href="#" onclick="return last_action('create');"><span class="blue">4차분류생성</span></a>
+					</div>
+
+				</TD>
+			</TR>
+			<TR height=36> 
+				<td colspan=2 bgcolor="#FFFFFF" align=left  style="padding-left:10px;">
+					<font class=small>
+						! 하위분류 없음 상태일 때만 삭제 가능 합니다. 하위분류가 있는경우 하위분류 없음으로 수정 하시고 삭제하시면 됩니다.</br>
+						! 분류명뒤 '→' 마크는 하위 분류가 있음을 의미 합니다
+					</font>
+				</td>
+			</TR>
+			</TABLE>
+			</TD>
+		</TR>
+		</TABLE>
+		</TD>
+	</TR>
+	</FORM>
+	</TABLE>
+</TD></TR>
+<!-- @3차분류 추가 및 분류 관리폼 끝 -->
+<TR><TD height=20></TD></TR>
+</TABLE>
+
+			</div>
+		</div>
+		<div class="bottom"></div>
+		</span>		
+	</div>
+</div>
+
+
+<script>
+
+var myForm = document.myForm;
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+	myForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+for(i=0,cnt=CATE1.length;i<cnt;i++){
+    document.form2.big_cate.options[i]=new Option(CATE1[i][0],CATE1[i][1]);	
+	if(keep1==CATE1[i][1]) form2.big_cate.options[i].selected=true;
+}
+if(i==0) document.form2.big_cate.options[i]=new Option('1차분류없음','');
+
+for(i=0,cnt=SCATE1.length;i<cnt;i++){
+    document.form3.big_cate.options[i]=new Option(SCATE1[i][0],SCATE1[i][1]);	
+	if(keep1==SCATE1[i][1]) form3.big_cate.options[i].selected=true;
+}
+if(i==0) document.form3.big_cate.options[i]=new Option('1차분류없음','');
+
+myForm.cate1.onchange=function(e){
+	for(i=myForm.cate2.length;i>=0;i--){
+		myForm.cate2.options[i]=null;
+	}
+	for(i=myForm.cate3.length;i>=0;i--){
+		myForm.cate3.options[i]=null;
+	}
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+		if(CATEname[sIndex][i][0]) myForm.cate2.options[i-1]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+		else myForm.cate2.options[i-1]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+	}
+	myForm.this_path.value	= "> " + myForm.cate1.options[sIndex].text.split('→')[0];
+	myForm.path_cate1.value = "> " + myForm.cate1.options[sIndex].text.split('→')[0];
+	document.add_p.last_cate.value	= myForm.cate1.value;
+	document.add_p.re_cate.value	= myForm.cate1.options[sIndex].text.split('→')[0];
+	third_disable('yes');
+	cate_def=1;
+}
+
+myForm.cate2.onchange=function(e){
+	for(i=myForm.cate3.length;i>=0;i--){
+		myForm.cate3.options[i]=null;
+	}
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,sIndex2=myForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2+1].slice(1).length;i<=cnt;i++){
+		if(typeof(CATEname[sIndex][sIndex2+1][i][0])!='undefined') myForm.cate3.options[i-1]=new Option(CATEname[sIndex][sIndex2+1][i][0],CATEnum[sIndex][sIndex2+1][i][0]);
+	}
+   
+	myForm.this_path.value	= myForm.path_cate1.value + " > " + myForm.cate2.options[sIndex2].text.split('→')[0];
+	myForm.path_cate2.value = myForm.path_cate1.value + " > " + myForm.cate2.options[sIndex2].text.split('→')[0];
+	document.add_p.last_cate.value =  myForm.cate2.value;
+	document.add_p.re_cate.value	= myForm.cate2.options[sIndex2].text.split('→')[0];
+	third_disable('yes');
+	cate_def=2;
+}
+
+myForm.cate3.onchange=function(e){
+	for(i=myForm.cate4.length;i>=0;i--){
+		myForm.cate4.options[i]=null;
+	}
+	for(i=1,sIndex=myForm.cate1.selectedIndex,sIndex2=myForm.cate2.selectedIndex,sIndex3=myForm.cate3.selectedIndex,cnt=CATEname[sIndex][sIndex2+1][sIndex3+1].slice(1).length;i<=cnt;i++){
+		if(typeof(CATEname[sIndex][sIndex2+1][sIndex3+1][i])!='undefined') myForm.cate4.options[i-1]=new Option(CATEname[sIndex][sIndex2+1][sIndex3+1][i],CATEnum[sIndex][sIndex2+1][sIndex3+1][i]);
+	}
+   
+	myForm.this_path.value	= myForm.path_cate2.value + " > " + myForm.cate3.options[sIndex3].text.split('→')[0];
+	myForm.path_cate3.value = myForm.path_cate2.value + " > " + myForm.cate3.options[sIndex3].text.split('→')[0];
+	document.add_p.last_cate.value =  myForm.cate3.value;
+	document.add_p.re_cate.value	= myForm.cate3.options[sIndex3].text.split('→')[0];
+	var tmps = myForm.cate3.value.split(":")
+	if(tmps[1]=='O') third_disable('no');
+	else third_disable('yes');
+	cate_def=3;
+}
+
+myForm.cate4.onchange=function(e){
+	sIndex=myForm.cate4.selectedIndex;   
+	myForm.this_path.value	= myForm.path_cate3.value + " > " + myForm.cate4.options[sIndex].text.split('→')[0];	
+	document.add_p.last_cate.value =  myForm.cate4.value;
+	document.add_p.re_cate.value	= myForm.cate4.options[sIndex].text.split('→')[0];	
+	third_disable('yes');
+	cate_def=4;
+}
+
+document.form3.big_cate.onchange=function(e){
+	for(i=document.form3.m_cate.length;i>=0;i--){
+		document.form3.m_cate.options[i]=null;
+	}
+	for(i=1,sIndex=document.form3.big_cate.selectedIndex,cnt=SCATEname[sIndex].slice(1).length;i<=cnt;i++){
+		if(SCATEname[sIndex][i][0]) document.form3.m_cate.options[i-1]=new Option(SCATEname[sIndex][i][0],SCATEnum[sIndex][i][0]);
+		else document.form3.m_cate.options[i-1]=new Option(SCATEname[sIndex][i],SCATEnum[sIndex][i]);
+	}
+	if(cnt==0) {
+		document.form3.m_cate.options[0]=new Option('3차분류를 생성할 수 있는 2차분류가 없습니다','');
+	}
+}
+<? 
+if($cnts>0) echo "document.form3.big_cate.onchange();\n";
+
+if($_GET['keep2']) { 
+	echo "myForm.cate1.value = '{$_GET['keep2']}';\n myForm.cate1.onchange();\n myForm.cate2.focus();\n";	 
+}
+if($_GET['keep3']) { 
+	echo "myForm.cate2.value = '{$_GET['keep3']}';\n myForm.cate2.onchange();\n myForm.cate3.focus();\n";	 
+}
+if($_GET['keep4']) { 
+	echo "myForm.cate3.value = '{$_GET['keep4']}';\n myForm.cate3.onchange();\n add_p.s_cate.focus();\n";
+}
+if($_GET['keep5']) { 
+	echo "myForm.cate1.value = '{$_GET['keep1']}:O';\n myForm.cate1.onchange();\n";
+	echo "myForm.cate2.value = '{$_GET['keep5']}:O';\n myForm.cate2.onchange();\n";
+	echo "form3.m_cate.value = '{$_GET['keep5']}';\n";
+}
+?>
+</script>
+<? include "../html/bottom_inc.html"; // 하단 HTML?>

@@ -1,0 +1,265 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" style="overflow-y:auto;">
+
+<!-- HEAD START -->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr" />
+<title>Quick View</title>
+<link rel="StyleSheet" HREF="{{skin2}}style.css" type="text/css" />
+<script type="text/javascript" src="../lib/lib.Function.js"></script>
+<script type="text/javascript" src="{{skin2}}skin.lib.Shop.js"></script>
+<script type="text/javascript" src="../lib/lib.lightBox.js"></script>
+<script type="text/javascript" src="../lib/lib.messageBox.js"></script> 
+<script type="text/javascript" src="../lib/lib.ajax.js"></script>
+
+<script type="text/javascript" >
+<!--
+shop_skin = '{{skin}}/';
+paths = "../";
+// -->
+</script>
+
+<body style="padding:0;margin:0">
+<script type="text/javascript" src="../lib/lib.ckForm.js"></SCRIPT>
+<form name="goodsForm" method="post" onsubmit="return false;" action="cart_ok.php">
+<input type='hidden' name='p_price' value='{{P_PRICE}}' />
+<input type='hidden' name='p_price2' value='{{P_PRICE2}}' />
+<input type='hidden' name='p_price3' value='{{P_PRICE3}}' />
+<input type='hidden' name='p_total' value='{{P_TOTAL}}' />
+<input type='hidden' name='p_total2' value='{{P_TOTAL2}}' />
+<input type='hidden' name='p_reserve' value='{{P_RESERVE}}' />
+<input type='hidden' name='p_sale' value='{{MY_SALE}}' />
+<input type='hidden' name='p_cate' value='{{cate}}' />
+<input type='hidden' name='p_number' value='{{uid}}' />
+<input type='hidden' name='p_carr' value='{{P_CARR}}' />
+<input type='hidden' name='pop' value="1" />
+<input type='hidden' name='type' />
+<input type='hidden' name='defQty' value='{{DEF_QTY}}' />
+<input type='hidden' name='sQty' value='{{S_QTY}}' />
+<input type='hidden' name='goodsUnit' value='{{GOODS_UNIT}}' />
+<input type='hidden' name='ckLogin' value='{{CKLOGIN}}' />
+<input type='hidden' name='page' value='{{page}}' />
+<input type='hidden' name='direct' value='N' />
+<input type='hidden' name='ckCart' value='{{ckCart}}' />
+<input type='hidden' name='p_option' />
+<input type='hidden' name='p_op' value='0' />
+<input type='hidden' name='p_op_cnt' value='{{op_cnt}}' />
+<input type='hidden' name='cp_type' value='{{CP_TYPE}}' />
+<input type='hidden' name='cp_sale' value='{{CP_SALE}}' />
+<input type='hidden' name='cp_sale_type' value='{{CP_SALE_TYPE}}' />
+
+<div id="pageView" style="padding-left:10px;margin-top:10xp;">	
+	<div class="left" style="width:280px;">
+		<div style='height:30px'>
+			<div class="left"><img src="img/shop/ttl_goods_point.gif" alt="상품고객평가" /></div>
+			<div>
+				<div class="num left tleft" style="padding:1px 10px 0 0;">
+					<img src="img/shop/star_num{{SUM1}}.gif" alt="" title="" /><img src="img/shop/star_num{{SUM2}}.gif" alt="" title="" /><img src="img/shop/star_jum.gif" alt="" title="" /><img src="img/shop/star_num{{SUM3}}.gif" alt="" title="" />
+				</div>
+				<div class="left" style="padding:2px 0 0 0;">
+					<div style="background:url(img/shop/icon_star_bg.gif);width:65px;height:12px;margin-bottom:1px;">
+						<div style="width:{{SUM4}}%;overflow:hidden"><img src="img/shop/icon_star.gif" /></div>
+					</div>
+				</div>
+				<div class="small left" style="margin:2px 0 0 6px;">이용후기 : <font class="num mColor">{{CNT_AFTER}}</font>건</div>				
+			</div>
+		</div>
+		<div style="width:280px;height:260px"><img src='{{GOODS_IMG}}' border='0' id='viewImage' width="{{GOODS_IMG_WIDTH}}" alt='{{GOODS_NAME}}' /></div>	
+		<!-- DYNAMIC @is_ot_img@ -->
+		<div style="height:74px">
+			<div class="left" style="margin:40px 0 0 0"><img src="img/shop/icon_arrow_prev2_off.gif" class="hand" onclick="oViewBoxDiv.scroll('left');" id="oViewBoxDivImgPrev" /></div>
+			<div style="position:relative;width:260px;height:74px;overflow:hidden;" class="left">
+				<div id='oViewBox' style="position:relative;left:0px;top:0px;width:{{OWIDTH}}px">
+					<div style="margin-top:16px;">
+						<!-- DYNAMIC @loop_ot_img@ -->
+						<div class="left" style="margin:0 4px 0 4px">
+							<img src="{{OT_IMG1}}" width="55" height="55" style="border:1px solid #DADADA" onmouseover="chImage('{{OT_IMG2}}');" onmouseout="chImage('{{GOODS_OIMG}}');" class="hand" alt="상품다른이미지" title="상품다른이미지" /> 
+						</div>			
+						<!-- DYNAMIC @loop_ot_img@ -->
+						<!-- DYNAMIC @no_ot_img@ -->
+						<div class="left" style="margin:0 4px 0 4px"><img src="img/shop/no_ot_img.gif" width="55" height="55" style="border:1px solid #DADADA" alt="상품이미지없음" title="상품이미지없음" /></div>			
+						<!-- DYNAMIC @no_ot_img@ -->
+					</div>
+				</div>
+			</div>
+			<div class="left" style="margin:40px 0 0 0;"><img src="img/shop/icon_arrow_next2_off.gif" class="hand" onclick="oViewBoxDiv.scroll('right');" id="oViewBoxDivImgNext" /></div>
+		</div>
+
+		<script>
+		oViewBoxDiv = new itemScroll3('oViewBox','{{OCNT}}','4','65');
+		</script>
+		<!-- DYNAMIC @is_ot_img@ -->
+
+		<div style="padding:20px 0 0 10px">
+			<div class="goodsShare">
+				<div class="left" style="padding-right:10px;"><img src="img/shop/ttl_goods_share.gif" alt="상품공유" /></div>
+				<ul>
+					<li>
+						<img src="img/shop/share_facebook.gif" class="hand" onclick="sendSNS('fa','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="페이스북 공유하기" title="페이스북 공유하기" />
+					</li>
+					<li>
+						<img src="img/shop/share_twitter.gif" class="hand" onclick="sendSNS('tw','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="트위터 공유하기" title="트위터 공유하기" />
+					</li>
+					<li>
+						<img src="img/shop/share_metoday.gif" class="hand" onclick="sendSNS('me','{{SHARE_GOODS}}','{{SHARE_URL}}','{{SHARE_TAG}}');" alt="미투데이 공유하기" title="미투데이 공유하기" />
+					</li>
+					<li>
+						<img src="img/shop/share_yozm.gif" class="hand" onclick="sendSNS('yz','{{SHARE_GOODS}}','{{SHARE_URL}}');" alt="요즘 공유하기" title="요즘 공유하기" />
+					</li>
+					<li>
+						<img src="img/shop/share_mail.gif" class="hand" onclick="sendSNS('ml','','','','{{uid}}',530,540);" alt="메일 보내기" title="메일 보내기" />
+					</li>
+					<li>
+						<img src="img/shop/share_copy.gif" class="hand" onclick="sendSNS('cp','','','','{{uid}}',550,420);" alt="상품 퍼가기" title="상품 퍼가기" />
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>		
+	<div class="goodsInfo">
+		<div style="width:1px; height:280px;float:left;overflow:hidden;">&nbsp;</div>
+		<div class="tleft">
+			<font class="title bold">{{GOODS_NAME}} {{GOODS_ICON}}</font>
+		</div>			
+		<div style="margin:8px 0;height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<ul>
+			<!-- DYNAMIC @is_oprice@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_cprice.gif" alt="소비자가격" /></div>
+				<div class="goodsText gray num"><s>{{GOODS_OPRICE}}</s></div>
+			</li>
+			<!-- DYNAMIC @is_oprice@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_price.gif" alt="판매가격" /></div>
+				<div class="goodsText bold num" id="prices">{{GOODS_ORIG_PRICE}}</div>					
+			</li>
+			<!-- DYNAMIC @is_my_sale@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_sale.gif" alt="할인가" /></div>
+				<div class="goodsText small gray"><font class="num bold orange" id="prices2">{{GOODS_PRICE}}</font> ({{TTL}}할인 <font class="num orange">{{MY_SALE}}%</font>)&nbsp;</div>					
+			</li>
+			<!-- DYNAMIC @is_my_sale@ -->
+			<!-- DYNAMIC @is_cupon@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_coupon_price.gif" alt="쿠폰적용가격" /></div>
+				<div class="right" style="padding-left:8px;position:relative;background-color:#fff">
+					<img src="img/shop/btn_cupon.gif" class="hand" onclick="cuponDown2({{CUID}},{{uid}});" alt="할인쿠폰다운" title="할인쿠폰다운" />
+				</div>
+				<div class="goodsText num orange bold" id="cp_prices">{{GOODS_CPRICE}}</div>					
+			</li>
+			<!-- DYNAMIC @is_cupon@ -->
+			<!-- DYNAMIC @is_reserve@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_reserve.gif" alt="적립금" /></div>
+				<!-- DYNAMIC @is_my_point@ -->
+				<div class="right small gray" style='padding:4px 0 0 8px;background-color:#fff;'>({{TTL}}추가적립 <font class="num orange">{{MY_POINT}}%</font>)&nbsp;</div>
+				<!-- DYNAMIC @is_my_point@ -->
+				<div class="goodsText num gray" id="reserves">{{GOODS_RESERVE}}원</div>					
+			</li>
+			<!-- DYNAMIC @is_reserve@ -->
+			<!-- DYNAMIC @is_model@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_model.gif" alt="모델명" /></div>
+				<div class="goodsText small gray">{{GOODS_MODEL}}</div>
+			</li>
+			<!-- DYNAMIC @is_model@ -->
+			<!-- DYNAMIC @is_comp@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_comp.gif" alt="제조사" /></div>
+				<div class="goodsText small gray">{{GOODS_COMP}}</div>
+			</li>
+			<!-- DYNAMIC @is_comp@ -->
+			<!-- DYNAMIC @is_made@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_made.gif" alt="원산지" /></div>
+				<div class="goodsText small gray">{{GOODS_MADE}}</div>
+			</li>
+			<!-- DYNAMIC @is_made@ -->
+			<!-- DYNAMIC @is_brand@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_brand.gif" alt="브랜드" /></div>
+				<div class="right" style="padding-left:8px;position:relative;background-color:#fff">
+					<img src="img/shop/btn_brand.gif" border="0" alt="브랜드샵가기" title="브랜드샵가기" class="hand" onclick="parent.location.href='../{{Main}}?channel=brand&uid={{PLUS}}';" /></a>
+				</div>
+				<div class="goodsText small gray">{{GOODS_BRAND}}</div>					
+			</li>
+			<!-- DYNAMIC @is_brand@ -->
+			<!-- DYNAMIC @is_event@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_event.gif" alt="관련이벤트" /></div>
+				<div class="goodsText small gray"><a href='#' onclick="parent.location.href='../{{Main}}?channel=event&amp;uid={{PLUS}}';">{{GOODS_EVENT}}</a></div>
+			</li>
+			<!-- DYNAMIC @is_event@ -->				
+			<!-- DYNAMIC @is_carr@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_carr.gif" alt="개별배송비" /></div>
+				<div class="goodsText small gray">{{GOODS_CARR}}</div>
+			</li>
+			<!-- DYNAMIC @is_carr@ -->
+			<!-- DYNAMIC @is_carr_free@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_carr2.gif" alt="배송비" /></div>
+				<div class="goodsText small gray">배송비 무료 상품입니다.</div>
+			</li>
+			<!-- DYNAMIC @is_carr_free@ -->
+			<!-- DYNAMIC @is_option@ -->
+			<li>
+				<div class="small left bold" style="background-color:#fff">
+					<!-- DYNAMIC @is_op_img@ -->
+					<img src="img/shop/ttl_goods_option{{o}}.gif" alt="{{OP_TITLE}}" />
+					<!-- DYNAMIC @is_op_img@ -->
+					<!-- DYNAMIC @is_op_text@ -->
+					<div style="padding:4px 8px 0 8px;">{{OP_TITLE}}</div>
+					<!-- DYNAMIC @is_op_text@ -->						
+				</div>
+				<div class="goodsText small gray" style="padding-top:1px;">
+					<select name='p_op{{i}}' class='opSelect' onchange='ckOption(this)'>{{OP_VALUES}}</select>
+					<input type='hidden' name='p_op_name{{i}}' value='{{OP_TITLE}}' />
+				</div>
+			</li>			
+			<!-- DYNAMIC @is_option@ -->			
+			<!-- DYNAMIC @no_limit@ -->
+			<li>
+				<div class="left"><img src="img/shop/ttl_goods_qty.gif" alt="구매수량" /></div>
+				<div class="right" style="padding:1px 0 0 1px;background-color:#fff">
+					<div style="width:13px;height:10px;overflow:hidden;"><img src="img/shop/btn_qty_up.gif" alt="plus" class="hand" onclick="cgQty('p');" style="vertical-align:top" /></div>
+					<div style="width:13px;height:10px;overflow:hidden;padding-top:1px;"><img src="img/shop/btn_qty_down.gif" alt="minus" class="hand" onclick="cgQty('m');" style="vertical-align:top" /></div>
+				</div>	
+				<div class="goodsText small gray" style="padding-top:1px;">
+					<input type="text" name="p_qty" size="4" value="{{DEF_QTY}}" class="inputs black num" onKeydown="onlyNum(this);" onKeyup="onlyNum(this);" onchange="ckTotal()" style="text-align:right;padding-right:3px;" /> 
+				</div>
+			</li>
+			<!-- DYNAMIC @no_limit@ -->
+			<!-- DYNAMIC @is_limit@ -->
+			<li>					
+				<div class="goodsText small bold gray">현재 상품은 품절입니다.</div>
+			</li>
+			<!-- DYNAMIC @is_limit@ -->	
+		</ul>
+		<div class="blank">&nbsp;</div>
+		<div style="height:1px;background-color:#ccc;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<div class="tleft" style="padding:10px; 0 0 14px;">
+			<div class="left"><img src="img/shop/ttl_goods_total.gif" alt="총합계금액" /></div>
+			<div class="left mColor bold num" style="font-size:14px;padding-top:4px;" id="totals">{{GOODS_TOTAL}}</div>
+			<div class="left"><img src="img/shop/ttl_goods_won.gif" alt="원" /></div>
+		</div>
+		<div class="blank" style="height:20px;">&nbsp;</div>
+		<div style="height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<div class="blank" style="height:20px;">&nbsp;</div>
+		<div class="tleft">
+			<!-- DYNAMIC @is_limit2@ -->
+			<img src="img/shop/btn_buy.gif" class="hand" onclick="return ckGoods('order');" alt="구매하기" title="구매하기" />
+			<img src="img/shop/btn_cart.gif" class="hand" onclick="return ckGoods('cart');" alt="장바구니담기" title="장바구니담기"  />
+			<!-- DYNAMIC @is_limit2@ -->
+			<!-- DYNAMIC @is_limit3@ -->
+			<img src="img/shop/btn_buy.gif" alt="구매하기" title="구매하기" />
+			<img src="img/shop/btn_cart.gif" alt="장바구니담기" title="장바구니담기"  />
+			<!-- DYNAMIC @is_limit3@ -->
+			<img src="img/shop/btn_detail.gif" class="hand" onclick="parent.location.href='../{{Main}}?channel=view&amp;uid={{uid}}&amp;cate={{cate}}';" alt="상품상세보기" title="상품상세보기"  />
+		</div>	
+	</div>	
+</div>
+<div class="blank" style="height:20px;">&nbsp;</div>
+</form>
+</body>
+</html>

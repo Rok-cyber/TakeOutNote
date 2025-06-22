@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="ko" lang="ko">
+
+<HEAD>
+<TITLE>customer_after.html</TITLE>
+<LINK rel="StyleSheet" HREF="../style.css" type="text/css" title="style" />
+</HEAD>
+
+<BODY style="margin:0px;text-align:left">
+
+<div class="bold" style="height:24px;">
+	<img src="../img/bar_icon.gif" align="absmiddle" /> customer_after.html (이용후기 모음 페이지)
+</div>
+<div style="padding-left:10px;">
+	<table border="0" cellpadding="0" cellspacing="4" width="100%" bgcolor="#EEEEEE">
+	<tr>
+		<td>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#999999">
+			<tr>
+				<td>
+ 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+					<tr height="26"> 
+						<td class="gr_bg" width="40%" style="padding-left:16px"><font class="small bTitle">*&nbsp;치환코드</font></td>
+						<td class="gr_bg" width="60%" style="padding-left:8px"><font class="small bTitle">*&nbsp;치환되는 값</font></td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CUS_MENU}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">고객센터 레프트 메뉴 (customer_cate.html 이용)</td>
+					</tr>		
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC10}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">10개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC20}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">20개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC30}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">30개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{SEC50}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">50개 정렬일때 선택</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{CNT_AFTER}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">이용후기 등록글 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{PAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">현재 페이지</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{TOTAL_PAGE}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">총 페이지 수</td>
+					</tr>	
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{limit}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">리스트 출력 수</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{field}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">검색한 검색필드</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{word}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">검색한 검색어</td>
+					</tr>
+					<tr height="26"> 
+						<td bgcolor="#EFEFEF" width="30%" style="padding-left:16px"><font class="eng bTitle">{{afterstr}}</font></td>
+						<td bgcolor="#FAFAFA" width="70%" style="padding-left:8px">추가 파라미터</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @no_after@ --></font><br/>
+			. . . (이용후기가 없을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @no_after@ --></font>
+		</div>
+	</div>
+	
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;">
+			<font class="blue">&lt!-- DYNAMIC @is_loop@ --></font><br/>
+			. . . (이용후기가 있을 경우 나타남)<br/>
+			<font class="blue">&lt!-- DYNAMIC @is_loop@ --></font>
+		</div>
+	</div>
+
+	<div style="clear:both;width:99%;border:1px solid #999;background-color:#FAFAFA;margin-top:10px;">
+		<div style="padding:10px;" class="blue">
+			리스트 결과를 AJAX를 이용해 받아와서 아래 함수를 호출후 내용이 나타남<br/><br/>
+rtnRowAfter(obj,num,point,title,name,buy,date,content,mod,uid,name2,link,image,dragd)<br/>
+obj 	: list_after (id)<br/>
+num	: 출력 번호<br/>
+point	: 평점<br/>
+title	: 제목<br/>
+name	: 이름<br/>
+buy	: 구매자가 등록했을 경우<br/>
+date	: 등록일<br/>
+content	: 내용<br/>
+mod	:수정일 경우<br/>
+uid	: 등록 uid<br/>
+name2	: 상품명<br/>
+link	: 상품 상세 페이지 링크주소<br/>
+dragd	: 드래그정보<br/><br/>
+
+해당 정보를 받아서 DOM형태로 코드 생성 후 출력<br/>
+
+		</div>
+	</div>
+
+    
+	<div style="height:20px;"></div>
+</div>
+
+
+
+</BODY>
+</html>

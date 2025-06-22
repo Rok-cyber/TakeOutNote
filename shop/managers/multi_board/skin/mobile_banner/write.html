@@ -1,0 +1,112 @@
+<script language="javascript">
+<!--
+function ckIt() {      
+	form=document.signForm;
+	if(!form.name.value) {
+		alert('배너명을 입력 하세요.');
+		form.name.focus();
+		return false;
+	}
+	if(!form.banner.value && form.ckd.value !='modify') {
+		alert('배너를 등록하세요.');
+		form.banner.focus();
+		return false;
+	}   
+	form.submit();
+	return false;
+}
+
+function ckCate(obj) {
+	f = document.signForm;
+	document.getElementById("cateDiv").style.display = 'none';
+}
+//-->
+</script>
+
+<table width="100%" border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+    <form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+	<input type=hidden name=ckd value={{mode}}>
+	<input type="hidden" name="cate" value="" />
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width=120><font class="small bTitle">&nbsp;&nbsp;*&nbsp;출력 위치</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px;">
+								<div class="left" style="width:100px">
+								 	<input type=radio name=location {{CKD11}} id='loc1' value=1 onfocus="blur();"><label for='loc1'>메인1(롤링)</label>
+								</div>
+								<div class="left" style="width:100px">
+									<input type=radio name=location {{CKD12}} id='loc2' value=2 onfocus="blur();"><label for='loc2'>메인2</label>
+								</div>								
+							</td>
+						</tr>									
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배너명</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=name value='{{FORM7}}' size=80></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;상태</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=radio name=status id='sta1' value='1' {{CKD6}} onfocus=blur();><label for='sta1'>사용</label> <input type=radio name=status id='sta2' value='2' {{CKD7}} onfocus=blur();><label for='sta2'>일시정지</label></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타겟</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=radio name=target id='tar1' value='1' {{CKD8}} onfocus=blur();><label for='tar1'>현재창</label> <input type=radio name=target id='tar2' value='2' {{CKD9}} onfocus=blur();><label for='tar2'>새창</label></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;종료 날짜</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=edate value='{{FORM8}}' size=10 onfocus="new CalendarFrame.Calendar(this)">&nbsp;&nbsp;<font class="small">미선택시 종료 안함</font>
+								<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+									<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe>
+								</div>
+							</td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;배너</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=file class=ta name=banner value='{{FORM2}}' size=50></td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;링크 주소</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=link value='{{FORM3}}' size=80></td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      
+						<tr>
+							<td colspan=2 align=middle height=30 class=gr_bg>등록된 배너 <font class='eng'>{{IMG}}</font></td>
+						</tr>
+						<tr>
+							<td colspan=2 align=middle bgcolor='ffffff'>{{IMG2}}</td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      			   	
+
+						<tr height=44>
+							<td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 배너의 가로 사이즈는 메인1 : <font class=eng>800px</font>, 메인2 : <font class=eng>350px</font><br />
+									! 배너는 스킨에 따라 지원하지 않는 곳이 있으니 스킨에서 해당 위치에 배너가 지원되는지 확인 하기시 바랍니다.									
+								</div>
+								<div id="sBtn1" style="float:right;padding-right:6px;padding-top:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>
+						</tr>							
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=20></td></tr>
+</table>

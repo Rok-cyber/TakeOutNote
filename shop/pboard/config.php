@@ -1,0 +1,1 @@
+<?||localhost||takeoutnote_shop_db_sample||takeoutnote_sample||subys.com_sample||a6d5c||?>

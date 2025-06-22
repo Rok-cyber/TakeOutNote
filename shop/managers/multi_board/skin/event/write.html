@@ -1,0 +1,569 @@
+<script language="javascript">
+<!--
+
+var tmp_scate = new Array();
+var tmp_sgoods = new Array();
+var tmp_sbrand = new Array();
+
+function ckIt() {      
+	form=document.signForm;
+
+	if(!form.name.value) {
+		alert('이벤트 제목을 입력하세요.');
+		form.name.focus();
+		return false;
+	}
+	if(!form.s_date.value) {
+		alert('시작일을 입력히세요.');
+		form.s_date.focus();
+		return false;
+	} 
+	if(!form.e_date.value) {
+		alert('종료일을 입력히세요.');
+		form.e_date.focus();
+		return false;
+	} 
+   
+	form.code.value = code.getHtml();
+
+	if(form.range[0].checked==true) {
+		form.scate.value = '';
+		form.sgoods.value = '';
+	}
+	else if(form.range[1].checked==true) {
+		for(i=0;i<tmp_scate.length;i++){
+			if(tmp_scate[i]!='') {
+				if(!form.scate.value) form.scate.value = tmp_scate[i];
+				else form.scate.value = form.scate.value + '|' + tmp_scate[i];
+			}
+		}
+
+		for(i=0;i<tmp_sgoods.length;i++){
+			if(tmp_sgoods[i]!='') {
+				if(!form.sgoods.value) form.sgoods.value = tmp_sgoods[i];
+				else form.sgoods.value = form.sgoods.value + '|' + tmp_sgoods[i];
+			}
+		}
+	}
+	else {
+		for(i=0;i<tmp_sbrand.length;i++){
+			if(tmp_sbrand[i]!='') {
+				if(!form.sbrand.value) form.sbrand.value = tmp_sbrand[i];
+				else form.sbrand.value = form.sbrand.value + '|' + tmp_sbrand[i];
+			}
+		}
+	}
+
+	form.submit();
+	return false;
+}
+
+
+function secCate(){
+	f = document.signForm;
+	f.range[1].checked = true;
+	cList = document.getElementById("cateList");
+	cnt = tmp_scate.length;
+
+	if(!f.seccate.value) {
+		alert('카테고리를 선택 하세요');
+		return false;
+	}
+		
+	for(i=0;i<cnt;i++) {
+		if(tmp_scate[i]==f.seccate.value) {
+			alert('이미 선택하신 분류 입니다.');
+			return false;
+		}		
+	}
+	
+	cName = "- " + f.cate1.options[f.cate1.selectedIndex].text;
+	if(f.cate2.value!=' ==== 2차분류 ==== ') {
+		
+		for(i=0;i<cnt;i++) {
+			if(tmp_scate[i]==f.seccate.value.substr(0,3)+'000000000') {
+				alert('이미 선택하신 상위분류가 존재 합니다.');
+				return false;
+			}		
+		}
+		cName = cName + ' > ' + f.cate2.options[f.cate2.selectedIndex].text;
+
+	}
+	if(f.cate3.value!=' ==== 3차분류 ==== ') {
+		
+		for(i=0;i<cnt;i++) {
+			if(tmp_scate[i]==f.seccate.value.substr(0,6)+'000000') {
+				alert('이미 선택하신 상위분류가 존재 합니다.');
+				return false;
+			}		
+		}
+		cName = cName + ' > ' + f.cate3.options[f.cate3.selectedIndex].text;
+
+	}
+	if(f.cate4.value!=' ==== 4차분류 ==== ') {
+
+		for(i=0;i<cnt;i++) {
+			if(tmp_scate[i]==f.seccate.value.substr(0,9)+'000') {
+				alert('이미 선택하신 상위분류가 존재 합니다.');
+				return false;
+			}		
+		}
+		
+		cName = cName + ' > ' + f.cate4.options[f.cate4.selectedIndex].text;
+	}
+	cName = cName + '&nbsp;&nbsp;<img src="img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delCate('+f.seccate.value+');" />';
+
+	var nList = document.createElement("div");
+	nList.id = "list_"+f.seccate.value;	
+	nList.style.height = '18px';
+	nList.className = 'small';
+	nList.style.padding = '6px 0 0 6px';
+	nList.innerHTML = cName;
+    
+	cList.appendChild(nList);
+	cnts = document.getElementById("cateList").childNodes.length;
+	
+	tmp_scate[cnt] = f.seccate.value;
+
+	if(cnts==1) cList.style.display = 'block';	
+	return false;
+}
+
+function delCate(num) {
+	if(!num) return;
+	cList = document.getElementById("cateList");
+	element = document.getElementById('list_'+num);
+
+	element.innerHtml ='';
+	cList.removeChild(element);
+	
+	for(i=cnt=0;i<tmp_scate.length;i++){
+		if(tmp_scate[i]==num) tmp_scate[i]='';
+		if(tmp_scate[i]) cnt++;
+	}
+        
+	if(cnt==0) {			
+		cList.style.display='none';	
+	}		
+}
+
+function secGoods(str,ck) {
+	if(!str) return;
+	var form = document.signForm;	
+	form.range[1].checked = true;
+		
+	aObj = new AjaxObject; 
+	tmps = str.split(',');
+	tmps2 = ''; 
+		
+	for(i=0;i<tmps.length;i++){
+		cnt = tmp_sgoods.length;
+		cks = 0;
+		if(tmps[i]) {
+			for(j=0;j<cnt;j++) {
+				if(tmps[i]==tmp_sgoods[j]) {
+					cks = 1;
+					break;
+				}
+			}
+
+			if(cks==0) {				
+				tmp_sgoods[cnt] = tmps[i];	
+				if(!tmps2) tmps2 = tmps[i];
+				else tmps2 += ','+tmps[i];	
+			}
+		}
+	}	
+	if(tmps2) aObj.getHttpRequest("../shopping/goodsInfo.php?uid="+tmps2, "addGoods","data"); 
+	if(!ck) pLightBox.hide();	
+}
+
+function addGoods(data){
+	
+	if(typeof(data['error'])!='undefined') {
+		alert("리스트를 가져오는 중 에러가 발생했씁니다.");
+		return;
+	}
+	
+	if(typeof(data['item'])=='undefined') return;
+	var gList = document.getElementById("goodsList");
+	
+	for(i=0,cnt=data['item'].length;i<cnt;i++){		
+		nList = document.createElement("div");
+	
+		iHtml =  '<div style="text-align:center"><a href="{{SMain}}?channel=view&uid='+data['item'][i]['uid']+'" target=_blank  title="쇼핑몰 상세설명 보기">'+data['item'][i]['image']+'</a></div>';
+		iHtml += '<div style="padding-top:4px;height:26px;overflow:hidden"><a href="../shopping/goods_write.php?mode=modify&uid='+data['item'][i]['uid']+'" target=_blank  title="상품수정하기">'+data['item'][i]['name']+'</a></div>';
+		iHtml += '<div class="eng green">'+data['item'][i]['price']+'원 &nbsp;<img src="../shopping/img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delGoods('+data['item'][i]['uid']+');" /></div>';
+		
+		if(data['item'][i]['sout']!='') {
+			iHtml += '<div style="position:relative;left:0px;top:-123px;width:36px;height:16px;border:1px solid #ff6600;background-color:#fff" class="small orange"><div style="padding:3px 8px 0 8px;">'+data['item'][i]['sout']+'</div></div>';
+		}
+		nList.id = "goods_" + data['item'][i]['uid'];	
+		nList.className = 'small goodsDiv';
+		nList.innerHTML = iHtml;
+		
+		gList.appendChild(nList);
+	}
+	document.getElementById("noGoods").style.display = 'none';		
+}
+
+function delGoods(num) {
+	if(!num) return;
+	
+	gList = document.getElementById("goodsList");
+	element = document.getElementById('goods_'+num);
+	
+	element.innerHtml ='';
+	gList.removeChild(element);
+	
+	for(i=0;i<tmp_sgoods.length;i++){
+		if(tmp_sgoods[i]==num) tmp_sgoods[i]='';
+	}
+
+	for(i=cnt=0;i<tmp_sgoods.length;i++){
+		if(tmp_sgoods[i]!='') cnt++;
+	}
+        
+	if(cnt==0) {			
+		document.getElementById("noGoods").style.display = 'block';	
+	}			
+}
+
+function secBrand(){
+	f = document.signForm;
+	f.range[2].checked = true;
+	bList = document.getElementById("brandList");
+	cnt = tmp_sbrand.length;
+
+	if(!f.brand.value) {
+		alert('브랜드를 선택 하세요');
+		return false;
+	}
+		
+	for(i=0;i<cnt;i++) {
+		if(tmp_sbrand[i]==f.brand.value) {
+			alert('이미 선택하신 브랜드 입니다.');
+			return false;
+		}		
+	}
+	
+	bName = "- " + f.brand.options[f.brand.selectedIndex].text;	
+	bName = bName + '&nbsp;&nbsp;<img src="img/icon_del.gif" border="0" align="absmiddle" class="hand" onclick="delBrand('+f.brand.value+');" />';
+
+	var nList = document.createElement("div");
+	nList.id = "list_"+f.brand.value;	
+	nList.style.height = '18px';
+	nList.className = 'small';
+	nList.style.padding = '6px 0 0 6px';
+	nList.innerHTML = bName;
+    
+	bList.appendChild(nList);
+	cnts = document.getElementById("brandList").childNodes.length;
+	
+	tmp_sbrand[cnt] = f.brand.value;
+
+	if(cnts==1) bList.style.display = 'block';
+	
+	f.brand.value = '';
+	return false;
+}
+
+function delBrand(num) {
+	if(!num) return;
+	bList = document.getElementById("brandList");
+	element = document.getElementById('list_'+num);
+
+	element.innerHtml ='';
+	bList.removeChild(element);
+	
+	for(i=cnt=0;i<tmp_sbrand.length;i++){
+		if(tmp_sbrand[i]==num) tmp_sbrand[i]='';
+		if(tmp_sbrand[i]) cnt++;
+	}
+        
+	if(cnt==0) {			
+		bList.style.display='none';	
+	}		
+}
+//-->
+</script>
+
+<link href="../../pEdit/include/pEditor.css" type="text/css" rel="stylesheet" />
+<script src="../../pEdit/pEditor.js"></script>
+<script src="../../lib/lib.ajax.js"></script>
+
+<table width='100%' border=0  cellpadding=0 cellspacing=0 >
+<tr><td><img src="img/{{mode}}_title.gif" border=0 align=absmiddle></td></tr>
+<tr><td height=8></td></tr>
+<tr>
+	<td  valign=middle>
+		<form name="signForm" enctype='multipart/form-data' method="post" action="{{ACTION}}">
+		<table border=0 cellpadding=0 cellspacing=4 width=100% bgcolor=#EEEEEE>
+		<tr>
+			<td>
+				<table border=0 cellpadding=0 cellspacing=0 width=100% bgcolor=#999999>
+				<tr>
+					<td>
+	 					<table border="0" cellpadding="2" cellspacing="1" width="100%">
+						<tr height=30> 
+							<td class=gr_bg width="120"><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이벤트 제목</font></div></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class=ta name=name value='{{FORM1}}' size=80></td>
+						</tr>
+						<!-- DYNAMIC @is_modify@ -->
+						<tr height=30> 
+							<td class=gr_bg width="120"><div style='width:120px;'><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이벤트 링크주소</font></div></td>
+							<td bgcolor="#EFEFEF" class="eng">&nbsp;<a href="{{ELINKS}}" target="_blank">{{ELINKS}}</a></td>
+						</tr>
+						<!-- DYNAMIC @is_modify@ -->
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이벤트 기간</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text class="ta eng" name=s_date value='{{FORM2}}' size=10 onfocus="new CalendarFrame.Calendar(this)"> ~ <input type=text class="ta eng" name=e_date value='{{FORM3}}' size=10 onfocus="new CalendarFrame.Calendar(this)">
+							<div id="CalendarLayer" style="display:none; width:172px; height:175px">
+							<iframe name="CalendarFrame" src="../html/calendar.html" width="172" height="175" border="0" frameborder="0" scrolling="no"></iframe></div>
+							&nbsp;&nbsp;<font class="small">기간은 시작일 00:00분 부터 종료일 23:59분 까지 적용 받습니다.</font> 
+							</td>
+						</tr>			
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;제공할인률</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text  class="ta2 eng" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" name=sale value='{{FORM4}}' size=3 maxlength=3>%
+							<font class="small">회원 할인률과 중복시 할인률이 큰 경우만 적용됩니다.</font> 
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;추가적립금</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=text  class="ta2 eng" onkeydown="onlyNum(this);" onkeyup="onlyNum(this);" name=point value='{{FORM5}}' size=3 maxlength=3>%
+							<font class="small">회원 추가적립금과 중복시 적립금이 큰 경우만 적용됩니다.</font> 
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;이벤트 상품</font></td>
+							<td bgcolor="#EFEFEF" style="padding-left:6px">
+								<input type=radio name=range id='range1' value='1' {{CKD1}}> <label for='range1'>전체 상품</label> <br />
+								<input type=radio name=range id='range2' value='2' {{CKD2}}> <label for='range2'>특정 분류 및 특정 상품</label> <br />
+								
+								<div style='margin:8px 0 8px 0;clear:both;padding-left:6px;'>									
+									<div style='float:left;padding:4px 0 0 0;'>
+										<input type="hidden" name="scate">
+										<input type="hidden" name="seccate">
+										<font class="small bold">분류선택 : </font>
+									</div>
+
+									<div id="sBtn1" style="float:left;padding-left:4px;">
+										<a href="#" onclick="return secCate();"><span class="green">추가하기</span></a>	
+									</div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+
+									<div>
+										<select name="cate1"></select>
+										<select name="cate2"></select>
+										<select name="cate3"></select>
+										<select name="cate4"></select>
+									</div>
+									
+									<div id="cateList" style='margin-top:10px;width:600px;border:1px solid #dadada; background-color:#FFF;display:none;'></div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+								</div>
+
+								<div style='margin:8px 0 8px 0;clear:both;padding-left:6px;'>									
+									<div style='float:left;padding:4px 0 0 0;'>
+										<font class="small bold">상품선택 : </font>
+										<input type="hidden" name="sgoods">
+									</div>
+									
+									<div id="sBtn1" style="float:left;padding:0 0 0 4px;">
+										<a href="#" onclick="pLightBox.show('../shopping/search_list.php','iframe','860','500','■ 상품 찾기',10);return false;"><span class="green">상품검색하기</span></a>	
+										<a href="#" onclick="pLightBox.show('../shopping/input_code.php','iframe','500','300','■ 상품 코드입력',10);return false;"><span class="green">상품코드입력</span></a>
+									</div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+									
+									<div id="goodsList" style='width:600px;border:1px solid #dadada; background-color:#FFF;padding:2px;' class="clearfix">
+										<div style='height:138px;' id='noGoods' class="small">
+											<div style='padding-top:65px;text-align:center'>! 선택된 상품이 없습니다. 상품검색하기로 상품을 추가 하시기 바랍니다.</div>
+										</div>
+									</div>
+								</div>
+
+								<input type=radio name=range id='range2' value='3' {{CKD3}}> <label for='range3'>특정 브랜드</label> <br />
+
+								<div style='margin:8px 0 8px 0;clear:both;padding-left:6px;'>									
+									<div style="float:left">
+										<select name="brand"><option value="">브랜드 선택</option>{{BRAND_LIST}}</select>
+									</div>
+									<div id="sBtn1" style="float:left;padding-left:4px;">
+										<input type="hidden" name="sbrand">
+										<a href="#" onclick="return secBrand();"><span class="green">추가하기</span></a>	
+									</div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+									
+									<div id="brandList" style='width:600px;border:1px solid #dadada; background-color:#FFF;display:none;'></div>
+
+									<div style="clear:both;height:8px;overflow:hidden;">&nbsp;</div>
+								</div>
+							</td>
+						</tr>
+						<tr height=30> 
+							<td class=gr_bg><font class="small bTitle">&nbsp;&nbsp;*&nbsp;타이틀 이미지</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type=file class=ta name=img1 value='' size=50>&nbsp;&nbsp;<font class=small>{{IMGSIZE}}</font></td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->      
+						<tr>
+							<td colspan=2 align=middle height=30 class=gr_bg>등록된 타이틀 이미지 <font class='eng'>({{IMG}})</font></td>
+						</tr>
+						<tr>
+							<td colspan=2 align=middle bgcolor='ffffff'>{{IMG2}}</td>
+						</tr>
+						<!-- DYNAMIC @is_img@ -->
+						<tr height=28>
+							<td class=gr_bg><font class="bTitle small">&nbsp;&nbsp;*&nbsp;삽입 코드</font></td>
+							<td bgcolor="#EFEFEF">&nbsp;<input type='radio' name='code_use' value='Y' {{CKDY}} id="vaild1" /><label for="vaild1">사용</label> <input type='radio' name='code_use' value='N' {{CKDN}} id="vaild2"><label for="vaild2" />사용안함<label></TD>
+						</tr>
+						<tr height=120> 							
+							<td bgcolor="#FFFFFF" colspan="2">
+								<textarea name="code" id="code">{{FORM6}}</textarea>
+								<script>var code = new pEditor("code","../../pEdit","758","250","{{up_dir}}","basic","hide"); //에디터 생성</script>
+							</td>
+						</tr>
+						<tr height=36>
+                            <td  bgcolor="#ffffff" colspan=2  style='padding-left:6px;'>
+								<div style="float:left;padding-top:6px;" class='small'>
+									! 페이지 상단에 나타날 디자인을 꾸미시면 됩니다. {{HELP_SIZE}}<br />
+									! 한상품당 하나의 이벤트만 적용 가능하며 마지막으로 등록/수정된 이벤트가 상품에 적용 됩니다.
+								</div>
+								<div id="sBtn1" style="float:right;margin-top:4px;padding-right:6px;">
+									<a href="#" onclick="return ckIt();"><span class="blue">{{TMODE}}하기</span></a>
+									<a href="{{LIST}}"><span class="blue">{{TMODE}}취소</span></a>
+								</div>	
+							</td>							 
+						</tr>					
+						</table>
+					</td>
+				</tr>
+				</table>
+			</td>
+		</tr>
+		</table>
+		</form>
+	</td>
+</tr>
+<tr><td height=30></td></tr>
+</table>
+
+<script>
+
+{{tmps1}}
+{{tmps2}}
+
+for(i=0,cnt=CATEname.length;i<cnt;i++){
+    signForm.cate1.options[i]=new Option(CATEname[i][0],CATEnum[i][0]);	
+}
+
+signForm.cate2.options[0]=new Option(CATEname[0][1][0],CATEname[0][1][0])
+signForm.cate3.options[0]=new Option(CATEname[0][1][1][0],CATEname[0][1][1][0])
+signForm.cate4.options[0]=new Option(CATEname[0][1][1][1],CATEname[0][1][1][1])
+
+signForm.cate1.onchange=function(e){
+	for(i=signForm.cate2.length;i>0;i--){
+		signForm.cate2.options[i]=null;
+	}
+	for(i=signForm.cate3.length;i>0;i--){
+		signForm.cate3.options[i]=null;
+	}
+	for(i=signForm.cate4.length;i>0;i--){
+		signForm.cate4.options[i]=null;
+	}
+	
+	sIndex = signForm.cate1.selectedIndex;
+	if(sIndex!=0) {
+		for(i=1,cnt=CATEname[sIndex].slice(1).length;i<=cnt;i++){
+			if(CATEname[sIndex][i][0]) signForm.cate2.options[i]=new Option(CATEname[sIndex][i][0],CATEnum[sIndex][i][0]);
+			else signForm.cate2.options[i]=new Option(CATEname[sIndex][i],CATEnum[sIndex][i]);
+		}
+	}
+	signForm.seccate.value = signForm.cate1.value;	
+}
+
+signForm.cate2.onchange=function(e){
+	for(i=signForm.cate3.length;i>0;i--){
+		signForm.cate3.options[i]=null;
+	}	
+	for(i=signForm.cate4.length;i>0;i--){
+		signForm.cate4.options[i]=null;
+	}
+	
+	sIndex2 = signForm.cate2.selectedIndex;
+	if(sIndex2!=0) {
+		for(i=1,sIndex=signForm.cate1.selectedIndex,cnt=CATEname[sIndex][sIndex2].slice(1).length;i<=cnt;i++){	
+			if(typeof(CATEname[sIndex][sIndex2][i][0])!='undefined') { 		
+			signForm.cate3.options[i]=new Option(CATEname[sIndex][sIndex2][i][0],CATEnum[sIndex][sIndex2][i][0]);		
+			
+			}
+		}   
+		signForm.seccate.value = signForm.cate2.value;	
+	}
+	else signForm.seccate.value = signForm.cate1.value;
+}
+
+signForm.cate3.onchange=function(e){
+	for(i=signForm.cate4.length;i>0;i--){
+		signForm.cate4.options[i]=null;
+	}
+
+	sIndex3 = signForm.cate3.selectedIndex;
+	if(sIndex3!=0) {
+		for(i=1,sIndex=signForm.cate1.selectedIndex,sIndex2=signForm.cate2.selectedIndex,cnt=CATEname[sIndex][sIndex2][sIndex3].slice(1).length;i<=cnt;i++){
+			if(typeof(CATEname[sIndex][sIndex2][sIndex3][i])!='undefined') signForm.cate4.options[i]=new Option(CATEname[sIndex][sIndex2][sIndex3][i],CATEnum[sIndex][sIndex2][sIndex3][i]);
+		}
+		signForm.seccate.value = signForm.cate3.value;	
+	}
+	else signForm.seccate.value = signForm.cate2.value;
+}
+
+signForm.cate4.onchange=function(e){
+	sIndex=signForm.cate4.selectedIndex;   
+	if(sIndex!=0) signForm.seccate.value = signForm.cate4.value;	
+	else signForm.seccate.value = signForm.cate3.value;
+}
+
+<!-- DYNAMIC @loop_scate@ -->
+signForm.cate1.value = '{{CATE1}}';
+signForm.cate1.onchange();
+signForm.cate2.value = '{{CATE2}}';
+signForm.cate2.onchange();
+signForm.cate3.value = '{{CATE3}}';
+signForm.cate3.onchange();
+signForm.cate4.value = '{{CATE4}}';
+signForm.seccate.value = '{{CATE}}';
+secCate();
+<!-- DYNAMIC @loop_scate@ -->
+
+<!-- DYNAMIC @is_sgoods@ -->
+var initGoods = "{{FORM8}}";
+if(initGoods) {
+	secGoods(initGoods,'1');
+	tmp = initGoods.split(",");
+	for(i=0;i<tmp.length;i++){
+		tmp_sgoods[i] = tmp[i];
+	}	
+	
+}
+<!-- DYNAMIC @is_sgoods@ -->
+
+<!-- DYNAMIC @is_sbrand@ -->
+var initBrand = "{{FORM9}}";
+if(initBrand) {	
+	tmp = initBrand.split(",");	
+	for(i=0;i<tmp.length;i++){
+		signForm.brand.value = tmp[i];
+		secBrand(tmp[i]);
+		tmp_sbrand[i] = tmp[i];
+	}	
+	
+}
+<!-- DYNAMIC @is_sbrand@ -->
+
+pE[0] = code;
+</script>

@@ -1,0 +1,296 @@
+<!-- DYNAMIC @is_style@ -->
+<link rel="StyleSheet" HREF="style.css" type="text/css" />
+<!-- DYNAMIC @is_style@ -->
+
+<script type="text/javascript">
+<!--
+function PselectBox(id,fName) {	
+	this.id			= id;
+	this.iskin		= "";
+	this.itemName	= new Array();
+	this.itemValue	= new Array();
+	this.itemCnt	= 0;
+	this.fName		= fName;
+	this.secNum		= 0;
+	this.tCnt		= 0;
+	this.hide		= false;
+	this.fStyle		= "font-family:굴림,verdana;font-size:12px;";
+	this._tArea		= document.createElement("DIV");
+	this._sArea		= document.createElement("DIV");				
+	this._hArea		= document.createElement("DIV");					
+
+	this.img1 = new Image;
+	this.img2 = new Image;
+	this.img1.src = this.iskin+'img/icon_select_down.gif';
+	this.img2.src = this.iskin+'img/icon_select_up.gif';
+	   
+	this.addItem = function(name, value){ 
+		this.itemName[this.itemCnt]		= name;
+		this.itemValue[this.itemCnt]	= value;
+		this.itemCnt++;
+	}
+
+	this.show = function(mode){
+		var self = (this)?this:'';
+		var pBody = document.getElementById(this.id);			
+		if(document.all) {
+			this._tArea.style.styleFloat = 'left';
+			this._sArea.style.styleFloat = 'left';
+		}
+		else {
+			this._tArea.style.cssFloat = 'left';
+			this._sArea.style.cssFloat = 'left';
+		}
+
+		this._tArea.style.width		= (parseInt(pBody.style.width) - 22) + 'px';	
+		this._tArea.style.padding	= '2px 0 0 4px';	
+		this._tArea.style.height	= '16px';
+		this._tArea.style.overflow	= 'hidden';
+
+		this._tArea.innerHTML		= "<div style='"+this.fStyle+"'>"+this.itemName[0]+"</div>";
+		this._sArea.style.width		= '18px';	
+		this._sArea.style.height	= '16px';	
+		this._sArea.style.overflow	= 'hidden';
+		this._sArea.style.background	= "url("+this.iskin+"img/select_line.gif) repeat-y";
+
+		tag	= document.createElement("img");
+		tag.id				= "sImg"+this.id;
+		tag.src				= this.img1.src;
+		tag.style.cursor	= 'pointer';
+		tag.style.padding	= "7px 0 0 3px";
+		tag.onclick	= function() { self.open(this); }
+		this._sArea.appendChild(tag);
+		
+		this._hArea.style.position	= 'absolute';
+		this._hArea.style.clear		= 'both';		
+		this._hArea.style.top		= parseInt(pBody.style.height) + 1 + 'px';			
+
+		if(mode=='cate') {
+			this._hArea.style.left		= '-2px';
+			this._hArea.style.border	= '1px solid #CCC';
+			this._hArea.style.width		= parseInt(pBody.style.width) + 2 + 'px';
+		}
+		else {
+			this._hArea.style.left		= '-1px';
+			this._hArea.style.border	= '1px solid #999';
+			this._hArea.style.width		= parseInt(pBody.style.width) +'px';
+		}
+
+		this._hArea.style.borderTop	= '0px';
+		this._hArea.style.backgroundColor = '#FFF';
+		this._hArea.style.display	= 'none';		
+
+		for(i=1;i<=this.itemCnt;i++) {
+			tag	= document.createElement("div");			
+			tag.style.height	= '18px';			
+
+			if(i==1) tag.style.padding	= '2px 0 0 4px';			
+			else tag.style.padding	= '0px 0 0 4px';		
+			tag.cnt				= i;
+			tag.style.cursor	= 'pointer';
+			tag.onmouseover		= function() { this.style.backgroundColor = '#efefef'; }
+			tag.onmouseout		= function() { this.style.backgroundColor = ''; }
+
+			tag.innerHTML		= "<div style='"+this.fStyle+"'>"+this.itemName[i-1]+"</div>";
+			if(mode=='cate') tag.onclick = function() { self.secNum = this.cnt; self.movePage(); self.hide = true; self.mout(); }
+			else tag.onclick = function() { self.secNum = this.cnt; self.hide = true; self.mout(); }
+			this._hArea.appendChild(tag);
+		}
+		
+		pBody.appendChild(this._tArea);
+		pBody.appendChild(this._sArea);
+		pBody.appendChild(this._hArea);
+	}
+
+	this.initSelect = function(vls) {
+		this.hide = true;
+
+		for(i=1;i<=this.itemCnt;i++) {
+			if(this.itemValue[i-1]==vls) this.secNum = i;
+		}	
+		this.mout();
+	}
+
+	this.open = function(obj) {			
+		var self = (this)?this:'';
+		var obj2 = this._hArea;
+
+		obj.src = this.img2.src;
+		obj.style.padding	= '5px 0 0 4px';
+		obj.onclick = function() { self.hide = true; self.mout(); }
+		
+		obj2.style.display = 'block';		
+		obj2.onmouseout = function() { self.mout(); }
+	}
+
+	this.mout = function() {
+		var self = (this)?this:'';
+		var obj	 = this._hArea;				
+		var obj2 = document.getElementById("sImg"+this.id);
+
+		if(!this.hide) {			
+			obj.onmouseover = function() { self.secNumse = ''; self.hide = false; clearTimeout(tHide) } 
+			this.hide = true;
+			tHide = setTimeout(this.id+"s.mout()",500);
+			return;			
+		}			
+		obj.style.display	= 'none';
+		obj2.style.padding	= "7px 0 0 3px";
+		obj2.src			= this.img1.src;
+		obj2.onclick		= function() { self.open(this); }
+
+		this.hide			= false;
+		if(this.secNum!='') {			
+			this.fName.value = this.itemValue[this.secNum-1];
+			this._tArea.innerHTML = "<div style='"+this.fStyle+"'>"+this.itemName[this.secNum-1]+"</div>";
+			this.secNum = '';
+		} 		
+
+	}	
+}
+//-->
+</script>
+
+<div id="pb_sub">
+    
+	<div class="contentBox">
+		<div class="contentBoxIn clearfix">				
+			<div style="padding:10px 0 0 20px;">				
+				<form name="searchForm" method="post" action="{{Main}}{{searchstring}}">
+				<input type="hidden" name="field" value='{{field}}' />
+				
+				<div id='PsBox' class='left searchField' style="z-index:99999;width:80px; height:18px;"></div>
+				<script>
+					PsBoxs = new PselectBox('PsBox',document.searchForm.field);
+					PsBoxs.fStyle = "font-family:돋움,돋움체,Tahoma;font-size:8pt;letter-spacing:-1px;text-decoration:none;color:#333;padding-top:2px;";
+					PsBoxs.addItem('제목','subject');
+					PsBoxs.addItem('내용','comment');
+					PsBoxs.addItem('이름','name');
+					PsBoxs.show();
+
+					if(document.searchForm.field.value) {
+						PsBoxs.initSelect(document.searchForm.field.value);								
+					}
+				</script>
+				<div style="float:left;padding-left:2px;"><input type="text" name="word" size="40" class="whites default" style='border-color:#bbb;vertical-align:top' value="{{word}}" /></div>
+				<div style="float:left;padding-left:2px;"><input type="image" src="img/btn_search.gif" border="0" alt="검색" title="검색" /></div>	
+				<div style="float:left;padding-left:2px;"><a href="{{Main}}"><img src="img/btn_cancel.gif" border="0" alt="검색취소" title="검색취소" /></a></div>	
+				</form>					
+			</div>			
+			<div class="blank">&nbsp;</div>
+		</div>	
+	</div>	
+
+	<div id="pb_list_top">
+		<div style="clear:both;height:4px;">&nbsp;</div>
+		<div  class="pb_left_text">
+			<font class="pb_eng"><font class="pb_small">오늘</font> {{TODAY}} , <font class="pb_small">전체</font> {{TOTAL}} , {{PAGE}}/{{TOPAGE}} <font class="pb_small">페이지</font>.</font>
+		</div>
+		<div class="pb_right_text">
+			<form name="searchForm" method="post" action="{{Main}}{{searchstring}}">
+			<input type="hidden" name="field" value='{{field}}' />
+			<!-- DYNAMIC @is_cate@ -->			
+			<font class="pb_small">분류선택</font>
+			<select name="seccate" class="pb_default" onchange="document.cateForm.submit();">{{CATE}}</select>			
+			<!-- DYNAMIC @is_cate@ -->			
+			</form>			
+		</div>
+		<div style="clear:both;height:4px;overflow:hidden;">&nbsp;</div>
+	</div>
+
+	<div id="pb_list">
+        <table cellspacing="0" cellpadding="0" border="0" width="100%">
+			<col width="50" />	
+			<!-- DYNAMIC @is_man1@ -->
+			<col width="30"/>
+			<!-- DYNAMIC @is_man1@ -->
+			<col />
+			<col width="80" /> 
+			<col width="60" />        
+			<col width="95" />        						
+			<thead>
+            <tr height="28" style="background:url(img/bar_list_bg.gif) repeat-x;" align="center">
+			    <th scope="col" style="border-left:1px solid #dddddd;"><img src="img/ttl_list_num.gif" alt="번호" /></th>
+				<!-- DYNAMIC @is_man2@ -->
+				<th scope="col"><a href='#' onclick="ch_check(document.del)" class="pb_link"><b class="pb_default">√</b></a></th>
+				<!-- DYNAMIC @is_man2@ -->
+                <th scope="col"><img src="img/ttl_list_title.gif" alt="제목" /></th>
+				<th scope="col"><img src="img/ttl_list_name.gif" alt="이름" /></th>
+				<th scope="col"><img src="img/ttl_list_hit.gif" alt="조회수" /></th>
+				<th scope="col" style="border-right:1px solid #dddddd;"><img src="img/ttl_list_date.gif" alt="등록일" /></th>			
+            </tr>
+			</thead>
+			
+			<tbody>
+			<form method="post" name="del"><input type="hidden" name="Main" value="{{Main}}" />
+			
+			<!-- DYNAMIC @loop@ -->					
+			<tr align="center" height="26" onmouseover="this.style.backgroundColor='#FEFEFE';" onmouseout="this.style.backgroundColor='#FFFFFF';">
+				<td>
+					<!-- DYNAMIC @is_notice@ --><font class="pb_small">공지</font><!-- DYNAMIC @is_notice@ -->
+					<!-- DYNAMIC @is_num@ --><font class="pb_eng"><b>{{NUM}}</b></font><!-- DYNAMIC @is_num@ -->
+
+				</td>
+				<!-- DYNAMIC @is_man3@ -->
+				<td>{{DEL}}</td>
+				<!-- DYNAMIC @is_man3@ -->
+				<td align=left style='padding-left:8px;'>
+				    <!-- DYNAMIC @is_catename@ --><font class="pb_small" style="color:#3399ff">[{{CATENAME}}]</font><!-- DYNAMIC @is_catename@ -->
+					<a href="{{VLINK}}" class="pb_link pb_default">{{SUBJECT}}</a> 
+					<!-- DYNAMIC @is_mcnt@ -->&nbsp;<img src="img/icon_memo.gif" alt="memo" /><font class="pb_eng">{{MEMOCNT}}</font><!-- DYNAMIC @is_mcnt@ -->
+					<!-- DYNAMIC @is_file@ -->&nbsp;<img src="img/icon_file.gif" alt="file" /><!-- DYNAMIC @is_file@ -->
+					{{NEWS}}
+				</td>
+				<td style="overflow:hidden;">
+					<a href='{{SNLINK}}' title='이름으로 검색' class="pb_link pb_default">{{NAME}}</a>
+				</td>
+				<td><font class="pb_eng">{{HIT}}</font></td>
+				<td>
+					<!-- DYNAMIC @is_times@ --><font class="pb_eng"><b>Today, {{TIMES}}</b></font><!-- DYNAMIC @is_times@ -->
+					<!-- DYNAMIC @is_dates@ --><font class="pb_eng">{{D_MM}}/{{D_DD}}, {{TIMES}}</font><!-- DYNAMIC @is_dates@ -->
+				</td>					
+			</tr>			
+			<tr><td height="1" class="pb_bg" colspan="6"></td></tr>
+			<!-- DYNAMIC @loop@ -->		
+			
+			<!-- DYNAMIC @no_loop@ -->			
+			<tr height="100">
+				<td colspan="6" align="center" height="150"><img src="img/no_article.gif" alt="등록(검색)된글없음" /></td>
+			</tr>			
+			<tr><td height="1" class="pb_bg" colspan="6"></td></tr>
+			<!-- DYNAMIC @no_loop@ -->				
+			
+			<tr><td height="10" colspan="6"></td></tr>
+			</form>
+			</tbody>			
+		</table>
+	</div>
+	
+	<div id="pb_list_page">
+		<div class="pb_left_text" style="width:40%">
+			<a href="{{Main}}"><img src="img/btn_list.gif" alt="목록보기" /></a>			
+			<!-- DYNAMIC @is_write@ -->
+			<a href="{{WLINK}}"><img src="img/btn_write.gif" alt="등록하기" /></a>
+			<!-- DYNAMIC @is_write@ -->
+			<!-- DYNAMIC @is_man4@ -->
+			<a href="#" onclick="delSend(document.del);return false;"><img src="img/btn_delete.gif" alt="삭제하기" /></a>
+			<!-- DYNAMIC @is_man4@ -->            
+	    </div>
+		<div id="paging" class="pb_right_text pb_small">
+			<!-- DYNAMIC @define_pg@ -->
+			PAGING(box,,)
+			<!-- DYNAMIC @define_pg@ -->	
+		</div>
+	    
+		<!-- DYNAMIC @is_paging@ -->
+		<div style="clear:both; text-align:right">
+			<font class="pb_default">( 분할검색 : {{SEPALIMIT}}만건 )</font>&nbsp;&nbsp;
+			<!-- DYNAMIC @define_pg2@ -->
+			PAGING2(box,,)
+			<!-- DYNAMIC @define_pg2@ -->
+		</div>
+        <!-- DYNAMIC @is_paging@ -->
+	</div>
+	
+	<div style="clear:both;height:20px;">&nbsp;</div>
+</div>	

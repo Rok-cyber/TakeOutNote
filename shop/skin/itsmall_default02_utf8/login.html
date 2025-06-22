@@ -1,0 +1,116 @@
+<!-- MAIN LEFT START -->
+<div id="contentLeft">
+	<!-- 상품 카테고리 START -->	
+	{{CATE_MENU}}
+	<!-- @상품 카테고리 END -->	
+</div>
+<!-- @MAIN LEFT END -->
+
+<!-- MAIN CENTER START -->
+<div id="contentCenter">
+	<div id="subTitle">
+		<img src="img/member/ttl_login.gif" alt="로그인" title="로그인" />
+	</div>	
+	
+	<div class="clear" style="height:28px;">&nbsp;</div>
+	
+	<div class="loginInfo left" style="padding-left:25px;">
+		<div class="tleft"><img src="img/common/ttl_login.gif" alt="LOGIN" title="LOGIN" /></div>	
+		<div style="margin:8px 0 10px 0;height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<div>
+			<form name="logForm" method="post" action="{{sMain}}php/login_ok.php" onsubmit="return ckLoginForm(this);">
+			<input type="hidden" name="url" value="{{type}}" />
+			<input type="hidden" name="channel2" value="{{channel2}}" />
+			<ul class="left">
+				<li>
+					<div class="left"><img src="img/common/ttl_id.gif" alt="아이디" /></div>
+					<div class="goodsText"><input type="text" name="id" class="inputs black num" /></div>
+				</li>
+				<li>
+					<div class="left"><img src="img/common/ttl_passwd.gif" alt="비밀번호" /></div>
+					<div class="goodsText"><input type="password" name="passwd" class="inputs black num" /></div>
+				</li>
+			</ul>
+			<div class="left" style="padding-top:9px;">
+				<input type="image" src="img/common/btn_plogin.gif" border="0" alt="로그인" />
+			</div>
+			</form>
+		</div>
+		<div class="blank">&nbsp;</div>
+		<div style="height:1px;background-color:#ccc;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>			
+		<!-- DYNAMIC @is_osearch@ -->
+		<div class="blank" style="height:20px;">&nbsp;</div>
+		<div class="tleft"><img src="img/member/ttl_order_search.gif" alt="ORDER SEARCH" title="ORDER SEARCH" /></div>	
+		<div style="margin:8px 0 10px 0;height:1px;background-color:#38c1c9;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>
+		<div>
+			<form name="osearchForm" method="get" action="{{Main}}" onsubmit="return ckoSearch(this);">
+			<input type="hidden" name="channel" value="osearch" />
+			<ul class="left">
+				<li>
+					<div class="left"><img src="img/member/ttl_oname.gif" alt="주문자명" /></div>
+					<div class="goodsText"><input type="text" name="name" class="inputs black num" /></div>
+				</li>
+				<li>
+					<div class="left"><img src="img/member/ttl_ordernum.gif" alt="주문번호" /></div>
+					<div class="goodsText"><input type="text" name="order_num" class="inputs black num" /></div>
+				</li>
+			</ul>
+			<div class="left" style="padding-top:9px;">
+				<input type="image" src="img/member/btn_osearch.gif" border="0" alt="주문조회" />
+			</div>
+			</form>
+		</div>
+		<div class="blank">&nbsp;</div>
+		<div style="height:1px;background-color:#ccc;border-bottom:2px solid #f8f8f8;overflow:hidden;">&nbsp;</div>		
+		<div class="blank">&nbsp;</div>
+		<!-- DYNAMIC @is_osearch@ -->
+
+		<div style="padding-left:10px;">
+			<!-- DYNAMIC @is_logins@ -->
+			<div style="padding-top:30px;">
+				<div class="left tleft" style="width:235px;">
+					<img src="img/common/ttl_login_help1.gif" alt="회원가입을 하시면 더 많은 혜택이 있습니다" />
+				</div>	
+				<div class="left tleft" style="padding-top:10px;">
+					<a href="{{Main}}?channel=regist"><img src="img/common/btn_join.gif" alt="회원가입" /></a>
+				</div>
+			</div>
+			<!-- DYNAMIC @is_logins@ -->
+			<div class="blank" style="height:10px;">&nbsp;</div>
+			<div>
+				<div class="left tleft" style="width:235px;">
+					<img src="img/common/ttl_login_help2.gif" alt="회원 아이디를 잊으셨나요?" />
+				</div>	
+				<div class="left tleft">
+					<a href="{{Main}}?channel=idpwsearch"><img src="img/common/btn_search_id.gif" alt="아이디찾기" /></a>
+				</div>
+			</div>
+			<div class="blank" style="height:10px;">&nbsp;</div>
+			<div>
+				<div class="left tleft" style="width:235px;">
+					<img src="img/common/ttl_login_help3.gif" alt="비밀번호가 기억이 안나세요?" />
+				</div>	
+				<div class="left tleft">
+					<a href="{{Main}}?channel=idpwsearch"><img src="img/common/btn_search_passwd.gif" alt="비밀번호찾기" /></a>
+				</div>
+			</div>
+		</div>					
+	</div>
+	
+	<div class="left" style="width:20px;overflow:hidden;">&nbsp;</div>
+
+	<div class="left" style="width:300px;overflow:hidden;text-align:left;padding-top:56px;">
+		<!-- DYNAMIC @loop_banner@ -->
+		<div><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></div>
+		<!-- DYNAMIC @loop_banner@ -->	
+	</div>
+
+	<div class="blank" style="height:40px;">&nbsp;</div>
+</div>
+<!-- @MAIN CENTER END -->
+
+<script language="javascript">
+<!--
+document.logForm.id.focus();
+//-->
+</script>

@@ -1,0 +1,120 @@
+<?
+include "../ad_init.php";
+
+$MENU_ARR = Array();
+$MENU_ARR[0] = Array();
+$MENU_ARR[0][] = Array("상품관리","shopping/goods_list.php","m_shop.gif","N");
+$MENU_ARR[0][] = Array("분류관리","shopping/cate_manager.html","N","N");
+$MENU_ARR[0][] = Array("상품리스트","shopping/goods_list.php","Y","11","Y");
+$MENU_ARR[0][] = Array("상품등록","shopping/goods_write.php","Y","N");
+$MENU_ARR[0][] = Array("일괄상품등록","shopping/goods_adds.html","N","N");
+$MENU_ARR[0][] = Array("브랜드관리","multi_board/board.php?code=brand","N","12");
+$MENU_ARR[0][] = Array("이벤트관리","multi_board/board.php?code=event","N","0");
+$MENU_ARR[0][] = Array("상품평관리","multi_board/board.php?code=goods_point","N","N");
+$MENU_ARR[0][] = Array("상품Q&A관리","multi_board/board.php?code=goods_qna","Y","N");
+
+$MENU_ARR[1] = Array();
+$MENU_ARR[1][] = Array("주문/데이타관리","order/order_main.html","m_order.gif","N");
+$MENU_ARR[1][] = Array("주문관리","order/order_main.html","Y","1");
+$MENU_ARR[1][] = Array("일괄송장번호등록","order/order_carr.html","N","N");
+$MENU_ARR[1][] = Array("현금영수증관리","order/cash_tax_list.php","N","10");
+$MENU_ARR[1][] = Array("매출통계","etc/sale.php?mode=detail","Y","2");
+$MENU_ARR[1][] = Array("판매/클릭순위","order/goods_rank.php?mode=o1","N","3");
+$MENU_ARR[1][] = Array("데이타 관리","etc/data.php","N","N");
+
+$MENU_ARR[2] = Array();
+$MENU_ARR[2][] = Array("디자인/문서관리","design/main.html","m_design.gif","N");
+$MENU_ARR[2][] = Array("상/하단디자인관리","design/common.html","N","N");
+$MENU_ARR[2][] = Array("메인디자인관리","design/main.html","N","N");
+$MENU_ARR[2][] = Array("분류디자인관리","design/main2.html","N","N");
+$MENU_ARR[2][] = Array("메일발송디자인관리","design/mail.html","N","N");
+$MENU_ARR[2][] = Array("기본문서관리","design/document.html?mode=A","N","4");
+$MENU_ARR[2][] = Array("추가페이지관리","multi_board/board.php?code=add_page","N","N");
+$MENU_ARR[2][] = Array("스킨선택","design/skin.html","N","N");
+
+$MENU_ARR[3] = Array();
+$MENU_ARR[3][] = Array("회원관리(mail/sms)","member/member_list.php","m_member.gif","N");
+$MENU_ARR[3][] = Array("회원관리","member/member_list.php","Y","13","Y");
+$MENU_ARR[3][] = Array("회원등급관리","member/member_level.php","N","N");
+$MENU_ARR[3][] = Array("메일관리","member/mail_form.html?type=all","N","5");
+$MENU_ARR[3][] = Array("SMS관리","member/sms_conf.html","N","6");
+$MENU_ARR[3][] = Array("적립금관리","multi_board/board.php?code=reserve","N","N");
+$MENU_ARR[3][] = Array("쿠폰관리","member/cupon_list.php","N","7");
+$MENU_ARR[3][] = Array("회원탈퇴사유관리","multi_board/board.php?code=member_quit","N","N");
+
+$MENU_ARR[4] = Array();
+$MENU_ARR[4][] = Array("기타서비스관리","board/board_list.php","m_etc.gif","N");
+$MENU_ARR[4][] = Array("게시판관리","board/board_list.php","N","8");
+$MENU_ARR[4][] = Array("팝업관리","multi_board/board.php?code=popup","N","N");
+$MENU_ARR[4][] = Array("배너관리","multi_board/board.php?code=banner","N","N");
+$MENU_ARR[4][] = Array("검색어관리","multi_board/board.php?code=search","N","N");
+$MENU_ARR[4][] = Array("자동완성검색어관리","multi_board/board.php?code=auto_search","N","N");
+$MENU_ARR[4][] = Array("접속통계","etc/count.php?channel=hour","Y","9");
+$MENU_ARR[4][] = Array("가격비교엔진관리","etc/compare.html","N","N");
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<HTML>
+<HEAD>
+<TITLE>자주 사용하는 메뉴 설정</TITLE>
+<link rel=StyleSheet HREF='../html/style.css' type=text/css title=style>
+</HEAD>
+
+<BODY style="padding:0;margin:0;">
+
+<div>
+	<form name='menuForm' method='post' action='menu_conf_ok.php'>
+	<input type='hidden' name='mode' value='menu' />
+	<div style="padding:20px 0 0 20px; width:700px">
+		<table border='0' cellpadding='0' cellspacing='0' width='100%'>
+		<tr>
+			<td>
+
+<? 
+$sql = "SELECT code FROM mall_aconf WHERE mode='M'";
+$menus = $mysql->get_one($sql);
+$menus = explode("|",$menus);
+
+for($i=0,$cnt=5;$i<$cnt;$i++) {
+	$i2 = $i+1;
+	echo "					
+				<div style='clear:both;height:28px;'>
+					<div style='height:8px;overflow:hidden;'>&nbsp;</div>
+					<img src='../html/img/ttl_tmenu{$i2}.gif' border='0' alt='{$MENU_ARR[$i][0][0]}' />
+				</div>					
+	";
+	for($j=1,$cnt2=count($MENU_ARR[$i]);$j<$cnt2;$j++){		
+		$ckd = "";
+		if(in_array("{$i}_{$j}",$menus)) $ckd = "checked";
+		echo "		
+				<div class='small left' style='width:140px;'>					
+					<input type='checkbox' name='item[]' value='{$i}_{$j}' id='item{$i}_{$j}' {$ckd} /><label for='item{$i}_{$j}'>{$MENU_ARR[$i][$j][0]}</label>
+				</div>
+		";
+	}
+
+	if(in_array("today",$menus)) $ckd = "checked";
+	else $ckd = "";
+}		
+?>			
+				<div class='small' style='float:right;;width:140px;'>					
+					<input type='checkbox' name='item[]' id='itemtoday' value='today' <?=$ckd?> /><label for='itemtoday'>오늘주문</label>
+				</div>							
+				<div style="clear:both;height:20px;">&nbsp;</div>
+				<center>
+				<div style="text-align:-moz-center;#text-align:center;:">
+					<img src="../html/img/btn_menu_save.gif" class="hand" alt="선택완료" onclick="document.menuForm.submit();" />
+					<img src="../html/img/btn_menu_cancel.gif" class="hand" onclick="parent.pLightBox.hide();" alt="취소" />
+				</div>
+				</center>
+			</td>
+		</tr>
+		</table>	
+	</div>
+	</form>
+</div>
+</body>
+</html>
+
+

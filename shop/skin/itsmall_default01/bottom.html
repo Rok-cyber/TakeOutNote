@@ -1,0 +1,178 @@
+	</div>  <!-- DIV(TOP START) -->
+	<div id="rightBox" style="top:0px;left:5px;width:80px;">
+		<div>
+			<div><img src="img/common/rMenu_today_on.gif" class="hand" id="rBoxDivImgToday" onclick="rBoxDiv.scroll('1',1);" alt="오늘본상품" title="오늘본상품" /></div>
+			<div id="rBoxArea">
+				<div id="rBox" style="position:relative;left:0px;top:0px;">
+					<div style="border-left:1px solid #d5d5d5;border-right:1px solid #d5d5d5;width:78px;">
+						<div style="height:4px;overflow:hidden;"></div>
+						<div class="small"><a href="{{Main}}?channel=today">전체보기(<span id="rTodayBoxDivCnt">{{Tcnt}}</span>)</a></div>
+						<div style="height:10px;overflow:hidden;"><img src="img/common/icon_arrow_prev_off.gif" class="hand" onclick="rTodayBoxDiv.scroll('up');" id="rTodayBoxDivImgPrev" alt='prev' style="vertical-align:top;" /></div>
+						<div id="rMenuGoods">	
+							<div id='rTodayBox' style="position:relative;left:0px;top:0px;height:400px">
+
+								<!-- DYNAMIC @loop_today_goods@ -->
+								<ul id="tGoods_{{CATE}}{{NUMBER}}">				
+									<li style="height:60px">
+										<div class="left" style="padding-left:9px;">
+											<a href="{{LINK}}" onfocus="this.blur()"><img src='{{IMAGE}}' width='58' height='58' style='border:1px solid #DADADA' alt="{{NAME}}" onmouseover="this.style.border='1px solid #999999'" onmouseout="this.style.border='1px solid #DADADA'" /></a>
+										</div>
+										<div style="float:left;position:relative;left:-13px;top:45px;height:9px;overflow:hidden;"><img src="img/common/icon_del.gif" class="hand" onclick="delGoods('{{CATE}}','{{NUMBER}}')"  alt="오늘본상품삭제" title="오늘본상품삭제" style='vertical-align:top' /></div>
+									</li>
+									<li>
+										<center>
+										<div style="height:14px;width:64px;overflow:hidden;padding-top:2px;">
+											<a href="{{LINK}}" onfocus="this.blur()" class="small" title="{{NAME}}">{{NAME}}</a>
+										</div>
+										</center>
+									</li>					
+									<li  class="num green">{{PRICE}}</li>
+								</ul>
+								<!-- DYNAMIC @loop_today_goods@ -->
+
+								<!-- DYNAMIC @empty_today_goods@ -->
+								<ul style="height:200px;">				
+									<li style="height:120px;"></li>
+									<li class="small gray">오늘 본 상품이 <br/>없습니다.</li>
+								</ul>
+								<!-- DYNAMIC @empty_today_goods@ -->
+
+							</div>
+						</div>
+						<div style="height:15px;overflow:hidden;"><img src="img/common/icon_arrow_next_off.gif" class="hand" onclick="rTodayBoxDiv.scroll('down');" id="rTodayBoxDivImgNext" alt='next' style="vertical-align:top;" /></div>
+						<div style="height:6px;overflow:hidden"></div>
+					</div>
+										
+					<div><img src="img/common/rMenu_cart.gif" class="hand" id="rBoxDivImgCart" onclick="rBoxDiv.scroll('2',1);" alt="장바구니상품" title="장바구니상품" /></div>
+					
+					<div style="position:absolute;border-left:1px solid #d5d5d5;border-right:1px solid #d5d5d5;width:78px; float:left;" id="gdropArea">
+						<div style="height:6px;overflow:hidden"></div>
+						<div class="small"><a href="{{Main}}?channel=cart">전체보기(<span id="rCartBoxDivCnt">{{Ccnt}}</span>)</a></div>
+						<div style="height:10px;overflow:hidden;"><img src="img/common/icon_arrow_prev_off.gif" class="hand" onclick="rCartBoxDiv.scroll('up');" id="rCartBoxDivImgPrev" alt='prev' style="vertical-align:top;" /></div>
+						<div id="rMenuGoods2">	
+							<div id='rCartBox' style="position:relative;left:0px;top:0px;height:400px">
+								
+								<!-- DYNAMIC @loop_cart_goods@ -->
+								<ul id="cGoods_{{UID}}">				
+									<li style="height:60px">
+										<div class="left" style="padding-left:9px;">
+											<a href="{{LINK}}" onfocus="this.blur()"><img src='{{IMAGE}}' width='58' height='58' style='border:1px solid #DADADA' alt="{{NAME}}" onmouseover="this.style.border='1px solid #999999'" onmouseout="this.style.border='1px solid #DADADA'" /></a>
+										</div>
+										<div style="float:left;position:relative;left:-13px;top:45px;height:9px;overflow:hidden;"><img src="img/common/icon_del.gif" class="hand" onclick="delGoods('{{UID}}')"  alt="장바구니상품삭제" title="장바구니상품삭제" style='vertical-align:top' /></div>
+									</li>
+									<li>
+										<center>
+										<div style="height:14px;width:64px;overflow:hidden;padding-top:2px;">
+											<a href="{{LINK}}" onfocus="this.blur()" class="small" title="{{NAME}}">{{NAME}}</a>
+										</div>
+										</center>
+									</li>					
+									<li class="num green">{{PRICE}}</li>
+								</ul>
+								<!-- DYNAMIC @loop_cart_goods@ -->
+
+								<!-- DYNAMIC @empty_cart_goods@ -->
+								<ul style="height:200px;">				
+									<li style="height:120px;"></li>
+									<li class="small gray" style="line-height:140%">장바구니 상품이 <br/>없습니다.</li>
+								</ul>
+								<!-- DYNAMIC @empty_cart_goods@ -->
+
+							</div>
+						</div>
+						<div style="height:15px;overflow:hidden"><img src="img/common/icon_arrow_next_off.gif" class="hand" onclick="rCartBoxDiv.scroll('down');" id="rCartBoxDivImgNext" alt='next' style="vertical-align:top;" /></div>						
+						<div style="height:6px;overflow:hidden;" id="gdropAreaHd"></div>
+					</div>					
+				</div>				
+			</div>
+			<div style="height:8px; overflow:hidden;"><img src="img/common/rMenu_bottom.gif" alt='box bottom' style="vertical-align:top;" /></div>
+		</div>
+		<div id="cartGuide" style='display:none'><img src='img/common/help_cart.gif' border='0' alt='장바구니 도우미' /></div>
+		<div style="padding-top:6px;">
+			<ul>
+				<!-- DYNAMIC @loop_banner@ -->
+				<li><a href="{{BLINK}}" {{BTARGET}}>{{BANNER}}</a></li>
+				<!-- DYNAMIC @loop_banner@ -->
+			</ul>
+		</div>
+	</div>	
+</div>
+
+
+
+<script type="text/javascript">
+<!--
+rTodayBoxDiv = new itemScroll2('rTodayBox','{{Tcnt}}','3','92');  //객체아이디,총상품수,보여줄상품수,스크롤 거리
+rCartBoxDiv = new itemScroll2('rCartBox','{{Ccnt}}','3','92');
+rBoxDiv = new boxScroll('rBox','328'); //객체아이디,스크롤 거리
+
+gToCart.divHeight = 994;  //쇼핑몰 가로 사이즈
+gToCart.topMargin = 158;  //드랍존 상단 여백
+gToCart.zoneWidth = 80;   //드랍존 가로 사이즈
+gToCart.zoneHeight = 276; //드랍존 세로 사이즈
+
+gToCart.addDiv = '<li style="height:60px"><a href="[LINK]" onfocus="this.blur()"><img src="[IMAGE]" width="58" height="58" style="border:1px solid #DADADA" alt="[NAME]"></a><div style="position:relative;left:22px;top:-14px;"><img src="img/common/icon_del.gif" class="hand" onclick="delGoods(\'[UID]\')" alt="장바구니삭제" title="장바구니삭제" /></div></li><li style="height:14px;width:64px;overflow:hidden;padding-top:2px;"><a href="[LINK]" onfocus="this.blur()" class="small">[NAME]</a></li><li class="num green">[PRICE]</li>';  //추가된 상품 코드
+//-->
+</script>
+
+<div id="footer" style='z-Index:1;'>
+	<div id="copymenu">
+		<ul style="width:560px">
+			<li><a href='{{Main}}?channel=docu&amp;mode=A' onfocus='this.blur();'><img src="img/bottom/company.gif" alt="회사소개" title="회사소개" /></a></li>
+			<li><img src="img/bottom/line_bar.gif" alt="카피메뉴바" /></li>
+			<li><a href='{{Main}}?channel=docu&amp;mode=B' onfocus='this.blur();'><img src="img/bottom/used.gif" alt="이용약관" title="이용약관" /></a></li>
+			<li><img src="img/bottom/line_bar.gif" alt="카피메뉴바" /></li>
+			<li><a href='{{Main}}?channel=docu&amp;mode=C' onfocus='this.blur();'><img src="img/bottom/private.gif" alt="개인정보취급방침" title="개인정보취급방침" /></a></li>
+			<li><img src="img/bottom/line_bar.gif" alt="카피메뉴바" /></li>
+			<li><a href='{{Main}}?channel=customer' onfocus='this.blur();'><img src="img/bottom/center.gif" alt="고객센터" title="고객센터" /></a></li>
+			<li><img src="img/bottom/line_bar.gif" alt="카피메뉴바" /></li>
+			<li><a href='{{Main}}?channel=docu&amp;mode=D' onfocus='this.blur();'><img src="img/bottom/infor.gif" alt="이용안내" title="이용안내" /></a></li>
+			<li><img src="img/bottom/line_bar.gif" alt="카피메뉴바" /></li>
+			<li><a href='{{Main}}?channel=board&amp;code=sales' onfocus='this.blur();'><img src="img/bottom/sales.gif" alt="대량구매문의" title="대량구매문의" /></a></li>
+			<li><img src="img/bottom/line_bar.gif" alt="카피메뉴바" /></li>
+			<li><a href='{{Main}}?channel=board&amp;code=cooperation' onfocus='this.blur();'><img src="img/bottom/cooperation.gif" alt="제휴/광고문의" title="제휴/광고문의" /></a></li>
+		</ul>
+		
+		<div style='float:right;padding:8px 84px 0 0;'>
+			<img src="img/common/icon_arrow_hprev.gif" alt="icon prev" />
+			<a href="{{Main}}" class="small">메인</a> &nbsp;&nbsp;				
+			<a href="#" class="num" onclick="goTop();return false;">TOP</a>
+			<img src="img/common/icon_arrow_prev_off.gif" alt="icon top" style="vertical-align:middle" />
+		</div>
+	</div>				
+	<!-- DYNAMIC @is_cimg1@ -->
+	<div id="copy_img">
+		<img src="{{B_COPY}}" alt="카피라이트" />
+	</div>
+	<!-- DYNAMIC @is_cimg1@ -->
+	
+	<!-- DYNAMIC @is_cimg2@ -->
+	<div id="copy_img">
+		<div id="copy_logo">{{T_LOGO}}</div>
+		<div id="copy_text">
+			<ul>
+				<li class="small">주소 : {{CO_ADDR}}&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;고객센터 : <font class="num">{{CO_TEL}}</font>&nbsp;&nbsp;|&nbsp;&nbsp;팩스 : <font class="num">{{CO_FAX}}</font>&nbsp;&nbsp;|&nbsp;&nbsp;E-mail : <a href="mailto:{{CO_EMAIL}}" class="num">{{CO_EMAIL}}</a></li>
+				<li class="small" style="padding-top:4px;">
+					<div class="left">
+						상호 : {{CO_NAME}}&nbsp;&nbsp;|&nbsp;&nbsp;대표 : {{CO_AD}}&nbsp;&nbsp;|&nbsp;&nbsp;사업자 등록번호 : <font class="num">{{CO_NUM1}}</font>&nbsp;&nbsp;|&nbsp;&nbsp;통신판매업 신고번호 : <font class="num">{{CO_NUM2}}</font>
+					</div>
+					<div class="left" style="padding-left:6px;">
+						<a href="{{CO_LINK}}" target="_blank"><img src="img/bottom/btn_cinfo.gif" alt="사업자정보확인" /></a>
+					</div>
+				</li>
+				<li class="small" style="padding-top:4px;">관리 책임자 : {{CO_SAD}} | 개인정보관리자 : {{CO_SAD}}</li>
+				<li style="height:10px;"></li>
+				<li class="num">Copyright {{START_YEAR}} <font class="smll">{{CO_NAME2}}</font> All Right Reserved.</li>
+			</ul>
+		</div>		
+	</div>
+	<!-- DYNAMIC @is_cimg2@ -->	
+</div>
+
+</center>
+
+<script type="text/javascript">
+<!--
+	var rBoxOT = document.getElementById("rightBox").offsetTop - 3;	
+//-->
+</script>
